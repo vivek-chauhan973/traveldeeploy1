@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/* open san */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+/* mostarret */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* fredoka */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+/* poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* raleway */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* rubik */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+/* lora */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tw-border-opacity: 1;
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+}
+
+html,
+body {
+  /* font-family: "Mulish", sans-serif; */
+  /* font-family: "Open Sans", sans-serif; */
+  /* font-family: "Montserrat", sans-serif; */
+  /* font-family: "Fredoka", sans-serif; */
+  /* font-family: "Poppins", sans-serif; */
+  /* font-family: "Inter", sans-serif; */
+  /* font-family: "Raleway", sans-serif; */
+  /* main font style` */
+  font-family: "Rubik", sans-serif;
+  scroll-behavior: smooth;
+  /* font-family: "Lora", serif; */
+  box-sizing: border-box;
+}
+
+/* h1 {
+  font-size: clamp(16px, 2.5vw, 32px);
+}
+
+h2 {
+  font-size: clamp(14px, 2.5vw, 28px);
+} */
+
+/* p{
+  color: #595959;
+} */
+.css-hz1bth-MuiDialog-container {
+  display: block;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  margin: auto;
+}
+
+/* react silk */
+.slick-slide>div {
+  margin: 0 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 12px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background: #2A2C41;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/* file type styling */
+/* input::file-selector-button {
+  font-weight: bold;
+  color: white;
+  font-size: 12px;
+  padding: 2px 4px;
+  background-color: black;
+  border: thin solid grey;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+
+/* website selection color  */
+::selection {
+  background-color: #ffab2cd7;
+  /* Change this color to the desired color */
+  color: white;
+  /* Change this color to the desired text color */
+}
+
+/* ql Editor styling */
+.ql-toolbar.ql-snow {
+  border-radius: 5px 5px 0 0 !important;
+}
+
+.ql-toolbar.ql-snow+.ql-container.ql-snow {
+  height: 100% !important;
+}
+
+.ql-container.ql-snow {
+  border-radius: 0 0 5px 5px !important;
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+  margin-right: 0px !important;
+}
+
+.ql-snow.ql-toolbar button svg,
+.ql-snow .ql-toolbar button svg {
+  height: 15px !important;
+}
+
+/* react js pagination */
+.pagination {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.pagination-item {
+  padding: 2px 8px;
+  border: 1px solid rgb(203, 213, 225, var(--tw-border-opacity));
+  border-radius: 5px;
+  background-color: #FFFBF5;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.pagination-item:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+.pagination-item.active {
+  background-color: black;
+  color: white;
+}
+
+/* End */
+/* calender */
+.react-datepicker__month-container {
+  width: 320px;
+}
+
+.react-datepicker-wrapper {
+  display: block;
+  padding: 0;
+  border: 0;
+}
+
+.react-datepicker__week {
+  display: flex;
+  gap: 9px;
+}
+
+.react-datepicker__day--006 {
+  width: 200px;
+}
+
+/* admin panel background design */
+.vignette {
+  background: radial-gradient(circle, rgb(186, 185, 243), rgb(144, 158, 170));
+  /* opacity: 0.8; */
+  /* pointer-events: none; */
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+
+/* carousel component */
+.carousel-container {
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+.carousel-item {
+  flex: none;
+  
+  /* Adjust the height as needed */
+  scroll-snap-align: start;
+  /* Add margin between items if needed */
+}
+
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+
+/* table styling */
+table {
+  border-radius: 8px !important;
+  overflow: hidden;
+  border: 2px solid black;
+}
+
+
+/* option tag styling */
+select {
+  
+  float: left;
+  width: 21.4%;
+  height: 34px;
+  /* background: #f9f9e0; */
+  border: 1px solid #999999;
+  padding: 0px 10px 0px 10px;
+  color: rgb(41, 41, 41);
+  /* margin: -10px 0px 0px 20px; */
+  background: white;
+  border-radius: 8px;
+  font-size: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-width: none;
+  /* background: url(https://alt-fit.com/images/global/select-button.png) 100% / 15% no-repeat #f9f9e0; */
+}
+
+/*  Package detail date time container  */
+.dateInnerCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.todayPrice {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #ff5722; /* Customize the color */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container-wrapper {
+  margin: auto;
+  min-width: 300px;
+}
+
+
+@media screen and (max-width:639px) {
+  .container-wrapper {
+    width: calc(100% - 35px) !important;
+    /* padding: 0 20px; */
+    /* background-color: red !important; */
+    /* padding:0 540px !important; */
+
+  }
+
+  .vignette-relative {
+    /* background: radial-gradient(circle, transparent, rgb(5, 1, 53)); */
+    position: absolute;
+  }
+}
+
+@media screen and (min-width:640px) {
+  .container-wrapper {
+    width: 600px !important;
+    /* background-color: red !important; */
+    /* padding:0 540px !important; */
+
+  }
+
+  .vignette-relative {
+    /* background: radial-gradient(circle, transparent, rgb(5, 1, 53)); */
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container-wrapper {
+    width: 750px !important;
+    /* background-color: red !important; */
+    /* padding:0 540px !important; */
+
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .container-wrapper {
+    width: 950px !important;
+    /* background-color: green !important; */
+    /* padding:0 20px !important; */
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container-wrapper {
+    width: 1130px !important;
+    /* background-color: blue !important; */
+    /* padding:0 20px !important; */
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
