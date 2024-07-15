@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { Db, MongoClient } from 'mongodb';
 
-const MONGODB_URI = "mongodb://localhost:27017/ToursTravels";
+const MONGODB_URI = "mongodb+srv://vermapradhumn3:pradhumn@cluster0.xo2ekjv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const connectToDatabase = async () => {
 
