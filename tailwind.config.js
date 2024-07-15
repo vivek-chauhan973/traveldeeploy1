@@ -2,9 +2,9 @@ const color = "#F07B01";
 
 const config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,jsx,mdx}",
+    "./src/components/**/*.{js,jsx,mdx}",
+    "./src/app/**/*.{js,jsx,mdx}",
   ],
   theme: {
     fontSize: {

@@ -1,14 +1,22 @@
+// next.config.js
+
 import withTM from 'next-transpile-modules';
 
-const nextConfig = {
+export default withTM(['jodit'])({
   reactStrictMode: true,
-  output: 'export',
+  // output: 'export',
   images: {
+    unoptimized: true,
     remotePatterns: [{
       protocol: 'https',
       hostname: '**',
     }],
   },
-};
-
-export default withTM(['jodit'])(nextConfig);
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader', 'postcss-loader'],
+    });
+    return config;
+  },
+});
