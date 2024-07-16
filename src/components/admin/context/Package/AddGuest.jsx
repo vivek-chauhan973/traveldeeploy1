@@ -55,7 +55,7 @@ export const AppProvider = ({ children }) => {
   // console.log("hi");
   // console.log("add data", inputData);
 
- 
+
 // for handle pricing management popup
 const [pricingManagement,setPricingManagement]=useState(null);
 
