@@ -15,7 +15,7 @@ const fetchLocation = async (state) => {
 };
 
 export default function PromoManage() {
-    const ref = useRef(null);
+     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState(null);
@@ -24,7 +24,9 @@ export default function PromoManage() {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
-
+     const [image,setImage]=useState("");
+    //  const [image1,setImage1]=useState(null);
+     const [imageData,setImageData]=useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -45,24 +47,35 @@ export default function PromoManage() {
     useEffect(() => {
         const getPromoData = async () => {
             try {
-                const res = await fetch(`/api/public/package-state/${statePackages[0]?._id}`);
+                const res = await fetch(`/api/public/package-state/${selectedLocation}`);
                 const data = await res.json();
-                setTitle(data?.data?.title || "");
-                setAlt(data?.data?.alt || "");
-                setPromoTxt(data);
+                
+                
+                console.log("data",data);
+                return data;
             } catch (error) {
                 console.error("Error fetching promo text", error);
             }
         };
 
         if (statePackages.length > 0) {
-            getPromoData();
+            getPromoData().then(res=>setPromoTxt(res?.data));
+           
         }
-    }, [statePackages]);
-
+    }, [statePackages,selectedLocation]);
     const handleChange = (e) => {
-        setFile(e.target.files[0]);
+        setFile(ref?.current?.files[0]);
+        // setImage1(ref?.current?.files[0]);
     };
+    useEffect(()=>{
+        setTitle(promoTxt?.title || "");
+    setAlt(promoTxt?.alt || "");
+    setImage(promoTxt?.image || "")
+    setFile(promoTxt?.image || "")
+    },[promoTxt])
+    // console.log("promotext",promoTxt)
+
+    
 
     const handleSelectChange = async (e) => {
         const selectedOption = e.target.selectedOptions[0];
@@ -83,9 +96,9 @@ export default function PromoManage() {
         setEditorContent(content);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
         const formData = new FormData();
-        formData.append('file', ref.current.files[0]);
+        formData.append('file', file);
         formData.append('title', title);
         formData.append('alt', alt);
         formData.append('faqData', JSON.stringify(faqData));
@@ -95,9 +108,8 @@ export default function PromoManage() {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                  },
+            
+               
             });
 
             if (!response.ok) {
@@ -106,7 +118,7 @@ export default function PromoManage() {
 
             const data = await response.json();
             console.log('Success:', data);
-
+            setImageData(data);
             // Reset form fields after successful submission
             setFile(null);
             setTitle("");
@@ -159,13 +171,15 @@ export default function PromoManage() {
                                 </div>
                                 <div className="py-10 border border-slate-500/45 px-2 rounded">
                                     <div className="w-2/3">
-                                        {file && <Image className="w-20 shadow-md" width="123" src={'jhk.jpeg'} alt="Preview" />}
+                                        {file && <Image className="w-20 shadow-md" width="123" height="150" src={image} alt="Preview" />}
+                                        {imageData && <Image className="w-20 shadow-md" width="123" height="150" src={imageData?.data?.image} alt="Preview" />}
                                     </div>
                                     <div>
                                         <input
                                             type="file"
-                                            ref={ref}
                                             onChange={handleChange}
+                                            // value={file}
+                                             ref={ref}
                                             className="file:mr-4 file:py-2 file:px-4
                                                 file:rounded-full file:border-0
                                                 file:text-sm file:font-semibold
@@ -200,7 +214,7 @@ export default function PromoManage() {
                                     {/* <p>{promoTxt?.message}</p> Adjusted to render a specific property */}
                                 </div>
                                 <div>
-                                    <Editor onChange={handleEditorChange} editorData={promoTxt?.data?.description || ""} />
+                                    <Editor onChange={handleEditorChange} editorData={promoTxt?.description || ""} />
                                 </div>
                             </div>
                         </div>
@@ -210,7 +224,7 @@ export default function PromoManage() {
                                 <p>Faq Section</p>
                             </div>
                             <div>
-                                <FaqSection onChange={handleFaqChange} faqData={promoTxt?.data?.faq} />
+                                <FaqSection onChange={handleFaqChange} faqData={promoTxt?.faq} />
                             </div>
                         </div>
                         <div className="flex">

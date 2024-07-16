@@ -6,7 +6,7 @@ const packagePublicPackageStateTest= async (req, res) => {
     try {
         const { locationId } = req.query;
         const packageStates = await PackageState.find({ state: locationId }).populate('state').exec();
-        console.log("packgeStates in test",packageStates)
+        // console.log("packgeStates in test",packageStates)
         const packageStatesIds = packageStates.map(city => city._id);
         const packages = await Package.find({ location: { $in: packageStatesIds } })
 
