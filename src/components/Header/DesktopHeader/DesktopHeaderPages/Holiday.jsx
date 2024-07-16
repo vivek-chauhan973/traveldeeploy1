@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 import React from "react";
 import { GiWillowTree } from "react-icons/gi";
 import { AiOutlineFundView } from "react-icons/ai";
@@ -6,7 +14,6 @@ import { PiCatThin } from "react-icons/pi";
 import { GrNavigate } from "react-icons/gr";
 import { GiCornerFlag } from "react-icons/gi";
 import { FaRegChessQueen } from "react-icons/fa6";
-import Image from 'next/image'
 import { IoAirplaneOutline } from "react-icons/io5";
 const Holiday = () => {
   return (
@@ -65,14 +72,14 @@ const Holiday = () => {
       </div>
       <div className="flex flex-col mt-4 ">
         <div>
-          <Image src='https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?t=st=1719391588~exp=1719395188~hmac=f1b1ed7abd7ba1094b2427a9493899088bd50528432ba0ef28c1a9bf2a0204ec&w=996' className=" h-32 w-64 rounded-md " alt="abc" />
+          <img src='https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?t=st=1719391588~exp=1719395188~hmac=f1b1ed7abd7ba1094b2427a9493899088bd50528432ba0ef28c1a9bf2a0204ec&w=996' className=" h-32 w-64 rounded-md " alt="abc" />
           <p className="font-semibold text-sm tm-1">Luxury Holiday. </p>
           <p className=" text-xs w-64">
             choose the the right tailer-mad luxuary travel vacation
           </p>
         </div>
-        <div className="mt-5">
-        <Image src='https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?t=st=1719391588~exp=1719395188~hmac=f1b1ed7abd7ba1094b2427a9493899088bd50528432ba0ef28c1a9bf2a0204ec&w=996' className=" h-32 w-64 rounded-md " alt="abc" />
+        <div className="mt-5 pb-3">
+        <img src='https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg?t=st=1719391588~exp=1719395188~hmac=f1b1ed7abd7ba1094b2427a9493899088bd50528432ba0ef28c1a9bf2a0204ec&w=996' className=" h-32 w-64 rounded-md " alt="abc" />
           <p className="font-semibold text-sm mt-1">Luxury Holiday. </p>
           <p className=" text-xs w-64">
             choose the the right tailer-mad luxuary travel vacation

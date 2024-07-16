@@ -23,7 +23,7 @@ const TourExclusion = () => {
 
     useEffect(() => {
         fetchGroups();
-    }, []);
+    }, [fetchGroups]);
 
     const fetchGroups = async () => {
         try {

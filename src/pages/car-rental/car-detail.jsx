@@ -19,7 +19,10 @@ return(
                 <div className="shadow-sm rounded bg-white">
                     <div className="block md:flex justify-between px-10 md:px-20  pt-8 my-4">
                         <div className="">
-                            <Image className="w-64 h-40 object-contain"
+                            <Image 
+                            width={300}
+                            height={300} 
+                             className=" object-contain"
                                 src="https://pngimg.com/uploads/mercedes/mercedes_PNG80135.png" alt="" />
                         </div>
                         <div>

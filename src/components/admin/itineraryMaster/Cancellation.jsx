@@ -32,7 +32,7 @@ const Cancellation = () => {
 
     useEffect(() => {
         fetchGroups();
-    }, []);
+    }, [fetchGroups]);
 
     const fetchGroups = async () => {
         try {
@@ -140,7 +140,7 @@ const Cancellation = () => {
                         </div>
                     </div>
                     <div className="py-2 px-4 h-48 overflow-y-auto">
-                        {groupsData.map((group, index) => (
+                        { groupsData.map((group, index) => (
                             <div key={group._id} className="flex justify-between items-center gap-10 even:bg-slate-100 hover:bg-slate-300 cursor-pointer">
                                 <p className='capitalize leading-8'>{index + 1}. {group.groupName}</p>
                                 <div className='flex gap-2'>

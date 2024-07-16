@@ -24,7 +24,7 @@ const PaymentTermComponent = () => {
 
     useEffect(() => {
         fetchGroups();
-    }, []);
+    }, [fetchGroups]);
 
     const fetchGroups = async () => {
         try {

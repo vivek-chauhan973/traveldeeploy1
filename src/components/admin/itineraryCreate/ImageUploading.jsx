@@ -125,9 +125,19 @@ export default function ImageUploading({ itinerary }) {
       <div className="my-20 bg-white p-3 rounded-md">
         <div>
           {previews.map((preview, index) => (
-            <div key={index} className="flex my-10 items-center pl-10">
-              <input type="file" onChange={(e) => handleChange(e, index)} />
-              <div className="ml-4">
+            <div key={index} className="flex my-10 items-center pl-10 ">
+              <input type="file" onChange={(e) => handleChange(e, index)}
+              
+              
+              className="file:mr-4 file:py-2 file:px-4
+              file:rounded-full file:border-0
+              file:text-sm file:font-semibold
+              file:bg-black/20 file:text-black/50
+              hover:file:bg-black/75 hover:file:text-white cursor-pointer"
+              />
+
+
+              <div className="ml-4 ">
                 {preview && (
                   <Image className="w-36 shadow-md" src={preview} alt="Preview" width="220"   height="120"
 />
@@ -135,7 +145,7 @@ export default function ImageUploading({ itinerary }) {
                 <div>
                   <p>Title</p>
                   <input
-                    className="border px-2"
+                    className="border px-2 rounded-lg"
                     type="text"
                     value={titles[index] || ""}
                     onChange={(e) => handleTitleChange(e, index)}
@@ -144,7 +154,7 @@ export default function ImageUploading({ itinerary }) {
                 <div>
                   <p>Alt</p>
                   <input
-                    className="border px-2"
+                    className="border px-2 rounded-lg"
                     type="text"
                     value={alts[index] || ""}
                     onChange={(e) => handleAltChange(e, index)}
@@ -155,7 +165,7 @@ export default function ImageUploading({ itinerary }) {
           ))}
           {!hasFetchedImages && files.length < 4 && (
             <button
-              className="bg-[#0d6efd] text-white px-3 py-2"
+              className="bg-[#2A2C41] text-white px-3 py-2 rounded-[17px]"
               onClick={addNewImageSection}
             >
               Add New Image
@@ -179,7 +189,7 @@ export default function ImageUploading({ itinerary }) {
           )}
           <div className="mt-4">
             <button
-              className="bg-[#0d6efd] text-white px-3 py-2"
+              className="bg-[#2A2C41] text-white px-3 py-2 rounded-[17px]"
               onClick={handleUpload}
             >
               {isUpdating ? "Update Images" : "Upload Images"}
