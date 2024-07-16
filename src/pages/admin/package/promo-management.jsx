@@ -1,5 +1,5 @@
 import Layout from "@/components/admin/Layout";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FaqSection from "@/components/admin/ItineraryPromo/FaqSection";
 import Editor from "@/components/admin/ItineraryPromo/Editor";
 import { LuPackagePlus } from "react-icons/lu";
@@ -15,6 +15,7 @@ const fetchLocation = async (state) => {
 };
 
 export default function PromoManage() {
+    const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState(null);
@@ -84,7 +85,7 @@ export default function PromoManage() {
 
     const handleSubmit = async () => {
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', ref.current.files[0]);
         formData.append('title', title);
         formData.append('alt', alt);
         formData.append('faqData', JSON.stringify(faqData));
@@ -94,6 +95,9 @@ export default function PromoManage() {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
                 body: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
             });
 
             if (!response.ok) {
@@ -155,11 +159,12 @@ export default function PromoManage() {
                                 </div>
                                 <div className="py-10 border border-slate-500/45 px-2 rounded">
                                     <div className="w-2/3">
-                                        {file && <Image className="w-20 shadow-md" src={URL.createObjectURL(file)} alt="Preview" />}
+                                        {file && <Image className="w-20 shadow-md" width="123" src={'jhk.jpeg'} alt="Preview" />}
                                     </div>
                                     <div>
                                         <input
                                             type="file"
+                                            ref={ref}
                                             onChange={handleChange}
                                             className="file:mr-4 file:py-2 file:px-4
                                                 file:rounded-full file:border-0

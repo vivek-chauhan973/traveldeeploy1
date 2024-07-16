@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Image from 'next/image'
+import { useAppContext } from "./admin/context/Package/AddGuest";
 
 const SearchPageTopSeoContent = ({ state }) => {
-
+  const {setLocationId}=useAppContext();
   const [show,setShow]=useState(false)
-
+  useEffect(()=>{
+    setLocationId(state?._id)
+      },[state]);
   const [active ,setActive]=useState(true)
 
 

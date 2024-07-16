@@ -61,6 +61,20 @@ const [pricingManagement,setPricingManagement]=useState(null);
 
 // console.log("pricingmanagement",typeof(pricingManagement))
 
+// object for filter api
+const [locationId,setLocationId]=useState(null);
+const [catagoryId,setCatagoryId]=useState(null);
+const[minPrice,setMinPrice]=useState(0);
+const [maxPrice,setMaxPrice]=useState(9900);
+
+const filterApi={
+  locationId,
+  catagoryId,
+  minPrice,
+  maxPrice
+
+}
+// console.log("filterApi122222222222234142 :",filterApi)
   useEffect(() => {
     if (addPackage && addPackage?.prices) {
       const {
@@ -83,7 +97,7 @@ const [pricingManagement,setPricingManagement]=useState(null);
       setGuestPrice(calculatedPrice);
       // console.log("ppppp", calculatedPrice);
     }
-  }, [inputData,addPackage]);
+  }, [inputData]);
 
 //frontend logic here related package details and departure section
 const [showAddguest,setShowAddguest]=useState(null);
@@ -99,7 +113,7 @@ const finalDataOfBooking={
 }
 
 
-console.log("show add guest popup",finalDataOfBooking);
+// console.log("show add guest popup",finalDataOfBooking);
 
 
   const contextFun = {
@@ -115,9 +129,14 @@ console.log("show add guest popup",finalDataOfBooking);
     setPricingManagement,
     pricingManagement,
     setShowAddguest,
-   showAddguest,
+    showAddguest,
     setDepartureSectionData,
-    departureSectionData
+    departureSectionData,
+    setLocationId,
+    setCatagoryId,
+    setMinPrice,
+    setMaxPrice,
+    filterApi
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>

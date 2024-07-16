@@ -9,6 +9,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import ItineraryFaq from '@/components/itinerarylist/ItineraryFaq';
 import BottomLink from '@/components/ItineraryDetail/BottomLink';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
+import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 // import Header from '@/components/Header';
 // import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 
@@ -51,6 +52,7 @@ export default  function SearchPage  ()  {
     };
 
     return (
+        <AppProvider>
         <div className='bg-slate-100'  >
             {/* <DesktopHeader/> */}
             
@@ -136,6 +138,7 @@ export default  function SearchPage  ()  {
             )}
             </div>
         </div>
+        </AppProvider>
     );
 };
 

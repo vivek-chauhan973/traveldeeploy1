@@ -3,6 +3,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { useState } from "react";
+import { useAppContext } from "./admin/context/Package/AddGuest";
 
 // Today changes here in main file
 
@@ -24,6 +25,7 @@ function valuetext(value) {
 }
 
 export default function SearchPageFilter  ({ onApplyFilter }) {
+    const {setMinPrice,setMaxPrice}=useAppContext();
     const [priceRange, setPriceRange] = useState([0, 9900]);
     const [tourDuration, setTourDuration] = useState([20, 37]);
     const [departureCity, setDepartureCity] = useState([]);
@@ -62,6 +64,14 @@ export default function SearchPageFilter  ({ onApplyFilter }) {
             departureCity,
             packageCategory,
         };
+        if(priceRange[0]>priceRange[1]){
+            setMaxPrice(priceRange[0])
+            setMinPrice(priceRange[1])
+        }
+        else{
+            setMaxPrice(priceRange[1])
+            setMinPrice(priceRange[0])
+        }
         onApplyFilter(filters);
     };
 
@@ -195,7 +205,7 @@ export default function SearchPageFilter  ({ onApplyFilter }) {
                         </div>
                     </div>
                     <div className="flex justify-center mt-2">
-                        <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-1 text-xs rounded-md xl:hidden block">Apply Filters</button>
+                        <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-1 text-xs rounded-md mb-2 block">Apply Filters</button>
                     </div>
                 </div>
             </div>

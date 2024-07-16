@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Pagination from "react-js-pagination";
 import Image from 'next/image'
+import { useAppContext } from "./admin/context/Package/AddGuest";
 
 const fetchPackages = async (locationId) => {
   const response = await fetch(
@@ -13,14 +14,27 @@ const fetchPackages = async (locationId) => {
   console.log("api public tour=package",data)
   return data.packages;
 };
+const filteredData=async (id,cat,min,max)=>{
+  const response=await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=6694f2c73a8237144bdbdeb7&priceMin=${min}&priceMax=${max}`)
+  const data=await response.json();
+  return data;
+}
+
 
 const SearchPagePackageList = (locationId) => {
   const router = useRouter();
+
   const pathnames = router.asPath.split("/").filter((x) => x);
   const [packages, setPackages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6); // Number of items per page
-
+  const [filterPackage,setFilterPackage]=useState(null);
+  const [filterData1,setFilterData1]=useState([]);
+  const {filterApi}=useAppContext();
+  useEffect(()=>{
+    filteredData(filterApi?.locationId,filterApi?.catagoryId,filterApi?.minPrice,filterApi?.maxPrice).then(res=>setFilterPackage(res?.packages))
+  
+  },[filterApi])
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,6 +44,7 @@ const SearchPagePackageList = (locationId) => {
           itemsPerPage
         );
         setPackages(packagesData);
+        console.log("packages 123123:::",packagesData)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -38,6 +53,15 @@ const SearchPagePackageList = (locationId) => {
       fetchData();
     }
   }, [locationId, currentPage,itemsPerPage]);
+  useEffect(()=>{
+    if(filterPackage?.length>0){
+      setFilterData1(filterPackage||[])
+    }
+    else{
+      setFilterData1(packages)
+    }
+  },[filterData1,locationId,currentPage,filterApi,packages,filterPackage])
+ 
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -47,8 +71,8 @@ const SearchPagePackageList = (locationId) => {
   };
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = packages?.slice(indexOfFirstItem, indexOfLastItem);
-  const totalItems = packages?.length;
+  const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
+  const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   return (
