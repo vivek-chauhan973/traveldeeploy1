@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import { FaHome } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { RiLoginCircleFill } from "react-icons/ri";
@@ -7,60 +8,49 @@ import { FaBars } from "react-icons/fa6";
 import FlyoutLink from "./FlyoutLink";
 import { header } from "./Data";
 import Header2 from "../../MobileHeader";
-import Image from 'next/image'
+// import Image from "next/image";
+// import Logo from "../../../../../public/HEAD.png";
+import { CiSearch } from "react-icons/ci";
+
 
 const Header3 = () => {
-const [headerLogo,setHeaderLogo]=useState(null);
-  async function fetchImage() {
-    try {
-      const res = await fetch('/api/logo/logo1');
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching image:', error);
-    }
-  }
-
-  // Fetch existing image on component mount
-  useEffect(() => {
-    fetchImage().then(res=>setHeaderLogo(res?.data));
-  }, [headerLogo]);
   // console.log(header);
   return (
     <div className=" top-0 sticky z-[999]">
       {/* Navbar*/}
       <div className="bg-navyblack">
         <div className="container-wrapper">
-        
-          <div className="flex items-center justify-between gap-5 py-3 ">
-          <div className=" relative flex gap-2">
-              <div className=" absolute xl:hidden">
-                <Header2 />
+          <div className="flex md:items-center md:justify-between md:gap-5 py-3 ">
+            <div className=" justify-between  ">
+              <div className=" relative flex gap-2 xl:hidden">
+                <div className=" mt-3">
+                  <Header2 />
+                </div>
+                <div className="flex justify-between  ">
+                  {/* <Image className="w-44  md:w-52" src={Logo} alt="" /> */}
+                </div>
+                
               </div>
-              
+              <CiSearch size={24} className="text-white mt-3 md:hidden" />
             </div>
-            <div className=" ">
-            <Image
-                src={headerLogo && headerLogo[0].path}
-                alt="Logo"
-                className="w-[150px] md:w-[240px] lg:w-[280px]"
-              />
+
+            <div className=" justify-between   hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden   p-[5px] items-center">
+
+              <div className="flex">
+                <IoIosSearch size={28} />
+                <input
+                  className="border-none focus:outline-none  placeholder:text-sm placeholder-black w-full px-2 text-sm"
+                  placeholder="Search Your Next Destination"
+                  type="text"
+                  name=""
+                  id=""
+                />
               </div>
-            <div className="flex justify-between border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden   p-[5px] items-center">
-              <IoIosSearch size={28} />
-              <input
-                className="border-none focus:outline-none placeholder:text-sm placeholder-black w-full px-2 text-sm"
-                placeholder="Search Your Next Destination"
-                type="text"
-                name=""
-                id=""
-              />
-              <button className="bg-navyblack rounded-full text-white text-sm rounded-badge px-4 py-1">
-                Search
-              </button>
+
+
             </div>
             <div className="hidden md:flex gap-3">
-              <button className="flex items-center gap-2  px-2 py-1 bg-white text-navyblack rounded-lg">
+              <button className="md:flex items-center gap-2 block px-2 py-1 bg-white text-navyblack rounded-lg">
                 <span>
                   <RiLoginCircleFill />
                 </span>{" "}
@@ -73,7 +63,9 @@ const [headerLogo,setHeaderLogo]=useState(null);
                 Sign up{" "}
               </button>
             </div>
-            
+            {/* <div className="md:hidden text-white">
+              <FaBars />
+            </div> */}
           </div>
         </div>
       </div>
@@ -103,3 +95,5 @@ const [headerLogo,setHeaderLogo]=useState(null);
 };
 
 export default Header3;
+
+

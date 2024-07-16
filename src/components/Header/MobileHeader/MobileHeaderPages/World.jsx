@@ -1,22 +1,24 @@
+
+
+
+
 import React from "react";
 import image from "./im.webp";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoChevronBack } from "react-icons/io5";
-import Image from 'next/image'
-
 const World = ({ setOpenClose }) => {
   return (
     <div className="pl-1 sm:pl-2 w-full h-[90vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
       <div className=" flex justify-between sm:px-2 mt-3 lg:pl-2 ">
         <div
-          className=" flex gap-2 items-center cursor-pointer"
+          className=" flex  items-center cursor-pointer"
           onClick={() => setOpenClose(false)}
         >
           <IoChevronBack className=" text-xl" />
-          <p className=" font-semibold text-xl">World</p>
+          <p className=" font-semibold text-md">World</p>
         </div>
         <div>
-          <p className=" underline font-bold text-xl text-blue-600">
+          <p className=" underline px-2 font-bold text-[15px] text-blue-600">
             View All Tours
           </p>
         </div>
@@ -24,7 +26,7 @@ const World = ({ setOpenClose }) => {
       <hr className="border-b mt-5 border-gray-400  w-90 overflow-hidden  " />
 
       <div className=" sm:ml-3  ">
-        <span className="text-sm font-normal mt-4">
+        <span className="text-sm font-normal mt-4 px-3">
           Top Recomonded Destination
         </span>
       </div>
@@ -32,48 +34,48 @@ const World = ({ setOpenClose }) => {
       <div className="flex gap-7 pl-2  mt-4 sm:p-3  overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400">
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Europe</span>
         </div>
 
         <div className="">
           <div className=" w-14 h-14 overflow-hidden  bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> America</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">
-            South East asia
+            South asia
           </span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Africa</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">Dubai</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold sm:ml-2 text-wrap">
-            Austelia New Zealand{" "}
+            Austelia 
           </span>
         </div>
         <div className="">
           <div className="w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold sm:ml-3 text-wrap">
             Frans
@@ -82,7 +84,7 @@ const World = ({ setOpenClose }) => {
       </div>
       {/*  after circle image*/}
       <div>
-        <div className="flex flex-col mt-4 lg:pl-2 ">
+        <div className="flex flex-col mt-4 lg:pl-2  px-2">
           <div className=" flex justify-between">
             <h1 className=" font-semibold text-md">AFRICA</h1>
             <span>

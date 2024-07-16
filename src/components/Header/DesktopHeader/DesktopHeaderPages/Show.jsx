@@ -8,8 +8,8 @@ const Show = () => {
     <div className=" flex w-[1000px] h-full bg-gray-100 ml-52 mt-5" >
       <div className="mt-2 text-sm  font-bold w-1/4 gap-x-6 bg-white ">
         <div className="cursor-pointer grid gap-4 grid-cols-1 ">
-         {stateData.map((item,i)=> <h2 key={i} className=' pl-2 hover:bg-gray-100 hover:p-2 hover:rounded-sm'
-          onMouseEnter={() => setChange(i)}
+         {stateData.map((item,i)=> <h2 key={i} className='  px-5 hover:px-5 hover:bg-gray-100  hover:p-2 hover:rounded-sm'
+          onMouseEnter={() => setChange(i)}               
            >
            {item}
            

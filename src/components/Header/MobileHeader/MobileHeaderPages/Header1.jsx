@@ -35,7 +35,7 @@ const Header1 = ({ setTogle, togle }) => {
   return (
     <div className={` sm:-ml-16 md:-ml-14 lg:-ml-28 relative w-[100vw] -ml-5 -mt-14 sm:w-60 md:w-64 lg:w-80 h-[100vh] shadow-sm border bg-white transition-transform duration-300 ease-in-out ${isVisible ? 'translate-x-0' : '-translate-x-full'} lg:-my-16 md:-mt-16 sm:-mt-14`}>
       <div className="h-[10vh] w-full px-2 sm:px-4 lg:pt-2 -mt-2 pt-1  sm:pt-1 bg-[#0e1e2c] lg:-mt-2 md:-mt-2 md:pt-2 sm:-mt-2">
-        <RxCross1 className="text-2xl cursor-pointer text-white" onClick={() => { setIsVisible(false); setTimeout(() => setTogle(false), 300); }} />
+        <RxCross1 className="text-2xl mt-4 cursor-pointer text-white" onClick={() => { setIsVisible(false); setTimeout(() => setTogle(false), 300); }} />
       </div>
       {openClose ? (
         <div onMouseLeave={() => setOpenClose(false)}>
@@ -44,9 +44,9 @@ const Header1 = ({ setTogle, togle }) => {
       ) : (
         <div>
           <div className="h-[80vh] w-full overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
-            <div className="flex w-full gap-4 flex-col px-2 sm:px-4 my-2">
+            <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
               <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</p>
+                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</p>
                 <p className="cursor-pointer"><IoChevronForwardSharp className=' text-2xl' onClick={() => { setOpenClose(true); setRenderedComponent(0) }} /></p>
               </div>
               <div className="flex justify-between">

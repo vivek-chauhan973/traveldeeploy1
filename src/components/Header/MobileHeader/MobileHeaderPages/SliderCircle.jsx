@@ -1,77 +1,77 @@
+
 import React from "react";
 import image from  './im.webp'
 import { IoIosArrowDown } from "react-icons/io";
 //import { IoIosArrowForward } from "react-icons/io";
 import { IoChevronBack } from "react-icons/io5";
-import Image from 'next/image'
 const SliderCircle = ({setOpenClose}) => {
   
   return (
     <div className="w-full h-[90vh] px-1 sm:px-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
       <div className=" flex justify-between mt-3">
-        <div className=" flex gap-2 items-center cursor-pointer" onClick={()=>setOpenClose(false)}>
-         <IoChevronBack className=" text-2xl"/>
-         <p className=" font-semibold text-xl">India</p>
+        <div className=" flex  items-center cursor-pointer" onClick={()=>setOpenClose(false)}>
+         <IoChevronBack className=" text-xl"/>
+         <p className=" font-semibold text-md">India</p>
         </div>
         <div>
-          <p className=" underline font-bold text-xl text-blue-600">View All Tours</p>
+          <p className=" underline font-bold text-[15px] text-blue-600">View All Tours</p>
         </div>
       </div>
       <hr className="border-b mt-5 border-gray-400  w-90 overflow-hidden  " />
 
       <div className=" sm:ml-3  ">
-        <span className="text-sm font-normal mt-4">
+        <span className="text-sm font-normal mt-2 px-3">
           Top Recomonded Destination
         </span>
       </div>
 
-      <div className=" flex gap-7 py-2  mt-4 sm:p-3  overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400">
+      <div className=" flex gap-7 py-2 px-3  mt-4 sm:p-3  overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400">
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Kashmir</span>
         </div>
 
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Kashmir</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">kashmir</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Kshmir</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">Rajsthan</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold ml-2 text-wrap">Sikkim </span>
         </div>
         <div className="">
           <div className="w-14 h-14 overflow-hidden bg-black rounded-full">
-            <Image src={image} alt="abc" className="" />
+            <img src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold ml-3 text-wrap">Kerla</span>
         </div>
       </div>
       {/*  after circle image*/}
-      <div className="flex flex-col mt-4">
+      <div className="flex flex-col px-3 mt-4">
         <div className=" flex justify-between">
           <h1 className=" font-semibold text-md">NORTH INDIA</h1>
           <span>
@@ -114,3 +114,4 @@ const SliderCircle = ({setOpenClose}) => {
 };
 
 export default SliderCircle;
+
