@@ -71,7 +71,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
   const saveHighlight = (index) => {
     itinerary.highlights[index].edit = false;
   }
-
+ 
   const addSubmitHighlight = async () => {
     try {
       const res = await fetch('/api/package/info/' + (itinerary ? itinerary.id : itineraryInfo.id), {
