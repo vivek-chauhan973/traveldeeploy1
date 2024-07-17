@@ -19,7 +19,7 @@ import TestingCard from "@/components/ItineraryDetail/TestingCard";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import { useEffect, useState,useCallback } from "react";
-import Image from 'next/image'
+// import Image from 'next/image'
 
 export default function Package1 () {
     const {addPackage,guestPrice,inputData,setInputData,closeBtn,setCloseBtn,showAddguest}=useAppContext();
@@ -59,7 +59,7 @@ fetchImages().then(res=>setImages(res));
             {/*Select departure city */}
            
             <div id="departure">
-              <DepartureSection />
+              <DepartureSection addPackage={addPackage}/>
             </div>
           
             {/* Pricing */}
@@ -192,7 +192,7 @@ fetchImages().then(res=>setImages(res));
             <div className="sticky top-[220px] z-20">
               <div className="flex gap-1 items-center  justify-end ">
                 <div className="items-center flex flex-col p-2 text-center">
-                  <Image
+                  <img
                     className="w-4"
                     src="https://www.svgrepo.com/show/475692/whatsapp-color.svg"
                     alt=""
@@ -200,7 +200,7 @@ fetchImages().then(res=>setImages(res));
                   <p className="text-[12px]">Send Itinerary</p>
                 </div>
                 <div className="border-l h-full items-center flex flex-col p-2 text-center">
-                  <Image
+                  <img
                     className="w-4"
                     src="https://www.svgrepo.com/show/522439/printer.svg"
                     alt=""
@@ -208,7 +208,7 @@ fetchImages().then(res=>setImages(res));
                   <p className="text-[12px]">Print Itinerary</p>
                 </div>
                 <div className="border-l h-full items-center flex flex-col p-2 text-center">
-                  <Image
+                  <img
                     className="w-4"
                     src="https://www.svgrepo.com/show/522399/envelope-closed.svg"
                     alt=""

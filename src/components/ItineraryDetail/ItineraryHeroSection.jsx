@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import CustomiseTour from "./CustomiseTour";
 import Slider from "react-slick";
 import { useAppContext } from "../admin/context/Package/AddGuest";
-import Image from 'next/image'
-
 const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData, closeBtn, setCloseBtn, images }) => {
     const { showAddguest } = useAppContext();
     const settings = {
@@ -27,28 +25,29 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
 
     return (
         <>
+       
             <div>
                 <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
                     <div className="">
                         <div className="slider-container xl:hidden mt-7">
                            <Slider {...settings}>
                                 {images?.data?.map((item, i) => <div key={i}>
-                                    <Image className=" w-full object-cover h-[40vh]" src={item.path} alt={`Image ${i + 1}`} />
+                                    <img className=" w-full object-cover h-[40vh]" src={item.path} alt={`Image ${i + 1}`} />
                                 </div>)}
                                 
                             </Slider>
                         </div>
-                        <Image className="rounded-md h-[350px] object-cover w-full hidden xl:flex"
+                        <img className="rounded-md h-[350px] object-cover w-full hidden xl:flex"
                             src={hemages && hemages[0].path} alt="Image 1" />
                     </div>
 
                     <div className="justify-end flex-col gap-y-4 md:justify-center w-full hidden xl:flex ">
                         <div className="">
-                            <Image className="rounded-md h-[167px] w-full object-cover"
+                            <img className="rounded-md h-[167px] w-full object-cover"
                                 src={hemages && hemages[1].path} alt="Image 2" />
                         </div>
                         <div className="">
-                            <Image className="rounded-md h-[167px] max-md-full w-full object-cover"
+                            <img className="rounded-md h-[167px] max-md-full w-full object-cover"
                                 src={hemages && hemages[2].path} alt="Image 3" />
                         </div>
                     </div>
@@ -57,7 +56,7 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
                             <div className="flex justify-between my-2">
                                 <h1 className=" text-lg  md:text-xl font-semibold">{addPackage?.name}</h1>
                                 <div className="flex items-center justify-center border rounded-full w-6 h-6">
-                                    <Image className=" p-1 " src="https://www.svgrepo.com/show/13666/heart.svg" alt="Heart Icon" />
+                                    <img className=" p-1 " src="https://www.svgrepo.com/show/13666/heart.svg" alt="Heart Icon" />
                                 </div>
                             </div>
                             <div className='stick top-1'>

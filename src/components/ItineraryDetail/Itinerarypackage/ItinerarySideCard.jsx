@@ -1,12 +1,12 @@
 import "../../../app/globals.css";
-import Image from 'next/image'
+
  const ItinerarySideCard=()=>{
     return(
         <>
            <div className="relative  flex-shrink-0 max-w-[18rem] mt-5 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md border ml-[80px]">
             <div
                 className="relative mx-4 mt-4 overflow-hidden text-white  rounded-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
-                <Image src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+                <img src="https://imgs.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
                     alt="ui/ux review check" />
                 <div
                     className="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60">
