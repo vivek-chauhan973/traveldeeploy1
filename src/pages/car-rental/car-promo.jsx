@@ -26,8 +26,6 @@ const marks = [
 ];
 
 
-
-
 export default function CarPromo(){
 
     const [priceRange, setPriceRange] = useState([0, 10000]);

@@ -32,7 +32,8 @@ const TourInclusion = () => {
         try {
             const response = await fetch('/api/package/tour-info/inclusion/get');
             const result = await response.json();
-            setGroupsData(result.inclusionGroupData);
+            // setGroupsData(result.inclusionGroupData);
+            setGroupsData(result.inclusionGroupData.reverse());
         } catch (error) {
             console.error("Error fetching groups:", error);
         }

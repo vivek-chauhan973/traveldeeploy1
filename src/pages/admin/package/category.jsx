@@ -13,7 +13,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import category from "../blog/category";
 
 
 
@@ -65,7 +65,7 @@ export default function Category () {
 
         } catch (err) {
             console.log(err);
-            return [];
+            return [];  
         }
     }
 
@@ -118,7 +118,8 @@ export default function Category () {
             const categoriesList = await fetch('/api/package-setting/category/get-categories')
             const categories = await categoriesList.json()
             // console.log("categories is here", categories)
-            setcategoryListData(categories.data)
+             setcategoryListData(categories.data.reverse())
+           
 
         } catch (err) {
             console.log(err);
@@ -245,13 +246,6 @@ export default function Category () {
 
 
 
-
-
-
-
-
-
-
     return (
         <>
         <AppProvider>
@@ -283,6 +277,7 @@ export default function Category () {
                             </form>
                             {/* data is here show */}
                             {/* <hr className='my-3 border border-slate-500' /> */}
+                            
                             <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
                                 <ul>
                                     {badgesListData?.map((item, index) => (
@@ -293,7 +288,7 @@ export default function Category () {
                                                     <span>{index + 1} </span>
                                                     {editBadgeId === item._id ? (
                                                         <input
-                                                            className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
+                                                           className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
                                                             defaultValue={item.badge}
                                                             onChange={(e) => setEditBadgeValue(e.target.value)}
                                                         />

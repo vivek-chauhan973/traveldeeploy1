@@ -188,8 +188,9 @@ return(
                             </div>
                             <div>
                                 <div className="flex flex-col space-y-3">
-                                    <div className=" w-56 ">
-                                        <Image className="w-full" src="/assets/logo.png" alt="" />
+                                    <div className="  ">
+                                        {/* <span>Logo Logo Logo</span> */}
+                                        <Image width={100} height={100} src="/assets/logo.png" alt="" />
                                     </div>
                                     <p className=" ">Keep travelling all year round!</p>
                                     <p className="text-sm font-extralight">Subscribe to our newsletter to find travel inspiration in your inbox</p>
@@ -268,17 +269,9 @@ return(
 
                     </div>
 
-
-
-
-
-
-
                     <div className="container-wrapper flex items-center justify-center px-6 pt-10 text-sm">
                         <span className="dark:text-gray-400">© Copyright 1986. All Rights Reserved.</span>
                     </div>
-
-
 
                 </footer>
             </div>

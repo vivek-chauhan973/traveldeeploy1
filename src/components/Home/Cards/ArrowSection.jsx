@@ -61,9 +61,11 @@ const ArrowSection = () => {
           {/* start is here code  */}
 
           {/* Testing */}
-          <div className=" shrink-0 relative max-w-[290px] rounded-lg overflow-hidden">
+          <div className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden">
             <Image
-              className="relative object-cover h-96"
+              className="relative object-cover" 
+            layout="fill"
+        
               src="https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
@@ -77,9 +79,17 @@ const ArrowSection = () => {
               </div>
             </div>
           </div>
-          <div className=" shrink-0 relative max-w-[290px] rounded-lg overflow-hidden">
+
+
+
+
+
+
+<div className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden">
             <Image
-              className="relative object-cover h-96"
+              className="relative object-cover" 
+            layout="fill"
+        
               src="https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
@@ -93,9 +103,13 @@ const ArrowSection = () => {
               </div>
             </div>
           </div>
-          <div className=" shrink-0 relative max-w-[290px] rounded-lg overflow-hidden">
+
+
+          <div className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden">
             <Image
-              className="relative object-cover h-96"
+              className="relative object-cover" 
+            layout="fill"
+        
               src="https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
@@ -109,9 +123,12 @@ const ArrowSection = () => {
               </div>
             </div>
           </div>
-          <div className=" shrink-0 relative max-w-[290px] rounded-lg overflow-hidden">
+
+          <div className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden">
             <Image
-              className="relative object-cover h-96"
+              className="relative object-cover" 
+            layout="fill"
+        
               src="https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
@@ -125,6 +142,7 @@ const ArrowSection = () => {
               </div>
             </div>
           </div>
+
           <div className=" bg-gradient-to-l from-white opacity-100 w-10 h-full right-0 absolute z-30  top-0"></div>
 
           {/* end is here code */}

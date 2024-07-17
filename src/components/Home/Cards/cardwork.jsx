@@ -43,17 +43,19 @@ const Cardwork = () => {
         />
         <div className="relative flex justify-center items-center overflow-hidden w-full h-72 rounded-lg">
           {data.slides.map((item, index) => (
-            <div
+            <div 
               key={index}
-              className={`w-full absolute transition-transform transform ${
+              className={` md:h-full w-full h-56  absolute transition-transform transform ${
                 index === startIndex ? "translate-x-0" : "translate-x-full"
               }`}
             >
               <Image
                 src={item.src}
                 alt={item.alt}
-                className="w-full h-full object-cover"
-              />
+                className=" object-cover"
+             layout='fill'
+                
+                />
             </div>
           ))}
         </div>

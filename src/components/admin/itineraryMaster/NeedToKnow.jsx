@@ -24,13 +24,13 @@ const NeedToKnowComponent = () => {
 
     useEffect(() => {
         fetchGroups();
-    }, [fetchGroups]);
+    }, []);
 
     const fetchGroups = async () => {
         try {
             const response = await fetch('/api/package/tour-info/need-to-know/get');
             const result = await response.json();
-            setGroupsData(result.NeedToKnowGroupData);
+            setGroupsData(result.NeedToKnowGroupData.reverse());
         } catch (error) {
             console.error("Error fetching groups:", error);
         }
