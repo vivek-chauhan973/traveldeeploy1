@@ -106,6 +106,7 @@ import { GiWillowTree } from "react-icons/gi";
 import { AiOutlineFundView } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import im from "./im.webp";
+import Image from "next/image";
 import { PiCatThin } from "react-icons/pi";
 import { GrNavigate } from "react-icons/gr";
 import { GiCornerFlag } from "react-icons/gi";
@@ -181,14 +182,14 @@ const CustomizedHoliday = ({setOpenClose}) => {
       </div>
       <div className="flex flex-col mt-4 pl-2">
         <div>
-          <img src={im} className=" h-32 w-64 rounded-md " alt="abc" />
+          <Image src={im} className=" h-32 w-64 rounded-md " alt="abc" />
           <p className="font-semibold text-md mt-1">Luxury Holiday. </p>
           <p className=" text-xs w-64">
             choose the the right tailer-mad luxuary travel vacation
           </p>
         </div>
         <div className="mt-5">
-          <img src={im} className=" h-32 w-64 rounded-md " alt="abc" />
+          <Image src={im} className=" h-32 w-64 rounded-md " alt="abc" />
           <p className="font-semibold text-md mt-1">Luxury Holiday. </p>
           <p className=" text-xs w-64">
             choose the the right tailer-mad luxuary travel vacation

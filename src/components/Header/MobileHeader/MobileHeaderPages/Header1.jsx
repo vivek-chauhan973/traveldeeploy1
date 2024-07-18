@@ -80,7 +80,8 @@ const Header1 = ({ setTogle, togle }) => {
             <hr className="mx-1" />
             <div className="w-full flex flex-col gap-6 px-2 sm:px-4 my-2">
               <div className="flex gap-2 items-center">
-                <div><Image src="" className=" sm:text-[10px] md:text-2xl" alt='pic' /></div>
+                <div><Image src="" className=" sm:text-[10px] md:text-2xl" alt='pic'  width="125"
+                    height="150" /></div>
                 <div className="flex gap-1 flex-col">
                   <p>Toll free number</p>
                   <p className="cursor-pointer font-semibold">1800 22 7979</p>

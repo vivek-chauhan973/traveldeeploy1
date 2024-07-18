@@ -451,7 +451,8 @@ const Addguest = ({ children, guestPrice, inputData, setInputData, setCloseBtn }
                                     <div className='flex-col flex items-center justify-between border-b md:flex-row mb-2'>
                                         <Image className=' w-32 h-24 object-cover'
                                             src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
-                                            alt="" />
+                                            alt=""  width="125"
+                                            height="150" />
                                         <div className='items-center flex flex-col md:block'>
                                             <p className='font-semibold'>Maruti Suzuki <span
                                                 className='text-sm  text-blue font-normal ml-2 hover:underline cursor-pointer'>About</span>

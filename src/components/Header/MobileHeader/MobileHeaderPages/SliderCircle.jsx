@@ -1,4 +1,4 @@
-
+import Image from "next/image";
 import React from "react";
 import image from  './im.webp'
 import { IoIosArrowDown } from "react-icons/io";
@@ -28,44 +28,44 @@ const SliderCircle = ({setOpenClose}) => {
       <div className=" flex gap-7 py-2 px-3  mt-4 sm:p-3  overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400">
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Kashmir</span>
         </div>
 
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Kashmir</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">kashmir</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Kshmir</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">Rajsthan</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold ml-2 text-wrap">Sikkim </span>
         </div>
         <div className="">
           <div className="w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold ml-3 text-wrap">Kerla</span>
         </div>

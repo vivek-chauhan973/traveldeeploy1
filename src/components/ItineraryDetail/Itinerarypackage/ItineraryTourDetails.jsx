@@ -42,7 +42,8 @@ const {addPackage} =useAppContext();
                                 </div>
                                 <div className='grow flex flex-col justify-center items-center' >
                                     <div >
-                                        <Image className='w-20' src="https://seeklogo.com/images/I/indigo-airlines-logo-B3BBFD5004-seeklogo.com.png" alt="" />
+                                        <Image className='w-20' src="https://seeklogo.com/images/I/indigo-airlines-logo-B3BBFD5004-seeklogo.com.png" alt=""  width="125"
+                    height="150" />
                                     </div>
                                     <div className='flex relative items-center mt-2'>
                                         

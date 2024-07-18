@@ -1,9 +1,9 @@
 import React, { useEffect, createContext, useState, useContext } from "react";
-const AppContext = createContext(null);
 import { useRouter } from "next/router";
 
+const AppContext = createContext(null);
+
 const fetchPackage = async (packageUrl) => {
-  
   const response = await fetch(`/api/public/package/${packageUrl}`, {
     method: "GET",
   });
@@ -12,15 +12,11 @@ const fetchPackage = async (packageUrl) => {
 };
 
 export const AppProvider = ({ children }) => {
-  //changing button
-
   const [closeBtn, setCloseBtn] = useState(false);
-
-  //calculation
   const [addPackage, setAddPackage] = useState(null);
   const [guestPrice, setGuestPrice] = useState(0);
   const router = useRouter();
-  const data = {
+  const initialData = {
     child: 0,
     infant: 0,
     singleRoom: 0,
@@ -30,9 +26,9 @@ export const AppProvider = ({ children }) => {
     childAges: {},
     infantAges: {},
   };
-  const [inputData, setInputData] = useState(data);
+  const [inputData, setInputData] = useState(initialData);
   const packageUrl = router.query.package?.replace("-tour-package", "");
-// console.log("input data",inputData);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,33 +44,20 @@ export const AppProvider = ({ children }) => {
     fetchData();
   }, [packageUrl]);
 
-  //for main the popup through togle side bar
+  const [toglePopup, setToglePopup] = useState(true);
+  const [pricingManagement, setPricingManagement] = useState(null);
+  const [locationId, setLocationId] = useState(null);
+  const [catagoryId, setCatagoryId] = useState(null);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(9900);
 
+  const filterApi = {
+    locationId,
+    catagoryId,
+    minPrice,
+    maxPrice
+  };
 
-  const [toglePopup,setToglePopup]=useState(true);
-  // console.log("hi");
-  // console.log("add data", inputData);
-
-
-// for handle pricing management popup
-const [pricingManagement,setPricingManagement]=useState(null);
-
-// console.log("pricingmanagement",typeof(pricingManagement))
-
-// object for filter api
-const [locationId,setLocationId]=useState(null);
-const [catagoryId,setCatagoryId]=useState(null);
-const[minPrice,setMinPrice]=useState(0);
-const [maxPrice,setMaxPrice]=useState(9900);
-
-const filterApi={
-  locationId,
-  catagoryId,
-  minPrice,
-  maxPrice
-
-}
-// console.log("filterApi122222222222234142 :",filterApi)
   useEffect(() => {
     if (addPackage && addPackage?.prices) {
       const {
@@ -93,28 +76,21 @@ const filterApi={
         twinSharingRoom * inputData?.twinRoom +
         tripleSharingRoom * inputData?.tripleRoom +
         quadSharingRoom * inputData?.quardRoom;
-// console.log("calculate prise ",calculatedPrice)
+
       setGuestPrice(calculatedPrice);
-      // console.log("ppppp", calculatedPrice);
     }
-  }, [inputData]);
+  }, [inputData, addPackage]);
 
-//frontend logic here related package details and departure section
-const [showAddguest,setShowAddguest]=useState(null);
-const [departureSectionData,setDepartureSectionData]=useState(null);
-// console.log("item data :",departureSectionData);
+  const [showAddguest, setShowAddguest] = useState(null);
+  const [departureSectionData, setDepartureSectionData] = useState(null);
 
-const finalDataOfBooking={
-  departureCity:showAddguest,
-  itemDateAndDay:departureSectionData,
-  twinSharingPrice:addPackage?.prices?.twinSharingRoom,
-  totalCalculatedPrize:guestPrice,
-  allDetail:inputData
-}
-
-
-// console.log("show add guest popup",finalDataOfBooking);
-
+  const finalDataOfBooking = {
+    departureCity: showAddguest,
+    itemDateAndDay: departureSectionData,
+    twinSharingPrice: addPackage?.prices?.twinSharingRoom,
+    totalCalculatedPrize: guestPrice,
+    allDetail: inputData
+  };
 
   const contextFun = {
     closeBtn,
@@ -138,6 +114,7 @@ const finalDataOfBooking={
     setMaxPrice,
     filterApi
   };
+
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>
   );

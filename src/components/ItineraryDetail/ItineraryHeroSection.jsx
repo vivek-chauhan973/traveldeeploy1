@@ -1,4 +1,5 @@
 import "../../app/globals.css";
+
 import { MdOutlineWhatsapp } from "react-icons/md";
 import { Link as ScrollLink } from 'react-scroll';
 import Addguest from "@/components/addguest";
@@ -6,7 +7,7 @@ import { useEffect, useState } from "react";
 import CustomiseTour from "./CustomiseTour";
 import Slider from "react-slick";
 import { useAppContext } from "../admin/context/Package/AddGuest";
-const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData, closeBtn, setCloseBtn, images }) => {
+const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData, closeBtn, setCloseBtn, imgs }) => {
     const { showAddguest } = useAppContext();
     const settings = {
         dots: true,
@@ -20,8 +21,8 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
     const [hemages, setHemages] = useState(null);
 
     useEffect(() => {
-        setHemages(images?.data);
-    }, [images]);
+        setHemages(imgs?.data);
+    }, [imgs]);
 
     return (
         <>
@@ -31,24 +32,28 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
                     <div className="">
                         <div className="slider-container xl:hidden mt-7">
                            <Slider {...settings}>
-                                {images?.data?.map((item, i) => <div key={i}>
-                                    <img className=" w-full object-cover h-[40vh]" src={item.path} alt={`Image ${i + 1}`} />
+                                {imgs?.data?.map((item, i) => <div key={i}>
+                                    <img className=" w-full object-cover h-[40vh]" src={item.path} alt={`img ${i + 1}`}  width="125"
+                    height="150" />
                                 </div>)}
                                 
                             </Slider>
                         </div>
                         <img className="rounded-md h-[350px] object-cover w-full hidden xl:flex"
-                            src={hemages && hemages[0].path} alt="Image 1" />
+                            src={hemages && hemages[0].path} alt="img 1"  width="125"
+                            height="150" />
                     </div>
 
                     <div className="justify-end flex-col gap-y-4 md:justify-center w-full hidden xl:flex ">
                         <div className="">
                             <img className="rounded-md h-[167px] w-full object-cover"
-                                src={hemages && hemages[1].path} alt="Image 2" />
+                                src={hemages && hemages[1].path} alt="img 2"  width="125"
+                                height="150" />
                         </div>
                         <div className="">
                             <img className="rounded-md h-[167px] max-md-full w-full object-cover"
-                                src={hemages && hemages[2].path} alt="Image 3" />
+                                src={hemages && hemages[2].path} alt="img 3"  width="125"
+                                height="150" />
                         </div>
                     </div>
                     <div>
@@ -56,7 +61,8 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
                             <div className="flex justify-between my-2">
                                 <h1 className=" text-lg  md:text-xl font-semibold">{addPackage?.name}</h1>
                                 <div className="flex items-center justify-center border rounded-full w-6 h-6">
-                                    <img className=" p-1 " src="https://www.svgrepo.com/show/13666/heart.svg" alt="Heart Icon" />
+                                    <img className=" p-1 " src="https://www.svgrepo.com/show/13666/heart.svg" alt="Heart Icon"  width="125"
+                    height="150" />
                                 </div>
                             </div>
                             <div className='stick top-1'>
@@ -117,7 +123,7 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
                         </div>
                     </div>
 
-                    {/* 3images */}
+                    {/* 3imgs */}
 
 
                 </div>
