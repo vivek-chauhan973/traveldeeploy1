@@ -23,13 +23,15 @@ const TourExclusion = () => {
 
     useEffect(() => {
         fetchGroups();
-    }, [fetchGroups]);
+    }, []);
 
     const fetchGroups = async () => {
         try {
             const response = await fetch('/api/package/tour-info/exclusion/get');
             const result = await response.json();
-            setGroupsData(result.ExclusionGroupData);
+            // setGroupsData(result.ExclusionGroupData);
+            setGroupsData(result.ExclusionGroupData.reverse())
+            // setcategoryListData(categories.data.reverse())
         } catch (error) {
             console.error("Error fetching groups:", error);
         }

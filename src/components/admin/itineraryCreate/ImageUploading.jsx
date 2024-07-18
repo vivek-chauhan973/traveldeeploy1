@@ -127,20 +127,18 @@ export default function ImageUploading({ itinerary }) {
           {previews.map((preview, index) => (
             <div key={index} className="flex my-10 items-center pl-10 ">
               <input type="file" onChange={(e) => handleChange(e, index)}
-              
-              
-              className="file:mr-4 file:py-2 file:px-4
+
+
+                className="file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
               file:text-sm file:font-semibold
               file:bg-black/20 file:text-black/50
               hover:file:bg-black/75 hover:file:text-white cursor-pointer"
               />
-
-
               <div className="ml-4 ">
                 {preview && (
-                  <Image className="w-36 shadow-md" src={preview} alt="Preview" width="220"   height="120"
-/>
+                  <Image className="w-36 shadow-md" src={preview} alt="Preview" width="220" height="120"
+                  />
                 )}
                 <div>
                   <p>Title</p>

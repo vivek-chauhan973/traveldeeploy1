@@ -70,12 +70,14 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
                                     <div className="pl-5 py-3">
                                         <div className='flex gap-2'>
                                             <Image className='w-5'
-                                                src="https://www.reshot.com/preview-assets/icons/TZCXQGV5F4/maps-TZCXQGV5F4.svg" alt="" />
+                                                src="https://www.reshot.com/preview-assets/icons/TZCXQGV5F4/maps-TZCXQGV5F4.svg" alt=""  width="125"
+                                                height="150" />
                                             <p className='text-sm leading-7' >Today’s Sightseeing</p>
                                         </div>
                                         <div className='flex gap-2'>
                                             <Image className='w-5 '
-                                                src="https://www.reshot.com/preview-assets/icons/TZCXQGV5F4/maps-TZCXQGV5F4.svg" alt="" />
+                                                src="https://www.reshot.com/preview-assets/icons/TZCXQGV5F4/maps-TZCXQGV5F4.svg" alt=""  width="125"
+                                                height="150"/>
                                             <p className='text-sm leading-7' >Today’s Sightseeing</p>
                                         </div>
                                     </div>

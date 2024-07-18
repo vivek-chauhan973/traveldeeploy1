@@ -54,6 +54,7 @@
 
 
 import React from "react";
+import Image from "next/image";
 import { MdAttachMoney } from "react-icons/md";
 import im from "./im.webp";
 import { IoChevronBack } from "react-icons/io5";
@@ -79,19 +80,19 @@ const Forex = ({setOpenClose}) => {
       <div className="pl-2  gap-y-4 flex flex-col mt-2">
         <p className="flex items-center gap-3">
           <span>
-            <img src={im} alt="abc" className=" w-14 h-14 rounded-full" />
+            <Image src={im} alt="abc" className=" w-14 h-14 rounded-full" />
           </span>
           Us Doller $
         </p>
         <p className="flex items-center gap-3">
           <span>
-            <img src={im} alt="abc" className=" w-14 h-14 rounded-full" />
+            <Image src={im} alt="abc" className=" w-14 h-14 rounded-full" />
           </span>
           AED -UAE Dirhham $
         </p>
         <p className="flex items-center gap-3 font-3xl">
           <span>
-            <img src={im} alt="abc" className=" w-14 h-14 rounded-full" />
+            <Image src={im} alt="abc" className=" w-14 h-14 rounded-full" />
           </span>
           EUR -Euro $
         </p>

@@ -32,13 +32,13 @@ const Cancellation = () => {
 
     useEffect(() => {
         fetchGroups();
-    }, [fetchGroups]);
+    }, []);
 
     const fetchGroups = async () => {
         try {
             const response = await fetch('/api/package/tour-info/cancellation/get');
             const result = await response.json();
-            setGroupsData(result.CancellationGroupData);
+            setGroupsData(result.CancellationGroupData.reverse());
         } catch (error) {
             console.error("Error fetching groups:", error);
         }

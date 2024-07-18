@@ -1,7 +1,7 @@
 
 
 
-
+import Image from "next/image";
 import React from "react";
 import image from "./im.webp";
 import { IoIosArrowDown } from "react-icons/io";
@@ -34,20 +34,20 @@ const World = ({ setOpenClose }) => {
       <div className="flex gap-7 pl-2  mt-4 sm:p-3  overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400">
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Europe</span>
         </div>
 
         <div className="">
           <div className=" w-14 h-14 overflow-hidden  bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> America</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">
             South asia
@@ -55,19 +55,19 @@ const World = ({ setOpenClose }) => {
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap"> Africa</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold text-wrap">Dubai</span>
         </div>
         <div className="">
           <div className=" w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold sm:ml-2 text-wrap">
             Austelia 
@@ -75,7 +75,7 @@ const World = ({ setOpenClose }) => {
         </div>
         <div className="">
           <div className="w-14 h-14 overflow-hidden bg-black rounded-full">
-            <img src={image} alt="abc" className="" />
+            <Image src={image} alt="abc" className="" />
           </div>
           <span className=" text-sm font-semibold sm:ml-3 text-wrap">
             Frans

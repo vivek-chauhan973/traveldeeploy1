@@ -24,13 +24,13 @@ const PaymentTermComponent = () => {
 
     useEffect(() => {
         fetchGroups();
-    }, [fetchGroups]);
+    }, []);
 
     const fetchGroups = async () => {
         try {
             const response = await fetch('/api/package/tour-info/payment-term/get');
             const result = await response.json();
-            setGroupsData(result.PaymentTermGroupData);
+            setGroupsData(result.PaymentTermGroupData.reverse());
         } catch (error) {
             console.error("Error fetching groups:", error);
         }

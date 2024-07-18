@@ -6,13 +6,14 @@ import { MdCurrencyRupee } from "react-icons/md";
 import { AllDataRelatedCity, city } from "./DepartureSectionData";
 import DeparturePopup from "./DeparturePopup";
 
- const DepartureSection= ( )=> {
+ const DepartureSection= ( {addPackage})=> {
 
-const {addPackage,setDepartureSectionData}=useAppContext();
+const {setDepartureSectionData}=useAppContext();
 const [datePackage,setDatePackage]=useState(0);
 const [showPopup,setShowPopup]=useState(false);
 // const [color,setColor]=useState(null);
   // console.log("highlight data show is here", addPackage);
+  
   return (
     <>
       <div className="">
@@ -34,7 +35,7 @@ const [showPopup,setShowPopup]=useState(false);
               {/* select departure city */}
               <div className=" relative gap-4  py-4">
                 <h1>All Departure date({AllDataRelatedCity[datePackage].length})</h1>
-                {showPopup&&<DeparturePopup setShowPopup={setShowPopup} />}
+                {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
                 <div className="flex my-2">
                 {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className="ml-2 cursor-pointer" >
                   <div className=" border-2 w-20 h-24 rounded-md">

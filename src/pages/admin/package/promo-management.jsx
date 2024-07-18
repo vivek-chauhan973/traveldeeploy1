@@ -15,7 +15,7 @@ const fetchLocation = async (state) => {
 };
 
 export default function PromoManage() {
-     const ref = useRef(null);
+    const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState(null);
@@ -24,9 +24,9 @@ export default function PromoManage() {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
-     const [image,setImage]=useState("");
+    const [image, setImage] = useState("");
     //  const [image1,setImage1]=useState(null);
-     const [imageData,setImageData]=useState(null);
+    const [imageData, setImageData] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -49,9 +49,9 @@ export default function PromoManage() {
             try {
                 const res = await fetch(`/api/public/package-state/${selectedLocation}`);
                 const data = await res.json();
-                
-                
-                console.log("data",data);
+
+
+                console.log("data", data);
                 return data;
             } catch (error) {
                 console.error("Error fetching promo text", error);
@@ -59,23 +59,23 @@ export default function PromoManage() {
         };
 
         if (statePackages.length > 0) {
-            getPromoData().then(res=>setPromoTxt(res?.data));
-           
+            getPromoData().then(res => setPromoTxt(res?.data));
+
         }
-    }, [statePackages,selectedLocation]);
+    }, [statePackages, selectedLocation]);
     const handleChange = (e) => {
         setFile(ref?.current?.files[0]);
         // setImage1(ref?.current?.files[0]);
     };
-    useEffect(()=>{
+    useEffect(() => {
         setTitle(promoTxt?.title || "");
-    setAlt(promoTxt?.alt || "");
-    setImage(promoTxt?.image || "")
-    setFile(promoTxt?.image || "")
-    },[promoTxt])
+        setAlt(promoTxt?.alt || "");
+        setImage(promoTxt?.image || "")
+        setFile(promoTxt?.image || "")
+    }, [promoTxt])
     // console.log("promotext",promoTxt)
 
-    
+
 
     const handleSelectChange = async (e) => {
         const selectedOption = e.target.selectedOptions[0];
@@ -108,8 +108,8 @@ export default function PromoManage() {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
                 body: formData,
-            
-               
+
+
             });
 
             if (!response.ok) {
@@ -179,7 +179,7 @@ export default function PromoManage() {
                                             type="file"
                                             onChange={handleChange}
                                             // value={file}
-                                             ref={ref}
+                                            ref={ref}
                                             className="file:mr-4 file:py-2 file:px-4
                                                 file:rounded-full file:border-0
                                                 file:text-sm file:font-semibold

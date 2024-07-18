@@ -44,6 +44,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [countries, setCountries] = useState();
     const [states, setStates] = useState();
     const [cities, setCities] = useState();
+    const [startCities, setStartCities] = useState("");
 
     useEffect(() => {
         const fetchCountry = async () => {
@@ -72,7 +73,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
 
     const [packageBadges, setPackageBadges] = useState();
     const [selectedBadges, setSelectedBadges] = useState([]); // Added selectedBadges state
-    console.log("selected badges show is here",selectedBadges)
+    console.log("selected badges show is here",itinerary)
     const fetchBadges = async () => {
         try {
             const badgeList = await fetch('/api/package-setting/get-badges');
@@ -198,6 +199,16 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         badges:selectedBadges
                     })
                 });
+                const res1 = await fetch('/api/package/startcity/'+itinerary?._id,{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body:JSON.stringify({
+                        city:startCities
+                    })
+                })
+                
                 const data = await res.json();
                 setItineraryInfo(data?.packageBasic);
                 router.push('/admin/package/itinerary/' + data?.packageBasic.id);
@@ -243,7 +254,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                                 <div className="sm:flex items-center mt-2">
                                     <label className=" font-semibold w-28 text-para" htmlFor="">Start & Cities</label>
                                     <div className="flex items-center gap-2">
-                                        <input className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para' type="text" />
+                                        <input className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para' type="text" value={startCities} onChange={(e)=>setStartCities(e.target.value)} />
                                         <MdAddLocationAlt className=" cursor-pointer" size={26} />
                                     </div>
                                 </div>

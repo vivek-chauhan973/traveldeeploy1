@@ -14,10 +14,10 @@ const useFetchData = (url, setState) => {
             }
         };
         fetchData();
-    }, [url]);
+    }, [url, setState]);
 };
 
-const TourInformation=({ itinerary })=> {
+const TourInformation = ({ itinerary }) => {
     const [tourInclusion, setTourInclusion] = useState([]);
     const [tourExclusion, setTourExclusion] = useState([]);
     const [tourCancellation, setTourCancellation] = useState([]);
@@ -174,4 +174,5 @@ const TourInformation=({ itinerary })=> {
         </div>
     );
 }
-export default  TourInformation
+
+export default TourInformation;

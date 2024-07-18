@@ -29,16 +29,16 @@ const ItineraryTour = () => {
                         <TourInclusion />
                     </div>
                     <div className={` ${activeTab === 'Tab2' ? 'block' : 'hidden'}`}>
-                        <TourExclusion/>
+                        <TourExclusion />
                     </div>
                     <div className={` ${activeTab === 'Tab3' ? 'block' : 'hidden'}`}>
-                        <Cancellation/>
+                        <Cancellation />
                     </div>
                     <div className={` ${activeTab === 'Tab4' ? 'block' : 'hidden'}`}>
-                        <PaymentTerm/>
+                        <PaymentTerm />
                     </div>
                     <div className={` ${activeTab === 'Tab5' ? 'block' : 'hidden'}`}>
-                        <NeedToKnow/>
+                        <NeedToKnow />
                     </div>
                 </div>
             </div>

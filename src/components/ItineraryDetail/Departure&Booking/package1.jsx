@@ -59,7 +59,7 @@ fetchImages().then(res=>setImages(res));
             {/*Select departure city */}
            
             <div id="departure">
-              <DepartureSection />
+              <DepartureSection addPackage={addPackage}/>
             </div>
           
             {/* Pricing */}
@@ -196,6 +196,8 @@ fetchImages().then(res=>setImages(res));
                     className="w-4"
                     src="https://www.svgrepo.com/show/475692/whatsapp-color.svg"
                     alt=""
+                    width="125"
+                    height="150"
                   />
                   <p className="text-[12px]">Send Itinerary</p>
                 </div>
@@ -204,6 +206,8 @@ fetchImages().then(res=>setImages(res));
                     className="w-4"
                     src="https://www.svgrepo.com/show/522439/printer.svg"
                     alt=""
+                     width="125"
+                    height="150"
                   />
                   <p className="text-[12px]">Print Itinerary</p>
                 </div>
@@ -212,6 +216,8 @@ fetchImages().then(res=>setImages(res));
                     className="w-4"
                     src="https://www.svgrepo.com/show/522399/envelope-closed.svg"
                     alt=""
+                     width="125"
+                    height="150"
                   />
                   <p className="text-[12px]">Email Itinerary</p>
                 </div>
