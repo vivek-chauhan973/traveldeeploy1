@@ -277,18 +277,67 @@ export default function Category () {
                             </form>
                             {/* data is here show */}
                             {/* <hr className='my-3 border border-slate-500' /> */}
-                            
+{/*                            
                             <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
                                 <ul>
                                     {badgesListData?.map((item, index) => (
                                         <li key={item._id} className="even:bg-slate-50">
                                             <div className='flex justify-between  px-1'>
-                                                {/* <p className='capitalize flex gap-2 leading-8'><span>{index + 1} </span>{item.badge}</p> */}
+                                                 <p className='capitalize truncate hover:text-clip flex gap-2 leading-8 text-[14px]'>
+                                                    <span>{index + 1} </span>
+                                                    {editBadgeId === item._id ? (
+                                                        <input
+                                                             className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
+                                                            defaultValue={item.badge}
+                                                            onChange={(e) => setEditBadgeValue(e.target.value)}
+                                                        />
+                                                    ) : item.badge}
+                                                </p>
+                                                <div className='flex gap-2 basis-1/3'>
+                                                    {editBadgeId === item._id ? (
+                                                        <span className="flex gap-2 px-2">
+                                                            {editBadgeValue && <IoIosSave
+                                                                size={24}
+                                                                className='mt-1 hover:text-red-500 cursor-pointer'
+                                                                onClick={() => saveEditBadge(item._id)}
+                                                            />}
+                                                            <MdCancel
+                                                                size={24}
+                                                               
+                                                                className='mt-1 hover:text-red-500 cursor-pointer'
+                                                                onClick={() => toggleEditBadge(item._id)}
+                                                            />
+                                                        </span>
+                                                    ) : (
+                                                        <FaEdit onClick={() => toggleEditBadge(item._id)} size={20} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                                    )}
+                                                    
+                                                   <MdDeleteForever onClick={() => handleDeleteBadge(item._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                                </div>
+                                                <ToastContainer/>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                            </div>  */}
+
+
+
+
+                            {/* trial code */}
+
+
+                            <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
+                                <ul>
+                                    {badgesListData?.map((item, index) => (
+                                        <li key={item._id} className="even:bg-slate-50">
+                                            <div className='flex justify-between  px-1'>
                                                 <p className='capitalize truncate hover:text-clip flex gap-2 leading-8 text-[14px]'>
                                                     <span>{index + 1} </span>
                                                     {editBadgeId === item._id ? (
                                                         <input
-                                                           className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
+                                                            className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
                                                             defaultValue={item.badge}
                                                             onChange={(e) => setEditBadgeValue(e.target.value)}
                                                         />
@@ -312,16 +361,17 @@ export default function Category () {
                                                         <FaEdit onClick={() => toggleEditBadge(item._id)} size={20} className='mt-1 hover:text-red-500 cursor-pointer' />
                                                     )}
 
-                                                    {/* <MdDeleteForever size={24} className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => handleDeleteCategory(item._id)} /> */}
-                                                    <MdDeleteForever onClick={() => handleDeleteBadge(item._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                                     <MdDeleteForever onClick={() => handleDeleteBadge(item._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
                                                 </div>
-                                                <ToastContainer/>
+                                                
                                             </div>
                                         </li>
                                     ))}
                                 </ul>
 
                             </div>
+
+
                         </div>
                         {/* category section */}
                         <div className=' p-4 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600'>

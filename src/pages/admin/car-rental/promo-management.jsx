@@ -61,7 +61,7 @@ export default function PromoManagement () {
                                 </div>
                                 <div className="py-10 border border-slate-500/45  px-2 rounded">
                                     <div className="w-2/3">
-                                        <Image className=" w-20 shadow-md " src={file} alt=""/>
+                                        {/* <Image className=" w-20 shadow-md " src={file} alt=""/> */}
                                     </div>
                                     <div>
                                         <input type="file" onChange={handleChange}

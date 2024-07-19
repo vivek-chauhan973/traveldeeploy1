@@ -30,6 +30,7 @@ export default function CarPackage() {
     const [exclusionValidate, setExclusionValidate] = useState('');
     const [readBeforeBook, setReadBeforeBook] = useState('');
     const [readBeforeBookValidate, setReadBeforeBookValidate] = useState('');
+    const [map, setMap] = useState('')
 
     const modules = {
         toolbar: [
@@ -76,9 +77,17 @@ export default function CarPackage() {
         }
     };
 
+  
+const HandleMap = (event) => {
+    // setMap(event.target.value);
+    const newValue = event.target.value;
+    setMap(newValue);
+    console.log(newValue);
+};
+
     const validateForm = () => {
         let valid = true;
-        
+
         if (!car) {
             valid = false;
         }
@@ -111,6 +120,7 @@ export default function CarPackage() {
             valid = false;
         }
 
+
         return valid;
     };
 
@@ -129,6 +139,7 @@ export default function CarPackage() {
             inclusion,
             exclusion,
             readBeforeBook,
+            map,
         };
 
         await fetch('/api/car-packages', {
@@ -146,128 +157,135 @@ export default function CarPackage() {
         setInclusion('');
         setExclusion('');
         setReadBeforeBook('');
+        setMap('');
+        console.log("all form data",setCar,setTitle)
     };
 
     return (
         <AppProvider>
-        <Layout>
-            <div>
-                <div className="flex items-center gap-5 text-primary pb-3">
-                    <BiSolidCarMechanic size={28} className="font-semibold" />
-                    <p className="text-[24px] text-black">Car Package</p>
-                    <HiOutlineArrowNarrowRight size={24} className=" text-teal-700" />
-                </div>
-                <div className="mt-10">
-                    <form onSubmit={handleSubmit}>
-                        <div className="bg-white p-4 grid grid-cols-1 md:grid-cols-2 gap-5 items-center h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                            <div className="flex flex-col gap-3">
-                                <div className="flex gap-2 items-center">
-                                    <div className="w-36">
-                                        <label htmlFor="cars" className="text-para font-semibold w-32">Choose a car:</label>
+            <Layout>
+                <div>
+                    <div className="flex items-center gap-5 text-primary pb-3">
+                        <BiSolidCarMechanic size={28} className="font-semibold" />
+                        <p className="text-[24px] text-black">Car Package</p>
+                        <HiOutlineArrowNarrowRight size={24} className=" text-teal-700" />
+                    </div>
+                    <div className="mt-10">
+                        <form onSubmit={handleSubmit}>
+                            <div className="bg-white p-4 grid grid-cols-1 md:grid-cols-2 gap-5 items-center h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
+                                <div className="flex flex-col gap-3">
+                                    <div className="flex gap-2 items-center">
+                                        <div className="w-36">
+                                            <label htmlFor="cars" className="text-para font-semibold w-32">Choose a car:</label>
+                                        </div>
+                                        <select name="cars" id="cars" className="border outline-[0.5px] flex justify-items-center" onChange={(e) => setCar(e.target.value)} value={car}>
+                                            <option className="" value="" disabled>Choose a car</option>
+                                            <option className="" value="volvo">Volvo</option>
+                                            <option className="" value="saab">Saab</option>
+                                            <option className="" value="mercedes">Mercedes</option>
+                                            <option className="" value="audi">Audi</option>
+                                        </select>
                                     </div>
-                                    <select name="cars" id="cars" className="border outline-[0.5px] flex justify-items-center" onChange={(e) => setCar(e.target.value)} value={car}>
-                                        <option className="" value="" disabled>Choose a car</option>
-                                        <option className="" value="volvo">Volvo</option>
-                                        <option className="" value="saab">Saab</option>
-                                        <option className="" value="mercedes">Mercedes</option>
-                                        <option className="" value="audi">Audi</option>
-                                    </select>
-                                </div>
-                                <div className="flex gap-2 items-center">
-                                    <div className="w-36">
-                                        <label className="text-para font-semibold" htmlFor="">Package Title</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div className="flex gap-2 items-center">
+                                        <div className="w-36">
+                                            <label className="text-para font-semibold" htmlFor="">Package Title</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        <input type="text" className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none" onChange={(e) => setTitle(e.target.value)} value={title} />
                                     </div>
-                                    <input type="text" className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none" onChange={(e) => setTitle(e.target.value)} value={title} />
-                                </div>
-                                <div className="flex gap-2 items-center">
-                                    <div className=" w-36">
-                                        <label className="text-para font-semibold" htmlFor="">Car Price</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div className="flex gap-2 items-center">
+                                        <div className=" w-36">
+                                            <label className="text-para font-semibold" htmlFor="">Car Price</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        <input type="text" className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none" onChange={(e) => setPrice(e.target.value)} value={price} />
                                     </div>
-                                    <input type="text" className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none" onChange={(e) => setPrice(e.target.value)} value={price} />
+                                </div>
+                                <div className="bg-slate-100 w-full h-full rounded-md flex justify-center">
+                                    {/* here when select car then car name show is here */}
+                                    <p className=" self-center text-[28px] font-semibold text-[#dad8d8]">Choose A Car</p>
                                 </div>
                             </div>
-                            <div className="bg-slate-100 w-full h-full rounded-md flex justify-center">
-                                {/* here when select car then car name show is here */}
-                                <p className=" self-center text-[28px] font-semibold text-[#dad8d8]">Choose A Car</p>
-                            </div>
-                        </div>
-                        <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                            <p className="text-para font-semibold pb-1">Description</p>
-                            <div className="bg-white">
-                                <QuillNoSSRWrapper
-                                    className='rounded h-32'
-                                    theme="snow"
-                                    value={description}
-                                    onChange={validateDescription}
-                                    modules={modules}
-                                />
-                                <div>
-                                    <span className="text-xs text-red-700 capitalize">{descriptionValidate}</span>
+                            <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
+                                <p className="text-para font-semibold pb-1">Description</p>
+                                <div className="bg-white">
+                                    <QuillNoSSRWrapper
+                                        className='rounded h-32'
+                                        theme="snow"
+                                        value={description}
+                                        onChange={validateDescription}
+                                        modules={modules}
+                                    />
+                                    <div>
+                                        <span className="text-xs text-red-700 capitalize">{descriptionValidate}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="mt-5 bg-white p-2  shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                            <p className="text-para font-semibold pb-1">Google Map</p>
-                            <div className="bg-white">
-                                <GoogleMap setActiveTab={undefined} itinerary={undefined}/>
+                            <div className="mt-5 bg-white p-2  shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
+                                <p className="text-para font-semibold pb-1">Google Map</p>
+                                <div className="bg-white">
+                                    <GoogleMap setActiveTab={undefined} itinerary={undefined}
+                                        onChange={HandleMap}
+                                        value={map}
+                                    />
+                                   {/* <input type="text" className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none" onChange={HandleMap} value={map} /> */}
+                               
+                                </div>
                             </div>
-                        </div>
-                        <div className="mb-5 shadow-sm">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                                    <p className="font-semibold text-para">Inclusion</p>
-                                    <div className="bg-white">
-                                        <QuillNoSSRWrapper
-                                            className='rounded h-32'
-                                            theme="snow"
-                                            value={inclusion}
-                                            onChange={validateInclusion}
-                                            modules={modules}
-                                        />
-                                        <div>
-                                            <span className="text-xs text-red-700 capitalize">{inclusionValidate}</span>
+                            <div className="mb-5 shadow-sm">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
+                                        <p className="font-semibold text-para">Inclusion</p>
+                                        <div className="bg-white">
+                                            <QuillNoSSRWrapper
+                                                className='rounded h-32'
+                                                theme="snow"
+                                                value={inclusion}
+                                                onChange={validateInclusion}
+                                                modules={modules}
+                                            />
+                                            <div>
+                                                <span className="text-xs text-red-700 capitalize">{inclusionValidate}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
+                                        <p className="font-semibold text-para">Exclusion</p>
+                                        <div className="bg-white">
+                                            <QuillNoSSRWrapper
+                                                className='rounded h-32'
+                                                theme="snow"
+                                                value={exclusion}
+                                                onChange={validateExclusion}
+                                                modules={modules}
+                                            />
+                                            <div>
+                                                <span className="text-xs text-red-700 capitalize">{exclusionValidate}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                                    <p className="font-semibold text-para">Exclusion</p>
-                                    <div className="bg-white">
-                                        <QuillNoSSRWrapper
-                                            className='rounded h-32'
-                                            theme="snow"
-                                            value={exclusion}
-                                            onChange={validateExclusion}
-                                            modules={modules}
-                                        />
-                                        <div>
-                                            <span className="text-xs text-red-700 capitalize">{exclusionValidate}</span>
-                                        </div>
+                            </div>
+                            <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
+                                <p className="text-para font-semibold">Read Before You Book</p>
+                                <div className="bg-white">
+                                    <QuillNoSSRWrapper
+                                        className='rounded h-32'
+                                        theme="snow"
+                                        value={readBeforeBook}
+                                        onChange={validateReadBeforeBook}
+                                        modules={modules}
+                                    />
+                                    <div>
+                                        <span className="text-xs text-red-700 capitalize">{readBeforeBookValidate}</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                            <p className="text-para font-semibold">Read Before You Book</p>
-                            <div className="bg-white">
-                                <QuillNoSSRWrapper
-                                    className='rounded h-32'
-                                    theme="snow"
-                                    value={readBeforeBook}
-                                    onChange={validateReadBeforeBook}
-                                    modules={modules}
-                                />
-                                <div>
-                                    <span className="text-xs text-red-700 capitalize">{readBeforeBookValidate}</span>
-                                </div>
+                            <div className="py-5">
+                                <button type="submit" className="bg-black w-full rounded-md py-2 text-white">Submit</button>
                             </div>
-                        </div>
-                        <div className="py-5">
-                            <button type="submit" className="bg-black w-full rounded-md py-2 text-white">Submit</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </Layout>
+            </Layout>
         </AppProvider>
     );
 }

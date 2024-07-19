@@ -78,7 +78,7 @@ export default function CarPromo(){
                                 <div className=" col-span-3 md:border-r">
                                     <div className="flex sm:flex-row flex-col gap-5">
                                         <div className="">
-                                            <Image className="w-52 h-40 object-contain" src="https://pngImage.com/uploads/mercedes/mercedes_PNG80135.png" alt="" />
+                                            {/* <Image className="w-52 h-40 object-contain" src="https://pngImage.com/uploads/mercedes/mercedes_PNG80135.png" alt="" /> */}
                                         </div>
                                         <div className=" ">
                                             <div className="pb-1 md:pb-3 ">

@@ -1,20 +1,20 @@
 import "../../app/globals.css";
 // import Card1 from "@/components/Home/Cards/Card1";
- import Card2 from "@/components/Home/Cards/Card2";
+import Card2 from "@/components/Home/Cards/Card2";
   import Card3 from "@/components/Home/Cards/Card3";
 // import HeroSection from "@/components/Home/HeroSection";
  import HorizontalCard from "@/components/Home/Cards/HorizontalCard";
 import Card4 from "@/components/Home/Cards/Card4";
 import ReviewsCard from "@/components/ReviewsCard";
 import Footer from "@/components/Footer";
- import Cardwork from "@/components/Home/Cards/cardwork";
- import ArrowSection from "@/components/Home/Cards/ArrowSection";
-
+import Cardwork from "@/components/Home/Cards/cardwork";
+import ArrowSection from "@/components/Home/Cards/ArrowSection";
+import DynamicTable from "@/components/DynamicTable";
 
 export default function home() {
     return (
         <>
-
+            <DynamicTable/>
             {/* <HeroSection /> */}
             {/* <Tostify/> */}
             {/* <AdminReview/> */}
