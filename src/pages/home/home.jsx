@@ -1,3 +1,4 @@
+import Image  from "next/image";
 import "../../app/globals.css";
 // import Card1 from "@/components/Home/Cards/Card1";
 import Card2 from "@/components/Home/Cards/Card2";
@@ -93,7 +94,7 @@ export default function home() {
 
 
                     <div className="">
-                        <img className="md:h-80 md:w-[720px]   object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <Image className="md:h-80 md:w-[720px]   object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     </div>
 
                 </div>
@@ -103,25 +104,25 @@ export default function home() {
             {/* relative text-center w-full  h-40 md:h-52 lg:h-44 xl:h-52  overflow-hidden rounded-2xl" */}
             <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
                 <div className="relative mb-2">
-                    <img className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     <div className="absolute  inset-x-2 bottom-0 bg-opacity-50 text-white text-center py-2">
                         <p className="text-[25px] font-bold">himacahl</p>
                     </div>
                 </div>
                 <div className="relative mb-2">
-                    <img className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     <div className="absolute  inset-x-2 bottom-0 bg-opacity-50 text-white text-center py-2">
                         <p className=" text-[25px]	 font-bold">Kerala</p>
                     </div>
                 </div>
                 <div className="relative mb-2">
-                    <img className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     <div className="absolute  inset-x-2 bottom-0 bg-opacity-50 text-white text-center py-2">
                         <p className="text-[25px] font-bold">Uttarakhand</p>
                     </div>
                 </div>
                 <div className="relative mb-2">
-                    <img className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     <div className="absolute  inset-x-0 bottom-0 bg-opacity-50 text-white text-center py-2">
                         <p className="text-[25px] font-bold">  Rajastan</p>
                     </div>
@@ -150,7 +151,7 @@ export default function home() {
 
 
                     <div className="">
-                        <img className="h-72 w-[720px] object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <Image className="h-72 w-[720px] object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     </div>
 
                 </div>
@@ -162,7 +163,7 @@ export default function home() {
 
 
                     <div className="">
-                        <img className="h-72 w-[720px] object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <Image className="h-72 w-[720px] object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     </div>
 
                     <div className="">
@@ -187,11 +188,11 @@ export default function home() {
 
             <div className=" container-wrapper md:grid md:grid-cols-2 mt-5 md:mb-16 md:mt-8 gap-1">
                 <div className="relative mb-3">
-                    <img className="md:h-72 w-full h-56 md:w-[550px] object-cover rounded-md  transition-transform duration-300 transform hover:scale-110 " src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <Image className="md:h-72 w-full h-56 md:w-[550px] object-cover rounded-md  transition-transform duration-300 transform hover:scale-110 " src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
 
                 </div>
                 <div className="relative ">
-                    <img className="md:h-72 md:w-[550px] h-56 w-full object-cover rounded-md transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <Image className="md:h-72 md:w-[550px] h-56 w-full object-cover rounded-md transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
 
                 </div>
 
@@ -333,7 +334,7 @@ export default function home() {
                     {/* multiple card */}
                     <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
-                            <img className=" object-cover w-14 h-14 rounded-full"
+                            <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                 alt="" />
                         </div>
@@ -345,7 +346,7 @@ export default function home() {
                     {/* multiple card */}
                     <div className="flex gap-2  ">
                         <div className=" overflow-hidden h-6 w-6">
-                            <img className=" object-cover w-5 h-5 rounded-full"
+                            <Image className=" object-cover w-5 h-5 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                 alt="" />
                         </div>
@@ -357,7 +358,7 @@ export default function home() {
                     {/* multiple card */}
                     <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
-                            <img className=" object-cover w-14 h-14 rounded-full"
+                            <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                 alt="" />
                         </div>
@@ -369,7 +370,7 @@ export default function home() {
                     {/* multiple card */}
                     <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
-                            <img className=" object-cover w-14 h-14 rounded-full"
+                            <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                 alt="" />
                         </div>
@@ -381,7 +382,7 @@ export default function home() {
                     {/* multiple card */}
                     <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
-                            <img className=" object-cover w-14 h-14 rounded-full"
+                            <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                 alt="" />
                         </div>
@@ -393,7 +394,7 @@ export default function home() {
                     {/* multiple card */}
                     <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
-                            <img className=" object-cover w-14 h-14 rounded-full"
+                            <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                 alt="" />
                         </div>
