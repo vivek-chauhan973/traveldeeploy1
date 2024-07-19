@@ -11,7 +11,7 @@ export default function TourPackage() {
     
     <AppProvider>
       <Package1 />
-     <div>HELLO WORLD</div>
+     {/* <div>HELLO WORLD</div> */}
      </AppProvider>
   );
 }

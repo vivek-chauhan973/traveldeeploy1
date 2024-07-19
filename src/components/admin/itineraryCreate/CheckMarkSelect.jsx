@@ -16,12 +16,13 @@ const MenuProps = {
     },
 };
 
-export default function MultipleSelectCheckmarks({ packageCategories, onSelectedCategoryIdsChange }) {
+export default function MultipleSelectCheckmarks({ packageCategories, onSelectedCategoryIdsChange ,selectedCategories1}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
+    // console.log("selected categories here : ",packageCategories)
     useEffect(() => {
-        setSelectedCategories([]);
-    }, [packageCategories]);
+        setSelectedCategories(selectedCategories1||[]);
+    }, [packageCategories,selectedCategories1]);
 
     const handleChange = (event) => {
         const {

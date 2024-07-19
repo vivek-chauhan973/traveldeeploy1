@@ -1,5 +1,4 @@
 import "../../app/globals.css";
-
 import { MdOutlineWhatsapp } from "react-icons/md";
 import { Link as ScrollLink } from 'react-scroll';
 import Addguest from "@/components/addguest";
@@ -7,7 +6,7 @@ import { useEffect, useState } from "react";
 import CustomiseTour from "./CustomiseTour";
 import Slider from "react-slick";
 import { useAppContext } from "../admin/context/Package/AddGuest";
-const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData, closeBtn, setCloseBtn, imgs }) => {
+const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData, closeBtn, setCloseBtn, images }) => {
     const { showAddguest } = useAppContext();
     const settings = {
         dots: true,
@@ -21,9 +20,9 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
     const [hemages, setHemages] = useState(null);
 
     useEffect(() => {
-        setHemages(imgs?.data);
-    }, [imgs]);
-
+        setHemages(images?.data);
+    }, [images,hemages]);
+    // console.log("images12324432423",hemages); 
     return (
         <>
        
@@ -32,9 +31,9 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
                     <div className="">
                         <div className="slider-container xl:hidden mt-7">
                            <Slider {...settings}>
-                                {imgs?.data?.map((item, i) => <div key={i}>
-                                    <img className=" w-full object-cover h-[40vh]" src={item.path} alt={`img ${i + 1}`}  width="125"
-                    height="150" />
+                                {hemages?.map((item, i) => <div key={i}>
+                                    <img className=" w-full object-cover h-[40vh]" src={item.path}  width="125" height="150"  alt={`img ${i + 1}`} 
+                    />
                                 </div>)}
                                 
                             </Slider>

@@ -10,7 +10,7 @@ export default function ImageUploading({ itinerary }) {
   const [selectedImageIds, setSelectedImageIds] = useState([]);
   const [hasFetchedImages, setHasFetchedImages] = useState(false); // Track if images have been fetched
 
-  console.log("Itinerary data shown in image uploading section", itinerary);
+  // console.log("Itinerary data shown in image uploading section", itinerary);
 
   // Function to fetch existing images
   const fetchImages = useCallback(async () => {

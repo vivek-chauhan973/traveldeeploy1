@@ -21,8 +21,10 @@ import { NextApiRequest, NextApiResponse } from "next";
         let updatedPackage
         switch (req.method) {
             case 'PUT':
-                const { name, price, status, location,category } = req.body;
-                updatedPackage = await Package.findByIdAndUpdate(packageId, { name, price, status, location }, { new: true });
+                const { name, price, status, location,category,badges ,startcity } = req.body;
+                const startcity1=startcity.split(",");
+                // console.log("startcity 134346387453465347534",badges);
+                updatedPackage = await Package.findByIdAndUpdate(packageId, { name, price, status, location,category,badges,startcity:startcity1 }, { new: true });
 
                 if (!updatedPackage) {
                     return res.status(404).json({ message: 'Package not found' });

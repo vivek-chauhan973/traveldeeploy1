@@ -19,7 +19,7 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelectChip({ packageBadges, onSelectedBadgesChange }) {
+export default function MultipleSelectChip({itinerary, packageBadges, onSelectedBadgesChange }) {
   const [snames, setNames] = useState([]);
 
   useEffect(() => {
@@ -29,6 +29,10 @@ export default function MultipleSelectChip({ packageBadges, onSelectedBadgesChan
 
   const theme = useTheme();
   const [selectedBadges, setSelectedBadges] = useState([]);
+  useEffect(()=>{
+    setSelectedBadges(itinerary?.badges || []);
+
+  },[itinerary])
 
   const handleChange = (event) => {
     const {
@@ -41,7 +45,7 @@ export default function MultipleSelectChip({ packageBadges, onSelectedBadgesChan
       onSelectedBadgesChange(value);
     }
   };
-
+// console.log("selected Badges :: ",selectedBadges)
   return (
     <div>
       {snames && (

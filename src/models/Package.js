@@ -27,6 +27,14 @@ const packageSchema = new Schema({
         ref: 'PackageMasterCategory',
         required: true
     }],
+    badges:{
+        type:[String],
+      default:[]
+    },
+    startcity:{
+      type:[String],
+      default:[]
+    },
     location: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'City',

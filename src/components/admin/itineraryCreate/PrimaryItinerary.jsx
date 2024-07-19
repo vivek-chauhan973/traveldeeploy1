@@ -170,7 +170,10 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setSelectedLocation(itinerary?.location);
         handleSelectCountry(itinerary?.location?.state?.country?._id);
         handleSelectState(itinerary?.location?.state?._id);
-        handleCategory(itinerary?.category?._id);
+        handleCategory(itinerary?.category);
+        
+        setStartCities((itinerary?.startcity?.join(",")) || "");
+        
     }, [itinerary]);
 
     const handleSaveBasic = async () => {
@@ -196,18 +199,10 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         category: selectedCategories,
                         status: 0,
                         location: selectedLocation,
-                        badges:selectedBadges
+                        badges:selectedBadges,
+                        startcity:startCities
                     })
                 });
-                const res1 = await fetch('/api/package/startcity/'+itinerary?._id,{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body:JSON.stringify({
-                        city:startCities
-                    })
-                })
                 
                 const data = await res.json();
                 setItineraryInfo(data?.packageBasic);
@@ -217,7 +212,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             }
         }
     };
-
+// console.log("cacategoryValidate223224234",selectedCategories);
     return (
         <>
             <div className="bg-white p-4 rounded-md">
@@ -249,7 +244,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                             <div className="">
                                 <div>
                                     <label htmlFor="cityBages" className="pb-2 font-semibold text-para">City Badges :</label>
-                                    <MultipleSelectChip packageBadges={packageBadges} onSelectedBadgesChange={setSelectedBadges} />
+                                    <MultipleSelectChip itinerary={itinerary} packageBadges={packageBadges} onSelectedBadgesChange={setSelectedBadges} />
                                 </div>
                                 <div className="sm:flex items-center mt-2">
                                     <label className=" font-semibold w-28 text-para" htmlFor="">Start & Cities</label>
@@ -309,7 +304,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         <div className="py-2 my-4">
                             <div>
                                 <label htmlFor="cityBages" className="pb-2 font-semibold text-para">Category :</label>
-                                <MultipleSelectCheckmarks packageCategories={packageCategories} onSelectedCategoryIdsChange={handleCategory} />
+                                <MultipleSelectCheckmarks packageCategories={packageCategories} onSelectedCategoryIdsChange={handleCategory} selectedCategories1={selectedCategories} />
                                 <span className="text-xs text-red-700 capitalize pl-5">{categoryValidate}</span>
                             </div>
                         </div>
