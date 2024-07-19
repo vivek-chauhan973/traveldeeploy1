@@ -27,6 +27,7 @@ export default function MultipleSelectChip({itinerary, packageBadges, onSelected
     setNames(BadgesArray || []);
   }, [packageBadges]);
 
+  
   const theme = useTheme();
   const [selectedBadges, setSelectedBadges] = useState([]);
   useEffect(()=>{

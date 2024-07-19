@@ -171,7 +171,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         handleSelectCountry(itinerary?.location?.state?.country?._id);
         handleSelectState(itinerary?.location?.state?._id);
         handleCategory(itinerary?.category);
-        
+        setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
         
     }, [itinerary]);
