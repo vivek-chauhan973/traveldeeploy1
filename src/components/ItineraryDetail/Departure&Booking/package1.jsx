@@ -34,6 +34,7 @@ export default function Package1 () {
 fetchImages().then(res=>setImages(res));
     },[addPackage,fetchImages])
     
+    
   return (
     <div>
       <div className=" absolute w-full ">
@@ -239,7 +240,7 @@ fetchImages().then(res=>setImages(res));
         </div>
       </div>
       <div className=" mt-2">
-        <TestingCard />
+        <TestingCard addPackage={addPackage} />
       </div>
       {/* bottom link */}
       <BottomLink />

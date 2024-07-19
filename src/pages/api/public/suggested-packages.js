@@ -1,12 +1,17 @@
 import Package from "@/models/Package";
-import { NextApiRequest, NextApiResponse } from "next";
+
+
 
  const packagePublicSuggestedPackage= async (req, res) => {
+    // console.log("req parasmdkjnkdjnkerbfhesbfs ejhbfehjbsd     ehfdbhejbfe  ejhrhf",req.params)
     try {
-        const { packageId } = req.query;
+        const { packageId} = req.query;
 
+        // console.log("req parasmdkjnkdjnkerbfhesbfs ejhbfehjbsd     ehfdbhejbfe  ejhrhf",req.params)
         // Fetch the current package details
         const currentPackage = await Package.findById(packageId).exec();
+
+        // console.log("current Package @##@!2131333142343255254252 ; ;",currentPackage);
 
         if (!currentPackage) {
             return res.status(404).json({ message: "Package not found" });
@@ -23,7 +28,7 @@ import { NextApiRequest, NextApiResponse } from "next";
         .limit(5)
         .exec();
 
-        return res.status(200).json({ suggestedPackages });
+        return res.status(200).json({message:"data found successfully" ,suggestedPackages });
     } catch (error) {
         console.error('Error handling API request:', error);
         return res.status(500).json({ message: 'Internal Server Error' });

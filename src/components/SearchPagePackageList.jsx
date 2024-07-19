@@ -31,6 +31,7 @@ const SearchPagePackageList = (locationId) => {
   const [filterPackage,setFilterPackage]=useState(null);
   const [filterData1,setFilterData1]=useState([]);
   const {filterApi}=useAppContext();
+  // console.log("filter api 12331",filterApi)
   useEffect(()=>{
     filteredData(filterApi?.locationId,filterApi?.catagoryId,filterApi?.minPrice,filterApi?.maxPrice).then(res=>setFilterPackage(res?.packages))
   
@@ -44,7 +45,7 @@ const SearchPagePackageList = (locationId) => {
           itemsPerPage
         );
         setPackages(packagesData);
-        console.log("packages 123123:::",packagesData)
+        // console.log("packages 123123:::",packagesData)
       } catch (error) {
         console.error("Error fetching data:", error);
       }

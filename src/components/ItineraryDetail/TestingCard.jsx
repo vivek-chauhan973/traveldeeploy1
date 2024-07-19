@@ -1,10 +1,21 @@
 import Image from 'next/image';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import "../../app/globals.css"
 import { IoIosArrowForward } from "react-icons/io";
+const fetchSuggestedData=async (addPackage)=>{
 
-const TestingCard = () => {
+    const res=await fetch(`/api/public/suggested-packages?packageId=${addPackage?._id}`);
+    const data=res.json();
+    return data;
+
+}
+const TestingCard = ({addPackage}) => {
+    const [suggestedPackage,setSuggestedPackage]=useState([]);
     const carouselRef = useRef(null);
+
+    useEffect(()=>{
+        fetchSuggestedData(addPackage).then(res=>setSuggestedPackage(res?.suggestedPackages));
+    },[addPackage])
 
     const scrollNext = () => {
         if (carouselRef.current) {
@@ -36,12 +47,12 @@ const TestingCard = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
+ console.log("suggested Package 123347484",suggestedPackage)
     return (
         <div className="carousel-container relative container-wrapper">
             <div className="carousel gap-5 " ref={carouselRef}>
                 {/* start is here code  */}
-                <div className="relative flex-shrink-0 w-72 md:w-80  flex-col rounded-md bg-white bg-clip-border text-gray-700 shadow-md border">
+                {suggestedPackage?.map((item,i)=><div key={i} className="relative flex-shrink-0 w-72 md:w-80  flex-col rounded-md bg-white bg-clip-border text-gray-700 shadow-md border">
                     <div
                         className="relative mx-4 mt-4 overflow-hidden text-white rounded-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
                         <Image className=' h-40 w-full object-cover' src="https://Images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
@@ -104,7 +115,7 @@ const TestingCard = () => {
                             View details
                         </button>
                     </div>
-                </div>
+                </div>)}
                 <div className="relative flex-shrink-0 w-72 md:w-80  flex-col rounded-md bg-white bg-clip-border text-gray-700 shadow-md border">
                     <div
                         className="relative mx-4 mt-4 overflow-hidden text-white rounded-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
