@@ -3,24 +3,24 @@ import "../../../app/globals.css";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import "../../../app/globals.css";
 
- const ItineraryPaymentTerms= ()=> {
-  const { addPackage } = useAppContext();
-  const [activeTab, setActiveTab] = useState("tab1");
-  const handleTabClick = (tour_details) => {
-    setActiveTab(tour_details);
-    // console.log(tour_details)
-  };
-  return (
-    <>
-      <div className="my-[10px] mb-[10px]">
-        <p className="md:text-lg text-md font-semibold text-graytext">
-          Payment Terms
-        </p>
-        <p className="md:text-md text-para italic text-slate-600">
-          Things to consider before the trip!
-        </p>
-      </div>
-      {/* <div className="lg:block hidden">
+const ItineraryPaymentTerms = () => {
+    const { addPackage } = useAppContext();
+    const [activeTab, setActiveTab] = useState("tab1");
+    const handleTabClick = (tour_details) => {
+        setActiveTab(tour_details);
+        // console.log(tour_details)
+    };
+    return (
+        <>
+            <div className="my-[10px] mb-[10px]">
+                <p className="md:text-lg text-md font-semibold text-graytext">
+                    Payment Terms
+                </p>
+                <p className="md:text-md text-para italic text-slate-600">
+                    Things to consider before the trip!
+                </p>
+            </div>
+            {/* <div className="lg:block hidden">
                 <div className="border-b border-slate-600">
                     <div className="lg:flex max-[600px]:block">
                         <div className="bg-navyblack flex flex-wrap  items-center p-3 rounded-tl-lg">
@@ -178,10 +178,10 @@ import "../../../app/globals.css";
 
                 </div>
             </div> */}
-      {<p> {addPackage?.TourInformations?.paymentTerm?.groupName}</p>}
+            {<p> {addPackage?.TourInformations?.paymentTerm?.groupName}</p>}
 
-      <div>
-        {/* <div className="mt-8">
+            <div>
+                {/* <div className="mt-8">
                     <div className="my-[10px]">
                         <p className="text-md md:text-lg  font-semibold text-graytext">Payment Terms</p>
                         <p className=" md:text-para text-sm mt-1 leading-relaxed">Guest can pay by Cheque/ Demand Draft/ Debit card / Credit card/
@@ -204,60 +204,57 @@ import "../../../app/globals.css";
                     </div>
 
                 </div> */}
-        <div id="TourDetailsSection">
-         
-          <div className="flex justify-between mt-2 gap-2 border-b-2 border-navyblack">
-            <div
-              onClick={() => handleTabClick("tab1")}
-              className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px]   ${
-                activeTab === "tab1"
-                  ? "bg-navyblack text-white"
-                  : "text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200"
-              }`}
-            >
-              <p className="text-sm  ">Cancellation </p>
-            </div>
-            <div
-              onClick={() => handleTabClick("tab2")}
-              className={`cursor-pointer rounded-t-lg py-2   grow text-center text-[16px]   ${
-                activeTab === "tab2"
-                  ? "bg-navyblack text-white"
-                  : "text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200"
-              }`}
-            >
-              <p className="text-sm ">Need To Know </p>
-            </div>
-            
-          </div>
-          <div className="border rounded-b-lg  overflow-hidden">
-            <div
-              className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${
-                activeTab === "tab1" ? "block" : "hidden"
-              }`}
-            >
-              <div>
-                
-              {
-                           <p className="py-3 pl-2" > {addPackage?.TourInformations?.cancellation?.groupName}</p>
-                        }
-                
-              </div>
-            </div>
+                <div id="TourDetailsSection">
 
-            <div
-              className={`py-4 list-disc  ${
-                activeTab === "tab2" ? "block" : "hidden"
-              }`}
-            >
-               {
-                           <p className="py-3 pl-2" > {addPackage?.TourInformations?.needToKnow?.groupName}</p>
-                        }
+                    <div className="flex justify-between mt-2 gap-2 border-b-2 border-navyblack">
+                        <div
+                            onClick={() => handleTabClick("tab1")}
+                            className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px]   ${activeTab === "tab1"
+                                ? "bg-navyblack text-white"
+                                : "text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200"
+                                }`}
+                        >
+                            <p className="text-sm  ">Cancellation </p>
+                        </div>
+                        <div
+                            onClick={() => handleTabClick("tab2")}
+                            className={`cursor-pointer rounded-t-lg py-2   grow text-center text-[16px]   ${activeTab === "tab2"
+                                ? "bg-navyblack text-white"
+                                : "text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200"
+                                }`}
+                        >
+                            <p className="text-sm ">Need To Know </p>
+                        </div>
+
+                    </div>
+                    <div className="border rounded-b-lg  overflow-hidden">
+                        <div
+                            className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${activeTab === "tab1" ? "block" : "hidden"
+                                }`}
+                        >
+                            <div>
+
+                                {
+                                    <p className="py-3 pl-2" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.cancellation?.description }} />
+                                }
+
+                            </div>
+                        </div>
+
+                        <div
+                            className={`py-4 list-disc  ${activeTab === "tab2" ? "block" : "hidden"
+                                }`}
+                        >
+                            {
+
+                                <p className="py-3 pl-2" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.needToKnow?.description }} />
+                            }
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
 export default ItineraryPaymentTerms

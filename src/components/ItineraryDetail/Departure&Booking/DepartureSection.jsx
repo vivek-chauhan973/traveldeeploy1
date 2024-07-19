@@ -76,12 +76,12 @@ const [showPopup,setShowPopup]=useState(false);
             </div>
           </div>
 
-          <div className="absolute bottom-0 bg-white my-1">
+          {/* <div className="absolute bottom-0 bg-white my-1">
             <p className="text-para">
               View itinerary for the tours you have booked by logging into your
               account.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

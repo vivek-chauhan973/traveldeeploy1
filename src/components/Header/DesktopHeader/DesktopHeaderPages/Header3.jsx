@@ -9,8 +9,10 @@ import FlyoutLink from "./FlyoutLink";
 import { header } from "./Data";
 import Header2 from "../../MobileHeader";
 // import Image from "next/image";
+import Image from 'next/image';
 // import Logo from "../../../../../public/HEAD.png";
 import { CiSearch } from "react-icons/ci";
+
 
 
 const Header3 = () => {
@@ -27,10 +29,15 @@ const Header3 = () => {
                   <Header2 />
                 </div>
                 <div className="flex justify-between  ">
-                  {/* <Image className="w-44  md:w-52" src={Logo} alt="" /> */}
+                  {/* <Image  src={Logo} alt=""  /> */}
+                  
+                  
                 </div>
                 
               </div>
+              {/* <Image  src={Logo} alt="" height={60} width={60} /> */}
+              <Image width={210} height={210} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" />
+              
               <CiSearch size={24} className="text-white mt-3 md:hidden" />
             </div>
 

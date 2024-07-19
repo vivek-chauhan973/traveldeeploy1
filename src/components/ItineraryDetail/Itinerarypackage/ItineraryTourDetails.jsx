@@ -7,7 +7,7 @@ import Image from 'next/image'
 const {addPackage} =useAppContext();
     const handleTabClick = (tour_details) => {
         setActiveTab(tour_details);
-        // console.log(tour_details)
+    
       };
     return(
         <>
@@ -63,87 +63,24 @@ const {addPackage} =useAppContext();
                             </div>)}
                         </div>
                     </div>
-                    {/* use this tour informatio ref veena world */}
-                    {/* <ul className={`p-5 list-disc ml-[20px] ${activeTab === 'tab1' ? 'block' : 'hidden'}`}>
-                        <li className="leading-8 text-[15px]"><span></span>Tab 1</li>
-                        <li className="leading-8 text-[15px]"><span></span>Tab 1</li>
-                        <li className="leading-8 text-[15px]"><span></span>Tab 1</li>
-                        <li className="leading-8 text-[15px]"><span></span>Tab 1</li>
-                        <li className="leading-8 text-[15px]"><span></span>Tab 1</li>
-                        <li className="leading-8 text-[15px]"><span></span>Tab 1</li>
-                        
-                    </ul> */}
+                
                     <div className={`py-4 list-disc  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
-                        {/* <div className=''>
-                             <table className='w-full'>
-                               <tbody>
-                                   <tr className='flex  justify-between '>
-                                        <td className='grow md:text-base text-[14px] font-semibold text-center'>City - Country</td>
-                                        <td className='grow md:text-base text-[14px] font-semibold  text-center'>Check In - Check Out</td>
-                                       <td className='grow md:text-base text-[14px] font-semibold text-center'>Hotel</td>
-                                  </tr>
-                               </tbody>
-                            </table> 
-
-                        </div> */}
-                        {/* <div className=''>
-                            <table className='w-full'>
-                                <tbody>
-                                    <tr className='flex justify-between even:bg-white odd:bg-slate-100 text-center'>
-                                        <td className='grow text-sm py-2  text-center'>City - Country</td>
-                                        <td className='grow text-sm py-2  text-center'>Hotel</td>
-                                        <td className='grow text-sm py-2  text-center'>Check In - Check Out</td>
-                                    </tr>
-                                    <tr className='flex justify-between even:bg-white odd:bg-slate-100 text-center'>
-                                        <td className='grow text-sm py-2  text-center'>City - Country</td>
-                                        <td className='grow text-sm py-2  text-center'>Hotel</td>
-                                        <td className='grow text-sm py-2  text-center'>Check In - Check Out</td>
-                                    </tr>
-                                    <tr className='flex justify-between even:bg-white odd:bg-slate-100 text-center'>
-                                        <td className='grow text-sm py-2  text-center'>City - Country</td>
-                                        <td className='grow text-sm py-2  text-center'>Hotel</td>
-                                        <td className='grow text-sm py-2  text-center'>Check In - Check Out</td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div> */}
+                       
 
                         {
-                           <p className="py-3 pl-2" > {addPackage?.TourInformations?.inclusion?.groupName}</p>
+                     
+
+                        <p className="py-3 pl-2" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
+
                         }
                         
                     </div>
                     <div className={` ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
-                        {/* <div className='grid grid-cols-[0.9fr,,2fr] border-b-2'>
-                            <div className=' bg-slate-100 md:px-5 px-[6px]  pt-3 pb-2 '>
-                                <p className='leading-7 text-sm'>Guest type</p>
-                                <p className='leading-7 text-sm'>reporting time</p>
-                                <p className='leading-7 text-sm'>dropping time</p>
-                            </div>
-                            <div className='px-5 pt-3 pb-2'>
-                                <p className='leading-7 text-sm'>shkjs shfj sjh</p>
-                                <p className='leading-7 text-sm'>lorem sdfsdfsf</p>
-                                <p className='leading-7 text-sm'>sdfev rtr er slorem</p>
-                            </div>
-                            
-                        </div>
-                        <div className='grid grid-cols-[0.9fr,,2fr]'>
-                            <div className=' bg-slate-100 md:px-5  px-[6px]  pt-3 pb-2 '>
-                                <p className='leading-7 text-sm'>Guest type</p>
-                                <p className='leading-7 text-sm'>reporting time</p>
-                                <p className='leading-7 text-sm '>dropping time</p>
-                            </div>
-                            <div className='px-5 pt-3 pb-2'>
-                                <p className='leading-7 text-sm'>shkjs shfj sjh</p>
-                                <p className='leading-7 text-sm'>lorem sdfsdfsf</p>
-                                <p className='leading-7 text-sm'>Done slorem</p>
-                            </div>
-                            
-                        </div> */}
+                  
                         
                         {
-                           <p className="py-3 pl-2"> {addPackage?.TourInformations?.exclusion?.groupName}</p>
+                           
+                            <p className="py-3 pl-2" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
                         }
                         
                     </div>

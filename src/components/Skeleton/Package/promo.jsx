@@ -34,6 +34,78 @@ export const PromoBanner = () => {
 
 
 
+//  Home page Skeleton
+   
+
+export const Home=()=>{
+    return(
+
+        <>
+             {/*  home page skeleton */}
+
+             <div className=" mt-9 container-wrapper  bg-slate-200  shadow-sm rounded-lg p-5 md:h-[400px] h-[510px] w-full mx-auto">
+                <div className="animate-pulse  space-y-4 md:space-x-4">
+                    <div className=" grid-flow-col    md:grid md:grid-cols-2 rounded  bg-slate-200 h-56 w-full">
+                        <div className=" mt-16  h-40 ml-9  w-48 grid grid-cols-3 ">
+                            <div className="  h-2 md:w-72 w-60 mt-3  bg-slate-100 rounded col-span-3"></div>
+                            <div className=" h-2 md:w-52 w-56   bg-slate-100 rounded col-span-2"></div>
+                            <div className=" h-2 md:w-48 w-48   bg-slate-100 rounded col-span-2"></div>
+                            <div className=" h-2 w-48   bg-slate-100 rounded col-span-2"></div>
+                            <div className=" h-2 w-48   bg-slate-100 rounded col-span-2"></div>
+                            <div className=" h-10  w-32  mt-7  bg-slate-100 rounded-[17px] col-span-2"></div>
+                        </div>
+                        <div className="">
+                            <div className=" md:h-80  h-56 w-full py-10 mt-7  bg-slate-100 rounded-[17px] col-span-2"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <br />
+            <div className="  container-wrapper mt-96 bg-slate-200  shadow-sm rounded-lg p-5 h-full w-full mx-auto" >
+
+                <div className=" grid md:grid grid-cols-2 gap-4   lg:grid-cols-4">
+                    <div className=" md:h-60 h-40 md:w-60 w-36  bg-slate-100 rounded-[17px] "></div>
+                    <div className="  md:h-60 h-40 md:w-60 w-36  bg-slate-100 rounded-[17px] "></div>
+                    <div className=" md:h-60 h-40 md:w-60 w-36   bg-slate-100 rounded-[17px] "></div>
+                    <div className=" md:h-60 h-40 md:w-60 w-36   bg-slate-100 rounded-[17px] "></div>
+                </div>
+
+            </div>
+            <br />
+            <div className=" mt-9 container-wrapper  bg-slate-200  shadow-sm rounded-lg p-5 md:h-[400px] h-[510px] w-full mx-auto">
+                <div className="animate-pulse  space-y-4 md:space-x-4">
+                    <div className=" grid-flow-col md:grid md:grid-cols-2 rounded  bg-slate-200 h-56 w-full">
+
+                        <div className=" mt-16  h-40 ml-9  w-48 grid grid-cols-3 ">
+
+                            <div className="  h-2   md:w-72 w-60  mt-3  bg-slate-100 rounded col-span-3"></div>
+                            <div className=" h-2 w-52   bg-slate-100 rounded col-span-2"></div>
+                            <div className=" h-2 w-48   bg-slate-100 rounded col-span-2"></div>
+                            <div className=" h-2 w-48   bg-slate-100 rounded col-span-2"></div>
+                            <div className=" h-2 w-48   bg-slate-100 rounded col-span-2"></div>
+
+                            <div className=" h-10  w-32  mt-7  bg-slate-100 rounded-[17px] col-span-2"></div>
+
+                        </div>
+                        <div>
+                            <div className=" md:h-80  h-56 w-full py-10 mt-7  bg-slate-100 rounded-[17px] col-span-2"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {/* home page skeletn done */}
+
+
+        </>
+    )
+}
+
+
+
 
 // filtering skeleton 
 export const PromoFilter = () => {
