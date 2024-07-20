@@ -14,6 +14,7 @@ const Addguest = ({
   inputData,
   setInputData,
   setCloseBtn,
+  addPackage
 }) => {
   const date = new Date();
   const { showAddguest } = useAppContext() ?? { showAddguest: false };
@@ -40,6 +41,7 @@ const Addguest = ({
     setOpen(false);
   };
 
+  // console.log("fixed departure package::::",addPackage);
   const handleChange = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
     setInputData({ ...inputData, [e.target.name]: value });
@@ -277,7 +279,7 @@ const Addguest = ({
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
-      <Dialog
+      {addPackage?.prices?.addguest==="addGuest"&&<Dialog
         className="h-[90%] my-auto px-0 "
         open={open}
         aria-labelledby="alert-dialog-title"
@@ -655,7 +657,8 @@ const Addguest = ({
             </div>
           </div>
         </form>
-      </Dialog>
+      </Dialog>}
+     
     </div>
   );
 };

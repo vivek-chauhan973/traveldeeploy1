@@ -20,10 +20,13 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import { useEffect, useState,useCallback } from "react";
 import Image from 'next/image'
+import ItinaryFixedDepartureCard from "./ItinaryFixedDepartureCard";
+import FixedDeparturePopup from "./FixedDeparturePopup";
 
 export default function Package1 () {
-    const {addPackage,guestPrice,inputData,setInputData,closeBtn,setCloseBtn,showAddguest}=useAppContext();
+    const {addPackage,guestPrice,inputData,setInputData,closeBtn,setCloseBtn,showAddguest,fixedDepartureButtonEnaibleAndDisable}=useAppContext();
     const [images,setImages]=useState(null);
+    const [fixedDeparturePopupOpen,setFixedDeparturePopupOpen]=useState(false);
     const fetchImages = useCallback(async () => {
       const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
       const data = await res.json();
@@ -34,7 +37,13 @@ export default function Package1 () {
 fetchImages().then(res=>setImages(res));
     },[addPackage,fetchImages])
     
-    
+    // console.log("packages is very smart",addPacka/
+    const handleSubmit=()=>{
+      if(fixedDepartureButtonEnaibleAndDisable){
+        setFixedDeparturePopupOpen(true);
+      }
+    }
+  
   return (
     <div>
       <div className=" absolute w-full ">
@@ -44,7 +53,7 @@ fetchImages().then(res=>setImages(res));
       {/* <Caraousel /> */}
       <Breadcrumbs />
       <div className="md:mt-20 mt-3">
-      <ItineraryHeroSection addPackage={addPackage} closeBtn={closeBtn}  guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn} images={images}/>
+      <ItineraryHeroSection addPackage={addPackage} closeBtn={closeBtn}  guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn} images={images} togglePopup={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>
       </div>
       <div className="bg-gray-100  mt-[20px] pb-10">
         <div className="container-wrapper mb-4">
@@ -59,14 +68,21 @@ fetchImages().then(res=>setImages(res));
           <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
             {/*Select departure city */}
            
-            <div id="departure">
+            <div id="departure" className=" hidden xl:block">
               <DepartureSection addPackage={addPackage}/>
             </div>
-          
+          <div className="xl:hidden">
+          {addPackage?.prices?.addguest==="addGuest"&&<DepartureSection addPackage={addPackage}/>}
+          {addPackage?.prices?.departure1==="fixedDeparture"&&<ItinaryFixedDepartureCard addPackage={addPackage} togglePopup={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen} />}
+          </div>
             {/* Pricing */}
+            <div>
+
+            </div>
            
             <div className="hidden xl:block">
-              <ItineraryPricingCard />
+              {addPackage?.prices?.addguest==="addGuest"&&<ItineraryPricingCard />}
+              {addPackage?.prices?.departure1==="fixedDeparture"&&<ItinaryFixedDepartureCard addPackage={addPackage} togglePopup={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen} />}
             </div>
           
           </div>
@@ -247,7 +263,7 @@ fetchImages().then(res=>setImages(res));
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">
-            <p className=" text-[20px] font-semibold">Lucknow Tour Package</p>
+            <p className=" text-[20px] font-semibold">{addPackage?.name}</p>
             <div>
               <span></span>
             </div>
@@ -260,7 +276,7 @@ fetchImages().then(res=>setImages(res));
               <p className="text-sm leading-5">
                 Starts From{" "}
                 <span className="text-lg text-graytext font-medium">
-                  ₹ 5454
+                  {addPackage?.price}
                 </span>
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
@@ -275,20 +291,24 @@ fetchImages().then(res=>setImages(res));
                 offset={-70}
                 duration={1000}
               >
-                <Addguest guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn}>
+               { addPackage?.prices?.addguest==="addGuest"&&<Addguest guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn} addPackage={addPackage}>
                 <p className={` ${showAddguest?"bg-primary cursor-pointer":"bg-orange-200"} px-5 py-2 rounded-md text-white text-center text-para`}>
                   <span className="disabled:opacity-75">{closeBtn?"Book Now":"Add Guest & Room"}</span>
 
                 </p>
-              </Addguest>
+              </Addguest>}
            
+           {
+            addPackage?.prices?.departure1==="fixedDeparture"&&<button onClick={handleSubmit}  className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable?"bg-primary":"bg-orange-200"} bg-primary text-center text-para`}>Book Noow</button>
+           }
+           {fixedDeparturePopupOpen&&<FixedDeparturePopup togglePopup={setFixedDeparturePopupOpen} addPackage={addPackage}/>}
               </ScrollLink>
             
-              <CustomiseTour>
+              {<CustomiseTour>
                 <p className="border px-5 cursor-pointer py-1 mt-2 rounded-md text-center text-para">
                   <span>Customise</span>
                 </p>
-              </CustomiseTour>
+              </CustomiseTour>}
             </div>
           </div>
         </div>

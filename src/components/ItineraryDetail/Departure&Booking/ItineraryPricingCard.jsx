@@ -6,7 +6,7 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 
  const ItineraryPricingCard = () =>{
-const {inputData,setInputData,guestPrice,closeBtn,setCloseBtn,showAddguest}=useAppContext();
+const {addPackage,inputData,setInputData,guestPrice,closeBtn,setCloseBtn,showAddguest}=useAppContext();
 
     return (
         <>
@@ -15,7 +15,7 @@ const {inputData,setInputData,guestPrice,closeBtn,setCloseBtn,showAddguest}=useA
                     <div className="flex justify-between">
                         <p className="text-base font-bold text-graytext">Booking Summary</p>
                         <div>
-                            <Addguest guestPrice={guestPrice}  >
+                            <Addguest guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn} addPackage={addPackage}  >
                                 <FaRegEdit className="cursor-pointer" />
                             </Addguest>
                         </div>

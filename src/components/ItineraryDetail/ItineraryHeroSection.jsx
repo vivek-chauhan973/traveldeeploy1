@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import CustomiseTour from "./CustomiseTour";
 import Slider from "react-slick";
 import { useAppContext } from "../admin/context/Package/AddGuest";
-const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData, closeBtn, setCloseBtn, images }) => {
-    const { showAddguest } = useAppContext();
+import FixedDeparturePopup from "./Departure&Booking/FixedDeparturePopup";
+const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData, closeBtn, setCloseBtn, images,togglePopup,fixedDeparturePopupOpen }) => {
+    const { showAddguest ,fixedDepartureButtonEnaibleAndDisable} = useAppContext();
     const settings = {
         dots: true,
         fade: true,
@@ -23,6 +24,12 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
         setHemages(images?.data);
     }, [images,hemages]);
     // console.log("images12324432423",hemages); 
+const handleSubmit=()=>{
+ if(fixedDepartureButtonEnaibleAndDisable){
+    togglePopup(true);
+ }
+}
+
     return (
         <>
        
@@ -105,19 +112,24 @@ const ItineraryHeroSection = ({ addPackage, guestPrice, inputData, setInputData,
                                     <p className='text-sm line-through'>₹20,000</p>
                                     <button className='uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center'>37% Off</button>
                                 </div>
-                                <p className="text-sm leading-5">Starts From <span className="text-lg text-graytext font-medium">₹
+                                {addPackage?.prices?.addguest==="addGuest"&&<p className="text-sm leading-5">Starts From <span className="text-lg text-graytext font-medium">₹
                                     {addPackage?.price}</span>
-                                </p>
+                                </p>}
+                                {addPackage?.prices?.departure1==="fixedDeparture"&&<p className="text-sm leading-5">Starts From <span className="text-lg text-graytext font-medium">₹
+                                    {addPackage?.price}</span>
+                                </p>}
                                 <p className="text-xxs leading-5">per person on twin sharing</p>
 
                             </div>
                             <div className="flex flex-col align-middle my-auto pl-2 gap-2">
-                                <Addguest guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn}>
+                                {addPackage?.prices?.addguest==="addGuest"&&<Addguest guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn} addPackage={addPackage}>
                                     <p className={` ${showAddguest?"bg-primary cursor-pointer":"bg-orange-200"} px-5 py-2 rounded-md text-white text-center text-para`}><span>{closeBtn?"Book Now":"Add Guest and Room"}</span></p>
-                                </Addguest>
-                                <CustomiseTour>
+                                </Addguest>}
+                                {<CustomiseTour>
                                     <p className="border px-5 py-2 rounded-md text-center text-para"><span>Customise</span></p>
-                                </CustomiseTour>
+                                </CustomiseTour>}
+                                {addPackage?.prices?.departure1==="fixedDeparture"&&<button onClick={handleSubmit} className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable?" bg-primary":" bg-orange-200"} text-center text-para`}>book now</button>}
+                                {fixedDeparturePopupOpen&&<FixedDeparturePopup togglePopup={togglePopup} addPackage={addPackage}/>}
                             </div>
                         </div>
                     </div>
