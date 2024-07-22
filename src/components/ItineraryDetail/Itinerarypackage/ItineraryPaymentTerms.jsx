@@ -246,10 +246,10 @@ const ItineraryPaymentTerms = () => {
                         >
                             {
 
-                                <p className=" py-3 pl-3 Dot1" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.needToKnow?.description }} />
+                                <p className=" py-3 pl-3 marker:text-blue-900 " dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.needToKnow?.description }} />
                             }
                         </div>
-
+{/* Dot1 */}
                     </div>
                 </div>
             </div>
