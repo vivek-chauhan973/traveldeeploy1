@@ -245,18 +245,6 @@ select {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 .container-wrapper {
   margin: auto;
   min-width: 300px;
@@ -321,4 +309,20 @@ select {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+
+
+
+
+/* this is change the innerHtml into the  normal in payment term anditernery tour detail*/
+.Dot ol li{
+  /* list-style: decimal inside; */
+  list-style: disc inside ;
+}
+.Dot ol li::marker {
+  color: #2A2C41;
+}
+.Dot1 ul li{
+  list-style: decimal inside;
 }

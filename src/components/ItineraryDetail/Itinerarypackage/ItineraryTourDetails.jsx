@@ -2,14 +2,14 @@ import { useState } from "react";
 import "../../../app/globals.css";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image'
- const ItineraryTourDetails=()=>{
-    const[activeTab,setActiveTab]=useState('tab1')
-const {addPackage} =useAppContext();
+const ItineraryTourDetails = () => {
+    const [activeTab, setActiveTab] = useState('tab1')
+    const { addPackage } = useAppContext();
     const handleTabClick = (tour_details) => {
         setActiveTab(tour_details);
-    
-      };
-    return(
+
+    };
+    return (
         <>
             <div id="TourDetailsSection">
                 <div className="md:mt-10 mt-8">
@@ -35,20 +35,20 @@ const {addPackage} =useAppContext();
                                 <p className='text-sm font-semibold text-graytext'>Departure & Arrival</p>
                             </div>
 
-                            {addPackage?.flights?.flights?.map((item,i)=><div key={i} className='flex'>
+                            {addPackage?.flights?.flights?.map((item, i) => <div key={i} className='flex'>
                                 <div className='grow'>
                                     <p className='text-base font-semibold text-graytext'>{item?.start?.to}</p>
                                     <p className='text-sm  '>{item?.start?.time}</p>
                                 </div>
                                 <div className='grow flex flex-col justify-center items-center' >
                                     <div >
-                                        <Image className='w-20' src="https://seeklogo.com/images/I/indigo-airlines-logo-B3BBFD5004-seeklogo.com.png" alt=""  width="125"
-                    height="150" />
+                                        <Image className='w-20' src="https://seeklogo.com/images/I/indigo-airlines-logo-B3BBFD5004-seeklogo.com.png" alt="" width="125"
+                                            height="150" />
                                     </div>
                                     <div className='flex relative items-center mt-2'>
-                                        
+
                                         <hr className=' w-10' />
-                                        
+
                                         <div className='border px-7 rounded-full flex'>
                                             <span className='md:text-[15px] text-[10px]' >-:-</span>
                                         </div>
@@ -59,36 +59,44 @@ const {addPackage} =useAppContext();
                                     <p className='text-base font-semibold text-graytext'>{item?.end?.to}</p>
                                     <p className='text-sm '>{item?.end?.time}</p>
                                 </div>
-                                
+
                             </div>)}
                         </div>
                     </div>
-                
+
                     <div className={`py-4 list-disc  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
-                       
+
 
                         {
-                     
 
-                        <p className="py-3 pl-2" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
+
+                            <p className="py-3 px-3  Dot" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
 
                         }
-                        
+
                     </div>
-                    <div className={` ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
-                  
-                        
+                    {/* <div className={` ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
+
                         {
-                           
+
                             <p className="py-3 pl-2" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
                         }
-                        
-                    </div>
 
+                    </div> */}
+
+
+
+
+                    <div className={` ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
+                        {
+
+                            <p className="py-3 pl-3 Dot" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
+                        }
+                    </div> 
                 </div>
 
             </div>
         </>
     )
 }
-export default  ItineraryTourDetails
+export default ItineraryTourDetails

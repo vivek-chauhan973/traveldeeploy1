@@ -15,6 +15,11 @@ export const AppProvider = ({ children }) => {
   const [closeBtn, setCloseBtn] = useState(false);
   const [addPackage, setAddPackage] = useState(null);
   const [guestPrice, setGuestPrice] = useState(0);
+  const [fixedDepCity,setFixedDepCity]=useState("");
+  const [fixedDepDate,setFixedDepDate]=useState("");
+  const [fixedDepCity1,setFixedDepCity1]=useState("");
+  const [fixedDepDate1,setFixedDepDate1]=useState("");
+  const [fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable]=useState(false);
   const router = useRouter();
   const initialData = {
     child: 0,
@@ -81,10 +86,13 @@ export const AppProvider = ({ children }) => {
     }
   }, [inputData, addPackage]);
 
+  // console.log("fixed Depature date selected",fixedDepDate)
+  // console.log("fixed Depature City selected",fixedDepCity)
+
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
-
-  const finalDataOfBooking = {
+  const [fixedDepartureData1,setFixedDepartureData1]=useState(null);
+  const finalDataOfBookingByUsingMethodAddGuest = {
     departureCity: showAddguest,
     itemDateAndDay: departureSectionData,
     twinSharingPrice: addPackage?.prices?.twinSharingRoom,
@@ -92,6 +100,24 @@ export const AppProvider = ({ children }) => {
     allDetail: inputData
   };
 
+  console.log("finalDataOfBookingByUsingMethodAddGuest",finalDataOfBookingByUsingMethodAddGuest)
+  const handleCleckOnDepartureFixed=()=>{
+
+  const finalDataOfBookingByUsingMethodFixedDeparture={
+    deparcity:fixedDepCity1,
+    depardate:fixedDepDate1,
+    name:"Pradhumn",
+    packageprice:addPackage?.price,
+    fixeddeparturebaseprice:addPackage?.prices?.basePrice,
+    packagename:addPackage?.name,
+    inventory:addPackage?.prices?.inventory,
+    weight:addPackage?.prices?.weight
+  }
+  setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
+  }
+
+  console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",fixedDepartureData1)
+  // console.log("packages sfsjbfbfjbsfhjdf",addPackage)
   const contextFun = {
     closeBtn,
     setCloseBtn,
@@ -112,7 +138,13 @@ export const AppProvider = ({ children }) => {
     setCatagoryId,
     setMinPrice,
     setMaxPrice,
-    filterApi
+    filterApi,
+    fixedDepDate,setFixedDepDate,
+    fixedDepCity,setFixedDepCity,
+     setFixedDepDate1,
+    setFixedDepCity1,
+    handleCleckOnDepartureFixed,
+    fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable
   };
 
   return (

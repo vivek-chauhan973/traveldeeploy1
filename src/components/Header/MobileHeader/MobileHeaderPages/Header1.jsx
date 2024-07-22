@@ -43,7 +43,7 @@ const Header1 = ({ setTogle, togle }) => {
         </div>
       ) : (
         <div>
-          <div className="h-[80vh] w-full overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
+          <div className="h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
             <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
               <div className="flex justify-between">
                 <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</p>

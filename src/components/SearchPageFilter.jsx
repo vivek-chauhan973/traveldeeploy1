@@ -2,7 +2,7 @@ import "../app/globals.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useAppContext } from "./admin/context/Package/AddGuest";
 
 // Today changes here in main file
@@ -24,8 +24,8 @@ function valuetext(value) {
     return `${value}°C`;
 }
 
-export default function SearchPageFilter  ({ onApplyFilter }) {
-    const {setMinPrice,setMaxPrice}=useAppContext();
+export default function SearchPageFilter({ onApplyFilter }) {
+    const { setMinPrice, setMaxPrice } = useAppContext();
     const [priceRange, setPriceRange] = useState([0, 9900]);
     const [tourDuration, setTourDuration] = useState([20, 37]);
     const [departureCity, setDepartureCity] = useState([]);
@@ -41,7 +41,7 @@ export default function SearchPageFilter  ({ onApplyFilter }) {
 
     //   // tour duration value
     //   const [value, setValue] = React.useState([20, 37]);
-  
+
     //   const handleChange = (event: any, newValue: any) => {
     //       setValue(newValue);
     //   };
@@ -64,11 +64,11 @@ export default function SearchPageFilter  ({ onApplyFilter }) {
             departureCity,
             packageCategory,
         };
-        if(priceRange[0]>priceRange[1]){
+        if (priceRange[0] > priceRange[1]) {
             setMaxPrice(priceRange[0])
             setMinPrice(priceRange[1])
         }
-        else{
+        else {
             setMaxPrice(priceRange[1])
             setMinPrice(priceRange[0])
         }
@@ -83,7 +83,9 @@ export default function SearchPageFilter  ({ onApplyFilter }) {
         // onClearFilters();
         document.querySelectorAll("input[type=checkbox]").forEach(el => el.checked = false);
     };
-    
+
+
+
 
     return (
         <>
@@ -134,10 +136,10 @@ export default function SearchPageFilter  ({ onApplyFilter }) {
                                 />
                             </Box>
                             <div>
-                                  <div className="flex justify-between md:mb-2 mb-2">
+                                <div className="flex justify-between md:mb-2 mb-2">
                                     <p className="md:text-[14px] text-[12px]">Min <span>{tourDuration[0]} days</span></p>
                                     <p className="md:text-[14px] text-[12px]">Max <span>{tourDuration[1]} days</span></p>
-                                 </div>
+                                </div>
                             </div>
 
                         </div>
@@ -181,27 +183,27 @@ export default function SearchPageFilter  ({ onApplyFilter }) {
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
                                         id="category1" name="category1" value="category1" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
                                     <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                    category1</label>
+                                        category1</label>
                                 </div>
                                 <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
-                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
+                                    <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
                                         id="category2" name="category2" value="category2" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
                                     <label htmlFor="category2" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                    category2</label>
+                                        category2</label>
                                 </div>
                                 <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
                                         id="category3" name="category3" value="category3" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
                                     <label htmlFor="category3" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                    category3</label>
+                                        category3</label>
                                 </div>
                                 <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
                                         id="category4" name="category4" value="category4" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
                                     <label htmlFor="category4" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                    category4</label>
+                                        category4</label>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                     <div className="flex justify-center mt-2">

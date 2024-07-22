@@ -135,7 +135,7 @@ export default function home() {
                 </div>
                 <div className="relative ">
                     <Image height={450} width={450}  className=" object-cover rounded-md transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-{/* md:h-72 md:w-[550px] h-56 w-full */}
+            {/* md:h-72 md:w-[550px] h-56 w-full */}
             {/* </div>
 
             </div>  */}

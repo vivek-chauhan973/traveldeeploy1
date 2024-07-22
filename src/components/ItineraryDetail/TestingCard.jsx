@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from "next/link";
 import React, { useRef, useEffect, useState } from 'react';
 import "../../app/globals.css"
 import { IoIosArrowForward } from "react-icons/io";
@@ -9,14 +10,22 @@ const fetchSuggestedData=async (addPackage)=>{
     return data;
 
 }
+const fetchImages = async (addPackage) => {
+    const res = await fetch(`/api/package/image-upload/${addPackage}`);
+    const data = await res.json();
+    return data;
+  };
 const TestingCard = ({addPackage}) => {
     const [suggestedPackage,setSuggestedPackage]=useState([]);
     const carouselRef = useRef(null);
 
+
+    
+
     useEffect(()=>{
         fetchSuggestedData(addPackage).then(res=>setSuggestedPackage(res?.suggestedPackages));
     },[addPackage])
-
+    
     const scrollNext = () => {
         if (carouselRef.current) {
             carouselRef.current.scrollBy({ left: carouselRef.current.clientWidth, behavior: 'smooth' });
@@ -47,12 +56,12 @@ const TestingCard = ({addPackage}) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
- console.log("suggested Package 123347484",suggestedPackage)
+//  console.log("suggested Package 123347484",suggestedPackage)
     return (
         <div className="carousel-container relative container-wrapper">
             <div className="carousel gap-5 " ref={carouselRef}>
                 {/* start is here code  */}
-                {suggestedPackage?.map((item,i)=><div key={i} className="relative flex-shrink-0 w-72 md:w-80  flex-col rounded-md bg-white bg-clip-border text-gray-700 shadow-md border">
+                {suggestedPackage?.map((item,i)=><div key={i}  className="relative flex-shrink-0 w-72 md:w-80  flex-col rounded-md bg-white bg-clip-border text-gray-700 shadow-md border">
                     <div
                         className="relative mx-4 mt-4 overflow-hidden text-white rounded-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
                         <Image className=' h-40 w-full object-cover' src="https://Images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
@@ -66,7 +75,7 @@ const TestingCard = ({addPackage}) => {
                     <div className="px-6 py-3">
                         <div className="flex items-center justify-between mb-1 md:mb-3">
                             <h5 className="block text-md md:text-lg font-semibold  leading-snug ">
-                                Wooden House, Florida
+                               {item?.name}
                             </h5>
                             <p
                                 className="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
@@ -81,8 +90,7 @@ const TestingCard = ({addPackage}) => {
                         </div>
                         <div className='line-clamp-2'>
                             <p className="block font-sans text-para text-gray-700">
-                                Enter a freshly updated and thoughtfully furnished peaceful home
-                                surrounded by ancient trees, stone walls, and open meadows.
+                                {item?.dayWiseInformation}
                             </p>
                         </div>
                         <div className="flex justify-between mt-3 md:mt-5">
@@ -103,7 +111,7 @@ const TestingCard = ({addPackage}) => {
                             <div className="text-right">
                                 <p className="text-sm leading-5 text-green-700 font-bold">SUPER DEAL PRICE</p>
                                 <p className="text-xxs leading-5">Starts From <span className="text-md font-semibold ">₹
-                                    3,50,000</span></p>
+                                    {item?.price}</span></p>
 
                                 <p className="text-sm leading-5 font-medium underline text-blue">from ₹ 19,423/months
                                 </p>
@@ -111,12 +119,16 @@ const TestingCard = ({addPackage}) => {
                         </div>
                     </div>
                     <div className="px-6 pt-1 pb-3 mb-1">
-                        <button className="text-white bg-primary w-full py-2 rounded-md  text-base " type="button">
-                            View details
-                        </button>
+                    <Link
+                href={"/package/" + item?.pageUrl}
+                className="mt-3 block w-full select-none rounded-lg bg-orange-400 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none "
+                type="button"
+              >
+                View details
+              </Link>
                     </div>
                 </div>)}
-                <div className="relative flex-shrink-0 w-72 md:w-80  flex-col rounded-md bg-white bg-clip-border text-gray-700 shadow-md border">
+                {/* <div className="relative flex-shrink-0 w-72 md:w-80  flex-col rounded-md bg-white bg-clip-border text-gray-700 shadow-md border">
                     <div
                         className="relative mx-4 mt-4 overflow-hidden text-white rounded-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
                         <Image className=' h-40 w-full object-cover' src="https://Images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
@@ -371,7 +383,7 @@ const TestingCard = ({addPackage}) => {
                             View details
                         </button>
                     </div>
-                </div>
+                </div> */}
                 {/* end is here code */}
 
             </div>
@@ -386,5 +398,4 @@ const TestingCard = ({addPackage}) => {
         </div>
     );
 }
-
 export default TestingCard;

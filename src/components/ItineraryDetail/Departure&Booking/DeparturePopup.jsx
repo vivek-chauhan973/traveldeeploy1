@@ -15,7 +15,7 @@ const [handleCity,setHandleCity]=useState(false);
         setData(addPackage?.startcity||[])
       },[data])
 const ref=useRef(null);
-console.log("addpackage123456789",addPackage)
+// console.log("addpackage123456789",addPackage)
       const handleSubmit=()=>{
             // console.log(); 
             if(handleCity){
