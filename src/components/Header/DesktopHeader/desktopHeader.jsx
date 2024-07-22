@@ -2,7 +2,7 @@ import Header3 from './DesktopHeaderPages/Header3';
 
 function DesktopHeader() {
   return (
-    <div className='flex flex-col gap-0 '>
+    <div className='flex flex-col gap-0 sticky top-0 pb-4 z-[999]'>
       <div className="bg-primary h-7">
             <div className="flex items-center container-wrapper  justify-center gap-5">
                 <p className=" capitalize text-white text-xxs md:text-sm   ">call us for free now</p>
