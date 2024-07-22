@@ -11,12 +11,12 @@ const fetchPackages = async (locationId) => {
     { method: "GET" }
   );
   const data = await response.json();
-  console.log("api public tour=package",data)
+  console.log("api public tour=package", data)
   return data.packages;
 };
-const filteredData=async (id,cat,min,max)=>{
-  const response=await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=6694f2c73a8237144bdbdeb7&priceMin=${min}&priceMax=${max}`)
-  const data=await response.json();
+const filteredData = async (id, cat, min, max) => {
+  const response = await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=6694f2c73a8237144bdbdeb7&priceMin=${min}&priceMax=${max}`)
+  const data = await response.json();
   return data;
 }
 
@@ -28,14 +28,14 @@ const SearchPagePackageList = (locationId) => {
   const [packages, setPackages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6); // Number of items per page
-  const [filterPackage,setFilterPackage]=useState(null);
-  const [filterData1,setFilterData1]=useState([]);
-  const {filterApi}=useAppContext();
+  const [filterPackage, setFilterPackage] = useState(null);
+  const [filterData1, setFilterData1] = useState([]);
+  const { filterApi } = useAppContext();
   // console.log("filter api 12331",filterApi)
-  useEffect(()=>{
-    filteredData(filterApi?.locationId,filterApi?.catagoryId,filterApi?.minPrice,filterApi?.maxPrice).then(res=>setFilterPackage(res?.packages))
-  
-  },[filterApi])
+  useEffect(() => {
+    filteredData(filterApi?.locationId, filterApi?.catagoryId, filterApi?.minPrice, filterApi?.maxPrice).then(res => setFilterPackage(res?.packages))
+
+  }, [filterApi])
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,16 +53,16 @@ const SearchPagePackageList = (locationId) => {
     if (locationId?.locationId) {
       fetchData();
     }
-  }, [locationId, currentPage,itemsPerPage]);
-  useEffect(()=>{
-    if(filterPackage?.length>0){
-      setFilterData1(filterPackage||[])
+  }, [locationId, currentPage, itemsPerPage]);
+  useEffect(() => {
+    if (filterPackage?.length > 0) {
+      setFilterData1(filterPackage || [])
     }
-    else{
+    else {
       setFilterData1(packages)
     }
-  },[filterData1,locationId,currentPage,filterApi,packages,filterPackage])
- 
+  }, [filterData1, locationId, currentPage, filterApi, packages, filterPackage])
+
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -78,10 +78,12 @@ const SearchPagePackageList = (locationId) => {
 
   return (
     <div>
-      {currentItems?.map((packageData,i) => (
+      {currentItems?.map((packageData, i) => (
         <div key={i} className=" relative py-5  mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
           <div className="md:pl-5 flex items-center">
-            <Image width={100} height={100}
+            <Image 
+               width={500}
+               height={500}
               className=" h-[220px] mx-5   md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
               src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
               alt="ui/ux review check"
@@ -90,7 +92,7 @@ const SearchPagePackageList = (locationId) => {
           <div className="mx-6 md:m-0 mt-2">
             <div className="">
               <div className="flex items-center justify-between mb-1">
-                <h5 className="block font-sans text-[18px] font-semibold antialiased text-black">
+                <h5 className="block font-sans text-[18px] capitalize font-semibold antialiased text-black">
                   {packageData.name}
                 </h5>
                 <p className="px-5 hidden md:flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
@@ -145,14 +147,14 @@ const SearchPagePackageList = (locationId) => {
                 </p>
               </div>
 
-              <div className=" line-clamp-3">
+              <div className=" line-clamp-2 w-60">
                 <p
                   dangerouslySetInnerHTML={{ __html: packageData.about }}
-                  className="block text-[12px] font-normal text-gray-800"
+                  className="block  text-[12px] font-normal text-gray-800"
                 ></p>
               </div>
             </div>
-            <div className="flex gap-3 md:gap-4 justify-between md:justify-normal max-w-[350px]  mb-3">
+            <div className="flex gap-3 mt-3 md:gap-4 justify-between md:justify-normal max-w-[350px]  mb-3">
               <div className="flex flex-col items-center ">
                 <Image width={100} height={100}
                   className="w-4 "

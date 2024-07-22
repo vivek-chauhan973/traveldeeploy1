@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Modal from '@mui/material/Modal';
 import SearchPageFilter from './SearchPageFilter';
 import CloseIcon from '@mui/icons-material/Close';
@@ -22,6 +22,24 @@ const handleApplyFilter = (filters) => {
   console.log(filters);
   handleCloseModal();  // Close the modal when filters are applied
 };
+    
+
+const handleResize = () => {
+  // Check if window width is 1200 pixels or less
+  if (window.innerWidth <= 1200) {
+    setIsModalOpen(false); // Close modal if window width is 1200 or less
+  }
+};
+
+useEffect(() => {
+  // Add event listener for window resize
+  window.addEventListener('resize', handleResize);
+
+  return () => {
+    // Cleanup by removing event listener on component unmount
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
 
   return (
     <div className="container-wrapper flex justify-between pb-5 items-center">
