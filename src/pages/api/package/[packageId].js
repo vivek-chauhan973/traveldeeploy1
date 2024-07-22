@@ -11,9 +11,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 // find By Id And Update
  const packageIds= async (req, res) => {
-
     try {
-
         const { packageId } = req.query;
         if (!packageId) {
             return res.status(400).json({ message: 'Package ID is required' });

@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://bizarexpedition.in",
   "scripts": {
-    "dev": "next dev -H 192.168.1.8 ",
+    "dev": "next dev  ",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

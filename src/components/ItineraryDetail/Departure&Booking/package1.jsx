@@ -18,42 +18,75 @@ import Addguest from "@/components/addguest";
 import TestingCard from "@/components/ItineraryDetail/TestingCard";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
-import { useEffect, useState,useCallback } from "react";
-import Image from 'next/image'
+import { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import ItinaryFixedDepartureCard from "./ItinaryFixedDepartureCard";
 import FixedDeparturePopup from "./FixedDeparturePopup";
+export default function Package1() {
+  const {
+    addPackage,
+    guestPrice,
+    inputData,
+    setInputData,
+    closeBtn,
+    setCloseBtn,
+    showAddguest,
+    fixedDepartureButtonEnaibleAndDisable,
+    setFixedDepCity1,
+    setFixedDepDate1,
+    fixedDepCity,
+    fixedDepDate
+  } = useAppContext();
+  const [images, setImages] = useState(null);
+  const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
+  const fetchImages = useCallback(async () => {
+    const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
+    const data = await res.json();
+    return data;
+  }, [addPackage]);
 
-export default function Package1 () {
-    const {addPackage,guestPrice,inputData,setInputData,closeBtn,setCloseBtn,showAddguest,fixedDepartureButtonEnaibleAndDisable}=useAppContext();
-    const [images,setImages]=useState(null);
-    const [fixedDeparturePopupOpen,setFixedDeparturePopupOpen]=useState(false);
-    const fetchImages = useCallback(async () => {
-      const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
-      const data = await res.json();
-      return data;
-    }, [addPackage]);
-    
-    useEffect(()=>{
-fetchImages().then(res=>setImages(res));
-    },[addPackage,fetchImages])
-    
-    // console.log("packages is very smart",addPacka/
-    const handleSubmit=()=>{
-      if(fixedDepartureButtonEnaibleAndDisable){
-        setFixedDeparturePopupOpen(true);
-      }
+  useEffect(() => {
+    fetchImages().then((res) => setImages(res));
+  }, [addPackage, fetchImages]);
+
+  // console.log("packages is very smart",addPacka/
+  const handleSubmit = () => {
+    if (fixedDepartureButtonEnaibleAndDisable) {
+      setFixedDeparturePopupOpen(true);
     }
+    if (fixedDepDate && fixedDepCity) {
+      setFixedDepCity1(fixedDepCity);
+      setFixedDepDate1(fixedDepDate);
+    }
+  };
+  // console.log("addPackage12324", addPackage);
+  const [buttonGuest,setButtonGuest]=useState("Add Guest & Room");
   
+useEffect(()=>{
+  if(closeBtn){
+    setButtonGuest("Book Now");
+  }
+},[closeBtn])
   return (
     <div>
       <div className=" absolute w-full ">
-        <DesktopHeader/>
+        <DesktopHeader />
       </div>
-      
+
       {/* <Caraousel /> */}
       <Breadcrumbs />
       <div className="md:mt-20 mt-3">
-      <ItineraryHeroSection addPackage={addPackage} closeBtn={closeBtn}  guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn} images={images} togglePopup={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>
+        <ItineraryHeroSection
+          addPackage={addPackage}
+          closeBtn={closeBtn}
+          guestPrice={guestPrice}
+          setInputData={setInputData}
+          inputData={inputData}
+          setCloseBtn={setCloseBtn}
+          images={images}
+          togglePopup={setFixedDeparturePopupOpen}
+          fixedDeparturePopupOpen={fixedDeparturePopupOpen}
+        />
       </div>
       <div className="bg-gray-100  mt-[20px] pb-10">
         <div className="container-wrapper mb-4">
@@ -67,24 +100,37 @@ fetchImages().then(res=>setImages(res));
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
             {/*Select departure city */}
-           
+
             <div id="departure" className=" hidden xl:block">
-              <DepartureSection addPackage={addPackage}/>
+              <DepartureSection addPackage={addPackage} />
             </div>
-          <div className="xl:hidden">
-          {addPackage?.prices?.addguest==="addGuest"&&<DepartureSection addPackage={addPackage}/>}
-          {addPackage?.prices?.departure1==="fixedDeparture"&&<ItinaryFixedDepartureCard addPackage={addPackage} togglePopup={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen} />}
-          </div>
+            <div className="xl:hidden">
+              {addPackage?.prices?.addguest === "addGuest" && (
+                <DepartureSection addPackage={addPackage} />
+              )}
+              {addPackage?.prices?.departure1 === "fixedDeparture" && (
+                <ItinaryFixedDepartureCard
+                  addPackage={addPackage}
+                  togglePopup={setFixedDeparturePopupOpen}
+                  fixedDeparturePopupOpen={fixedDeparturePopupOpen}
+                />
+              )}
+            </div>
             {/* Pricing */}
             <div>
-
+              <div className="hidden xl:block">
+                {addPackage?.prices?.addguest === "addGuest" && (
+                  <ItineraryPricingCard />
+                )}
+                {addPackage?.prices?.departure1 === "fixedDeparture" && (
+                  <ItinaryFixedDepartureCard
+                    addPackage={addPackage}
+                    togglePopup={setFixedDeparturePopupOpen}
+                    fixedDeparturePopupOpen={fixedDeparturePopupOpen}
+                  />
+                )}
+              </div>
             </div>
-           
-            <div className="hidden xl:block">
-              {addPackage?.prices?.addguest==="addGuest"&&<ItineraryPricingCard />}
-              {addPackage?.prices?.departure1==="fixedDeparture"&&<ItinaryFixedDepartureCard addPackage={addPackage} togglePopup={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen} />}
-            </div>
-          
           </div>
         </div>
       </div>
@@ -195,7 +241,7 @@ fetchImages().then(res=>setImages(res));
               </p>
             </div>
             {/* <Itinerary/>    */}
-            <Itinerary  />
+            <Itinerary />
             {/* Itinerary map */}
             <Itinerarymap />
             {/* <!- TOUR DETAILS IS HERE --> */}
@@ -223,7 +269,7 @@ fetchImages().then(res=>setImages(res));
                     className="w-4"
                     src="https://www.svgrepo.com/show/522439/printer.svg"
                     alt=""
-                     width="125"
+                    width="125"
                     height="150"
                   />
                   <p className="text-[12px]">Print Itinerary</p>
@@ -233,7 +279,7 @@ fetchImages().then(res=>setImages(res));
                     className="w-4"
                     src="https://www.svgrepo.com/show/522399/envelope-closed.svg"
                     alt=""
-                     width="125"
+                    width="125"
                     height="150"
                   />
                   <p className="text-[12px]">Email Itinerary</p>
@@ -249,7 +295,9 @@ fetchImages().then(res=>setImages(res));
       <ReviewsCard />
       <div className="container-wrapper pt-6 md:pt-10">
         <div>
-          <h2 className="md:text-xl font-semibold  text-lg">Similar Tour Packages</h2>
+          <h2 className="md:text-xl font-semibold  text-lg">
+            Similar Tour Packages
+          </h2>
           <h2 className="md:text-md text-[15px] italic">
             Lorem ipsum dolor sit amet consectetur adipisicing.
           </h2>
@@ -281,39 +329,69 @@ fetchImages().then(res=>setImages(res));
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
             </div>
-            
+
             <div className=" flex-col  align-middle my-auto pl-2 gap-2 py-2">
-           
-            <ScrollLink
+              <ScrollLink
                 to="departure"
                 spy={true}
                 smooth={true}
                 offset={-70}
                 duration={1000}
               >
-               { addPackage?.prices?.addguest==="addGuest"&&<Addguest guestPrice={guestPrice} setInputData={setInputData} inputData={inputData}  setCloseBtn={setCloseBtn} addPackage={addPackage}>
-                <p className={` ${showAddguest?"bg-primary cursor-pointer":"bg-orange-200"} px-5 py-2 rounded-md text-white text-center text-para`}>
-                  <span className="disabled:opacity-75">{closeBtn?"Book Now":"Add Guest & Room"}</span>
+                {addPackage?.prices?.addguest === "addGuest" && (
+                  <Addguest
+                    guestPrice={guestPrice}
+                    setInputData={setInputData}
+                    inputData={inputData}
+                    setCloseBtn={setCloseBtn}
+                    addPackage={addPackage}
+                  >
+                    <p
+                      className={` ${
+                        showAddguest
+                          ? "bg-primary cursor-pointer"
+                          : "bg-orange-200"
+                      } px-5 py-2 rounded-md text-white text-center text-para`}
+                    >
+                      <span className="disabled:opacity-75" onClick={()=>setPricingShowPopup(true)}>
+                        {buttonGuest}
+                      </span>
+                    </p>
+                  </Addguest>
+                )}
+                
 
-                </p>
-              </Addguest>}
-           
-           {
-            addPackage?.prices?.departure1==="fixedDeparture"&&<button onClick={handleSubmit}  className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable?"bg-primary":"bg-orange-200"} bg-primary text-center text-para`}>Book Noow</button>
-           }
-           {fixedDeparturePopupOpen&&<FixedDeparturePopup togglePopup={setFixedDeparturePopupOpen} addPackage={addPackage}/>}
+                {addPackage?.prices?.departure1 === "fixedDeparture" && (
+                  <button
+                    onClick={handleSubmit}
+                    className={`border px-5 py-1 rounded-md ${
+                      fixedDepartureButtonEnaibleAndDisable
+                        ? "bg-primary"
+                        : " bg-orange-200"
+                    }  text-center text-para`}
+                  >
+                    Book Noow
+                  </button>
+                )}
+                {fixedDeparturePopupOpen && (
+                  <FixedDeparturePopup
+                    togglePopup={setFixedDeparturePopupOpen}
+                    addPackage={addPackage}
+                  />
+                )}
               </ScrollLink>
-            
-              {<CustomiseTour>
-                <p className="border px-5 cursor-pointer py-1 mt-2 rounded-md text-center text-para">
-                  <span>Customise</span>
-                </p>
-              </CustomiseTour>}
+
+              {
+                <CustomiseTour>
+                  <p className="border px-5 cursor-pointer py-1 mt-2 rounded-md text-center text-para">
+                    <span>Customise</span>
+                  </p>
+                </CustomiseTour>
+              }
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

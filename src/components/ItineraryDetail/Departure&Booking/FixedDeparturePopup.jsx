@@ -1,21 +1,28 @@
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
-import { useEffect, useRef } from "react";
+import { useEffect,  useState } from "react";
 
 const FixedDeparturePopup = ({togglePopup,addPackage}) => {
   const {fixedDepDate,fixedDepCity,handleCleckOnDepartureFixed}=useAppContext();
-  const ref=useRef(null);
+  const [check,setCheck]=useState(false);
+
     useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
           document.body.style.overflow = "auto";
         };
       }, []);
+      console.log("true",check)
+     
 // console.log("refdffdsfsfsdf",ref.current);
 const handleSubmit=()=>{
-  if(ref.current){
+  if(check){
     handleCleckOnDepartureFixed();
-    togglePopup(false);
+    
   }
+  else{
+    return alert("please checke marked of confirm box");
+  }
+  togglePopup(false);
   // console.log("refdffdsfsfsdf212323234",ref.current);
 }
 
@@ -46,8 +53,8 @@ const handleSubmit=()=>{
           
           <input
             type="checkbox"
-            ref={ref}
-            className=" px-3 py-2 border border-gray-300 rounded-lg focus:outline-none  "
+            onChange={()=>setCheck(true)}
+            className=" border border-gray-300 rounded-lg   "
           />
           <p className="block text-gray-700 mb-2">Please confirm</p>
         </div>

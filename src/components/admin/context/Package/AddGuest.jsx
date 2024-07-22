@@ -91,7 +91,7 @@ export const AppProvider = ({ children }) => {
 
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
-
+  const [fixedDepartureData1,setFixedDepartureData1]=useState(null);
   const finalDataOfBookingByUsingMethodAddGuest = {
     departureCity: showAddguest,
     itemDateAndDay: departureSectionData,
@@ -99,6 +99,8 @@ export const AppProvider = ({ children }) => {
     totalCalculatedPrize: guestPrice,
     allDetail: inputData
   };
+
+  console.log("finalDataOfBookingByUsingMethodAddGuest",finalDataOfBookingByUsingMethodAddGuest)
   const handleCleckOnDepartureFixed=()=>{
 
   const finalDataOfBookingByUsingMethodFixedDeparture={
@@ -106,12 +108,15 @@ export const AppProvider = ({ children }) => {
     depardate:fixedDepDate1,
     name:"Pradhumn",
     packageprice:addPackage?.price,
-    fixeddeparturebaseprice:addPackage?.basePrice,
+    fixeddeparturebaseprice:addPackage?.prices?.basePrice,
     packagename:addPackage?.name,
     inventory:addPackage?.prices?.inventory,
     weight:addPackage?.prices?.weight
   }
+  setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
+
+  console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",fixedDepartureData1)
   // console.log("packages sfsjbfbfjbsfhjdf",addPackage)
   const contextFun = {
     closeBtn,

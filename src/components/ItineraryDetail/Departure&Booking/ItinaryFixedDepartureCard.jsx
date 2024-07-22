@@ -38,50 +38,55 @@ const ItinaryFixedDepartureCard = ({
     <>
       <div className="flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
         <div className=" overflow-y-auto">
-          <div className="flex mb-[10px] mt-5 text-sm">
-            <p className=" w-24 text-md">Dept. city : </p>
-            <select
-              id="city"
-              name="city"
-              className=" w-40 text-center text-md outline-none"
-              onChange={(e) => {
-                setFixedDepCity(e.target.value);
-                setCity(true);
-              }}
-            >
-              <option value="" className=" w-32 text-start text-md">
-                Select Departure city
-              </option>
-              {addPackage?.startcity?.map((item, i) => (
-                <option
-                  key={i}
-                  value={item}
-                  className="text-start my-2 text-md"
-                >
-                  {item}
+          <div className="flex xl:block justify-center items-center flex-col gap-3 my-3">
+          <div>
+          
+            <div className="flex mb-[10px] mt-5 text-sm">
+              <p className=" w-24 text-md">Dept. city : </p>
+              <select
+                id="city"
+                name="city"
+                className=" w-40 text-center text-md outline-none"
+                onChange={(e) => {
+                  setFixedDepCity(e.target.value);
+                  setCity(true);
+                }}
+              >
+                <option value="" className=" w-32 text-start text-md">
+                  Select Departure city
                 </option>
-              ))}
-            </select>
+                {addPackage?.startcity?.map((item, i) => (
+                  <option
+                    key={i}
+                    value={item}
+                    className="text-start my-2 text-md"
+                  >
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {fixedDepCity ? null : (
+              <p className=" text-red-600">please select City first</p>
+            )}
           </div>
-          {fixedDepCity ? null : (
-            <p className=" text-red-600">please select City first</p>
-          )}
-
-          <div className=" flex gap-2">
-            <p>select Dept. date : </p>
-            <input
-              type="date"
-              className=" outline-none border-2 rounded-lg p-1 text-sm"
-              onChange={(e) => {
-                setFixedDepDate(e.target.value);
-                setDate(true);
-              }}
-            />
+          <div>
+            <div className=" flex gap-2">
+              <p>select Dept. date : </p>
+              <input
+                type="date"
+                className=" outline-none border-2 rounded-lg p-1 text-sm"
+                onChange={(e) => {
+                  setFixedDepDate(e.target.value);
+                  setDate(true);
+                }}
+              />
+            </div>
+            {fixedDepDate ? null : (
+              <p className=" text-red-600">please select date first</p>
+            )}
           </div>
-          {fixedDepDate ? null : (
-            <p className=" text-red-600">please select date first</p>
-          )}
-
+          </div>
           <div className=" justify-between  pt-3 pb-3 hidden xl:flex ">
             <div>
               <p className="text-sm ">Basic Price</p>
@@ -110,6 +115,34 @@ const ItinaryFixedDepartureCard = ({
             </div>
           </div>
           <hr className="border-dashed my-2" />
+          {/* inject your code for mobile device */}
+          <div className="xl:hidden">
+            <div className="ml-2">
+              <p className="font-semibold text-base mb-2 mt-1 text-graytext">
+                About us
+              </p>
+
+              <p
+                className="text-para"
+                dangerouslySetInnerHTML={{
+                  __html: addPackage?.about,
+                }}
+              ></p>
+            </div>
+
+            <div>
+              <p className="text-md ml-2 font-semibold my-2 text-graytext">
+                Highlights
+              </p>
+              <div>
+                {addPackage?.highlights?.map((highlight) => (
+                  <ol key={highlight._id} className="list-disc   ">
+                    <li className="ml-10 text-para">{highlight.text}</li>
+                  </ol>
+                ))}
+              </div>
+            </div>
+          </div>
           <div className="text-para  grid-cols-2 hidden xl:grid">
             <div></div>
             <div className="grid grid-cols-2 gap-1">
