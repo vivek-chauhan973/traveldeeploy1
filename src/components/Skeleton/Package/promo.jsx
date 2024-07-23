@@ -265,12 +265,11 @@ export const CarRentalHomeSkelton = () => {
                 <div className=" container-wrapper skeleton bg-slate-200 shadow-sm rounded-lg p-5 h-[440px] w-full mx-auto">
                     <div className="animate-pulse h-full space-y-4 md:space-x-4 mr-5 ">
 
-                        <div className=" rounded bg-slate-100 h-2 md:w-48 w-24 md:ml-4 mt-5 mb-7"></div>
+                        <div className=" rounded bg-slate-100 h-4 md:w-48 w-24 md:ml-4 mt-5 mb-7"></div>
                         <div className=" rounded bg-slate-100 h-2 w-full "></div>
                         <div className=" rounded bg-slate-100 h-2 w-full "></div>
                         <div className=" rounded bg-slate-100 h-2 w-full "></div>
                         <div className=" rounded bg-slate-100 h-2 w-full "></div>
-                        <div className=" rounded bg-slate-100 h-2 w-full xl:hidden block"></div>
                         <div className=" rounded bg-slate-100 h-2 w-full xl:hidden block"></div>
                         <div className=" rounded bg-slate-100 h-2 w-full xl:hidden block"></div>
                         <div className=" rounded bg-slate-100 h-2 w-full xl:hidden block"></div>

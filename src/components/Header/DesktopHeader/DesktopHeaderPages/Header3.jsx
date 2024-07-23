@@ -20,7 +20,7 @@ const Header3 = () => {
   return (
     <div className=" top-0 sticky z-[999]">
       {/* Navbar*/}
-      <div className="bg-navyblack">
+      <div className="bg-[#272727]"> {/* 251E21 , navyblack*/}
         <div className="container-wrapper">
           <div className="flex md:items-center md:justify-between md:gap-5 py-3 ">
             <div className=" justify-between  ">
@@ -36,15 +36,15 @@ const Header3 = () => {
                 
               </div>
               {/* <Image  src={Logo} alt="" height={60} width={60} /> */}
-              <Image width={210} height={210} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" />
+              <Image width={160} height={160} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" />
               
               <CiSearch size={24} className="text-white mt-3 md:hidden" />
             </div>
 
-            <div className=" justify-between   hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden   p-[5px] items-center">
+            <div className=" justify-between   hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
 
               <div className="flex">
-                <IoIosSearch size={28} />
+                <IoIosSearch size={20} />
                 <input
                   className="border-none focus:outline-none  placeholder:text-sm placeholder-black w-full px-2 text-sm"
                   placeholder="Search Your Next Destination"
@@ -57,13 +57,13 @@ const Header3 = () => {
 
             </div>
             <div className="hidden md:flex gap-3">
-              <button className="md:flex items-center gap-2 block px-2 py-1 bg-white text-navyblack rounded-lg">
+              <button className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg">
                 <span>
                   <RiLoginCircleFill />
                 </span>{" "}
                 Login{" "}
               </button>
-              <button className="flex items-center gap-2 border-white border text-white px-2 py-1 rounded-lg">
+              <button className="flex items-center gap-2 px-2 py-1 text-sm border-white border text-white rounded-lg">
                 <span>
                   <FaUser />
                 </span>{" "}
