@@ -310,7 +310,7 @@ import { ImCross } from "react-icons/im";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import Image from 'next/image';
 
-export default function (){
+export default function CarDetail(){
     return(
     <>
     {/* CarDetailSkeleton  */} 

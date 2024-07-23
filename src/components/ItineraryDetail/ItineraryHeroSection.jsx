@@ -7,6 +7,7 @@ import CustomiseTour from "./CustomiseTour";
 import Slider from "react-slick";
 import { useAppContext } from "../admin/context/Package/AddGuest";
 import FixedDeparturePopup from "./Departure&Booking/FixedDeparturePopup";
+import Image from 'next/image';
 const ItineraryHeroSection = ({
   addPackage,
   guestPrice,
@@ -53,6 +54,7 @@ const ItineraryHeroSection = ({
 
   return (
     <>
+  
       <div>
         <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="">
@@ -62,9 +64,9 @@ const ItineraryHeroSection = ({
                   <div key={i}>
                     <img
                       className=" w-full object-cover h-[40vh]"
-                      src={item.path}
-                      width="125"
-                      height="150"
+                      src={item?.path}
+                      width={200}
+                      height={100}
                       alt={`img ${i + 1}`}
                     />
                   </div>
@@ -73,10 +75,10 @@ const ItineraryHeroSection = ({
             </div>
             <img
               className="rounded-md h-[350px] object-cover w-full hidden xl:flex"
-              src={hemages && hemages[0].path}
+              src={hemages && hemages?.[0]?.path}
               alt="img 1"
-              width="125"
-              height="150"
+              width={200}
+              height={100}
             />
           </div>
 
@@ -84,19 +86,19 @@ const ItineraryHeroSection = ({
             <div className="">
               <img
                 className="rounded-md h-[167px] w-full object-cover"
-                src={hemages && hemages[1].path}
+                src={hemages && hemages?.[1]?.path}
                 alt="img 2"
-                width="125"
-                height="150"
+                width={200}
+                height={100}
               />
             </div>
             <div className="">
               <img
                 className="rounded-md h-[167px] max-md-full w-full object-cover"
-                src={hemages && hemages[2].path}
+                src={hemages && hemages?.[2]?.path}
                 alt="img 3"
-                width="125"
-                height="150"
+                width={200}
+                height={100}
               />
             </div>
           </div>
@@ -111,8 +113,8 @@ const ItineraryHeroSection = ({
                     className=" p-1 "
                     src="https://www.svgrepo.com/show/13666/heart.svg"
                     alt="Heart Icon"
-                    width="125"
-                    height="150"
+                    width={200}
+                    height={100}
                   />
                 </div>
               </div>
@@ -238,7 +240,7 @@ const ItineraryHeroSection = ({
             </div>
           </div>
 
-          {/* 3imgs */}
+          
         </div>
       </div>
     </>

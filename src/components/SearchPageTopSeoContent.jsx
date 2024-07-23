@@ -8,7 +8,9 @@ const SearchPageTopSeoContent = ({ state }) => {
   const [show, setShow] = useState(false)
   useEffect(() => {
     setLocationId(state?._id)
-  }, [state]);
+  // }, [state]);
+}, [state?._id]);
+
   const [active, setActive] = useState(true)
 
 

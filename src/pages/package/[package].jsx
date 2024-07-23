@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+
 import "../../app/globals.css";
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import Package1 from '@/components/ItineraryDetail/Departure&Booking/package1';

@@ -13,7 +13,9 @@ const [handleCity,setHandleCity]=useState(false);
       useEffect(()=>{
        
         setData(addPackage?.startcity||[])
-      },[data])
+      // },[data])
+    }, [addPackage?.startcity, data]);
+
 const ref=useRef(null);
 // console.log("addpackage123456789",addPackage)
       const handleSubmit=()=>{

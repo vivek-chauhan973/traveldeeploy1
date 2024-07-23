@@ -13,7 +13,7 @@ const fetchPackage = async (packageUrl) => {
 
 export const AppProvider = ({ children }) => {
   const [closeBtn, setCloseBtn] = useState(false);
-  const [addPackage, setAddPackage] = useState(null);
+  const [addPackage, setAddPackage] = useState({});
   const [guestPrice, setGuestPrice] = useState(0);
   const [fixedDepCity,setFixedDepCity]=useState("");
   const [fixedDepDate,setFixedDepDate]=useState("");
@@ -100,7 +100,7 @@ export const AppProvider = ({ children }) => {
     allDetail: inputData
   };
 
-  console.log("finalDataOfBookingByUsingMethodAddGuest",finalDataOfBookingByUsingMethodAddGuest)
+  // console.log("finalDataOfBookingByUsingMethodAddGuest",finalDataOfBookingByUsingMethodAddGuest)
   const handleCleckOnDepartureFixed=()=>{
 
   const finalDataOfBookingByUsingMethodFixedDeparture={
@@ -116,7 +116,7 @@ export const AppProvider = ({ children }) => {
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
 
-  console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",fixedDepartureData1)
+  // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",fixedDepartureData1)
   // console.log("packages sfsjbfbfjbsfhjdf",addPackage)
   const contextFun = {
     closeBtn,

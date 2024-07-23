@@ -309,7 +309,7 @@ const marks = [
 
 
 
-export default function(){
+export default function CarPromo(){
 
     const [priceRange, setPriceRange] = useState([0, 10000]);
     const [bikeChecked, setBikeChecked] = useState(false);
