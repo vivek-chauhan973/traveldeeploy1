@@ -34,7 +34,7 @@ const [showPopup,setShowPopup]=useState(false);
 
               {/* select departure city */}
               <div className=" relative gap-4  py-4">
-                <h1>All Departure date({AllDataRelatedCity[datePackage].length})</h1>
+                <h1 className=" font-semibold text-lg">All Departure date({AllDataRelatedCity[datePackage].length})</h1>
                 {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
                 <div className="flex my-2">
                 {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className="ml-2 cursor-pointer" >
@@ -70,6 +70,7 @@ const [showPopup,setShowPopup]=useState(false);
                         <li className="ml-10 text-para">{highlight.text}</li>
                       </ol>
                     ))}
+                    {/* <div className= 'bg-gradient-to-t -mt-7  from-red-400 opacity-100 w-full  h-10 -top-2 z-30" ' ></div> */}
                   </div>
                 </div>
               </div>

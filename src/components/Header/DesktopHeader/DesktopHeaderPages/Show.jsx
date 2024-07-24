@@ -8,7 +8,7 @@ const Show = () => {
     <div className=" flex w-[1000px] h-full bg-gray-100 ml-52 mt-5" >
       <div className="mt-2 text-sm  font-bold w-1/4 gap-x-6 bg-white ">
         <div className="cursor-pointer grid gap-4 grid-cols-1 ">
-         {stateData.map((item,i)=> <h2 key={i} className='  px-5 hover:px-5 hover:bg-gray-100  hover:p-2 hover:rounded-sm'
+         {stateData.map((item,i)=> <h2 key={i} className=' font-medium text-md  px-5 hover:px-5 hover:bg-gray-100  hover:p-2 hover:rounded-sm'
           onMouseEnter={() => setChange(i)}               
            >
            {item}
@@ -18,7 +18,7 @@ const Show = () => {
       </div>
      <div className="ml-2 p-2 h-96 w-full grid grid-cols-3 grid-rows-3  ">   
         <div>
-          <h1 className="font-medium">{data1[change].state}</h1>
+          <h1 className="font-medium text-lg ">{data1[change].state}</h1>
           <p>Chandratal</p>
           <p>Dalhouse</p>
           <p>Kaza</p>
@@ -26,7 +26,7 @@ const Show = () => {
           <p>shimla</p>
         </div>
         <div>
-          <h1 className="font-medium">{data1[change].state1}</h1>
+          <h1 className="font-medium text-lg">{data1[change].state1}</h1>
           <p>Chandratal</p>
           <p>Dalhouse</p>
           <p>Kaza</p>
@@ -34,7 +34,7 @@ const Show = () => {
           <p>shimla</p>
         </div>
         <div>
-          <h1 className="font-medium">{data1[change].state2}</h1>
+          <h1 className="font-medium text-lg">{data1[change].state2}</h1>
           <p>Chandratal</p>
           <p>Dalhouse</p>
           <p>Kaza</p>
@@ -42,7 +42,7 @@ const Show = () => {
           <p>shimla</p>
         </div>
         <div className="mt-7">
-          <h1 className="font-medium">{data1[change].state3}</h1>
+          <h1 className="font-medium text-lg">{data1[change].state3}</h1>
           <p>Chandratal</p>
           <p>Dalhouse</p>
           <p>Kaza</p>
@@ -50,7 +50,7 @@ const Show = () => {
           <p>shimla</p>
         </div>
         <div className="mt-7">
-          <h1 className="font-medium">{data1[change].state4}</h1>
+          <h1 className="font-medium text-lg">{data1[change].state4}</h1>
           <p>Chandratal</p>
           <p>Dalhouse</p>
           <p>Kaza</p>

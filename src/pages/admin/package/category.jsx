@@ -329,9 +329,9 @@ export default function Category () {
 
 
                             <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
-                                <ul>
+                                <div>
                                     {badgesListData?.map((item, index) => (
-                                        <li key={item._id} className="even:bg-slate-50">
+                                        <div key={item._id} className="even:bg-slate-50">
                                             <div className='flex justify-between  px-1'>
                                                 <p className='capitalize truncate hover:text-clip flex gap-2 leading-8 text-[14px]'>
                                                     <span>{index + 1} </span>
@@ -365,9 +365,9 @@ export default function Category () {
                                                 </div>
                                                 
                                             </div>
-                                        </li>
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
 
                             </div>
 
@@ -391,9 +391,9 @@ export default function Category () {
                             {/* data is here show */}
                             {/* <hr className='my-3' /> */}
                             <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
-                                <ul>
+                                <div>
                                     {categoryListData?.map((item, index) => (
-                                        <li key={item._id} className="even:bg-slate-50">
+                                        <div key={item._id} className="even:bg-slate-50">
                                             <div className='flex justify-between  px-1'>
                                                 <p className='capitalize flex gap-2 leading-8 text-[14px]'>
                                                     <span>{index + 1} </span>
@@ -433,9 +433,9 @@ export default function Category () {
                                                     <FaEdit size={20} className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => handleEditCategory(item._id)} />
                                                 </div> */}
                                             </div>
-                                        </li>
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
