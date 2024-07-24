@@ -22,11 +22,11 @@ handler.post((req, res) => {
     }
 
     try {
+      
       const file = files.file;
       const data = fs.readFileSync(file.filepath);
       const filePath = path.join(form.uploadDir, file.originalFilename);
       await writeFileAsync(filePath, data);
-
       res.status(200).json({ message: 'File uploaded successfully', path: `/uploads/${file.originalFilename}` });
     } catch (uploadError) {
       console.error("File upload error:", uploadError);

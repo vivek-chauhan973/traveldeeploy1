@@ -6,7 +6,7 @@ import { FaEdit } from 'react-icons/fa';
 import { IoIosSave } from 'react-icons/io';
 import { useAppContext } from '../context/Package/AddGuest';
 
-const FixedDeparture = ({ itinerary }) => {
+const FixedDeparture = ({ itinerary ,setActiveTab}) => {
     const [basePrice, setBasePrice] = useState(itinerary?.prices?.basePrice || 0);
     const [rate, setRate] = useState(itinerary?.prices?.perRate|| 0);
     const [inventory, setInventory] = useState(itinerary?.prices?.inventory || 0);
@@ -126,6 +126,7 @@ const FixedDeparture = ({ itinerary }) => {
                 body: JSON.stringify(payload),
             });
             const data = await res.json();
+            setActiveTab("Tab10");
             // setActiveTab("NextTab"); // Assuming there's a function to set the next tab
             console.log("Data submitted", data);
         } catch (error) {

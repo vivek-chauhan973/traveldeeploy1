@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 
-const SeoPage = ({ itinerary }) => {
+const SeoPage = ({ itinerary,setActiveTab }) => {
     const [isSEOField, setIsSEOField] = useState({
         title: '',
         description: '',
@@ -74,6 +74,7 @@ const SeoPage = ({ itinerary }) => {
                 }
 
                 const data = await response.json();
+                setActiveTab("Tab9");
                 console.log('Form submitted successfully:', data);
             } catch (error) {
                 console.error('Error submitting form:', error);

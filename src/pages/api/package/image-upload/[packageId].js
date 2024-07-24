@@ -2,8 +2,8 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db'; // Adjust path as per your project structure
-import { NextApiRequest, NextApiResponse } from 'next';
 import PackageImage from '@/models/package/ImageUploading'; // Adjust path as per your project structure
+import Package from '@/models/Package';
 
 
 const uploadDirectory = './public/uploads/package/details'; // Updated upload directory
@@ -28,6 +28,7 @@ const apiRoute = async (req, res) => {
   await dbConnect(); // Ensure database connection
 
   const { packageId } = req.query;
+  console.log("packageId74623873256374",packageId)
 
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
@@ -52,13 +53,20 @@ const apiRoute = async (req, res) => {
           filename: file.filename,
           path: `/uploads/package/details/${file.filename}`,
         }));
-
+        console.log("filesfhbjfsfssjfhbasjh121312y3432y4",files);
         // Update or insert files into database
         await PackageImage.findOneAndUpdate(
           { packageId },
           { $push: { uploads: { $each: files } } },
           { upsert: true, new: true }
         );
+        const imagesArray=files?.map(item=>item.path)
+        // console.log()
+        await Package.updateOne({_id:packageId},{
+          $set:{uploads:imagesArray}
+        },{
+          new:true,
+        })
 
         return res.status(200).json({ message: 'Files uploaded successfully' });
       } catch (error) {

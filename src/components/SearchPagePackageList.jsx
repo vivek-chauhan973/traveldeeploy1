@@ -75,7 +75,7 @@ const SearchPagePackageList = (locationId) => {
   const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
+  // console.log("packsheghdbfhsdvfugsdjfbdscvjsdbfvjgse",currentItems)
   return (
     <div>
       {currentItems?.map((packageData, i) => (
@@ -85,7 +85,7 @@ const SearchPagePackageList = (locationId) => {
                width={500}
                height={500}
               className=" h-[220px] mx-5   md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
-              src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+              src={packageData?.uploads?.[0]?packageData?.uploads?.[0]:"https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"}
               alt="ui/ux review check"
             />
           </div>

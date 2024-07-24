@@ -115,7 +115,7 @@ const YourComponent = () => {
                                     <td className="py-2 pl-4 w-52">
                                         <Image
                                             className="w-40 h-16 object-cover rounded"
-                                            src="https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                            src={itinerary?.uploads?.[0]?itinerary?.uploads?.[0]:"https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                                             alt=""
                                             width="1920"   height="1280"
                                         />

@@ -89,6 +89,7 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
         body: JSON.stringify({ flights: flightBookingList })
       });
       if (response.ok) {
+        setActiveTab("Tab7");
         console.log("Flights saved successfully");
       } else {
         console.error("Failed to save flights");

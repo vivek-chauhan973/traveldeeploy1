@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LiaRupeeSignSolid } from 'react-icons/lia';
 import { useAppContext } from '../context/Package/AddGuest';
 
-const PricingManagement = ({ itinerary }) => {
+const PricingManagement = ({ itinerary,setActiveTab }) => {
     // console.log("Pricing data show is here itinerary", itinerary?._id)
   const {pricingManagement}= useAppContext()
     const [pricingData, setPricingData] = useState({
@@ -105,7 +105,7 @@ const PricingManagement = ({ itinerary }) => {
                     body: JSON.stringify(pricingData)
                 })
                 const data = await res.json();
-
+                setActiveTab("Tab10");
                 // console.log("pricing data show is here", pricingData)
 
             } catch (error) {
