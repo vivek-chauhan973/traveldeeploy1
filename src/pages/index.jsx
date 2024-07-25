@@ -38,7 +38,7 @@ export default function Page() {
 
     fetchData();
   }, []);
-
+// console.log("state url 823729364932",states.pageUrl)
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-4">Homepage!</h1>

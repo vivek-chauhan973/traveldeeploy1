@@ -24,9 +24,7 @@ export default function PromoManage() {
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
-    const [image, setImage] = useState("");
-    //  const [image1,setImage1]=useState(null);
-    const [imageData, setImageData] = useState(null);
+     const [image1,setImage1]=useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -49,9 +47,7 @@ export default function PromoManage() {
             try {
                 const res = await fetch(`/api/public/package-state/${selectedLocation}`);
                 const data = await res.json();
-
-
-                console.log("data", data);
+                // console.log("data", data);
                 return data;
             } catch (error) {
                 console.error("Error fetching promo text", error);
@@ -64,17 +60,26 @@ export default function PromoManage() {
         }
     }, [statePackages, selectedLocation]);
     const handleChange = (e) => {
-        setFile(ref?.current?.files[0]);
-        // setImage1(ref?.current?.files[0]);
+        const data = e.target.files[0];
+        setImage1(data)
+    if (data) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setFile(e.target.result);
+      };
+      reader.readAsDataURL(data);
+    }
     };
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
-        setImage(promoTxt?.image || "")
         setFile(promoTxt?.image || "")
+        setEditorContent(promoTxt?.description||"<p></p>");
     }, [promoTxt])
     // console.log("promotext",promoTxt)
-
+    useEffect(()=>{
+        setFile(image1)
+    },[image1])
 
 
     const handleSelectChange = async (e) => {
@@ -93,17 +98,19 @@ export default function PromoManage() {
     };
 
     const handleEditorChange = (content) => {
+
+        // console.log("content",content)
         setEditorContent(content);
     };
 
     const handleSubmit = async (e) => {
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', image1);
         formData.append('title', title);
         formData.append('alt', alt);
         formData.append('faqData', JSON.stringify(faqData));
         formData.append('editorContent', editorContent);
-
+        console.log("content",editorContent)
         try {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
@@ -118,8 +125,7 @@ export default function PromoManage() {
 
             const data = await response.json();
             console.log('Success:', data);
-            setImageData(data);
-            // Reset form fields after successful submission
+          // Reset form fields after successful submission
             setFile(null);
             setTitle("");
             setAlt("");
@@ -171,8 +177,8 @@ export default function PromoManage() {
                                 </div>
                                 <div className="py-10 border border-slate-500/45 px-2 rounded">
                                     <div className="w-2/3">
-                                        {file && <Image className="w-20 shadow-md" width="123" height="150" src={image} alt="Preview" />}
-                                        {imageData && <Image className="w-20 shadow-md" width="123" height="150" src={imageData?.data?.image} alt="Preview" />}
+                                        {file && <Image className="w-20 shadow-md" width="123" height="150" src={file} alt="Preview" />}
+                                        
                                     </div>
                                     <div>
                                         <input
@@ -214,7 +220,7 @@ export default function PromoManage() {
                                     {/* <p>{promoTxt?.message}</p> Adjusted to render a specific property */}
                                 </div>
                                 <div>
-                                    <Editor onChange={handleEditorChange} editorData={promoTxt?.description || ""} />
+                                    <Editor onChange={handleEditorChange} editorData={promoTxt?.description} />
                                 </div>
                             </div>
                         </div>

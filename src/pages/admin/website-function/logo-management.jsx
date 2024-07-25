@@ -94,7 +94,7 @@ export default function LogoManagement() {
             <div className="flex my-10 items-center pl-10">
               <input type="file" onChange={handleChange} />
               <div>
-                {preview && <Image className="w-36 shadow-md" src={preview} alt="Preview" />}
+                {preview && <Image className="w-36 shadow-md" src={preview} alt="Preview" width={150} height={200} />}
                 <div>
                   <p>Title</p>
                   <input

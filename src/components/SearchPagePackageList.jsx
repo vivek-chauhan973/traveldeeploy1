@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Pagination from "react-js-pagination";
 import Image from 'next/image'
 import { useAppContext } from "./admin/context/Package/AddGuest";
+import Category from "@/pages/admin/package/category";
 
 const fetchPackages = async (locationId) => {
   const response = await fetch(
@@ -15,7 +16,7 @@ const fetchPackages = async (locationId) => {
   return data.packages;
 };
 const filteredData = async (id, cat, min, max) => {
-  const response = await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=6694f2c73a8237144bdbdeb7&priceMin=${min}&priceMax=${max}`)
+  const response = await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}`)
   const data = await response.json();
   return data;
 }
