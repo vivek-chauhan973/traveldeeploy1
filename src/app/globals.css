@@ -322,7 +322,7 @@ select {
   color: #2A2C41;
 }
  ul li{
-  list-style: decimal inside;
+  list-style: disc inside;
 }
 /* For Editore we are use of our custom css */
 
