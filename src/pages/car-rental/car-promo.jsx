@@ -185,90 +185,90 @@ export default function CarPromo(){
 
                         {/* Filter */}
                         <div className="shadow-md rounded bg-white  p-5 col-span-4 lg:col-span-1 mt-3 lg:mt-2">
-                               <p className="text-lg font-semibold text-center mb-5">Filter</p>
-                                <div className="flex justify-between md:pb-2 pb-1">
-                                    <p className="md:text-[16px] text-[15px] font-medium">Prices Range</p>
-                                    <p className="text-[12px] underline text-blue-800 cursor-pointer"
-                                    onClick={handleClearAll} >Clear All</p>
-                                </div>
+                            <p className="text-lg font-semibold text-center mb-5">Filter</p>
+                            <div className="flex justify-between md:pb-2 pb-1">
+                                <p className="md:text-[16px] text-[15px] font-medium">Prices Range</p>
+                                <p className="text-[12px] underline text-blue-800 cursor-pointer"
+                                onClick={handleClearAll} >Clear All</p>
+                            </div>
 
-                                <div >
-                                    <div>
-                                        <Box>
-                                            <Slider
-                                                className='w-full'
-                                                marks={marks}
-                                                step={100}
-                                                value={priceRange}
-                                                valueLabelDisplay="auto"
-                                                min={MIN}
-                                                max={MAX}
-                                                onChange={(_, newValue) => setPriceRange(newValue)}
-                                                sx={{ color: "#2A2C41" }}
-                                            />
-                                            <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
-                                                <p className='md:text-para text-[14px]'>{priceRange[0]} - {priceRange[1]} prices</p>
-                                            </Box>
+                            <div>
+                                <div>
+                                    <Box>
+                                        <Slider
+                                            className='w-full'
+                                            marks={marks}
+                                            step={100}
+                                            value={priceRange}
+                                            valueLabelDisplay="auto"
+                                            min={MIN}
+                                            max={MAX}
+                                            onChange={(_, newValue) => setPriceRange(newValue)}
+                                            sx={{ color: "#2A2C41" }}
+                                        />
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+                                            <p className='md:text-para text-[14px]'>{priceRange[0]} - {priceRange[1]} prices</p>
                                         </Box>
+                                    </Box>
+                                </div>
+                            </div>
+                            <div className="border-b mt-2"></div>
+                            {/* car type */}
+                            <div className="pr-5 py-2">
+                                <p className="md:text-[16px] text-[15px] font-medium md:my-2 my-1">Car Type</p>
+                                <div>
+                                    <div className="flex items-center gap-2  pb-2 ">
+                                        <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
+                                        type="checkbox"  id="bike" name="bike" value="bike"
+                                        checked={bikeChecked} onChange={() => setBikeChecked(!bikeChecked)}/>
+                                        <label htmlFor="bike" className="cursor-pointer label-text text-[14px]">
+                                        I have a bike</label>
+                                    </div> 
+                                    <div className="flex items-center gap-2 pb-2  ">
+                                        <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
+                                        type="checkbox" id="car" name="car" value="car"
+                                        checked={carChecked} onChange={() => setCarChecked(!carChecked)}/>
+                                        <label htmlFor="car" className="cursor-pointer label-text text-[14px]">
+                                        I have a car</label>
+                                    </div>
+                                    <div className="flex items-center gap-2  pb-2">
+                                        <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
+                                        type="checkbox" id="boat" name="boat" value="boat"
+                                        checked={boatChecked} onChange={() => setBoatChecked(!boatChecked)}/>
+                                        <label htmlFor="boat" className="cursor-pointer label-text text-[14px]">
+                                        I have a boat</label>
                                     </div>
                                 </div>
-                                <div className="border-b mt-2"></div>
-                                    {/* car type */}
-                                <div className="pr-5 py-2">
-                                    <p className="md:text-[16px] text-[15px] font-medium md:my-2 my-1">Car Type</p>
-                                    <div>
-                                        <div className="flex items-center gap-2  pb-2 ">
-                                            <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
-                                            type="checkbox"  id="bike" name="bike" value="bike"
-                                            checked={bikeChecked} onChange={() => setBikeChecked(!bikeChecked)}/>
-                                            <label htmlFor="bike" className="cursor-pointer label-text text-[14px]">
-                                            I have a bike</label>
-                                        </div> 
-                                        <div className="flex items-center gap-2 pb-2  ">
-                                            <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
-                                            type="checkbox" id="car" name="car" value="car"
-                                            checked={carChecked} onChange={() => setCarChecked(!carChecked)}/>
-                                            <label htmlFor="car" className="cursor-pointer label-text text-[14px]">
-                                            I have a car</label>
-                                        </div>
-                                        <div className="flex items-center gap-2  pb-2">
-                                            <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
-                                            type="checkbox" id="boat" name="boat" value="boat"
-                                            checked={boatChecked} onChange={() => setBoatChecked(!boatChecked)}/>
-                                            <label htmlFor="boat" className="cursor-pointer label-text text-[14px]">
-                                            I have a boat</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="border-b"></div>
-                                {/* capacity */}
+                            </div>
+                            <div className="border-b"></div>
+                            {/* capacity */}
 
-                                <div className="pr-5 py-2">
-                                        <p className="md:text-[16px] text-[15px] font-medium md:my-2 my-1 ">Capacity</p>
-                                    <div>
-                                        <div className="flex items-center gap-2  pb-2">
-                                            <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
-                                               type="checkbox" id="min" name="min" value="min"
-                                               checked={minChecked} onChange={() => setMinChecked(!minChecked)}
-                                            />
-                                            <label htmlFor="min" className="cursor-pointer label-text text-[14px]">
-                                            3 to 5 Passenger</label>
-                                        </div>
-                                        <div className="flex items-center gap-2  pb-2">
-                                            <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
-                                              type="checkbox"  id="more" name="more" value="more" 
-                                              checked={moreChecked} onChange={() => setMoreChecked(!moreChecked)}
-                                              />
-                                            <label htmlFor="more" className="cursor-pointer label-text text-[14px]">
-                                            6 More</label>
-                                        </div>
+                            <div className="pr-5 py-2">
+                                    <p className="md:text-[16px] text-[15px] font-medium md:my-2 my-1 ">Capacity</p>
+                                <div>
+                                    <div className="flex items-center gap-2  pb-2">
+                                        <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
+                                        type="checkbox" id="min" name="min" value="min"
+                                        checked={minChecked} onChange={() => setMinChecked(!minChecked)}
+                                        />
+                                        <label htmlFor="min" className="cursor-pointer label-text text-[14px]">
+                                        3 to 5 Passenger</label>
+                                    </div>
+                                    <div className="flex items-center gap-2  pb-2">
+                                        <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" 
+                                        type="checkbox"  id="more" name="more" value="more" 
+                                        checked={moreChecked} onChange={() => setMoreChecked(!moreChecked)}
+                                        />
+                                        <label htmlFor="more" className="cursor-pointer label-text text-[14px]">
+                                        6 More</label>
                                     </div>
                                 </div>
-                                <div className="flex justify-center mt-2">
-                                    <button className="bg-blue-500 text-white px-4 py-1 text-xs rounded-md "
-                                    onClick={handleApplyFilters} >
-                                    Apply Filters</button>
-                                </div>
+                            </div>
+                            <div className="flex justify-center mt-2">
+                                <button className="bg-blue-500 text-white px-4 py-1 text-xs rounded-md "
+                                onClick={handleApplyFilters} >
+                                Apply Filters</button>
+                            </div>
                         </div> 
                         {/*filter end */}
 
