@@ -23,8 +23,14 @@ const marks = [
 function valuetext(value) {
     return `${value}°C`;
 }
+const fetchCatagory=async ()=>{
+    const response = await fetch('/api/package-setting/category/get-categories');
+    const data=await response.json();
+    return data;
+}
 
 export default function SearchPageFilter({ onApplyFilter }) {
+    const {setCatagoryId}=useAppContext()
     const { setMinPrice, setMaxPrice } = useAppContext();
     const [priceRange, setPriceRange] = useState([0, 9900]);
     const [tourDuration, setTourDuration] = useState([20, 37]);
@@ -45,6 +51,9 @@ export default function SearchPageFilter({ onApplyFilter }) {
     //   const handleChange = (event: any, newValue: any) => {
     //       setValue(newValue);
     //   };
+    useEffect(()=>{
+        fetchCatagory().then(res=>setPackageCategory(res?.data||[]))
+    },[])
 
     const handleCheckboxChange = (event, stateSetter) => {
         const value = event.target.value;
@@ -85,6 +94,7 @@ export default function SearchPageFilter({ onApplyFilter }) {
     };
 
 
+    // console.log("package data",packageCategory)
 
 
     return (
@@ -179,30 +189,13 @@ export default function SearchPageFilter({ onApplyFilter }) {
                         <div className="pr-5 py-2">
                             <p className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</p>
                             <div>
-                                <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
+                               {packageCategory?.map( item=><div key={item._id} className="flex items-center gap-2 px-5 pb-2 py-2 ">
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                        id="category1" name="category1" value="category1" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
+                                        id="category1" name={item?.category} value={item?._id} onChange={(e) => setCatagoryId(e.target.value)} />
                                     <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                        category1</label>
-                                </div>
-                                <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
-                                    <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                        id="category2" name="category2" value="category2" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
-                                    <label htmlFor="category2" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                        category2</label>
-                                </div>
-                                <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
-                                    <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                        id="category3" name="category3" value="category3" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
-                                    <label htmlFor="category3" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                        category3</label>
-                                </div>
-                                <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
-                                    <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                        id="category4" name="category4" value="category4" onChange={(e) => handleCheckboxChange(e, setPackageCategory)} />
-                                    <label htmlFor="category4" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                        category4</label>
-                                </div>
+                                        {item?.category}</label>
+                                </div>)}
+                                
                             </div>  
                         </div>
                     </div>

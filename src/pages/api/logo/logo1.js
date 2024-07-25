@@ -3,8 +3,6 @@ import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db'; // Adjust path as per your project structure
 import File from '@/models/logo/Main'; // Adjust path as per your project structure
-import { NextApiRequest, NextApiResponse } from 'next';
-
 const uploadDirectory = './public/uploads/logo'; // Define your upload directory
 
 // Ensure upload directory exists
@@ -27,7 +25,7 @@ const apiRoute = async (req, res) => {
   await dbConnect(); // Ensure database connection
 
   if (req.method === 'POST') {
-    upload.single('file')(req, file, async (err) => {
+    upload.single('file')(req, File, async (err) => {
       if (err instanceof multer.MulterError) {
         console.error('Multer error:', err);
         return res.status(500).json({ error: 'File upload failed' });
@@ -36,6 +34,7 @@ const apiRoute = async (req, res) => {
         return res.status(500).json({ error: 'File upload failed' });
       }
 
+      console.log("req body is here 1231232324234",req.body)
       const { title, alt } = req.body;
       const fileData = req.file ? {
         title,
