@@ -312,17 +312,51 @@ select {
 }
 
 
-
-
-
 /* this is change the innerHtml into the  normal in payment term anditernery tour detail*/
-.Dot ol li{
+ ol li{
   /* list-style: decimal inside; */
   list-style: disc inside ;
-}
+
+} 
 .Dot ol li::marker {
   color: #2A2C41;
 }
-.Dot1 ul li{
-  list-style: decimal inside;
+ ul li{
+  list-style: disc inside;
 }
+/* For Editore we are use of our custom css */
+
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 30px;
+}
+
+
+blockquote {
+  padding: 5px 10px 10px;
+  background: #e5ecf7;
+  border-left: 2px solid #c7d9f5;
+  color: #3f849d;
+}
+
+.ql-indent-1{
+text-indent: 40px;
+}
+.ql-indent-2{
+text-indent: 60px;
+}
+.ql-indent-3{
+text-indent: 80px;
+}
+.ql-indent-4{
+text-indent: 100px;
+}
+.ql-indent-5{
+text-indent: 120px;
+}
+
+/* a{
+  color: #0056b3;
+} */

@@ -31,6 +31,8 @@ const packageSchema = new Schema({
         type:[String],
       default:[]
     },
+    uploads: [String]
+      ,
     startcity:{
       type:[String],
       default:[]

@@ -64,13 +64,13 @@ const ItineraryTourDetails = () => {
                         </div>
                     </div>
 
-                    <div className={`py-4 list-disc  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
+                    <div className={`py-4  px-6 list-disc  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
 
 
                         {
 
 
-                            <p className="py-3 px-3  Dot" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
+                            <p className=" marker:text-green-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
 
                         }
 
@@ -87,10 +87,10 @@ const ItineraryTourDetails = () => {
 
 
 
-                    <div className={` ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
+                    <div className={` py-4  px-6 ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
                         {
 
-                            <p className="py-3 pl-3 Dot" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
+                            <p className=" marker:text-red-800 " dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
                         }
                     </div> 
                 </div>

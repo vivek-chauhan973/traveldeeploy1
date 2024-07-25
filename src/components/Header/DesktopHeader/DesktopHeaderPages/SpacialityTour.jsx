@@ -4,8 +4,8 @@ const SpacialityTour = () => {
   return (
     <div className=" flex flex-col w-[900px] h-full bg-gray-100 rounded-sm mt-5" > 
         <div className='ml-10 mt-4 h-[150px] object-contain'>
-          <h1 className=' font-extrabold w-full'>POPULAR & AVAILABLE TOURS</h1>
-          <div className="ml-2 p-2 w-[900px] grid grid-cols-3 grid-rows-3  " >
+          <h1 className=' font-bold w-full text-lg'>POPULAR & AVAILABLE TOURS</h1>
+          <div className="ml-2 p-1   w-[900px] grid grid-cols-3 grid-rows-3  " >
           <div>
           <p>Chandratal</p>
           <p>Dalhouse</p>
@@ -25,9 +25,9 @@ const SpacialityTour = () => {
         </div>
           </div>
           </div>
-          <div className='ml-10 mt-4 h-[150px] object-contain'>
-          <h1 className=' font-extrabold w-full '>UPCOMING TOURS</h1>
-          <div className="ml-2 p-2 w-[900px] grid grid-cols-3 grid-rows-3  " >
+          <div className='ml-10  h-[150px] object-contain'>
+          <h1 className=' font-bold w-full text-lg '>UPCOMING TOURS</h1>
+          <div className="ml-2 p-1 w-[900px] grid grid-cols-3 grid-rows-3  " >
           <div>
           <p>Chandratal</p>
           <p>Dalhouse</p>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import DeletePop from "../iternaryPopup/DeletePop";
-export default function PackageFaq({ itinerary }) {
+export default function PackageFaq({ itinerary,setActiveTab }) {
   // console.log("itinerary : ",itinerary);
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(
     []
@@ -72,6 +72,7 @@ export default function PackageFaq({ itinerary }) {
         },
         body: JSON.stringify({ days: itineraryDayWiseDataArray }),
       });
+      setActiveTab("Tab11");
       // console.log("currently data pass", itineraryDayWiseDataArray);
     } catch (error) {
       console.error(error);
@@ -126,9 +127,9 @@ export default function PackageFaq({ itinerary }) {
 
               <hr className="my-3" />
               <div className="text-[15px]">
-                <ul>
+                <div>
                   {itineraryDayWiseDataArray?.map((item, index) => (
-                    <li key={index}>
+                    <div key={index}>
                       <div className="flex justify-between even:bg-slate-50 px-1">
                         <div>
                           <p className="capitalize flex gap-2">
@@ -151,9 +152,9 @@ export default function PackageFaq({ itinerary }) {
                           }
                         </div>
                       </div>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
               <div>
                 <span className="text-xs text-red-700 capitalize">

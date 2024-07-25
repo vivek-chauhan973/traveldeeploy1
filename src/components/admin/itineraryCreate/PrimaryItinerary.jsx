@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import "../../../app/globals.css";
 import MultipleSelectChip from "./Select";
 import MultipleSelectCheckmarks from "./CheckMarkSelect";
-import ImageUploading from "@/components/admin/itineraryCreate/ImageUploading";
 import { useRouter } from "next/router";
 import { MdAddLocationAlt } from "react-icons/md";
 
@@ -38,6 +37,11 @@ const fetchCities = async (stateId) => {
         return [];
     }
 };
+const fetchImages=async (itinerary)=>{
+    const res = await fetch(`/api/package/image-upload/${itinerary?._id}`);
+    const data = await res.json();
+    return data;
+}
 
 export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo }) {
     const router = useRouter();
@@ -46,6 +50,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [cities, setCities] = useState();
     const [startCities, setStartCities] = useState("");
     const [cityPopup,setCityPopup]=useState(false);
+    const [imageDetails,setImageDetails]=useState([]);
     useEffect(() => {
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();
@@ -54,6 +59,17 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
 
         fetchCountry();
     }, []);
+
+
+// Images here 
+
+
+    useEffect(()=>{
+        if(itinerary){
+            fetchImages(itinerary).then(res=>setImageDetails(res));
+        }
+ 
+    },[itinerary])
 
     // console.log("countries",countries)
     const [file, setFile] = useState();
@@ -74,7 +90,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
 
     const [packageBadges, setPackageBadges] = useState();
     const [selectedBadges, setSelectedBadges] = useState([]); // Added selectedBadges state
-    console.log("selected badges show is here",itinerary)
+    // console.log("selected badges show is here",itinerary)
     const fetchBadges = async () => {
         try {
             const badgeList = await fetch('/api/package-setting/get-badges');
@@ -104,7 +120,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             return [];
         }
     };
-
+// console.log("Images12232343253453",imageDetails)
     useEffect(() => {
         const fetchData = async () => {
             await fetchCategories();
@@ -121,8 +137,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         } else {
             setDisplayPriceValidate("");
         }
-    };
-
+    }
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState();
     const [categoryValidate, setCategoryValidate] = useState();
@@ -136,7 +151,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             setCategoryValidate("");
         }
     };
-
     const handleLocation1 = (location) => {
         setSelectedLocation(location);
         if (!location) {
@@ -154,7 +168,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         }
     };
 
-
     const handleSelectCountry1 = (value) => {
         const fetchState = async () => {
             const fetchedStates = await fetchStates(value);
@@ -170,8 +183,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         fetchState();
     };
 
-
-    
     const handleSelectState1 = (value) => {
         const fetchCity = async () => {
             const fetchedCities = await fetchCities(value);
@@ -234,13 +245,17 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         status: 0,
                         location: selectedLocation,
                         badges:selectedBadges,
-                        startcity:startCities
+                        startcity:startCities,
+                        uploads:imageDetails,
+                       
                     })
                 });
                 
                 const data = await res.json();
+                setActiveTab("Tab2");
                 setItineraryInfo(data?.packageBasic);
                 router.push('/admin/package/itinerary/' + data?.packageBasic.id);
+               
             } catch (error) {
                 console.log(error);
             }
@@ -248,11 +263,10 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     };
 // console.log("cacategoryValidate223224234",selectedCategories);
 
-
-    return (
+ return (
         <>
             <div className="bg-white p-4 rounded-md">
-                <div className=" grid grid-cols-1 md:grid-cols-2 mb-4 gap-5">
+                <div className=" grid grid-cols-1  mb-4 gap-5">
                     <div className="border p-4 rounded">
                         <div>
                             <div className=" sm:flex items-center">
@@ -345,15 +359,10 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                             </div>
                         </div>
                     </div>
-                    <div className=" border rounded p-4">
-                        <div>
-                            <p className="text-[15px] font-semibold">Image Upload</p>
-                        </div>
-                        <ImageUploading itinerary={itinerary} />
-                    </div>
+                    
                 </div>
-                <button className="bg-black text-white w-full rounded py-2" onClick={handleSaveBasic}>Save</button>
-            </div>
+                <button  className="bg-black text-white w-full rounded py-2" onClick={handleSaveBasic}>Save</button>
+                </div>
         </>
     );
 }

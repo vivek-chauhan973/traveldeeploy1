@@ -14,7 +14,12 @@ import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 // import Header from '@/components/Header';
 // import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 
+const fetchPromoManagementData=async (stateId)=>{
+     const response = await fetch(`/api/public/package-state/${stateId}`);
+     const data=response.json();
+     return data;
 
+}
 
 
 const fetchLocation = async (state) => {
@@ -29,16 +34,15 @@ export default  function SearchPage  ()  {
     const state = router.query.state?.replace("-tour-packages", "");
     const [selectedLocation, setSelectedLocation] = useState();
     const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
-    
+    const [promoData,setPromoData]=useState({});
     const [loading, setLoading] = useState(true);
-    
+    // console.log("state uyeirerw",state)
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (state) {
                     const selectedLocationData = await fetchLocation(state);
                     setSelectedLocation(selectedLocationData);
-                    console.log("Your state value is the",selectedLocationData)
                     setLoading(false);
                 }
             } catch (error) {
@@ -48,10 +52,14 @@ export default  function SearchPage  ()  {
         fetchData();
     }, [state]);
 
+    useEffect(()=>{
+        fetchPromoManagementData(selectedLocation?._id).then(res=>setPromoData(res?.data || {}))
+    },[selectedLocation])
+
     const handleApplyFilter = (priceRange) => {
         setSelectedPriceRange(priceRange);
     };
-
+  console.log("promo data",promoData);
     return (
         <AppProvider>
         <div className='bg-slate-100'  >
@@ -60,7 +68,7 @@ export default  function SearchPage  ()  {
             <Breadcrumbs />
             {!loading ? (
                 <div>
-                    <SearchPageTopSeoContent state={selectedLocation} />
+                    <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} />
                 </div>
             ) : (
                 // skeleton
@@ -116,7 +124,7 @@ export default  function SearchPage  ()  {
             <div className="container-wrapper py-12">
             {!loading ? (
                 <div>
-                    <ItineraryFaq />
+                    <ItineraryFaq promoData={promoData}/>
                 </div>
             ):(
                 // skeleton show

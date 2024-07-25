@@ -236,7 +236,7 @@ useEffect(()=>{
               </p>
             </div>
             <div>
-              <p className="text-para leading-relaxed">
+              <p className="text-para leading-relaxed  pb-8">
                 {addPackage?.dayWiseInformation}
               </p>
             </div>

@@ -178,7 +178,8 @@ const ItineraryPaymentTerms = () => {
 
                 </div>
             </div> */}
-            {<p> {addPackage?.TourInformations?.paymentTerm?.groupName}</p>}
+            {/* {<p> {addPackage?.TourInformations?.paymentTerm?.description}</p>} */}
+            <p className="py-3 pl-2 " dangerouslySetInnerHTML={{ __html:addPackage?.TourInformations?.paymentTerm?.description }} />
 
             <div>
                 {/* <div className="mt-8">
@@ -205,8 +206,7 @@ const ItineraryPaymentTerms = () => {
 
                 </div> */}
                 <div id="TourDetailsSection">
-
-                    <div className="flex justify-between mt-2 gap-2 border-b-2 border-navyblack">
+                    <div className="flex justify-between mt-5  gap-2 border-b-2 border-navyblack">
                         <div
                             onClick={() => handleTabClick("tab1")}
                             className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px]   ${activeTab === "tab1"
@@ -225,31 +225,27 @@ const ItineraryPaymentTerms = () => {
                         >
                             <p className="text-sm ">Need To Know </p>
                         </div>
-
                     </div>
                     <div className="border rounded-b-lg  overflow-hidden ">
                         <div
-                            className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${activeTab === "tab1" ? "block" : "hidden"
+                            className={`  xs:overflow-x-auto list-disc mx-5 ${activeTab === "tab1" ? "block" : "hidden"
                                 }`}
                         >
-                            <div>
+                            <div className="py-3  px-4">
 
                                 {
-                                    <p className="py-3 pl-2 Dot" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.cancellation?.description }} />
+                                    <p className=" marker:text-blue-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.cancellation?.description }} />
                                 }
-
                             </div>
                         </div>
-
                         <div
-                            className={`py-4   ${activeTab === "tab2" ? "block" : "hidden"}`}
+                            className={` py-3  px-4  ${activeTab === "tab2" ? "block" : "hidden"}`}
                         >
                             {
 
-                                <p className=" py-3 pl-3 marker:text-blue-900 " dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.needToKnow?.description }} />
+                                <p className="  marker:text-red-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.needToKnow?.description }} />
                             }
                         </div>
-{/* Dot1 */}
                     </div>
                 </div>
             </div>

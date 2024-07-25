@@ -12,7 +12,7 @@ const Editor = ({ onChange,editorData }) => {
     const [modules, setModules] = useState({});
 // console.log('html11111111111: ',editorHtml)
     useEffect(() => {
-         setEditorHtml(editorData||'');
+         setEditorHtml(editorData);
         const initializeModules = () => {
             setModules({
                 toolbar: [
@@ -35,8 +35,8 @@ const Editor = ({ onChange,editorData }) => {
     ];
 
     const handleEditorChange = (html) => {
-        setEditorHtml(html);
-        onChange(html);
+        setEditorHtml(html?html:editorData);
+        onChange(html?html:editorData);
     };
 
     return (

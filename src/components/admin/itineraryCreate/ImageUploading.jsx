@@ -17,7 +17,7 @@ export default function ImageUploading({ itinerary }) {
     try {
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`);
       const data = await res.json();
-      console.log("Data from fetchImages", data);
+      // console.log("Data from fetchImages", data);
       if (data.data.length > 0) {
         const images = data.data;
         setSelectedImageIds(images.map((image) => image._id));
@@ -78,6 +78,7 @@ export default function ImageUploading({ itinerary }) {
           formData.append("ids", selectedImageIds[index]);
         }
       }
+     
     });
 
     try {
@@ -88,6 +89,7 @@ export default function ImageUploading({ itinerary }) {
 
       if (res.ok) {
         alert(`Files ${isUpdating ? "updated" : "uploaded"} successfully`);
+        setActiveTab("Tab3");
         // Optionally, reset form fields or update state after successful upload
         setFiles([]);
         setPreviews([]);
@@ -127,8 +129,6 @@ export default function ImageUploading({ itinerary }) {
           {previews.map((preview, index) => (
             <div key={index} className="flex my-10 items-center pl-10 ">
               <input type="file" onChange={(e) => handleChange(e, index)}
-
-
                 className="file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
               file:text-sm file:font-semibold

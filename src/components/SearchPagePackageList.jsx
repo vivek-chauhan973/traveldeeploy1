@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Pagination from "react-js-pagination";
 import Image from 'next/image'
 import { useAppContext } from "./admin/context/Package/AddGuest";
+import Category from "@/pages/admin/package/category";
 
 const fetchPackages = async (locationId) => {
   const response = await fetch(
@@ -15,7 +16,7 @@ const fetchPackages = async (locationId) => {
   return data.packages;
 };
 const filteredData = async (id, cat, min, max) => {
-  const response = await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=6694f2c73a8237144bdbdeb7&priceMin=${min}&priceMax=${max}`)
+  const response = await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}`)
   const data = await response.json();
   return data;
 }
@@ -75,7 +76,7 @@ const SearchPagePackageList = (locationId) => {
   const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
+  // console.log("packsheghdbfhsdvfugsdjfbdscvjsdbfvjgse",currentItems)
   return (
     <div>
       {currentItems?.map((packageData, i) => (
@@ -85,7 +86,7 @@ const SearchPagePackageList = (locationId) => {
                width={500}
                height={500}
               className=" h-[220px] mx-5   md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
-              src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+              src={packageData?.uploads?.[0]?packageData?.uploads?.[0]:"https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"}
               alt="ui/ux review check"
             />
           </div>
@@ -246,7 +247,7 @@ const SearchPagePackageList = (locationId) => {
         </div>
       ))}
 
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-end mt-4  list-none">
         <Pagination
           activePage={currentPage}
           itemsCountPerPage={itemsPerPage}
@@ -259,6 +260,7 @@ const SearchPagePackageList = (locationId) => {
           firstPageText="1"
           lastPageText={`...${totalPages}`}
           innerClass="pagination"
+          
         />
       </div>
     </div>

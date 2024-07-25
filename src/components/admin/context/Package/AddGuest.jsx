@@ -115,7 +115,7 @@ export const AppProvider = ({ children }) => {
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-
+// console.log("fetch api 123221",filterApi)
   // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",fixedDepartureData1)
   // console.log("packages sfsjbfbfjbsfhjdf",addPackage)
   const contextFun = {

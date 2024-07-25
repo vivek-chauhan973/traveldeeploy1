@@ -89,6 +89,7 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
         body: JSON.stringify({ flights: flightBookingList })
       });
       if (response.ok) {
+        setActiveTab("Tab7");
         console.log("Flights saved successfully");
       } else {
         console.error("Failed to save flights");
@@ -211,9 +212,9 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
           </form>
           <hr className="my-10 mb-5" />
           <div className="text-[14px]">
-            <ul>
+            <div>
               {flightBookingList.map((item, index) => (
-                <li key={index}>
+                <div key={index}>
                   <div className='flex justify-between even:bg-slate-50 px-5'>
                     <div className="flex justify-between gap-5 items-center">
                       <p className='capitalize flex gap-2 leading-8'>
@@ -240,9 +241,9 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
                       )}
                     </div>
                   </div>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>
