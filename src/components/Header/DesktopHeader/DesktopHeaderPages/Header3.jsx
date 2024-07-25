@@ -36,7 +36,7 @@ const Header3 = () => {
                 
               </div>
               {/* <Image  src={Logo} alt="" height={60} width={60} /> */}
-              <Image width={160} height={160} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" />
+              {/* <Image width={160} height={160} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" /> */}
               
               <CiSearch size={24} className="text-white mt-3 md:hidden" />
             </div>
