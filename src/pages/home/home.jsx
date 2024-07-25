@@ -12,6 +12,7 @@ import Cardwork from "@/components/Home/Cards/cardwork";
 import ArrowSection from "@/components/Home/Cards/ArrowSection";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 
+
 export default function home() {
     return (
         <>
@@ -19,8 +20,6 @@ export default function home() {
             <HeroSection />
             {/* <Tostify/> */}
             {/* <AdminReview/> */}
-
-
 
             <div className="container-wrapper  md:py-11 py-5">
                 <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">

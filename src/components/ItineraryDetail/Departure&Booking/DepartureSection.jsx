@@ -19,12 +19,12 @@ const [showPopup,setShowPopup]=useState(false);
       <div className="">
         <div className="flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
           <div className="">
-            <div className="flex gap-3">
+            <div className="flex gap-3  ">
               <p className="text-base font-bold p-4 text-graytext">
                 1. SELECT DEPARTURE CITY & DATE
               </p>
             </div>
-            <hr />
+            <hr/>
             <div className="overflow-y-auto ">
               <div className="flex gap-3 py-4">
                 {city.map((item,i)=><div onClick={()=>setDatePackage(i)} className="font-semibold text-sm hover:bg-green-300 hover:text-white cursor-pointer border rounded-full py-2 px-3.5" key={i}>
@@ -61,12 +61,13 @@ const [showPopup,setShowPopup]=useState(false);
                 </div>
 
                 <div>
-                  <p className="text-md ml-2 font-semibold my-2 text-graytext">
+                  <p className="text-md ml-2 font-semibold my-2 p-1 text-graytext">
                     Highlights
                   </p>
                   <div>
+                  <hr />
                     {addPackage?.highlights?.map((highlight) => (
-                      <ol key={highlight._id} className="list-disc   ">
+                      <ol key={highlight._id} className="list-disc  p-2 ">
                         <li className="ml-10 text-para">{highlight.text}</li>
                       </ol>
                     ))}

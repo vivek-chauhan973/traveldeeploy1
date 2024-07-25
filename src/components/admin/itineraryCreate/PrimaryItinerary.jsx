@@ -137,8 +137,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         } else {
             setDisplayPriceValidate("");
         }
-    };
-
+    }
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState();
     const [categoryValidate, setCategoryValidate] = useState();
@@ -152,7 +151,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             setCategoryValidate("");
         }
     };
-
     const handleLocation1 = (location) => {
         setSelectedLocation(location);
         if (!location) {
@@ -170,7 +168,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         }
     };
 
-
     const handleSelectCountry1 = (value) => {
         const fetchState = async () => {
             const fetchedStates = await fetchStates(value);
@@ -186,8 +183,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         fetchState();
     };
 
-
-    
     const handleSelectState1 = (value) => {
         const fetchCity = async () => {
             const fetchedCities = await fetchCities(value);
@@ -268,8 +263,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     };
 // console.log("cacategoryValidate223224234",selectedCategories);
 
-
-    return (
+ return (
         <>
             <div className="bg-white p-4 rounded-md">
                 <div className=" grid grid-cols-1  mb-4 gap-5">
@@ -367,10 +361,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                     </div>
                     
                 </div>
-               
                 <button  className="bg-black text-white w-full rounded py-2" onClick={handleSaveBasic}>Save</button>
-
-            
                 </div>
         </>
     );

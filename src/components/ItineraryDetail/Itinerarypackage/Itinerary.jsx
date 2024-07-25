@@ -21,18 +21,19 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
     return (
         <div className='justify-between md:mt-2 -mt-1 pb-8'>
             {addPackage?.days?.map((item, index) => (
-                <Accordion className='mb-4 border-none shadow-none' key={index}>
+                <Accordion className='mb-4 border-none shadow-none    ' key={index}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1-content"
                         id="panel1-header"
-                        className=' shadow-sm bg-lightgray m-0'
+                        className=' rounded-full bg-lightgray m-0 '
+                      
                     >
                         {/* itenaray heading is here */}
                         <div className="flex justify-between">
                             <div className=" ">
-                                <div className="flex items-center gap-3">
-                                    <div className="bg-navyblack text-white px-2 py-1 rounded-sm">
+                                <div className="flex items-center gap-3 ">
+                                    <div className="bg-navyblack text-white px-2 py-1 rounded-md">
                                         <p className="text-xs font-semibold text-white">Day {index+1}</p>
                                     </div>
                                     <div>
@@ -49,9 +50,6 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
                         {/* itenery data is here */}
                         <div className="relative">
 
-
-
-
                             {/* ------------------------------------------------------------------------ */}
                             <div className="relative text-para pl-10 border-l ml-4 border-limeyellow border-dashed pb-2">
                                 {/* circle */}
@@ -59,10 +57,7 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
                                 </div>
                                 {/* <div contentEditable='true' dangerouslySetInnerHTML={{ __html:  }}></div> */}
                                 <div dangerouslySetInnerHTML={{__html:item.information }}></div>
-           
                             </div>
-
-
                         </div>
                     </AccordionDetails>
                 </Accordion>
