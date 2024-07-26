@@ -29,10 +29,7 @@ const Header3 = () => {
                 </div>
                 <div className="flex justify-between  ">
                   {/* <Image  src={Logo} alt=""  /> */}
-                  
-                  
-                </div>
-                
+                </div> 
               </div>
               {/* <Image  src={Logo} alt="" height={60} width={60} /> */}
               <Image width={160} height={160} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" />

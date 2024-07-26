@@ -104,9 +104,9 @@ export default function FaqSection({ onChange,faqData }) {
 
               <hr className="my-3" />
               <div className="text-[15px]">
-                <ul>
+                <div>
                   {itineraryDayWiseDataArray?.map((item, index) => (
-                    <li key={index}>
+                    <div key={index}>
                       <div className="flex justify-between even:bg-slate-50 px-1">
                         <div>
                           <p className="capitalize flex gap-2">
@@ -129,9 +129,9 @@ export default function FaqSection({ onChange,faqData }) {
                           )}
                         </div>
                       </div>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
               <div>
                 <span className="text-xs text-red-700 capitalize">

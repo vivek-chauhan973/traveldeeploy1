@@ -13,13 +13,13 @@ const stripHtmlTags = (html) => {
 
 
 
-const SearchPageTopSeoContent = ({ state,promoData }) => {
+const SearchPageTopSeoContent = ({ state, promoData }) => {
   const { setLocationId } = useAppContext();
   const [show, setShow] = useState(false)
   useEffect(() => {
     setLocationId(state?._id)
-  // }, [state]);
-}, [state?._id,setLocationId]);
+    // }, [state]);
+  }, [state?._id, setLocationId]);
 
   const [active, setActive] = useState(true)
 
@@ -32,7 +32,7 @@ const SearchPageTopSeoContent = ({ state,promoData }) => {
   const fade = () => {
     setActive(!active);
   }
- 
+
 
   return (
 
@@ -40,18 +40,18 @@ const SearchPageTopSeoContent = ({ state,promoData }) => {
       <div className="relative w-full h-80 md:h-96 lg:h-[28rem] overflow-hidden">
         <Image
           className="absolute top-0 left-0 w-full h-full object-cover object-center"
-          src={promoData?.image?promoData?.image:"https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+          src={promoData?.image ? promoData?.image : "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
           alt=""
           width={100} height={100}
         />
       </div>
       <div className="container-wrapper py-5">
         <p className="text-lg mb-2 font-medium">{state?.name}</p>
-        <p className={`text-para ${show ? "" : "line-clamp-3 "}`} >
-      
-        <div dangerouslySetInnerHTML={{ __html: promoData?.description }} />
+        <div className={`text-para ${show ? "" : "line-clamp-3 "}`} >
 
-        </p>
+          <div dangerouslySetInnerHTML={{ __html: promoData?.description }} />
+
+        </div>
         <div className={` ${active ? 'bg-gradient-to-t -mt-7  from-white opacity-100 w-full  h-10 -top-2 z-30" ' : null}`}></div>
         <div className="flex gap-2 items-center  justify-end" onClick={fade}
         >
