@@ -360,3 +360,8 @@ text-indent: 120px;
 /* a{
   color: #0056b3;
 } */
+
+
+.pagination-item {
+  list-style: none; /* Removes bullets/numbers */
+}

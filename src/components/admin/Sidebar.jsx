@@ -73,7 +73,7 @@ const Sidebar = () => {
         { label: "Package Master", href: "/admin/car-rental" },
         { label: "Package List", href: "/admin/car-rental/package-list" },
         { label: "Car Promo Management", href: "/admin/car-rental/promo-management" },
-        { label: "country-state-car", href: "/admin/car-rental/country-state-car" },
+        { label: "country-state-city", href: "/admin/car-rental/country-state-city" },
       ]
     },
     {
