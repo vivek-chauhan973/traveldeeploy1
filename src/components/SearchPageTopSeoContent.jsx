@@ -9,13 +9,6 @@ const stripHtmlTags = (html) => {
 };
 
 // React component to display the inner text of HTML
-const HtmlAsText = ({ html }) => {
-  return (
-    <div>
-      <p>{stripHtmlTags(html)}</p>
-    </div>
-  );
-};
 
 
 
@@ -26,7 +19,7 @@ const SearchPageTopSeoContent = ({ state,promoData }) => {
   useEffect(() => {
     setLocationId(state?._id)
   // }, [state]);
-}, [state?._id]);
+}, [state?._id,setLocationId]);
 
   const [active, setActive] = useState(true)
 
@@ -55,7 +48,8 @@ const SearchPageTopSeoContent = ({ state,promoData }) => {
       <div className="container-wrapper py-5">
         <p className="text-lg mb-2 font-medium">{state?.name}</p>
         <p className={`text-para ${show ? "" : "line-clamp-3 "}`} >
-        <HtmlAsText html={promoData?.description} />
+      
+        <div dangerouslySetInnerHTML={{ __html: promoData?.description }} />
 
         </p>
         <div className={` ${active ? 'bg-gradient-to-t -mt-7  from-white opacity-100 w-full  h-10 -top-2 z-30" ' : null}`}></div>

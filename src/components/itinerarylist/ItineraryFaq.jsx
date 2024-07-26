@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
       </div>
-     {promoData?.faq?.map(item=><Accordion className="my-2 shadow-none border-y-[1px] bg-[#F1F5F9] outline-0 ">
+     {promoData?.faq?.map((item,i)=><Accordion key={i} className="my-2 shadow-none border-y-[1px] bg-[#F1F5F9] outline-0 ">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon className="text-white" />}
           aria-controls="panel1-content"

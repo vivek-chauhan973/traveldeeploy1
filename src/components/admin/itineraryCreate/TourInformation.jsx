@@ -15,7 +15,7 @@ const useFetchData = (url, setState) => {
         };
         fetchData();
     // }, [url]);
-    }, [url]);
+    }, [url,setState]);
 };
 
 const TourInformation = ({ itinerary }) => {
