@@ -11,40 +11,40 @@ import BottomLink from '@/components/ItineraryDetail/BottomLink';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
-// import Header from '@/components/Header';
-// import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 
-const fetchPromoManagementData=async (stateId)=>{
-     const response = await fetch(`/api/public/package-state/${stateId}`);
-     const data=response.json();
-     return data;
-
+const fetchPromoManagementData = async (stateId) => {
+    // Ensure stateId is not undefined before fetching
+    if (!stateId) return {}; // Return an empty object if stateId is undefined
+    const response = await fetch(`/api/public/package-state/${stateId}`);
+    const data = await response.json();
+    return data;
 }
 
-
 const fetchLocation = async (state) => {
+    if (!state) return {}; // Check if state is undefined or null before making the request
     const response = await fetch(`/api/public/${state}`, { method: 'GET' });
     const data = await response.json();
     return data;
 };
 
-
-export default  function SearchPage  ()  {
+export default function SearchPage() {
     const router = useRouter();
     const state = router.query.state?.replace("-tour-packages", "");
-    const [selectedLocation, setSelectedLocation] = useState();
+    const [selectedLocation, setSelectedLocation] = useState(null); // Initialize with null
     const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
-    const [promoData,setPromoData]=useState({});
+    const [promoData, setPromoData] = useState({});
     const [loading, setLoading] = useState(true);
-    // console.log("state uyeirerw",state)
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (state) {
                     const selectedLocationData = await fetchLocation(state);
                     setSelectedLocation(selectedLocationData);
-                    setLoading(false);
+                } else {
+                    setSelectedLocation(null);
                 }
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -52,103 +52,81 @@ export default  function SearchPage  ()  {
         fetchData();
     }, [state]);
 
-    useEffect(()=>{
-        fetchPromoManagementData(selectedLocation?._id).then(res=>setPromoData(res?.data || {}))
-    },[selectedLocation])
+    useEffect(() => {
+        if (selectedLocation?._id) {
+            fetchPromoManagementData(selectedLocation._id).then(res => setPromoData(res?.data || {}));
+        } else {
+            setPromoData({});
+        }
+    }, [selectedLocation]);
 
     const handleApplyFilter = (priceRange) => {
         setSelectedPriceRange(priceRange);
     };
-  console.log("promo data",promoData);
+
     return (
         <AppProvider>
-        <div className='bg-slate-100'  >
-            <DesktopHeader/>
-            
-            <Breadcrumbs />
-            {!loading ? (
-                <div>
-                    <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} />
-                </div>
-            ) : (
-                // skeleton
-                <div>
-                    <PromoBanner />
-                </div>
-            )}
+            <div className='bg-slate-100'>
+                <DesktopHeader />
+                <Breadcrumbs />
+                {!loading ? (
+                    <div>
+                        <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} />
+                    </div>
+                ) : (
+                    <div>
+                        <PromoBanner />
+                    </div>
+                )}
 
-            <SearchHeaderWpr />
-            <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
-                <div className=' relative'>
+                <SearchHeaderWpr />
+                <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
+                    <div className='relative'>
+                        {!loading ? (
+                            <div className='hidden xl:block'>
+                                <SearchPageFilter onApplyFilter={handleApplyFilter} />
+                            </div>
+                        ) : (
+                            <div>
+                                <PromoFilter />
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        {!loading ? (
+                            <div>
+                                {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} />}
+                            </div>
+                        ) : (
+                            <div>
+                                <PromoList />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="container-wrapper py-12">
                     {!loading ? (
-                        <div className='hidden xl:block '> {/*hidden*/}
-                            <SearchPageFilter onApplyFilter={handleApplyFilter} />
+                        <div>
+                            <ItineraryFaq promoData={promoData} />
                         </div>
                     ) : (
-                        // skeleton
                         <div>
-                            <PromoFilter />
+                            <PromoList />
                         </div>
                     )}
                 </div>
-                {/* package list show is here */}
-                <div className=' '>
+                <div>
                     {!loading ? (
-                        <div>
-                            {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} />}
+                        <div className="border-t border">
+                            <BottomLink />
                         </div>
-
                     ) : (
                         <div>
-                            {/* skeleton show */}
-                            <div className='pb-5'>
-                                <PromoList />
-                            </div>
-                            <div className='pb-5'>
-                                <PromoList />
-                            </div>
-                            <div className='pb-5'>
-                                <PromoList />
-                            </div>
-                            <div className='pb-5'>
-                                <PromoList />
-                            </div>
-                            <div className='pb-5'>
-                                <PromoList />
-                            </div>
+                            <PromoLink />
                         </div>
                     )}
-
                 </div>
             </div>
-            <div className="container-wrapper py-12">
-            {!loading ? (
-                <div>
-                    <ItineraryFaq promoData={promoData}/>
-                </div>
-            ):(
-                // skeleton show
-                <div>
-                    <PromoList />
-                </div>
-            )}
-            </div>
-            {/* bottom link */}
-            <div className="">
-            {!loading ? (
-                <div className="border-t border">
-                    <BottomLink/>   
-                </div>
-            ):(
-                // skeleton
-                <div>
-                    <PromoLink />
-                </div>
-            )}
-            </div>
-        </div>
         </AppProvider>
     );
-};
-
-
+}
