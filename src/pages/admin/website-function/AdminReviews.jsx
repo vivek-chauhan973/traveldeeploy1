@@ -10,7 +10,7 @@ const AdminReviews = () => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [summary, setSummary] = useState("");
-    const [sdate, setSdate] = useState(null);
+    const [sdate, setSdate] = useState("");
     const [rating, setRating] = useState(false);
 
 
@@ -31,13 +31,7 @@ const AdminReviews = () => {
         const newRating = value === rating ? 0 : value;
         setRating(newRating);
     };
-    const handleStartDateChange = (event) => {
-        setSdate(new Date(event.target.value));
-        console.log(sdate)
-    };
-
-
-
+   
     // const Example = () => {
     //     const [startDate, setStartDate] = useState(new Date());
     //     return (
@@ -95,8 +89,8 @@ const AdminReviews = () => {
                             <input
                                 type="date"
                                 id="start-date"
-                                value={sdate ? sdate.toISOString().split('T')[0] : ''}
-                                onChange={handleStartDateChange}
+                                
+                                onChange={(e)=>setSdate(e.target.value)}
                                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm py-2 px-2"
                             />
                         </div>
@@ -127,6 +121,8 @@ const AdminReviews = () => {
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                         onClick={() => handleClick(value)}
+                                        width={20}
+                                        height={20}
                                     >
                                         <path
                                             fillRule="evenodd"
