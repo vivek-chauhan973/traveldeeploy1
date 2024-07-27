@@ -15,8 +15,10 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
     // const [ faqData,setFaqData]=useState(null);
     const {addPackage}=useAppContext();
     // setFaqData(addPackage);
-    const [dummy, setDummy] = useState([addPackage?.days])
 
+    const [dummy, setDummy] = useState([addPackage?.days])
+    //  console.log("addsdhbbsjdddfadhbhdb",addPackage)
+     
 
     return (
         <div className='justify-between md:mt-2 -mt-1 pb-8'>

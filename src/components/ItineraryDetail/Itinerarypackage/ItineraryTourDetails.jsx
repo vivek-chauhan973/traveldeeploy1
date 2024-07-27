@@ -65,8 +65,6 @@ const ItineraryTourDetails = () => {
                     </div>
 
                     <div className={`py-4  px-6 list-disc  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
-
-
                         {
 
 

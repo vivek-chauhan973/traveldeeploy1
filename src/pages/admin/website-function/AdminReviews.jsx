@@ -14,14 +14,21 @@ const AdminReviews = () => {
     const [rating, setRating] = useState(false);
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault();
         setTitle("");
         setAuthor("")
         setSummary("")
         setSdate(null);
-
-        console.log("Form Data:", { title, author, summary, sdate, rating });
+const data={ title, author, summary, sdate, rating };
+const review=await fetch("/api/review/reviews",{
+    method:"POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+})
+       
     };
     //setRating()
 
