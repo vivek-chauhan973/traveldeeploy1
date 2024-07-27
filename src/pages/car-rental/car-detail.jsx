@@ -31,10 +31,10 @@ export default function CarDetail(){
     };
 
     const initialFormData = {
-        pickupLocation: '',
-        pickupTime: '',
-        numberOfAdults: '',
-        numberOfInfants: '',
+        pickupLocation: 'Volvo',
+        pickupTime: 'Volvo',
+        numberOfAdults: '1',
+        numberOfInfants: '0',
         selectedDate: '',
         paymentOption: ''
     };
@@ -52,15 +52,18 @@ export default function CarDetail(){
     const handleSubmit = (e) => {
         e.preventDefault();
         // You can perform further actions like sending data to a backend or processing here
-        console.log(formData);
+        
         setFormData(initialFormData)
+        handleCloseModal()
+
+        alert(`Booking successful`)
+        console.log(formData);
     };
     return(
     <>
     {/* CarDetailSkeleton  */} 
         <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%">
-            <DesktopHeader />  
-                
+            <DesktopHeader />      
             <div className="container-wrapper ">
                 <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5">
                     <div className=" col-span-2  ">
@@ -70,8 +73,8 @@ export default function CarDetail(){
                                     <Image className="w-64 h-40 object-contain"
                                         src="https://pngimg.com/uploads/mercedes/mercedes_PNG80135.png" 
                                         alt="" 
-                                        width={1283}
-                                        height={854}/>
+                                        width={256}
+                                        height={160}/>
                                 </div>
                                 <div>
                                     <div>
@@ -107,14 +110,14 @@ export default function CarDetail(){
                                             </div>
                                             <div className="flex items-center">
                                                 <div className="flex items-center gap-2 md:text-xl text-lg">
-                                                    <BsFillFuelPumpFill/>
+                                                    <BsFillFuelPumpFill size={22}/>
                                                     <div>
                                                         <p className="font-semibold text-para">Fuel policy</p>
                                                         <p className="text-para">Same to Same</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-2 md:text-xl text-lg">
-                                                    <FaLocationDot/>
+                                                    <FaLocationDot size={22}/>
                                                     <div>
                                                         <p className="font-semibold text-para">Pick-up location</p>
                                                         <p className="text-para">Free shutter services</p>
@@ -127,7 +130,7 @@ export default function CarDetail(){
                             </div>
                             <div className="border-t  md:mx-10 mx-7">
                                 <div className="pt-5 pb-2">
-                                    <p className={`text-para ${show ? "" : "line-clamp-3 "}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
+                                    <p className={`text-para ${show ? "" : "line-clamp-6 md:line-clamp-3"}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
                                         amet, nostrum sed minus non nulla, nihil molestiae voluptas doloribus mollitia optio ad?
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
                                         amet, nostrum sed minus non nulla, nihil molestiae voluptas doloribus mollitia optio ad?
@@ -313,7 +316,7 @@ export default function CarDetail(){
                                     </div>
                                     <div className="flex flex-col mt-5">
                                         <input className="w-full py-2 border border-[#999999] rounded text-center"
-                                            type="date" name="selectedDate" onChange={handleChange} value={formData.selectedDate}/>
+                                            type="date" name="selectedDate" onChange={handleChange} value={formData.selectedDate} required/>
                                     </div>           
                                     <hr className="my-2 mt-4" />
                                     <div className="flex items-center justify-between pb-4">
@@ -329,7 +332,7 @@ export default function CarDetail(){
                                             <div className="flex justify-between items-center pb-1 border-b border-dashed">
                                                 <label className=" flex items-center">
                                                     <input type="radio" className=" form-radio text-primary" name="paymentOption" value="25% Now"
-                                                        onChange={handleChange} checked={formData.paymentOption === '25% Now'} />
+                                                        onChange={handleChange} checked={formData.paymentOption === '25% Now'} required/>
                                                     <span className="ml-2 text-sm font-semibold">Pay 25% Now</span>
                                                 </label>
                                                 <div>
@@ -339,7 +342,7 @@ export default function CarDetail(){
                                             <div  className="flex justify-between items-center pb-2 pt-1">
                                                 <label className=" flex items-center">
                                                     <input type="radio" className="form-radio text-primary" name="paymentOption" value="Full Online" 
-                                                        onChange={handleChange} checked={formData.paymentOption === 'Full Online'} />
+                                                        onChange={handleChange} checked={formData.paymentOption === 'Full Online'} required/>
                                                     <span className="ml-2 text-sm font-semibold">Pay Full Online</span>
                                                 </label>
                                                 <div>
@@ -440,8 +443,8 @@ export default function CarDetail(){
                                     </div>
                                     <div className="flex flex-col mt-5">
                                         {/* <p className="w-full py-2 border border-[#999999] rounded text-center">Select Date</p> */}
-                                        <input type="date" name="selectedDate" onChange={handleChange} value={formData.selectedDate}
-                                               className="w-full py-2 border border-[#999999] rounded text-center bg-transparent"/>
+                                        <input className="w-full py-2 border border-[#999999] rounded text-center bg-transparent"
+                                               type="date" name="selectedDate" onChange={handleChange} value={formData.selectedDate} required/>
                                     </div>           
                                     <hr className="my-2 mt-4" />
                                     <div className="flex items-center justify-between pb-4">
@@ -457,7 +460,7 @@ export default function CarDetail(){
                                             <div className="flex justify-between items-center pb-1 border-b border-dashed">
                                                 <label className=" flex items-center">
                                                     <input type="radio" className=" form-radio text-primary" name="paymentOption" value="25% Now"
-                                                        onChange={handleChange} checked={formData.paymentOption === '25% Now'} />
+                                                        onChange={handleChange} checked={formData.paymentOption === '25% Now'} required/>
                                                     <span className="ml-2 text-sm font-semibold">Pay 25% Now</span>
                                                 </label>
                                                 <div>
@@ -467,7 +470,7 @@ export default function CarDetail(){
                                             <div  className="flex justify-between items-center pb-2 pt-1">
                                                 <label className=" flex items-center">
                                                     <input type="radio" className="form-radio text-primary" name="paymentOption" value="Full Online" 
-                                                        onChange={handleChange} checked={formData.paymentOption === 'Full Online'} />
+                                                        onChange={handleChange} checked={formData.paymentOption === 'Full Online'} required/>
                                                     <span className="ml-2 text-sm font-semibold">Pay Full Online</span>
                                                 </label>
                                                 <div>
@@ -490,7 +493,7 @@ export default function CarDetail(){
                     </div>
                 </Modal>
             </div>
-            {/* Book Now is end  */}
+            {/* Booking pop is end  */}
         </div>
     </>
     )

@@ -5,6 +5,7 @@ import Picker from "./picker";
 import Carousel from "@/components/car-rental/CarouselCard";
 import Image from 'next/image';
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const CarHireSection = ({ title, services }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +76,11 @@ export default function App() {
         // Add more FAQs as needed
     ];
 
+    const [show, setShow] = useState(false)
     
+    const handleToggle = () => {
+        setShow(!show);
+      }
 
     return (
         <>
@@ -89,7 +94,7 @@ export default function App() {
                     <div className="overflow-hidden relative md:h-[83vh]">
                         <div className="container-wrapper">
                             <div className="absolute top-20">
-                                <h1 className="font-semibold text-white w-2/3">India No.1 Bizare Expedition Car rental</h1>
+                                <p className="md:font-semibold font-bold md:text-xl text-lg  text-white w-2/3">India No.1 Bizare Expedition Car rental</p>
                             </div>
                         </div>
                         <div className="container-wrapper xl:block hidden">
@@ -106,14 +111,25 @@ export default function App() {
                         </div>
                     </div>
                     <div className="py-5 container-wrapper pt-10 ">
-                        <p className="md:font-semibold font-medium text-xl">Hello I am Heading</p>
-                        <p className="text-[15px] pt-4 text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nulla soluta officia est facere, 
-                            vel eius nam, et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam. 
-                            et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam. 
-                            et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam.
-                            et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam.
-                        </p>
+                        <div>
+                            <p className="md:font-semibold font-medium text-xl">Hello I am Heading</p>
+                            <p className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"}`} >
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nulla soluta officia est facere, 
+                                vel eius nam, et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam. 
+                                corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam. 
+                                corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam. 
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nulla soluta officia est facere, 
+                                vel eius nam, et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam. 
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nulla soluta officia est facere, 
+                                vel eius nam, et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, quisquam blanditiis sequi neque iste ullam.                         
+                            </p>
+                        </div>
+                        <div className="flex justify-center items-center md:h-6 h-5 md:w-24 w-20 mt-2 bg-navyblack rounded shadow-sm text-white cursor-pointer">
+                            <button className=" md:text-para text-xs" onClick={handleToggle}>{show ? "Read less" : "Read more"}</button>
+                            <span>
+                                <IoMdArrowDropdown className={`transition-transform  ${show ? 'rotate-180' : ''} `} onClick={handleToggle} />
+                            </span>
+                        </div>
                     </div>
                 </div>
                 {/* four Images */}
@@ -122,8 +138,9 @@ export default function App() {
                         <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                          src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                          alt=""
-                         width={1283} 
-                         height={854} />
+                         width={300}  //256 in phone
+                         height={288} // 160
+                        />
                         <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
                             <p className="md:text-xl md:font-bold text-lg font-semibold">Himacahl</p>
                         </div>
@@ -132,8 +149,9 @@ export default function App() {
                         <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                          src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                          alt="" 
-                         width={1283} 
-                         height={854}/>
+                         width={300}  //256 
+                         height={288} // 160
+                         />
                         <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
                             <p className="md:text-xl md:font-bold text-lg font-semibold">Kerala</p>
                         </div>
@@ -142,8 +160,9 @@ export default function App() {
                         <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110" 
                          src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                          alt="" 
-                         width={1283} 
-                         height={854}/>
+                         width={300}  //256 
+                         height={288} // 160 
+                         />
                         <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
                             <p className="md:text-xl md:font-bold text-lg font-semibold">Uttarakhand</p>
                         </div>
@@ -152,8 +171,9 @@ export default function App() {
                         <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                          src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                          alt="" 
-                         width={1283} 
-                         height={854}/>
+                         width={300}  //256 
+                         height={288} // 160
+                         />
                         <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
                             <p className="md:text-xl md:font-bold text-lg font-semibold">  Rajastan</p>
                         </div>
@@ -162,7 +182,7 @@ export default function App() {
                 </div>
                 {/* complete images */}
                 <div className="container-wrapper py-10 ">
-                    <h1 className="text-center font-semibold">UTTARAKHAND TAXI SERVICE</h1>
+                    <h1 className="text-center font-semibold md:text-lg text-base ">UTTARAKHAND TAXI SERVICE</h1>
                     <div className="flex justify-between items-center">
                         <h1 className="md:font-semibold font-medium md:text-[19px] text-lg py-5">Popular Car</h1>
                         <button className="border border-navyblack rounded hover:bg-navyblack hover:text-white md:text-sm text-xs px-2 py-1">See All</button>
@@ -180,8 +200,8 @@ export default function App() {
                 </div>
                 <div className="container-wrapper">
                     <div className="py-5">
-                        <p className="md:font-semibold font-medium text-xl">Hello I am Heading</p>
-                        <p className="text-para pt-1 pb-7 md:font-semibold font-medium">Find the Car Deals</p>
+                        <p className="md:font-semibold font-medium text-xl">Hello I am Heading</p> 
+                        <p className="text-[15px] pt-1 pb-7 md:font-semibold font-medium">Find the Car Deals</p>
                         <p className="text-[15px]">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.Voluptatum nulla soluta officia est facere,
                             vel eius iis sequi neque iste ullam. et corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, 
@@ -208,3 +228,4 @@ export default function App() {
         </>
     );
 }
+

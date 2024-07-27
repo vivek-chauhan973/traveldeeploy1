@@ -13,7 +13,28 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
       </div>
-     {promoData?.faq?.map((item,i)=><Accordion key={i} className="my-2 shadow-none border-y-[1px] bg-[#F1F5F9] outline-0 ">
+     {/* {promoData?.faq?.map((item,i)=><Accordion key={i} className="my-2 shadow-none border-y-[1px] bg-[#F1F5F9] outline-0 ">
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon className="text-white" />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+          className=" bg-navyblack text-white "
+          sx={{ borderRadius: 1 }}
+        > */}
+          {/* itenaray heading is here */}
+          {/* <Itineraryfaqheading/>  */}
+          {/* <p className="md:text-[15px] text-para">{item.title}</p>
+        </AccordionSummary>
+        <AccordionDetails className="border-0"> */}
+          {/* itenery data is here */}
+          {/* <ItineraryFaq/> */}
+          {/* <p>{item?.information}</p>
+        </AccordionDetails>
+      </Accordion>)} */}
+
+      {/* Temporary Accordion*/}
+
+      <Accordion className="my-2 shadow-none border-y-[1px] bg-[#F1F5F9] outline-0 ">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon className="text-white" />}
           aria-controls="panel1-content"
@@ -23,14 +44,17 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
         >
           {/* itenaray heading is here */}
           {/* <Itineraryfaqheading/>  */}
-          <p className="md:text-[15px] text-para">{item.title}</p>
+          <p className="md:text-[15px] text-para">Hello</p>
         </AccordionSummary>
         <AccordionDetails className="border-0">
           {/* itenery data is here */}
           {/* <ItineraryFaq/> */}
-          <p>{item?.information}</p>
+          <p>Lorem corrupti ratione cum magnam provident! Eligendi maiores nulla delectus vel, 
+            quisquam blanditiis sequi neque iste ullam. 
+          </p>
         </AccordionDetails>
-      </Accordion>)}
+      </Accordion>
+      
     </div>
   );
 }
