@@ -54,7 +54,6 @@ const ItineraryHeroSection = ({
 
   return (
     <>
-  
       <div>
         <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="">
@@ -238,9 +237,7 @@ const ItineraryHeroSection = ({
                 )}
               </div>
             </div>
-          </div>
-
-          
+          </div> 
         </div>
       </div>
     </>

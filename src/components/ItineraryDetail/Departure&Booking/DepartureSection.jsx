@@ -6,14 +6,14 @@ import { MdCurrencyRupee } from "react-icons/md";
 import { AllDataRelatedCity, city } from "./DepartureSectionData";
 import DeparturePopup from "./DeparturePopup";
 
- const DepartureSection= ( {addPackage})=> {
+const DepartureSection = ({ addPackage }) => {
 
-const {setDepartureSectionData}=useAppContext();
-const [datePackage,setDatePackage]=useState(0);
-const [showPopup,setShowPopup]=useState(false);
-// const [color,setColor]=useState(null);
+  const { setDepartureSectionData } = useAppContext();
+  const [datePackage, setDatePackage] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  // const [color,setColor]=useState(null);
   // console.log("highlight data show is here", addPackage);
-  
+
   return (
     <>
       <div className="">
@@ -24,10 +24,10 @@ const [showPopup,setShowPopup]=useState(false);
                 1. SELECT DEPARTURE CITY & DATE
               </p>
             </div>
-            <hr/>
+            <hr />
             <div className="overflow-y-auto ">
               <div className="flex gap-3 py-4">
-                {city.map((item,i)=><div onClick={()=>setDatePackage(i)} className="font-semibold text-sm hover:bg-green-300 hover:text-white cursor-pointer border rounded-full py-2 px-3.5" key={i}>
+                {city.map((item, i) => <div onClick={() => setDatePackage(i)} className="font-semibold text-sm hover:bg-green-300 hover:text-white cursor-pointer border rounded-full py-2 px-3.5" key={i}>
                   <span></span>{item}
                 </div>)}
               </div>
@@ -35,17 +35,17 @@ const [showPopup,setShowPopup]=useState(false);
               {/* select departure city */}
               <div className=" relative gap-4  py-4">
                 <h1 className=" font-semibold text-lg">All Departure date({AllDataRelatedCity[datePackage].length})</h1>
-                {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
+                {showPopup && <DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
                 <div className="flex my-2">
-                {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className="ml-2 cursor-pointer" >
-                  <div className=" border-2 w-20 h-24 rounded-md">
-                    <p className="text-center">{item.day}</p>
-                    <hr />
-                    <p className="text-center">{item.date}</p>
-                    <hr />
-                    <div className="flex justify-center pt-3"><MdCurrencyRupee/> <p>{item.price}</p></div>
-                  </div>
-                </div>)}
+                  {AllDataRelatedCity[datePackage].map((item, i) => <div key={i} onClick={() => { setShowPopup(true); setDepartureSectionData(item) }} className="ml-2 cursor-pointer" >
+                    <div className=" border-2 w-20 h-24 rounded-md">
+                      <p className="text-center">{item.day}</p>
+                      <hr />
+                      <p className="text-center">{item.date}</p>
+                      <hr />
+                      <div className="flex justify-center pt-3"><MdCurrencyRupee /> <p>{item.price}</p></div>
+                    </div>
+                  </div>)}
                 </div>
                 <div className="ml-2">
                   <p className="font-semibold text-base mb-2 mt-1 text-graytext">
@@ -65,12 +65,15 @@ const [showPopup,setShowPopup]=useState(false);
                     Highlights
                   </p>
                   <div>
-                  <hr />
-                    {addPackage?.highlights?.map((highlight) => (
-                      <ol key={highlight._id} className="list-disc  p-2 ">
-                        <li className="ml-10 text-para">{highlight.text}</li>
-                      </ol>
-                    ))}
+                    <hr />
+                    <div className="ml-1 p-1 ">
+                      {addPackage?.highlights?.map((highlight) => (
+                        <ol key={highlight._id} className="list-disc  ">
+                          <li className=" text-para">{highlight.text}</li>
+                        </ol>
+                      ))}
+                    </div>
+
                     {/* <div className= 'bg-gradient-to-t -mt-7  from-red-400 opacity-100 w-full  h-10 -top-2 z-30" ' ></div> */}
                   </div>
                 </div>

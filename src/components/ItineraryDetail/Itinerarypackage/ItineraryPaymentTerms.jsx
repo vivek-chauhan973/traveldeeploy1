@@ -179,7 +179,7 @@ const ItineraryPaymentTerms = () => {
                 </div>
             </div> */}
             {/* {<p> {addPackage?.TourInformations?.paymentTerm?.description}</p>} */}
-            <p className="py-3 pl-2 " dangerouslySetInnerHTML={{ __html:addPackage?.TourInformations?.paymentTerm?.description }} />
+            <p className="py-4 px-6 " dangerouslySetInnerHTML={{ __html:addPackage?.TourInformations?.paymentTerm?.description }} />
 
             <div>
                 {/* <div className="mt-8">
@@ -228,10 +228,10 @@ const ItineraryPaymentTerms = () => {
                     </div>
                     <div className="border rounded-b-lg  overflow-hidden ">
                         <div
-                            className={`  xs:overflow-x-auto list-disc mx-5 ${activeTab === "tab1" ? "block" : "hidden"
+                            className={`  xs:overflow-x-auto list-disc  ${activeTab === "tab1" ? "block" : "hidden"
                                 }`}
                         >
-                            <div className="py-3  px-4">
+                            <div className="py-4 px-6 ">
 
                                 {
                                     <p className=" marker:text-blue-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.cancellation?.description }} />
@@ -239,7 +239,7 @@ const ItineraryPaymentTerms = () => {
                             </div>
                         </div>
                         <div
-                            className={` py-3  px-4  ${activeTab === "tab2" ? "block" : "hidden"}`}
+                            className={` py-4 px-6   ${activeTab === "tab2" ? "block" : "hidden"}`}
                         >
                             {
 

@@ -22,6 +22,7 @@ import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import ItinaryFixedDepartureCard from "./ItinaryFixedDepartureCard";
 import FixedDeparturePopup from "./FixedDeparturePopup";
+import Head from 'next/head';
 export default function Package1() {
   const {
     addPackage,
@@ -37,16 +38,19 @@ export default function Package1() {
     fixedDepCity,
     fixedDepDate
   } = useAppContext();
+
   const [images, setImages] = useState(null);
+  const [seofetch, setSeofetch] = useState(null);
   const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
   const fetchImages = useCallback(async () => {
     const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
     const data = await res.json();
     return data;
   }, [addPackage]);
-
+  console.log("SEO2222222222222222", addPackage)
   useEffect(() => {
     fetchImages().then((res) => setImages(res));
+    setSeofetch(addPackage?.seoData);
   }, [addPackage, fetchImages]);
 
   // console.log("packages is very smart",addPacka/
@@ -60,15 +64,38 @@ export default function Package1() {
     }
   };
   // console.log("addPackage12324", addPackage);
-  const [buttonGuest,setButtonGuest]=useState("Add Guest & Room");
+  const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
+
+  useEffect(() => {
+    if (closeBtn) {
+      setButtonGuest("Book Now");
+    }
+  }, [closeBtn])
+
   
-useEffect(()=>{
-  if(closeBtn){
-    setButtonGuest("Book Now");
-  }
-},[closeBtn])
+   
   return (
     <div>
+      
+        <Head>
+        {/* <title>SEO Form</title>
+                  <meta name="description" content={isSEOField.description} />
+                  <meta property="og:title" content={isSEOField.title} />
+                  <meta property="og:type" content="product"/>
+                  <meta property="og:description" content={isSEOField.description} />
+                  <meta property="og:url" content={isSEOField.canonicalUrl} />
+                  <meta property="og:site_name" content="bizare expedition" />
+                  <meta property="og:locale" content="en_IN" /> Change as per requirement */}
+                  {/* <meta property="og:image" content="" />
+                  <meta name="twitter:card" content="summary_large_image"/>
+                  <meta name="twitter:description" content={isSEOField.description} />
+                  <meta name="twitter:image" content="" /> */}
+                  {/* <title>{addPackage?.seoData.title}</title> */}
+                  {/* <link rel="canonical" href={addPackage?.seoData.canonicalUrl} />addPackage?.seoData?.description */}
+                  {/* <meta property="og:description" content={seofetch?.title || 'Default Description'} /> */}
+                  
+        </Head>
+
       <div className=" absolute w-full ">
         <DesktopHeader />
       </div>
@@ -347,28 +374,26 @@ useEffect(()=>{
                     addPackage={addPackage}
                   >
                     <p
-                      className={` ${
-                        showAddguest
+                      className={` ${showAddguest
                           ? "bg-primary cursor-pointer"
                           : "bg-orange-200"
-                      } px-5 py-2 rounded-md text-white text-center text-para`}
+                        } px-5 py-2 rounded-md text-white text-center text-para`}
                     >
-                      <span className="disabled:opacity-75" onClick={()=>setPricingShowPopup(true)}>
+                      <span className="disabled:opacity-75" onClick={() => setPricingShowPopup(true)}>
                         {buttonGuest}
                       </span>
                     </p>
                   </Addguest>
                 )}
-                
+
 
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
-                    className={`border px-5 py-1 rounded-md ${
-                      fixedDepartureButtonEnaibleAndDisable
+                    className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                         ? "bg-primary"
                         : " bg-orange-200"
-                    }  text-center text-para`}
+                      }  text-center text-para`}
                   >
                     Book Noow
                   </button>
@@ -393,6 +418,6 @@ useEffect(()=>{
         </div>
       </div>
     </div>
-    
+
   );
 }
