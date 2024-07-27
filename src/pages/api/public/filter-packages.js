@@ -14,9 +14,9 @@ const packagePublicFilter = async (req, res) => {
         if (cityId && !isValidObjectId(cityId)) {
             return res.status(400).json({ message: 'Invalid cityId' });
         }
-        if (categoryId && !isValidObjectId(categoryId)) {
-            return res.status(400).json({ message: 'Invalid categoryId' });
-        }
+        // if (categoryId && !isValidObjectId(categoryId)) {
+        //     return res.status(400).json({ message: 'Invalid categoryId' });
+        // }
 
         // Build query conditions based on available parameters
         const query = {};
@@ -33,7 +33,7 @@ const packagePublicFilter = async (req, res) => {
             query.location = cityId;
         }
 
-        if (categoryId) {
+        if (!categoryId) {
             query.category = categoryId;
         }
 

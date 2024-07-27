@@ -33,6 +33,12 @@ const packageSchema = new Schema({
     },
     uploads: [String]
       ,
+      addguest:{
+        type:String
+      },
+      fixedfixeddepartureweightedprice:{
+      type:Number
+      },
     startcity:{
       type:[String],
       default:[]

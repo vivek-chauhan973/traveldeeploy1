@@ -37,6 +37,8 @@ const SearchPagePackageList = (locationId) => {
     filteredData(filterApi?.locationId, filterApi?.catagoryId, filterApi?.minPrice, filterApi?.maxPrice).then(res => setFilterPackage(res?.packages))
 
   }, [filterApi])
+
+  console.log("fileter api data change throught onClick",filterApi);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -241,7 +243,11 @@ const SearchPagePackageList = (locationId) => {
           </div>
           <div className=" absolute top-3">
             <div className=" rounded-tr-sm rounded-br-sm px-2 bg-gradient-to-r from-cyan-500 to-blue-500">
-              <p className="py-1 text-sm text-white ">Group Departure</p>
+              <p className="py-1 text-sm text-white ">
+                {(packageData?.addguest==="addGuest") && "Group Depature"}
+                {((packageData?.addguest==="fixedDeparture")&&(packageData?.fixedfixeddepartureweightedprice!==0))&&"Charture"}
+                {((packageData?.addguest==="fixedDeparture")&&(packageData?.fixedfixeddepartureweightedprice===0))&&"Fixed Departure"}
+              </p>
             </div>
           </div>
         </div>

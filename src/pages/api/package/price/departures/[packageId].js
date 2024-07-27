@@ -1,3 +1,4 @@
+import Package from "@/models/Package";
 import PackageDeparture from "@/models/package/PackageDeparture";
 import dbConnect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -28,7 +29,11 @@ import { NextApiRequest, NextApiResponse } from "next";
         },
         { upsert: true, new: true }
       );
-
+      const updatedPackage = await Package.updateOne(
+        {_id:packageId},
+        { $set: { addguest: departure1,fixedfixeddepartureweightedprice:parseFloat(weightOptional) } },
+        { new: true }
+      );
       // console.log("Saved departure data:", departure);
       return res.status(201).json({ departure });
     } catch (error) {

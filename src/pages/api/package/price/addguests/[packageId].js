@@ -1,3 +1,4 @@
+import Package from "@/models/Package";
 import PackagePrice from "@/models/package/PackagePrice";
 import dbConnect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -31,6 +32,12 @@ import { NextApiRequest, NextApiResponse } from "next";
       );
 
       // console.log("Saved price data:", price);
+      const updatedPackage = await Package.updateOne(
+        {_id:packageId},
+        { $set: { addguest: addguest } },
+        { new: true }
+      );
+      console.log("updatedPackage",updatedPackage);
       return res.status(201).json({ price });
     } catch (error) {
       console.error("Error handling API request:", error);

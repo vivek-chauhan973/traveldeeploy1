@@ -97,6 +97,7 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
             // If no errors, proceed with form submission
             // console.log("your data is now on console", pricingData);
             try {
+                // console.log("pricing data of addguest is here",pricingData)
                 const res = await fetch(`/api/package/price/addguests/${itinerary?._id}`, {
                     method: 'POST',
                     headers: {

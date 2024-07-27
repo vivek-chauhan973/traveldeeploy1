@@ -1,3 +1,4 @@
+import Package from "@/models/Package";
 import PackagePrice from "@/models/package/PackagePrice";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -7,10 +8,10 @@ import { NextApiRequest, NextApiResponse } from "next";
             return res.status(405).json({ message: 'Method Not Allowed' });
         }
 
-        const { packageId, singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childOverFive, childUnderFive,adults } = req.body;
+        const { packageId, singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childOverFive, childUnderFive,adults,addguest } = req.body;
 
         let price = await PackagePrice.findOne({ package: packageId });
-
+        
         if (!price) {
             price = new PackagePrice({
                 package: packageId,

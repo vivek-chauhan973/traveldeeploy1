@@ -4,6 +4,7 @@ import MultipleSelectChip from "./Select";
 import MultipleSelectCheckmarks from "./CheckMarkSelect";
 import { useRouter } from "next/router";
 import { MdAddLocationAlt } from "react-icons/md";
+import { useAppContext } from "../context/Package/AddGuest";
 
 const fetchCountries = async () => {
     try {
@@ -45,6 +46,7 @@ const fetchImages=async (itinerary)=>{
 
 export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo }) {
     const router = useRouter();
+    const {pricingManagement}=useAppContext();
     const [countries, setCountries] = useState();
     const [states, setStates] = useState();
     const [cities, setCities] = useState();
@@ -247,7 +249,8 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         badges:selectedBadges,
                         startcity:startCities,
                         uploads:imageDetails,
-                       
+                        addguest:"",
+                        fixedfixeddepartureweightedprice:0  
                     })
                 });
                 

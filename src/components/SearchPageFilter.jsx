@@ -73,17 +73,19 @@ export default function SearchPageFilter({ onApplyFilter }) {
             departureCity,
             packageCategory,
         };
-        if (priceRange[0] > priceRange[1]) {
-            setMaxPrice(priceRange[0])
-            setMinPrice(priceRange[1])
-        }
-        else {
-            setMaxPrice(priceRange[1])
-            setMinPrice(priceRange[0])
-        }
+       
         onApplyFilter(filters);
     };
-
+useEffect(()=>{
+    if (priceRange[0] > priceRange[1]) {
+        setMaxPrice(priceRange[0])
+        setMinPrice(priceRange[1])
+    }
+    else {
+        setMaxPrice(priceRange[1])
+        setMinPrice(priceRange[0])
+    }
+},[priceRange])
     const handleClearAll = () => {
         setPriceRange([0, 9900]);
         setTourDuration([20, 37]);
