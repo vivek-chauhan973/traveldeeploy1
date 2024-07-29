@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import '../../app/globals.css';
 import Image from 'next/image';
 import logo from "../../../public/logo.png";
-import dynamic from 'next/dynamic';
 
 // Dynamic imports for icons
-const HiMiniBars3BottomLeft = dynamic(() => import('react-icons/hi2').then(mod => mod.HiMiniBars3BottomLeft));
-const FaBell = dynamic(() => import('react-icons/fa').then(mod => mod.FaBell));
-import { FaMessage } from "react-icons/fa6";
-import Link from 'next/link';
+import {
+     BellIcon,
+     BarIcon,
+     MessageIcon
+  } from "@/components/icons/index"
 import { useAppContext } from './context/Package/AddGuest';
 
 const Layout = ({ children }) => {
@@ -106,13 +106,13 @@ const Layout = ({ children }) => {
             >
                 <div className="sticky top-0 z-30 shadow-md backdrop-blur-xl bg-white/80 py-3 px-4 flex items-center gap-5">
                     <div className="cursor-pointer" onClick={toggleSidebar}>
-                        <HiMiniBars3BottomLeft size={26} className=' mt-[7px] text-[#939ba2] hover:text-black'/>
+                        <BarIcon size={26} className=' mt-[7px] text-[#939ba2] hover:text-black'/>
                     </div>
                     <div className="flex justify-between w-full">
                         <Image className="w-[220px]" src={logo} alt="Logo" width={320} height={400}/>
                         <div className="flex items-center gap-5">
-                            <FaBell className="text-[#939ba2] hover:text-black cursor-pointer" size={20} />
-                            <FaMessage className="text-[#939ba2] hover:text-black cursor-pointer" size={20} />
+                            <BellIcon className="text-[#939ba2] hover:text-black cursor-pointer" size={20} />
+                            <MessageIcon className="text-[#939ba2] hover:text-black cursor-pointer" size={20} />
                             <div className="flex items-center gap-3">
                                 <Image
                                     className="hidden sm:block w-10 h-10 rounded-full"

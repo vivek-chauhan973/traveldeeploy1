@@ -1,19 +1,56 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const CarSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  capacity: { type: Number, required: true },
-  ac: { type: String, required: true, enum: ['AC', 'Non AC'] },
-  seatingCapacity: { type: Number, required: true },
-  vehicleType: { type: String, required: true, enum: ['Sedan', 'SUV', 'Hatchback'] },
-  dailyLimit: { type: Number, required: true },
-  rate: { type: Number, required: true },
-  outStationBasePrice: { type: Number, required: true },
-  perKmRate: { type: Number, required: true },
-  markup: { type: Number, required: true },
-  categories: { type: [String], required: true},
-  imageUrl: { type: String }
-}, { timestamps: true });
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  capacity: {
+    type: Number,
+    required: true,
+  },
+  ac: {
+    type: String,
+    enum: ['AC', 'Non AC'],
+    required: true,
+  },
+  seatingCapacity: {
+    type: Number,
+    required: true,
+  },
+  vehicleType: {
+    type: String,
+    enum: ['Sedan', 'SUV', 'Hatchback'],
+    required: true,
+  },
+  dailyLimit: {
+    type: Number,
+    required: true,
+  },
+  rate: {
+    type: Number,
+    required: true,
+  },
+  outStationBasePrice: {
+    type: Number,
+    required: true,
+  },
+  perKmRate: {
+    type: Number,
+    required: true,
+  },
+  markup: {
+    type: Number,
+    required: true,
+  },
+  imageUrls: [
+    {
+      type: String, // This can store the URL or base64 encoded image data
+    }
+  ],
+}, {
+  timestamps: true, // Automatically adds createdAt and updatedAt fields
+});
 
-const Car = mongoose.models.Car || mongoose.model('Car', CarSchema);
-export default Car;
+export default mongoose.models.Car || mongoose.model('Car', CarSchema);

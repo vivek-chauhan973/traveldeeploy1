@@ -1,8 +1,7 @@
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import { useState, useEffect } from "react";
-import Image from 'next/image'
-
+import Image from 'next/image';
 
 export default function LogoManagement() {
   const [file, setFile] = useState(null);
@@ -84,6 +83,37 @@ export default function LogoManagement() {
     }
   }
 
+  // Function to handle image removal
+  async function handleRemove() {
+    if (!selectedImageId) {
+      alert('No image selected for removal.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/logo/logo1?id=${selectedImageId}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        alert('Image removed successfully');
+        // Reset state after successful removal
+        setFile(null);
+        setPreview(null);
+        setTitle('');
+        setAlt('');
+        setIsUpdating(false);
+        setSelectedImageId(null);
+        fetchImage(); // Fetch updated image list
+      } else {
+        alert('Failed to remove image');
+      }
+    } catch (error) {
+      console.error('Error removing image:', error);
+      alert('Failed to remove image');
+    }
+  }
+
   return (
     <AppProvider>
       <Layout>
@@ -118,6 +148,11 @@ export default function LogoManagement() {
             <div>
               <button className="bg-[#0d6efd] text-white px-3 py-2" onClick={handleUpload}>
                 {isUpdating ? 'Update Image' : 'Upload Image'}
+              </button>
+            </div>
+            <div>
+              <button className="bg-red-600 text-white px-3 py-2" onClick={handleRemove}>
+                Remove
               </button>
             </div>
           </div>

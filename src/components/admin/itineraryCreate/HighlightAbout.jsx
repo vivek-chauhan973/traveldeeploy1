@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../../../app/globals.css";
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
-const MdOutlineAddCircle = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineAddCircle));
-const MdOutlineSave = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineSave));
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
-const IoIosSave = dynamic(() => import('react-icons/io').then(mod => mod.IoIosSave));
+import {
+  DeleteIcon,
+  AddCircleIcon,
+  EditIcon,
+  SaveIcon,
+  CancelIcon
+} from "@/components/icons/index"
 
 import DeletePop from "../iternaryPopup/DeletePop";
 
@@ -117,7 +119,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
           <div className="flex items-center gap-5">
             <div dangerouslySetInnerHTML={{ __html: aboutEditorHtml }}></div>
             <div className="w-20">
-              <FaEdit onClick={() => setIsEditingAbout(true)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
+              <EditIcon onClick={() => setIsEditingAbout(true)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
             </div>
           </div>
         )}
@@ -131,7 +133,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
             {highlightEdit.edit ? (
               <MdOutlineSave onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
             ) : (
-              <MdOutlineAddCircle onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
+              <AddCircleIcon onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
             )}
           </div>
           <div className="border h-48 w-full overflow-y-auto py-2 rounded-md mt-2">
@@ -149,11 +151,11 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
                 )}
                 <div className='flex gap-2'>
                   {item.edit ? (
-                    <IoIosSave onClick={() => saveHighlight(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
+                    <SaveIcon onClick={() => saveHighlight(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
                   ) : (
                     <>
-                      <FaEdit onClick={() => toggleEditHighlight(index)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
-                      {deletePopup ? <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={handleRemoveHighlight} /> : <MdDeleteForever onClick={() => setDeletePopu(true)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />}
+                      <EditIcon onClick={() => toggleEditHighlight(index)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
+                      {deletePopup ? <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={handleRemoveHighlight} /> : <DeleteIcon onClick={() => setDeletePopu(true)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />}
                     </>
                   )}
                 </div>

@@ -1,11 +1,11 @@
 
-import dynamic from 'next/dynamic';
-
-const MdOutlineAddCircle = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineAddCircle));
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
-const IoIosSave = dynamic(() => import('react-icons/io').then(mod => mod.IoIosSave));
-const MdCancel = dynamic(() => import('react-icons/md').then(mod => mod.MdCancel));
+import {
+  DeleteIcon,
+  AddCircleIcon,
+  EditIcon,
+  SaveIcon,
+  CancelIcon
+} from "@/components/icons/index"
 import Layout from "@/components/admin/Layout";
 
 import { useEffect, useState } from "react";
@@ -299,7 +299,7 @@ export default function CountryStateCity () {
                   onChange={handleCountryInputChange} />
               </div>
               <button onClick={handleAddCountry} disabled={!country}>
-                <MdOutlineAddCircle size={35} />
+                <AddCircleIcon size={35} />
               </button>
             </div>
             {/* data is here show */}
@@ -325,25 +325,28 @@ export default function CountryStateCity () {
                   <div className='flex gap-2 basis-1/3'>
                     {editCountryId === countryData._id ? (
                       <span className="flex gap-2 px-2">
-                        {editCountryValue && <IoIosSave
+                        {editCountryValue && <SaveIcon
                           size={24}
                           className='mt-1 hover:text-red-500 cursor-pointer'
                           onClick={() => saveEditCountry(countryData._id)}
                         />}
-                        <MdCancel
+                        <CancelIcon
                           size={24}
                           className='mt-1 hover:text-red-500 cursor-pointer'
                           onClick={() => toggleEditCountry(countryData._id)}
                         />
                       </span>
                     ) : (
-                      <FaEdit
+                      <div onClick={() => toggleEditCountry(countryData._id)}>
+
+                      <EditIcon
                         size={20}
                         className='mt-1 hover:text-red-500 cursor-pointer'
-                        onClick={() => toggleEditCountry(countryData._id)}
+                        
                       />
+                      </div>
                     )}
-                    <MdDeleteForever
+                    <DeleteIcon
                       size={24}
                       className='mt-1 hover:text-red-500 cursor-pointer'
                       onClick={() => handleDeleteCountry(countryData._id)}
@@ -362,7 +365,7 @@ export default function CountryStateCity () {
                     value={state} onChange={handleStateInputChange} />
                 </div>
                 <button onClick={handleAddState} disabled={!state}>
-                  <MdOutlineAddCircle size={35} />
+                  <AddCircleIcon size={35} />
                 </button>
               </div>
             </div>
@@ -387,25 +390,25 @@ export default function CountryStateCity () {
                 <div className='flex gap-2 basis-1/3'>
                   {editStateId === state._id ? (
                     <span className="flex gap-2 px-2">
-                      {editStateValue && <IoIosSave
+                      {editStateValue && <SaveIcon
                         size={24}
                         className='mt-1 hover:text-red-500 cursor-pointer'
                         onClick={() => saveEditState(state._id)}
                       />}
-                      <MdCancel
+                      <CancelIcon
                         size={24}
                         className='mt-1 hover:text-red-500 cursor-pointer'
                         onClick={() => toggleEditState(state._id)}
                       />
                     </span>
                   ) : (
-                    <FaEdit
+                    <EditIcon
                       size={20}
                       className='mt-1 hover:text-red-500 cursor-pointer'
                       onClick={() => toggleEditState(state._id)}
                     />
                   )}
-                  <MdDeleteForever
+                  <DeleteIcon
                     size={24}
                     className='mt-1 hover:text-red-500 cursor-pointer'
                     onClick={() => handleDeleteState(state._id)}
@@ -423,7 +426,7 @@ export default function CountryStateCity () {
                     name="city" />
                 </div>
                 <button onClick={handleAddCity}>
-                  <MdOutlineAddCircle size={35} className='cursor-pointer hover:text-primary' />
+                  <AddCircleIcon size={35} className='cursor-pointer hover:text-primary' />
                 </button>
               </div>
             </div>
@@ -445,21 +448,21 @@ export default function CountryStateCity () {
                 <div className='flex gap-2'>
                   {editCityId === city._id ? (
                     <span className="flex gap-2 px-2">
-                      {editCityValue && <IoIosSave
+                      {editCityValue && <SaveIcon
                         size={24}
                         className='mt-1 hover:text-red-500 cursor-pointer'
                         onClick={() => saveEditCity(city._id)}
                       />}
-                      <MdCancel
+                      <CancelIcon
                         size={24}
                         className='mt-1 hover:text-red-500 cursor-pointer'
                         onClick={() => toggleEditCity(city._id)}
                       />
                     </span>
                   ) : (
-                    <FaEdit size={20} onClick={() => toggleEditCity(city._id)} className='mt-1 hover:text-red-500 cursor-pointer' />
+                    <EditIcon size={20} onClick={() => toggleEditCity(city._id)} className='mt-1 hover:text-red-500 cursor-pointer' />
                   )}
-                  <MdDeleteForever onClick={() => handleDeleteCity(city._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                  <DeleteIcon onClick={() => handleDeleteCity(city._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
                 </div>
               </div>))}
             </div>

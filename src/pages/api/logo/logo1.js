@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db'; // Adjust path as per your project structure
 import File from '@/models/logo/Main'; // Adjust path as per your project structure
+
 const uploadDirectory = './public/uploads/logo'; // Define your upload directory
 
 // Ensure upload directory exists
@@ -34,7 +35,6 @@ const apiRoute = async (req, res) => {
         return res.status(500).json({ error: 'File upload failed' });
       }
 
-      console.log("req body is here 1231232324234",req.body)
       const { title, alt } = req.body;
       const fileData = req.file ? {
         title,
@@ -75,8 +75,26 @@ const apiRoute = async (req, res) => {
       console.error('Error fetching files:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
+  } else if (req.method === 'DELETE') {
+    const { id } = req.query;
+    try {
+      const file = await File.findById(id);
+      if (file) {
+        // Delete file from disk
+        fs.unlinkSync(path.join(uploadDirectory, file.filename));
+
+        // Delete file from database
+        await File.findByIdAndDelete(id);
+        return res.status(200).json({ message: 'File removed successfully' });
+      } else {
+        return res.status(404).json({ error: 'File not found' });
+      }
+    } catch (error) {
+      console.error('Error deleting file:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
   } else {
-    res.setHeader('Allow', ['POST', 'GET']);
+    res.setHeader('Allow', ['POST', 'GET', 'DELETE']);
     return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 };
