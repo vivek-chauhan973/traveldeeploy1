@@ -1,8 +1,12 @@
 
 import dynamic from 'next/dynamic';
-const MdOutlineAddCircle = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineAddCircle));
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const LiaUserEditSolid = dynamic(() => import('react-icons/lia').then(mod => mod.LiaUserEditSolid));
+import {
+    DeleteIcon,
+    AddCircleIcon,
+    EditIcon,
+    SaveIcon,
+    CancelIcon
+  } from "@/components/icons/index"
 
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from "react";
@@ -138,7 +142,7 @@ const Cancellation = () => {
                                 placeholder="Enter Group Name"
                             />
                             <button type="button" onClick={handleSave}>
-                                <MdOutlineAddCircle size={35} className='cursor-pointer hover:text-primary' />
+                                <AddCircleIcon size={35} className='cursor-pointer hover:text-primary' />
                             </button>
                         </div>
                     </div>
@@ -148,11 +152,11 @@ const Cancellation = () => {
                                 <p className='capitalize leading-8'>{index + 1}. {group.groupName}</p>
                                 <div className='flex gap-2'>
                                     {(isEditing && editGroupId === group._id) ? (
-                                        <MdDeleteForever size={24} className='mt-1 opacity-50 cursor-not-allowed' />
+                                        <DeleteIcon size={24} className='mt-1 opacity-50 cursor-not-allowed' />
                                     ) : (
-                                        <MdDeleteForever onClick={() => toggleModal(group._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                        <DeleteIcon onClick={() => toggleModal(group._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
                                     )}
-                                    <LiaUserEditSolid onClick={() => handleEdit(group._id)} size={24} className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-red-500 cursor-pointer') : ''}`} />
+                                    <EditIcon onClick={() => handleEdit(group._id)} size={24} className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-red-500 cursor-pointer') : ''}`} />
                                 </div>
                             </div>
                         ))}

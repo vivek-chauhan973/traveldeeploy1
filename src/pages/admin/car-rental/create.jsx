@@ -5,7 +5,8 @@ import { FaEdit } from "react-icons/fa";
 import { BiSolidCarMechanic } from "react-icons/bi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
-import Image from 'next/image'
+import Image from 'next/image';
+
 export default function AddCar() {
   const [cars, setCars] = useState([]);
   const [form, setForm] = useState({
@@ -19,7 +20,7 @@ export default function AddCar() {
     outStationBasePrice: '',
     perKmRate: '',
     markup: '',
-    imageUrls: []  // For handling multiple images
+    imageUrls: []
   });
 
   const [selectedImages, setSelectedImages] = useState([]);
@@ -60,27 +61,22 @@ export default function AddCar() {
       return;
     }
 
+    const formData = new FormData();
+    Object.keys(form).forEach((key) => {
+      if (Array.isArray(form[key])) {
+        form[key].forEach((value, index) => formData.append(`${key}[${index}]`, value));
+      } else {
+        formData.append(key, form[key]);
+      }
+    });
+
     if (selectedImages.length) {
-      const base64Images = await Promise.all(selectedImages.map(image => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            resolve(reader.result.split(',')[1]);
-          };
-          reader.onerror = reject;
-          reader.readAsDataURL(image);
-        });
-      }));
-
-      const payload = {
-        ...form,
-        imageUrls: base64Images,
-      };
-
-      await sendFormData(payload);
-    } else {
-      await sendFormData(form);
+      selectedImages.forEach((image) => {
+        formData.append('images', image);
+      });
     }
+
+    await sendFormData(formData);
   };
 
   const sendFormData = async (formData) => {
@@ -90,10 +86,7 @@ export default function AddCar() {
 
       const response = await fetch(url, {
         method: method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData),
+        body: formData,
       });
 
       const result = await response.json();
@@ -162,103 +155,124 @@ export default function AddCar() {
 
   return (
     <AppProvider>
-    <Layout>
-      <div>
-        <div className="flex items-center gap-5 text-primary pb-3">
-          <BiSolidCarMechanic size={28} className="font-semibold" />
-          <p className="text-[24px] text-black">Add Car</p>
-          <HiOutlineArrowNarrowRight size={24} className=" text-teal-700" />
+      <Layout>
+        <div>
+          <div className="flex items-center gap-5 text-primary pb-3">
+            <BiSolidCarMechanic size={28} className="font-semibold" />
+            <p className="text-[24px] text-black">Add Car</p>
+            <HiOutlineArrowNarrowRight size={24} className="text-teal-700" />
+          </div>
         </div>
-      </div>
-      <div className="bg-white rounded-md shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-2 ">
-        <form className="" onSubmit={handleSubmit}>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-5 items-center grid-cols-reverse'>
-            <div className="h-80 w-full bg-white p-8 border rounded">
-              <div className="bg-slate-200 h-56 w-full rounded">
-                {selectedImages.length > 0 && selectedImages.map((image, index) => (
-                  <Image key={index} src={URL.createObjectURL(image)} alt={`Selected Image ${index + 1}`} className="h-full w-full object-cover " />
-                ))}
+        <div className="bg-white rounded-md shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-2 ">
+          <form onSubmit={handleSubmit}>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 items-center grid-cols-reverse'>
+              <div className="h-80 w-full bg-white p-8 border rounded">
+                <div className="bg-slate-200 h-56 w-full rounded">
+                  {selectedImages.length > 0 && selectedImages.map((image, index) => (
+                    <img key={index} src={URL.createObjectURL(image)} alt={`Selected Image ${index + 1}`} className="h-full w-full object-cover" />
+                  ))}
+                </div>
+                <div className="mt-4">
+                  <input
+                    type="file"
+                    multiple
+                    onChange={handleFileChange}
+                    className='file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100'
+                  />
+                </div>
               </div>
-              <div className="mt-4">
-                <input type="file" multiple onChange={handleFileChange} className='file:mr-4 file:py-2 file:px-4
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-violet-50 file:text-violet-700
-      hover:file:bg-violet-100' />
+              <div className="border p-2 rounded">
+                {[
+                  { label: "Car Name", name: "name", type: "text" },
+                  { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
+                  { label: "Ac /Non Ac", name: "ac", type: "select", options: ["AC", "Non AC"] },
+                  { label: "Vehicle Type", name: "vehicleType", type: "select", options: ["Sedan", "SUV", "Hatchback"] },
+                  { label: "Daily Limit", name: "dailyLimit", type: "number" },
+                  { label: "Rate", name: "rate", type: "number" },
+                  { label: "Base price for KM's", name: "capacity", type: "number" },
+                  { label: "Out Station Base Price for KM", name: "outStationBasePrice", type: "number" },
+                  { label: "Per KM Rate", name: "perKmRate", type: "number" },
+                  { label: "Markup", name: "markup", type: "number" },
+                ].map((field) => (
+                  <div key={field.name} className="mt-2 flex items-center pb-2">
+                    <div className="w-40">
+                      <label className="text-para font-semibold" htmlFor={field.name}>{field.label}:</label>
+                    </div>
+                    {field.type === "select" ? (
+                      <select
+                        className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
+                        name={field.name}
+                        value={form[field.name]}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select {field.label}</option>
+                        {field.options.map(option => (
+                          <option key={option} value={option}>{option}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
+                        type={field.type}
+                        name={field.name}
+                        value={form[field.name]}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    )}
+                  </div>
+                ))}
+                <button
+                  type="submit"
+                  className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                >
+                  {editMode ? 'Update Car' : 'Add Car'}
+                </button>
               </div>
             </div>
-            <div className="border p-2 rounded">
-              {[
-                { label: "Car Name", name: "name", type: "text" },
-                { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
-                { label: "Ac /Non Ac", name: "ac", type: "select", options: ["AC", "Non AC"] },
-                { label: "Vehicle Type", name: "vehicleType", type: "select", options: ["Sedan", "SUV", "Hatchback"] },
-                { label: "Daily Limit", name: "dailyLimit", type: "number" },
-                { label: "Rate", name: "rate", type: "number" },
-                { label: "Base price for KM's", name: "capacity", type: "number" },
-                { label: "Out Station Base Price for KM", name: "outStationBasePrice", type: "number" },
-                { label: "Per KM Rate", name: "perKmRate", type: "number" },
-                { label: "Markup", name: "markup", type: "number" },
-              ].map((field) => (
-                <div key={field.name} className="mt-2 flex items-center pb-2">
-                  <div className="w-40">
-                    <label className="text-para font-semibold" htmlFor={field.name}>{field.label}:</label>
+          </form>
+          <div className="mt-10">
+            <p className="text-2xl font-semibold">Cars List</p>
+            <div className="mt-5 grid gap-5 grid-cols-1 md:grid-cols-2">
+              {cars.map((car) => (
+                <div key={car._id} className="border p-4 rounded">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-semibold">{car.name}</h3>
+                    <div className="flex gap-2">
+                      <MdOutlineAddCircle
+                        className="text-xl cursor-pointer text-green-600"
+                        onClick={() => handleEdit(car)}
+                      />
+                      <MdDeleteForever
+                        className="text-xl cursor-pointer text-red-600"
+                        onClick={() => handleDelete(car._id)}
+                      />
+                    </div>
                   </div>
-                  {field.type === "select" ? (
-                    <select
-                      className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
-                      name={field.name}
-                      value={form[field.name]}
-                      onChange={handleInputChange}
-                      required
-                    >
-                      <option value="">Select {field.label}</option>
-                      {field.options.map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))}
-                    </select>
-                  ) : (
-                    <input
-                      className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
-                      type={field.type}
-                      name={field.name}
-                      value={form[field.name]}
-                      onChange={handleInputChange}
-                      required
+                  <p>Capacity: {car.capacity}</p>
+                  <p>Seating Capacity: {car.seatingCapacity}</p>
+                  <p>AC/Non-AC: {car.ac}</p>
+                  <p>Vehicle Type: {car.vehicleType}</p>
+                  <p>Daily Limit: {car.dailyLimit}</p>
+                  <p>Rate: {car.rate}</p>
+                  <p>Out Station Base Price: {car.outStationBasePrice}</p>
+                  <p>Per KM Rate: {car.perKmRate}</p>
+                  <p>Markup: {car.markup}</p>
+                  {car.imageUrls && car.imageUrls.map((url, index) => (
+                    <img
+                      key={index}
+                      src={url}
+                      alt={`Car Image ${index + 1}`}
+                      className="w-full h-auto"
                     />
-                  )}
+                  ))}
                 </div>
               ))}
             </div>
           </div>
-          <button className="px-10 py-1 w-full bg-black text-white rounded mt-5" type="submit">
-            {editMode ? 'Update Car' : 'Add Car'}
-          </button>
-        </form>
-      </div>
-      <div className="border p-2 rounded bg-white mt-20 shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]">
-        <div>
-          <p className="font-semibold text-[15px]">Car Create List</p>
         </div>
-        {cars?.map((car, index) => (
-          <div key={car._id} className="grid grid-cols-4 grid-flow-col even:bg-slate-100 py-3">
-            <div className="place-self-center">
-              <p>{index + 1}</p>
-            </div>
-            <div className="place-self-center">
-              {car.name}
-            </div>
-            <div className="place-self-center">
-              {new Date(car.createdAt).toLocaleDateString()}
-            </div>
-            <div className='place-self-center flex gap-2 items-center'>
-              <FaEdit size={20} className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => handleEdit(car)} />
-              <MdDeleteForever size={24} className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => handleDelete(car._id)} />
-            </div>
-          </div>
-        ))}
-      </div>
-    </Layout>
+      </Layout>
     </AppProvider>
   );
 }

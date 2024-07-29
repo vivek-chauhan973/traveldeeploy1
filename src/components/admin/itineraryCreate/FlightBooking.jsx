@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import dynamic from 'next/dynamic';
-
-// Dynamically import icons
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
+import {
+  DeleteIcon,
+  EditIcon,
+} from "@/components/icons/index"
 
 import DeletePop from "../iternaryPopup/DeletePop";
 
@@ -229,7 +228,7 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
                       </p>
                     </div>
                     <div className='flex gap-2'>
-                      <FaEdit
+                      <EditIcon
                         size={20}
                         className='mt-1 hover:text-red-500 cursor-pointer'
                         onClick={() => editFlightBooking(index)}
@@ -237,7 +236,7 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
                       {deletePopup ? (
                         <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={removeFlightBooking} />
                       ) : (
-                        <MdDeleteForever
+                        <DeleteIcon
                           size={24}
                           className='mt-1 hover:text-red-500 cursor-pointer'
                           onClick={() => setDeletePopu(true)}

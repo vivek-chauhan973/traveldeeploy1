@@ -1,27 +1,31 @@
+import dynamic from 'next/dynamic';
 import "../../../app/globals.css";
-import DepartureSection from "@/components/ItineraryDetail/Departure&Booking/DepartureSection";
-import ItineraryPricingCard from "@/components/ItineraryDetail/Departure&Booking/ItineraryPricingCard";
-import ItineraryHeroSection from "@/components/ItineraryDetail/ItineraryHeroSection";
-import { Link as ScrollLink } from "react-scroll";
-import Itinerary from "@/components/ItineraryDetail/Itinerarypackage/Itinerary";
-import ItineraryTourDetails from "@/components/ItineraryDetail/Itinerarypackage/ItineraryTourDetails";
-import ItineraryPaymentTerms from "@/components/ItineraryDetail/Itinerarypackage/ItineraryPaymentTerms";
-import ItinerarySideCard from "@/components/ItineraryDetail/Itinerarypackage/ItinerarySideCard";
-import Itinerarymap from "@/components/ItineraryDetail/Itinerarypackage/Itinerarymap";
-import ReviewsCard from "@/components/ReviewsCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import BottomLink from "@/components/ItineraryDetail/BottomLink";
-import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import Addguest from "@/components/addguest";
-import TestingCard from "@/components/ItineraryDetail/TestingCard";
+
+// Dynamically import components
+const DepartureSection = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/DepartureSection"));
+const ItineraryPricingCard = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/ItineraryPricingCard"));
+import ItineraryHeroSection from "@/components/ItineraryDetail/ItineraryHeroSection";const Itinerary = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/Itinerary"));
+const ItineraryTourDetails = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItineraryTourDetails"));
+const ItineraryPaymentTerms = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItineraryPaymentTerms"));
+const ItinerarySideCard = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItinerarySideCard"));
+const Itinerarymap = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/Itinerarymap"));
+import ReviewsCard from "@/components/ReviewsCard";
+const BottomLink = dynamic(() => import("@/components/ItineraryDetail/BottomLink"));
+const CustomiseTour = dynamic(() => import("@/components/ItineraryDetail/CustomiseTour"));
+const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
+const Addguest = dynamic(() => import("@/components/addguest"));
+const TestingCard = dynamic(() => import("@/components/ItineraryDetail/TestingCard"));
+import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureCard"));
+const FixedDeparturePopup = dynamic(() => import("./FixedDeparturePopup"));
+
+// Import React and other dependencies
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
-import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
-import ItinaryFixedDepartureCard from "./ItinaryFixedDepartureCard";
-import FixedDeparturePopup from "./FixedDeparturePopup";
+import { Link as ScrollLink } from "react-scroll";
+
 export default function Package1() {
   const {
     addPackage,

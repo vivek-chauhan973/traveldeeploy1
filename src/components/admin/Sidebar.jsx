@@ -3,21 +3,24 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import {
+  FunctionIcon,
+  HotelIcon,
+  PageIcon,
+  HomeIcon,
+  HeaderFooterIcon,
+  CarIcon,
+  BlogIcon,
+  SettingIcon,
+  WebsiteFunIcon,
+  CartIcon,
+  TravelGuideIcon,
+  LogoutIcon,
+  TagFillIcon,
+  PackageIcon,
+  
+} from "@/components/icons/index"
 
-const MdViewList = dynamic(() => import('react-icons/md').then(mod => mod.MdViewList));
-const MdShoppingCart = dynamic(() => import('react-icons/md').then(mod => mod.MdShoppingCart));
-const MdMap = dynamic(() => import('react-icons/md').then(mod => mod.MdMap));
-const MdLocalOffer = dynamic(() => import('react-icons/md').then(mod => mod.MdLocalOffer));
-const MdExitToApp = dynamic(() => import('react-icons/md').then(mod => mod.MdExitToApp));
-const MdOutlineSettingsInputComposite = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineSettingsInputComposite));
-const HiOutlineClipboardDocumentList = dynamic(() => import('react-icons/hi2').then(mod => mod.HiOutlineClipboardDocumentList));
-const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuPackagePlus));
-const BiSolidCarMechanic = dynamic(() => import('react-icons/bi').then(mod => mod.BiSolidCarMechanic));
-const RiHotelFill = dynamic(() => import('react-icons/ri').then(mod => mod.RiHotelFill));
-const RiPagesLine = dynamic(() => import('react-icons/ri').then(mod => mod.RiPagesLine));
-const FaFileSignature = dynamic(() => import('react-icons/fa').then(mod => mod.FaFileSignature));
-const AiFillSetting = dynamic(() => import('react-icons/ai').then(mod => mod.AiFillSetting));
-const SiPagespeedinsights = dynamic(() => import('react-icons/si').then(mod => mod.SiPagespeedinsights));
 const IoIosArrowDown = dynamic(() => import('react-icons/io').then(mod => mod.IoIosArrowDown));
 
 const Sidebar = () => {
@@ -28,12 +31,12 @@ const Sidebar = () => {
   const sidebarTabs = useMemo(() => [
     {
       label: "Dashboard",
-      icon: SiPagespeedinsights,
+      icon: FunctionIcon,
       href: "/admin"
     },
     {
       label: "Website Function",
-      icon: MdOutlineSettingsInputComposite,
+      icon: WebsiteFunIcon,
       subMenu: [
         { label: "Country-state-city", href: "/admin/website-function/country-state-city" },
         { label: "Website Schema", href: "/admin/website-function/website-schema" },
@@ -43,7 +46,7 @@ const Sidebar = () => {
     },
     {
       label: "Home Page",
-      icon: HiOutlineClipboardDocumentList,
+      icon: HomeIcon,
       subMenu: [
         { label: "Banner", href: "#" },
         { label: "Other Management", href: "#" }
@@ -51,12 +54,12 @@ const Sidebar = () => {
     },
     {
       label: "Header / Footer",
-      icon: MdViewList,
+      icon: HeaderFooterIcon,
       href: "/admin/header-footer"
     },
     {
       label: "Package",
-      icon: LuPackagePlus,
+      icon: PackageIcon,
       subMenu: [
         { label: "Package Master", href: "/admin/package/category" },
         { label: "Add Itinerary", href: "/admin/package/itinerary" },
@@ -66,7 +69,7 @@ const Sidebar = () => {
     },
     {
       label: "Car Rental",
-      icon: BiSolidCarMechanic,
+      icon: CarIcon,
       subMenu: [
         { label: "Create", href: "/admin/car-rental/create" },
         { label: "Package Master", href: "/admin/car-rental" },
@@ -77,7 +80,7 @@ const Sidebar = () => {
     },
     {
       label: "Hotels",
-      icon: RiHotelFill,
+      icon: HotelIcon,
       subMenu: [
         { label: "Hotel Master", href: "#" },
         { label: "Packages", href: "/admin/hotel/packages-list" },
@@ -86,7 +89,7 @@ const Sidebar = () => {
     },
     {
       label: "Blog",
-      icon: FaFileSignature,
+      icon: BlogIcon,
       subMenu: [
         { label: "Blog Master", href: "/admin/blog/category" },
         { label: "All Post", href: "/admin/blog/all-post" },
@@ -96,7 +99,7 @@ const Sidebar = () => {
     },
     {
       label: "Manage Order",
-      icon: MdShoppingCart,
+      icon: CartIcon,
       subMenu: [
         { label: "Package Order", href: "/admin/manage-order/package" },
         { label: "Hotel Order", href: "/admin/manage-order/hotel" },
@@ -105,27 +108,27 @@ const Sidebar = () => {
     },
     {
       label: "Pages ",
-      icon: RiPagesLine,
+      icon: PageIcon,
       href: "/admin/page-create"
     },
     {
       label: "Setting",
-      icon: AiFillSetting,
+      icon: SettingIcon,
       href: "/admin/setting-site"
     },
     {
       label: "Travel Guide",
-      icon: MdMap,
+      icon: TravelGuideIcon,
       href: "#"
     },
     {
       label: "Deals Page",
-      icon: MdLocalOffer,
+      icon: TagFillIcon,
       href: "#"
     },
     {
       label: "Logout",
-      icon: MdExitToApp,
+      icon: LogoutIcon,
       href: "#"
     }
   ], []);
