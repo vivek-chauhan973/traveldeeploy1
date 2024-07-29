@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
-import dynamic from 'next/dynamic';
-
-const FaHome = dynamic(() => import('react-icons/fa').then((mod) => mod.FaHome));
-const IoIosSearch = dynamic(() => import('react-icons/io').then((mod) => mod.IoIosSearch));
-const RiLoginCircleFill = dynamic(() => import('react-icons/ri').then((mod) => mod.RiLoginCircleFill));
-const FaUser = dynamic(() => import('react-icons/fa').then((mod) => mod.FaUser));
-const FaBars = dynamic(() => import('react-icons/fa').then((mod) => mod.FaBars));
 
 import FlyoutLink from "./FlyoutLink";
 import { header } from "./Data";
 import Header2 from "../../MobileHeader";
 // import Image from "next/image";
 import Image from 'next/image';
-// import Logo from "../../../../../public/HEAD.png";
-import { CiSearch } from "react-icons/ci";
 
+import {
+  SearchIcon,
+  LoginIcon,
+  SignupIcon, HomeIcon,
+  BarIcon
+} from "@/components/icons/index"
 
 
 const Header3 = () => {
@@ -46,11 +43,6 @@ const Header3 = () => {
     fetchData();
   }, []);
 
-
-
-
-
-
   // console.log(header);
   return (
     <div className=" top-0 sticky z-[999]">
@@ -76,15 +68,13 @@ const Header3 = () => {
                 <div>No Image available</div>
               )}
 
-
-
-              <CiSearch size={24} className="text-white mt-3 md:hidden" />
+              {/* <SearchIcon size={24} className="text-white mt-3 md:hidden" /> */}
             </div>
 
             <div className=" justify-between   hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
 
               <div className="flex">
-                <IoIosSearch size={20} />
+                <SearchIcon size={20} />
                 <input
                   className="border-none focus:outline-none  placeholder:text-sm placeholder-black w-full px-2 text-sm"
                   placeholder="Search Your Next Destination"
@@ -99,13 +89,13 @@ const Header3 = () => {
             <div className="hidden md:flex gap-3">
               <button className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg">
                 <span>
-                  <RiLoginCircleFill />
+                  <LoginIcon />
                 </span>{" "}
                 Login{" "}
               </button>
               <button className="flex items-center gap-2 px-2 py-1 text-sm border-white border text-white rounded-lg">
                 <span>
-                  <FaUser />
+                  <SignupIcon />
                 </span>{" "}
                 Sign up{" "}
               </button>
@@ -120,7 +110,7 @@ const Header3 = () => {
         <ul className="container-wrapper flex gap-x-10 text-para">
           <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
             <span>
-              <FaHome />
+              <HomeIcon />
             </span>
             Home
           </li>

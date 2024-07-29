@@ -55,15 +55,19 @@
 
 import React from "react";
 import Image from "next/image";
-import { MdAttachMoney } from "react-icons/md";
+
 import im from "./im.webp";
-import { IoChevronBack } from "react-icons/io5";
+import {
+DownArrow ,DollerIcon
+} from "@/components/icons/index"
+
+
 const Forex = ({setOpenClose}) => {
   return (
     <div>
       <div className=" flex justify-between px-2 mt-3">
         <div className=" flex  items-center cursor-pointer" onClick={()=>setOpenClose(false)}>
-         <IoChevronBack className=" text-xl"/>
+        <div className="rotate-90 mt-2"> <DownArrow /></div>
          <p className=" font-semibold text-md">Forex</p>
         </div>
         <div>
@@ -73,7 +77,7 @@ const Forex = ({setOpenClose}) => {
       <hr className="border-b mt-5 border-gray-400  w-90 overflow-hidden  " />
       <h1 className=" mt-4  text-md font-bold leading-5 text-[#29499A] flex items-center ">
         <span>
-          <MdAttachMoney size={30} />
+        <DollerIcon/>
         </span>
         Buy and Sell foreign currency
       </h1>

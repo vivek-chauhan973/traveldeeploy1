@@ -1,17 +1,19 @@
 import React from "react";
-import { CiLocationOn } from "react-icons/ci";
-import { PiPathBold } from "react-icons/pi";
-import { IoChevronBack } from "react-icons/io5";
+import {
+ LocationIcon,RoadIcon,DownArrow 
+} from "@/components/icons/index"
 
 const Speciality = ({ setOpenClose }) => {
   return (
     <div className="flex h-[90vh] flex-col sm:p-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
       <div className="flex justify-between mt-3">
         <div
-          className="flex items-center cursor-pointer"
+          className="flex items-center cursor-pointer "
           onClick={() => setOpenClose(false)}
         >
-          <IoChevronBack className="text-xl" />
+
+          <div className="rotate-90 mt-2"> <DownArrow /></div>
+        
           <p className="font-semibold text-md">Speciality Tours</p>
         </div>
         <div>
@@ -24,9 +26,9 @@ const Speciality = ({ setOpenClose }) => {
       <div className="px-1">
         <div className="flex mt-1 gap-1">
           <span>
-            <CiLocationOn size={30} />
+          <LocationIcon/>
           </span>
-          <h1 className="text-blue-600 font-bold">
+          <h1 className="text-blue-600 text-md font-bold">
             POPULAR AND AVAILABLE TOURS
           </h1>
         </div>
@@ -75,9 +77,9 @@ const Speciality = ({ setOpenClose }) => {
 
         <div className="mt-6 flex gap-3 px-1">
           <span>
-            <PiPathBold size={30} />
+            <RoadIcon />
           </span>
-          <h1 className="text-blue-600 font-bold">
+          <h1 className="text-blue-600 text-md font-bold">
             POPULAR AND AVAILABLE TOURS
           </h1>
         </div>

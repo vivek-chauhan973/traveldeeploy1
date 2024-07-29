@@ -442,11 +442,6 @@ export default function Category () {
                     <div className="mt-5">
                         <ItineraryTour/>
                     </div>
-
-
-
-
-
                 </div>
             </Layout>
             </AppProvider>

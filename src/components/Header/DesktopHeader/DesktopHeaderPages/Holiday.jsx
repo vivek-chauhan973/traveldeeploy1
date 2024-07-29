@@ -1,71 +1,66 @@
-
-
-
-
-
-
-
-
 import React from "react";
-import { GiWillowTree } from "react-icons/gi";
-import { AiOutlineFundView } from "react-icons/ai";
-import { CiHeart } from "react-icons/ci";
-import { PiCatThin } from "react-icons/pi";
-import { GrNavigate } from "react-icons/gr";
 import Image from "next/image";
-import { GiCornerFlag } from "react-icons/gi";
-import { FaRegChessQueen } from "react-icons/fa6";
-import { IoAirplaneOutline } from "react-icons/io5";
+import {
+  FunIcon ,
+  LoveIcon,
+  TreeIcon ,
+  FlagIcon,
+  PlanIcon,
+  Tree1Icon,
+  WinIcon,
+  CatIcon
+} from "@/components/icons/index"
+
 const Holiday = () => {
   return (
     <div className="flex w-[700px] h-auto bg-gray-100 mt-4 justify-around rounded-sm">
       <div>
         <h1 className=" mt-4  text-md font-bold leading-5 text-[#29499A] flex items-center gap-2 ">
           <span>
-            <GiWillowTree size={20} />
+            <Tree1Icon/>
           </span>
           THEMED EXPERINCE -Find your reason!
         </h1>
         <div className=" gap-y-4 flex flex-col mt-2">
           <p className="flex items-center gap-3">
             <span>
-              <AiOutlineFundView size={20} />
+              <FunIcon />
             </span>
             Family fun
           </p>
           <p className="flex items-center gap-3">
             <span>
-              <CiHeart size={20} />
+              <LoveIcon/>
             </span>
             Romantic Holiday
           </p>
           <p className="flex items-center gap-3">
             <span>
-              <PiCatThin size={20} />
+              <CatIcon />
             </span>
             City Breakes
           </p>
           <p className="flex items-center gap-3 ">
             <span>
-              <GrNavigate size={20} />
+              <TreeIcon />
             </span>
             gateway
           </p>
           <p className="flex items-center gap-3 ">
             <span>
-              <GiCornerFlag size={20} />
+              <FlagIcon />
             </span>
             Aventure stiries{" "}
           </p>
           <p className="flex items-center gap-3 ">
             <span>
-              <FaRegChessQueen size={20} />
+              <WinIcon />
             </span>
             Taj Holoiday
           </p>
           <p className="flex items-center gap-3 ">
             <span>
-              <IoAirplaneOutline size={20} />
+              <PlanIcon />
             </span>
             Air Inclusive Holidays
           </p>

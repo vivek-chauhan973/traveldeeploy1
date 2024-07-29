@@ -1,11 +1,12 @@
 
-
-
 import Image from "next/image";
 import React from "react";
 import image from "./im.webp";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoChevronBack } from "react-icons/io5";
+
+import {
+DownArrow 
+ } from "@/components/icons/index"
+
 const World = ({ setOpenClose }) => {
   return (
     <div className="pl-1 sm:pl-2 w-full h-[90vh] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
@@ -14,7 +15,8 @@ const World = ({ setOpenClose }) => {
           className=" flex  items-center cursor-pointer"
           onClick={() => setOpenClose(false)}
         >
-          <IoChevronBack className=" text-xl" />
+    <div className="rotate-90 mt-2"> <DownArrow /></div>
+    
           <p className=" font-semibold text-md">World</p>
         </div>
         <div>
@@ -87,9 +89,9 @@ const World = ({ setOpenClose }) => {
         <div className="flex flex-col mt-4 lg:pl-2  px-2">
           <div className=" flex justify-between">
             <h1 className=" font-semibold text-md">AFRICA</h1>
-            <span>
-              <IoIosArrowDown className=" cursor-pointer" />
-            </span>
+            <span className=" cursor-pointer">
+            <DownArrow />
+          </span>
           </div>
           <div className="mt-2">
             <p className=" mt-2 text-blue-600  font-semibold">All of Africa </p>

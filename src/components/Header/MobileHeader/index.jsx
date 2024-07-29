@@ -1,7 +1,9 @@
 
 import { useState } from "react";
-import { IoReorderThreeOutline } from "react-icons/io5";
 import Header1 from "./MobileHeaderPages/Header1";
+import {
+  BarIcon
+} from "@/components/icons/index"
 
 
 function Header2() {
@@ -11,14 +13,16 @@ function Header2() {
       {togle ? (
         <Header1 setTogle={setTogle} togle={togle} />
       ) : (
-        <IoReorderThreeOutline
-          className=" text-2xl -my-4 text-white md:-ml-10"
+
+        <div className=" text-2xl -my-4 text-white md:-ml-10"
           onClick={() => {
             setTogle(true);
-          }}
-        />
+          }}>
+          <BarIcon />
+        </div>
+
       )}
-     
+
     </>
   );
 }

@@ -1,16 +1,21 @@
 import Image from "next/image";
 import React from "react";
 import image from  './im.webp'
-import { IoIosArrowDown } from "react-icons/io";
-//import { IoIosArrowForward } from "react-icons/io";
-import { IoChevronBack } from "react-icons/io5";
+
+import {
+DownArrow 
+ } from "@/components/icons/index"
+ 
 const SliderCircle = ({setOpenClose}) => {
   
   return (
     <div className="w-full h-[90vh] px-1 sm:px-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
       <div className=" flex justify-between mt-3">
         <div className=" flex  items-center cursor-pointer" onClick={()=>setOpenClose(false)}>
-         <IoChevronBack className=" text-xl"/>
+          <div className=" mt-2 rotate-90">
+          <DownArrow />
+          </div>
+
          <p className=" font-semibold text-md">India</p>
         </div>
         <div>
@@ -74,8 +79,8 @@ const SliderCircle = ({setOpenClose}) => {
       <div className="flex flex-col px-3 mt-4">
         <div className=" flex justify-between">
           <h1 className=" font-semibold text-md">NORTH INDIA</h1>
-          <span>
-            <IoIosArrowDown className=" cursor-pointer" />
+          <span className=" cursor-pointer">
+            <DownArrow />
           </span>
         </div>
         <div className="mt-2">
