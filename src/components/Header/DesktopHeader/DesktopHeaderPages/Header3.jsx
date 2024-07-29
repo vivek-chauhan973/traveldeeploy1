@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import dynamic from 'next/dynamic';
-
-const FaHome = dynamic(() => import('react-icons/fa').then((mod) => mod.FaHome));
-const IoIosSearch = dynamic(() => import('react-icons/io').then((mod) => mod.IoIosSearch));
-const RiLoginCircleFill = dynamic(() => import('react-icons/ri').then((mod) => mod.RiLoginCircleFill));
-const FaUser = dynamic(() => import('react-icons/fa').then((mod) => mod.FaUser));
-const FaBars = dynamic(() => import('react-icons/fa').then((mod) => mod.FaBars));
-
+import React from "react";
+import { FaHome } from "react-icons/fa";
+import { IoIosSearch } from "react-icons/io";
+import { RiLoginCircleFill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa";
+import { FaBars } from "react-icons/fa6";
 import FlyoutLink from "./FlyoutLink";
 import { header } from "./Data";
 import Header2 from "../../MobileHeader";
@@ -18,39 +15,6 @@ import { CiSearch } from "react-icons/ci";
 
 
 const Header3 = () => {
-
-
-  const [logo, setLogo] = useState(null);
-  console.log("imaheeee", logo?.path)
-  console.log("logo", logo)
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/logo/logo1');
-        // Check if the response is successful
-        if (response.ok) {
-          // Parse JSON data
-          const result = await response.json();
-          // Update state with the data
-          setLogo(result);
-        } else {
-          console.error('Network response was not ok');
-        }
-      } catch (error) {
-        console.error('Fetch error:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-
-
-
-
   // console.log(header);
   return (
     <div className=" top-0 sticky z-[999]">
@@ -65,19 +29,11 @@ const Header3 = () => {
                 </div>
                 <div className="flex justify-between  ">
                   {/* <Image  src={Logo} alt=""  /> */}
-                </div>
+                </div> 
               </div>
               {/* <Image  src={Logo} alt="" height={60} width={60} /> */}
               {/* <Image width={160} height={160} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" /> */}
-              {logo ? (
-
-                <Image src={logo?.data?.[0]?.path} height={200} width={200} alt="Logo" />
-              ) : (
-                <div>No Image available</div>
-              )}
-
-
-
+              
               <CiSearch size={24} className="text-white mt-3 md:hidden" />
             </div>
 
