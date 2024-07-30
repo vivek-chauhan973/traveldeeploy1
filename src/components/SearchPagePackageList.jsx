@@ -16,7 +16,7 @@ const fetchPackages = async (locationId) => {
   return data.packages;
 };
 const filteredData = async (id, cat, min, max) => {
-  const response = await fetch(`http://localhost:3000/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}`)
+  const response = await fetch(`/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}`)
   const data = await response.json();
   return data;
 }

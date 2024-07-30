@@ -31,7 +31,7 @@ const ItineraryTourDetails = () => {
                 <div className="border rounded-b-lg  overflow-hidden">
                     <div className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${activeTab === 'tab1' ? 'block' : 'hidden'}`}>
                         <div>
-                            <div className='mb-5'>
+                            <div className=' md:my-0 my-3'>
                                 <p className='text-sm font-semibold text-graytext'>Departure & Arrival</p>
                             </div>
 
@@ -68,7 +68,7 @@ const ItineraryTourDetails = () => {
                         {
 
 
-                            <p className=" marker:text-green-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
+                            <p className="text-para marker:text-green-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
 
                         }
 
@@ -88,7 +88,7 @@ const ItineraryTourDetails = () => {
                     <div className={` py-4  px-6 ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
                         {
 
-                            <p className=" marker:text-red-800 " dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
+                            <p className="text-para marker:text-red-800 " dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
                         }
                     </div> 
                 </div>

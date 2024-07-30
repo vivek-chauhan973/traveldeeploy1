@@ -6,7 +6,9 @@ import "slick-carousel/slick/slick-theme.css";
 // Dynamically import components
 const DepartureSection = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/DepartureSection"));
 const ItineraryPricingCard = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/ItineraryPricingCard"));
-import ItineraryHeroSection from "@/components/ItineraryDetail/ItineraryHeroSection";const Itinerary = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/Itinerary"));
+import ItineraryHeroSection from "@/components/ItineraryDetail/ItineraryHeroSection";
+// const Itinerary = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/Itinerary"));
+const ItineraryFaq = dynamic(() => import("@/components/itinerarylist/ItineraryFaq"))
 const ItineraryTourDetails = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItineraryTourDetails"));
 const ItineraryPaymentTerms = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItineraryPaymentTerms"));
 const ItinerarySideCard = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItinerarySideCard"));
@@ -244,10 +246,14 @@ useEffect(()=>{
                 {addPackage?.dayWiseInformation}
               </p>
             </div>
-            {/* <Itinerary/>    */}
-            <Itinerary />
-            {/* Itinerary map */}
-            <Itinerarymap />
+            <div className="mb-10">
+              {/* <Itinerary /> */}
+              <ItineraryFaq/>
+            </div>
+            <div>
+              {/* Itinerary map */}
+              <Itinerarymap />
+            </div>
             {/* <!- TOUR DETAILS IS HERE --> */}
             <ItineraryTourDetails />
             {/* Privacy policy Terms */}
@@ -256,8 +262,8 @@ useEffect(()=>{
             </div>
           </div>
           <div className=" mt-10">
-            <div className="sticky top-[220px] z-20">
-              <div className="flex gap-1 items-center  justify-end ">
+            <div className="sticky top-[50px] z-20">
+              <div className="flex gap-1 justify-center items-center">
                 <div className="items-center flex flex-col p-2 text-center">
                   <Image
                     className="w-4"
@@ -288,9 +294,10 @@ useEffect(()=>{
                   />
                   <p className="text-[12px]">Email Itinerary</p>
                 </div>
+                
               </div>
               {/* card is here */}
-              <ItinerarySideCard />
+                <ItinerarySideCard />
             </div>
           </div>
         </div>

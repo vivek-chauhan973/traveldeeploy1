@@ -154,9 +154,13 @@ const Cancellation = () => {
                                     {(isEditing && editGroupId === group._id) ? (
                                         <DeleteIcon size={24} className='mt-1 opacity-50 cursor-not-allowed' />
                                     ) : (
-                                        <DeleteIcon onClick={() => toggleModal(group._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                        <div onClick={() => toggleModal(group._id)}>
+                                            <DeleteIcon size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                        </div>
                                     )}
-                                    <EditIcon onClick={() => handleEdit(group._id)} size={24} className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-red-500 cursor-pointer') : ''}`} />
+                                    <div onClick={() => handleEdit(group._id)}>
+                                        <EditIcon  size={24} className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-red-500 cursor-pointer') : ''}`} />
+                                    </div>
                                 </div>
                             </div>
                         ))}
