@@ -6,11 +6,13 @@ import '../../app/globals.css';
 import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import ItineraryFaq from '@/components/itinerarylist/ItineraryFaq';
+// import ItineraryFaq from '@/components/itinerarylist/ItineraryFaq';
 import BottomLink from '@/components/ItineraryDetail/BottomLink';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
+import Faq1 from '@/components/Faq/Faq1';
+
 
 const fetchPromoManagementData = async (stateId) => {
     // Ensure stateId is not undefined before fetching
@@ -63,7 +65,7 @@ export default function SearchPage() {
     const handleApplyFilter = (priceRange) => {
         setSelectedPriceRange(priceRange);
     };
-
+console.log("fffffffffff",promoData)
     return (
         <AppProvider>
             <div className='bg-slate-100'>
@@ -107,11 +109,22 @@ export default function SearchPage() {
                 <div className="container-wrapper py-12">
                     {!loading ? (
                         <div>
-                            <ItineraryFaq promoData={promoData} />
+                            {/* <ItineraryFaq promoData={promoData} /> */}
                         </div>
                     ) : (
                         <div>
                             <PromoList />
+                        </div>
+                    )}
+                </div>
+                      <div>
+                    {!loading ? (
+                        <div className="border-t border">
+                            {/* <Faq1 title={promoData} description={promoData}/> */}
+                        </div>
+                    ) : (
+                        <div>
+                            <PromoLink />
                         </div>
                     )}
                 </div>
