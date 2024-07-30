@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 import "../../../app/globals.css";
 import Layout from "../../../components/admin/Layout";
@@ -10,6 +10,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+import Image from "next/image";
 
 // Dynamic import for Quill.js as it needs to be loaded on the client-side
 const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
@@ -30,6 +31,11 @@ export default function CarPackage() {
     const [exclusionValidate, setExclusionValidate] = useState('');
     const [readBeforeBook, setReadBeforeBook] = useState('');
     const [readBeforeBookValidate, setReadBeforeBookValidate] = useState('');
+    const [carsList, setCarsList] = useState();
+    const [isSelectedCar, setSelectedCar] = useState();
+
+    console.log("car list show is data",carsList?.data)
+    console.log("car images---- show is data",isSelectedCar?.imageDetails)
     const [map, setMap] = useState('')
 
     const modules = {
@@ -158,8 +164,24 @@ const HandleMap = (event) => {
         setExclusion('');
         setReadBeforeBook('');
         setMap('');
-        console.log("all form data",setCar,setTitle)
     };
+
+
+    // fetch api carlist
+    useEffect(() => {
+        fetchCars();
+      }, []);
+
+    const fetchCars = async () => {
+        try {
+          const response = await fetch('/api/cars/carapi');
+          setCarsList(await response.json());
+          
+          
+        } catch (error) {
+          console.error("Error fetching cars:", error);
+        }
+      };
 
     return (
         <AppProvider>
@@ -178,12 +200,12 @@ const HandleMap = (event) => {
                                         <div className="w-36">
                                             <label htmlFor="cars" className="text-para font-semibold w-32">Choose a car:</label>
                                         </div>
-                                        <select name="cars" id="cars" className="border outline-[0.5px] flex justify-items-center" onChange={(e) => setCar(e.target.value)} value={car}>
+                                        <select name="cars" id="cars" className="border outline-[0.5px] flex justify-items-center" onChange={(e) => setSelectedCar(e.target.value)}>
                                             <option className="" value="" disabled>Choose a car</option>
-                                            <option className="" value="volvo">Volvo</option>
-                                            <option className="" value="saab">Saab</option>
-                                            <option className="" value="mercedes">Mercedes</option>
-                                            <option className="" value="audi">Audi</option>
+                                            <option className="" value="" >hello</option>
+                                            {carsList?.data.map((car,i)=>(
+                                                <option className="" key={i} value={JSON.stringify(car)} >{car.name}</option>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="flex gap-2 items-center">
@@ -201,7 +223,8 @@ const HandleMap = (event) => {
                                 </div>
                                 <div className="bg-slate-100 w-full h-full rounded-md flex justify-center">
                                     {/* here when select car then car name show is here */}
-                                    <p className=" self-center text-[28px] font-semibold text-[#dad8d8]">Choose A Car</p>
+                                    {/* <Image src={isSelectedCar?.imageDetails[0].url} width={100} height={100}/> */}
+                                    {/* <p className=" self-center text-[28px] font-semibold text-[#dad8d8]">Choose A Car</p> */}
                                 </div>
                             </div>
                             <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">

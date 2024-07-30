@@ -119,8 +119,6 @@ export default function PromoManage() {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
                 body: formData,
-
-
             });
 
             if (!response.ok) {
@@ -159,7 +157,7 @@ export default function PromoManage() {
                                     className='ml-4 h-7 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
                                     onChange={handleSelectChange}
                                 >
-                                    <option disabled selected>Select a category</option>
+                                    <option disabled selected>Select a state</option>
                                     {statePackages.map((state, i) => (
                                         <option
                                             key={i}
