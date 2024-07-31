@@ -19,6 +19,10 @@ const carPackageSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // carImage:{
+  //   type:String,
+  //   required: true
+  // },
   map: {
     type: String,
     required: true
@@ -30,10 +34,14 @@ const carPackageSchema = new mongoose.Schema({
   exclusion: {
     type: String,  // Array of strings for exclusion items
     required: true
+  },
+  readbook: {
+    type: String,  // Array of strings for exclusion items
+    required: true
   }
 });
 
 // Create the model
-const CarPackage = mongoose.model('CarPackage', carPackageSchema);
+const CarPackage =mongoose.models.CarPackage||mongoose.model('CarPackage', carPackageSchema);
 
 module.exports = CarPackage;
