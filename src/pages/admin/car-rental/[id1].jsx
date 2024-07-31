@@ -10,16 +10,20 @@ import "react-quill/dist/quill.snow.css";
 import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 // Dynamic import for Quill.js as it needs to be loaded on the client-side
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
-
+const fetchPackageDataById=async (id)=>{
+   const res=await fetch(`/api/cars/carpackages/${id}`)
+   const data=res.json();
+   return data;
+}
 export default function CarPackage() {
   // State variables for the Quill editors and validation
-  const [car, setCar] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -32,19 +36,30 @@ export default function CarPackage() {
   const [readBeforeBookValidate, setReadBeforeBookValidate] = useState("");
   const [carsList, setCarsList] = useState([]);
   const [isSelectedCar, setSelectedCar] = useState("");
-  var packageId = isSelectedCar ? JSON.parse(isSelectedCar)._id : null;
+  const [packageId,setPackageId]=useState(null);
   const [mapCode, setMapCode] = useState(null);
-
+  const [data,setdata]=useState(null)
+  const [handleUpdate,setHandleUpdate]=useState(false);
+  const router=useRouter();
+  const {id1}=router.query;
   const handleChange = (e) => {
     setMapCode(e.target.value);
-    // console.log("new value :: ",e.target.value);
   };
-  // console.log("new value :: ",mapCode);
-  // console.log("package id", packageId);
+// console.log("data",data)
+  useEffect(()=>{
+    fetchPackageDataById(id1).then(res=>setdata(res?.data))
+  },[id1,handleUpdate])
 
-  const [map, setMap] = useState("");
-  // console.log("Car List :::: ",carsList);
-
+  useEffect(()=>{
+    setPrice(data?.[0]?.carprice?.toString() ||"")
+    setDescription(data?.[0]?.description||"")
+    setInclusion(data?.[0]?.inclusion||'')
+    setExclusion(data?.[0]?.exclusion||"")
+    setTitle(data?.[0]?.title||"")
+    setReadBeforeBook(data?.[0]?.readbook||"")
+    setPackageId(data?.[0]?.id||null)
+    setMapCode(data?.[0]?.map||"")
+  },[data,handleUpdate])
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }],
@@ -152,24 +167,25 @@ export default function CarPackage() {
       readBeforeBook,
       mapCode,
     };
-    console.log("car Package data:::", newPackage);
-    await fetch("/api/cars/carpackages/carpackages", {
+    // console.log("car Package data:::", newPackage);
+    const data1=await fetch(`/api/cars/carpackages/${id1}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newPackage),
     });
-
-    setCar("");
+    if(data1){
+      setHandleUpdate(true)
+    }
+    
     setTitle("");
     setPrice("");
     setDescription("");
     setInclusion("");
     setExclusion("");
     setReadBeforeBook("");
-    setMapCode("");
-   
+   setMapCode("");
   };
 
   // Fetch API car list
@@ -282,6 +298,7 @@ export default function CarPackage() {
                     theme="snow"
                     value={description}
                     onChange={validateDescription}
+                    // dangerouslySetInnerHTML={{ __html: description }}
                     modules={modules}
                   />
                   <div>
@@ -381,7 +398,7 @@ export default function CarPackage() {
                   type="submit"
                   className="bg-black w-full rounded-md py-2 text-white"
                 >
-                  Submit
+                  update
                 </button>
               </div>
             </form>
