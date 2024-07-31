@@ -26,7 +26,7 @@ const [showPopup,setShowPopup]=useState(false);
             </div>
             <hr/>
             <div className="overflow-y-auto ">
-              <div className="flex flex-wrap gap-3 py-4">
+              <div className="flex flex-wrap gap-3 pt-4">
                 {city.map((item,i)=><div onClick={()=>setDatePackage(i)} 
                   className="flex justify-center items-center font-semibold text-sm hover:bg-green-300 hover:text-white cursor-pointer border rounded-full ml-2 py-2  px-3 " key={i}>
                   <span></span>{item}
@@ -61,17 +61,19 @@ const [showPopup,setShowPopup]=useState(false);
                   ></p>
                 </div>
 
-                <div className="my-4">
-                  <p className="text-md ml-2 font-semibold mb-2 p-1 text-graytext">
+              <hr />
+                <div className="ml-2 mt-2">
+                  <p className="text-md font-semibold mb-2 text-graytext">
                     Highlights
                   </p>
                   <div>
-                  <hr />
+                  <div>
                     {addPackage?.highlights?.map((highlight) => (
-                      <ol key={highlight._id} className="list-disc  p-2 ">
+                      <ol key={highlight._id} className="list-disc">
                         <li className="ml-5 mr-2 text-para">{highlight.text}</li>
                       </ol>
                     ))}
+                    </div>
                     {/* <div className= 'bg-gradient-to-t -mt-7  from-red-400 opacity-100 w-full  h-10 -top-2 z-30" ' ></div> */}
                   </div>
                 </div>

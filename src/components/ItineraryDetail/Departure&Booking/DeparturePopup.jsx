@@ -33,29 +33,29 @@ const ref=useRef(null);
    
   return (
     <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
-    <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-50"></div>
     
-    <div className="bg-white rounded-[20px]  shadow-lg z-50">
-    <div className=' float-right relative top-2 right-2 cursor-pointer' onClick={handlePopupClose}>X</div>
-        <h2 className="text-xl px-8 pt-8 font-semibold  text-center justify-center">Select your preferred departure city</h2>
-        <div className='pt-4 px-8'>
-            {data?.map((item,i)=><div key={i} className='flex gap-3 my-2'>
-                <input type="radio" name='radio' value={item} className=' h-6 w-6' onChange={()=>setHandleCity(true)} ref={ref}/>
-                <p className=' text-md'>{item}</p>
-            </div>)}
-        </div>
-        <div className="flex justify-center mt-4">
-            {/* <button onClick={() => toggleModal(null)} className="mr-5 bg-gray-500 hover:bg-gray-700 text-white font-normal py-3 px-8 rounded-[25px] ">
-                Cancel
-            </button> */}
-             <button onClick={handleSubmit}  className="  bg-yellow-300 hover:bg-yellow-600 text-black font-normal py-3 mb-3 px-8 rounded-[25px] mx-2 ">
-                {handleCity?"Proceed":"Select Departure"}
-            </button>
-            
-           
-        </div>
+      <div className="bg-white rounded-[20px]  shadow-lg z-50 p-5">
+          <div className=' flex justify-end items-center cursor-pointer' onClick={handlePopupClose}>X</div>
+          <div className="text-lg font-semibold p-2">
+            <p>Select your preferred departure city</p>
+          </div>
+          <div className='p-2'>
+              {data?.map((item,i)=><div key={i} className='flex gap-3 my-2'>
+                  <input type="radio" name='radio' value={item} className='w-5 h-5' onChange={()=>setHandleCity(true)} ref={ref}/>
+                  <p className='text-md'>{item}</p>
+              </div>)}
+          </div>
+          <div className="flex justify-center p-2">
+              {/* <button onClick={() => toggleModal(null)} className="mr-5 bg-gray-500 hover:bg-gray-700 text-white font-normal py-3 px-8 rounded-[25px] ">
+                  Cancel
+              </button> */}
+              <button onClick={handleSubmit}  className="  bg-yellow-300 hover:bg-yellow-600 text-black font-normal py-2 px-4 rounded-xl">
+                  {handleCity?"Proceed":"Select Departure"}
+              </button>  
+          </div>
+      </div>
     </div>
-</div>
   )
 }
 
