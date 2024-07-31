@@ -20,7 +20,7 @@ const [showPopup,setShowPopup]=useState(false);
         <div className="flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
           <div className="">
             <div className="flex gap-3  ">
-              <p className="text-base font-semibold p-4 text-graytext">
+              <p className="text-base font-semibold md:p-4 p-3 text-graytext">
                 1. SELECT DEPARTURE CITY & DATE
               </p>
             </div>
@@ -35,7 +35,7 @@ const [showPopup,setShowPopup]=useState(false);
 
               {/* select departure city */}
               <div className=" relative gap-4  py-4 ">
-                <h1 className=" font-semibold text-base ml-2 mb-2">All Departure date({AllDataRelatedCity[datePackage].length})</h1>
+                <h1 className=" font-semibold text-base ml-2 mb-3">All Departure date({AllDataRelatedCity[datePackage].length})</h1>
                 {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
                 <div className="flex my-2 gap-3 flex-wrap ml-5">
                   {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className=" cursor-pointer" >
@@ -62,7 +62,7 @@ const [showPopup,setShowPopup]=useState(false);
                 </div>
 
               <hr />
-                <div className="ml-2 mt-2">
+                <div className="ml-2 mt-3">
                   <p className="text-md font-semibold mb-2 text-graytext">
                     Highlights
                   </p>

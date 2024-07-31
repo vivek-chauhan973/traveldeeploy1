@@ -27,6 +27,7 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
+import { ClassNames } from '@emotion/react';
 
 export default function Package1() {
   const {
@@ -94,7 +95,7 @@ useEffect(()=>{
           fixedDeparturePopupOpen={fixedDeparturePopupOpen}
         />
       </div>
-      <div className="bg-gray-100  mt-[20px] pb-10"> 
+      <div className="bg-gray-100  mt-[20px] pb-7"> 
         <div className="container-wrapper mb-4">
           <div className="mb-[20px] pt-[40px]">
             <h1 className="text-lg font-medium text-graytext">
@@ -232,7 +233,7 @@ useEffect(()=>{
           <div>
             <div
               id="ItinerarySubSection"
-              className="flex  justify-between my-5"
+              className="flex  justify-between mt-5 mb-3"
             >
               <p className="text-lg font-semibold text-graytext">
                 Itinerary{" "}
@@ -242,11 +243,11 @@ useEffect(()=>{
               </p>
             </div>
             <div>
-              <p className="text-para leading-relaxed  pb-8">
+              <p className="text-para leading-relaxed  pb-5">
                 {addPackage?.dayWiseInformation}
               </p>
             </div>
-            <div className="mb-10">
+            <div className="mb-7">
               {/* <Itinerary /> */}
               <ItineraryFaq/>
             </div>
@@ -257,7 +258,7 @@ useEffect(()=>{
             {/* <!- TOUR DETAILS IS HERE --> */}
             <ItineraryTourDetails />
             {/* Privacy policy Terms */}
-            <div id="Policy&TermsSection" className="pt-9">
+            <div id="Policy&TermsSection" className="pt-7">
               <ItineraryPaymentTerms />
             </div>
           </div>
@@ -297,14 +298,18 @@ useEffect(()=>{
                 
               </div>
               {/* card is here */}
-                <ItinerarySideCard />
+              <div ClassName="xl;block hidden">
+               <ItinerarySideCard />
+              </div>
             </div>
           </div>
         </div>
       </div>
       {/* review card */}
-      <ReviewsCard />
-      <div className="container-wrapper pt-6 md:pt-10">
+      <div className="mt-7 mb-5">
+        <ReviewsCard/>
+      </div>
+      <div className="container-wrapper ">
         <div>
           <h2 className="md:text-xl font-semibold  text-lg">
             Similar Tour Packages
@@ -314,7 +319,7 @@ useEffect(()=>{
           </h2>
         </div>
       </div>
-      <div className=" mt-2">
+      <div className="mt-5">
         <TestingCard addPackage={addPackage} />
       </div>
       {/* bottom link */}
