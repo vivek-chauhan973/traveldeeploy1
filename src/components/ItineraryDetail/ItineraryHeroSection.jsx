@@ -60,23 +60,22 @@ const ItineraryHeroSection = ({
     <>
 
       <div>
+        <div className="slider-container xl:hidden mt-7">
+          
+          <div className="slider-container overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
+            {hemages?.map((item, i) => (
+              <div key={i} className="snap-center flex-shrink-0 w-full">
+                <img
+                  className="w-full h-[50vh] object-cover"
+                  src={item.path || "/logo.png"}
+                  alt={`img ${i + 1}`}
+                />
+              </div>
+            ))}
+        </div>
+        </div>
         <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="">
-            <div className="slider-container xl:hidden mt-7">
-              <Slider {...settings}>
-                {hemages?.map((item, i) => (
-                  <div key={i}>
-                    <img
-                      className=" w-full object-cover h-[40vh]"
-                      src={item?.path || "/logo.png"}
-                      width={200}
-                      height={100}
-                      alt={`img ${i + 1}`}
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
             <img
               className="rounded-md h-[350px] object-cover w-full hidden xl:flex"
               src={hemages && hemages?.[0]?.path|| "/logo.png"}
@@ -111,11 +110,11 @@ const ItineraryHeroSection = ({
           </div>
           <div>
             <div>
-              <div className="flex justify-between my-2">
-                <h1 className=" text-lg  md:text-xl font-semibold">
+              <div className="flex justify-between my-2 p-2 bg-navyblack rounded-lg">
+                <h1 className=" text-lg  md:text-xl font-semibold capitalize text-white">
                   {addPackage?.name}
                 </h1>
-                <div className="flex items-center justify-center border rounded-full w-6 h-6">
+                {/* <div className="flex items-center justify-center border rounded-full w-6 h-6">
                   <img
                     className=" p-1 "
                     src="https://www.svgrepo.com/show/13666/heart.svg"
@@ -123,24 +122,33 @@ const ItineraryHeroSection = ({
                     width={200}
                     height={100}
                   />
-                </div>
+                </div> */}
               </div>
               <div className="stick top-1">
-                <div className="flex flex-wrap gap-2 text-xxs font-semibold text-white">
-                  <button className=" rounded-full rounded-badge bg-navyblack py-1 px-2">
-                    8 Days / 7 Nights
+              <div className="flex flex-wrap gap-2 text-xxs font-semibold text-white">
+                {addPackage?.badges?.map((badge, index) => (
+                  <button
+                    key={index}
+                    className={`rounded-full py-1 px-2 ${
+                      index === 0
+                        ? 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize'
+                        : 'bg-navyblack'
+                    }`}
+                  >
+                    {badge}
                   </button>
-                  <button className=" rounded-badge py-1 px-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full">
-                    Early bird sales!
-                  </button>
-                </div>
+                ))}
+              </div>
                 <div className="flex justify-between mt-2">
                   <div className="flex flex-wrap gap-1 items-center">
                     <p className="md:text-md text-[16px] ">
                       Start & City:{" "}
-                      <span className="font-semibold text-graytext">
-                        Mumbai
-                      </span>
+                      {addPackage?.startcity?.map((city, index) => (
+                        <span key={index} className="capitalize font-semibold text-graytext">
+                          {city}{index < addPackage.startcity.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+
                     </p>
 
                   </div>

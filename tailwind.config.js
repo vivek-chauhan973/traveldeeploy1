@@ -49,15 +49,22 @@ const config = {
         navyblacklite: "#ceced6",
         graytext: "#212221",
       },
-      // gradientColorStops: theme => ({
-      //   'cyan-blue-gradient': {
-      //     'from': theme('colors.cyan.500'),
-      //     'to': theme('colors.blue.500'),
-      //   },
-      // }),
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".hide-scrollbar": {
+          "-ms-overflow-style": "none" /* Internet Explorer 10+ */,
+          "scrollbar-width": "none" /* Firefox */,
+        },
+        ".hide-scrollbar::-webkit-scrollbar": {
+          display: "none" /* WebKit */,
+        },
+      };
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };
 
 export default config;

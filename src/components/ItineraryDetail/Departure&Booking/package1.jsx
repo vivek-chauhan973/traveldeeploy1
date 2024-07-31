@@ -29,6 +29,7 @@ import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from '@/components/Faq/Faq1';
+import Metatag from '../metatag';
 
 export default function Package1() {
   const {
@@ -77,6 +78,7 @@ export default function Package1() {
   }, [closeBtn])
   return (
     <div>
+    <Metatag seoData={addPackage}/>
       <div className=" absolute w-full ">
         <DesktopHeader />
       </div>

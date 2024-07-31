@@ -27,9 +27,9 @@ const [showPopup,setShowPopup]=useState(false);
             <hr/>
             <div className="overflow-y-auto ">
               <div className="flex flex-wrap gap-3 pt-4">
-                {city.map((item,i)=><div onClick={()=>setDatePackage(i)} 
+                {addPackage?.startcity?.map((item,i)=><div onClick={()=>setDatePackage(i)} 
                   className="flex justify-center items-center font-semibold text-sm hover:bg-green-300 hover:text-white cursor-pointer border rounded-full ml-2 py-2  px-3 " key={i}>
-                  <span></span>{item}
+                  <span>{item}</span>
                 </div>)}
               </div>
 

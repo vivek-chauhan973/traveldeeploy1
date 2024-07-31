@@ -206,7 +206,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setPackageTitleName(itinerary?.name);
         setDisplayPrice(itinerary?.price);
         setSelectedLocation(itinerary?.location);
-        handleSelectCountry(itinerary?.associateCountry._id);
+        handleSelectCountry(itinerary?.associateCountry?._id);
         handleSelectState(itinerary?.associateState?._id);
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
