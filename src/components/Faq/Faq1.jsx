@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid';
 
-const Faq1 = ({ title ,description}) => {
+const Faq1 = ({ title, description }) => {
     // promoData
 
-
+    const [openIndex, setOpenIndex] = useState(null);
     const handleToggle = (i) => {
         setOpenIndex(openIndex === i ? null : i);
     };
@@ -32,6 +32,8 @@ const Faq1 = ({ title ,description}) => {
                 Eligendi maiores nulla delectus vel.`
         },
     ];
+    console.log("................data print",title.title)
+    console.log("................data print",title.title)
     return (
         <div className="w-full md:w-3/4 m-auto ">
 
@@ -42,14 +44,14 @@ const Faq1 = ({ title ,description}) => {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 </p>
             </div>
-            <div></div>
+            {/* <div>{title}</div> */}
             <div className="w-full mx-auto mt-10">
                 {sections.map((item, i) => (
                     <div key={i} className=" mb-3">
                         <div className="w-full flex justify-between items-center px-5 py-2 bg-gray-100 rounded-md hover:bg-gray-200"
                             onClick={() => handleToggle(i)}>
                             <p className="text-base md:font-medium font-normal">{item.title}</p>
-                            {openIndex === i ? (<ChevronUpIcon className="h-5 w-5 text-gray-600" />) : (
+                            { openIndex === i ? (<ChevronUpIcon className="h-5 w-5 text-gray-600" />) : (
                                 <ChevronDownIcon className="h-5 w-5 text-gray-600" />)}
                         </div>
                         <div className={`overflow-hidden transition-max-height duration-700 ease-in-out 
