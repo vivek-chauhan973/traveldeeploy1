@@ -5,27 +5,27 @@ import { FaEdit } from "react-icons/fa";
 import Link from "next/link";
 import { IoIosSearch } from "react-icons/io";
 import Image from 'next/image'
-import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
 import Pagination from "react-js-pagination";
 import { LuPackagePlus } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-
+const fetchImage=async ()=>{
+    const response = await fetch("/api/cars/carapi");
+    return response.json();
+}
 const CarList = () => {
     const [carsList, setCarsList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8); // Number of items per page
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [deletedId, setDeletedId] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         // Fetch car data
         const fetchCarData = async () => {
             try {
-                const response = await fetch('/api/package/get-packages');
+               const response= await fetch('/api/cars/carpackages/carpackages');
                 const data = await response.json();
-                setCarsList(data.packages || []); // Provide a default empty array if data.packages is undefined
+                setCarsList(data?.data || []); // Provide a default empty array if data.packages is undefined
             } catch (error) {
                 console.error("Error fetching car data:", error);
             }
@@ -34,16 +34,26 @@ const CarList = () => {
         fetchCarData();
     }, []);
 
-    const handleDelete = () => {
-        // Perform delete action here
-        setIsModalOpen(false);
-        // console.log("Deleting item with ID:", deletedId);
-        // Handle delete logic...
-    };
-
-    const deleteItem = (id) => {
-        setIsModalOpen(true);
-        setDeletedId(id);
+    useEffect(()=>{
+        // fetchImage().then(res=>console.log("res image",res))
+    },[])
+    const deleteItem = async (id) => {
+    const bool1=confirm("Do you want to delete paclage")
+    if(bool1){
+        const data=await fetch(`/api/cars/carpackages/${id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          const newCarsList=carsList.filter(item=>item?._id!==id);
+          setCarsList(newCarsList);
+          if(data){
+          alert(`${id} item successfully deleted from database`)
+          }
+//  console.log("data",data)
+        }
+        
     };
 
     const handlePageChange = (pageNumber) => {
@@ -54,25 +64,18 @@ const CarList = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     // Filter items based on search query
-    let filteredCarsList = carsList.filter((car) =>
-        car.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    console.log("data found successfully 11::",carsList)
+    // let filteredCarsList = carsList?.filter((car) =>
+    //     car?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+    // );
 
-    const totalItemsCount = filteredCarsList.length;
+    const totalItemsCount = carsList?.length;
     const totalNumberOfPages = Math.ceil(totalItemsCount / itemsPerPage);
-    const currentItems = filteredCarsList.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = carsList?.slice(indexOfFirstItem, indexOfLastItem);
 
     return (
         <AppProvider>
         <Layout>
-            <div>
-                <DeleteModal
-                    Deleted_id={deletedId}
-                    isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}
-                    onDelete={handleDelete}
-                />
-            </div>
             <div className="w-30 overflow-auto">
                 <div className="p-4 min-w-[768px] overflow-x-auto">
                     <div className="flex justify-between items-center pb-5">
@@ -112,19 +115,19 @@ const CarList = () => {
                                     <td className="py-2 pl-4 w-52">
                                         <Image
                                             className="w-40 h-16 object-cover rounded"
-                                            src="https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                            src={car?.id?.imageDetails?.[0]?.url?car?.id?.imageDetails?.[0]?.url:"https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                                             alt=""
                                             width="1920"   height="1280"
                                         />
                                     </td>
-                                    <td className="py-4 pl-4 border-x capitalize">{car.name}</td>
-                                    <td className="py-4 pl-4 border-x">Rs {car.price}</td>
-                                    <td className="py-4 pl-4 border-x">{car.status}</td>
+                                    <td className="py-4 pl-4 border-x capitalize">{car.title}</td>
+                                    <td className="py-4 pl-4 border-x">Rs {car.carprice}</td>
+                                    <td className="py-4 pl-4 border-x">{0}</td>
                                     <td className="justify-center flex gap-2 items-center my-auto py-3">
-                                        <Link href={"./itinerary/" + car.id + "?type=edit"}>
+                                        <Link href={"./" + car._id + "?type=edit"}>
                                             <FaEdit size={20} className="mt-1 hover:text-red-500 cursor-pointer" />
                                         </Link>
-                                        <MdDeleteForever onClick={() => deleteItem(car.id)} size={24} className="mt-1 hover:text-red-500 cursor-pointer" />
+                                        <MdDeleteForever onClick={() => deleteItem(car._id)} size={24} className="mt-1 hover:text-red-500 cursor-pointer" />
                                     </td>
                                 </tr>
                             ))}

@@ -12,7 +12,7 @@ const ItineraryPaymentTerms = () => {
     };
     return (
         <>
-            <div className="my-[10px] mb-[10px]">
+            <div>
                 <p className="md:text-lg text-md font-semibold text-graytext">
                     Payment Terms
                 </p>
@@ -25,7 +25,7 @@ const ItineraryPaymentTerms = () => {
             <div>
                 
                 <div id="TourDetailsSection">
-                    <div className="flex justify-between mt-5  gap-2 border-b-2 border-navyblack">
+                    <div className="flex justify-between mt-2  gap-2 border-b-2 border-navyblack">
                         <div
                             onClick={() => handleTabClick("tab1")}
                             className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px]   ${activeTab === "tab1"
