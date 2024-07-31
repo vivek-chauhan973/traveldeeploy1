@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const DepartureSection = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/DepartureSection"));
 const ItineraryPricingCard = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/ItineraryPricingCard"));
 import ItineraryHeroSection from "@/components/ItineraryDetail/ItineraryHeroSection";
-// const Itinerary = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/Itinerary"));
+const Itinerary = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/Itinerary"));
 const ItineraryFaq = dynamic(() => import("@/components/itinerarylist/ItineraryFaq"))
 const ItineraryTourDetails = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItineraryTourDetails"));
 const ItineraryPaymentTerms = dynamic(() => import("@/components/ItineraryDetail/Itinerarypackage/ItineraryPaymentTerms"));
@@ -19,14 +19,16 @@ const CustomiseTour = dynamic(() => import("@/components/ItineraryDetail/Customi
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 const Addguest = dynamic(() => import("@/components/addguest"));
 const TestingCard = dynamic(() => import("@/components/ItineraryDetail/TestingCard"));
-import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureCard"));
+import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader"; const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureCard"));
 const FixedDeparturePopup = dynamic(() => import("./FixedDeparturePopup"));
+
 
 // Import React and other dependencies
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
+import Faq1 from '@/components/Faq/Faq1';
 
 export default function Package1() {
   const {
@@ -65,14 +67,14 @@ export default function Package1() {
       setFixedDepDate1(fixedDepDate);
     }
   };
-  // console.log("addPackage12324", addPackage);
-  const [buttonGuest,setButtonGuest]=useState("Add Guest & Room");
-  
-useEffect(()=>{
-  if(closeBtn){
-    setButtonGuest("Book Now");
-  }
-},[closeBtn])
+  console.log("addPackage12324", addPackage);
+  const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
+
+  useEffect(() => {
+    if (closeBtn) {
+      setButtonGuest("Book Now");
+    }
+  }, [closeBtn])
   return (
     <div>
       <div className=" absolute w-full ">
@@ -94,7 +96,7 @@ useEffect(()=>{
           fixedDeparturePopupOpen={fixedDeparturePopupOpen}
         />
       </div>
-      <div className="bg-gray-100  mt-[20px] pb-10"> 
+      <div className="bg-gray-100  mt-[20px] pb-10">
         <div className="container-wrapper mb-4">
           <div className="mb-[20px] pt-[40px]">
             <h1 className="text-lg font-medium text-graytext">
@@ -248,7 +250,8 @@ useEffect(()=>{
             </div>
             <div className="mb-10">
               {/* <Itinerary /> */}
-              <ItineraryFaq/>
+              <ItineraryFaq faq={addPackage?.days}/>
+
             </div>
             <div>
               {/* Itinerary map */}
@@ -294,10 +297,10 @@ useEffect(()=>{
                   />
                   <p className="text-[12px]">Email Itinerary</p>
                 </div>
-                
+
               </div>
               {/* card is here */}
-                <ItinerarySideCard />
+              <ItinerarySideCard />
             </div>
           </div>
         </div>
@@ -318,6 +321,16 @@ useEffect(()=>{
         <TestingCard addPackage={addPackage} />
       </div>
       {/* bottom link */}
+      {/* FAQ section  */}
+      <div className='mt-12'>
+        <div className="text-center mb-4">
+            <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
+          <p className="text-para md:text-base">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+        </div>
+        <Faq1 data={addPackage?.faqs?.days} />
+      </div>
       <BottomLink />
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
@@ -358,28 +371,26 @@ useEffect(()=>{
                     addPackage={addPackage}
                   >
                     <p
-                      className={` ${
-                        showAddguest
+                      className={` ${showAddguest
                           ? "bg-primary cursor-pointer"
                           : "bg-orange-200"
-                      } px-5 py-2 rounded-md text-white text-center text-para`}
+                        } px-5 py-2 rounded-md text-white text-center text-para`}
                     >
-                      <span className="disabled:opacity-75" onClick={()=>setPricingShowPopup(true)}>
+                      <span className="disabled:opacity-75" onClick={() => setPricingShowPopup(true)}>
                         {buttonGuest}
                       </span>
                     </p>
                   </Addguest>
                 )}
-                
+
 
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
-                    className={`border px-5 py-1 rounded-md ${
-                      fixedDepartureButtonEnaibleAndDisable
+                    className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                         ? "bg-primary"
                         : " bg-orange-200"
-                    }  text-center text-para`}
+                      }  text-center text-para`}
                   >
                     Book Noow
                   </button>
@@ -404,6 +415,6 @@ useEffect(()=>{
         </div>
       </div>
     </div>
-    
+
   );
 }
