@@ -27,7 +27,7 @@ const handleSubmit=()=>{
 }
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+  <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
       <h1 onClick={()=>togglePopup(false)} className="float-right relative -top-5 font-bold cursor-pointer">X</h1>
       <h2 className="text-2xl font-bold mb-4">Name:Pradhumn</h2>
