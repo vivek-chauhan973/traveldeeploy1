@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 import "../../../app/globals.css";
 import Layout from "../../../components/admin/Layout";
-import { MdOutlineAddCircle } from "react-icons/md";
-import { MdDeleteForever } from "react-icons/md";
+import { MdOutlineAddCircle, MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { BiSolidCarMechanic } from "react-icons/bi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import 'react-quill/dist/quill.snow.css'; // Import Quill styles
+import 'react-quill/dist/quill.snow.css';
 import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
@@ -31,12 +30,13 @@ export default function CarPackage() {
     const [exclusionValidate, setExclusionValidate] = useState('');
     const [readBeforeBook, setReadBeforeBook] = useState('');
     const [readBeforeBookValidate, setReadBeforeBookValidate] = useState('');
-    const [carsList, setCarsList] = useState();
-    const [isSelectedCar, setSelectedCar] = useState();
+    const [carsList, setCarsList] = useState([]);
+    const [isSelectedCar, setSelectedCar] = useState('');
+    var packageId = isSelectedCar ? JSON.parse(isSelectedCar)._id : null
 
-    console.log("car list show is data",carsList?.data)
-    console.log("car images---- show is data",isSelectedCar?.imageDetails)
-    const [map, setMap] = useState('')
+    console.log("package id",packageId)
+
+    const [map, setMap] = useState('');
 
     const modules = {
         toolbar: [
@@ -83,13 +83,11 @@ export default function CarPackage() {
         }
     };
 
-  
-const HandleMap = (event) => {
-    // setMap(event.target.value);
-    const newValue = event.target.value;
-    setMap(newValue);
-    console.log(newValue);
-};
+    const handleMap = (event) => {
+        const newValue = event.target.value;
+        setMap(newValue);
+        console.log(newValue);
+    };
 
     const validateForm = () => {
         let valid = true;
@@ -126,7 +124,6 @@ const HandleMap = (event) => {
             valid = false;
         }
 
-
         return valid;
     };
 
@@ -138,6 +135,7 @@ const HandleMap = (event) => {
         }
 
         const newPackage = {
+            packageId,
             car,
             title,
             price: parseFloat(price),
@@ -166,22 +164,20 @@ const HandleMap = (event) => {
         setMap('');
     };
 
-
-    // fetch api carlist
+    // Fetch API car list
     useEffect(() => {
         fetchCars();
-      }, []);
+    }, []);
 
     const fetchCars = async () => {
         try {
-          const response = await fetch('/api/cars/carapi');
-          setCarsList(await response.json());
-          
-          
+            const response = await fetch('/api/cars/carapi');
+            const data = await response.json();
+            setCarsList(data);
         } catch (error) {
-          console.error("Error fetching cars:", error);
+            console.error("Error fetching cars:", error);
         }
-      };
+    };
 
     return (
         <AppProvider>
@@ -202,9 +198,8 @@ const HandleMap = (event) => {
                                         </div>
                                         <select name="cars" id="cars" className="border outline-[0.5px] flex justify-items-center" onChange={(e) => setSelectedCar(e.target.value)}>
                                             <option className="" value="" disabled>Choose a car</option>
-                                            <option className="" value="" >hello</option>
-                                            {carsList?.data.map((car,i)=>(
-                                                <option className="" key={i} value={JSON.stringify(car)} >{car.name}</option>
+                                            {carsList?.data?.map((car, i) => (
+                                                <option className="" key={i} value={JSON.stringify(car)}>{car.name}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -222,9 +217,12 @@ const HandleMap = (event) => {
                                     </div>
                                 </div>
                                 <div className="bg-slate-100 w-full h-full rounded-md flex justify-center">
-                                    {/* here when select car then car name show is here */}
-                                    {/* <Image src={isSelectedCar?.imageDetails[0].url} width={100} height={100}/> */}
-                                    {/* <p className=" self-center text-[28px] font-semibold text-[#dad8d8]">Choose A Car</p> */}
+                                    {isSelectedCar && (
+                                        <Image src={JSON.parse(isSelectedCar)?.imageDetails[0].url} width={100} height={100} alt="Car Image" />
+                                    )}
+                                    {!isSelectedCar && (
+                                        <p className="self-center text-[28px] font-semibold text-[#dad8d8]">Choose A Car</p>
+                                    )}
                                 </div>
                             </div>
                             <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
@@ -246,11 +244,9 @@ const HandleMap = (event) => {
                                 <p className="text-para font-semibold pb-1">Google Map</p>
                                 <div className="bg-white">
                                     <GoogleMap setActiveTab={undefined} itinerary={undefined}
-                                        onChange={HandleMap}
+                                        onChange={handleMap}
                                         value={map}
                                     />
-                                   {/* <input type="text" className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none" onChange={HandleMap} value={map} /> */}
-                               
                                 </div>
                             </div>
                             <div className="mb-5 shadow-sm">
@@ -312,3 +308,9 @@ const HandleMap = (event) => {
         </AppProvider>
     );
 }
+
+
+
+
+
+

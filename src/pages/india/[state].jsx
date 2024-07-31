@@ -69,7 +69,7 @@ console.log("fffffffffff",promoData)
     return (
         <AppProvider>
             <div className='bg-slate-100'>
-                <DesktopHeader />
+                {/* <DesktopHeader /> */}
                 <Breadcrumbs />
                 {!loading ? (
                     <div>

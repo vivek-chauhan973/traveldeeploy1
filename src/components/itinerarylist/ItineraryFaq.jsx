@@ -46,24 +46,24 @@ const ItineraryFaq = ({ promoData }) => {
   ];
 
   return (
-    <div className="w-full md:w-3/4 m-auto">
-      <div className="text-center md:mb-7 mb-5">
+    <div className="w-full m-auto">
+      {/* <div className="text-center md:mb-7 mb-5">
         <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
         <p className="text-para md:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-      </div>
+      </div> */}
 
       <div className='flex justify-end items-center'>
-        <button className="underline underline-offset-[6px] md:px-3  px-2 py-1.5 hover:bg-slate-100 rounded-md"
+        <button className="underline underline-offset-[6px] text-sm px-2 py-1.5 hover:bg-slate-100 rounded-md"
                 onClick={isAllOpen ? handleHideAll : handleExpandAll}
             >
             {isAllOpen ? 'Hide all' : 'Expand all'}
         </button>
       </div>
 
-      <div className="w-full mx-auto mt-10">
+      <div className="w-full mx-auto md:mt-5 mt-3">
         {sections.map((item, i) => (
           <div key={i} className="mb-3">            
-            <div className="w-full flex justify-between items-center px-4 py-2 bg-gray-100 rounded-md hover:bg-gray-200 cursor-pointer"
+            <div className="w-full flex justify-between items-center px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 cursor-pointer"
                  onClick={() => handleToggle(i)}
                 >
                 <p className="text-base md:font-medium font-normal">{item.title}</p>
