@@ -94,7 +94,7 @@ useEffect(()=>{
           fixedDeparturePopupOpen={fixedDeparturePopupOpen}
         />
       </div>
-      <div className="bg-gray-100  mt-[20px] pb-10">
+      <div className="bg-gray-100  mt-[20px] pb-10"> 
         <div className="container-wrapper mb-4">
           <div className="mb-[20px] pt-[40px]">
             <h1 className="text-lg font-medium text-graytext">

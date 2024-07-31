@@ -12,7 +12,6 @@ const config = {
       xs: ["12px", "18px"],
       sm: ["13px", "20px"],
       para: ["14px", "22px"],
-      desc: ["15px, 22px"],
       base: ["16px", "24px"],
       md: ["17px", "26px"],
       lg: ["18px", "28px"],
