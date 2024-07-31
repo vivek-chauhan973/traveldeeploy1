@@ -69,7 +69,7 @@ console.log("fffffffffff",promoData)
     return (
         <AppProvider>
             <div className='bg-slate-100'>
-                {/* <DesktopHeader /> */}
+                <DesktopHeader />
                 <Breadcrumbs />
                 {!loading ? (
                     <div>
@@ -120,7 +120,7 @@ console.log("fffffffffff",promoData)
                       <div>
                     {!loading ? (
                         <div className="border-t border">
-                            <Faq1 title={promoData} description={promoData}/>
+                            {/* <Faq1 title={promoData} description={promoData}/> */}
                         </div>
                     ) : (
                         <div>

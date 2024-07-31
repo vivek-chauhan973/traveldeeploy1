@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid';
 
-const Faq1 = ({ title, description }) => {
+const Faq1 = ({ title ,description}) => {
     // promoData
 
-    const [openIndex, setOpenIndex] = useState(null);
+
     const handleToggle = (i) => {
         setOpenIndex(openIndex === i ? null : i);
     };
@@ -32,8 +32,6 @@ const Faq1 = ({ title, description }) => {
                 Eligendi maiores nulla delectus vel.`
         },
     ];
-    console.log("................data print",title.title)
-    console.log("................data print",title.title)
     return (
         <div className="w-full md:w-3/4 m-auto ">
 
@@ -44,7 +42,7 @@ const Faq1 = ({ title, description }) => {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 </p>
             </div>
-            {/* <div>{title}</div> */}
+            <div></div>
             <div className="w-full mx-auto mt-10">
                 {sections.map((item, i) => (
                     <div key={i} className=" mb-3">
