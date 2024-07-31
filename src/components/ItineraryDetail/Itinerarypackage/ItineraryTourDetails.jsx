@@ -12,11 +12,11 @@ const ItineraryTourDetails = () => {
     return (
         <>
             <div id="TourDetailsSection">
-                <div className="md:mt-10 mt-8">
+                <div className="mt-7">
                     <p className="md:text-lg text-md font-semibold text-graytext">Tour Details</p>
                     <p className="md:text-md text-para italic text-slate-600">Best facilities with no added cost.</p>
                 </div>
-                <div className="flex justify-between mt-2 gap-2 border-b-2 border-navyblack">
+                <div className="flex justify-between mt-3 gap-2 border-b-2 border-navyblack">
                     <div onClick={() => handleTabClick('tab1')} className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px]   ${activeTab === 'tab1' ? 'bg-navyblack text-white' : 'text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200'}`}>
                         <p className='text-sm  '>Flight Details </p>
                     </div>
