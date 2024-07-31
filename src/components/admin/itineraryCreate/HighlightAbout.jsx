@@ -131,7 +131,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
             <input onChange={(e) => handleChangeData(e.target.value)} value={inputHighlight} className='w-full border rounded-md h-8 px-2 text-para grow focus:border-primary outline-none'
               type="text" placeholder="Enter A Highlight" />
             {highlightEdit.edit ? (
-              <MdOutlineSave onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
+              <CancelIcon onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
             ) : (
               <div onClick={addHighlight}>
                 <AddCircleIcon  size={35} className='cursor-pointer hover:text-primary' />
