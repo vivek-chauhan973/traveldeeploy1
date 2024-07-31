@@ -8,7 +8,7 @@ export default function FaqSection({ onChange,faqData }) {
     title: "",
     information: "",
   });
-  // console.log("faqData111111111111111111:",faqData)
+  console.log("faqData111111111111111111:",faqData)
   useEffect(()=>{
     setItineraryDayWiseDataArray(faqData ||[])
   },[faqData])
@@ -61,7 +61,7 @@ export default function FaqSection({ onChange,faqData }) {
     <div>
       <div>
         <div>
-          <p className="text-base font-semibold">Itinerary Days Wise</p>
+          {/* <p className="text-base font-semibold">Itinerary Days Wise</p> */}
         </div>
         <div className="border p-3 rounded">
           <div className="justify-between gap-5">

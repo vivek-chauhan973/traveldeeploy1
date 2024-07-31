@@ -1,18 +1,19 @@
 import Holiday from "./Holiday"
 import Show from "./Show"
 import CarHire from './CarHire'
-import dynamic from 'next/dynamic';
-
-const VscCompass = dynamic(() => import('react-icons/vsc').then((mod) => mod.VscCompass));
-const BsCakeFill = dynamic(() => import('react-icons/bs').then((mod) => mod.BsCakeFill));
-const FaCarAlt = dynamic(() => import('react-icons/fa').then((mod) => mod.FaCarAlt));
-const IoDiamondOutline = dynamic(() => import('react-icons/io5').then((mod) => mod.IoDiamondOutline));
-const FaHandshake = dynamic(() => import('react-icons/fa').then((mod) => mod.FaHandshake));
-const IoIosContacts = dynamic(() => import('react-icons/io').then((mod) => mod.IoIosContacts));
-
 import Contact from "./Contact";
 import Deals from "./Deals";
 import SpacialityTour from "./SpacialityTour";
+import {
+  CompassIcon,
+  CakeIcon,
+  CarIcon,SpecilityIcon,
+  DealtIcon,
+  ContactIcon
+
+} from "@/components/icons/index"
+
+
 const data1=[{
   state:"Himachal Pradesh",
   cities:['Chandratal','Dalhouse','Kaza','Manali','shimla'],
@@ -66,36 +67,36 @@ const header=[
   name:"Destination",
   element:Show,
   href:'#',
-  icon:<VscCompass/>
+  icon:<CompassIcon/>
 },{
   name:"Holiday",
   element:Holiday,
   href:'#' ,
-  icon:<BsCakeFill/>
+  icon:<CakeIcon/>
 },
 {
   name:"Car Hire",
   element:CarHire,
   href:'#',
-   icon:<FaCarAlt/>
+   icon:<CarIcon/>
 },
 {
   name:"Spaciality Tour",
   element:SpacialityTour,
   href:'#',
-   icon:<IoDiamondOutline/>
+   icon:<SpecilityIcon/>
 },
 {
   name:"Deals",
   element:Deals,
   href:'#',
-   icon:<FaHandshake/>
+   icon:<DealtIcon/>
 },
 {
   name:"Contact Us",
   element:Contact,
   href:'#',
-   icon:<IoIosContacts/>
+   icon:<ContactIcon/>
 }]
 
 // console.log(header)

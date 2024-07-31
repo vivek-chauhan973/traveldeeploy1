@@ -51,10 +51,14 @@ const ItineraryHeroSection = ({
       setFixedDepDate1(fixedDepDate);
     }
   };
-
+  const def = "/logo.png"
+  // const handleError = (e) => {
+  //   e.target.src = def;
+  // };
+  // const imageSrc = hemages && hemages[2]?.path ? hemages[2]?.path : def;
   return (
     <>
-  
+
       <div>
         <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="">
@@ -64,7 +68,7 @@ const ItineraryHeroSection = ({
                   <div key={i}>
                     <img
                       className=" w-full object-cover h-[40vh]"
-                      src={item?.path}
+                      src={item?.path || "/logo.png"}
                       width={200}
                       height={100}
                       alt={`img ${i + 1}`}
@@ -75,7 +79,7 @@ const ItineraryHeroSection = ({
             </div>
             <img
               className="rounded-md h-[350px] object-cover w-full hidden xl:flex"
-              src={hemages && hemages?.[0]?.path}
+              src={hemages && hemages?.[0]?.path|| "/logo.png"}
               alt="img 1"
               width={200}
               height={100}
@@ -86,7 +90,7 @@ const ItineraryHeroSection = ({
             <div className="">
               <img
                 className="rounded-md h-[167px] w-full object-cover"
-                src={hemages && hemages?.[1]?.path}
+                src={hemages && hemages?.[1]?.path || "/logo.png"}
                 alt="img 2"
                 width={200}
                 height={100}
@@ -95,11 +99,14 @@ const ItineraryHeroSection = ({
             <div className="">
               <img
                 className="rounded-md h-[167px] max-md-full w-full object-cover"
-                src={hemages && hemages?.[2]?.path}
+                src={hemages && hemages?.[2]?.path || "/logo.png"}
+                // src={imageSrc}
                 alt="img 3"
                 width={200}
                 height={100}
+                // onError={handleError}
               />
+
             </div>
           </div>
           <div>
@@ -135,6 +142,7 @@ const ItineraryHeroSection = ({
                         Mumbai
                       </span>
                     </p>
+
                   </div>
                   <div className="flex gap-2 items-center ">
                     <div>
@@ -199,11 +207,10 @@ const ItineraryHeroSection = ({
                     addPackage={addPackage}
                   >
                     <p
-                      className={` ${
-                        showAddguest
-                          ? "bg-primary cursor-pointer"
-                          : "bg-orange-200"
-                      } px-5 py-2 rounded-md text-white text-center text-para`}
+                      className={` ${showAddguest
+                        ? "bg-primary cursor-pointer"
+                        : "bg-orange-200"
+                        } px-5 py-2 rounded-md text-white text-center text-para`}
                     >
                       <span>
                         {closeBtn ? "Book Now" : "Add Guest and Room"}
@@ -221,11 +228,10 @@ const ItineraryHeroSection = ({
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
-                    className={`border px-5 py-2 rounded-md ${
-                      fixedDepartureButtonEnaibleAndDisable
-                        ? " bg-primary"
-                        : " bg-orange-200"
-                    } text-center text-para`}
+                    className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
+                      ? " bg-primary"
+                      : " bg-orange-200"
+                      } text-center text-para`}
                   >
                     book now
                   </button>
@@ -240,7 +246,7 @@ const ItineraryHeroSection = ({
             </div>
           </div>
 
-          
+
         </div>
       </div>
     </>

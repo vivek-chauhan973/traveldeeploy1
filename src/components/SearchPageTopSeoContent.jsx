@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
-
 const IoMdArrowDropdown = dynamic(() => import('react-icons/io').then((mod) => mod.IoMdArrowDropdown));
 import Image from 'next/image'
 import { useAppContext } from "./admin/context/Package/AddGuest";
@@ -10,11 +9,8 @@ const stripHtmlTags = (html) => {
   return div.textContent || div.innerText || '';
 };
 
+import {DownArrow} from "@/components/icons/index"
 // React component to display the inner text of HTML
-
-
-
-
 const SearchPageTopSeoContent = ({ state, promoData }) => {
   const { setLocationId } = useAppContext();
   const [show, setShow] = useState(false)
@@ -42,7 +38,7 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
       <div className="relative w-full h-80 md:h-96 lg:h-[28rem] overflow-hidden">
         <Image
           className="absolute top-0 left-0 w-full h-full object-cover object-center"
-          src={promoData?.image ? promoData?.image : "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+          src={promoData?.image ? promoData?.image : "/logo.png"}
           alt=""
           width={100} height={100}
         />
@@ -61,9 +57,9 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
             {show ? "Read less" : "Read more"}
           </p>
 
-          <span>
-            <IoMdArrowDropdown className={`text-blue  transition-transform  ${show ? 'rotate-180' : ''} cursor-pointer`} onClick={handleToggle} />
-          </span>
+          <div className={`text-blue  transition-transform  ${show ? 'rotate-180' : ''} cursor-pointer`} onClick={handleToggle}>
+            <DownArrow/>
+          </div>
 
         </div>
 

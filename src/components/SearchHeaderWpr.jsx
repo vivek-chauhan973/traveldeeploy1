@@ -1,7 +1,8 @@
 import React, { useState ,useEffect} from "react";
 import Modal from '@mui/material/Modal';
 import SearchPageFilter from './SearchPageFilter';
-import CloseIcon from '@mui/icons-material/Close';
+import {CancelIcon} from "@/components/icons/index"
+
 
 // Today changes here in main file
 
@@ -74,7 +75,7 @@ useEffect(() => {
           <div className="relative bg-white p-6 rounded-lg w-full max-w-md h-full max-h-[95vh] overflow-y-auto">
             <button onClick={handleCloseModal} 
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-              <CloseIcon />
+              <CancelIcon/>
             </button>
             <SearchPageFilter onApplyFilter={handleApplyFilter} />
           </div>

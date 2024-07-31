@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { RxCross1 } from "react-icons/rx";
-import { IoChevronForwardSharp } from "react-icons/io5";
-import { ImWhatsapp } from "react-icons/im";
-import { MdOutlineWatchLater } from "react-icons/md";
 import Image from 'next/image'
-import { MdOutlineAddIcCall } from "react-icons/md";
 
 import Data from './Data';
+import {
+  CancelIcon, DownArrow,CallIcon,WhatAppIcon,WatchIcon
+} from "@/components/icons/index"
+
 
 const Header1 = ({ setTogle, togle }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -35,7 +34,11 @@ const Header1 = ({ setTogle, togle }) => {
   return (
     <div className={` sm:-ml-16 md:-ml-14 lg:-ml-28 relative w-[100vw] -ml-5 -mt-14 sm:w-60 md:w-64 lg:w-80 h-[100vh] shadow-sm border bg-white transition-transform duration-300 ease-in-out ${isVisible ? 'translate-x-0' : '-translate-x-full'} lg:-my-16 md:-mt-16 sm:-mt-14`}>
       <div className="h-[10vh] w-full px-2 sm:px-4 lg:pt-2 -mt-2 pt-1  sm:pt-1 bg-[#0e1e2c] lg:-mt-2 md:-mt-2 md:pt-2 sm:-mt-2">
-        <RxCross1 className="text-2xl mt-4 cursor-pointer text-white" onClick={() => { setIsVisible(false); setTimeout(() => setTogle(false), 300); }} />
+        <div className="text-2xl mt-4 cursor-pointer text-white" onClick={() => { setIsVisible(false); setTimeout(() => setTogle(false), 300); }}>
+
+          <CancelIcon />
+        </div>
+       
       </div>
       {openClose ? (
         <div onMouseLeave={() => setOpenClose(false)}>
@@ -47,25 +50,50 @@ const Header1 = ({ setTogle, togle }) => {
             <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
               <div className="flex justify-between">
                 <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</p>
-                <p className="cursor-pointer"><IoChevronForwardSharp className=' text-2xl' onClick={() => { setOpenClose(true); setRenderedComponent(0) }} /></p>
+                <div className="cursor-pointer">
+                  
+                  <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>
+                  <DownArrow />
+                  </div>
+
+                 
+                </div>
               </div>
               <div className="flex justify-between">
                 <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(1) }}>World</p>
-                <p className="cursor-pointer"><IoChevronForwardSharp className=' text-2xl' onClick={() => { setOpenClose(true); setRenderedComponent(1) }} /></p>
+                <div className="cursor-pointer">
+                  <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(1) }} >
+                  <DownArrow />
+                  </div>
+                  
+                  </div>
               </div>
               <div className="flex justify-between">
                 <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>Speciality Tours</p>
-                <p className="cursor-pointer"><IoChevronForwardSharp className=' text-2xl' onClick={() => { setOpenClose(true); setRenderedComponent(2) }} /></p>
+                <div className="cursor-pointer">
+
+                <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(2) }} >
+                  <DownArrow />
+                  </div>
+              </div>
               </div>
               <div className="flex justify-between">
                 <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Customized Holidays</p>
-                <p className="cursor-pointer"><IoChevronForwardSharp className=' text-2xl' onClick={() => { setOpenClose(true); setRenderedComponent(3) }} /></p>
+                <div className="cursor-pointer">
+                <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(3) }} >
+                  <DownArrow />
+                  </div>
+              </div>
               </div>
               <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Corporate Travel</p>
               <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Inbound</p>
               <div className="flex justify-between">
                 <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(4) }}>Forex</p>
-                <p className="cursor-pointer"><IoChevronForwardSharp className=' text-2xl' onClick={() => { setOpenClose(true); setRenderedComponent(4) }} /></p>
+                <div className="cursor-pointer">
+                <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(4) }} >
+                  <DownArrow />
+                  </div>
+              </div>
               </div>
               <p className="cursor-pointer md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Gift a Tour</p>
               <p className="cursor-pointer md: sm:text-[10px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Contact Us</p>
@@ -80,15 +108,15 @@ const Header1 = ({ setTogle, togle }) => {
             <hr className="mx-1" />
             <div className="w-full flex flex-col gap-6 px-2 sm:px-4 my-2">
               <div className="flex gap-2 items-center">
-                <div><Image src="" className=" sm:text-[10px] md:text-2xl" alt='pic'  width="125"
-                    height="150" /></div>
+                <div><Image src="" className=" sm:text-[10px] md:text-2xl" alt='pic' width="125"
+                  height="150" /></div>
                 <div className="flex gap-1 flex-col">
                   <p>Toll free number</p>
                   <p className="cursor-pointer font-semibold">1800 22 7979</p>
                 </div>
               </div>
               <div className="flex gap-2">
-                <div className="pt-2"><MdOutlineAddIcCall className=" sm:text-[10px] md:text-2xl" /></div>
+                <div className="pt-2"><CallIcon className=" sm:text-[10px] md:text-2xl" /></div>
                 <div className="flex gap-1 flex-col">
                   <p>You can also call on:</p>
                   <p className="cursor-pointer font-semibold">+91 22 2101 7979</p>
@@ -96,14 +124,14 @@ const Header1 = ({ setTogle, togle }) => {
                 </div>
               </div>
               <div className="flex gap-2 items-center">
-                <div><ImWhatsapp className=" sm:text-[10px] md:text-2xl text-green-500" /></div>
+                <div><WhatAppIcon className=" sm:text-[10px] md:text-2xl text-green-500" /></div>
                 <div className="flex gap-1 flex-col">
                   <p>Chat on WhatsApp</p>
                   <p className="cursor-pointer font-semibold">+91 88799 00414</p>
                 </div>
               </div>
               <div className="flex gap-2 items-center">
-                <div><MdOutlineWatchLater className=" sm:text-[10px] md:text-2xl" /></div>
+                <div><WatchIcon className=" sm:text-[10px] md:text-2xl" /></div>
                 <div className="flex gap-1 flex-col">
                   <p className="font-semibold">Business hours</p>
                   <p className="font-semibold">10am - 6pm</p>
