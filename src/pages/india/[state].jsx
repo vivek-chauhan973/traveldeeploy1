@@ -119,8 +119,11 @@ console.log("fffffffffff",promoData)
                 </div>
                       <div>
                     {!loading ? (
+                        
                         <div className="border-t border">
-                            {/* <Faq1 title={promoData} description={promoData}/> */}
+                        <div>hello</div>
+                            <Faq1 data={promoData.faq}/>
+                        
                         </div>
                     ) : (
                         <div>
