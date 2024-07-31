@@ -65,11 +65,10 @@ export default function SearchPage() {
     const handleApplyFilter = (priceRange) => {
         setSelectedPriceRange(priceRange);
     };
-console.log("fffffffffff",promoData)
     return (
         <AppProvider>
             <div className='bg-slate-100'>
-                {/* <DesktopHeader /> */}
+                <DesktopHeader />
                 <Breadcrumbs />
                 {!loading ? (
                     <div>
@@ -117,13 +116,21 @@ console.log("fffffffffff",promoData)
                         </div>
                     )}
                 </div>
-                      <div>
+                <div>
                     {!loading ? (
-                        
+
                         <div className="border-t border">
-                        <div>hello</div>
-                            <Faq1 data={promoData.faq}/>
-                        
+                            <div className="w-full md:w-3/4 m-auto">
+                            <div className="text-center mb-10">
+                                <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
+                                <p className="text-para md:text-base">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </p>
+                            </div>
+                            <Faq1 data={promoData.faq} />
+                            </div>
+                          
+
                         </div>
                     ) : (
                         <div>
@@ -143,6 +150,6 @@ console.log("fffffffffff",promoData)
                     )}
                 </div>
             </div>
-        </AppProvider> 
+        </AppProvider>
     );
 }
