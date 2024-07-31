@@ -133,7 +133,9 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
             {highlightEdit.edit ? (
               <MdOutlineSave onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
             ) : (
-              <AddCircleIcon onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
+              <div onClick={addHighlight}>
+                <AddCircleIcon  size={35} className='cursor-pointer hover:text-primary' />
+              </div>
             )}
           </div>
           <div className="border h-48 w-full overflow-y-auto py-2 rounded-md mt-2">
