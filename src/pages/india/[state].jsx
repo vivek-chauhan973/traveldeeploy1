@@ -69,7 +69,7 @@ export default function SearchPage() {
         <AppProvider>
             <div className='bg-slate-100'>
                 <DesktopHeader />
-                <Breadcrumbs />
+                {/* <Breadcrumbs /> */}
                 {!loading ? (
                     <div>
                         <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} />

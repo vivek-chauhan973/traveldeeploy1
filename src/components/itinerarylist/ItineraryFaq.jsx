@@ -40,15 +40,15 @@ const ItineraryFaq = ({ faq }) => {
         {faq?.map((item, i) => (
           <div key={i} className="mb-4">
             <div
-              className="w-full flex justify-between items-center px-4 py-4 bg-gray-200 rounded-md hover:bg-gray-300 cursor-pointer"
+              className="w-full h-12 flex justify-between items-center px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 cursor-pointer"
               onClick={() => handleToggle(i)}
             >
               <div className="flex items-center gap-3">
-                <div className="bg-navyblack text-white px-2 py-1 rounded-sm">
-                  <p className="text-xs font-semibold text-white">Day {i + 1}</p>
+                <div className="bg-navyblack text-white px-2 py-1 rounded-md">
+                  <p className="text-xs font-medium text-white">Day {i + 1}</p>
                 </div>
                 <div>
-                  <p className="text-base capitalize font-semibold text-graytext">{item.title}</p>
+                  <p className="text-base capitalize font-medium text-graytext">{item.title}</p>
                 </div>
               </div>
               {openIndices.includes(i) ? (

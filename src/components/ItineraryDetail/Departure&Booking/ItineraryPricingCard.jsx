@@ -20,7 +20,7 @@ const ItineraryPricingCard = () => {
       <div className=" border p-3 rounded-md bg-white xs:mt-5 xl:mt-0 xs:hidden xl:block overflow-hidden ">
         <div className="bg-white">
           <div className="flex justify-between">
-            <p className="text-base font-bold text-graytext">Booking Summary</p>
+            <p className="text-md font-semibold text-graytext">Booking Summary</p>
             <div>
               <Addguest
                 guestPrice={guestPrice}
@@ -37,26 +37,26 @@ const ItineraryPricingCard = () => {
         </div>
 
         <div className=" overflow-y-auto">
-          <div className="flex mb-[10px] mt-5 text-sm">
+          <div className="flex mb-2.5 mt-5 text-sm">
             <p className=" w-20">Dept. city : </p>
             <p className="font-semibold text-graytext">Mumbai</p>
           </div>
-          <div className="flex mb-[10px] text-sm">
+          <div className="flex mb-2.5 text-sm">
             <p className=" w-20">Dept. date :</p>
             <p className=" font-bold text-graytext">
               10 Mar 2024 - 17 Mar 2024
             </p>
           </div>
-          <div className="flex mb-[10px] text-sm">
+          <div className="flex mb-2.5 text-sm">
             <p className=" w-20">Traveller :</p>
             <p className=" font-semibold text-graytext">
               Adults:{inputData?.adult}, Child:{inputData?.child}, Infant:
               {inputData?.infant}
             </p>
           </div>
-          <div className="flex mb-[10px] text-sm">
+          <div className="flex mb-2.5 text-sm">
             <p className=" w-20">Rooms :</p>
-            <div className="">
+            <div>
               {inputData &&
                 Object.keys(inputData).map(
                   (roomType, index) =>
@@ -80,7 +80,7 @@ const ItineraryPricingCard = () => {
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>
-          <hr className="border-dashed my-4" />
+          <hr className="border-dashed my-2" />
           <div className="text-para grid grid-cols-2 my-3">
             <div></div>
             <div className="grid grid-cols-2">
@@ -88,7 +88,7 @@ const ItineraryPricingCard = () => {
               <p className="">70,000</p>
             </div>
           </div>
-          <div className="text-para grid grid-cols-2 -mt-2">
+          <div className="text-para grid grid-cols-2 mt-3">
             <div></div>
             <div className="grid grid-cols-2">
               <p>GST 5% </p>
