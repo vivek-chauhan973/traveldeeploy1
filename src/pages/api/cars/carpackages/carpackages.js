@@ -1,14 +1,14 @@
 import CarPackage from "@/models/car-package/carPackage";
 
 const CarPackages=async (req,res)=>{
-   
+   const url="hello"
     const {packageId,
         title,
         price,
         description,
         inclusion,
         exclusion,
-        readBeforeBook,mapCode}=req.body;
+        readBeforeBook,mapCode, location}=req.body;
 //    console.log("req.body kndkndjfksvfd;;;",req.body)
     if([packageId,
         title,
@@ -17,12 +17,13 @@ const CarPackages=async (req,res)=>{
         inclusion,
         exclusion,
         mapCode,
-        readBeforeBook].some(item=>item===""||item===0)){
+        readBeforeBook,location].some(item=>item===""||item===0)){
             return res.status(301).json({message:"each field is required"});
         }
         if(req.method==="POST"){
+            // console.log("jdkssssssssssssssssssssssssssssssssssssssssssssssssssss")
     try {
-      const data= await CarPackage.create({id:packageId,title,carprice:price,description,map:mapCode,inclusion,exclusion,readbook:readBeforeBook})
+      const data= await CarPackage.create({id:packageId,title,url,carprice:price,description,location,map:mapCode,inclusion,exclusion,readbook:readBeforeBook})
       if(!data){
         res.status(301).json({message:"somethimg went wrong"});
       }

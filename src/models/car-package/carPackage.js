@@ -7,6 +7,11 @@ const carPackageSchema = new mongoose.Schema({
     ref: 'Car',
     required: true
   },
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CarCity',
+    required: true
+},
   title: {
     type: String,
     required: true
@@ -15,6 +20,10 @@ const carPackageSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  url: {
+    type: String,
+    trim: true,
+},
   description: {
     type: String,
     required: true
@@ -40,6 +49,10 @@ const carPackageSchema = new mongoose.Schema({
     required: true
   }
 });
+carPackageSchema.virtual('pageUrl').get(function () {
+  return `${this.url}-Car-package`;
+});
+
 
 // Create the model
 const CarPackage =mongoose.models.CarPackage||mongoose.model('CarPackage', carPackageSchema);
