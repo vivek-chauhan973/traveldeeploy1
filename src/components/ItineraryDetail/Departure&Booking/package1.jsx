@@ -29,7 +29,7 @@ import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from '@/components/Faq/Faq1';
-import Metatag from '../metatag';
+import Metatag from '@/components/ItineraryDetail/MetaTag';
 
 export default function Package1() {
   const {
