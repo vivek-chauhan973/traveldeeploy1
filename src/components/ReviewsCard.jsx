@@ -65,9 +65,7 @@ const Carousel = () => {
 
                 <div className="text-center pt-10 pb-5">
                     <h3 className="text-xl leading-8 font-medium text-white">Bizare Expenditure tour reviews</h3>
-                    <p className="text-xs leading-8 font-semibold text-white"> What are you waiting for? Chalo Bag Bharo Nikal
-                        Pado!
-                    </p>
+                    <p className="text-xs leading-8 font-semibold text-white"> What are you waiting for? Chalo Bag Bharo Nikal Pado!</p>
                 </div>
                 <div className="carousel gap-5 pb-10" ref={carouselRef}>
                     {/* start is here code  */}  
@@ -97,14 +95,13 @@ const Carousel = () => {
                                 <span>06 Sept</span>
                             </div>
                         </div>
-                        {/* Card pop up here */}
+                        {/* reviewsCard pop up here */}
                         {isOpen && (
                             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                                 <div className="relative bg-white rounded-lg w-11/12 md:w-1/2 lg:w-1/3">                 
-                                    {/* <div className=' pr-3 pt-1 flex justify-end items-center '>
-                                        <button className='cursor-pointer' onClick={handleClose}>X</button>
-                                    </div> */}
-                                        <p className='cursor-pointer text-end pr-3 pt-1' onClick={handleClose}>X</p>
+                                    <div className='pr-3 pt-1 flex justify-end items-center '>
+                                        <button className='cursor-pointer py-0.5 px-2' onClick={handleClose}>X</button>
+                                    </div>
                                     <div className="  bg-white min-w-80 rounded-lg">
                                         <div className="flex justify-between items-center px-4">
                                             <div className="p-1 border flex item-center gap-1 rounded-md border-black  ">
@@ -133,7 +130,7 @@ const Carousel = () => {
                                 </div>
                             </div>
                         )}
-                        {/* Card pop up end */}
+                        {/* reviewsCard pop up end */}
 
                         <div className="  bg-white min-w-80 rounded-lg">
                             <div className="flex justify-between items-center p-4">

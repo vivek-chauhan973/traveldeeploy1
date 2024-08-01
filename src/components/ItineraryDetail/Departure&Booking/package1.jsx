@@ -302,15 +302,13 @@ export default function Package1() {
 
               </div>
               {/* card is here */}
-              <div ClassName="xl:block hidden">
                <ItinerarySideCard />
-              </div>
             </div>
           </div>
         </div>
       </div>
       {/* review card */}
-      <div className="mt-7 mb-5">
+      <div className="my-7">
         <ReviewsCard/>
       </div>
       <div className="container-wrapper ">
@@ -328,7 +326,7 @@ export default function Package1() {
       </div>
       {/* bottom link */}
       {/* FAQ section  */}
-      <div className='mt-12'>
+      <div className='my-7'>
         <div className="text-center mb-4">
             <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
           <p className="text-para md:text-base">

@@ -18,9 +18,9 @@ const [showPopup,setShowPopup]=useState(false);
     <>
       <div className="">
         <div className="flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
-          <div className="">
-            <div className="flex gap-3  ">
-              <p className="text-base font-semibold md:p-4 p-3 text-graytext">
+          <div>
+            <div>
+              <p className="font-semibold text-base p-3 text-graytext">
                 1. SELECT DEPARTURE CITY & DATE
               </p>
             </div>
