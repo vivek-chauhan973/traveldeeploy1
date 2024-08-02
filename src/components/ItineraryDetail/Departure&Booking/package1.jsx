@@ -20,7 +20,7 @@ const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 const Addguest = dynamic(() => import("@/components/addguest"));
 const TestingCard = dynamic(() => import("@/components/ItineraryDetail/TestingCard"));
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader"; const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureCard"));
-const FixedDeparturePopup = dynamic(() => import("./FixedDeparturePopup"));
+const FixedDeparturePopup = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/FixedDeparturePopup"));
 
 
 // Import React and other dependencies
@@ -145,12 +145,12 @@ export default function Package1() {
         </div>
       </div>
       {/* Departure city End */}
-      <div className="">
+      <div>
         <div
           id="ItinerarySection"
           className="bg-white py-1 shadow-md sticky top-0 z-40"
         >
-          <div className="container-wrapper gap-3  md:gap-12 xs:pb-5 md:pb-0  flex justity-start overflow-x-auto ">
+          <div className="container-wrapper gap-3  md:gap-12 xs:pb-5 md:pb-0 hide-scrollbar flex justity-start overflow-x-auto ">
             <div>
               <ScrollLink
                 to="ItinerarySubSection"
@@ -311,30 +311,25 @@ export default function Package1() {
       <div className="my-7">
         <ReviewsCard/>
       </div>
-      <div className="container-wrapper ">
-        <div>
-          <h2 className="md:text-xl font-semibold  text-lg">
-            Similar Tour Packages
-          </h2>
-          <h2 className="md:text-md text-[15px] italic">
-            Lorem ipsum dolor sit amet consectetur adipisicing.
-          </h2>
-        </div>
-      </div>
-      <div className="mt-5">
+      <div>
         <TestingCard addPackage={addPackage} />
       </div>
-      {/* bottom link */}
-      {/* FAQ section  */}
-      <div className='my-7'>
-        <div className="text-center mb-4">
+      {/* ) : null} */}
+      {/* when data is not available the all content will hide */}
+      {/* FAQ section  */} 
+      {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
+        <div className='my-7 md:p-0 px-4'>
+          <div className="text-center mb-4">
             <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
-          <p className="text-para md:text-base">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
+            <p className="text-para md:text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+          </div>
+          {/* <Faq1 data={addPackage?.faqs?.days} /> */}
+          <Faq1 data={addPackage.faqs.days} />
         </div>
-        <Faq1 data={addPackage?.faqs?.days} />
-      </div>
+      ) : null}
+      {/* bottom link */}
       <BottomLink />
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
