@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 // Define the schema
 const carPackageSchema = new mongoose.Schema({
@@ -20,18 +20,10 @@ const carPackageSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  url: {
-    type: String,
-    trim: true,
-},
   description: {
     type: String,
     required: true
   },
-  // carImage:{
-  //   type:String,
-  //   required: true
-  // },
   map: {
     type: String,
     required: true
@@ -48,13 +40,18 @@ const carPackageSchema = new mongoose.Schema({
     type: String,  // Array of strings for exclusion items
     required: true
   }
+},
+{
+  timestamps: true,
+  toJSON:{virtuals:true},
+  toObject:{virtuals:true}
 });
 carPackageSchema.virtual('pageUrl').get(function () {
-  return `${this.url}-Car-package`;
+  return `${this.title}-car-package`;
 });
 
 
 // Create the model
-const CarPackage =mongoose.models.CarPackage||mongoose.model('CarPackage', carPackageSchema);
+const CarPackage =mongoose.models.CarPackage||mongoose.model('CarPackage',carPackageSchema);
 
-module.exports = CarPackage;
+export default CarPackage;

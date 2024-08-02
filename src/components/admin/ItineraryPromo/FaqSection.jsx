@@ -18,7 +18,7 @@ export default function FaqSection({ onChange,faqData }) {
 
   useEffect(() => {
    
-    // onChange(itineraryDayWiseDataArray);
+    onChange(itineraryDayWiseDataArray);
   }, [itineraryDayWiseDataArray, onChange]);
 
   const handleChange = (e) => {
