@@ -123,9 +123,7 @@ const Header1 = ({ setTogle, togle }) => {
               </div>
               <div className="flex gap-2">
                 <div className="pt-2 sm:text-[10px] md:text-2xl">
-
                   <FontAwesomeIcon icon={faPhone} size="xs" />
-
                 </div>
                 <div className="flex gap-1 flex-col">
                   <p>You can also call on:</p>
