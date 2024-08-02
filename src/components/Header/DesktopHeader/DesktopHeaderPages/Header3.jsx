@@ -60,12 +60,7 @@ const Header3 = () => {
               </div>
               {/* <Image  src={Logo} alt="" height={60} width={60} /> */}
               {/* <Image width={160} height={160} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" /> */}
-              {logo ? (
-
-                <Image src={logo?.data?.[0]?.path} height={200} width={200} alt="Logo" />
-              ) : (
-                <div>No Image available</div>
-              )}
+      
 
               <Image
                 src={imageSrc}
