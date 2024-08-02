@@ -3,6 +3,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { IoIosArrowForward } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCross, } from '@fortawesome/free-solid-svg-icons';
+
+
+
 const Carousel = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -100,7 +105,14 @@ const Carousel = () => {
                             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                                 <div className="relative bg-white rounded-lg w-11/12 md:w-1/2 lg:w-1/3">                 
                                     <div className='pr-3 pt-1 flex justify-end items-center '>
-                                        <button className='cursor-pointer py-0.5 px-2' onClick={handleClose}>X</button>
+                                        <button className='cursor-pointer py-0.5 px-2' onClick={handleClose}>
+{/* 
+                                        <span>
+                                        <FontAwesomeIcon icon={faCross} size="xs" />
+                                        </span>
+                                     */}dgdgd
+
+                                        </button>
                                     </div>
                                     <div className="  bg-white min-w-80 rounded-lg">
                                         <div className="flex justify-between items-center px-4">
