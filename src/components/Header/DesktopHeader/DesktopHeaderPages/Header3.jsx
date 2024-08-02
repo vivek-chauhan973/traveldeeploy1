@@ -80,7 +80,7 @@ const Header3 = () => {
             <div className=" justify-between  hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
               <div className="flex gap-1 ">
                 <span className="">
-                  <FontAwesomeIcon icon={faSearch} size="xs" />
+                  <FontAwesomeIcon icon={faSearch}  className='font' />
                 </span>
                 <input
                   className="border-none focus:outline-none  placeholder:text-sm placeholder-black w-full  text-sm"
@@ -96,7 +96,7 @@ const Header3 = () => {
               <button className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg">
                 <span className=" ">
                 
-                  <FontAwesomeIcon icon={  faArrowAltCircleRight } size="xs" />
+                  <FontAwesomeIcon icon={  faArrowAltCircleRight }  className='font'  />
                 </span>{" "}
 
                 <span className=" ">
@@ -104,7 +104,7 @@ const Header3 = () => {
                 </span>
               </button>
               <button className=" items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg">
-                <FontAwesomeIcon icon={faUser} size="xs" />
+                <FontAwesomeIcon icon={faUser}  className='font'  />
 
                 <span className=" ">
                   Sign up
@@ -123,7 +123,7 @@ const Header3 = () => {
         <ul className="container-wrapper     flex items-end gap-x-10 text-para">
           <li className="capitalize flex items-center gap-1  cursor-pointer hover:text-primary">
 
-          <FontAwesomeIcon icon={faHome} size="xs" />
+          <FontAwesomeIcon icon={faHome}  className='font'  />
 
             <span>
               Home

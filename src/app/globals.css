@@ -365,3 +365,8 @@ text-indent: 120px;
 .pagination-item {
   list-style: none; /* Removes bullets/numbers */
 }
+
+.font{
+  height: 20px;
+  width: 13px;
+}

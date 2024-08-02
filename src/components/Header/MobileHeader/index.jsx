@@ -18,7 +18,7 @@ function Header2() {
           onClick={() => {
             setTogle(true);
           }}>
-          <FontAwesomeIcon icon={  faBars } size="xs" />
+          <FontAwesomeIcon icon={  faBars }  className='font' />
         </div>
 
       )}

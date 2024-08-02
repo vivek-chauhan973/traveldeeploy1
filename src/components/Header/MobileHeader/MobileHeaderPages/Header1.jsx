@@ -40,7 +40,7 @@ const Header1 = ({ setTogle, togle }) => {
         <div className="text-2xl mt-2 cursor-pointer text-white" onClick={() => { setIsVisible(false); setTimeout(() => setTogle(false), 300); }}>
           {/*       
           <CancelIcon /> */}
-          <FontAwesomeIcon icon={faCircleXmark} size="xs" />
+          <FontAwesomeIcon icon={faCircleXmark}  className='font'  />
         </div>
 
       </div>
@@ -123,7 +123,9 @@ const Header1 = ({ setTogle, togle }) => {
               </div>
               <div className="flex gap-2">
                 <div className="pt-2 sm:text-[10px] md:text-2xl">
-                  <FontAwesomeIcon icon={faPhone} size="xs" />
+
+                  <FontAwesomeIcon icon={faPhone}  className='font'  />
+
                 </div>
                 <div className="flex gap-1 flex-col">
                   <p>You can also call on:</p>
@@ -139,7 +141,7 @@ const Header1 = ({ setTogle, togle }) => {
                 </div>
               </div>
               <div className="flex gap-2 items-center sm:text-[10px] md:text-2xl">
-                <FontAwesomeIcon icon={faClock} size="xs" />
+                <FontAwesomeIcon icon={faClock}  className='font'  />
                 <div>
 
                 </div>
