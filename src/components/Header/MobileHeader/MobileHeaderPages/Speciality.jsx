@@ -32,7 +32,7 @@ const Speciality = ({ setOpenClose }) => {
       <div className="px-1">
         <div className="flex mt-1 gap-1">
           <span>
-          <FontAwesomeIcon icon={ faLocationDot} size="lg" />
+          <FontAwesomeIcon icon={ faLocationDot}  className='font'  />
           </span>
           <h1 className="text-blue-600 text-md font-bold">
             POPULAR AND AVAILABLE TOURS

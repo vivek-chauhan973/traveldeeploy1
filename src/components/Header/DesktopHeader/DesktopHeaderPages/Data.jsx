@@ -61,36 +61,36 @@ const header=[
   name:"Destination",
   element:Show,
   href:'#',
-  icon:  <FontAwesomeIcon icon={faCompass} size="sm" />
+  icon:  <FontAwesomeIcon icon={faCompass}  className='font'  />
 },{
   name:"Holiday",
   element:Holiday,
   href:'#' ,
-  icon:<FontAwesomeIcon icon={faCake} size="sm" />
+  icon:<FontAwesomeIcon icon={faCake}  className='font'  />
 },
 {
   name:"Car Hire",
   element:CarHire,
   href:'#',
-   icon:<FontAwesomeIcon icon={faCar} size="sm" />
+   icon:<FontAwesomeIcon icon={faCar}  className='font'  />
 },
 {
   name:"Spaciality Tour",
   element:SpacialityTour,
   href:'#',
-   icon:<FontAwesomeIcon icon={faDiamond} size="sm" />
+   icon:<FontAwesomeIcon icon={faDiamond}  className='font'  />
 },
 {
   name:"Deals",
   element:Deals,
   href:'#',
-   icon: <FontAwesomeIcon icon={faHandshakeSimple} size="sm" />
+   icon: <FontAwesomeIcon icon={faHandshakeSimple}  className='font'  />
 },
 {
   name:"Contact Us",
   element:Contact,
   href:'#',
-   icon:<FontAwesomeIcon icon={  faAddressBook} size="sm" />
+   icon:<FontAwesomeIcon icon={  faAddressBook}  className='font'  />
  
 }]
 

@@ -1,7 +1,7 @@
 import Header3 from './DesktopHeaderPages/Header3';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPhone} from '@fortawesome/free-solid-svg-icons';
+import {faPhone,faCab} from '@fortawesome/free-solid-svg-icons';
 
 function DesktopHeader() {
   return (
@@ -12,7 +12,8 @@ function DesktopHeader() {
           <div className="flex justify-center gap-1  items-end  rounded-[17px] bg-navyblack text-white rounded-badge text-xxs md:text-xs px-4 md:py-0 py-[2px] md:mt-[1px]  mt-[5px]">
             <span>
               {/* <CallIcon/> */}
-              <FontAwesomeIcon icon={faPhone}  />
+              <FontAwesomeIcon icon={faPhone} className='font' />
+        
             </span>
             {/* <CallIcon className="md:mt-1 md:mr-1 m-1"/> */}
             <span>
