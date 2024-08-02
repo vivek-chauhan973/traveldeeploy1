@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+mongoose.connect(process.env.MONGODB_URI).then(res=>console.log("db connected"));
 
 const packageImageSchema = new mongoose.Schema({
   packageId: {

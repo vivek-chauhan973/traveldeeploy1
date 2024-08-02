@@ -1,5 +1,7 @@
-import { HomeIcon } from '@heroicons/react/24/outline';
+import { HomeIcon,ShareIcon,PencilSquareIcon,TrashIcon,XCircleIcon,XMarkIcon,CakeIcon,UserCircleIcon,MagnifyingGlassIcon , PhoneIcon,ArrowRightCircleIcon,PrinterIcon,ChevronDownIcon,StarIcon,ChevronLeftIcon,ChevronRightIcon,} from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
+import "../../app/globals.css";
+
 import "../../app/globals.css";
 
 const DynamicTable = () => {
@@ -55,9 +57,10 @@ const DynamicTable = () => {
     return (
         <div>
             <div className='flex items-center justify-center mb-4'>
-                <p className='text-red-500'>hello</p>
+                <p className='text-red-500'>Hello</p>
                 <div>
                     <HomeIcon className="h-6 w-6 text-blue-500" />
+                    
                 </div>
             </div>
 
@@ -136,3 +139,6 @@ const DynamicTable = () => {
 };
 
 export default DynamicTable;
+
+
+
