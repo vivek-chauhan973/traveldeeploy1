@@ -59,6 +59,7 @@ const [showPopup,setShowPopup]=useState(false);
                       __html: addPackage?.about,
                     }}
                   ></p>
+                  
                 </div>
 
               <hr />
@@ -71,7 +72,7 @@ const [showPopup,setShowPopup]=useState(false);
                     {addPackage?.highlights?.map((highlight) => (
                       <ol key={highlight._id} className="list-disc">
                         <li className="ml-5 mr-2 text-para">{highlight.text}</li>
-                      </ol>
+                      </ol>                     
                     ))}
                     </div>
                     {/* <div className= 'bg-gradient-to-t -mt-7  from-red-400 opacity-100 w-full  h-10 -top-2 z-30" ' ></div> */}
