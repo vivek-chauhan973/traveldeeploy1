@@ -113,6 +113,7 @@ export default function LogoManagement() {
       alert('Failed to remove image');
     }
   }
+  console.log("preview the image",preview)
 
   return (
     <AppProvider>
