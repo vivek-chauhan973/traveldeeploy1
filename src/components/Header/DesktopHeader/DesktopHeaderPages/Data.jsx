@@ -4,14 +4,8 @@ import CarHire from './CarHire'
 import Contact from "./Contact";
 import Deals from "./Deals";
 import SpacialityTour from "./SpacialityTour";
-import {
-  CompassIcon,
-  CakeIcon,
-  CarIcon,SpecilityIcon,
-  DealtIcon,
-  ContactIcon
-
-} from "@/components/icons/index"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCompass ,  faCake,faCar,faDiamond,faAddressBook ,faHandshakeSimple} from '@fortawesome/free-solid-svg-icons';
 
 
 const data1=[{
@@ -67,36 +61,37 @@ const header=[
   name:"Destination",
   element:Show,
   href:'#',
-  icon:<CompassIcon/>
+  icon:  <FontAwesomeIcon icon={faCompass} size="sm" />
 },{
   name:"Holiday",
   element:Holiday,
   href:'#' ,
-  icon:<CakeIcon/>
+  icon:<FontAwesomeIcon icon={faCake} size="sm" />
 },
 {
   name:"Car Hire",
   element:CarHire,
   href:'#',
-   icon:<CarIcon/>
+   icon:<FontAwesomeIcon icon={faCar} size="sm" />
 },
 {
   name:"Spaciality Tour",
   element:SpacialityTour,
   href:'#',
-   icon:<SpecilityIcon/>
+   icon:<FontAwesomeIcon icon={faDiamond} size="sm" />
 },
 {
   name:"Deals",
   element:Deals,
   href:'#',
-   icon:<DealtIcon/>
+   icon: <FontAwesomeIcon icon={faHandshakeSimple} size="sm" />
 },
 {
   name:"Contact Us",
   element:Contact,
   href:'#',
-   icon:<ContactIcon/>
+   icon:<FontAwesomeIcon icon={  faAddressBook} size="sm" />
+ 
 }]
 
 // console.log(header)

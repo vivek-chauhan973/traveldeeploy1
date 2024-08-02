@@ -43,29 +43,19 @@ const Bookings = () => {
 
         }
     }
-
-
-
-
     const handleAccount = () => {
         setAccount(!account)
     }
-
 
     const handleBook = () => {
         setMybooking(!mybooking);
     }
 
-
     return (
         <>
-
-            
             <div className="container-wrapper md:pt-20 md:px-2 md:relative py-3 px-3  md:gap-3 bg-gray-400   md:flex ">
                 {/* user area section */}
                 <div className=" md:w-72 md:h-3/5  w-full border md:mt-7 mt-14 rounded-lg  bg-white " >
-
-
                     <div className="md:h-36 md:w-36 h-28 w-28 top-2 ml-5 absolute md:top-3   md:ml-14   rounded-full bg-gray-300 flex items-center justify-center mx-auto">
                         <label htmlFor="file-upload">
                             <CiCamera className="h-8 w-8 relative left-10 md:left-14 top-9 p-1 text-white inline-flex items-center justify-center rounded-full bg-gray-500 " />
@@ -75,11 +65,6 @@ const Bookings = () => {
                         {selectedfile && <p>Selected file: {selectedfile.name}</p>}
 
                     </div>
-
-
-
-
-
                     <div className=" mt-20 ml-5 ">
                         <h1 className="md:font-medium  fonrt-semibold text-gray-300 md:text-lg  text-md">Chauhan jee</h1>
 
@@ -103,9 +88,7 @@ const Bookings = () => {
                         </div>
                     </div>
                     {/* <Book /> */}
-
                 </div>
-
                 <div>
                     {/* slider profile 1 */}
                     {/* <div>

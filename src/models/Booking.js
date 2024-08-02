@@ -36,126 +36,12 @@ const bookingSchema = new Schema({
     }
 
 }
-
-    // {
-    // info: {
-    // name: {
-    // type: String,
-    // required: true,
-    // trim: true,
-    // unique: true
-    // },
-    // number: {
-    // type: Number,
-    // required: true,
-    // trim: true,
-
-    // },
-    // email: {
-    // type: String,
-    // required: true,
-    // trim: true,
-
-    // },
-    // address: {
-    // type: String,
-    // required: true,
-    // trim: true
-    // },
-    // },
-    // package: {
-    // name: {
-    // type: String,
-    // required: true,
-    // trim: true,
-
-    // },
-    // start_date: {
-    // type: String,
-    // required: true,
-    // trim: true
-    // },
-    // end_date: {
-    // type: String,
-    // required: true,
-    // trim: true
-    // },
-    // code: {
-    // type: Number,
-    // required: true,
-    // trim: true
-    // }
-    // },
-    // no_of_customer: {
-    // adult: {
-    // type: Number,
-    // required: true,
-    // trim: true
-    // },
-    // child_dob: {
-    // child_1: {
-    // type: String,
-    // required: true,
-    // trim: true
-    // },
-    // child_2: {
-    // type: String,
-    // required: true,
-    // trim: true
-    // }
-    // },
-    // infant: {
-    // type: Number,
-    // required: true,
-    // trim: true
-    // },
-    // singleRoom: {
-    // type: Number,
-    // required: true,
-    // trim: true
-    // },
-    // twinRoom: {
-    // type: Number,
-    // // required: true,
-    // trim: true
-    // },
-    // tripleRoom: {
-    // type: Number,
-    // // required: true,
-    // trim: true
-    // },
-    // quardRoom: {
-    // type: Number,
-    // // required: true,
-    // trim: true
-    // },
-
-    // code: {
-    // type: Number,
-    // required: true,
-    // trim: true
-    // }
-    // },
-    // payment: {
-    // total: {
-    // type: Number,
-    // required: true,
-    // trim: true
-    // },
-    // advance: {
-    // type: Number,
-    // required: true,
-    // trim: true
-    // }
-    // }
-    // },
-    ,
-    {
+,    {
         timestamps: true,
     }
 );
 
-const Booking = mongoose.models.Booking || mongoose.model('Booking', bookingSchema)
+const Booking = mongoose.models.Booking || mongoose.model('Booking', bookingSchema )
 
 export default Booking;
 

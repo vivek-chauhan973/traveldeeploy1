@@ -1,7 +1,13 @@
 import React from "react";
 import {
- LocationIcon,RoadIcon,DownArrow 
+RoadIcon,DownArrow 
 } from "@/components/icons/index"
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot} from '@fortawesome/free-solid-svg-icons';
+
+
 
 const Speciality = ({ setOpenClose }) => {
   return (
@@ -26,7 +32,7 @@ const Speciality = ({ setOpenClose }) => {
       <div className="px-1">
         <div className="flex mt-1 gap-1">
           <span>
-          <LocationIcon/>
+          <FontAwesomeIcon icon={ faLocationDot} size="lg" />
           </span>
           <h1 className="text-blue-600 text-md font-bold">
             POPULAR AND AVAILABLE TOURS

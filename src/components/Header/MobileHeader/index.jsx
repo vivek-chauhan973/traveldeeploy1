@@ -1,9 +1,9 @@
 
 import { useState } from "react";
 import Header1 from "./MobileHeaderPages/Header1";
-import {
-  BarIcon
-} from "@/components/icons/index"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 
 function Header2() {
@@ -18,7 +18,7 @@ function Header2() {
           onClick={() => {
             setTogle(true);
           }}>
-          <BarIcon />
+          <FontAwesomeIcon icon={  faBars } size="xs" />
         </div>
 
       )}

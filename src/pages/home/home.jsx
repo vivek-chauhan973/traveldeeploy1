@@ -3,24 +3,25 @@ import "../../app/globals.css";
 // import Card1 from "@/components/Home/Cards/Card1";
 import Card2 from "@/components/Home/Cards/Card2";
 import Card3 from "@/components/Home/Cards/Card3";
-import HeroSection from "@/components/Home/HeroSection";
+// import HeroSection from "@/components/Home/HeroSection";
 import HorizontalCard from "@/components/Home/Cards/HorizontalCard";
 import Card4 from "@/components/Home/Cards/Card4";
 import ReviewsCard from "@/components/ReviewsCard";
 import Footer from "@/components/Footer";
 import Cardwork from "@/components/Home/Cards/cardwork";
 import ArrowSection from "@/components/Home/Cards/ArrowSection";
-import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
-
+// import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
+// import Booking from "@/components/profile/bookings";
 
 export default function home() {
     return (
         <>
-            <DesktopHeader />
-            <HeroSection />
+            {/* <DesktopHeader /> */}
+            {/* <HeroSection /> */}
+            {/* <Bookings/> */}
             {/* <Tostify/> */}
             {/* <AdminReview/> */}
-
+           
             <div className="container-wrapper  md:py-11 py-5">
                 <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
 
@@ -32,8 +33,6 @@ export default function home() {
                         </h1>
                         <button className="ml-2 mt-3 hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5 rounded-full">Know more</button>
                     </div>
-
-
                     <div className=" md:ml-28 ">
                         <Image width={450} height={450} className="   object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     </div>
