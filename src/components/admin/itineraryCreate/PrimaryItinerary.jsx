@@ -52,6 +52,9 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [startCities, setStartCities] = useState("");
     const [cityPopup,setCityPopup]=useState(false);
     const [imageDetails,setImageDetails]=useState([]);
+    const [dayWiseFaq,setDayWiseFaq]=useState([]);
+
+    console.log("jhkjashdf daywise data",dayWiseFaq)
     useEffect(() => {
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();
@@ -211,6 +214,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
+        setDayWiseFaq(itinerary?.days)
         if(!itinerary){
             setCityPopup(true);
             console.log("countryId",itinerary?.associateCountry?._id)
@@ -249,6 +253,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         startcity:startCities,
                         uploads:imageDetails,
                         addguest:"",
+                        days:dayWiseFaq,
                         fixedfixeddepartureweightedprice:0  
                     })
                 });

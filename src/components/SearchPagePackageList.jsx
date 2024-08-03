@@ -78,7 +78,7 @@ const SearchPagePackageList = (locationId) => {
   const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  // console.log("packsheghdbfhsdvfugsdjfbdscvjsdbfvjgse",currentItems)
+  console.log("current dat is slkjshkljfh sadfkj",currentItems)
   return (
     <div>
       {currentItems?.map((packageData, i) => (
@@ -134,7 +134,7 @@ const SearchPagePackageList = (locationId) => {
                       src="https://www.svgrepo.com/show/229132/internet.svg"
                       alt=""
                     />
-                  </span>{" "}
+                  </span>{packageData?.days?.length}
                   15 Days
                 </p>
                 <p className="text-[11px] flex gap-1 items-center">
@@ -145,8 +145,8 @@ const SearchPagePackageList = (locationId) => {
                       src="https://www.svgrepo.com/show/38705/location-pin.svg"
                       alt=""
                     />
-                  </span>{" "}
-                  23 Cities
+                  </span>{packageData?.startcity?.length}
+                  Cities
                 </p>
               </div>
 

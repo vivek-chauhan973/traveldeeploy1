@@ -20,7 +20,12 @@ import { NextApiRequest, NextApiResponse } from "next";
             PackageDayWise.findOneAndUpdate({ package: packageId }, { days }, { upsert: true, new: true }),
             // console.log("days destruct",{days})
         ]);
-        return res.status(201).json({ packageDays, tourPackage });
+        const updatedPackage = await Package.updateOne(
+            {_id:packageId},
+            { $set:{ days:days } },
+            { new: true }
+          );
+        return res.status(201).json({ packageDays, tourPackage ,updatedPackage});
     } catch (error) {
         console.error('Error handling API request:', error);
         return res.status(500).json({ message: error.message });

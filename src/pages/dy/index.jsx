@@ -53,6 +53,7 @@ const DynamicTable = () => {
         setRows(submittedData);
         setSubmitted(false);
     };
+    console.log("all data is here",submittedData)
 
     return (
         <div>
