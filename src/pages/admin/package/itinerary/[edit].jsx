@@ -13,7 +13,7 @@ import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
 import PricingManagement from "@/components/admin/itineraryCreate/PricingManagement";
 import PricingManagementPopup from '@/components/admin/itineraryCreate/PricingManagementPopup';
 import dynamic from 'next/dynamic';
-
+import Index from "@/components/dy/Index";
 // Dynamically import icons
 const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuPackagePlus));
 const HiOutlineArrowNarrowRight = dynamic(() => import('react-icons/hi').then(mod => mod.HiOutlineArrowNarrowRight));
@@ -25,15 +25,15 @@ import ImageUploading from "@/components/admin/itineraryCreate/ImageUploading";
 
 export default function CreatePackage() {
     const [pricingPopup, setPricingPopup] = useState(true);
-    
+
 
     const { edit } = useRouter().query;
     const formType = useSearchParams()?.get("type");
 
     const [itinerary, setItinerary] = useState();
     const [activeTab, setActiveTab] = useState(formType ? 'Tab1' : 'Tab1');
-     
-    
+
+
     const handleTabClick = (tabname) => {
         setActiveTab(tabname);
     };
@@ -55,7 +55,7 @@ export default function CreatePackage() {
 
     const [select, setSelect] = useState("");
     const [selectedOption, setSelectedOption] = useState("");
-    
+
     const handleOnChange = (e) => {
         setSelect(e.target.value);
     };
@@ -67,7 +67,7 @@ export default function CreatePackage() {
         }
     };
 
-    useEffect(() => {}, [select]);
+    useEffect(() => { }, [select]);
 
     return (
         <AppProvider>
@@ -90,17 +90,18 @@ export default function CreatePackage() {
                         <button onClick={() => handleTabClick('Tab9')} className={`${activeTab === "Tab9" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>Pricing Management</button>
                         <button onClick={() => handleTabClick('Tab10')} className={`${activeTab === "Tab10" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>FAQ</button>
                         <button onClick={() => handleTabClick('Tab11')} className={`${activeTab === "Tab11" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>Time Range date</button>
+                        <button onClick={() => handleTabClick('Tab12')} className={`${activeTab === "Tab12" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>Table</button>
                     </div>
                 </div>
                 <div className={`tab-content ${activeTab === 'Tab1' ? 'block' : 'hidden'}`}>
-                    <PrimaryItinerary setActiveTab={setActiveTab} itinerary={itinerary} itineraryInfo={undefined} setItineraryInfo={undefined}    />
+                    <PrimaryItinerary setActiveTab={setActiveTab} itinerary={itinerary} itineraryInfo={undefined} setItineraryInfo={undefined} />
                 </div>
                 <div className={`tab-content ${activeTab === 'Tab2' ? 'block' : 'hidden'}`}>
-                <div className=" border rounded p-4">
+                    <div className=" border rounded p-4">
                         <div>
                             <p className="text-[15px] font-semibold">Image Upload</p>
                         </div>
-                        <ImageUploading itinerary={itinerary} setActiveTab={setActiveTab}/>
+                        <ImageUploading itinerary={itinerary} setActiveTab={setActiveTab} />
                     </div>
                 </div>
 
@@ -116,33 +117,38 @@ export default function CreatePackage() {
                 </div>
                 <div className={` ${activeTab === 'Tab5' ? 'block' : 'hidden'}`}>
                     <GoogleMap setActiveTab={setActiveTab} itinerary={itinerary} />
-                </div> 
+                </div>
                 <div className={` ${activeTab === 'Tab6' ? 'block' : 'hidden'}`}>
-                    <FlightBooking setActiveTab={setActiveTab} itinerary={itinerary}/>
+                    <FlightBooking setActiveTab={setActiveTab} itinerary={itinerary} />
                 </div>
                 <div className={` ${activeTab === 'Tab7' ? 'block' : 'hidden'}`}>
                     <TourInformation itinerary={itinerary} setActiveTab={setActiveTab} />
                 </div>
                 <div className={` ${activeTab === 'Tab8' ? 'block' : 'hidden'}`}>
-                    <SeoField itinerary={itinerary} setActiveTab={setActiveTab}/>
+                    <SeoField itinerary={itinerary} setActiveTab={setActiveTab} />
                 </div>
                 <div className={` ${activeTab === 'Tab9' ? 'block' : 'hidden'}`}>
                     <div className="relative">
                         {itinerary?.prices === null && pricingPopup && <PricingManagementPopup setPricingPopup={setPricingPopup} handleOnChange={handleOnChange} handleCleckbox={handleCleckbox} />}
-                        {(itinerary?.prices?.addguest === "addGuest" || selectedOption === "addGuest") && <PricingManagement itinerary={itinerary} setActiveTab={setActiveTab}/>}
+                        {(itinerary?.prices?.addguest === "addGuest" || selectedOption === "addGuest") && <PricingManagement itinerary={itinerary} setActiveTab={setActiveTab} />}
                         {(itinerary?.prices?.departure1 === "fixedDeparture" || selectedOption === "fixedDeparture") && (
                             <div>
-                                <p><FixedDeparture itinerary={itinerary} setActiveTab={setActiveTab}/></p>
+                                <p><FixedDeparture itinerary={itinerary} setActiveTab={setActiveTab} /></p>
                             </div>
                         )}
                     </div>
                 </div>
                 <div className={` ${activeTab === 'Tab10' ? 'block' : 'hidden'}`}>
-                    <PackageFaq itinerary={itinerary} setActiveTab={setActiveTab}/>
+                    <PackageFaq itinerary={itinerary} setActiveTab={setActiveTab} />
                 </div>
                 <div className={` ${activeTab === 'Tab11' ? 'block' : 'hidden'}`}>
                     <PriceRange itinerary={itinerary} setActiveTab={setActiveTab} />
                 </div>
+
+                <div className={`${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>
+                    <Index />
+                </div>
+
             </Layout>
         </AppProvider>
     );
