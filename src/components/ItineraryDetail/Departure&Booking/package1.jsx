@@ -78,7 +78,7 @@ export default function Package1() {
   }, [closeBtn])
   return (
     <div>
-    <Metatag seoData={addPackage}/>
+    {/* <Metatag seoData={addPackage}/> */}
       <div className=" absolute w-full ">
         <DesktopHeader />
       </div>

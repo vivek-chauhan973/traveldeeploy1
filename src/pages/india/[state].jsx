@@ -37,6 +37,8 @@ export default function SearchPage() {
     const [promoData, setPromoData] = useState({});
     const [loading, setLoading] = useState(true);
 
+    console.log("prodata is here ,--------",promoData)
+
     useEffect(() => {
         const fetchData = async () => {
             try {

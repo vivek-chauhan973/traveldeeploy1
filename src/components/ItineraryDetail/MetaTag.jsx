@@ -1,16 +1,32 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
+// Fetch data on the server side
 export async function getServerSideProps(context) {
-  const { packageUrl } = context.query;
-  const res = await fetch(`http://localhost:3000/api/public/package/${packageUrl}`);
-  const data = await res.json();
+  const { packageUrl } = context.params;
+  
+  try {
+    // Fetch the tour package data from your API
+    const res = await fetch(`/api/public/package/${packageUrl}`);
+    const data = await res.json();
 
-  return {
-    props: {
-      seoData: data
-    }
-  };
+    console.log("Fetched API data:", data); // Debug log
+
+    // Extract SEO data
+    const seoData = data.seoData || {};
+
+    // Return SEO data as props
+    return {
+      props: { seoData },
+    };
+  } catch (error) {
+    console.error('Error fetching tour package data:', error);
+
+    // Handle errors or return default SEO data
+    return {
+      props: { seoData: {} },
+    };
+  }
 }
 
 const Metatag = ({ seoData }) => {
@@ -22,6 +38,7 @@ const Metatag = ({ seoData }) => {
 
   useEffect(() => {
     if (seoData) {
+      console.log("SEO Data in useEffect:", seoData); // Debug log
       setSeoInfo({
         title: seoData.title || '',
         description: seoData.description || '',

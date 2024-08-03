@@ -1,82 +1,93 @@
 import mongoose, { Schema } from "mongoose";
 
- mongoose.connect(process.env.MONGODB_URI).then(res=>console.log("db connected"));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then((res) => console.log("db connected"));
 
-const packageSchema = new Schema({
+const packageSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
     price: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     status: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     url: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
     },
-    category: [{
+    category: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'PackageMasterCategory',
-        required: true
-    }],
-    badges:{
-        type:[String],
-      default:[]
+        ref: "PackageMasterCategory",
+        required: true,
+      },
+    ],
+    badges: {
+      type: [String],
+      default: [],
     },
-    uploads: [String]
-      ,
-      addguest:{
-        type:String
-      },
-      fixedfixeddepartureweightedprice:{
-      type:Number
-      },
-    startcity:{
-      type:[String],
-      default:[]
+    days: {
+      type: [String],
+      default: [],
+    },
+    uploads: [String],
+    addguest: {
+      type: String,
+    },
+    fixedfixeddepartureweightedprice: {
+      type: Number,
+    },
+    startcity: {
+      type: [String],
+      default: [],
     },
     location: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'City',
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "City",
+      required: true,
     },
     about: { type: String, trim: true },
-    dayWiseInformation: { type: String, trim: true }
-}, {
+    dayWiseInformation: { type: String, trim: true },
+  },
+  {
     timestamps: true,
-    toJSON: { virtuals: true }
-})
+    toJSON: { virtuals: true },
+  }
+);
 
-packageSchema.virtual('pageUrl').get(function () {
-    return `${this.url}-tour-package`;
+packageSchema.virtual("pageUrl").get(function () {
+  return `${this.url}-tour-package`;
 });
-packageSchema.pre('save', async function (next) {
-    if (this.isNew || this.isModified('name')) {
-        this.url = this.name.toLowerCase().replace(/\s+/g, '-');
-    }
-    try {
-        await this.validate();
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
-packageSchema.pre('findOneAndUpdate', function (next) {
-    const update = this.getUpdate();
-    if (update.name) {
-        update.url = update.name.toLowerCase().replace(/\s+/g, '-');
-    }
+packageSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("name")) {
+    this.url = this.name.toLowerCase().replace(/\s+/g, "-");
+  }
+  try {
+    await this.validate();
     next();
+  } catch (error) {
+    next(error);
+  }
+});
+packageSchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate();
+  if (update.name) {
+    update.url = update.name.toLowerCase().replace(/\s+/g, "-");
+  }
+  next();
 });
 
-const Package = mongoose.models.Package || mongoose.model('Package', packageSchema)
+const Package =
+  mongoose.models.Package || mongoose.model("Package", packageSchema);
 
 export default Package;

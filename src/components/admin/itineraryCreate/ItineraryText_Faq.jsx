@@ -113,7 +113,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary }) {
       return;
     }
     try {
-      const response = await fetch(`/api/package/day-wise/${itinerary?._id}`, {
+      const res = await fetch('/api/package/' + (itinerary ? `day-wise/${itinerary?._id}` : 'add-package'), {      
         method: "POST",
         headers: {
           "Content-Type": "application/json",
