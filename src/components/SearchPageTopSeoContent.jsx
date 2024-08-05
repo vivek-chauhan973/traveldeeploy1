@@ -127,69 +127,6 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
 
         {show && (
           <div className="table-container mt-4">
-            {/* <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Header 1</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Header 2</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Header 3</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">Data 1</td>
-                  <td className="px-6 py-4 whitespace-nowrap">Data 2</td>
-                  <td className="px-6 py-4 whitespace-nowrap">Data 3</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">Data 4</td>
-                  <td className="px-6 py-4 whitespace-nowrap">Data 5</td>
-                  <td className="px-6 py-4 whitespace-nowrap">Data 6</td>
-                </tr>
-              </tbody>
-            </table> */}
-
-            {/* <table className="w-full border-collapse border text-center text-para">
-              <tbody>
-                <tr className="border bg-black text-white">
-                  <th className="border font-light">Sightseeing Places</th>
-                  <th className="border font-light">Sedan</th>
-                  <th className="border font-light">Innova/Innova Crysta</th>
-                  <th className="border w-36 font-light">Tempo Traveler</th>
-                </tr>
-                <tr>
-                  <td className="border">Mana Village</td>
-                  <td className="border">INR 1000</td>
-                  <td className="border">INR 1500</td>
-                  <td className="border">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border">Mana Village</td>
-                  <td className="border">INR 1000</td>
-                  <td className="border">INR 1500</td>
-                  <td className="border">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border">Mana Village</td>
-                  <td className="border">INR 1000</td>
-                  <td className="border">INR 1500</td>
-                  <td className="border">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border">Mana Village</td>
-                  <td className="border">INR 1000</td>
-                  <td className="border">INR 1500</td>
-                  <td className="border">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border">Mana Village</td>
-                  <td className="border">INR 1000</td>
-                  <td className="border">INR 1500</td>
-                  <td className="border">INR 2000</td>
-                </tr>
-              </tbody>
-            </table> */}
-
             <table className="w-full border-collapse border text-center text-para">
               <thead>
                 <tr className="border-b bg-black text-white">
@@ -230,33 +167,34 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
                   <td className="border-t border-l border-r border-b">INR 1500</td>
                   <td className="border-t border-l border-r border-b">INR 2000</td>
                 </tr>
+                <tr>
+                  <td className="border-t border-l border-r border-b">Mana Village</td>
+                  <td className="border-t border-l border-r border-b">INR 1000</td>
+                  <td className="border-t border-l border-r border-b">INR 1500</td>
+                  <td className="border-t border-l border-r border-b">INR 2000</td>
+                </tr>
               </tbody>
             </table>
-
-
-
-
-
-
-
           </div>
-        )}  
-        <div className="flex gap-2 items-center justify-end" onClick={fade}>
-          <p className="text-right text-para text-blue cursor-pointer" onClick={handleToggle}>
-            {show ? "Read less" : "Read more"}
-          </p>
+        )}
 
-          <div className={`text-blue transition-transform ${show ? 'rotate-180' : ''} cursor-pointer`} onClick={handleToggle}>
-            <DownArrow />
-          </div>
+        <div className="flex float-right  justify-end items-center px-1 md:h-6 h-5 md:w-24 w-20 bg-navyblack rounded shadow-sm text-white cursor-pointer">
+          <button className=" md:text-para text-xs" onClick={handleToggle}>{show ? "Read less" : "Read more"}</button>
+          <span>
+            <IoMdArrowDropdown className={`transition-transform  ${show ? 'rotate-180' : ''} `} onClick={handleToggle} />
+          </span>
         </div>
+
+
       </div>
+      <div className=" mt-3"> 
       <hr className="container-wrapper border-slate-300" />
+
+      </div>
     </div>
   );
 };
 
 export default SearchPageTopSeoContent;
-
 
 

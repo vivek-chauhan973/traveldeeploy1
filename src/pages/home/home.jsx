@@ -3,25 +3,25 @@ import "../../app/globals.css";
 // import Card1 from "@/components/Home/Cards/Card1";
 import Card2 from "@/components/Home/Cards/Card2";
 import Card3 from "@/components/Home/Cards/Card3";
-// import HeroSection from "@/components/Home/HeroSection";
+import HeroSection from "@/components/Home/HeroSection";
 import HorizontalCard from "@/components/Home/Cards/HorizontalCard";
 import Card4 from "@/components/Home/Cards/Card4";
 import ReviewsCard from "@/components/ReviewsCard";
 import Footer from "@/components/Footer";
 import Cardwork from "@/components/Home/Cards/cardwork";
 import ArrowSection from "@/components/Home/Cards/ArrowSection";
-// import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
+import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 // import Booking from "@/components/profile/bookings";
 
 export default function home() {
     return (
         <>
-            {/* <DesktopHeader /> */}
-            {/* <HeroSection /> */}
+            <DesktopHeader />
+            <HeroSection />
             {/* <Bookings/> */}
             {/* <Tostify/> */}
             {/* <AdminReview/> */}
-           
+
             <div className="container-wrapper  md:py-11 py-5">
                 <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
 
@@ -40,7 +40,6 @@ export default function home() {
                 </div>
             </div>
             {/*  image */}
-
             {/* relative text-center w-full  h-40 md:h-52 lg:h-44 xl:h-52  overflow-hidden rounded-2xl" */}
             <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
                 <div className="relative mb-2">
@@ -88,20 +87,15 @@ export default function home() {
 
                         </div>
                     </div>
-
-
                     <div className=" md:ml-28 ">
                         <Image width={450} height={450} className="object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     </div>
-
                 </div>
             </div>
 
             {/*  */}
             <div className="container-wrapper md:pb-10  ">
                 <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
-
-
                     <div className="">
                         <Image width={450} height={450} className=" object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                     </div>
@@ -122,8 +116,6 @@ export default function home() {
 
                 </div>
             </div>
-
-
             {/* image */}
 
             {/* <div className=" container-wrapper md:grid md:grid-cols-2  justify-around items-center mt-5 md:mb-16 md:mt-8 gap-1">
@@ -139,15 +131,10 @@ export default function home() {
             </div>  */}
 
             {/* weekend package */}
-
-
-
             <Cardwork />
 
             {/* horizontal card */}
             <div className="">
-
-
                 <div className="container-wrapper  md:mt-8">
                     <p className="text-center mt-1 md:font-semibold  text-xl font-medium md:text-[25px]">Plan an unforgettable trip from your city</p>
                 </div>
@@ -166,7 +153,6 @@ export default function home() {
 
             </div>
 
-
             <div className="md:mt-9  mt-4  bg-slate-100">
                 <div className="container-wrapper text-xl md:text-[22px] font-medium text-center pb-7">
                     <p>Lorem, ipsum dolor.</p>
@@ -184,8 +170,6 @@ export default function home() {
                 </div>
 
             </div>
-
-
 
             {/* card tab section */}
             <div className="my-1 mt-6 md:mt-10 ">

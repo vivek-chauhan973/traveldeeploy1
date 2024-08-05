@@ -156,7 +156,7 @@ useEffect(()=>{
 
                         </div>
                         <div className="border-b md:mt-0 mt-1"></div>
-                        <div className="px-5 md:py-2 py-1">
+                        {/* <div className="px-5 md:py-2 py-1">
                             <p className="md:text-[16px] text-[14px] font-medium md:my-2 my-1">Departure City</p>
                         </div>
                         <div>
@@ -186,12 +186,12 @@ useEffect(()=>{
                                     id="city4" name="indore" value="Indore" onChange={(e) => handleCheckboxChange(e, setDepartureCity)} />
                                 <label htmlFor="city4" className="cursor-pointer label-text md:text-[14px] text-[12px]"> Indore</label>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="border-b md:mt-5 mt-2"></div>
                         <div className="pr-5 py-2">
                             <p className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</p>
                             <div>
-                               {packageCategory?.map( item=><div key={item._id} className="flex items-center gap-2 px-5 pb-2 py-2 ">
+                               {packageCategory?.map( item=><div key={item._id} className="flex capitalize items-center gap-2 px-5 pb-2 py-2 ">
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
                                         id="category1" name={item?.category} value={item?._id} onChange={(e) => setCatagoryId(e.target.value)} />
                                     <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">

@@ -26,7 +26,7 @@ return(
                         <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2 ">
-                                    <h2 className="font-medium">Char Dham Yatra 2024</h2>
+                                    <h2 className="font-medium text-md ">Char Dham Yatra 2024</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Complete Chardham Yatra</a>
                                         <a rel="noopener noreferrer" href="#">Do Dham Yatra</a>
@@ -36,7 +36,7 @@ return(
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2 ">
-                                    <h2 className="font-medium">Char Dham Yatra 2024</h2>
+                                    <h2 className="font-medium text-md">Char Dham Yatra 2024</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Complete Chardham Yatra</a>
                                         <a rel="noopener noreferrer" href="#">Do Dham Yatra</a>
@@ -50,7 +50,7 @@ return(
                             </div>
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Adventure</h2>
+                                    <h2 className="font-medium text-md">Adventure</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Rishikesh Rafting Package</a>
                                         <a rel="noopener noreferrer" href="#">Kanatal Uttarakhand Package</a>
@@ -62,7 +62,7 @@ return(
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Adventure</h2>
+                                    <h2 className="font-medium text-md">Adventure</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Rishikesh Rafting Package</a>
                                         <a rel="noopener noreferrer" href="#">Kanatal Uttarakhand Package</a>
@@ -74,7 +74,7 @@ return(
                             </div>
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Hill Station</h2>
+                                    <h2 className="font-medium text-md">Hill Station</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
                                         <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
@@ -87,7 +87,7 @@ return(
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Hill Station</h2>
+                                    <h2 className="font-medium text-md">Hill Station</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
                                         <a rel="noopener noreferrer" href="#">Mussoorie Holiday Packages</a>
@@ -99,7 +99,7 @@ return(
                             </div>
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Experiential Travel</h2>
+                                    <h2 className="font-medium text-md">Experiential Travel</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
                                         <a rel="noopener noreferrer" href="#">Shimla Honeymoon Tour</a>
@@ -108,7 +108,7 @@ return(
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Experiential Travel</h2>
+                                    <h2 className="font-medium text-md">Experiential Travel</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
                                         <a rel="noopener noreferrer" href="#">Shimla Honeymoon Tour</a>
@@ -124,7 +124,7 @@ return(
                             </div>
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Experiential Travel</h2>
+                                    <h2 className="font-medium text-md">Experiential Travel</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
                                         <a rel="noopener noreferrer" href="#">Shimla Honeymoon Tour</a>
@@ -133,7 +133,7 @@ return(
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Experiential Travel</h2>
+                                    <h2 className="font-medium text-md">Experiential Travel</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
                                         <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
@@ -153,7 +153,7 @@ return(
                         <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4 py-5 border-t-1 border-slate-300 ">
                             <div>
                                 <div className="flex flex-col space-y-2 ">
-                                    <h2 className="font-medium">Company</h2>
+                                    <h2 className="font-medium text-md">Company</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">About Us</a>
                                         <a rel="noopener noreferrer" href="#">Contact Us</a>
@@ -165,7 +165,7 @@ return(
                             </div>
                             <div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Help</h2>
+                                    <h2 className="font-medium text-md">Help</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer"  href="#">FAQs</a>
                                         <a rel="noopener noreferrer"  href="#">Cancellations & Returns</a>
@@ -176,7 +176,7 @@ return(
                             </div>
                             <div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium">Customization</h2>
+                                    <h2 className="font-medium text-md">Customization</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                         <a rel="noopener noreferrer" href="#">Configuration</a>
                                         <a rel="noopener noreferrer" href="#">Theme Configuration</a>
@@ -213,21 +213,21 @@ return(
                     <hr className="container-wrapper mt-2" />
 
                     <div className=" container-wrapper md:flex md:items-center md:justify-between mt-5 ">
-                        <ul className="flex items-center flex-wrap mb-6 md:mb-0">
-                            <li><a href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Terms
+                        <ul className="flex items-center  flex-wrap mb-6 md:mb-0">
+                            <li className=" list-none"><a href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Terms
                                     and
                                     conditions</a>
                             </li>
-                            <li><a href="#"
+                            <li className=" list-none"><a href="#"
                                     className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Privacy
                                     Policy</a></li>
-                            <li><a href="#"
+                            <li className=" list-none"><a href="#"
                                     className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Licensing</a>
                             </li>
-                            <li><a href="#"
+                            <li className=" list-none"><a href="#"
                                     className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Cookie
                                     Policy</a></li>
-                            <li><a href="#" className="text-sm font-normal text-gray-500 hover:underline">Contact</a></li>
+                            <li className=" list-none"><a href="#" className="text-sm font-normal text-gray-500 hover:underline">Contact</a></li>
                         </ul>
                         <div className="flex sm:justify-center space-x-6">
                             <a href="#" className="text-gray-500 hover:text-primary">
