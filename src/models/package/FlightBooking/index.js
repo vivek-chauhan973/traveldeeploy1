@@ -43,6 +43,14 @@ const flightBookingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Package',
         required: true
+    },
+    flightNo:{
+        type:String,
+        required:true
+    },
+    selectedImage:{
+        type:String,
+        required:true
     }
 }, {
     timestamps: true,

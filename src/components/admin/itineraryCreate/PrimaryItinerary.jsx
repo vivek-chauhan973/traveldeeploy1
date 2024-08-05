@@ -46,6 +46,7 @@ const fetchImages=async (itinerary)=>{
 export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo }) {
     const router = useRouter();
     const {pricingManagement}=useAppContext();
+    const [priority,setPriority]=useState("0");
     const [countries, setCountries] = useState();
     const [states, setStates] = useState();
     const [cities, setCities] = useState();
@@ -211,6 +212,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setSelectedLocation(itinerary?.location);
         handleSelectCountry(itinerary?.associateCountry?._id);
         handleSelectState(itinerary?.associateState?._id);
+        setPriority((itinerary?.priority)||"0");
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
@@ -244,6 +246,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
+                        priority,
                         name: packageTitleName,
                         price: displayPrice,
                         category: selectedCategories,
@@ -269,13 +272,17 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         }
     };
 // console.log("cacategoryValidate223224234",selectedCategories);
-
  return (
         <>
             <div className="bg-white p-4 rounded-md">
                 <div className=" grid grid-cols-1  mb-4 gap-5">
                     <div className="border p-4 rounded">
                         <div>
+                        <div className=" sm:flex items-center mb-2">
+                                <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Priority:</label>
+                                <input type="text"  className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                    onChange={(e) => setPriority(e.target.value)} placeholder="Enter Priority " defaultValue={priority} />
+                            </div>
                             <div className=" sm:flex items-center">
                                 <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Title:</label>
                                 <input ref={packageTitleRef} className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'

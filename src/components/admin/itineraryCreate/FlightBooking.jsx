@@ -18,6 +18,12 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
     start: { to: "", time: "" },
     end: { to: "", time: "" }
   });
+  //additional flight details here
+
+const [flightNo,setFlightNo]=useState('');
+const [selectedImg,setSelectedImg]=useState("");
+
+// console.log("flightNo.  ::"+flightNo+"--->selected Image:: ::"+selectedImg)
 
   const handleFlightBooking = (e) => {
     const { name, value } = e.target;
@@ -89,7 +95,7 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
       const response = await fetch(`/api/package/flight-create/${itinerary?._id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ flights: flightBookingList })
+        body: JSON.stringify({ flights: flightBookingList,flightNo,selectedImg })
       });
       if (response.ok) {
         setActiveTab("Tab7");
@@ -120,11 +126,15 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
     };
 
     // Fetch initial flight bookings if needed
-    fetchedData(itinerary?._id).then((res) =>
-      setFlightBookingList(res?.booking?.flights || [])
+    fetchedData(itinerary?._id).then((res) =>{setFlightBookingList(res?.booking?.flights || [])
+      setFlightNo(res?.booking?.flightNo||"");
+      setSelectedImg(res?.booking?.selectedImage||"")
+    }
+      
     );
   }, [itinerary]);
 
+  console.log("flight list :: ",flightBookingList)
   return (
     <>
       <div className="flex items-center gap-1">
@@ -207,7 +217,25 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
                 </div>
               </div>
             </div>
-            <div className="my-3">
+            <div className="mt-3 flex gap-3 flex-col">
+              <div className=" flex items-center gap-4">
+                <div className=" font-medium">Flight No. :</div>
+                <div><input type="text" className="h-8 px-2 rounded border text-para ml-7 w-44 pl-2"
+                onChange={(e)=>setFlightNo(e.target.value)} value={flightNo}/></div>
+              </div>
+              <div className=" flex items-center gap-4">
+                 <div className=" font-medium">Selecte Image :</div>
+                 <div className="">
+                  <select name="" id="" className=" w-44 outline-none border text-md" value={selectedImg} onChange={(e)=>setSelectedImg(e.target.value)}>
+                    <option className="py-1 text-md" >select one</option>
+                    <option className="py-1" value="A">A</option>
+                    <option className="py-1" value="B">B</option>
+                    <option className="py-1" value="C">C</option>
+                  </select>
+                 </div>
+              </div>
+            </div>
+            <div className="my-5">
               <button type="submit" className="bg-navyblack text-white rounded px-10 py-1">
                 {editingIndex !== null ? 'Update Booking' : 'Add Booking'}
               </button>
