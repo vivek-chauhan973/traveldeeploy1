@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
 async function createOrUpdateFlightBookings(req, res, packageId) {
     try {
-        const { flights } = req.body;
+        const { flights,flightNo,selectedImg } = req.body;
 
         if (!Array.isArray(flights) || flights.length === 0) {
             return res.status(400).json({ message: 'Flights information is required' });
@@ -32,7 +32,7 @@ async function createOrUpdateFlightBookings(req, res, packageId) {
 
         const booking = await FlightBookingSchema.findOneAndUpdate(
             { package: packageId },
-            { flights },
+            { flights ,flightNo:flightNo,selectedImage:selectedImg},
             { upsert: true, new: true }
         );
         // console.log("booking222222222222 !!!!!!!!!!!!!!!!!!!!!!!!!!!!",booking.flights)
