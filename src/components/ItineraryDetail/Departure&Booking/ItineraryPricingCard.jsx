@@ -126,9 +126,9 @@ const ItineraryPricingCard = () => {
               </label>
             </div>
           )}
-          <div className="grid grid-cols-2 gap-3 mt-2">
+          <div className="grid grid-cols-2 gap-3 my-2">
             <CustomiseTour>
-              <button className=" border-primary w-full border text-primary flex-flow   flex justify-center py-2 rounded-md">
+              <button className=" border-primary w-full border text-primary flex-flow   flex justify-center px-5 py-2 text-para rounded-md">
                 Customise
               </button>
             </CustomiseTour>
@@ -144,7 +144,7 @@ const ItineraryPricingCard = () => {
                 <button
                   className={` ${
                     showAddguest ? "bg-primary cursor-pointer" : "bg-orange-200"
-                  } px-5 py-3 rounded-md text-white text-center text-para`}
+                  } px-5 py-2 rounded-md text-white text-center text-para`}
                 >
                   {closeBtn ? "Book now" : "Add Guest & room"}
                 </button>

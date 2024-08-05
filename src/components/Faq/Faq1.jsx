@@ -18,7 +18,7 @@ const Faq1 = ({ data }) => {
                     
                     <div className="w-full h-12 flex justify-between items-center px-5 py-2 bg-[#f3f3f3] rounded-md hover:bg-gray-200"
                         onClick={() => handleToggle(i)}>
-                        <p className="text-base capitalize font-medium">{item.title}</p>
+                        <p className="text-para capitalize font-semibold">{item.title}</p>
                         {openIndex === i ? (
                             <ChevronUpIcon className="h-5 w-5 text-gray-600" />
                         ) : (

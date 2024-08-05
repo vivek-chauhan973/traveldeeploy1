@@ -56,6 +56,12 @@ const ItineraryHeroSection = ({
   //   e.target.src = def;
   // };
   // const imageSrc = hemages && hemages[2]?.path ? hemages[2]?.path : def;
+
+  // Inner shadow Main image
+  const boxShadowStyle = {
+    boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
+  };
+
   return (
     <>
 
@@ -74,21 +80,25 @@ const ItineraryHeroSection = ({
             ))}
         </div>
         </div>
-        <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
-          <div className="">
+        <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">   
+          <div className="relative">
             <img
-              className="rounded-md h-[350px] object-cover w-full hidden xl:flex"
-              src={hemages && hemages?.[0]?.path|| "/logo.png"}
+              className="rounded-md h-[400px] object-cover w-full hidden xl:flex"
+              src={hemages && hemages[0]?.path || "/logo.png"}
               alt="img 1"
               width={200}
               height={100}
             />
+            <div
+              style={boxShadowStyle}
+              className="hidden xl:flex  absolute top-0 left-0 z-10 w-full h-[400px] pb-5 text-white text-2xl font-semibold justify-center items-end rounded-md">
+              {addPackage?.name} 
+            </div>
           </div>
-
           <div className="justify-end flex-col gap-y-4 md:justify-center w-full hidden xl:flex ">
             <div className="">
               <img
-                className="rounded-md h-[167px] w-full object-cover"
+                className="rounded-md h-[192px] w-full object-cover"
                 src={hemages && hemages?.[1]?.path || "/logo.png"}
                 alt="img 2"
                 width={200}
@@ -97,7 +107,7 @@ const ItineraryHeroSection = ({
             </div>
             <div className="">
               <img
-                className="rounded-md h-[167px] max-md-full w-full object-cover"
+                className="rounded-md h-[192px] max-md-full w-full object-cover"
                 src={hemages && hemages?.[2]?.path || "/logo.png"}
                 // src={imageSrc}
                 alt="img 3"
