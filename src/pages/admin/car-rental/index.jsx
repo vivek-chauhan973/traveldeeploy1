@@ -16,10 +16,50 @@ const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
+const fetchCountries = async () => {
+  try {
+    const res = await fetch("/api/location/carindex?type=car-country", { method: "GET" });
+    const data = await res.json();
+    return data.result;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+const fetchStates = async (countryId) => {
+  try {
+    const res = await fetch("/api/location/carindex?type=car-state&countryId=" + countryId, {
+      method: "GET",
+    });
+    const data = await res.json();
+    return data.result;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+const fetchCities = async (stateId) => {
+  try {
+    const res = await fetch("/api/location/carindex?type=car-city&stateId=" + stateId, {
+      method: "GET",
+    });
+    const data = await res.json();
+    return data.result;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
 
 export default function CarPackage() {
   // State variables for the Quill editors and validation
+  const [countries, setCountries] = useState();
+  const [states, setStates] = useState();
+  const [cities, setCities] = useState();
   const [car, setCar] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState();
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -32,8 +72,40 @@ export default function CarPackage() {
   const [readBeforeBookValidate, setReadBeforeBookValidate] = useState("");
   const [carsList, setCarsList] = useState([]);
   const [isSelectedCar, setSelectedCar] = useState("");
+  const [cityPopup, setCityPopup] = useState(false);
+  const [locationValidate, setLocationValidate] = useState();
   var packageId = isSelectedCar ? JSON.parse(isSelectedCar)._id : null;
   const [mapCode, setMapCode] = useState(null);
+  useEffect(() => {
+    const fetchCountry = async () => {
+      const fetchedCountries = await fetchCountries();
+      setCountries(fetchedCountries);
+    };
+
+    fetchCountry();
+  }, []);
+  const handleSelectCountry = (value) => {
+    const fetchState = async () => {
+      const fetchedStates = await fetchStates(value);
+      setStates(fetchedStates);
+    };
+    fetchState();
+  };
+  const handleSelectState = (value) => {
+    const fetchCity = async () => {
+      const fetchedCities = await fetchCities(value);
+      setCities(fetchedCities);
+    };
+    fetchCity();
+  };
+  const handleLocation = (location) => {
+    setSelectedLocation(location);
+    if (!location) {
+      setLocationValidate("Location is required");
+    } else {
+      setLocationValidate("");
+    }
+  };
 
   const handleChange = (e) => {
     setMapCode(e.target.value);
@@ -95,8 +167,6 @@ export default function CarPackage() {
     }
   };
 
-  
-
   const validateForm = () => {
     let valid = true;
 
@@ -141,7 +211,7 @@ export default function CarPackage() {
     // if (!validateForm()) {
     //     return;
     // }
-
+    // console.log("selected Location : ", selectedLocation);
     const newPackage = {
       packageId,
       title,
@@ -151,6 +221,7 @@ export default function CarPackage() {
       exclusion,
       readBeforeBook,
       mapCode,
+      location: selectedLocation,
     };
     console.log("car Package data:::", newPackage);
     await fetch("/api/cars/carpackages/carpackages", {
@@ -169,7 +240,6 @@ export default function CarPackage() {
     setExclusion("");
     setReadBeforeBook("");
     setMapCode("");
-   
   };
 
   // Fetch API car list
@@ -215,7 +285,7 @@ export default function CarPackage() {
                       className="border outline-[0.5px] flex justify-items-center"
                       onChange={(e) => setSelectedCar(e.target.value)}
                     >
-                      <option className="" value="" disabled>
+                      <option className="" value="">
                         Choose a car
                       </option>
                       {carsList?.data?.map((car, i) => (
@@ -257,6 +327,71 @@ export default function CarPackage() {
                       value={price}
                     />
                   </div>
+                  <div className="flex gap-2 items-center">
+                    <div className=" w-36">
+                      <label className="text-para font-semibold" htmlFor="">
+                        location :
+                      </label>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div className="flex gap-2 items-center flex-wrap">
+                      {countries && (
+                        <select
+                          id="packageLocation"
+                          className=" w-[130px] ml-4 pl-2 rounded-md outline-none border-black border h-6 text-para"
+                          onChange={(e) => handleSelectCountry(e.target.value)}
+                        >
+                          <option value="">select Country</option>
+                          {countries?.map((country) => (
+                            <option
+                              key={country._id}
+                              className="border-none bg-slate-100 text-black"
+                              value={country._id}
+                            >
+                              {country.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+
+                      {states && (
+                        <select
+                          onChange={(e) => handleSelectState(e.target.value)}
+                          className="w-[130px] ml-4 px-2 rounded-md outline-none border-black border h-6 text-para"
+                        >
+                          <option value="">Select state</option>
+                          {states?.map((state) => (
+                            <option
+                              key={state._id}
+                              className="border-none bg-slate-100 text-black"
+                              value={state._id}
+                            >
+                              {state.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+
+                      {cities && (
+                        <select
+                          onChange={(e) => handleLocation(e.target.value)}
+                          id="packageLocation"
+                          className="w-[130px] ml-4 rounded-md outline-none border-black px-2 border h-6 text-para"
+                        >
+                          <option value="">Select city</option>
+                          {cities?.map((city) => (
+                            <option
+                              key={city._id}
+                              className="border-none bg-slate-100 text-black"
+                              value={city._id}
+                            >
+                              {city.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                  </div>
                 </div>
                 <div className="bg-slate-100 w-full h-full rounded-md flex justify-center">
                   {isSelectedCar && (
@@ -294,7 +429,6 @@ export default function CarPackage() {
               <div className="mt-5 bg-white p-2  shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
                 <p className="text-para font-semibold pb-1">Google Map</p>
                 <div className="bg-white">
-                  
                   <div className="grid grid-cols-2 gap-5 items-center">
                     <div>
                       <textarea
@@ -306,7 +440,6 @@ export default function CarPackage() {
                         <span className="text-xs">
                           Confirm you Enter width=100% & height=100%
                         </span>
-                        
                       </div>
                     </div>
                     <div>

@@ -64,7 +64,7 @@ const CarList = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     // Filter items based on search query
-    console.log("data found successfully 11::",carsList)
+    // console.log("data found successfully 11::",carsList)
     // let filteredCarsList = carsList?.filter((car) =>
     //     car?.name?.toLowerCase().includes(searchQuery.toLowerCase())
     // );

@@ -8,7 +8,7 @@ export default function FaqSection({ onChange,faqData }) {
     title: "",
     information: "",
   });
-  console.log("faqData111111111111111111:",faqData)
+  // console.log("faqData111111111111111111:",faqData)
   useEffect(()=>{
     setItineraryDayWiseDataArray(faqData ||[])
   },[faqData])

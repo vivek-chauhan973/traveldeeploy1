@@ -7,10 +7,9 @@ const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
     loading: () => <p>Loading editor...</p>,
 });
 
-const Editor = ({ onChange,editorData }) => {
+const Editor = ({onChange,editorData }) => {
     const [editorHtml, setEditorHtml] = useState();
     const [modules, setModules] = useState({});
-// console.log('html11111111111: ',editorHtml)
     useEffect(() => {
          setEditorHtml(editorData);
         const initializeModules = () => {
