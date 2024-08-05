@@ -339,7 +339,7 @@ export default function Package1() {
               <span></span>
             </div>
           </div>
-          <div className="flex gap-1 justify-end">
+          <div className="flex gap-1 md:justify-end justify-around  items-center">
             <div className="text-right flex flex-col items-end justify-center ">
               <p className="text-base leading-5 text-green-600 font-semibold uppercase">
                 best deal price
@@ -404,9 +404,12 @@ export default function Package1() {
 
               {
                 <CustomiseTour>
-                  <p className="border px-5 cursor-pointer py-1 mt-2 rounded-md text-center text-para">
+                  {/* <p className="border px-5 cursor-pointer py-1 mt-2 rounded-md text-center text-para">
                     <span>Customise</span>
-                  </p>
+                  </p> */}
+                  <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">
+                    Customise
+                  </button>
                 </CustomiseTour>
               }
             </div>

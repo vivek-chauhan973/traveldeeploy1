@@ -152,7 +152,7 @@ const ItineraryHeroSection = ({
                 <div className="flex justify-between mt-2">
                   <div className="flex flex-wrap gap-1 items-center">
                     <p className="md:text-md text-[16px] ">
-                      Start & City:{" "}
+                      Start & City :{" "}
                       {addPackage?.startcity?.map((city, index) => (
                         <span key={index} className="capitalize font-semibold text-graytext">
                           {city}{index < addPackage.startcity.length - 1 ? ", " : ""}
@@ -186,7 +186,7 @@ const ItineraryHeroSection = ({
             </div>
           </div>
           <div className="flex justify-end">
-            <div className="hidden xl:flex gap-1">
+            <div className="hidden xl:flex gap-5">
               <div className="text-right flex flex-col items-end justify-center ">
                 <p className="text-base leading-5 text-green-600 font-semibold uppercase">
                   best deal price
@@ -236,13 +236,6 @@ const ItineraryHeroSection = ({
                     </p>
                   </Addguest>
                 )}
-                {
-                  <CustomiseTour>
-                    <p className="border px-5 py-2 rounded-md text-center text-para">
-                      <span>Customise</span>
-                    </p>
-                  </CustomiseTour>
-                }
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
@@ -251,9 +244,17 @@ const ItineraryHeroSection = ({
                       : " bg-orange-200"
                       } text-center text-para`}
                   >
-                    book now
+                    Book now
                   </button>
                 )}
+                {
+                  <CustomiseTour>
+                    <button className=" border-primary w-full border text-primary px-5 py-2 text-para rounded-md">
+                      Customise
+                    </button>
+                  </CustomiseTour>
+                }
+                
                 {fixedDeparturePopupOpen && (
                   <FixedDeparturePopup
                     togglePopup={togglePopup}
