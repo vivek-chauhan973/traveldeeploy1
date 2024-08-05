@@ -81,6 +81,10 @@ export default function App() {
     const handleToggle = () => {
         setShow(!show);
       }
+      // Inner shadow Four image
+    const boxShadowStyle = {
+        boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
+    };
 
     return (
         <>
@@ -135,48 +139,56 @@ export default function App() {
                 {/* four Images */}
                 <div className="container-wrapper grid md:grid grid-cols-2 gap-4   lg:grid-cols-4">
                     <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                          src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                          alt=""
                          width={300}  //256 in phone
                          height={288} // 160
                         />
-                        <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
-                            <p className="md:text-xl md:font-bold text-lg font-semibold">Himacahl</p>
-                        </div>
+                        <div style={boxShadowStyle}
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                            Himacahl 
+                        </div>                     
                     </div>
                     <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                          src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                         alt="" 
-                         width={300}  //256 
+                         alt=""
+                         width={300}  //256 in phone
                          height={288} // 160
-                         />
-                        <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
-                            <p className="md:text-xl md:font-bold text-lg font-semibold">Kerala</p>
-                        </div>
+                        />
+                        <div style={boxShadowStyle}
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                            Kerala 
+                        </div>                     
                     </div>
                     <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110" 
+                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                          src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                         alt="" 
-                         width={300}  //256 
-                         height={288} // 160 
-                         />
-                        <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
-                            <p className="md:text-xl md:font-bold text-lg font-semibold">Uttarakhand</p>
-                        </div>
+                         alt=""
+                         width={300}  //256 in phone
+                         height={288} // 160
+                        />
+                        <div style={boxShadowStyle}
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                            Uttarakhand 
+                        </div>                     
                     </div>
                     <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-40 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                         src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                         alt="" 
-                         width={300}  //256 
+                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                         src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                         alt=""
+                         width={300}  //256 in phone
                          height={288} // 160
-                         />
-                        <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white text-center md:py-36 py-20 transition-transform duration-300 transform group-hover:scale-110 w-full md:h-72 h-40 rounded-[17px] bg-gradient-to-b from-transparent to-[#151515]">
-                            <p className="md:text-xl md:font-bold text-lg font-semibold">  Rajastan</p>
-                        </div>
+                        />
+                        <div style={boxShadowStyle}
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                            Rajsthan 
+                        </div>                     
                     </div>
 
                 </div>

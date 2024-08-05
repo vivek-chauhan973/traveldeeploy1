@@ -314,23 +314,27 @@ select {
 
 /* this is change the innerHtml into the  normal in payment term anditernery tour detail*/
  ol li{
-  /* list-style: decimal inside; */
-  list-style: disc inside ;
+  list-style: decimal outside;
 
 } 
 .Dot ol li::marker {
   color: #2A2C41;
 }
  ul li{
-  list-style: disc inside;
+  list-style: disc outside;
+  margin-bottom: 3px;
 }
 /* For Editore we are use of our custom css */
 
 h1 {
-  font-size: 40px;
+  /* font-size: 40px; */
+  font-size: 32px; 
+  line-height: 40px;
 }
 h2 {
-  font-size: 30px;
+  /* font-size: 30px; */
+  font-size: 24px; 
+  line-height: 33px;
 }
 
 

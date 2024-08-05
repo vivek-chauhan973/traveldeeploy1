@@ -19,8 +19,8 @@ const ItineraryPaymentTerms = () => {
                 <p className="md:text-md text-para italic text-slate-600">
                     Things to consider before the trip!
                 </p>
+                <p className="py-3 pl-4 text-para" dangerouslySetInnerHTML={{ __html:addPackage?.TourInformations?.paymentTerm?.description }} />
             </div>
-            <p className="py-3 pl-2 text-para" dangerouslySetInnerHTML={{ __html:addPackage?.TourInformations?.paymentTerm?.description }} />
 
             <div>
                 
@@ -46,12 +46,12 @@ const ItineraryPaymentTerms = () => {
                         </div>
                     </div>
                     <div className="border rounded-b-lg  overflow-hidden">
-                        <div className={`  xs:overflow-x-auto list-disc mx-5 ${activeTab === "tab1" ? "block" : "hidden"}`} >
+                        <div className={`  xs:overflow-x-auto list-disc  pl-9 pr-4 ${activeTab === "tab1" ? "block" : "hidden"}`} >
                             <div className="py-3">
-                                { <p className="text-para marker:text-blue-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.cancellation?.description }} /> }
+                                { <p className="text-para marker:text-green-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.cancellation?.description }} /> }
                             </div>
                         </div>
-                        <div className={`py-3  px-5 ${activeTab === "tab2" ? "block" : "hidden"}`}>
+                        <div className={`py-3  pl-9 pr-4 ${activeTab === "tab2" ? "block" : "hidden"}`}>
                             { <p className="text-para marker:text-red-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.needToKnow?.description }} /> }
                         </div>
                     </div>

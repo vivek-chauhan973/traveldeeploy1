@@ -33,65 +33,51 @@ const ItinaryFixedDepartureCard = ({
       togglePopup(true);
     }
   };
-
+// ========================================================
   return (
     <>
-      <div className="flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
+      <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[480px] overflow-scroll">
         <div className=" overflow-y-auto">
-          <div className="flex xl:block justify-center items-center flex-col gap-3 my-3">
-          <div>
-          
-            <div className="flex mb-[10px] mt-5 text-sm">
-              <p className=" w-24 text-md">Dept. city : </p>
-              <select
-                id="city"
-                name="city"
-                className=" w-40 text-center text-md outline-none"
-                onChange={(e) => {
-                  setFixedDepCity(e.target.value);
-                  setCity(true);
-                }}
-              >
-                <option value="" className=" w-32 text-start text-md">
-                  Select Departure city
-                </option>
-                {addPackage?.startcity?.map((item, i) => (
-                  <option
-                    key={i}
-                    value={item}
-                    className="text-start my-2 text-md"
+          <p className="xl:block hidden text-md font-semibold text-center ">Booking Summary</p>                 
+          <div className="flex xl:block justify-center items-center flex-col gap-3 md:p-2">
+            <div>   
+              <div className="flex xl:flex-col">
+                <label className="text-para font-semibold" htmlFor="city">Select Dept. City : </label>
+                <select name="city" id="city" className="border rounded w-full pl-3"
+                        onChange={(e) => { setFixedDepCity(e.target.value);
+                                           setCity(true);
+                                          }}
                   >
-                    {item}
-                  </option>
-                ))}
-              </select>
+                  <option value="">Departure City</option>
+                  {addPackage?.startcity?.map((item, i) => (
+                    <option key={i} value={item}>{item}</option>
+                  ))}
+                </select>
+              </div>
+              {fixedDepCity ? null : (
+                <p className="text-sm text-red-600">Please Select City First</p>
+              )}
             </div>
-            {fixedDepCity ? null : (
-              <p className=" text-red-600">please select City first</p>
-            )}
-          </div>
-          <div>
-            <div className=" flex gap-2">
-              <p>select Dept. date : </p>
-              <input
-                type="date"
-                className=" outline-none border-2 rounded-lg p-1 text-sm"
-                onChange={(e) => {
-                  setFixedDepDate(e.target.value);
-                  setDate(true);
-                }}
-              />
+
+            <div>
+              <div className="flex xl:flex-col mt-3">
+                <label className="text-para font-semibold" htmlFor="date">Select Dept. Date</label>
+                <input type="date" id="date" required className="w-full md:py-1.5 md:px-3 text-para border border-[#999999] rounded text-center"
+                       onChange={(e) => { setFixedDepDate(e.target.value);
+                                          setDate(true);
+                                        }}/>
+              </div>
+              {fixedDepDate ? null : (
+                <p className="text-sm text-red-600">Please Select Date First</p>
+              )}
             </div>
-            {fixedDepDate ? null : (
-              <p className=" text-red-600">please select date first</p>
-            )}
           </div>
-          </div>
-          <div className=" justify-between  pt-3 pb-3 hidden xl:flex ">
+
+          <div className=" justify-between hidden xl:flex px-2">
             <div>
               <p className="text-sm ">Basic Price</p>
             </div>
-            <div className="">
+            <div>
               <p className="text-lg font-medium text-graytext">
                 {" "}
                 {addPackage?.prices?.basePrice}
@@ -99,7 +85,7 @@ const ItinaryFixedDepartureCard = ({
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>
-          <hr className="border-dashed my-4 hidden xl:block" />
+          <hr className="border-dashed my-2 hidden xl:block" />
           <div className="text-para  grid-cols-2 my-3 hidden xl:grid">
             <div></div>
             <div className="grid grid-cols-2">
@@ -118,12 +104,12 @@ const ItinaryFixedDepartureCard = ({
           {/* inject your code for mobile device */}
           <div className="xl:hidden">
             <div className="ml-2">
-              <p className="font-semibold text-base mb-2 mt-1 text-graytext">
+              <p className="font-semibold text-lg mb-2 mt-1 text-graytext">
                 About us
               </p>
 
               <p
-                className="text-para"
+                className="text-para px-3"
                 dangerouslySetInnerHTML={{
                   __html: addPackage?.about,
                 }}
@@ -131,13 +117,13 @@ const ItinaryFixedDepartureCard = ({
             </div>
 
             <div>
-              <p className="text-md ml-2 font-semibold my-2 text-graytext">
+              <p className="text-lg ml-2 font-semibold my-2 text-graytext">
                 Highlights
               </p>
               <div>
                 {addPackage?.highlights?.map((highlight) => (
                   <ol key={highlight._id} className="list-disc   ">
-                    <li className="ml-10 text-para">{highlight.text}</li>
+                    <li className="px-3 text-para">{highlight.text}</li>
                   </ol>
                 ))}
               </div>
@@ -181,7 +167,7 @@ const ItinaryFixedDepartureCard = ({
                     : "bg-orange-200"
                 } text-center text-para`}
               >
-                book now
+                Book now
               </button>
             }
 

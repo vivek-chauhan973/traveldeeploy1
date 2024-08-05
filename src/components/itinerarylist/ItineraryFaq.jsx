@@ -44,11 +44,11 @@ const ItineraryFaq = ({ faq }) => {
               onClick={() => handleToggle(i)}
             >
               <div className="flex items-center gap-3">
-                <div className="bg-navyblack text-white px-2 py-1 rounded-md">
+                <div className="bg-navyblack text-white px-2 py-1 rounded-2xl">
                   <p className="text-xs font-medium text-white">Day {i + 1}</p>
                 </div>
                 <div>
-                  <p className="text-base capitalize font-medium text-graytext">{item.title}</p>
+                  <p className="text-para capitalize font-semibold text-graytext">{item.title}</p>
                 </div>
               </div>
               {openIndices.includes(i) ? (
@@ -62,9 +62,9 @@ const ItineraryFaq = ({ faq }) => {
                 ${openIndices.includes(i) ? 'max-h-[1000px]' : 'max-h-0'}`}
               style={{ maxHeight: openIndices.includes(i) ? '1000px' : '0px' }}
             >
-              <div className="py-4 px-10 text-para">
+              <div className="py-4  px-4 text-para">
                 <div className="relative">
-                  <div className="relative text-para pl-10 border-l ml-2 border-limeyellow border-dashed pb-2">
+                  <div className="relative text-para md:pl-10 pl-8 border-l ml-2 border-limeyellow border-dashed pb-2">
                     {/* Circle */}
                     <div className="-left-2 absolute bg-primary h-4 w-4 rounded-full"></div>
                     <div dangerouslySetInnerHTML={{ __html: item.information }}></div>
