@@ -107,7 +107,7 @@ export default function PromoManagement () {
                                 <label htmlFor="cityBages" className="  font-semibold text-para">Category :</label>
                                 <select id="packageCategory" className='ml-4 h-7  rounded-md outline-none border-slate-500/45 cursor-pointer border text-para ' onChange={(e)=>handleCity(e.target.value)}>
                                     <option className='border-none bg-slate-50 text-black' value="volvo">Select Badges</option>
-                                    {states?.map(item=><option className='border-none bg-slate-50 text-black' value={item?._id}>{item.name}</option>)}    
+                                    {states?.map((item,i)=><option key={i} className='border-none bg-slate-50 text-black' value={item?._id}>{item.name}</option>)}    
                                 </select>
                                 <button className="bg-black text-white rounded py-[3px] cursor-pointer px-3">Add</button>
                             </div>

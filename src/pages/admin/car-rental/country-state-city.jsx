@@ -45,7 +45,7 @@ const fetchCities = async (stateId) => {
 };
 
 
-export default function fetchCars() {
+export default function FetchCars() {
 
   useEffect(() => {
     const fetchData = async () => {
