@@ -126,8 +126,11 @@ const [selectedImg,setSelectedImg]=useState("");
     };
 
     // Fetch initial flight bookings if needed
-    fetchedData(itinerary?._id).then((res) =>
-      setFlightBookingList(res?.booking?.flights || [])
+    fetchedData(itinerary?._id).then((res) =>{setFlightBookingList(res?.booking?.flights || [])
+      setFlightNo(res?.booking?.flightNo||"");
+      setSelectedImg(res?.booking?.selectedImage||"")
+    }
+      
     );
   }, [itinerary]);
 

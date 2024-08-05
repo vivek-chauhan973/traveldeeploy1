@@ -46,7 +46,7 @@ async function createOrUpdateFlightBookings(req, res, packageId) {
 async function getFlightBookings(req, res, packageId) {
     try {
         const booking = await FlightBookingSchema.findOne({ package: packageId }).populate('package');
-            // console.log("booking !!!!!!!!!!!!!!!!!!!!!!!!!!!!",booking.flights)
+           
         if (!booking) {
             return res.status(404).json({ message: 'Flight bookings not found for this package' });
         }
