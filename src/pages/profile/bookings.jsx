@@ -12,9 +12,9 @@ import { GiWorld } from "react-icons/gi";
 import { BsHandbag } from "react-icons/bs";
 import { TbCalendarCancel } from "react-icons/tb";
 import { CiCamera } from "react-icons/ci";
-import Homecomp from "@/components/ui/Homecomp";
-import Userloginotp from "@/components/ui/Userloginotp";
-import Enquiryform from "@/components/ui/Enquiryform";
+// import Homecomp from "@/components/ui/Homecomp";
+// import Userloginotp from "@/components/ui/Userloginotp";
+// import Enquiryform from "@/components/ui/Enquiryform";
 
 const Bookings = () => {
   const [plus, setplus] = useState(false);
@@ -49,7 +49,7 @@ const Bookings = () => {
 
   return (
     <>
-      <Userloginotp />
+      {/* <Userloginotp /> */}
       {/* <Homecomp /> */}
       {/* <Enquiryform /> */}
       <div className=" mt-10 container-wrapper md:pt-20 md:px-2 md:relative py-3 px-3  md:gap-3 bg-gray-400   md:flex ">

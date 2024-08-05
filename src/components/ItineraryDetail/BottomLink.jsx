@@ -24,7 +24,7 @@ const BottomLink = ({ locationId }) => {
 
   useEffect(() => {
     fetchPromoManagementData();
-  }, [locationIds]);
+  }, [locationIds, fetchPromoManagementData]);
 
   return (
     <div className="bg-slate-100 py-8">
@@ -33,7 +33,7 @@ const BottomLink = ({ locationId }) => {
         <div className="text-[13px] flex gap-2 flex-wrap mt-3">
           {bottomLinkData ? (
             bottomLinkData?.map((item, index) => (
-              <Link
+              <Link key={index}
                 href={"/package/" + item.pageUrl}
                 className="hover:text-primary cursor-pointer text-slate-500 outline rounded-sm px-[5px] md:outline-1 "
                 type="button"
