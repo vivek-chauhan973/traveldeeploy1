@@ -107,17 +107,17 @@ export default function SearchPage() {
                         )}
                     </div>
                 </div>
-                <div className="container-wrapper py-12">
+                {/* <div className="container-wrapper py-12">
                     {!loading ? (
                         <div>
-                            {/* <ItineraryFaq promoData={promoData} /> */}
+                            <ItineraryFaq promoData={promoData} />
                         </div>
                     ) : (
                         <div>
                             <PromoList />
                         </div>
                     )}
-                </div>
+                </div> */}
                 <div>
                     {!loading ? (
 
@@ -143,7 +143,7 @@ export default function SearchPage() {
                 <div>
                     {!loading ? (
                         <div className="border-t border">
-                            <BottomLink />
+                            <BottomLink  locationId={selectedLocation} />
                         </div>
                     ) : (
                         <div>
