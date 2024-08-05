@@ -66,7 +66,7 @@ const ItineraryHeroSection = ({
     <>
 
       <div>
-        <div className="slider-container xl:hidden mt-7">
+        <div className="slider-container xl:hidden  mt-7">
           
           <div className="slider-container overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
             {hemages?.map((item, i) => (
@@ -80,7 +80,7 @@ const ItineraryHeroSection = ({
             ))}
         </div>
         </div>
-        <div className="container-wrapper   grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">   
+        <div className="container-wrapper  grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">   
           <div className="relative">
             <img
               className="rounded-md h-[400px] object-cover w-full hidden xl:flex"
@@ -120,7 +120,7 @@ const ItineraryHeroSection = ({
           </div>
           <div>
             <div>
-              <div className="flex justify-between my-2 p-2 bg-navyblack rounded-lg">
+              <div className="flex justify-between md:hidden  my-2 p-2 bg-navyblack rounded-lg">
                 <h1 className=" text-lg  md:text-xl font-semibold capitalize text-white">
                   {addPackage?.name}
                 </h1>

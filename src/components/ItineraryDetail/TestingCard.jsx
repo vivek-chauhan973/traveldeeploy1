@@ -67,10 +67,10 @@ const TestingCard = ({ addPackage }) => {
         <div className="container-wrapper">
           {/* Title and Description */}
             <div className="mb-7">
-                <h2 className="md:text-xl font-semibold text-lg">
+                <h2 className="md:text-lg  font-semibold text-lg">
                     Similar Tour Packages
                 </h2>
-                <h2 className="md:text-md text-[15px] italic">
+                <h2 className="md:text-md text-slate-600 text-[15px] italic">
                     Lorem ipsum dolor sit amet consectetur adipisicing.
                 </h2>
             </div>

@@ -1,9 +1,10 @@
-import formidable from 'formidable';
+import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db'; // Adjust path as per your project structure
 import PackageImage from '@/models/package/ImageUploading'; // Adjust path as per your project structure
 import Package from '@/models/Package';
+
 
 const uploadDirectory = './public/uploads/package/details'; // Updated upload directory
 
@@ -12,53 +13,60 @@ if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
 
+const storage = multer.diskStorage({
+  destination: uploadDirectory,
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    const fileName = `${file.fieldname}-${Date.now()}${ext}`;
+    cb(null, fileName);
+  },
+});
+
+const upload = multer({ storage });
+
 const apiRoute = async (req, res) => {
   await dbConnect(); // Ensure database connection
 
   const { packageId } = req.query;
+  console.log("packageId74623873256374",packageId)
 
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
   }
 
   if (req.method === 'POST') {
-    const form = new formidable.IncomingForm({
-      uploadDir: uploadDirectory,
-      keepExtensions: true, // Keep file extensions
-      filename: (name, ext, path) => `${name}-${Date.now()}${ext}`,
-    });
-
-    form.parse(req, async (err, fields, files) => {
-      if (err) {
-        console.error('Formidable error:', err);
+    upload.array('files')(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+        console.error('Multer error:', err);
+        return res.status(500).json({ error: 'File upload failed' });
+      } else if (err) {
+        console.error('Unknown error during file upload:', err);
         return res.status(500).json({ error: 'File upload failed' });
       }
 
-      const { titles = [], alts = [] } = fields;
-      const uploadedFiles = Array.isArray(files.files) ? files.files : [files.files];
+      const { titles, alts, ids } = req.body;
 
       try {
-        const filesData = uploadedFiles.map((file, index) => ({
+        const files = req.files.map((file, index) => ({
           title: titles[index] || '',
           alt: alts[index] || '',
-          filename: path.basename(file.filepath),
-          path: `/uploads/package/details/${path.basename(file.filepath)}`,
+          filename: file.filename,
+          path: `/uploads/package/details/${file.filename}`,
         }));
-
+        console.log("filesfhbjfsfssjfhbasjh121312y3432y4",files);
         // Update or insert files into database
         await PackageImage.findOneAndUpdate(
           { packageId },
-          { $push: { uploads: { $each: filesData } } },
+          { $push: { uploads: { $each: files } } },
           { upsert: true, new: true }
         );
-
-        const imagesArray = filesData.map(item => item.path);
-
-        await Package.updateOne(
-          { _id: packageId },
-          { $set: { uploads: imagesArray } },
-          { new: true }
-        );
+        const imagesArray=files?.map(item=>item.path)
+        // console.log()
+        await Package.updateOne({_id:packageId},{
+          $set:{uploads:imagesArray}
+        },{
+          new:true,
+        })
 
         return res.status(200).json({ message: 'Files uploaded successfully' });
       } catch (error) {

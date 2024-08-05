@@ -74,9 +74,9 @@ const Carousel = () => {
                 </div>
                 <div className="carousel gap-5 pb-10" ref={carouselRef}>
                     {/* start is here code  */}  
-                        <div className="  bg-white min-w-80 rounded-lg">
-                            <div className="flex justify-between items-center p-4">
-                                <div className="p-1 border flex item-center gap-1 rounded-md border-black  ">
+                        <div className="  bg-white min-w-80 rounded-lg ">
+                            <div className="flex justify-between items-center px-4 mt-4">
+                                <div className="p-1  flex item-center gap-1 ">
                                     <FaStar size={18} className=" text-primary" />
                                     <span className="text-sm">5</span>
                                 </div>
@@ -84,9 +84,9 @@ const Carousel = () => {
                                 <p className=" text-sm text-gray-400 uppercase">Recommended</p>
                             </div>
 
-                            <div className=" p-3 ">
-                                <h1 className=" text-lg font-semibold">Lorem Ipsum is simply dummy..</h1>
-                                <p className="mt-3 text-sm line-clamp-3">
+                            <div className=" px-3 py-1 ">
+                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
+                                <p className="mt-1   text-sm line-clamp-3">
                                     If you are looking for comment and review cards suitable for
                                     different projects and concepts, then look at our cards pack!
                                     If you are looking for comment and review cards suitable for
@@ -139,122 +139,118 @@ const Carousel = () => {
                                 </div>
                             </div>
                         )}
+                        {/* here start second code */}
+                        <div className="  bg-white min-w-80 rounded-lg ">
+                            <div className="flex justify-between items-center px-4 mt-4">
+                                <div className="p-1  flex item-center gap-1 ">
+                                    <FaStar size={18} className=" text-primary" />
+                                    <span className="text-sm">5</span>
+                                </div>
+
+                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
+                            </div>
+
+                            <div className=" px-3 py-1 ">
+                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
+                                <p className="mt-1   text-sm line-clamp-3">
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                </p>
+                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
+                            </div>
+                            <hr />
+                            <div className="flex justify-between px-4 py-2 text-para">
+                                <span className="font-bold text-gray-700">Someone Name</span>
+                                <span>06 Sept</span>
+                            </div>
+                        </div>
+                        <div className="  bg-white min-w-80 rounded-lg ">
+                            <div className="flex justify-between items-center px-4 mt-4">
+                                <div className="p-1  flex item-center gap-1 ">
+                                    <FaStar size={18} className=" text-primary" />
+                                    <span className="text-sm">5</span>
+                                </div>
+
+                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
+                            </div>
+
+                            <div className=" px-3 py-1 ">
+                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
+                                <p className="mt-1   text-sm line-clamp-3">
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                </p>
+                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
+                            </div>
+                            <hr />
+                            <div className="flex justify-between px-4 py-2 text-para">
+                                <span className="font-bold text-gray-700">Someone Name</span>
+                                <span>06 Sept</span>
+                            </div>
+                        </div>
+                        <div className="  bg-white min-w-80 rounded-lg ">
+                            <div className="flex justify-between items-center px-4 mt-4">
+                                <div className="p-1  flex item-center gap-1 ">
+                                    <FaStar size={18} className=" text-primary" />
+                                    <span className="text-sm">5</span>
+                                </div>
+
+                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
+                            </div>
+
+                            <div className=" px-3 py-1 ">
+                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
+                                <p className="mt-1   text-sm line-clamp-3">
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                </p>
+                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
+                            </div>
+                            <hr />
+                            <div className="flex justify-between px-4 py-2 text-para">
+                                <span className="font-bold text-gray-700">Someone Name</span>
+                                <span>06 Sept</span>
+                            </div>
+                        </div>
+                        <div className="  bg-white min-w-80 rounded-lg ">
+                            <div className="flex justify-between items-center px-4 mt-4">
+                                <div className="p-1  flex item-center gap-1 ">
+                                    <FaStar size={18} className=" text-primary" />
+                                    <span className="text-sm">5</span>
+                                </div>
+
+                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
+                            </div>
+
+                            <div className=" px-3 py-1 ">
+                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
+                                <p className="mt-1   text-sm line-clamp-3">
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                    If you are looking for comment and review cards suitable for
+                                    different projects and concepts, then look at our cards pack!
+                                </p>
+                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
+                            </div>
+                            <hr />
+                            <div className="flex justify-between px-4 py-2 text-para">
+                                <span className="font-bold text-gray-700">Someone Name</span>
+                                <span>06 Sept</span>
+                            </div>
+                        </div>
                         {/* reviewsCard pop up end */}
 
-                        <div className="  bg-white min-w-80 rounded-lg">
-                            <div className="flex justify-between items-center p-4">
-                                <div className="p-1 border flex item-center gap-1 rounded-md border-black  ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" p-3 ">
-                                <h1 className=" text-lg font-semibold">Lorem Ipsum is simply dummy..</h1>
-                                <p className="mt-3 text-sm">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!...
-                                </p>
-                                <span className="text-blue-500 text-para">read more..</span>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
-                        </div>
-
-                        <div className="  bg-white min-w-80 rounded-lg">
-                            <div className="flex justify-between items-center p-4">
-                                <div className="p-1 border flex item-center gap-1 rounded-md border-black  ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" p-3 ">
-                                <h1 className=" text-lg font-semibold">Lorem Ipsum is simply dummy..</h1>
-                                <p className="mt-3 text-sm">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!...
-                                </p>
-                                <span className="text-blue-500 text-para">read more..</span>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
-                        </div>
-
-                        <div className="  bg-white min-w-80 rounded-lg">
-                            <div className="flex justify-between items-center p-4">
-                                <div className="p-1 border flex item-center gap-1 rounded-md border-black  ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" p-3 ">
-                                <h1 className=" text-lg font-semibold">Lorem Ipsum is simply dummy..</h1>
-                                <p className="mt-3 text-sm">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!...
-                                </p>
-                                <span className="text-blue-500 text-para">read more..</span>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
-                        </div>
-
-                        <div className="  bg-white min-w-80 rounded-lg">
-                            <div className="flex justify-between items-center p-4">
-                                <div className="p-1 border flex item-center gap-1 rounded-md border-black  ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" p-3 ">
-                                <h1 className=" text-lg font-semibold">Lorem Ipsum is simply dummy..</h1>
-                                <p className="mt-3 text-sm">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!...
-                                </p>
-                                <span className="text-blue-500 text-para">read more..</span>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
-                         
-                        </div>
                         
-                    
-                    {/* end is here code */}
-                    {/* <div className=" bg-gradient-to-l from-white mt-[14 0px] opacity-95 w-10 h-72 -right-5  md:hidden absolute z-30  top-0"></div> */}
-                    {/* shadow hold */}
-                    {/* <div className=" bg-gradient-to-l from-white  opacity-95 w-10 h-full -right-5  md:hidden absolute z-30  top-0"></div> */}
-                 
                 </div>
                 <div className=" bg-gradient-to-l from-white opacity-95 w-10 h-[60%] mt-36 -right-5  md:hidden absolute z-30  top-0"></div>
-                
-                {/* <div className=" bg-gradient-to-l from-white opacity-95 w-10 h-full -right-5  md:hidden absolute z-30  top-0"></div> */}
                 <div className=" hidden md:block absolute top-3/4 -translate-y-[60px] justify-between w-full">
                     <div className=' justify-between flex pl-2 '>
-
                         <button onClick={scrollPrev} className="rounded-full   bg-black/50 hover:bg-black p-2 text-white rotate-180"><IoIosArrowForward size={20} /></button>
                         <button onClick={scrollNext} className="rounded-full  bg-black/50 hover:bg-black p-2 text-white"><IoIosArrowForward size={20} /></button>
                     </div>

@@ -78,7 +78,7 @@ export default function Package1() {
   }, [closeBtn])
   return (
     <div>
-    {/* <Metatag seoData={addPackage}/> */}
+      {/* <Metatag seoData={addPackage}/> */}
       <div className=" absolute w-full ">
         <DesktopHeader />
       </div>
@@ -98,7 +98,7 @@ export default function Package1() {
           fixedDeparturePopupOpen={fixedDeparturePopupOpen}
         />
       </div>
-      <div className="bg-gray-100  mt-[20px] pb-7"> 
+      <div className="bg-gray-100  mt-[20px] pb-7">
         <div className="container-wrapper mb-4">
           <div className="mb-[20px] pt-[40px]">
             <h1 className="text-lg font-medium text-graytext">
@@ -252,7 +252,7 @@ export default function Package1() {
             </div>
             <div className="mb-7">
               {/* <Itinerary /> */}
-              <ItineraryFaq faq={addPackage?.days}/>
+              <ItineraryFaq faq={addPackage?.days} />
 
             </div>
             <div>
@@ -300,23 +300,35 @@ export default function Package1() {
                   <p className="text-[12px]">Email Itinerary</p>
                 </div>
 
+
+
+ {/* reviewsCard */}
+
+
               </div>
               {/* card is here */}
-               <ItinerarySideCard />
+              <ItinerarySideCard />
             </div>
           </div>
         </div>
       </div>
-      {/* review card */}
+   
       <div className="my-7">
-        <ReviewsCard/>
+        <ReviewsCard />
       </div>
-      <div>
+
+
+
+
+
+
+      <div className=' mt-12 pb-6'>
         <TestingCard addPackage={addPackage} />
       </div>
-      {/* ) : null} */}
+
+     {/* ) : null} */}
       {/* when data is not available the all content will hide */}
-      {/* FAQ section  */} 
+      {/* FAQ section  */}
       {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
         <div className='my-7 md:p-0 px-4'>
           <div className="text-center mb-4">
@@ -330,7 +342,13 @@ export default function Package1() {
         </div>
       ) : null}
       {/* bottom link */}
-      <BottomLink />
+
+ 
+
+     
+
+
+      <BottomLink  />
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">
@@ -371,8 +389,8 @@ export default function Package1() {
                   >
                     <p
                       className={` ${showAddguest
-                          ? "bg-primary cursor-pointer"
-                          : "bg-orange-200"
+                        ? "bg-primary cursor-pointer"
+                        : "bg-orange-200"
                         } px-5 py-2 rounded-md text-white text-center text-para`}
                     >
                       <span className="disabled:opacity-75" onClick={() => setPricingShowPopup(true)}>
@@ -387,8 +405,8 @@ export default function Package1() {
                   <button
                     onClick={handleSubmit}
                     className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                        ? "bg-primary"
-                        : " bg-orange-200"
+                      ? "bg-primary"
+                      : " bg-orange-200"
                       }  text-center text-para`}
                   >
                     Book Noow
