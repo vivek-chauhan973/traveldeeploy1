@@ -39,12 +39,12 @@ const [showPopup,setShowPopup]=useState(false);
                 {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
                 <div className="flex my-2 gap-3 flex-wrap ml-5">
                   {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className=" cursor-pointer" >
-                    <div className=" border-2 w-20 h-20 rounded-md">
-                      <p className="text-center text-para">{item.day}</p>
+                    <div className=" border-b-2 hover:bg-gray-300  text-white bg-gray-50 w-16 h-14 rounded-md overflow-hidden">
+                      <p className="text-center text-xxs text-white group-hover:text-white  bg-navyblack">{item.day}</p>
                       <hr />
-                      <p className="text-center text-sm">{item.date}</p>
-                      <hr />
-                      <div className="flex justify-center items-center mt-1 text-sm"><MdCurrencyRupee/> <p>{item.price}</p></div>
+                      <p className="text-center text-black group-hover:text-white  text-xxs">{item.date}</p>
+                      
+                      <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs"><MdCurrencyRupee/> <p>{item.price}</p></div>
                     </div>
                   </div>)}
                 </div>
@@ -54,7 +54,7 @@ const [showPopup,setShowPopup]=useState(false);
                   </p>
 
                   <p
-                    className="ml-5 mr-2 text-para"
+                    className="ml-3 mr-2 about-margin text-para"
                     dangerouslySetInnerHTML={{
                       __html: addPackage?.about,
                     }}
@@ -70,9 +70,9 @@ const [showPopup,setShowPopup]=useState(false);
                   <div>
                   <div>
                     {addPackage?.highlights?.map((highlight) => (
-                      <ol key={highlight._id} className="list-disc">
+                      <ul key={highlight._id} className=" ml-3">
                         <li className="ml-5 mr-2 text-para">{highlight.text}</li>
-                      </ol>                     
+                      </ul>                     
                     ))}
                     </div>
                     {/* <div className= 'bg-gradient-to-t -mt-7  from-red-400 opacity-100 w-full  h-10 -top-2 z-30" ' ></div> */}

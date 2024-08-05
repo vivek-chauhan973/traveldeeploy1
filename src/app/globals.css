@@ -313,8 +313,10 @@ select {
 
 
 /* this is change the innerHtml into the  normal in payment term anditernery tour detail*/
- ol li{
+
+ol li{
   list-style: decimal outside;
+  margin-bottom: 3px;
 
 } 
 .Dot ol li::marker {
@@ -373,4 +375,17 @@ text-indent: 120px;
 .font{
   height: 20px;
   width: 13px;
+}
+
+.about-margin ul  {
+  margin-left: 18px;
+}
+.about-margin ol{
+  margin-left: 12px;
+}
+.about-margin ol li s{
+  margin-left: 7px;
+}
+.about-margin p{
+  margin-bottom: 3px;
 }
