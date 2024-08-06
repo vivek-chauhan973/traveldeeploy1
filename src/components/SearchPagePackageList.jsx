@@ -253,7 +253,7 @@ const SearchPagePackageList = (locationId) => {
         </div>
       ))}
 
-      <div className="flex justify-end mt-4  list-none">
+      <div className="flex justify-end my-5  list-none">
         <Pagination
           activePage={currentPage}
           itemsCountPerPage={itemsPerPage}

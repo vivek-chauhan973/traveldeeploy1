@@ -122,14 +122,14 @@ export default function SearchPage() {
                     {!loading ? (
 
                         <div className="border-t border">
-                            <div className="w-full md:w-3/4 m-auto">
-                            <div className="text-center mb-10">
-                                <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
-                                <p className="text-para md:text-base">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                </p>
-                            </div>
-                            <Faq1 data={promoData.faq} />
+                            <div className="w-full md:w-3/4 m-auto px-2 pb-5">
+                                <div className="text-center mt-5 mb-10">
+                                    <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
+                                    <p className="text-para md:text-base">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    </p>
+                                </div>
+                                <Faq1 data={promoData.faq} />
                             </div>
                           
 

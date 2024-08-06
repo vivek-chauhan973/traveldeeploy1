@@ -61,11 +61,9 @@ useEffect(() => {
           <option>Han Solo</option>
           <option>Greedo</option>
         </select>
-        {/* <button className="border rounded-sm border-gray-400 text-sm px-3 py-1 hover:bg-white xl:hidden block">
-          Filter
-        </button> */}
-          <button className="border rounded-sm border-gray-400 text-sm px-2 py-0.5 hover:bg-white xl:hidden block"
-          onClick={handleOpenModal}>
+        <button className="border rounded-sm border-gray-400 text-sm px-2 py-0.5 hover:bg-white xl:hidden block"
+                onClick={handleOpenModal}
+          >
           Filter
         </button>
       </div>
