@@ -9,13 +9,13 @@ import { FaCircleMinus, FaCirclePlus } from "react-icons/fa6";
 import { useAppContext } from "./admin/context/Package/AddGuest";
 
 const Addguest = ({
-  children,
-  guestPrice,
-  inputData,
-  setInputData,
-  setCloseBtn,
-  addPackage
-}) => {
+    children,
+    guestPrice,
+    inputData,
+    setInputData,
+    setCloseBtn,
+    addPackage
+  }) => {
   const date = new Date();
   const { showAddguest } = useAppContext() ?? { showAddguest: false };
 
@@ -275,12 +275,12 @@ const Addguest = ({
         break;
     }
   };
-
+// ==================================Changes========================================================
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
       {addPackage?.prices?.addguest==="addGuest"&&<Dialog
-        className="h-[90%] my-auto px-0 "
+        className="h-full my-auto px-0 "
         open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"

@@ -67,7 +67,7 @@ const ItineraryFaq = ({ faq }) => {
                   <div className="relative text-para md:pl-10 pl-8 border-l ml-2 border-navyblack border-dashed pb-2">
                     {/* Circle */}
                     <div className="-left-2 absolute bg-navyblack h-4 w-4 rounded-full"></div>
-                    <div dangerouslySetInnerHTML={{ __html: item.information }}></div>
+                    <div className='package-list' dangerouslySetInnerHTML={{ __html: item.information }}></div>
                   </div>
                 </div>
               </div>

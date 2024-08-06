@@ -26,7 +26,7 @@ const Faq1 = ({ data }) => {
                         )}
                     </div>
                     <div className={`overflow-hidden transition-max-height duration-700 ease-in-out ${openIndex === i ? 'max-h-screen' : 'max-h-0'}`}>
-                        <div className="py-4 px-10 text-para">
+                        <div className="py-4 xl:px-10 px-7 text-para">
                         {item.information}
                         </div>
                     </div>

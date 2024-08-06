@@ -19,7 +19,7 @@ const ItineraryPaymentTerms = () => {
                 <p className="md:text-md text-para italic text-slate-600">
                     Things to consider before the trip!
                 </p>
-                <p className="py-3 pl-4 text-para" dangerouslySetInnerHTML={{ __html:addPackage?.TourInformations?.paymentTerm?.description }} />
+                <p className="py-3 pl-4 text-para payment-margin" dangerouslySetInnerHTML={{ __html:addPackage?.TourInformations?.paymentTerm?.description }} />
             </div>
 
             <div>

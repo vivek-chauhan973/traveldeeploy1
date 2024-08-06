@@ -253,7 +253,6 @@ export default function Package1() {
             <div className="mb-7">
               {/* <Itinerary /> */}
               <ItineraryFaq faq={addPackage?.days} />
-
             </div>
             <div>
               {/* Itinerary map */}
@@ -300,11 +299,6 @@ export default function Package1() {
                   <p className="text-[12px]">Email Itinerary</p>
                 </div>
 
-
-
- {/* reviewsCard */}
-
-
               </div>
               {/* card is here */}
               <ItinerarySideCard />
@@ -312,23 +306,16 @@ export default function Package1() {
           </div>
         </div>
       </div>
-   
+      {/* reviewsCard */}
       <div className="my-7">
         <ReviewsCard />
       </div>
-
-
-
-
-
 
       <div className=' mt-12 pb-6'>
         <TestingCard addPackage={addPackage} />
       </div>
 
-     {/* ) : null} */}
-      {/* when data is not available the all content will hide */}
-      {/* FAQ section  */}
+      {/* FAQ section --- when data is not available then all content will hide */}
       {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
         <div className='my-7 md:p-0 px-4'>
           <div className="text-center mb-4">
@@ -341,13 +328,8 @@ export default function Package1() {
           <Faq1 data={addPackage.faqs.days} />
         </div>
       ) : null}
+
       {/* bottom link */}
-
- 
-
-     
-
-
       <BottomLink  />
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
@@ -400,7 +382,6 @@ export default function Package1() {
                   </Addguest>
                 )}
 
-
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
@@ -422,9 +403,6 @@ export default function Package1() {
 
               {
                 <CustomiseTour>
-                  {/* <p className="border px-5 cursor-pointer py-1 mt-2 rounded-md text-center text-para">
-                    <span>Customise</span>
-                  </p> */}
                   <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">
                     Customise
                   </button>

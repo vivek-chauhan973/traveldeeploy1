@@ -24,7 +24,7 @@ const BottomLink = ({ locationId }) => {
 
   useEffect(() => {
     fetchPromoManagementData();
-  }, [locationIds, fetchPromoManagementData]);
+  }, [locationIds]);
 
   return (
     <div className="bg-slate-100 py-8">

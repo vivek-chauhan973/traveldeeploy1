@@ -5,7 +5,6 @@ import Slider from '@mui/material/Slider';
 import { useState,useEffect } from "react";
 import { useAppContext } from "./admin/context/Package/AddGuest";
 
-// Today changes here in main file
 
 const MAX = 99100;
 const MIN = 0;
@@ -37,20 +36,6 @@ export default function SearchPageFilter({ onApplyFilter }) {
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
 
-    // const handleApplyFilter = () => {
-    //     onApplyFilter(priceRange);
-    // };
-
-    // const handleSubmit = () => {
-    //     onApplyFilter({ priceRange, value });
-    //   };
-
-    //   // tour duration value
-    //   const [value, setValue] = React.useState([20, 37]);
-
-    //   const handleChange = (event: any, newValue: any) => {
-    //       setValue(newValue);
-    //   };
     useEffect(()=>{
         fetchCatagory().then(res=>setPackageCategory(res?.data||[]))
     },[])
@@ -76,28 +61,25 @@ export default function SearchPageFilter({ onApplyFilter }) {
        
         onApplyFilter(filters);
     };
-useEffect(()=>{
-    if (priceRange[0] > priceRange[1]) {
-        setMaxPrice(priceRange[0])
-        setMinPrice(priceRange[1])
-    }
-    else {
-        setMaxPrice(priceRange[1])
-        setMinPrice(priceRange[0])
-    }
-},[priceRange])
+    useEffect(()=>{
+        if (priceRange[0] > priceRange[1]) {
+            setMaxPrice(priceRange[0])
+            setMinPrice(priceRange[1])
+        }
+        else {
+            setMaxPrice(priceRange[1])
+            setMinPrice(priceRange[0])
+        }
+    },[priceRange])
+
     const handleClearAll = () => {
         setPriceRange([0, 9900]);
         setTourDuration([20, 37]);
         setDepartureCity([]);
         setPackageCategory([]);
-        // onClearFilters();
+
         document.querySelectorAll("input[type=checkbox]").forEach(el => el.checked = false);
     };
-
-
-    // console.log("package data",packageCategory)
-
 
     return (
         <>
@@ -186,8 +168,8 @@ useEffect(()=>{
                                     id="city4" name="indore" value="Indore" onChange={(e) => handleCheckboxChange(e, setDepartureCity)} />
                                 <label htmlFor="city4" className="cursor-pointer label-text md:text-[14px] text-[12px]"> Indore</label>
                             </div>
-                        </div> */}
-                        <div className="border-b md:mt-5 mt-2"></div>
+                        </div> 
+                        <div className="border-b md:mt-5 mt-2"></div>*/}
                         <div className="pr-5 py-2">
                             <p className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</p>
                             <div>

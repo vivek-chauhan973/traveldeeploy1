@@ -17,9 +17,9 @@ const ItineraryPricingCard = () => {
 
   return (
     <>
-      <div className=" border p-3 rounded-md bg-white xs:mt-5 xl:mt-0 xs:hidden xl:block overflow-hidden ">
+      <div className=" border p-5 rounded-md bg-white xs:mt-5 xl:mt-0 xs:hidden xl:block overflow-hidden ">
         <div className="bg-white">
-          <div className="flex justify-between">
+          <div className="flex justify-between mb-2">
             <p className="text-md font-semibold text-graytext">Booking Summary</p>
             <div>
               <Addguest
@@ -37,7 +37,7 @@ const ItineraryPricingCard = () => {
         </div>
 
         <div className=" overflow-y-auto">
-          <div className="flex mb-2.5 mt-5 text-sm">
+          <div className="flex mb-2.5 mt-3 text-sm">
             <p className=" w-20">Dept. city : </p>
             <p className="font-semibold text-graytext">Mumbai</p>
           </div>
@@ -126,7 +126,7 @@ const ItineraryPricingCard = () => {
               </label>
             </div>
           )}
-          <div className="grid grid-cols-2 gap-3 my-2">
+          <div className="grid grid-cols-2 gap-3 my-2.5">
             <CustomiseTour>
               <button className=" border-primary w-full border text-primary flex-flow   flex justify-center px-5 py-2 text-para rounded-md">
                 Customise
