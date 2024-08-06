@@ -5,7 +5,20 @@ const faqSchema = new mongoose.Schema({
   title: { type: String, required: true },
   information: { type: String, required: true },
 });
-
+const seoSchema=new mongoose.Schema({
+  seoTags:{
+    type:String
+  },
+  seoTitle:{
+    type:String,
+  },
+  seoDescription:{
+    type:String
+  },
+  seoKeywords:{
+    type:String
+  }
+})
 const packageStateSchema = new mongoose.Schema({
   relatedId: { type: mongoose.Schema.Types.ObjectId, required: true },
   relatedTo: { type: String, required: true },
@@ -14,6 +27,8 @@ const packageStateSchema = new mongoose.Schema({
   image: { type: String }, // Add image field
   description: { type: String, required: true },
   faq: [faqSchema],
+  tableData:[{}],
+ seoField:seoSchema,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

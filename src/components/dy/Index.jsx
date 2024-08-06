@@ -1,10 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../app/globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const DynamicTable = () => {
+const DynamicTable = ({setTableData,tableData}) => {
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
     const [submitted, setSubmitted] = useState(false);
@@ -19,7 +19,11 @@ const DynamicTable = () => {
         columns.forEach(col => newRow[col] = '');
         setRows([...rows, newRow]);
     };
-
+useEffect(()=>{
+    setSubmittedData(tableData||[]);
+    setRows(tableData||[])
+    setSubmitted(true)
+},[tableData])
     const handleRemoveRow = (id) => {
         if (window.confirm('Are you sure you want to delete this row?')) {
             setRows(rows.filter(row => row.id !== id));
@@ -61,7 +65,7 @@ const DynamicTable = () => {
     const handleSubmit = () => {
         setSubmittedData(rows);
         setSubmitted(true);
-        console.log('Submitted Data:::::::::::::::::::::::', rows);
+        setTableData(rows);
     };
 
     const handleEdit = () => {
@@ -91,6 +95,7 @@ const DynamicTable = () => {
 
 
 // for toggle
+// console.log("submitted data :: ",submittedData);
     const HandleToogle = () => {
         setToggle(!toggle)
     }

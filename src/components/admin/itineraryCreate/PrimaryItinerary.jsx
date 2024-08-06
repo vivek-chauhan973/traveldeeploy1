@@ -54,8 +54,9 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [cityPopup,setCityPopup]=useState(false);
     const [imageDetails,setImageDetails]=useState([]);
     const [dayWiseFaq,setDayWiseFaq]=useState([]);
+    
 
-    console.log("jhkjashdf daywise data",dayWiseFaq)
+    // console.log("jhkjashdf daywise data",dayWiseFaq)
     useEffect(() => {
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();

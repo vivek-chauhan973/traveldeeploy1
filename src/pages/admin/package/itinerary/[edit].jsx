@@ -29,7 +29,7 @@ export default function CreatePackage() {
 
     const { edit } = useRouter().query;
     const formType = useSearchParams()?.get("type");
-
+    const [tableData,setTableData]=useState([]);
     const [itinerary, setItinerary] = useState();
     const [activeTab, setActiveTab] = useState(formType ? 'Tab1' : 'Tab1');
 
@@ -146,7 +146,7 @@ export default function CreatePackage() {
                 </div>
 
                 <div className={`${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>
-                    <Index />
+                    <Index setTableData={setTableData} tableData={tableData} />
                 </div>
 
             </Layout>
