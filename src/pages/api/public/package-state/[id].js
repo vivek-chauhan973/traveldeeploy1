@@ -54,9 +54,9 @@ const handler = async (req, res) => {
                 } else if (err) {
                     return res.status(500).json({ error: err.message || 'File upload failed' });
                 }
-                console.log("req body 4554545545",req)
+                // console.log("req body 4554545545",req)
                 try {
-                    const { title, alt, faqData, editorContent } = req.body;
+                    const { title, alt, faqData, editorContent,tableData,seoData } = req.body;
                     const file = req.file;
                     //  console.log("req body 4554545545",req)
                     let updateData = {
@@ -65,6 +65,8 @@ const handler = async (req, res) => {
                         description: editorContent,
                         faq: JSON.parse(faqData).map(faq => ({ title: faq.title, information: faq.information })),
                         relatedTo: 'State',
+                        tableData:JSON.parse(tableData),
+                        seoField:JSON.parse(seoData),
                         relatedId: id,
                         image: file ? `/uploads/packagestate/${file.filename}` : undefined,
                     };
