@@ -125,7 +125,7 @@ export default function PromoManagement () {
                                         <input type="file"
                                         onChange={handleChange}
                                         ref={ref}
-                                            className=" file:mr-4 file:py-2 file:px-4
+                                        className=" file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
                                         file:text-sm file:font-semibold
                                         file:bg-black/20 file:text-black/50

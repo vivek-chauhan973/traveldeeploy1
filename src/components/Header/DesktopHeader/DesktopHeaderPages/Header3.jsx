@@ -49,19 +49,10 @@ const Header3 = () => {
       <div className="bg-[#272727]">
         <div className="container-wrapper">
           <div className="flex md:items-center md:justify-between md:gap-5 py-3 ">
-            <div className=" justify-between  ">
-              <div className=" relative flex gap-2 xl:hidden">
-                <div className=" mt-3">
-                  <Header2 />
-                </div>
-                <div className="flex justify-between  ">
-                  {/* <Image  src={Logo} alt=""  /> */}
-                </div>
-              </div>
-              {/* <Image  src={Logo} alt="" height={60} width={60} /> */}
-              {/* <Image width={160} height={160} className="   object-cover rounded-[17px]" src="/logo1.png" alt="" /> */}
-      
-
+            <div className=" flex w-full md:w-auto justify-between ">
+             
+              {/* images... */}
+              <div>
               <Image
                 src={imageSrc}
                 height={200}
@@ -69,10 +60,13 @@ const Header3 = () => {
                 alt="Logo"
                 onError={() => setImageSrc('/logo.png')} // Ensure fallback if image fails to load
               />
-              {/* <SearchIcon size={24} className="text-white mt-3 md:hidden" /> */}
+              </div>
+              <div className=" relative  flex gap-2 md:hidden xl:hidden">
+                  <Header2 />
+              </div>
             </div>
 
-            <div className=" justify-between  hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
+            <div className=" justify-between   hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
               <div className="flex gap-1 ">
                 <span className="">
                   <FontAwesomeIcon icon={faSearch}  className='font' />

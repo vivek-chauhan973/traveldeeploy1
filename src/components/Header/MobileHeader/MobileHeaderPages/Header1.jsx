@@ -7,7 +7,7 @@ import {
 } from "@/components/icons/index"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faClock, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faClock, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 const Header1 = ({ setTogle, togle }) => {
@@ -35,22 +35,26 @@ const Header1 = ({ setTogle, togle }) => {
   }, [handleScroll]);
 
   return (
-    <div className={` sm:-ml-16 md:-ml-14 lg:-ml-28 relative w-[100vw] -ml-5 -mt-14 sm:w-60 md:w-64 lg:w-80 h-[100vh] shadow-sm border bg-white transition-transform duration-300 ease-in-out ${isVisible ? 'translate-x-0' : '-translate-x-full'} lg:-my-16 md:-mt-16 sm:-mt-14`}>
-      <div className="h-[10vh] w-full px-2 sm:px-4 lg:pt-2 -mt-2 pt-1  sm:pt-1 bg-[#0e1e2c] lg:-mt-2 md:-mt-2 md:pt-2 sm:-mt-2">
-        <div className="text-2xl mt-2 cursor-pointer text-white" onClick={() => { setIsVisible(false); setTimeout(() => setTogle(false), 300); }}>
-          {/*       
-          <CancelIcon /> */}
-          <FontAwesomeIcon icon={faCircleXmark}  className='font'  />
-        </div>
+    <div
+      className={`fixed top-0 right-0 w-full h-full bg-white shadow-sm border transition-transform duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
+        }`} style={{ zIndex: 1000 }}>
 
+      <div className="h-[10vh] w-full px-2 sm:px-4 bg-[#0e1e2c] flex items-center justify-between">
+        <div className="text-2xl cursor-pointer text-white" onClick={() => {
+          setIsVisible(false);
+          setTimeout(() => setTogle(false), 300); // Ensure this matches the duration of the transition
+        }}>
+          <FontAwesomeIcon icon={faXmark} className=' font1' />
+        </div>
       </div>
+
       {openClose ? (
         <div onMouseLeave={() => setOpenClose(false)}>
           {Data[renderedComponent] && Data[renderedComponent]({ setOpenClose })}
         </div>
       ) : (
         <div>
-          <div className="h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
+          <div className="  ml-1 h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
             <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
               <div className="flex justify-between">
                 <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</p>
@@ -59,12 +63,10 @@ const Header1 = ({ setTogle, togle }) => {
                   <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>
                     <DownArrow />
                   </div>
-
-
                 </div>
               </div>
               <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(1) }}>World</p>
+                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(1) }}>World</p>
                 <div className="cursor-pointer">
                   <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(1) }} >
                     <DownArrow />
@@ -73,7 +75,7 @@ const Header1 = ({ setTogle, togle }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>Speciality Tours</p>
+                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>Speciality Tours</p>
                 <div className="cursor-pointer">
 
                   <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(2) }} >
@@ -82,17 +84,17 @@ const Header1 = ({ setTogle, togle }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Customized Holidays</p>
+                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Customized Holidays</p>
                 <div className="cursor-pointer">
                   <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(3) }} >
                     <DownArrow />
                   </div>
                 </div>
               </div>
-              <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Corporate Travel</p>
-              <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Inbound</p>
+              <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Corporate Travel</p>
+              <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Inbound</p>
               <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[10px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(4) }}>Forex</p>
+                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(4) }}>Forex</p>
                 <div className="cursor-pointer">
                   <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(4) }} >
                     <DownArrow />
@@ -100,7 +102,7 @@ const Header1 = ({ setTogle, togle }) => {
                 </div>
               </div>
               <p className="cursor-pointer md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Gift a Tour</p>
-              <p className="cursor-pointer md: sm:text-[10px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Contact Us</p>
+              <p className="cursor-pointer md: sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Contact Us</p>
             </div>
             <hr className="mx-1" />
             <div className="w-full flex flex-col gap-4 px-2 sm:px-4 my-2">
@@ -113,7 +115,7 @@ const Header1 = ({ setTogle, togle }) => {
             <div className="w-full flex flex-col gap-6 px-2 sm:px-4 my-2">
               <div className="flex gap-2 items-center">
                 <div>
-                  {/* <Image src="" className=" sm:text-[10px] md:text-2xl" alt='pic' width="125"
+                  {/* <Image src="" className=" sm:text-[16px] md:text-2xl" alt='pic' width="125"
                     height="150" /> */}
                 </div>
                 <div className="flex gap-1 flex-col">
@@ -124,7 +126,7 @@ const Header1 = ({ setTogle, togle }) => {
               <div className="flex gap-2">
                 <div className="pt-2 sm:text-[10px] md:text-2xl">
 
-                  <FontAwesomeIcon icon={faPhone}  className='font'  />
+                  <FontAwesomeIcon icon={faPhone} className='font' />
 
                 </div>
                 <div className="flex gap-1 flex-col">
@@ -141,7 +143,7 @@ const Header1 = ({ setTogle, togle }) => {
                 </div>
               </div>
               <div className="flex gap-2 items-center sm:text-[10px] md:text-2xl">
-                <FontAwesomeIcon icon={faClock}  className='font'  />
+                <FontAwesomeIcon icon={faClock} className='font' />
                 <div>
 
                 </div>

@@ -304,13 +304,26 @@ select {
     /* padding:0 20px !important; */
   }
 }
+@media screen and (min-width: 1400px) {
+  .container-wrapper {
+    width: 1330px !important;
+    /* background-color: blue !important; */
+    /* padding:0 20px !important; */
+  }
+}
+@media screen and (min-width: 1300px) {
+  .container-wrapper {
+    width: 1280px !important;
+    /* background-color: blue !important; */
+    /* padding:0 20px !important; */
+  }
+}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
-
 
 /* this is change the innerHtml into the  normal in payment term anditernery tour detail*/
 
@@ -375,6 +388,10 @@ text-indent: 120px;
 .font{
   height: 20px;
   width: 13px;
+}
+.font1{
+  height: 20px;
+  width: 20px;
 }
 
 .about-margin ul  {

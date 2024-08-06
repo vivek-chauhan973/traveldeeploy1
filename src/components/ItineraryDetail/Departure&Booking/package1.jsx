@@ -343,9 +343,6 @@ export default function Package1() {
       ) : null}
       {/* bottom link */}
 
- 
-
-     
 
 
       <BottomLink  />

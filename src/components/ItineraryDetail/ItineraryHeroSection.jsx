@@ -61,39 +61,58 @@ const ItineraryHeroSection = ({
   const boxShadowStyle = {
     boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
   };
+  const mobileBoxShadowStyle = {
+    boxShadow: 'inset 0px -50px 20px 5px rgba(0, 0, 0, 0.5)'
+  };
 
   return (
     <>
 
       <div>
-        <div className="slider-container xl:hidden  mt-7">
+        <div className="">
+          <div className="slider-container xl:hidden  mt-6 ">
+
+            <div className="slider-container overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar relative ">
+              {hemages?.map((item, i) => (
+                <div key={i} className="snap-center flex-shrink-0 w-full relative">
+                  <img
+                    className="w-full h-[50vh] object-cover"
+                    src={item.path || "/logo.png"}
+                    alt={`img ${i + 1}`}
+                  />
+                  <div className="">
+                    <h1
+                      style={mobileBoxShadowStyle}
+                      className=" gap-3 items-center flex  left-0 z-10 w-full absolute py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
+                      {addPackage?.name}
+                      <span className=" bg-primary py-1 px-4 text-white rounded text-base font-bold  ">{addPackage?.faqs?.days.length}D/ {addPackage?.faqs?.days.length - 1}N</span>
+                    </h1>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
           
-          <div className="slider-container overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar">
-            {hemages?.map((item, i) => (
-              <div key={i} className="snap-center flex-shrink-0 w-full">
-                <img
-                  className="w-full h-[50vh] object-cover"
-                  src={item.path || "/logo.png"}
-                  alt={`img ${i + 1}`}
-                />
-              </div>
-            ))}
         </div>
-        </div>
-        <div className="container-wrapper  grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">   
-          <div className="relative">
+        <div className="container-wrapper  grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
+          <div className="relative rounded-md overflow-hidden">
             <img
-              className="rounded-md h-[400px] object-cover w-full hidden xl:flex"
+              className=" h-[400px] object-cover w-full hidden xl:flex"
               src={hemages && hemages[0]?.path || "/logo.png"}
               alt="img 1"
               width={200}
               height={100}
             />
-            <div
+
+
+            <h1
               style={boxShadowStyle}
-              className="hidden xl:flex  absolute top-0 left-0 z-10 w-full h-[400px] pb-5 text-white text-2xl font-semibold justify-center items-end rounded-md">
-              {addPackage?.name} 
-            </div>
+              className="hidden xl:flex  gap-3 items-center  absolute  left-0 z-10 w-full  py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
+              {addPackage?.name}
+              <span className=" bg-primary py-1 px-4 text-white rounded text-base font-bold  ">{addPackage?.faqs?.days.length}D/ {addPackage?.faqs?.days.length-1}N</span>
+            </h1>
+
+
           </div>
           <div className="justify-end flex-col gap-y-4 md:justify-center w-full hidden xl:flex ">
             <div className="">
@@ -113,15 +132,15 @@ const ItineraryHeroSection = ({
                 alt="img 3"
                 width={200}
                 height={100}
-                // onError={handleError}
+              // onError={handleError}
               />
 
             </div>
           </div>
           <div>
             <div>
-              <div className="flex justify-between md:hidden  my-2 p-2 bg-navyblack rounded-lg">
-                <h1 className=" text-lg  md:text-xl font-semibold capitalize text-white">
+              <div className=" mb-2 ">
+                <h1 className=" text-lg   md:text-xl font-semibold capitalize ">
                   {addPackage?.name}
                 </h1>
                 {/* <div className="flex items-center justify-center border rounded-full w-6 h-6">
@@ -135,20 +154,19 @@ const ItineraryHeroSection = ({
                 </div> */}
               </div>
               <div className="stick top-1">
-              <div className="flex flex-wrap gap-2 text-xxs font-semibold text-white">
-                {addPackage?.badges?.map((badge, index) => (
-                  <button
-                    key={index}
-                    className={`rounded-full py-1 px-2 ${
-                      index === 0
+                <div className="flex flex-wrap gap-2 text-xxs font-semibold text-white">
+                  {addPackage?.badges?.map((badge, index) => (
+                    <button
+                      key={index}
+                      className={`rounded-full py-1 px-2 ${index === 0
                         ? 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize'
                         : 'bg-navyblack'
-                    }`}
-                  >
-                    {badge}
-                  </button>
-                ))}
-              </div>
+                        }`}
+                    >
+                      {badge}
+                    </button>
+                  ))}
+                </div>
                 <div className="flex justify-between mt-2">
                   <div className="flex flex-wrap gap-1 items-center">
                     <p className="md:text-md text-[16px] ">
@@ -254,7 +272,7 @@ const ItineraryHeroSection = ({
                     </button>
                   </CustomiseTour>
                 }
-                
+
                 {fixedDeparturePopupOpen && (
                   <FixedDeparturePopup
                     togglePopup={togglePopup}

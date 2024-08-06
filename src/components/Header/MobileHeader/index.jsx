@@ -12,14 +12,20 @@ function Header2() {
     <>
       {togle ? (
         <Header1 setTogle={setTogle} togle={togle} />
+
       ) : (
 
-        <div className=" text-2xl -my-4 text-white md:-ml-10"
+        <div
+          className="text-2xl -my-4 text-white flex justify-end items-center  cursor-pointer"
           onClick={() => {
             setTogle(true);
-          }}>
-          <FontAwesomeIcon icon={  faBars }  className='font' />
+          }}
+        >
+          <div>
+            <FontAwesomeIcon icon={faBars} className='font1' />
+          </div>
         </div>
+
 
       )}
     </>

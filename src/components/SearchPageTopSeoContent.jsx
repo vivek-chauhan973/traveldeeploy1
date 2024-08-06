@@ -179,16 +179,15 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
         )}
 
         <div className="flex float-right  justify-end items-center px-1 md:h-6 h-5 md:w-24 w-20 bg-navyblack rounded shadow-sm text-white cursor-pointer">
-          <button className=" md:text-para text-xs" onClick={handleToggle}>{show ? "Read less" : "Read more"}</button>
+          <button className=" md:text-para text-xs " onClick={handleToggle}>{show ? "Read less" : "Read more"}</button>
           <span>
             <IoMdArrowDropdown className={`transition-transform  ${show ? 'rotate-180' : ''} `} onClick={handleToggle} />
           </span>
         </div>
-
-
+      
       </div>
       <div className=" mt-3"> 
-      <hr className="container-wrapper border-slate-300" />
+      <hr className="container-wrapper border-slate-300"/>
 
       </div>
     </div>
