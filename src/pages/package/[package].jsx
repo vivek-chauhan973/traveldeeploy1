@@ -26,7 +26,7 @@ export default function TourPackage({data}) {
       <meta property="og:title" content={data?.seoData?.title} />
       <meta property="og:type" content="website" />
       <meta property="og:description" content={data?.seoData?.description} />
-      <meta property="og:image" content={`https://www.bizarexpedition.in/${data?.uploads[0]}`}/>
+      <meta property="og:image" content={`https://www.bizarexpedition.in}`}/>
       <meta property="og:url" content={`https://www.bizarexpedition.in/package/${data?.pageUrl}`} />
       <meta property="og:site_name" content="BizareXpedition" />
       <meta property="og:locale" content="en_Us" />
@@ -34,7 +34,7 @@ export default function TourPackage({data}) {
       <meta name="twitter:title" content={data?.seoData?.title} />
       <meta name="twitter:description" content={data?.seoData?.description} />
       <meta name="twitter:url" content={`https://www.bizarexpedition.in/package/${data?.pageUrl}`}/>
-      <meta name="twitter:image" content={`https://www.bizarexpedition.in/${data?.uploads[0]}`}/>
+      <meta name="twitter:image" content={`https://www.bizarexpedition.in}`}/>
       <meta name="twitter:creator" content="@bizarexpedition"/>
       <meta name="twitter:site" content="BizareXpedition"></meta>
       <meta name="keywords" content="HTML, CSS, JavaScript"/>
