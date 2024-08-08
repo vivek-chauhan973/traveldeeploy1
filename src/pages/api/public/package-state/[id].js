@@ -46,7 +46,15 @@ const handler = async (req, res) => {
                 res.status(400).json({ success: false, message: error.message });
             }
             break;
+        case "DELETE":
+            try {
+                const packageState = await PackageState.findOneAndDelete({_id: id });
 
+                return res.status(204).json({message:"data deleted succcessfully"});
+            } catch (error) {
+                res.status(400).json({ success: false, message: error.message });
+            }    
+            break;
         case 'POST':
             upload.single('file')(req, res, async (err) => {
                 if (err instanceof multer.MulterError) {
@@ -56,7 +64,7 @@ const handler = async (req, res) => {
                 }
                 // console.log("req body 4554545545",req)
                 try {
-                    const { title, alt, faqData, editorContent,tableData,seoData } = req.body;
+                    const { title, alt, faqData, editorContent,tableData,seoData,tableColumn ,selectType,selectedItem} = req.body;
                     const file = req.file;
                     //  console.log("req body 4554545545",req)
                     let updateData = {
@@ -67,7 +75,10 @@ const handler = async (req, res) => {
                         relatedTo: 'State',
                         tableData:JSON.parse(tableData),
                         seoField:JSON.parse(seoData),
+                        tableColumn:JSON.parse(tableColumn),
                         relatedId: id,
+                        selectType:selectType,
+                        selectedItem:selectedItem,
                         image: file ? `/uploads/packagestate/${file.filename}` : undefined,
                     };
 

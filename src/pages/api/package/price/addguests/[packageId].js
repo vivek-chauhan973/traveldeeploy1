@@ -13,7 +13,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 
   if (req.method === "POST") {
     console.log("req body  ; ",req.body)
-    const {addguest, singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childUnderFive, childOverFive } = req.body;
+    const {addguest, singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childUnderFive, childOverFive, misc,
+      markup,
+      diskHike,
+      gst } = req.body;
 
     try {
       const price = await PackagePrice.findOneAndUpdate(
@@ -27,6 +30,9 @@ import { NextApiRequest, NextApiResponse } from "next";
           infantSharingRoom,
           childUnderFive,
           childOverFive,
+          markup,
+      diskHike,
+      gst ,misc
         },
         { upsert: true, new: true }
       );

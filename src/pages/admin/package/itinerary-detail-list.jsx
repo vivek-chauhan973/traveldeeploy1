@@ -61,8 +61,8 @@ const YourComponent = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     // Filter items based on search query
-    let filteredItineraries = itineraries.filter((itinerary) =>
-        itinerary.name.toLowerCase().includes(searchQuery.toLowerCase())
+    let filteredItineraries = itineraries?.filter((itinerary) =>
+        itinerary?.name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     const totalItemsCount = filteredItineraries.length;

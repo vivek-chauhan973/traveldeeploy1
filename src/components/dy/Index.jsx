@@ -4,7 +4,7 @@ import "../../app/globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const DynamicTable = ({setTableData,tableData}) => {
+const DynamicTable = ({setTableData,tableData,tableColumn,setTableColumn}) => {
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
     const [submitted, setSubmitted] = useState(false);
@@ -22,7 +22,12 @@ const DynamicTable = ({setTableData,tableData}) => {
 useEffect(()=>{
     setSubmittedData(tableData||[]);
     setRows(tableData||[])
-    setSubmitted(true)
+    setColumns(tableColumn||[]);
+    if(columns.length!==0){
+        setSubmitted(true);
+    }
+  
+    
 },[tableData])
     const handleRemoveRow = (id) => {
         if (window.confirm('Are you sure you want to delete this row?')) {
@@ -35,7 +40,7 @@ useEffect(()=>{
         if (newColumn && !columns.includes(newColumn)) {
             const updatedColumns = [...columns, newColumn];
             setColumns(updatedColumns);
-
+            
             // Add the new column to existing rows
             setRows(rows.map(row => ({ ...row, [newColumn]: '' })));
 
@@ -65,6 +70,7 @@ useEffect(()=>{
     const handleSubmit = () => {
         setSubmittedData(rows);
         setSubmitted(true);
+        setTableColumn(columns);
         setTableData(rows);
     };
 
@@ -90,6 +96,7 @@ useEffect(()=>{
                 return { ...rest, [newColumnName]: oldValue };
             }));
         }
+        // setTableColumn(columns);
         setEditingColumn(null);
     };
 

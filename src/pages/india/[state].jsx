@@ -36,9 +36,8 @@ export default function SearchPage() {
     const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
     const [promoData, setPromoData] = useState({});
     const [loading, setLoading] = useState(true);
-
-    console.log("prodata is here ,--------", promoData)
-
+    const [tourDuration, setTourDuration] = useState([20, 37]);
+    // console.log("prodata is here ,--------",promoData)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -89,7 +88,7 @@ export default function SearchPage() {
                     <div className='relative'>
                         {!loading ? (
                             <div className='hidden xl:block'>
-                                <SearchPageFilter onApplyFilter={handleApplyFilter} />
+                                <SearchPageFilter onApplyFilter={handleApplyFilter} setTourDuration={setTourDuration} tourDuration={tourDuration} />
                             </div>
                         ) : (
                             <div>
@@ -100,7 +99,7 @@ export default function SearchPage() {
                     <div>
                         {!loading ? (
                             <div>
-                                {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} />}
+                                {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} setTourDuration={setTourDuration} />}
                             </div>
                         ) : (
                             <div>

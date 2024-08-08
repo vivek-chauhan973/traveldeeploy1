@@ -28,14 +28,28 @@ const fetchCatagory=async ()=>{
     return data;
 }
 
-export default function SearchPageFilter({ onApplyFilter }) {
+export default function SearchPageFilter({ onApplyFilter,setTourDuration,tourDuration }) {
     const {setCatagoryId}=useAppContext()
     const { setMinPrice, setMaxPrice } = useAppContext();
     const [priceRange, setPriceRange] = useState([0, 9900]);
-    const [tourDuration, setTourDuration] = useState([20, 37]);
+    
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
+const [filter,setFilter]=useState(false);
+    // const handleApplyFilter = () => {
+    //     onApplyFilter(priceRange);
+    // };
 
+    // const handleSubmit = () => {
+    //     onApplyFilter({ priceRange, value });
+    //   };
+
+    //   // tour duration value
+    //   const [value, setValue] = React.useState([20, 37]);
+
+    //   const handleChange = (event: any, newValue: any) => {
+    //       setValue(newValue);
+    //   };
     useEffect(()=>{
         fetchCatagory().then(res=>setPackageCategory(res?.data||[]))
     },[])
@@ -58,20 +72,19 @@ export default function SearchPageFilter({ onApplyFilter }) {
             departureCity,
             packageCategory,
         };
-       
+        setFilter(!filter)
         onApplyFilter(filters);
     };
-    useEffect(()=>{
-        if (priceRange[0] > priceRange[1]) {
-            setMaxPrice(priceRange[0])
-            setMinPrice(priceRange[1])
-        }
-        else {
-            setMaxPrice(priceRange[1])
-            setMinPrice(priceRange[0])
-        }
-    },[priceRange])
-
+useEffect(()=>{
+    if (priceRange[0] > priceRange[1]) {
+        setMaxPrice(priceRange[0])
+        setMinPrice(priceRange[1])
+    }
+    else {
+        setMaxPrice(priceRange[1])
+        setMinPrice(priceRange[0])
+    }
+},[filter])
     const handleClearAll = () => {
         setPriceRange([0, 9900]);
         setTourDuration([20, 37]);

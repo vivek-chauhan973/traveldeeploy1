@@ -40,7 +40,7 @@ const packageSchema = new Schema({
       default: [],
     },
     days: {
-      type: [String],
+      type: Number,
       default: [],
     },
     uploads: [String],
