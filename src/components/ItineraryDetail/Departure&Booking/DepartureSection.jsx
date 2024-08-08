@@ -37,7 +37,7 @@ const [showPopup,setShowPopup]=useState(false);
               <div className=" relative gap-4  py-4 ">
                 <h6 className=" font-semibold text-base ml-2 mb-3">All Departure date({AllDataRelatedCity[datePackage].length})</h6>
                 {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
-                <div className="flex my-2 gap-3 flex-wrap ml-5">
+                <div className="flex my-2 xl:gap-3 gap-5 flex-wrap ml-5">
                   {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className=" cursor-pointer" >
                     <div className=" border-b-2 hover:bg-gray-300  text-white bg-gray-50 w-16 h-14 rounded-md overflow-hidden">
                       <p className="text-center text-xxs text-white group-hover:text-white  bg-navyblack">{item.day}</p>
@@ -54,7 +54,7 @@ const [showPopup,setShowPopup]=useState(false);
                   </h6>
 
                   <p
-                    className="ml-3 mr-2 about-margin text-para"
+                    className="xl:ml-3 ml-0 mr-2 about-margin text-para"
                     dangerouslySetInnerHTML={{
                       __html: addPackage?.about,
                     }}
@@ -71,7 +71,7 @@ const [showPopup,setShowPopup]=useState(false);
                   <div>
                     {addPackage?.highlights?.map((highlight) => (
                       <ul key={highlight._id} className=" ml-3">
-                        <li className="ml-5 mr-2 text-para">{highlight.text}</li>
+                        <li className="xl:ml-5 ml-2 mr-2 text-para">{highlight.text}</li>
                       </ul>                     
                     ))}
                     </div>

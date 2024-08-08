@@ -14,6 +14,11 @@ import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 // import Booking from "@/components/profile/bookings";
 
 export default function home() {
+
+    const boxShadowStyle = {
+        boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
+    };
+
     return (
         <>
             <DesktopHeader />
@@ -39,38 +44,65 @@ export default function home() {
 
                 </div>
             </div>
-            {/*  image */}
-            {/* relative text-center w-full  h-40 md:h-52 lg:h-44 xl:h-52  overflow-hidden rounded-2xl" */}
+            {/* Four image */}
             <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
-                <div className="relative mb-2">
-                    <Image width={450} height={450} className=" object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                    <div className="absolute  inset-x-2 bottom-0 bg-opacity-50 text-white text-center py-2">
-                        <p className="text-[25px] font-bold">himacahl</p>
-                    </div>
+
+                <div className="relative mb-2 group">
+                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        alt=""
+                        width={300}  //256 in phone
+                        height={288} // 160
+                    />
+                    <div style={boxShadowStyle}
+                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                        Himacahl 
+                    </div>                     
                 </div>
-                <div className="relative mb-2">
-                    <Image width={450} height={450} className=" object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                    <div className="absolute  inset-x-2 bottom-0 bg-opacity-50 text-white text-center py-2">
-                        <p className=" text-[25px]	 font-bold">Kerala</p>
-                    </div>
+               <div className="relative mb-2 group">
+                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        alt=""
+                        width={300}  //256 in phone
+                        height={288} // 160
+                    />
+                    <div style={boxShadowStyle}
+                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                        Kerala 
+                    </div>                     
                 </div>
-                <div className="relative mb-2">
-                    <Image width={450} height={450} className=" object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                    <div className="absolute  inset-x-2 bottom-0 bg-opacity-50 text-white text-center py-2">
-                        <p className="text-[25px] font-bold">Uttarakhand</p>
-                    </div>
+                <div className="relative mb-2 group">
+                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        alt=""
+                        width={300}  //256 in phone
+                        height={288} // 160
+                    />
+                    <div style={boxShadowStyle}
+                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                        Uttarakhand 
+                    </div>                     
                 </div>
-                <div className="relative mb-2">
-                    <Image width={450} height={450} className="object-cover rounded-[17px] transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                    <div className="absolute  inset-x-0 bottom-0 bg-opacity-50 text-white text-center py-2">
-                        <p className="text-[25px] font-bold">  Rajastan</p>
-                    </div>
+                <div className="relative mb-2 group">
+                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        alt=""
+                        width={300}  //256 in phone
+                        height={288} // 160
+                    />
+                    <div style={boxShadowStyle}
+                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        >
+                        Rajasthan 
+                    </div>                     
                 </div>
 
             </div>
 
             {/* image and text */}
-
             <div className="container-wrapper md:py-10 py-4">
                 <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
 
@@ -82,7 +114,7 @@ export default function home() {
                         </h1>
 
                         <div className=" mt-4 flex md:justify-between gap-3  ">
-                            <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Ker;a</button>
+                            <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Kerala</button>
                             <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Himalay</button>
 
                         </div>

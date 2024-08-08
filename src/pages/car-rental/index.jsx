@@ -146,7 +146,7 @@ export default function App() {
                          height={288} // 160
                         />
                         <div style={boxShadowStyle}
-                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                         >
                             Himacahl 
                         </div>                     
@@ -159,7 +159,7 @@ export default function App() {
                          height={288} // 160
                         />
                         <div style={boxShadowStyle}
-                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                         >
                             Kerala 
                         </div>                     
@@ -172,7 +172,7 @@ export default function App() {
                          height={288} // 160
                         />
                         <div style={boxShadowStyle}
-                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                         >
                             Uttarakhand 
                         </div>                     
@@ -185,7 +185,7 @@ export default function App() {
                          height={288} // 160
                         />
                         <div style={boxShadowStyle}
-                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                             className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                         >
                             Rajsthan 
                         </div>                     
