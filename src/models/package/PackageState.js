@@ -29,6 +29,15 @@ const packageStateSchema = new mongoose.Schema({
   faq: [faqSchema],
   tableData:[{}],
  seoField:seoSchema,
+ selectType:{
+  type:String,
+  required:true
+ },
+ tableColumn:[String],
+ selectedItem:{
+  type:String,
+  required:true
+ },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

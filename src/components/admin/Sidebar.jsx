@@ -64,6 +64,7 @@ const Sidebar = () => {
         { label: "Package Master", href: "/admin/package/category" },
         { label: "Add Itinerary", href: "/admin/package/itinerary" },
         { label: "Itinerary List", href: "/admin/package/itinerary-detail-list" },
+        { label: "Promo List", href: "/admin/package/itinerary-promo-list" },
         { label: "Promo Management", href: "/admin/package/promo-management" }
       ]
     },

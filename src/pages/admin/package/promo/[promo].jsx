@@ -1,3 +1,4 @@
+
 import Layout from "@/components/admin/Layout";
 import { useEffect, useRef, useState } from "react";
 import FaqSection from "@/components/admin/ItineraryPromo/FaqSection";
@@ -12,9 +13,14 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image';
 import Index from "@/components/dy/Index";
 import SeoPopupField from "@/components/dy/SeoPopupField";
+import { useRouter } from "next/router";
 
 
 export default function PromoManage() {
+    const router=useRouter();
+    
+    const {promo}=router?.query;
+    // console.log("router is here : ",router);
     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
     const [catoryorstate,setCatoryorstate]=useState(false);
@@ -23,7 +29,6 @@ export default function PromoManage() {
     const [title, setTitle] = useState(null);
     const [seofieldpopup,setSeofieldpopup]=useState(false);
     const [alt, setAlt] = useState(null);
-    const [statePackages, setStatePackages] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
@@ -32,74 +37,27 @@ export default function PromoManage() {
      const [seoData,setSeoData]=useState({});
      const [tableData,setTableData]=useState([]);
      const [tableColumn,setTableColumn]=useState([]);
-    useEffect(() => {
-        if(selectCatagoryOrState==="state"){
-        const fetchData = async () => {
-           
-            try {
-                const response = await fetch('/api/public/states');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                // console.log("categories is here : ",data)
-                setStatePackages(data?.states);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
+     useEffect(()=>{
+        setSelectedLocation(promo||"")
+    },[promo])
     
-        
-
-        fetchData();}
-        if(selectCatagoryOrState==="category"){
-        const fetchCatogories=async ()=>{
-           try {
-           
-                const categoriesList = await fetch('/api/package-setting/category/get-categories');
-            const categories = await categoriesList.json();
-            setStatePackages(categories?.data);
-            
-            
-
-           } catch (error) {
-            console.error('Error fetching data:', error);
-           }
-        }
-        fetchCatogories();}
-        if(selectCatagoryOrState==="country"){
-            const fetchCountries = async () => {
-                try {
-                    const res = await fetch('/api/location?type=country', { method: 'GET' });
-                    const data = await res.json();
-                    setStatePackages(data?.result);
-                    // console.log("all countries is here",data);
-                } catch (err) {
-                    console.log(err);
-                    return [];
-                }
-            };
-            fetchCountries();
-        }
-    }, [selectCatagoryOrState]);
-
     useEffect(() => {
         const getPromoData = async () => {
             try {
                 const res = await fetch(`/api/public/package-state/${selectedLocation}`);
                 const data = await res.json();
-                // console.log("data", data);
+                
                 return data;
             } catch (error) {
                 console.error("Error fetching promo text", error);
             }
         };
 
-        if (statePackages.length > 0) {
+       
             getPromoData().then(res => setPromoTxt(res?.data));
 
-        }
-    }, [statePackages, selectedLocation]);
+        
+    }, [ selectedLocation]);
     const handleChange = (e) => {
         const data = e.target.files[0];
         setImage1(data)
@@ -111,6 +69,7 @@ export default function PromoManage() {
       reader.readAsDataURL(data);
     }
     };
+    
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
@@ -119,13 +78,14 @@ export default function PromoManage() {
         setSeoData(promoTxt?.seoField|| {});
         setTableColumn(promoTxt?.tableColumn|| []);
         setEditorContent(promoTxt?.description||"<p></p>");
+        setSelectCatagoryOrState(promoTxt?.selectType||"")
+        setSelectedItem(promoTxt?.selectedItem||"");
     }, [promoTxt])
-    console.log("promotext",promoTxt)
+   
     useEffect(()=>{
         setFile(image1)
     },[image1])
-console.log("columns is here ",tableColumn)
-    // console.log("selected Item ::",selectedItem)
+
     const handleSelectChange = async (e) => {
       const selectedData=(e.target.value)?.split(",");
     //   console.log("selectedData",selectedData);
@@ -160,7 +120,6 @@ console.log("columns is here ",tableColumn)
         formData.append('tableColumn', JSON.stringify(tableColumn));
         formData.append('selectType',selectCatagoryOrState);
         formData.append("selectedItem",selectedItem);
-        console.log("content",editorContent)
         try {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
@@ -174,7 +133,7 @@ console.log("columns is here ",tableColumn)
             const data = await response.json();
             console.log('Success:', data);
           // Reset form fields after successful submission
-            setFile(null);
+            /* setFile(null);
             setTitle("");
             setAlt("");
             setFaqData([]);
@@ -182,7 +141,7 @@ console.log("columns is here ",tableColumn)
             setSelectedLocation("");
             setSeoData({});
             setTableData([]);
-            setTableColumn([]);
+            setTableColumn([]);*/
         } catch (error) {
             console.error('Error:', error);
         }
@@ -191,8 +150,7 @@ console.log("columns is here ",tableColumn)
     return (
         <AppProvider>
             <Layout>
-                <div>
-                    
+                <div>    
                     <div className="flex items-center gap-5 text-primary pb-3">
                         <LuPackagePlus size={24} className="font-semibold" />
                         <p className="text-[28px] text-black">Promo Manage</p>
@@ -203,52 +161,19 @@ console.log("columns is here ",tableColumn)
                             <div className="flex items-center gap-2 mb-4">
                                 <label htmlFor="cityBages" className="font-semibold text-md">Select :</label>
                                 <select  className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
-                                onChange={(e)=>{setCatoryorstate(true);setSelectCatagoryOrState(e.target.value)}}>
-                                    <option value="">select one</option>
-                                    <option value="category">category</option>
-                                    <option value="state">state</option>
-                                    <option value="country">country</option>
+                                >
+                                    <option value="">{selectCatagoryOrState}</option>    
                                 </select>
-                                {catoryorstate&&<select
+                                <select
                                     id="packageCategory"
                                     className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
                                     onChange={(e)=>{handleSelectChange(e);}}
                                     
                                 >
-                                    {selectCatagoryOrState==="category"&&<option disabled selected>Select category</option>}
-                                    {selectCatagoryOrState==="state"&&<option disabled selected>Select state</option>}
-                                    {selectCatagoryOrState==="country"&&<option disabled selected>Select country</option>}
-                                    {selectCatagoryOrState==="country"&&statePackages.map((state, i) => (
-                                        <option
-                                            key={i}
-                                            className='border-none bg-slate-50 text-black'
-                                            value={`${state.name},${state._id}`}
-                                            data-pageurl={state.url}
-                                        >
-                                            {state.name}
-                                        </option>
-                                    ))}
-                                    {selectCatagoryOrState==="state"&&statePackages.map((state, i) => (
-                                        <option
-                                            key={i}
-                                            className='border-none bg-slate-50 text-black'
-                                            value={`${state.name},${state._id}`}
-                                            data-pageurl={state.url}
-                                        >
-                                            {state.name}
-                                        </option>
-                                    ))}
-                                    {selectCatagoryOrState==="category"&&statePackages.map((state, i) => (
-                                        <option
-                                            key={i}
-                                            className='border-none bg-slate-50 text-black'
-                                            value={`${state.category},${state._id}`}
-                                            // data-pageurl={state.url}
-                                        >
-                                            {state.category}
-                                        </option>
-                                    ))}
-                                </select>}
+                                    {selectCatagoryOrState==="category"&&<option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState==="state"&&<option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState==="country"&&<option disabled selected>{selectedItem}</option>}
+                                </select>
                             </div>
                             <div>
                                 <button className=" bg-green-200 py-1 px-2 rounded-md hover:bg-green-500" onClick={()=>setSeofieldpopup(true)}>Add Seo field</button>

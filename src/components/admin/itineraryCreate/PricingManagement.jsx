@@ -14,7 +14,11 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
         infantSharingRoom: '',
         childUnderFive: '',
         childOverFive: '',
-        packageId: ""
+        packageId: "",
+        misc:"",
+        markup:"",
+        diskHike:"",
+        gst:""
     });
 
     const [itineraryPriceApi, setItineraryPriceApi] = useState({
@@ -26,14 +30,18 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
         infantSharingRoom: '',
         childUnderFive: '',
         childOverFive: '',
-        packageId: ""
+        packageId: "",
+        misc:"",
+        markup:"",
+        diskHike:"",
+        gst:""
     });
 
     useEffect(() => {
         if (itinerary && itinerary.prices) {
-            const { singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childUnderFive, childOverFive } = itinerary.prices;
+            const { addguest,singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childUnderFive, childOverFive,misc,diskHike,markup,gst } = itinerary.prices;
             setPricingData({
-                addguest:pricingManagement,
+                addguest:pricingManagement||addguest,
                 singleRoom: singleRoom || '',
                 twinSharingRoom: twinSharingRoom || '',
                 tripleSharingRoom: tripleSharingRoom || '',
@@ -41,6 +49,10 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                 infantSharingRoom: infantSharingRoom || '',
                 childUnderFive: childUnderFive || '',
                 childOverFive: childOverFive || '',
+                gst:gst||"",
+                markup:markup||"",
+                misc:misc||"",
+                diskHike:diskHike||"",
                 packageId: itinerary._id || ''
             });
         }
@@ -116,6 +128,7 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
             setErrors({});
         }
     };
+    // console.log("pricing data is here :: :: :: ",pricingData)
 
     return (
         <>
@@ -249,6 +262,72 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                                 />
                             </div>
                             {errors.childOverFive && <p className="text-red-500 text-sm ml-2">{errors.childOverFive}</p>}
+                        </div>
+                        <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
+                            <label className="font-semibold w-40" htmlFor="">
+                                Misc Per Day :
+                            </label>
+                            <div className="flex gap-1 items-center">
+                                <LiaRupeeSignSolid size={18} />
+                                <input
+                                    onChange={handleChange}
+                                    className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
+                                    name="misc"
+                                    // defaultValue={itinerary?.prices?.infantSharingRoom}
+                                    value={pricingData.misc}
+                                    type="number"
+                                />
+                            </div>
+                            {errors.infantSharingRoom && <p className="text-red-500 text-sm ml-2">{errors.infantSharingRoom}</p>}
+                        </div>
+                        <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
+                            <label className="font-semibold w-40" htmlFor="">
+                                Markup(%) :
+                            </label>
+                            <div className="flex gap-1 items-center">
+                               <p className='mx-1'>%</p>
+                                <input
+                                    onChange={handleChange}
+                                    className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
+                                    name="markup"
+                                    // defaultValue={itinerary?.prices?.infantSharingRoom}
+                                    value={pricingData.markup}
+                                    type="number"
+                                />
+                            </div>
+                            {errors.infantSharingRoom && <p className="text-red-500 text-sm ml-2">{errors.infantSharingRoom}</p>}
+                        </div>
+                        <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
+                            <label className="font-semibold w-40" htmlFor="">
+                                Discount/Hike(%):
+                            </label>
+                            <div className="flex gap-1 items-center">
+                                <p className='mx-1'>%</p>
+                                <input
+                                    onChange={handleChange}
+                                    className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
+                                    name="diskHike"
+                                    // defaultValue={itinerary?.prices?.infantSharingRoom}
+                                    value={pricingData.diskHike}
+                                    type="number"
+                                />
+                            </div>
+                            {errors.infantSharingRoom && <p className="text-red-500 text-sm ml-2">{errors.infantSharingRoom}</p>}
+                        </div>
+                        <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
+                            <label className="font-semibold w-40" htmlFor="">
+                                GST:
+                            </label>
+                            <div className="flex gap-1 items-center">
+                            <select name='gst' className='mx-4 w-52' value={pricingData.gst}
+                            onChange={handleChange}>
+                                  <option value="">Select GST</option>
+                                  <option value="5">5%</option>
+                                  <option value="15">15%</option>
+                                  <option value="0">All inclusive</option>
+                            </select>
+                            </div>
+                            {errors.infantSharingRoom && <p className="text-red-500 text-sm ml-2">{errors.infantSharingRoom}</p>}
                         </div>
                         <div className="mt-5">
                             <button type="submit" className="bg-navyblack text-white rounded px-10 py-1">

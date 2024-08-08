@@ -22,23 +22,22 @@ const filteredData = async (id, cat, min, max) => {
 }
 
 
-const SearchPagePackageList = (locationId) => {
+const SearchPagePackageList = ({locationId,setTourDuration}) => {
   const router = useRouter();
 
   const pathnames = router.asPath.split("/").filter((x) => x);
   const [packages, setPackages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6); // Number of items per page
+  const [itemsPerPage] = useState(6); 
   const [filterPackage, setFilterPackage] = useState(null);
   const [filterData1, setFilterData1] = useState([]);
   const { filterApi } = useAppContext();
-  // console.log("filter api 12331",filterApi)
+  const [day,setDay]=useState(0);
   useEffect(() => {
     filteredData(filterApi?.locationId, filterApi?.catagoryId, filterApi?.minPrice, filterApi?.maxPrice).then(res => setFilterPackage(res?.packages))
 
   }, [filterApi])
 
-  console.log("fileter api data change throught onClick",filterApi);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,7 +47,6 @@ const SearchPagePackageList = (locationId) => {
           itemsPerPage
         );
         setPackages(packagesData);
-        // console.log("packages 123123:::",packagesData)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -67,6 +65,14 @@ const SearchPagePackageList = (locationId) => {
   }, [filterData1, locationId, currentPage, filterApi, packages, filterPackage])
 
 
+
+for(let item of packages){
+ if(day<item.days){
+  setDay(item.days);
+ }
+}
+
+// console.log("days",day)
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     const windowHeight = window.innerHeight;
@@ -78,7 +84,7 @@ const SearchPagePackageList = (locationId) => {
   const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  console.log("current dat is slkjshkljfh sadfkj",currentItems)
+  // console.log("current dat is slkjshkljfh sadfkj",currentItems)
   return (
     <div>
       {currentItems?.map((packageData, i) => (

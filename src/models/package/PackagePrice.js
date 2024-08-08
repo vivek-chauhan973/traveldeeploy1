@@ -32,6 +32,22 @@ const packagePriceSchema = new Schema({
         type: Number,
         required: true
     },
+    misc:{
+        type: Number,
+        required: true
+    },
+    diskHike:{
+        type: Number,
+        required: true
+    },
+    gst:{
+        type: Number,
+        required: true
+    },
+    markup:{
+        type: Number,
+        required: true
+    },
     package: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Package',

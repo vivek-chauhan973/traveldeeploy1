@@ -12,17 +12,18 @@ import { NextApiRequest, NextApiResponse } from "next";
  const packageDayWise= async (req, res) => {
     const { packageId } = req.query;
     const { days, information } = req.body;
+    const day=days?.length;
 //     console.log("day wise ssss",days)
 //  console.log("days aaa",days);
     try {
         const [tourPackage, packageDays] = await Promise.all([
-            Package.findByIdAndUpdate(packageId, { dayWiseInformation: information }),
+            Package.findByIdAndUpdate(packageId, { dayWiseInformation: information}),
             PackageDayWise.findOneAndUpdate({ package: packageId }, { days }, { upsert: true, new: true }),
             // console.log("days destruct",{days})
         ]);
-        const updatedPackage = await Package.updateOne(
+        const updatedPackage = await Package.findOneAndUpdate(
             {_id:packageId},
-            { $set:{ days:days } },
+            { $set:{days:day}  },
             { new: true }
           );
         return res.status(201).json({ packageDays, tourPackage ,updatedPackage});

@@ -29,14 +29,14 @@ const fetchCatagory=async ()=>{
     return data;
 }
 
-export default function SearchPageFilter({ onApplyFilter }) {
+export default function SearchPageFilter({ onApplyFilter,setTourDuration,tourDuration }) {
     const {setCatagoryId}=useAppContext()
     const { setMinPrice, setMaxPrice } = useAppContext();
     const [priceRange, setPriceRange] = useState([0, 9900]);
-    const [tourDuration, setTourDuration] = useState([20, 37]);
+    
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
-
+const [filter,setFilter]=useState(false);
     // const handleApplyFilter = () => {
     //     onApplyFilter(priceRange);
     // };
@@ -73,7 +73,7 @@ export default function SearchPageFilter({ onApplyFilter }) {
             departureCity,
             packageCategory,
         };
-       
+        setFilter(!filter)
         onApplyFilter(filters);
     };
 useEffect(()=>{
@@ -85,7 +85,7 @@ useEffect(()=>{
         setMaxPrice(priceRange[1])
         setMinPrice(priceRange[0])
     }
-},[priceRange])
+},[filter])
     const handleClearAll = () => {
         setPriceRange([0, 9900]);
         setTourDuration([20, 37]);
