@@ -7,7 +7,7 @@ import { FiPhoneCall } from "react-icons/fi";
 import Image from 'next/image'
 import { MdMailOutline } from "react-icons/md";
 
-
+// ==============================changes==========================================
 export default function Footer(){
 return(
 <>
@@ -26,121 +26,121 @@ return(
                         <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2 ">
-                                    <h2 className="font-medium text-md ">Char Dham Yatra 2024</h2>
+                                    <h2 className="footer-head font-semibold text-base">Char Dham Yatra 2024</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Complete Chardham Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Do Dham Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Kedarnath Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Badrinath Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Complete Chardham Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Do Dham Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Kedarnath Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Badrinath Yatra</a>
                                         
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2 ">
-                                    <h2 className="font-medium text-md">Char Dham Yatra 2024</h2>
+                                    <h2 className="footer-head font-semibold text-base">Char Dham Yatra 2024</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Complete Chardham Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Do Dham Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Kedarnath Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Badrinath Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Kedarnath Yatra</a>
-                                        <a rel="noopener noreferrer" href="#">Badrinath Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Complete Chardham Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Do Dham Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Kedarnath Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Badrinath Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Kedarnath Yatra</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Badrinath Yatra</a>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Adventure</h2>
+                                    <h2 className="footer-head font-semibold text-base">Adventure</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Rishikesh Rafting Package</a>
-                                        <a rel="noopener noreferrer" href="#">Kanatal Uttarakhand Package</a>
-                                        <a rel="noopener noreferrer" href="#">Chopta Package</a>
-                                        <a rel="noopener noreferrer" href="#">Chopta Package</a>
-                                        <a rel="noopener noreferrer" href="#">Chopta Package</a>
-                                        <a rel="noopener noreferrer" href="#">Valley of Flowers</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Rafting Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Kanatal Uttarakhand Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Chopta Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Chopta Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Chopta Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Valley of Flowers</a>
                                         
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Adventure</h2>
+                                    <h2 className="footer-head font-semibold text-base">Adventure</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Rishikesh Rafting Package</a>
-                                        <a rel="noopener noreferrer" href="#">Kanatal Uttarakhand Package</a>
-                                        <a rel="noopener noreferrer" href="#">Chopta Package</a>
-                                        <a rel="noopener noreferrer" href="#">Valley of Flowers</a>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-y-5">
-                                <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Hill Station</h2>
-                                    <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
-                                        <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
-                                        <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
-                                        <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
-                                        <a rel="noopener noreferrer" href="#">Mussoorie Holiday Packages</a>
-                                        <a rel="noopener noreferrer" href="#">Nainital Packages</a>
-                                        <a rel="noopener noreferrer" href="#">Nainital-Jim Corbett Package</a>
-                                        
-                                    </div>
-                                </div>
-                                <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Hill Station</h2>
-                                    <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Rishikesh Auli Package</a>
-                                        <a rel="noopener noreferrer" href="#">Mussoorie Holiday Packages</a>
-                                        <a rel="noopener noreferrer" href="#">Nainital Packages</a>
-                                        <a rel="noopener noreferrer" href="#">Nainital-Jim Corbett Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Rafting Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Kanatal Uttarakhand Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Chopta Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Valley of Flowers</a>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Experiential Travel</h2>
+                                    <h2 className="footer-head font-semibold text-base">Hill Station</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Shimla Honeymoon Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Mussoorie Holiday Packages</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Nainital Packages</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Nainital-Jim Corbett Package</a>
                                         
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Experiential Travel</h2>
+                                    <h2 className="footer-head font-semibold text-base">Hill Station</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Shimla Honeymoon Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Mussoorie Holiday Packages</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Nainital Packages</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Nainital-Jim Corbett Package</a>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-y-5">
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Experiential Travel</h2>
+                                    <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Shimla Honeymoon Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Shimla Honeymoon Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
                                         
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Experiential Travel</h2>
+                                    <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Spiti Valley Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Shimla Honeymoon Tour</a>
-                                        <a rel="noopener noreferrer" href="#">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Shimla Honeymoon Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-y-5">
+                                <div className="flex flex-col space-y-2">
+                                    <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
+                                    <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Shimla Honeymoon Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
+                                        
+                                    </div>
+                                </div>
+                                <div className="flex flex-col space-y-2">
+                                    <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
+                                    <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Shimla Honeymoon Tour</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Dalhousie Dharamshala Tour</a>
                                         
                                     </div>
                                 </div>
@@ -153,55 +153,58 @@ return(
                         <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4 py-5 border-t-1 border-slate-300 ">
                             <div>
                                 <div className="flex flex-col space-y-2 ">
-                                    <h2 className="font-medium text-md">Company</h2>
+                                    <h2 className="footer-head font-semibold text-base">Company</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">About Us</a>
-                                        <a rel="noopener noreferrer" href="#">Contact Us</a>
-                                        <a rel="noopener noreferrer" href="#">Careers</a>
-                                        <a rel="noopener noreferrer" href="#">Blog</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">About Us</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Contact Us</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Careers</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Blog</a>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Help</h2>
+                                    <h2 className="footer-head font-semibold text-base">Help</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer"  href="#">FAQs</a>
-                                        <a rel="noopener noreferrer"  href="#">Cancellations & Returns</a>
-                                        <a rel="noopener noreferrer"  href="#">Dark Mode</a>
+                                        <a rel="noopener noreferrer"  href="#" className="footer-content">FAQs</a>
+                                        <a rel="noopener noreferrer"  href="#" className="footer-content">Cancellations & Returns</a>
+                                        <a rel="noopener noreferrer"  href="#" className="footer-content">Dark Mode</a>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <div className="flex flex-col space-y-2">
-                                    <h2 className="font-medium text-md">Customization</h2>
+                                    <h2 className="footer-head font-semibold text-base">Customization</h2>
                                     <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                        <a rel="noopener noreferrer" href="#">Configuration</a>
-                                        <a rel="noopener noreferrer" href="#">Theme Configuration</a>
-                                        <a rel="noopener noreferrer" href="#">Breakpoints</a>
-                                        <a rel="noopener noreferrer" href="#">Customizing Colors</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Configuration</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Theme Configuration</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Breakpoints</a>
+                                        <a rel="noopener noreferrer" href="#" className="footer-content">Customizing Colors</a>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <div className="flex flex-col space-y-3">
-                                    <div className="  ">
+                                    <div>
                                         {/* <span>Logo Logo Logo</span> */}
-                                        <Image width={100} height={100} src="/assets/logo.png" alt="" />
+                                        <Image width={100} height={100} src="/assets/logo.png" 
+                                                className="cursor-pointer"
+                                                alt="" 
+                                        />
                                     </div>
-                                    <p className=" ">Keep travelling all year round!</p>
-                                    <p className="text-sm font-extralight">Subscribe to our newsletter to find travel inspiration in your inbox</p>
+                                    <p className="text-para font-medium">Keep travelling all year round!</p>
+                                    <p className="text-xs font-extralight">Subscribe to our newsletter to find travel inspiration in your inbox</p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <hr className="mt-10 mb-2 container-wrapper" />
-                    <div className="container-wrapper">
-                        <p className="text-[12px]">*Caution: Beware of Fake Promotions or Offers *Please do not believe or
+                    <hr className="container-wrapper" />
+                    <div className="container-wrapper py-2">
+                        <p className="text-xs">*Caution: Beware of Fake Promotions or Offers *Please do not believe or
                             engage with any promotional emails, SMS or Web-link which ask you to click on a link and fill in
                             your details. All Veena World authorized email communications are delivered from domain
                             @veenaworld.com or @veenaworld.in or SMS from VNAWLD or 741324. *Veena World bears no liability
@@ -210,10 +213,10 @@ return(
                             not
                             received from registered domain.</p>
                     </div>
-                    <hr className="container-wrapper mt-2" />
+                    <hr className="container-wrapper" />
 
-                    <div className=" container-wrapper md:flex md:items-center md:justify-between mt-5 ">
-                        <ul className="flex items-center  flex-wrap mb-6 md:mb-0">
+                    <div className=" container-wrapper md:flex md:items-center md:justify-between py-1">
+                        <ul className="flex items-center  flex-wrap ">
                             <li className=" list-none"><a href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Terms
                                     and
                                     conditions</a>
@@ -269,7 +272,7 @@ return(
 
                     </div>
 
-                    <div className="container-wrapper flex items-center justify-center px-6 pt-10 text-sm">
+                    <div className="container-wrapper flex items-center justify-start pb-5 pt-3 xl:pt-0 text-sm">
                         <span className="dark:text-gray-400">© Copyright 1986. All Rights Reserved.</span>
                     </div>
 

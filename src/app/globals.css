@@ -27,6 +27,7 @@ h2 {
 
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   margin: auto;
+  width:550px;
 }
 
 /* react silk */
@@ -392,7 +393,7 @@ text-indent: 120px;
 }
 
 .about-margin ul  {
-  margin-left: 18px;
+  margin-left: 25px;
 }
 .about-margin ol{
   margin-left: 25px;
@@ -404,7 +405,7 @@ text-indent: 120px;
   margin-bottom: 3px;
 }
 .about-margin h1,.about-margin h2{
-  margin-bottom: 20px;
+  margin: 10px 0px;
 }
 
 .package-list p{
@@ -412,4 +413,13 @@ text-indent: 120px;
 }
 .payment-margin ol{
   margin-left: 18px;
+}
+/* footer */
+.footer-content:hover {
+  text-decoration: underline;
+  color: white;
+}
+.footer-head:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

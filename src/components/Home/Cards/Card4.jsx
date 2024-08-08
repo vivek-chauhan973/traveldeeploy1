@@ -70,7 +70,7 @@ const Card4 = () => {
                                 <p className=" line-through text-sm">Rs. 1,199</p>
                                 <div className="flex gap-5 items-center">
                                     <p className="text-md font-semibold">Rs. 599</p>
-                                    <button className="bg-primary text-xs py-2 px-3 text-white ">-50%</button>
+                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-primary">-50%</button>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,8 @@ const Card4 = () => {
                                 <p className=" line-through text-sm">Rs. 1,199</p>
                                 <div className="flex gap-5 items-center">
                                     <p className="text-md font-semibold">Rs. 599</p>
-                                    <button className="bg-primary text-xs py-2 px-3 text-white ">-50%</button>
+                                    {/* <button className="bg-primary text-xs py-2 px-3 text-white ">-50%</button> */}
+                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-primary">-50%</button>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +129,7 @@ const Card4 = () => {
                                 <p className=" line-through text-sm">Rs. 1,199</p>
                                 <div className="flex gap-5 items-center">
                                     <p className="text-md font-semibold">Rs. 599</p>
-                                    <button className="bg-primary text-xs py-2 px-3 text-white ">-50%</button>
+                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-primary">-50%</button>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +158,7 @@ const Card4 = () => {
                                 <p className=" line-through text-sm">Rs. 1,199</p>
                                 <div className="flex gap-5 items-center">
                                     <p className="text-md font-semibold">Rs. 599</p>
-                                    <button className="bg-primary text-xs py-2 px-3 text-white ">-50%</button>
+                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-primary">-50%</button>                
                                 </div>
                             </div>
                         </div>
@@ -186,7 +187,7 @@ const Card4 = () => {
                                 <p className=" line-through text-sm">Rs. 1,199</p>
                                 <div className="flex gap-5 items-center">
                                     <p className="text-md font-semibold">Rs. 599</p>
-                                    <button className="bg-primary text-xs py-2 px-3 text-white ">-50%</button>
+                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-primary">-50%</button>
                                 </div>
                             </div>
                         </div>
@@ -216,7 +217,7 @@ const Card4 = () => {
                                 <p className=" line-through text-sm">Rs. 1,199</p>
                                 <div className="flex gap-5 items-center">
                                     <p className="text-md font-semibold">Rs. 599</p>
-                                    <button className="bg-primary text-xs py-2 px-3 text-white ">-50%</button>
+                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-primary">-50%</button>
                                 </div>
                             </div>
                         </div>

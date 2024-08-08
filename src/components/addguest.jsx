@@ -7,6 +7,7 @@ import { MdChildFriendly } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 import { FaCircleMinus, FaCirclePlus } from "react-icons/fa6";
 import { useAppContext } from "./admin/context/Package/AddGuest";
+import { MdOutlineAirlineSeatReclineExtra } from "react-icons/md";
 
 const Addguest = ({
     children,
@@ -275,27 +276,36 @@ const Addguest = ({
         break;
     }
   };
+
+  // AC/NonAC
+  const [isAC, setIsAC] = useState(true);
+
+  const handleToggle = (e) => {
+    e.preventDefault()
+    setIsAC(prevIsAC => !prevIsAC);
+  };
+
 // ==================================Changes========================================================
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
       {addPackage?.prices?.addguest==="addGuest"&&<Dialog
-        className="h-full my-auto px-0 "
+        className="h-full my-auto px-0 z-[99999]"
         open={open}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <form className="w-full" action="">
-          <div className=" ">
+          <div>
             <div className="relative">
               <div className="sticky top-0 shadow-md z-[5]">
                 <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
                   <p className=" capitalize text-md font-semibold">
                     add guest & Choose from{}
                   </p>
-                  <div className="">
-                    <p className="text-lg font-medium"> ₹ {guestPrice}</p>
-                    <p className="text-xxs">per person on twin sharing</p>
+                  <div>
+                    {/* <p className="text-lg font-medium"> ₹ {guestPrice}</p>
+                    <p className="text-xxs">per person on twin sharing</p> */}
                   </div>
                 </div>
                 <IoIosClose
@@ -306,13 +316,13 @@ const Addguest = ({
                 <hr />
               </div>
               <div className="overflow-y-auto md:px-12 px-2">
-                <div className="flex items-center gap-10 mt-5">
+                <div className="flex items-center gap-10 mt-5 md:w-72 w-64 justify-between">
                   <label htmlFor="Adultsdropdown" className="my-2">
                     <div className="flex gap-3 items-center">
                       <IoMan />
                       <div>
                         <p className="text-para">
-                          Adults{" "}
+                          Adults
                           <span className=" text-slate-400 font-light">
                             (Above 12 yrs)
                           </span>{" "}
@@ -321,24 +331,26 @@ const Addguest = ({
                     </div>
                   </label>
 
-                  <select
-                    name="adult"
-                    value={inputData?.adult}
-                    id="Adultsdropdown"
-                    className="border px-4 py-1 rounded-md"
-                    onChange={handleChange}
-                  >
-                    <option value="0"> 0</option>
-                    <option value="1"> 1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
+                  <div className=" w-14">
+                    <select
+                      name="adult"
+                      value={inputData?.adult}
+                      id="Adultsdropdown"
+                      className="border w-full py-1 rounded-md"
+                      onChange={handleChange}
+                    >
+                      <option value="0"> 0</option>
+                      <option value="1"> 1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                  </div>
                 </div>
-                <div>
-                  <div className="flex items-center gap-10 ">
+                <div className="mt-2">
+                  <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
                     <label htmlFor="Childdropdown" className="my-2">
                       <div className="flex gap-3 items-center">
                         <FaChild />
@@ -353,24 +365,26 @@ const Addguest = ({
                       </div>
                     </label>
 
-                    <select
-                      name="child"
-                      value={inputData?.child}
-                      id="Childdropdown"
-                      className={`border px-4 py-1 rounded-md ${
-                        inputData?.child === 0 &&
-                        inputData?.adult === 0 &&
-                        "opacity-50"
-                      }`}
-                      onChange={handleChange}
-                      disabled={inputData?.adult === 0} // Disable if adult count is 0
-                    >
-                      <option value="0">0</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                    </select>
+                    <div className="w-14">
+                      <select
+                        name="child"
+                        value={inputData?.child}
+                        id="Childdropdown"
+                        className={`border w-full py-1 rounded-md ${
+                          inputData?.child === 0 &&
+                          inputData?.adult === 0 &&
+                          "opacity-50"
+                        }`}
+                        onChange={handleChange}
+                        disabled={inputData?.adult === 0} // Disable if adult count is 0
+                      >
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                    </div>
                   </div>
                   {/* child date is here */}
                   {[...Array(inputData?.child)].map((_, index) => (
@@ -403,7 +417,7 @@ const Addguest = ({
 
                 {/* Infant date is here */}
                 <div className="mt-2">
-                  <div className="flex items-center gap-10 ">
+                  <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
                     <label htmlFor="Childdropdown" className="my-2">
                       <div className="flex gap-3 items-center">
                         <FaChild />
@@ -418,24 +432,26 @@ const Addguest = ({
                       </div>
                     </label>
 
-                    <select
-                      name="infant"
-                      value={inputData?.infant}
-                      id="Infantdropdown"
-                      className={`border px-4 py-1 rounded-md ${
-                        inputData?.infant === 0 &&
-                        inputData?.adult === 0 &&
-                        "opacity-50"
-                      }`}
-                      onChange={handleChange1}
-                      disabled={inputData?.adult === 0} // Disable if adult count is 0
-                    >
-                      <option value="0">0</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                    </select>
+                    <div className="w-14">
+                      <select
+                        name="infant"
+                        value={inputData?.infant}
+                        id="Infantdropdown"
+                        className={`border w-full py-1 rounded-md ${
+                          inputData?.infant === 0 &&
+                          inputData?.adult === 0 &&
+                          "opacity-50"
+                        }`}
+                        onChange={handleChange1}
+                        disabled={inputData?.adult === 0} // Disable if adult count is 0
+                      >
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                    </div>
                   </div>
                   {/* child date is here */}
                   {[...Array(inputData?.infant)].map((_, index) => (
@@ -472,7 +488,7 @@ const Addguest = ({
                 </div>
 
                 <div>
-                  <div className="flex flex-col mt-8">
+                  <div className="flex flex-col mt-5">
                     <div className="mb-2 flex justify-between pr-5 items-center">
                       <div>
                         <p className="ml-2 text-para font-semibold cursor-pointer">
@@ -580,10 +596,16 @@ const Addguest = ({
                 </div>
 
                 <div className="mt-5">
-                  <p className="bg-navyblack text-white pl-5 rounded-md">
-                    Transports
-                  </p>
-                  <div className="flex-col flex items-center justify-between border-b md:flex-row mb-2">
+                  <div className="pl-3 w-full bg-navyblack rounded-md text-white flex justify-between items-center">
+                    <p>Transports</p>
+                    <button
+                      onClick={handleToggle}
+                      className={`px-4 py-2 rounded-r-md ${isAC ? 'bg-primary' : 'bg-red-500'}`}
+                    >
+                      {isAC ? 'AC' : 'NonAC'}
+                    </button>
+                  </div>
+                  <div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
                     <Image
                       className=" w-32 h-24 object-cover"
                       src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
@@ -592,24 +614,23 @@ const Addguest = ({
                       height="150"
                     />
                     <div className="items-center flex flex-col md:block">
-                      <p className="font-semibold">
-                        Maruti Suzuki{" "}
-                        <span className="text-sm  text-blue font-normal ml-2 hover:underline cursor-pointer">
-                          About
-                        </span>
-                      </p>
-                      <p className="text-para">6 Guest Spaces</p>
+                      <p className="font-semibold">Sedan{" "}</p>
+                      <div className="flex itmes-center justify-center">
+                        <MdOutlineAirlineSeatReclineExtra />
+                        <p className="text-para">6</p>
+                      </div>
                     </div>
                     <div className="items-center flex flex-col">
-                      <button className="border border-navyblack  text-navyblack text-para px-3 py-2 rounded-md hover:bg-navyblack hover:text-white">
+                      <button className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md hover:bg-navyblack hover:text-white">
                         Select
                       </button>
                     </div>
                   </div>
+                  
                 </div>
               </div>
             </div>
-            <div className=" bottom-0 sticky bg-slate-50 border-t py-2 px-4 flex justify-between items-center">
+            <div className=" bottom-0 sticky bg-slate-50 border-t py-2 md:px-7 px-5 flex justify-between items-center">
               <div>
                 <div className="flex gap-4">
                   <p className="text-sm">
@@ -634,19 +655,17 @@ const Addguest = ({
                     Rooms
                   </p>
                 </div>
-                <div className="text-sm flex gap-2 md:gap-4">
-                  <p>
-                    Transport :{" "}
-                    <span className="font-semibold">Maruti Suzuki</span>
-                  </p>
-                  <p>
-                    Capacity : <span className="font-semibold">6</span>
-                  </p>
+                <div className="text-sm flex gap-2 md:gap-4"> 
+                  <p className="font-semibold">Sedan</p>
+                  <div className="flex itmes-center justify-center">
+                    <MdOutlineAirlineSeatReclineExtra />
+                    <p className="font-semibold">6</p>
+                  </div>
                 </div>
               </div>
               <button
                 onClick={(e) => handleSubmit(e)}
-                className="bg-navyblack  py-1 text-white rounded-md hover:bg-slate-400 h-12 px-4"
+                className="bg-navyblack  py-2 text-white rounded-md hover:bg-slate-400 px-5"
               >
                 Submit
               </button>
