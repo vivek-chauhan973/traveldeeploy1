@@ -19,7 +19,8 @@ const CustomiseTour = dynamic(() => import("@/components/ItineraryDetail/Customi
 const Breadcrumbs = dynamic(() => import("@/components/Breadcrumbs"));
 const Addguest = dynamic(() => import("@/components/addguest"));
 const TestingCard = dynamic(() => import("@/components/ItineraryDetail/TestingCard"));
-import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader"; const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureCard"));
+import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
+ const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureCard"));
 const FixedDeparturePopup = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/FixedDeparturePopup"));
 
 
@@ -238,12 +239,12 @@ export default function Package1() {
               id="ItinerarySubSection"
               className="flex  justify-between mt-5 mb-3"
             >
-              <p className="text-lg font-semibold text-graytext">
+              <h3 className="text-lg font-semibold text-graytext">
                 Itinerary{" "}
                 <span className="text-[13px] italic text-slate-600 ">
                   (Day Wise)
                 </span>
-              </p>
+              </h3>
             </div>
             <div>
               <p className="text-para leading-relaxed  pb-5">

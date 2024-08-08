@@ -38,132 +38,136 @@ const Header1 = ({ setTogle, togle }) => {
     <div
       className={`fixed top-0 right-0 w-full h-full bg-white shadow-sm border transition-transform duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
         }`} style={{ zIndex: 1000 }}>
+      <div className={`fixed top-0 right-0 h-full w-full  transform transition-transform duration-1000 ease-in-out ${togle ? 'translate-x-0' : 'translate-x-full'} `}>
+        <div className="h-[10vh] w-full px-2 sm:px-4 bg-[#0e1e2c] flex items-center justify-between">
+          <div className="text-2xl cursor-pointer text-white" onClick={() => {
+            setIsVisible(false);
+            setTimeout(() => setTogle(false), 300); // Ensure this matches the duration of the transition
+          }}>
 
-      <div className="h-[10vh] w-full px-2 sm:px-4 bg-[#0e1e2c] flex items-center justify-between">
-        <div className="text-2xl cursor-pointer text-white" onClick={() => {
-          setIsVisible(false);
-          setTimeout(() => setTogle(false), 300); // Ensure this matches the duration of the transition
-        }}>
-          <FontAwesomeIcon icon={faXmark} className=' font1' />
-        </div>
-      </div>
-
-      {openClose ? (
-        <div onMouseLeave={() => setOpenClose(false)}>
-          {Data[renderedComponent] && Data[renderedComponent]({ setOpenClose })}
-        </div>
-      ) : (
-        <div>
-          <div className="  ml-1 h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
-            <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
-              <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</p>
-                <div className="cursor-pointer">
-
-                  <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>
-                    <DownArrow />
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(1) }}>World</p>
-                <div className="cursor-pointer">
-                  <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(1) }} >
-                    <DownArrow />
-                  </div>
-
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>Speciality Tours</p>
-                <div className="cursor-pointer">
-
-                  <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(2) }} >
-                    <DownArrow />
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Customized Holidays</p>
-                <div className="cursor-pointer">
-                  <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(3) }} >
-                    <DownArrow />
-                  </div>
-                </div>
-              </div>
-              <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Corporate Travel</p>
-              <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Inbound</p>
-              <div className="flex justify-between">
-                <p className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(4) }}>Forex</p>
-                <div className="cursor-pointer">
-                  <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(4) }} >
-                    <DownArrow />
-                  </div>
-                </div>
-              </div>
-              <p className="cursor-pointer md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Gift a Tour</p>
-              <p className="cursor-pointer md: sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Contact Us</p>
-            </div>
-            <hr className="mx-1" />
-            <div className="w-full flex flex-col gap-4 px-2 sm:px-4 my-2">
-              <p className="cursor-pointer" onClick={() => setTogle(false)} href="#">About Us</p>
-              <p className="cursor-pointer" onClick={() => setTogle(false)} href="#">Career</p>
-              <p className="cursor-pointer" onClick={() => setTogle(false)} href="#">Blogs</p>
-              <p className="cursor-pointer" onClick={() => setTogle(false)} href="#">Contact js</p>
-            </div>
-            <hr className="mx-1" />
-            <div className="w-full flex flex-col gap-6 px-2 sm:px-4 my-2">
-              <div className="flex gap-2 items-center">
-                <div>
-                  {/* <Image src="" className=" sm:text-[16px] md:text-2xl" alt='pic' width="125"
-                    height="150" /> */}
-                </div>
-                <div className="flex gap-1 flex-col">
-                  <p>Toll free number</p>
-                  <p className="cursor-pointer font-semibold">1800 22 7979</p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <div className="pt-2 sm:text-[10px] md:text-2xl">
-
-                  <FontAwesomeIcon icon={faPhone} className='font' />
-
-                </div>
-                <div className="flex gap-1 flex-col">
-                  <p>You can also call on:</p>
-                  <p className="cursor-pointer font-semibold">+91 22 2101 7979</p>
-                  <p className="cursor-pointer font-semibold">+91 22 2101 6969</p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-center">
-                <div><WhatAppIcon className=" sm:text-[10px] md:text-2xl text-green-500" /></div>
-                <div className="flex gap-1 flex-col">
-                  <p>Chat on WhatsApp</p>
-                  <p className="cursor-pointer font-semibold">+91 88799 00414</p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-center sm:text-[10px] md:text-2xl">
-                <FontAwesomeIcon icon={faClock} className='font' />
-                <div>
-
-                </div>
-                <div className="flex gap-1 flex-col">
-                  <p className="font-semibold">Business hours</p>
-                  <p className="font-semibold">10am - 6pm</p>
-                </div>
-              </div>
-            </div>
-            <hr className="mx-1" />
-            <div className="flex gap-4 flex-col px-2 sm:mx-4 my-2">
-              <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl" onClick={() => setTogle(false)} href="#">Nearest office</p>
-              <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl" onClick={() => setTogle(false)} href="#">Leave your feedback here</p>
-            </div>
+            <FontAwesomeIcon icon={faXmark} className=' font1' />
           </div>
-          <div className="h-[10vh] w-full"></div>
         </div>
-      )}
+
+        {openClose ? (
+          <div onMouseLeave={() => setOpenClose(false)}>
+            {Data[renderedComponent] && Data[renderedComponent]({ setOpenClose })}
+          </div>
+        ) : (
+          <div>
+            <div className="  ml-1 h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
+              <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
+                <div className="flex justify-between">
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</h3>
+                  <div className="cursor-pointer">
+
+                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>
+                      <DownArrow />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(1) }}>World</h3>
+                  <div className="cursor-pointer">
+                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(1) }} >
+                      <DownArrow />
+                    </div>
+
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>Speciality Tours</h3>
+                  <div className="cursor-pointer">
+
+                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(2) }} >
+                      <DownArrow />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Customized Holidays</h3>
+                  <div className="cursor-pointer">
+                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(3) }} >
+                      <DownArrow />
+                    </div>
+                  </div>
+                </div>
+                <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Corporate Travel</h3>
+                <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Inbound</h3>
+                <div className="flex justify-between">
+                  <h6 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(4) }}>Forex</h6>
+                  <div className="cursor-pointer">
+                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(4) }} >
+                      <DownArrow />
+                    </div>
+                  </div>
+                </div>
+                <h3 className="cursor-pointer md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Gift a Tour</h3>
+                <h3 className="cursor-pointer md: sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Contact Us</h3>
+              </div>
+              <hr className="mx-1" />
+              <div className="w-full flex flex-col gap-4 px-2 sm:px-4 my-2">
+                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">About Us</h6>
+                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Career</h6>
+                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Blogs</h6>
+                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Contact js</h6>
+              </div>
+              <hr className="mx-1" />
+              <div className="w-full flex flex-col gap-6 px-2 sm:px-4 my-2">
+                <div className="flex gap-2 items-center">
+                  <div>
+                    {/* <Image src="" className=" sm:text-[16px] md:text-2xl" alt='pic' width="125"
+                    height="150" /> */}
+                  </div>
+                  <div className="flex gap-1 flex-col">
+                    <h6 className=' font-semibold'>Toll free number</h6>
+                    <p className="cursor-pointer">1800 22 7979</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="pt-2 sm:text-[10px] md:text-2xl">
+
+                    <FontAwesomeIcon icon={faPhone} className='font' />
+
+                  </div>
+                  <div className="flex gap-1 flex-col">
+                    <h6 className=' font-semibold'>You can also call on:</h6>
+                    <p className="cursor-pointer ">+91 22 2101 7979</p>
+                    <p className="cursor-pointer ">+91 22 2101 6969</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <div><WhatAppIcon className=" sm:text-[10px] md:text-2xl text-green-500" /></div>
+                  <div className="flex gap-1 flex-col">
+                    <h6 className='  font-semibold'>Chat on WhatsApp</h6>
+                    <p className="cursor-pointer ">+91 88799 00414</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 items-center sm:text-[10px] md:text-2xl">
+                  <FontAwesomeIcon icon={faClock} className='font' />
+                  <div>
+
+                  </div>
+                  <div className="flex gap-1 flex-col">
+                    <h6 className="font-semibold">Business hours</h6>
+                    <p>10am - 6pm</p>
+                  </div>
+                </div>
+              </div>
+              <hr className="mx-1" />
+              <div className="flex gap-4 flex-col px-2 sm:mx-4 my-2">
+                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl" onClick={() => setTogle(false)} href="#">Nearest office</p>
+                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl" onClick={() => setTogle(false)} href="#">Leave your feedback here</p>
+              </div>
+            </div>
+            <div className="h-[10vh] w-full"></div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default Header1;
+
+

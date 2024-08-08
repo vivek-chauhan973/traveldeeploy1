@@ -7,7 +7,7 @@ import Header2 from "../../MobileHeader";
 import Image from 'next/image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch , faUser , faArrowAltCircleRight,faHome, faCompass ,faDownload, falocation } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUser, faArrowAltCircleRight, faHome, faCompass, faDownload, falocation } from '@fortawesome/free-solid-svg-icons';
 
 
 const Header3 = () => {
@@ -50,26 +50,26 @@ const Header3 = () => {
         <div className="container-wrapper">
           <div className="flex md:items-center md:justify-between md:gap-5 py-3 ">
             <div className=" flex w-full md:w-auto justify-between ">
-             
+
               {/* images... */}
               <div>
-              <Image
-                src={imageSrc}
-                height={200}
-                width={200}
-                alt="Logo"
-                onError={() => setImageSrc('/logo.png')} // Ensure fallback if image fails to load
-              />
+                <Image
+                  src={imageSrc}
+                  height={200}
+                  width={200}
+                  alt="Logo"
+                  onError={() => setImageSrc('/logo.png')} // Ensure fallback if image fails to load
+                />
               </div>
               <div className=" relative  flex gap-2 md:hidden xl:hidden">
-                  <Header2 />
+                <Header2 />
               </div>
             </div>
 
             <div className=" justify-between   hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
               <div className="flex gap-1 ">
                 <span className="">
-                  <FontAwesomeIcon icon={faSearch}  className='font' />
+                  <FontAwesomeIcon icon={faSearch} className='font' />
                 </span>
                 <input
                   className="border-none focus:outline-none  placeholder:text-sm placeholder-black w-full  text-sm"
@@ -84,21 +84,21 @@ const Header3 = () => {
             <div className="hidden md:flex gap-3">
               <button className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg">
                 <span className=" ">
-                
-                  <FontAwesomeIcon icon={  faArrowAltCircleRight }  className='font'  />
+
+                  <FontAwesomeIcon icon={faArrowAltCircleRight} className='font' />
                 </span>{" "}
 
-                <span className=" ">
+                <h6 className=" ">
                   Login{" "}
-                </span>
+                </h6>
               </button>
               <button className=" items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg">
-                <FontAwesomeIcon icon={faUser}  className='font'  />
+                <FontAwesomeIcon icon={faUser} className='font' />
 
-                <span className=" ">
+                <h6 className=" ">
                   Sign up
-                  
-                </span>
+
+                </h6>
                 {" "}
               </button>
             </div>
@@ -112,13 +112,13 @@ const Header3 = () => {
         <ul className="container-wrapper     flex items-end gap-x-10 text-para">
           <li className="capitalize flex items-center gap-1  cursor-pointer hover:text-primary">
 
-          <FontAwesomeIcon icon={faHome}  className='font'  />
+            <FontAwesomeIcon icon={faHome} className='font' />
 
             <span>
               Home
             </span>
           </li>
-          
+
           {header?.map((item, i) => (
             <li
               key={i}

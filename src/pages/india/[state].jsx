@@ -37,7 +37,7 @@ export default function SearchPage() {
     const [promoData, setPromoData] = useState({});
     const [loading, setLoading] = useState(true);
 
-    console.log("prodata is here ,--------",promoData)
+    console.log("prodata is here ,--------", promoData)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -67,8 +67,10 @@ export default function SearchPage() {
     const handleApplyFilter = (priceRange) => {
         setSelectedPriceRange(priceRange);
     };
+
     return (
         <AppProvider>
+
             <div className='bg-slate-100'>
                 <DesktopHeader />
                 {/* <Breadcrumbs /> */}
@@ -131,7 +133,7 @@ export default function SearchPage() {
                                 </div>
                                 <Faq1 data={promoData.faq} />
                             </div>
-                          
+
 
                         </div>
                     ) : (
@@ -143,7 +145,7 @@ export default function SearchPage() {
                 <div>
                     {!loading ? (
                         <div className="border-t border">
-                            <BottomLink  locationId={selectedLocation} />
+                            <BottomLink locationId={selectedLocation} />
                         </div>
                     ) : (
                         <div>

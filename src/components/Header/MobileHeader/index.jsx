@@ -19,8 +19,7 @@ function Header2() {
           className="text-2xl -my-4 text-white flex justify-end items-center  cursor-pointer"
           onClick={() => {
             setTogle(true);
-          }}
-        >
+          }}>
           <div>
             <FontAwesomeIcon icon={faBars} className='font1' />
           </div>

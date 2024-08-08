@@ -38,16 +38,17 @@ const ItinaryFixedDepartureCard = ({
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[480px] overflow-scroll">
         <div className=" overflow-y-auto">
-          <p className="xl:block hidden text-md font-semibold text-center ">Booking Summary</p>                 
+          <h4 className="xl:block hidden text-md font-semibold text-center ">Booking Summary</h4>
           <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3 p-2">
-            <div>   
+            <div>
               <div className="flex flex-col">
                 <label className="text-para font-semibold cursor-pointer" htmlFor="city">Select Dept. City : </label>
                 <select name="city" id="city" className="border rounded w-full pl-3 cursor-pointer"
-                        onChange={(e) => { setFixedDepCity(e.target.value);
-                                           setCity(true);
-                                          }}
-                  >
+                  onChange={(e) => {
+                    setFixedDepCity(e.target.value);
+                    setCity(true);
+                  }}
+                >
                   <option value="" className="cursor-pointer">Departure City</option>
                   {addPackage?.startcity?.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
@@ -63,9 +64,10 @@ const ItinaryFixedDepartureCard = ({
               <div className="flex flex-col mt-2 ">
                 <label className="text-para font-semibold cursor-pointer" htmlFor="date">Select Dept. Date</label>
                 <input type="date" id="date" required className="w-full py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
-                       onChange={(e) => { setFixedDepDate(e.target.value);
-                                          setDate(true);
-                                        }}/>
+                  onChange={(e) => {
+                    setFixedDepDate(e.target.value);
+                    setDate(true);
+                  }} />
               </div>
               {fixedDepDate ? null : (
                 <p className="text-xs text-red-600">Please Select Date First</p>
@@ -117,9 +119,9 @@ const ItinaryFixedDepartureCard = ({
             </div>
 
             <div>
-              <p className="text-lg ml-2 font-semibold my-2 text-graytext">
+              <h5 className="text-lg ml-2 font-semibold my-2 text-graytext">
                 Highlights
-              </p>
+              </h5>
               <div>
                 {addPackage?.highlights?.map((highlight) => (
                   <ol key={highlight._id} className="list-disc   ">
@@ -161,11 +163,10 @@ const ItinaryFixedDepartureCard = ({
             {
               <button
                 onClick={handleSubmit}
-                className={`border px-5 py-2 rounded-md ${
-                  fixedDepartureButtonEnaibleAndDisable
+                className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                     ? "bg-primary"
                     : "bg-orange-200"
-                } text-center text-para`}
+                  } text-center text-para`}
               >
                 Book now
               </button>

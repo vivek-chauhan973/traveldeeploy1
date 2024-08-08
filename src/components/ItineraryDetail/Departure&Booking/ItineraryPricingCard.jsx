@@ -20,12 +20,12 @@ const ItineraryPricingCard = () => {
       <div className=" border p-5 rounded-md bg-white xs:mt-5 xl:mt-0 xs:hidden xl:block overflow-hidden ">
         <div className="bg-white">
           <div className="flex justify-between mb-2">
-            <p className="text-md font-semibold text-graytext">Booking Summary</p>
+            <h5 className="text-md font-semibold text-graytext">Booking Summary</h5>
             <div>
               <Addguest
                 guestPrice={guestPrice}
                 setInputData={setInputData}
-                inputData={inputData}
+                inputData={inputData} 
                 setCloseBtn={setCloseBtn}
                 addPackage={addPackage}
               >

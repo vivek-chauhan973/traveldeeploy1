@@ -17,7 +17,7 @@ const World = ({ setOpenClose }) => {
         >
     <div className="rotate-90 mt-2"> <DownArrow /></div>
     
-          <p className=" font-semibold text-md">World</p>
+          <h5 className=" font-semibold text-md">World</h5>
         </div>
         <div>
           <p className=" underline px-2 font-bold text-[15px] text-blue-600">
@@ -25,7 +25,7 @@ const World = ({ setOpenClose }) => {
           </p>
         </div>
       </div>
-      <hr className="border-b mt-5 border-gray-400  w-90 overflow-hidden  " />
+      <hr className="border-b mt-3 border-gray-400  w-90 overflow-hidden  " />
 
       <div className=" sm:ml-3  ">
         <span className="text-sm font-normal mt-4 px-3">
@@ -109,13 +109,13 @@ const World = ({ setOpenClose }) => {
             <span>Spiti vally</span>
           </div>
           <div>
-            <h1 className="font-semibold text-md">Kenya</h1>
+            <h5 className="font-semibold text-md">Kenya</h5>
             <hr className="border-b mt-2 border-gray-400  w-90 overflow-hidden" />
             <div className="flex gap-3 p-1 mt-2  text-sm flex-wrap ">
               <span>masai mara </span>
             </div>
           </div>
-          <h1 className="font-semibold text-md">mauritius</h1>
+          <h5 className="font-semibold text-md">mauritius</h5>
           <hr className="border-b mt-2 border-gray-400  w-90 overflow-hidden" />
         </div>
       </div>

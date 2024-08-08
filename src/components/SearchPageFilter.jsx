@@ -87,7 +87,7 @@ export default function SearchPageFilter({ onApplyFilter }) {
                 <div className="bg-white rounded-md sticky top-2 ">
                     <div className="md:p-5 p-2  ">
                         <div className="flex justify-between md:pb-2 pb-1">
-                            <p className="md:text-[16px] text-[14px] font-medium">Package Prices</p>
+                            <h3 className="md:text-[16px] text-[14px] font-medium">Package Prices</h3>
                             <p className="text-[12px] underline text-blue-800 cursor-pointer" onClick={handleClearAll}>Clear All</p>
                         </div>
                         <div>
@@ -117,7 +117,7 @@ export default function SearchPageFilter({ onApplyFilter }) {
                     <div>
                         <div className="border-t md:p-3 p-2 py-0">
                             <div>
-                                <p className="md:text-[16px] text-[14px] font-medium my-2">Tour Duration</p>
+                                <h3 className="md:text-[16px] text-[14px] font-medium my-2">Tour Duration</h3>
                             </div>
                             <Box sx={{ width: '100%' }}>
                                 <Slider
@@ -171,7 +171,7 @@ export default function SearchPageFilter({ onApplyFilter }) {
                         </div> 
                         <div className="border-b md:mt-5 mt-2"></div>*/}
                         <div className="pr-5 py-2">
-                            <p className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</p>
+                            <h3 className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</h3>
                             <div>
                                {packageCategory?.map( item=><div key={item._id} className="flex capitalize items-center gap-2 px-5 pb-2 py-2 ">
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"

@@ -20,9 +20,9 @@ const [showPopup,setShowPopup]=useState(false);
         <div className="flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
           <div>
             <div>
-              <p className="font-semibold text-base p-3 text-graytext">
+              <h4 className="font-semibold text-base p-3 text-graytext">
                 1. SELECT DEPARTURE CITY & DATE
-              </p>
+              </h4>
             </div>
             <hr/>
             <div className="overflow-y-auto ">
@@ -35,7 +35,7 @@ const [showPopup,setShowPopup]=useState(false);
 
               {/* select departure city */}
               <div className=" relative gap-4  py-4 ">
-                <h1 className=" font-semibold text-base ml-2 mb-3">All Departure date({AllDataRelatedCity[datePackage].length})</h1>
+                <h6 className=" font-semibold text-base ml-2 mb-3">All Departure date({AllDataRelatedCity[datePackage].length})</h6>
                 {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
                 <div className="flex my-2 gap-3 flex-wrap ml-5">
                   {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className=" cursor-pointer" >
@@ -49,9 +49,9 @@ const [showPopup,setShowPopup]=useState(false);
                   </div>)}
                 </div>
                 <div className="ml-2 my-4">
-                  <p className="font-semibold text-base mb-2 text-graytext">
+                  <h6 className="font-semibold text-base mb-2 text-graytext">
                     About us
-                  </p>
+                  </h6>
 
                   <p
                     className="ml-3 mr-2 about-margin text-para"
@@ -64,9 +64,9 @@ const [showPopup,setShowPopup]=useState(false);
 
               <hr />
                 <div className="ml-2 mt-3">
-                  <p className="text-md font-semibold mb-2 text-graytext">
+                  <h6 className="text-md font-semibold mb-2 text-graytext">
                     Highlights
-                  </p>
+                  </h6>
                   <div>
                   <div>
                     {addPackage?.highlights?.map((highlight) => (

@@ -20,7 +20,7 @@ const Speciality = ({ setOpenClose }) => {
 
           <div className="rotate-90 mt-2"> <DownArrow /></div>
         
-          <p className="font-semibold text-md">Speciality Tours</p>
+          <h5 className="font-semibold text-md">Speciality Tours</h5>
         </div>
         <div>
           <p className="underline px-2 font-bold text-[15px] text-blue-600">
@@ -28,15 +28,15 @@ const Speciality = ({ setOpenClose }) => {
           </p>
         </div>
       </div>
-      <hr className="border-b mt-5 border-gray-400 w-90 overflow-hidden" />
+      <hr className="border-b mt-3 border-gray-400 w-90 overflow-hidden" />
       <div className="px-1">
         <div className="flex mt-1 gap-1">
           <span>
           <FontAwesomeIcon icon={ faLocationDot}  className='font'  />
           </span>
-          <h1 className="text-blue-600 text-md font-bold">
+          <h4 className="text-blue-600 text-md font-bold">
             POPULAR AND AVAILABLE TOURS
-          </h1>
+          </h4>
         </div>
         <div className="mt-2 pl-3">
           <span className="font-semibold text-[15px]">Honeymoon Special</span>
@@ -85,9 +85,9 @@ const Speciality = ({ setOpenClose }) => {
           <span>
             <RoadIcon />
           </span>
-          <h1 className="text-blue-600 text-md font-bold">
+          <h4 className="text-blue-600 text-md font-bold">
             POPULAR AND AVAILABLE TOURS
-          </h1>
+          </h4>
         </div>
         <div className="mt-4 pl-3">
           <span className="font-semibold text-[15px]">Couples Only</span>

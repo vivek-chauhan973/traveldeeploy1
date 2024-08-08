@@ -40,9 +40,9 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
         />
       </div>
       <div className="container-wrapper py-5">
-        <p className="text-lg font-medium mb-2 capitalize">{state?.name}</p>
+        <h4 className="text-xl font-medium mb-2 capitalize">{state?.name}</h4>
         <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
-          <div dangerouslySetInnerHTML={{ __html: promoData?.description }} />
+          <p dangerouslySetInnerHTML={{ __html: promoData?.description }} />
         </div>
 
         {show && (
@@ -113,7 +113,7 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
         </div>
 
       </div>
-      <div> 
+      <div>
         <hr className="container-wrapper border-slate-300" />
       </div>
     </div>

@@ -51,19 +51,15 @@ const ItineraryHeroSection = ({
       setFixedDepDate1(fixedDepDate);
     }
   };
-  const def = "/logo.png"
-  // const handleError = (e) => {
-  //   e.target.src = def;
-  // };
-  // const imageSrc = hemages && hemages[2]?.path ? hemages[2]?.path : def;
 
   // Inner shadow Main image
-  const boxShadowStyle = {
-    boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
-  };
-  const mobileBoxShadowStyle = {
-    boxShadow: 'inset 0px -50px 20px 5px rgba(0, 0, 0, 0.5)'
-  };
+// const boxShadowStyle = {
+//   background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+// };
+
+  // const mobileBoxShadowStyle = {
+  //   boxShadow: 'inset 0px -50px 20px 5px rgba(0, 0, 0, 0.5)'
+  // };
 
   return (
     <>
@@ -80,12 +76,12 @@ const ItineraryHeroSection = ({
                     src={item.path || "/logo.png"}
                     alt={`img ${i + 1}`}
                   />
-                  <div className="">
+                  <div className="container-wrapper">
                     <h1
-                      style={mobileBoxShadowStyle}
-                      className=" gap-3 items-center flex  left-0 z-10 w-full absolute py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
+                      
+                      className="box-Shadow-Style-Package gap-3 items-center flex  left-0 z-10 w-full absolute py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
                       {addPackage?.name}
-                      <span className=" bg-primary py-1 px-4 text-white rounded text-base font-bold  ">{addPackage?.faqs?.days.length}D/ {addPackage?.faqs?.days.length - 1}N</span>
+                      <span className=" bg-primary py-1 px-4 text-white rounded text-base font-bold  "> {addPackage?.faqs?.days.length - 1}N/ {addPackage?.faqs?.days.length}D</span>
                     </h1>
                   </div>
                 </div>
@@ -104,13 +100,13 @@ const ItineraryHeroSection = ({
               height={100}
             />
 
-
-            <h1
-              style={boxShadowStyle}
-              className="hidden xl:flex  gap-3 items-center  absolute  left-0 z-10 w-full  py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
-              {addPackage?.name}
-              <span className=" bg-primary py-1 px-4 text-white rounded text-base font-bold  ">{addPackage?.faqs?.days.length}D/ {addPackage?.faqs?.days.length-1}N</span>
-            </h1>
+            <div className="box-Shadow-Style-Package hidden xl:flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
+              <h1 className="flex items-center gap-2 mr-2"
+                >
+                {addPackage?.name}
+                <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">{addPackage?.faqs?.days.length-1}N/ {addPackage?.faqs?.days.length}D</span>
+              </h1>
+            </div>
 
 
           </div>
@@ -140,18 +136,10 @@ const ItineraryHeroSection = ({
           <div>
             <div>
               <div className=" mb-2 ">
-                <h1 className=" text-lg   md:text-xl font-semibold capitalize ">
+                <h2 className=" text-lg   md:text-xl font-semibold capitalize ">
                   {addPackage?.name}
-                </h1>
-                {/* <div className="flex items-center justify-center border rounded-full w-6 h-6">
-                  <img
-                    className=" p-1 "
-                    src="https://www.svgrepo.com/show/13666/heart.svg"
-                    alt="Heart Icon"
-                    width={200}
-                    height={100}
-                  />
-                </div> */}
+                </h2>
+            
               </div>
               <div className="stick top-1">
                 <div className="flex flex-wrap gap-2 text-xxs font-semibold text-white">
