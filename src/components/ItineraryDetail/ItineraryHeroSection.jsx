@@ -6,11 +6,7 @@ import CustomiseTour from "./CustomiseTour";
 import Slider from "react-slick";
 import { useAppContext } from "../admin/context/Package/AddGuest";
 import FixedDeparturePopup from "./Departure&Booking/FixedDeparturePopup";
-import Image from 'next/image';
-
-
-
-
+import Image from "next/image";
 const ItineraryHeroSection = ({
   addPackage,
   guestPrice,
@@ -55,69 +51,61 @@ const ItineraryHeroSection = ({
     }
   };
 
-  // Inner shadow Main image
-  // const boxShadowStyle = {
-  //   background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
-  // };
-
-  // const mobileBoxShadowStyle = {
-  //   boxShadow: 'inset 0px -50px 20px 5px rgba(0, 0, 0, 0.5)'
-  // };
-
   return (
     <>
-
       <div>
         <div className="">
           <div className="slider-container xl:hidden  mt-6 ">
-
             <div className="slider-container overflow-x-scroll snap-x snap-mandatory flex hide-scrollbar relative ">
               {hemages?.map((item, i) => (
-                <div key={i} className="snap-center flex-shrink-0 w-full relative">
+                <div
+                  key={i}
+                  className="snap-center flex-shrink-0 w-full relative"
+                >
                   <img
                     className="w-full h-[50vh] object-cover"
                     src={item.path || "/logo.png"}
                     alt={`img ${i + 1}`}
                   />
-                  <div className="container-wrapper">
-                    <h1
-
-                      className="box-Shadow-Style-Package gap-3 items-center flex  left-0 z-10 w-full absolute py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
+                  <div className="box-Shadow-Style-Package flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
+                    <h1 className="flex items-center gap-2 mr-2">
                       {addPackage?.name}
-                      <span className=" bg-primary py-1 px-4 text-white rounded text-base font-bold  "> {addPackage?.faqs?.days.length - 1}N/ {addPackage?.faqs?.days.length}D</span>
+                      <span className=" mt-1 bg-primary py-[2px] px-2 text-white rounded text-para font-bold ">
+                        {addPackage?.faqs?.days.length - 1}N/{" "}
+                        {addPackage?.faqs?.days.length}D
+                      </span>
                     </h1>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
         </div>
         <div className="container-wrapper  grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="relative rounded-md overflow-hidden">
             <img
               className=" h-[400px] object-cover w-full hidden xl:flex"
-              src={hemages && hemages[0]?.path || "/logo.png"}
+              src={(hemages && hemages[0]?.path) || "/logo.png"}
               alt="img 1"
               width={200}
               height={100}
             />
 
-            <div className="box-Shadow-Style-Package hidden xl:flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
-              <h1 className="flex items-center gap-2 mr-2"
-              >
+            <div className="box-Shadow-Style-Package hidden xl:flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
+              <h1 className="flex items-center gap-2 mr-2">
                 {addPackage?.name}
-                <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">{addPackage?.faqs?.days.length - 1}N/ {addPackage?.faqs?.days.length}D</span>
+                <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">
+                  {addPackage?.faqs?.days.length - 1}N/{" "}
+                  {addPackage?.faqs?.days.length}D
+                </span>
               </h1>
             </div>
-
-
           </div>
           <div className="justify-end flex-col gap-y-4 md:justify-center w-full hidden xl:flex ">
             <div className="">
               <img
                 className="rounded-md h-[192px] w-full object-cover"
-                src={hemages && hemages?.[1]?.path || "/logo.png"}
+                src={(hemages && hemages?.[1]?.path) || "/logo.png"}
                 alt="img 2"
                 width={200}
                 height={100}
@@ -126,14 +114,13 @@ const ItineraryHeroSection = ({
             <div className="">
               <img
                 className="rounded-md h-[192px] max-md-full w-full object-cover"
-                src={hemages && hemages?.[2]?.path || "/logo.png"}
+                src={(hemages && hemages?.[2]?.path) || "/logo.png"}
                 // src={imageSrc}
                 alt="img 3"
                 width={200}
                 height={100}
-              // onError={handleError}
+                // onError={handleError}
               />
-
             </div>
           </div>
           <div>
@@ -142,17 +129,17 @@ const ItineraryHeroSection = ({
                 <h2 className=" text-lg   md:text-xl font-semibold capitalize ">
                   {addPackage?.name}
                 </h2>
-
               </div>
               <div className="stick top-1">
                 <div className="flex flex-wrap gap-2 text-xxs font-semibold text-white">
                   {addPackage?.badges?.map((badge, index) => (
                     <button
                       key={index}
-                      className={`rounded-full py-1 px-2 ${index === 0
-                        ? 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize'
-                        : 'bg-navyblack'
-                        }`}
+                      className={`rounded-full py-1 px-2 ${
+                        index === 0
+                          ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize"
+                          : "bg-navyblack"
+                      }`}
                     >
                       {badge}
                     </button>
@@ -163,13 +150,15 @@ const ItineraryHeroSection = ({
                     <p className="md:text-md text-[16px] ">
                       Start & City :{" "}
                       {addPackage?.startcity?.map((city, index) => (
-                        <span key={index} className="capitalize font-semibold text-graytext">
-                          {city}{index < addPackage.startcity.length - 1 ? ", " : ""}
+                        <span
+                          key={index}
+                          className="capitalize font-semibold text-graytext"
+                        >
+                          {city}
+                          {index < addPackage.startcity.length - 1 ? ", " : ""}
                         </span>
                       ))}
-
                     </p>
-
                   </div>
                   <div className="flex gap-2 items-center ">
                     <div>
@@ -239,10 +228,11 @@ const ItineraryHeroSection = ({
                     addPackage={addPackage}
                   >
                     <p
-                      className={` ${showAddguest
-                        ? "bg-primary cursor-pointer"
-                        : "bg-orange-200"
-                        } px-5 py-2 rounded-md text-white text-center text-para`}
+                      className={` ${
+                        showAddguest
+                          ? "bg-primary cursor-pointer"
+                          : "bg-orange-200"
+                      } px-5 py-2 rounded-md text-white text-center text-para`}
                     >
                       <span>
                         {closeBtn ? "Book Now" : "Add Guest and Room"}
@@ -253,10 +243,11 @@ const ItineraryHeroSection = ({
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
-                    className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                      ? " bg-primary"
-                      : " bg-orange-200"
-                      } text-center text-para`}
+                    className={`border px-5 py-2 rounded-md ${
+                      fixedDepartureButtonEnaibleAndDisable
+                        ? " bg-primary"
+                        : " bg-orange-200"
+                    } text-center text-para`}
                   >
                     Book now
                   </button>
@@ -278,8 +269,6 @@ const ItineraryHeroSection = ({
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </>
