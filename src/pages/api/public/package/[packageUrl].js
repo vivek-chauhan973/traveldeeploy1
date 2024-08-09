@@ -20,7 +20,7 @@ import FlightBookingSchema from "@/models/package/FlightBooking";
     }
 
     try {
-        const packageDetails = await Package.findOne({ url: query.packageUrl }).populate("category").exec();
+        const packageDetails = await Package.findOne({ url: query.packageUrl }).populate({path:"location"}).populate({path:"country"}).populate({path:"state"}).lean();
         if (!packageDetails) {
             return res.status(404).json({ message: 'Package not found.' });
         }

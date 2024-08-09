@@ -34,6 +34,8 @@ export default function CreatePackage() {
     const [activeTab, setActiveTab] = useState(formType ? 'Tab1' : 'Tab1');
     const [tableColumn,setTableColumn]=useState([]);
 
+    
+    console.log("table columns id :: ",itinerary);
     const handleTabClick = (tabname) => {
         setActiveTab(tabname);
     };
@@ -147,6 +149,7 @@ export default function CreatePackage() {
 
                 <div className={`${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>
                 <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn}/>
+                <button className=" bg-black text-white py-1 mt-3 px-3 rounded-md">Save Data</button>
                 </div>
 
             </Layout>
