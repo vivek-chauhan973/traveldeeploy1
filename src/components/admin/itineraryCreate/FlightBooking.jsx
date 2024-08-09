@@ -98,7 +98,7 @@ const [selectedImg,setSelectedImg]=useState("");
         body: JSON.stringify({ flights: flightBookingList,flightNo,selectedImg })
       });
       if (response.ok) {
-        setActiveTab("Tab7");
+        setActiveTab("Tab8");
         console.log("Flights saved successfully");
       } else {
         console.error("Failed to save flights");

@@ -34,7 +34,7 @@ const GoogleMap = ({ setActiveTab, itinerary }) => {
             });
 
             if (response.ok) {
-                setActiveTab("Tab6");
+                setActiveTab("Tab7");
                 console.log("Map code successfully embedded");
             } else {
                 console.error('Failed to embed map code');

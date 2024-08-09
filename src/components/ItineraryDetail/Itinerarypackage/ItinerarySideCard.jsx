@@ -3,7 +3,7 @@ import Image from "next/image";
  const ItinerarySideCard=()=>{
     return(
     <>
-        <div className="relative  flex-shrink-0 max-w-[18rem] mt-5 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md border ml-[80px] hidden xl:block">
+        <div className="relative  flex-shrink-0 max-w-[18rem] mt-5 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md border xl:ml-[80px] ml-[20px] xl:block hidden">
             <div
                 className="relative mx-4 mt-4 overflow-hidden text-white  rounded-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
                 <Image src="https://Images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
@@ -16,7 +16,7 @@ import Image from "next/image";
                 </div>
                 
             </div>
-            <div className="px-6 py-4">
+            <div className="px-6 py-3">
                 <div className="flex items-center justify-between mb-3">
                     <h5
                         className=" text-lg font-semibold leading-snug ">
@@ -34,16 +34,19 @@ import Image from "next/image";
                     </p>
                 </div>
                 
-                    <div>
-                        <p className='text-[14px] line-clamp-2'>Lorem ipsum dolor sit amet consectetur adipisicing. Assenda maxime impedit adipisci? Ipsa cupiditate magnam ex, temporibus non cumque amet et saepe.</p>
-                    </div>
-                <div className="flex justify-center mt-5">
+                <div>
+                    <p className='text-para line-clamp-2'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing. Assenda maxime impedit adipisci? Ipsa cupiditate magnam ex, temporibus non cumque amet et saepe.
+                        Lorem ipsum dolor sit amet consectetur adipisicing. Assenda maxime impedit adipisci? Ipsa cupiditate magnam ex, temporibus non cumque amet et saepe.
+                    </p>
+                </div>
+                <div className="flex justify-end mt-3">
                     <div className="text-right">
                         {/* <p className="text-[14px] leading-5 text-cyan-400 font-semibold">SUPER DEAL PRICE</p> */}
-                        <p className="text-[12px] leading-4 text-green-600">Starts From <span className="text-[20px] text-black font-medium">₹
+                        <p className="text-xs leading-4 text-green-600">Starts From <span className="text-lg text-black font-medium">₹
                                 3,50,000</span></p>
                         {/* <p className="text-[10px] leading-5">per person on twin sharing</p> */}
-                        <p className="text-[14px] leading-5 font-medium underline text-blue">from ₹ 19,423/months
+                        <p className="text-para leading-7 font-medium underline text-blue">from ₹ 19,423/months
                         </p>
                     </div>
                 </div>

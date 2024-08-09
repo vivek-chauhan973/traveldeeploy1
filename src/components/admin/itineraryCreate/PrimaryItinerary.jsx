@@ -279,7 +279,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                 <div className=" grid grid-cols-1  mb-4 gap-5">
                     <div className="border p-4 rounded">
                         <div>
-                        <div className=" sm:flex items-center mb-2">
+                            <div className=" sm:flex items-center mb-2">
                                 <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Priority:</label>
                                 <input type="text"  className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => setPriority(e.target.value)} placeholder="Enter Priority " defaultValue={priority} />
@@ -376,7 +376,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                     
                 </div>
                 <button  className="bg-black text-white w-full rounded py-2" onClick={handleSaveBasic}>Save</button>
-                </div>
+            </div>
         </>
     );
 }
