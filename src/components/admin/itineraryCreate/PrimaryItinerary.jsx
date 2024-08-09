@@ -54,9 +54,11 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [cityPopup,setCityPopup]=useState(false);
     const [imageDetails,setImageDetails]=useState([]);
     const [dayWiseFaq,setDayWiseFaq]=useState([]);
-    
+    const [selectedCountry,setSelesctedCountry]=useState('');
+    const [selectedState,setSelesctedState]=useState('');
 
-    // console.log("jhkjashdf daywise data",dayWiseFaq)
+    console.log("country : ",selectedCountry)
+    console.log("State  : ",selectedState)
     useEffect(() => {
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();
@@ -217,7 +219,9 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
-        setDayWiseFaq(itinerary?.days)
+        setDayWiseFaq(itinerary?.days);
+        setSelesctedCountry(itinerary?.country);
+        setSelesctedState(itinerary?.state);
         if(!itinerary){
             setCityPopup(true);
             console.log("countryId",itinerary?.associateCountry?._id)
@@ -258,7 +262,9 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         uploads:imageDetails,
                         addguest:"",
                         days:dayWiseFaq,
-                        fixedfixeddepartureweightedprice:0  
+                        fixedfixeddepartureweightedprice:0 ,
+                        selectedState,
+                        selectedCountry 
                     })
                 });
                 
@@ -325,25 +331,25 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                                     <label htmlFor="packageLocation" className="pb-2 font-semibold text-para">Location:</label>
                                 </div>
                                 <div className="flex gap-2 items-center flex-wrap">
-                                    {(itinerary && (countries)) && (<select id="packageLocation" className=' w-[130px] ml-4 pl-2 rounded-md outline-none border-black border h-6 text-para' onChange={(e) => handleSelectCountry(e.target.value)} defaultValue={itinerary?.location?.state?.country?._id}>
+                                    {(itinerary && (countries)) && (<select id="packageLocation" className=' w-[130px] ml-4 pl-2 rounded-md outline-none border-black border h-6 text-para' onChange={(e) => {handleSelectCountry(e.target.value);setSelesctedCountry(e.target.value)}} defaultValue={itinerary?.location?.state?.country?._id}>
                                         <option value="">{itinerary?itinerary?.associateCountry?.name:"select Country"}</option>
                                         {countries?.map(country => (
                                             <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
                                         ))}
                                     </select>)}
-                                    {(!itinerary && countries) && (<select id="packageLocation" className=' w-[130px] ml-4 pl-2 rounded-md outline-none border-black border h-6 text-para' onChange={(e) => handleSelectCountry1(e.target.value)}>
+                                    {(!itinerary && countries) && (<select id="packageLocation" className=' w-[130px] ml-4 pl-2 rounded-md outline-none border-black border h-6 text-para' onChange={(e) =>{ handleSelectCountry1(e.target.value);setSelesctedCountry(e.target.value)}}>
                                         <option value="">select country</option>
                                         {countries?.map(country => (
                                             <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
                                         ))}
                                     </select>)}
-                                    {(itinerary && (states||cityPopup)) && (<select onChange={(e) => handleSelectState(e.target.value)} className=' w-[130px] ml-4 px-2 rounded-md outline-none border-black border h-6 text-para' defaultValue={itinerary?.location?.state?._id}>
+                                    {(itinerary && (states||cityPopup)) && (<select onChange={(e) => {handleSelectState(e.target.value);setSelesctedState(e.target.value)}} className=' w-[130px] ml-4 px-2 rounded-md outline-none border-black border h-6 text-para' defaultValue={itinerary?.location?.state?._id}>
                                         <option value="">{itinerary?itinerary?.associateState?.name:"select Country"}</option>
                                         {states?.map(state => (
                                             <option key={state._id} className='border-none bg-slate-100 text-black' value={state._id}>{state.name}</option>
                                         ))}
                                     </select>)}
-                                    {(!itinerary && (states)) && (<select onChange={(e) => handleSelectState1(e.target.value)} className='w-[130px] ml-4 px-2 rounded-md outline-none border-black border h-6 text-para'>
+                                    {(!itinerary && (states)) && (<select onChange={(e) => {handleSelectState1(e.target.value);setSelesctedState(e.target.value)}} className='w-[130px] ml-4 px-2 rounded-md outline-none border-black border h-6 text-para'>
                                         <option value="">Select state</option>
                                         {states?.map(state => (
                                             <option key={state._id} className='border-none bg-slate-100 text-black' value={state._id}>{state.name}</option>

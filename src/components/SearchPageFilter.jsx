@@ -29,9 +29,9 @@ const fetchCatagory=async ()=>{
     return data;
 }
 
-export default function SearchPageFilter({ onApplyFilter,setTourDuration,tourDuration }) {
+export default function SearchPageFilter({ onApplyFilter,setTourDuration,tourDuration,setMaxDay,setMinDay,setClearAll}) {
     const {setCatagoryId}=useAppContext()
-    const { setMinPrice, setMaxPrice } = useAppContext();
+    const { setMinPrice, setMaxPrice,setDuration } = useAppContext();
     const [priceRange, setPriceRange] = useState([0, 9900]);
     
     const [departureCity, setDepartureCity] = useState([]);
@@ -75,6 +75,7 @@ const [filter,setFilter]=useState(false);
         };
         setFilter(!filter)
         onApplyFilter(filters);
+        setClearAll(false)
     };
 useEffect(()=>{
     if (priceRange[0] > priceRange[1]) {
@@ -85,20 +86,22 @@ useEffect(()=>{
         setMaxPrice(priceRange[1])
         setMinPrice(priceRange[0])
     }
+    setDuration(tourDuration)
 },[filter])
     const handleClearAll = () => {
         setPriceRange([0, 9900]);
-        setTourDuration([20, 37]);
+        setTourDuration([0, 6]);
         setDepartureCity([]);
-        setPackageCategory([]);
+        setClearAll(true)
         // onClearFilters();
         document.querySelectorAll("input[type=checkbox]").forEach(el => el.checked = false);
     };
 
+    const updatedTourDuration=(newValue)=>{
+            console.log("new value is here : : ",newValue)
+    }
 
     // console.log("package data",packageCategory)
-
-
     return (
         <>
             <div>
@@ -141,16 +144,17 @@ useEffect(()=>{
                                 <Slider
                                     getAriaLabel={() => 'Tour duration range'}
                                     value={tourDuration}
-                                    onChange={(_, newValue) => setTourDuration(newValue)}
+                                    onChange={(_, newValue) => {setMaxDay(newValue[1]);setMinDay(newValue[0]);setTourDuration(newValue)}}
                                     valueLabelDisplay="auto"
                                     getAriaValueText={valuetext}
                                     sx={{ color: "#2A2C41" }}
+                                    min={0}
                                 />
                             </Box>
                             <div>
                                 <div className="flex justify-between md:mb-2 mb-2">
-                                    <p className="md:text-[14px] text-[12px]">Min <span>{tourDuration[0]} days</span></p>
-                                    <p className="md:text-[14px] text-[12px]">Max <span>{tourDuration[1]} days</span></p>
+                                    <p className="md:text-[14px] text-[12px]">Min <span>{tourDuration?.[0]} days</span></p>
+                                    <p className="md:text-[14px] text-[12px]">Max <span>{tourDuration?.[1]} days</span></p>
                                 </div>
                             </div>
 

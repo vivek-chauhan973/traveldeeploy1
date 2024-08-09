@@ -19,11 +19,12 @@ import { NextApiRequest, NextApiResponse } from "next";
         let updatedPackage
         switch (req.method) {
             case 'PUT':
-                const {priority, name, price, status, location,category,badges ,startcity,uploads } = req.body;
+                const {priority, name, price, status, location,category,badges ,startcity,uploads, selectedState,
+                    selectedCountry } = req.body;
                 const startcity1=startcity.split(",");
                 const images=uploads?.data?.map(item=>item?.path)
                 // console.log("startcity 134346387453465347534",badges);
-                updatedPackage = await Package.findByIdAndUpdate(packageId, {priority, name, price, status, location,category,badges,startcity:startcity1,uploads:images }, { new: true });
+                updatedPackage = await Package.findByIdAndUpdate(packageId, {priority, name, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState }, { new: true });
 
                 if (!updatedPackage) {
                     return res.status(404).json({ message: 'Package not found' });

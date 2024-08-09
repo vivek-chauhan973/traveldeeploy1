@@ -3,10 +3,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const BottomLink = ({ locationId }) => {
-  console.log("location in bottom link", locationId?._id);
+  // console.log("location in bottom link", locationId?._id);
   const locationIds = locationId?._id;
   const [bottomLinkData, setBottomLinkData] = useState(null);
-  console.log("location down in bottom link", bottomLinkData);
+  // console.log("location down in bottom link", bottomLinkData);
 
   const fetchPromoManagementData = async () => {
     if (!locationIds) return;
@@ -16,7 +16,7 @@ const BottomLink = ({ locationId }) => {
       );
       const data = await response.json();
       setBottomLinkData(data.packages); // Store the fetched data
-      console.log("bottom fetching data:", data);
+      // console.log("bottom fetching data:", data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
