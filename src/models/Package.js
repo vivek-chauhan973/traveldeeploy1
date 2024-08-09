@@ -41,7 +41,7 @@ const packageSchema = new Schema({
     },
     days: {
       type: Number,
-      default: [],
+      default: 0,
     },
     uploads: [String],
     addguest: {
@@ -57,6 +57,16 @@ const packageSchema = new Schema({
     location: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "City",
+      required: true,
+    },
+    country:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Country",
+      required: true,
+    },
+    state:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "State",
       required: true,
     },
     about: { type: String, trim: true },

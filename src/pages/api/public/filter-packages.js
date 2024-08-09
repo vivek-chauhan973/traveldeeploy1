@@ -7,18 +7,14 @@ import mongoose from "mongoose";
 // Export default API endpoint handler function
 const packagePublicFilter = async (req, res) => {
     try {
-        const { locationId, priceMin, priceMax, cityId, categoryId } = req.query;
-
+        const { locationId, priceMin, priceMax, cityId, categoryId,minDay,maxDay } = req.query;
+     console.log("max day 223232",maxDay)
+     console.log("min day 223232",minDay)
         // Validate ObjectIds
         const isValidObjectId = mongoose.Types.ObjectId.isValid;
         if (cityId && !isValidObjectId(cityId)) {
             return res.status(400).json({ message: 'Invalid cityId' });
         }
-        // if (categoryId && !isValidObjectId(categoryId)) {
-        //     return res.status(400).json({ message: 'Invalid categoryId' });
-        // }
-
-        // Build query conditions based on available parameters
         const query = {};
 
         if (priceMin && priceMax) {
@@ -28,7 +24,10 @@ const packagePublicFilter = async (req, res) => {
         } else if (priceMax) {
             query.price = { $lte: Number(priceMax) };
         }
-
+          
+        if (minDay !== undefined || maxDay !== undefined) {
+            query.days={$lte:Number(maxDay),$gte:Number(minDay)}
+        }
         if (cityId) {
             query.location = cityId;
         }
@@ -46,12 +45,11 @@ const packagePublicFilter = async (req, res) => {
             .populate('location')
             .populate('category')
             .exec();
-
-        // Return JSON response with packages and cities
+// Return JSON response with packages and cities
         return res.status(200).json({ packages, cities });
     } catch (error) {
         console.error('Error handling API request:', error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+        return res.status(500).json({ message:error.message });
     }
 };
 

@@ -12,8 +12,8 @@ import { faSearch, faUser, faArrowAltCircleRight, faHome, faCompass, faDownload,
 
 const Header3 = () => {
   const [logo, setLogo] = useState(null);
-  console.log("imaheeee", logo?.path)
-  console.log("logo", logo)
+  // console.log("imaheeee", logo?.path)
+  // console.log("logo", logo)
 
 
   useEffect(() => {

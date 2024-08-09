@@ -6,7 +6,8 @@ import { NextApiRequest, NextApiResponse } from "next";
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });
         }
-        const {priority, name, price, status, location, category,badges ,startcity,uploads,addguest,fixedfixeddepartureweightedprice} = req.body;
+        const {priority, name, price, status, location, category,badges ,startcity,uploads,addguest,fixedfixeddepartureweightedprice, selectedState,
+            selectedCountry} = req.body;
         const images=uploads?.data?.map(item=>item?.path)
         const startcity1=startcity.split(",");
         const missingFields = [];
@@ -19,8 +20,8 @@ import { NextApiRequest, NextApiResponse } from "next";
             return res.status(400).json({ message: `Missing required fields: ${missingFields.join(', ')}` });
         }
         const url = name.replace(/[^\w\s]/gi, '-').toLowerCase().replace(/\s+/g, '-');
-        const packageBasic = await Package.create({priority, name, price, status, url, location, category,badges,startcity:startcity1,uploads:images,addguest,fixedfixeddepartureweightedprice})
-        console.log('Package created', packageBasic)
+        const packageBasic = await Package.create({priority, name, price, status, url, location, category,badges,startcity:startcity1,uploads:images,addguest,fixedfixeddepartureweightedprice,country:selectedCountry,state:selectedState})
+        // console.log('Package created', packageBasic)
         return res.status(201).json({ message: 'Package created', packageBasic });
     } catch (error) {
         console.error('Error handling API request:', error);

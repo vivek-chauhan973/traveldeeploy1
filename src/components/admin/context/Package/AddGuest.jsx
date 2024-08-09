@@ -55,12 +55,14 @@ export const AppProvider = ({ children }) => {
   const [catagoryId, setCatagoryId] = useState(null);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(9900);
-
+  const [duration,setDuration]=useState([]);
+  // console.log("duration",duration)
   const filterApi = {
     locationId,
     catagoryId,
     minPrice,
-    maxPrice
+    maxPrice,
+    duration
   };
 
   useEffect(() => {
@@ -144,7 +146,8 @@ export const AppProvider = ({ children }) => {
      setFixedDepDate1,
     setFixedDepCity1,
     handleCleckOnDepartureFixed,
-    fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable
+    fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable,
+    setDuration
   };
 
   return (

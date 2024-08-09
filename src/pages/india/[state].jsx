@@ -9,7 +9,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 // import ItineraryFaq from '@/components/itinerarylist/ItineraryFaq';
 import BottomLink from '@/components/ItineraryDetail/BottomLink';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
+import { AppProvider, useAppContext } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 
@@ -31,13 +31,25 @@ const fetchLocation = async (state) => {
 
 export default function SearchPage() {
     const router = useRouter();
+    // const {setDuration}=useAppContext();
     const state = router.query.state?.replace("-tour-packages", "");
     const [selectedLocation, setSelectedLocation] = useState(null); // Initialize with null
     const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
     const [promoData, setPromoData] = useState({});
     const [loading, setLoading] = useState(true);
-    const [tourDuration, setTourDuration] = useState([20, 37]);
-    // console.log("prodata is here ,--------",promoData)
+    const [maxDay,setMaxDay]=useState(0);
+    const [minDay,setMinDay]=useState(0);
+    const [tourDuration, setTourDuration] = useState([20, 36]);
+    const [clearAll,setClearAll]=useState(false);
+    useEffect(()=>{
+       setTourDuration(prev=>{
+        const newItem=[...prev];
+        newItem[1]=maxDay;
+        newItem[0]=minDay;
+        return newItem
+       })
+    //    setDuration(tourDuration);
+    },[maxDay])
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -55,6 +67,8 @@ export default function SearchPage() {
         fetchData();
     }, [state]);
 
+    // console.log("max days",maxDay)
+    // console.log("min days",minDay)
     useEffect(() => {
         if (selectedLocation?._id) {
             fetchPromoManagementData(selectedLocation._id).then(res => setPromoData(res?.data || {}));
@@ -88,7 +102,7 @@ export default function SearchPage() {
                     <div className='relative'>
                         {!loading ? (
                             <div className='hidden xl:block'>
-                                <SearchPageFilter onApplyFilter={handleApplyFilter} setTourDuration={setTourDuration} tourDuration={tourDuration} />
+                                <SearchPageFilter onApplyFilter={handleApplyFilter} setTourDuration={setTourDuration} tourDuration={tourDuration} setMaxDay={setMaxDay} setMinDay={setMinDay} setClearAll={setClearAll} />
                             </div>
                         ) : (
                             <div>
@@ -99,7 +113,7 @@ export default function SearchPage() {
                     <div>
                         {!loading ? (
                             <div>
-                                {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} setTourDuration={setTourDuration} />}
+                                {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll}/>}
                             </div>
                         ) : (
                             <div>
