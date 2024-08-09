@@ -41,6 +41,28 @@ export default function SearchPage() {
     const [minDay,setMinDay]=useState(0);
     const [tourDuration, setTourDuration] = useState([20, 36]);
     const [clearAll,setClearAll]=useState(false);
+    
+
+    const [priorityPackage, setPriorityPackage] = useState([]);
+
+    useEffect(() => {
+        const fetchPackages = async () => {
+            try {
+                const response = await fetch(`/api/public/priority-package?locationId=${selectedLocation?._id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch packages');
+                }
+                const data = await response.json();
+                console.log("package selected data show is here data",data)
+                setPriorityPackage(data?.packages);
+            } catch (err) {
+                console.error('Error fetching data:', err);
+            } 
+        };
+
+        fetchPackages();
+    }, [selectedLocation]);
+    console.log("package selected data show is here 0000000",priorityPackage)
     useEffect(()=>{
        setTourDuration(prev=>{
         const newItem=[...prev];
@@ -88,7 +110,7 @@ export default function SearchPage() {
                 {/* <Breadcrumbs /> */}
                 {!loading ? (
                     <div>
-                        <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} />
+                        <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} priorityPackage={priorityPackage}/>
                     </div>
                 ) : (
                     <div>

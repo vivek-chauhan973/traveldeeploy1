@@ -58,7 +58,7 @@ export default function Package1() {
     const data = await res.json();
     return data;
   }, [addPackage]);
-
+  console.log("state id is here --------",addPackage?.state)
   useEffect(() => {
     fetchImages().then((res) => setImages(res));
   }, [addPackage, fetchImages]);
@@ -325,7 +325,7 @@ export default function Package1() {
       ) : null}
 
       {/* bottom link */}
-      <BottomLink />
+      <BottomLink locationId={addPackage?.state} />
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">

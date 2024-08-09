@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import dynamic from 'next/dynamic';
-const IoMdArrowDropdown = dynamic(() => import('react-icons/io').then((mod) => mod.IoMdArrowDropdown));
-import Image from 'next/image';
+import dynamic from "next/dynamic";
+const IoMdArrowDropdown = dynamic(() =>
+  import("react-icons/io").then((mod) => mod.IoMdArrowDropdown)
+);
+import Image from "next/image";
 import { useAppContext } from "./admin/context/Package/AddGuest";
 import { DownArrow } from "@/components/icons/index";
 
 // Function to strip HTML tags
 const stripHtmlTags = (html) => {
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   div.innerHTML = html;
-  return div.textContent || div.innerText || '';
+  return div.textContent || div.innerText || "";
 };
 
-const SearchPageTopSeoContent = ({ state, promoData }) => {
+const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
   const { setLocationId } = useAppContext();
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(true);
@@ -36,7 +38,8 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
           className="absolute top-0 left-0 w-full h-full object-cover object-center"
           src={promoData?.image ? promoData?.image : "/logo.png"}
           alt=""
-          width={100} height={100}
+          width={100}
+          height={100}
         />
       </div>
       <div className="container-wrapper py-5">
@@ -46,56 +49,46 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
         </div>
 
         {show && (
-          <div className="table-container mt-4">
-            <table className="w-full border-collapse border text-center text-para">
-              <thead>
-                <tr className="border-b bg-black text-white">
-                  <th className="border-t border-l border-r font-light">Sightseeing Places</th>
-                  <th className="border-t border-l border-r font-light">Sedan</th>
-                  <th className="border-t border-l border-r font-light">Innova/Innova Crysta</th>
-                  <th className="border-t border-l border-r border-b w-36 font-light">Tempo Traveler</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border-t border-l border-r border-b">Mana Village</td>
-                  <td className="border-t border-l border-r border-b">INR 1000</td>
-                  <td className="border-t border-l border-r border-b">INR 1500</td>
-                  <td className="border-t border-l border-r border-b">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border-t border-l border-r border-b">Mana Village</td>
-                  <td className="border-t border-l border-r border-b">INR 1000</td>
-                  <td className="border-t border-l border-r border-b">INR 1500</td>
-                  <td className="border-t border-l border-r border-b">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border-t border-l border-r border-b">Mana Village</td>
-                  <td className="border-t border-l border-r border-b">INR 1000</td>
-                  <td className="border-t border-l border-r border-b">INR 1500</td>
-                  <td className="border-t border-l border-r border-b">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border-t border-l border-r border-b">Mana Village</td>
-                  <td className="border-t border-l border-r border-b">INR 1000</td>
-                  <td className="border-t border-l border-r border-b">INR 1500</td>
-                  <td className="border-t border-l border-r border-b">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border-t border-l border-r border-b">Mana Village</td>
-                  <td className="border-t border-l border-r border-b">INR 1000</td>
-                  <td className="border-t border-l border-r border-b">INR 1500</td>
-                  <td className="border-t border-l border-r border-b">INR 2000</td>
-                </tr>
-                <tr>
-                  <td className="border-t border-l border-r border-b">Mana Village</td>
-                  <td className="border-t border-l border-r border-b">INR 1000</td>
-                  <td className="border-t border-l border-r border-b">INR 1500</td>
-                  <td className="border-t border-l border-r border-b">INR 2000</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <>
+            <div className="table-container mt-4">
+              <table className="w-full border-collapse border text-center text-para">
+                <thead>
+                  <tr className="border-b bg-black text-white">
+                    <th className="border-t border-l border-r font-light">
+                      Name
+                    </th>
+                    <th className="border-t border-l border-r font-light">
+                      Badges
+                    </th>
+                    <th className="border-t border-l border-r font-light">
+                      Days
+                    </th>
+                    <th className="border-t border-l border-r border-b w-36 font-light">
+                      PageUrl
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {priorityPackage?.map((item, index) => (
+                    <tr key={index}>
+                      <td className="border-t border-l border-r border-b">
+                        {item.name}
+                      </td>
+                      <td className="border-t border-l border-r border-b">
+                        {item.badges}
+                      </td>
+                      <td className="border-t border-l border-r border-b">
+                        {item.days}
+                      </td>
+                      <td className="border-t border-l border-r border-b">
+                        {item.pageUrl}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
 
         <div className="flex justify-end items-center mt-2">
@@ -105,13 +98,14 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
             </button>
             <span className="flex items-center justify-center">
               <IoMdArrowDropdown
-                className={`transition-transform text-xs ${show ? 'rotate-180' : ''}`}
+                className={`transition-transform text-xs ${
+                  show ? "rotate-180" : ""
+                }`}
                 onClick={handleToggle}
               />
             </span>
           </div>
         </div>
-
       </div>
       <div>
         <hr className="container-wrapper border-slate-300" />
@@ -121,5 +115,3 @@ const SearchPageTopSeoContent = ({ state, promoData }) => {
 };
 
 export default SearchPageTopSeoContent;
-
-
