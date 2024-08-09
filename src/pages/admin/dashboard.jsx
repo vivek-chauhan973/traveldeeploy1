@@ -70,6 +70,36 @@ export default function AdminDashboard() {
                         <div className="flex">
                             <p className="m-auto font-semibold text-md">Income</p>
                         </div>
+                        {/* ------------- */}
+                        <div className="p-3"> 
+                            <div className="p-4 rounded mb-2 overflow-scroll">
+                                <div className=" sm:flex items-center md:mb-5 mb-2">
+                                    <label htmlFor="ratingValue" className=" font-semibold w-36 text-para">Rating Value :</label>
+                                    <input type="text" id="ratingValue" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                        placeholder="Enter Rating Value " />
+                                </div>
+                                <div className=" sm:flex items-center md:mb-5 mb-2">
+                                    <label htmlFor="ratingCount" className=" font-semibold w-36 text-para">Rating Count :</label>
+                                    <input type="text" id="ratingCount" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                        placeholder="Enter Rating Count " />
+                                </div>
+                                <div className=" sm:flex items-center md:mb-4 mb-2">
+                                    <label htmlFor="startDate" className=" font-semibold w-36 text-para">Start Date :</label>
+                                    <input type="date" id="startDate" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                        placeholder="Enter Start Date"/>
+                                </div>
+                                <div className=" sm:flex items-center md:mb-5 mb-2">
+                                    <label htmlFor="endDate" className=" font-semibold w-36 text-para">Price Valid Until/End Date :</label>
+                                    <input type="Date" id="endDate" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                        placeholder="Enter End Date "/>
+                                </div>
+                                
+                                <button className="w-full rounded py-2 bg-black text-white">
+                                    Save
+                                </button>      
+                            </div>
+                        </div>
+                        {/* ---------- */}
                     </div>
                 </div>
 
