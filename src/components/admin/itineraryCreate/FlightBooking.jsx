@@ -23,7 +23,6 @@ export default function FlightBookingForm({ itinerary, setActiveTab }) {
 const [flightNo,setFlightNo]=useState('');
 const [selectedImg,setSelectedImg]=useState("");
 
-// console.log("flightNo.  ::"+flightNo+"--->selected Image:: ::"+selectedImg)
 
   const handleFlightBooking = (e) => {
     const { name, value } = e.target;

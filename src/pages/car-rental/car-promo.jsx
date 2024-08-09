@@ -65,7 +65,6 @@ export default function CarPromo(){
         
         handleCloseModal(); //for close the popup window
         alert(`Filters are applied`) //Filters alert
-        console.log(filters);
         
     };
 

@@ -8,7 +8,7 @@ const ItineraryPaymentTerms = () => {
     const [activeTab, setActiveTab] = useState("tab1");
     const handleTabClick = (tour_details) => {
         setActiveTab(tour_details);
-        // console.log(tour_details)
+    
     };
     return (
         <>

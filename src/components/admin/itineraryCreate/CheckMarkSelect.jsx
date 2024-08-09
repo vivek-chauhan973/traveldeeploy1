@@ -19,7 +19,7 @@ const MenuProps = {
 export default function MultipleSelectCheckmarks({ packageCategories, onSelectedCategoryIdsChange ,selectedCategories1}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
-    // console.log("selected categories here : ",packageCategories)
+
     useEffect(() => {
         setSelectedCategories(selectedCategories1||[]);
     }, [packageCategories,selectedCategories1]);

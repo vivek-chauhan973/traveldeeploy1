@@ -18,7 +18,7 @@ export default function Promo() {
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
-    // console.log("here is my title",title)
+
     return (
         < div className=" h-[100%]">
             {/* <Header /> */}

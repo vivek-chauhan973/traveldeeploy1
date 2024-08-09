@@ -32,7 +32,6 @@ const TermandCondition = () => {
       seoDescription,
       seoKeywords,
     };
-    // console.log('Blog Data:', blogData);
 
     try {
       const response = await fetch('/api/blogs', {
@@ -48,7 +47,6 @@ const TermandCondition = () => {
       }
 
       const result = await response.json();
-      console.log('Blog successfully created:', result);
       // You can add more actions here, e.g., redirecting the user to another page
     } catch (error) {
       console.error('Failed to create blog:', error);

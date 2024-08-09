@@ -12,7 +12,6 @@ import { NextApiRequest, NextApiResponse } from "next";
   }
 
   if (req.method === "POST") {
-    console.log("req body  ; ",req.body)
     const {addguest, singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childUnderFive, childOverFive, misc,
       markup,
       diskHike,
@@ -37,13 +36,11 @@ import { NextApiRequest, NextApiResponse } from "next";
         { upsert: true, new: true }
       );
 
-      // console.log("Saved price data:", price);
       const updatedPackage = await Package.updateOne(
         {_id:packageId},
         { $set: { addguest: addguest } },
         { new: true }
       );
-      console.log("updatedPackage",updatedPackage);
       return res.status(201).json({ price });
     } catch (error) {
       console.error("Error handling API request:", error);

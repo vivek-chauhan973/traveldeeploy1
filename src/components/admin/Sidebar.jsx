@@ -138,13 +138,13 @@ const Sidebar = () => {
 
   const handleTabToggle = (tabName) => {
     setActiveTab(prevTab => (prevTab === tabName ? null : tabName));
-    console.log('Toggle Button clicked');
+
     setSelectedSubMenu(null);
   };
 
   const handleSubMenuClick = (subMenuLabel, parentLabel) => {
     setSelectedSubMenu(subMenuLabel);
-    console.log('Submenu Button clicked');
+
     setActiveTab(parentLabel); // Ensure the parent tab remains open
   };
 

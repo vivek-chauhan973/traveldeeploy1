@@ -10,8 +10,7 @@ import DeparturePopup from "./DeparturePopup";
 const {setDepartureSectionData}=useAppContext();
 const [datePackage,setDatePackage]=useState(0);
 const [showPopup,setShowPopup]=useState(false);
-// const [color,setColor]=useState(null);
-  // console.log("highlight data show is here", addPackage);
+
   // =====================changes===============================
   return (
     <>
@@ -74,19 +73,13 @@ const [showPopup,setShowPopup]=useState(false);
                       </ul>                     
                     ))}
                     </div>
-                    {/* <div className= 'bg-gradient-to-t -mt-7  from-red-400 opacity-100 w-full  h-10 -top-2 z-30" ' ></div> */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* <div className="absolute bottom-0 bg-white my-1">
-            <p className="text-para">
-              View itinerary for the tours you have booked by logging into your
-              account.
-            </p>
-          </div> */}
+     
         </div>
       </div>
     </>

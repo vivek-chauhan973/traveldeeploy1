@@ -73,14 +73,7 @@ const ItineraryTourDetails = () => {
                         }
 
                     </div>
-                    {/* <div className={` ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
-
-                        {
-
-                            <p className="py-3 pl-2" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
-                        }
-
-                    </div> */}
+            
 
 
 

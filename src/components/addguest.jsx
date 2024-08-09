@@ -42,7 +42,6 @@ const Addguest = ({
     setOpen(false);
   };
 
-  // console.log("fixed departure package::::",addPackage);
   const handleChange = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
     setInputData({ ...inputData, [e.target.name]: value });

@@ -13,7 +13,6 @@ import FlightBookingSchema from "@/models/package/FlightBooking";
 
  const packagePublicPackageUrl= async (req, res) => {
     const { method, query } = req;
-    console.log("data in query show is here",query)
     if (method !== 'GET') {
         res.setHeader('Allow', ['GET']);
         return res.status(405).json({ message: `Method ${method} not allowed` });

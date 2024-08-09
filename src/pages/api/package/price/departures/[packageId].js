@@ -34,7 +34,6 @@ import { NextApiRequest, NextApiResponse } from "next";
         { $set: { addguest: departure1,fixedfixeddepartureweightedprice:parseFloat(weightOptional) } },
         { new: true }
       );
-      // console.log("Saved departure data:", departure);
       return res.status(201).json({ departure });
     } catch (error) {
       console.error("Error handling API request:", error);

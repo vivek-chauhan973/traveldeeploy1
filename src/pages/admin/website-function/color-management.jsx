@@ -31,7 +31,6 @@ export default function ColorManagement(){
             }
         })
 
-        // console.log(isColor)
     }
 
 
@@ -44,13 +43,13 @@ export default function ColorManagement(){
     }
 
     const handleBtnColorChange=(e)=>{
-        // console.log(e.target.value)
+  
         isColor.button=e.target.value
     }
 
     const colorSubmit=async(e)=>{
         e.preventDefault()
-        // console.log("here is click and change the states",isColor)
+
         try {
             const response = await fetch('/api/website-color/update', {
                 method: 'POST',
@@ -76,7 +75,6 @@ export default function ColorManagement(){
     // set end point url
     const [isurlEndPoint, seturlEndPoint] =useState()
 
-    // console.log(isurlEndPoint)
 
     
 

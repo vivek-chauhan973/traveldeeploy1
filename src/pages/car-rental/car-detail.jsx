@@ -57,7 +57,6 @@ export default function CarDetail(){
         handleCloseModal()
 
         alert(`Booking successful`)
-        console.log(formData);
     };
     return(
     <>

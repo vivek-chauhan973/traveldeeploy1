@@ -3,7 +3,7 @@ import React, { useState, useEffect, use } from 'react';
 import { format, eachDayOfInterval } from 'date-fns';
 
 const PriceRange = ({ itinerary }) => {
-  // console.log("json data", itinerary);
+
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [price, setPrice] = useState('');

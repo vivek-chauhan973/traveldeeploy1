@@ -47,7 +47,7 @@ const DynamicTable = () => {
 
     const handleSubmit = () => {
         // Print or use tableData as needed
-        console.log(tableData);
+       
         // Example: Displaying data in an alert
       
     };

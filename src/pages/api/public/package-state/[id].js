@@ -10,7 +10,6 @@ const packageStateUploadDir = path.join(uploadDirectory, 'packagestate');
 if (!fs.existsSync(packageStateUploadDir)) {
     fs.mkdirSync(packageStateUploadDir, { recursive: true });
 }
- console.log("packageStateUploadDi",packageStateUploadDir);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, packageStateUploadDir);
@@ -62,11 +61,9 @@ const handler = async (req, res) => {
                 } else if (err) {
                     return res.status(500).json({ error: err.message || 'File upload failed' });
                 }
-                // console.log("req body 4554545545",req)
                 try {
                     const { title, alt, faqData, editorContent,tableData,seoData,tableColumn ,selectType,selectedItem} = req.body;
                     const file = req.file;
-                    //  console.log("req body 4554545545",req)
                     let updateData = {
                         title,
                         alt,
@@ -102,7 +99,6 @@ const handler = async (req, res) => {
 
                     res.status(200).json({ success: true, data: updatedPackageState });
                 } catch (error) {
-                    // console.log("hi")
                     res.status(400).json({ success: false, message: error.message });
                 }
             });

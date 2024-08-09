@@ -20,8 +20,6 @@ export async function getServerSideProps(context) {
 
 export default function TourPackage({data}) {
   
-  console.log("SEO data all is here ",data)
-  console.log("SEO data all is here ",data?.seoData)
   return (
     <>
     <Head>

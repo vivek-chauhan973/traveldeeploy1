@@ -13,13 +13,12 @@ import { NextApiRequest, NextApiResponse } from "next";
     const { packageId } = req.query;
     const { days, information } = req.body;
     const day=days?.length;
-//     console.log("day wise ssss",days)
-//  console.log("days aaa",days);
+
     try {
         const [tourPackage, packageDays] = await Promise.all([
             Package.findByIdAndUpdate(packageId, { dayWiseInformation: information}),
             PackageDayWise.findOneAndUpdate({ package: packageId }, { days }, { upsert: true, new: true }),
-            // console.log("days destruct",{days})
+      
         ]);
         const updatedPackage = await Package.findOneAndUpdate(
             {_id:packageId},
@@ -28,7 +27,7 @@ import { NextApiRequest, NextApiResponse } from "next";
           );
         return res.status(201).json({ packageDays, tourPackage ,updatedPackage});
     } catch (error) {
-        console.error('Error handling API request:', error);
+      
         return res.status(500).json({ message: error.message });
     }
 

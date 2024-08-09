@@ -20,7 +20,6 @@ import { NextApiRequest, NextApiResponse } from "next";
         { upsert: true, new: true }
       );
 
-      // console.log("Saved tour information:", tourInfo);
 
       return res.status(201).json({ tourInfo });
     } catch (error) {

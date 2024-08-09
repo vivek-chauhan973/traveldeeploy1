@@ -67,8 +67,7 @@ export default function SearchPage() {
         fetchData();
     }, [state]);
 
-    // console.log("max days",maxDay)
-    // console.log("min days",minDay)
+  
     useEffect(() => {
         if (selectedLocation?._id) {
             fetchPromoManagementData(selectedLocation._id).then(res => setPromoData(res?.data || {}));

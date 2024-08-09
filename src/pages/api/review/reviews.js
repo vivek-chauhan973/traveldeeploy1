@@ -21,7 +21,6 @@ const reviewsApi = async (req, res) => {
         summary,
         title,
       });
-      //    console.log("review data is here",res)
 
       if (!res1) {
         return res.status(301).json({ message: "something went wrong" });
@@ -35,7 +34,6 @@ const reviewsApi = async (req, res) => {
   } else {
     try {
       const res1 = await Review.find({});
-    //   console.log("resbdsfbfjbfhs",res)
       if (!res1) {
         return res.status(404).json({ message: "reviews not found" });
       }

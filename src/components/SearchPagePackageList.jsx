@@ -12,7 +12,6 @@ const fetchPackages = async (locationId) => {
     { method: "GET" }
   );
   const data = await response.json();
-  console.log("api public tour=package", data)
   return data.packages;
 };
 const filteredData = async (id, cat, min, max,minDay,maxDay) => {
@@ -66,7 +65,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
     
   }, [filterData1, locationId, currentPage, filterApi, filterPackage])
 
-  // console.log("packages is here ::: ",filterData1)
+
   for(let item of packages){
     if(maxDay<item.days){
       setMaxDay(item.days)
@@ -74,7 +73,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
   }
 
 
-// console.log("filter api here ::::: ",filterApi)
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     const windowHeight = window.innerHeight;
@@ -86,7 +85,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
   const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  // console.log("current dat is slkjshkljfh sadfkj",currentItems)
+
   return (
     <div>
       {currentItems?.map((packageData, i) => (

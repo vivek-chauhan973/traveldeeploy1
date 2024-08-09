@@ -13,7 +13,7 @@ const deletePackage= async (req, res) => {
             return res.status(400).json({ message: 'Package ID is required' });
         }
 
-        console.log("Deleting package with ID: ", packageList_id);
+        
         
         // Use findByIdAndDelete with the correct ID
         const result = await Package.findByIdAndDelete(packageList_id);
@@ -24,8 +24,7 @@ const deletePackage= async (req, res) => {
 
         return res.status(200).json({ message: 'Package deleted' });
     } catch (error) {
-        console.error('Error handling API request:', error);
-        return res.status(500).json({ message: error.message });
+           return res.status(500).json({ message: error.message });
     }
 }
 export default deletePackage

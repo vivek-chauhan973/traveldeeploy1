@@ -7,17 +7,12 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
-// import { ItineraryFaq, Itineraryfaqheading } from "@/components/Itineraryfaq";
-
 
  const Itinerary= ()=> {
 
-    // const [ faqData,setFaqData]=useState(null);
     const {addPackage}=useAppContext();
-    // setFaqData(addPackage);
 
     const [dummy, setDummy] = useState([addPackage?.days])
-    //  console.log("addsdhbbsjdddfadhbhdb",addPackage)
      
 
     return (

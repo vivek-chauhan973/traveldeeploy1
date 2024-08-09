@@ -19,7 +19,6 @@ import PackageMap from "@/models/package/PackageMap";
         { upsert: true, new: true ,strict: false }
       );
 
-      // console.log("Saved data:", map);
 
       return res.status(201).json({ map });
     } catch (error) {

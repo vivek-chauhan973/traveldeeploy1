@@ -20,7 +20,7 @@ export default function PromoManage() {
     const router=useRouter();
     
     const {promo}=router?.query;
-    // console.log("router is here : ",router);
+   
     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
     const [catoryorstate,setCatoryorstate]=useState(false);
@@ -88,7 +88,7 @@ export default function PromoManage() {
 
     const handleSelectChange = async (e) => {
       const selectedData=(e.target.value)?.split(",");
-    //   console.log("selectedData",selectedData);
+   
       setSelectedLocation(selectedData?.[1]);
       setSelectedItem(selectedData?.[0])
        
@@ -97,14 +97,13 @@ export default function PromoManage() {
     const handleFaqChange = (faqs) => {
         setFaqData(faqs);
     };
-    // console.log("selected location ::",selectedLocation)
+ 
     const handleEditorChange = (content) => {
 
-        // console.log("content",content)
+      
         setEditorContent(content);
     };
-    // console.log("your selected catory is : ",selectCatagoryOrState)
-    // console.log("data of seofield",tableData)
+   
     const handleSubmit = async (e) => {
         if(selectedLocation.length===0){
             return alert("select state or category or state");
@@ -131,22 +130,11 @@ export default function PromoManage() {
             }
 
             const data = await response.json();
-            console.log('Success:', data);
-          // Reset form fields after successful submission
-            /* setFile(null);
-            setTitle("");
-            setAlt("");
-            setFaqData([]);
-            setEditorContent("");
-            setSelectedLocation("");
-            setSeoData({});
-            setTableData([]);
-            setTableColumn([]);*/
         } catch (error) {
             console.error('Error:', error);
         }
     };
-// console.log("table data :: ",tableData)
+
     return (
         <AppProvider>
             <Layout>

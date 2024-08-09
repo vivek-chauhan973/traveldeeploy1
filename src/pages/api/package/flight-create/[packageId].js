@@ -1,12 +1,8 @@
 import FlightBookingSchema from "@/models/package/FlightBooking";
-// import FlightBooking from "@/models/flightBooking";
-// import dbConnect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req, res) {
     const { packageId } = req.query;
-    // await dbConnect();
-// console.log('pakage id1111111111111111111111111',packageId)
     if (!packageId) {
         return res.status(400).json({ message: 'Package ID is required' });
     }
@@ -35,7 +31,6 @@ async function createOrUpdateFlightBookings(req, res, packageId) {
             { flights ,flightNo:flightNo,selectedImage:selectedImg},
             { upsert: true, new: true }
         );
-        // console.log("booking222222222222 !!!!!!!!!!!!!!!!!!!!!!!!!!!!",booking.flights)
         return res.status(201).json({ booking });
     } catch (error) {
         console.error('Error handling API request:', error);
@@ -53,7 +48,6 @@ async function getFlightBookings(req, res, packageId) {
 
         return res.status(200).json({ booking });
     } catch (error) {
-        // console.log("booking !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         console.error('Error handling API request:', error);
         return res.status(500).json({ message: error.message });
     }
