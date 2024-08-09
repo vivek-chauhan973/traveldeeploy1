@@ -6,8 +6,8 @@ mongoose
 
 const packageSchema = new Schema({
     priority:{
-        type:String,
-        required:true
+        type: Number,
+        required: true,
     },
     name: {
       type: String,
