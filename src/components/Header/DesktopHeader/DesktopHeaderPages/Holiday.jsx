@@ -13,7 +13,7 @@ import {
 
 const Holiday = () => {
   return (
-    <div className="flex w-[700px] ml-60 h-auto bg-gray-100 mt-4 justify-around rounded-sm">
+    <div className="flex w-[700px] ml-60 h-auto bg-gray-100 mt-4 justify-around rounded-[15px]">
       <div>
         <h4 className=" mt-4  text-md font-bold leading-5 text-[#29499A] flex items-center gap-2 ">
           <span>

@@ -1,8 +1,9 @@
 import Addguest from "@/components/addguest";
 import "../../../app/globals.css";
-import { FaRegEdit } from "react-icons/fa";
 import CustomiseTour from "../CustomiseTour";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 
 const ItineraryPricingCard = () => {
   const {
@@ -29,7 +30,7 @@ const ItineraryPricingCard = () => {
                 setCloseBtn={setCloseBtn}
                 addPackage={addPackage}
               >
-                <FaRegEdit className="cursor-pointer" />
+                <FontAwesomeIcon icon={faPenToSquare} className='font1 cursor-pointer' />
               </Addguest>
             </div>
           </div>

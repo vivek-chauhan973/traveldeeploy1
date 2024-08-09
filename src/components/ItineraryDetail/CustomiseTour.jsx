@@ -1,13 +1,13 @@
 // import React from 'react'
-import { FaArrowRight } from "react-icons/fa6";
-import { BiSolidCustomize } from "react-icons/bi";
-import { RxCross2 } from "react-icons/rx";
-import { GiConfirmed } from "react-icons/gi";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark,faGear,faArrowCircleLeft,faArrowRight} from '@fortawesome/free-solid-svg-icons';
+
+
 
 const style = {
     position: 'absolute',
@@ -163,10 +163,13 @@ export default function CustomiseTour({ children }) {
                 {!openConfirmation ?
                     <Box sx={style}>
                         <div className="flex justify-end">
-                            <RxCross2 className=" cursor-pointer" size={20} onClick={handleClose} />
+                            <div onClick={handleClose} className=" cursor-pointer">
+                            <FontAwesomeIcon icon={faCircleXmark} className='font1' />
+                     
+                            </div>
                         </div>
                         <div className='flex justify-center gap-2 items-center pb-3'>
-                            <BiSolidCustomize size={28} />
+                        <FontAwesomeIcon icon={faGear} className='font1' />
                             <h3 className='text-md font-semibold'>Customise Tour</h3>
                         </div>
 
@@ -407,7 +410,7 @@ export default function CustomiseTour({ children }) {
                             <div>
                                 <div className=' w-36 flex items-center gap-2 justify-end bg-primary text-white py-2 px-4 m-auto rounded-full'>
                                     <button type="submit" className=''>Book Now</button>
-                                    <FaArrowRight />
+                                    <FontAwesomeIcon icon={faArrowRight} className='font1' />
                                 </div>
                             </div>
 
@@ -418,15 +421,18 @@ export default function CustomiseTour({ children }) {
                     :
                     <Box sx={style}>
                         <div className="w-full text-para">
-                            <FaArrowAltCircleLeft onClick={() => setConfirmation(!openConfirmation)} size={20} className=" cursor-pointer text-slate-500 hover:text-primary" />
+                            <div onClick={() => setConfirmation(!openConfirmation)} size={20} className=" cursor-pointer text-slate-500 hover:text-primary">
+                            <FontAwesomeIcon icon={faArrowCircleLeft} className='font1' />
+                            </div>
+                            {/* <FaArrowAltCircleLeft  /> */}
                             {bookingConfirmed ?
                                 <div className="flex justify-center gap-2 pb-5 items-center">
-                                    <GiConfirmed className="text-green-500" size={28} />
+                                   
                                     <p className="text-lg font-semibold text-green-500">Booking Confirmed</p>
                                 </div>
                                 :
                                 <div className="flex justify-center gap-2 pb-5 items-center">
-                                    <GiConfirmed size={28} />
+                                   
                                     <p className="text-lg font-semibold ">Booking Confirmation</p>
                                 </div>
 

@@ -2,7 +2,6 @@ import CalendarFunc from "@/components/Calender";
 import "../../../app/globals.css";
 import { useState } from "react";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
-import { MdCurrencyRupee } from "react-icons/md";
 import { AllDataRelatedCity, city } from "./DepartureSectionData";
 import DeparturePopup from "./DeparturePopup";
 
@@ -44,7 +43,7 @@ const [showPopup,setShowPopup]=useState(false);
                       <hr />
                       <p className="text-center text-black group-hover:text-white  text-xxs">{item.date}</p>
                       
-                      <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs"><MdCurrencyRupee/> <p>{item.price}</p></div>
+                      <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">₹ <p>{item.price}</p></div>
                     </div>
                   </div>)}
                 </div>

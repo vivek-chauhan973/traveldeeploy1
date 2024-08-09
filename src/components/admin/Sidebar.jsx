@@ -3,26 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import {
-  FunctionIcon,
-  HotelIcon,
-  PageIcon,
-  HomeIcon,
-  HeaderFooterIcon,
-  CarIcon,
-  BlogIcon,
-  SettingIcon,
-  WebsiteFunIcon,
-  CartIcon,
-  TravelGuideIcon,
-  LogoutIcon,
-  TagFillIcon,
-  PackageIcon,
-  
-} from "@/components/icons/index"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChartSimple,faSliders,faSort,faBook,faCar, faBlog,faHotel,faCartShopping,faFile,faGear,faRightFromBracket,faTag,faLayerGroup, faHome } from '@fortawesome/free-solid-svg-icons';
 
 const IoIosArrowDown = dynamic(() => import('react-icons/io').then(mod => mod.IoIosArrowDown));
-
 const Sidebar = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(null);
@@ -31,12 +16,12 @@ const Sidebar = () => {
   const sidebarTabs = useMemo(() => [
     {
       label: "Dashboard",
-      icon: FunctionIcon,
+      icon: () => <FontAwesomeIcon icon={faChartSimple  } />,
       href: "/admin"
     },
     {
       label: "Website Function",
-      icon: WebsiteFunIcon,
+      icon: () => <FontAwesomeIcon icon={   faSliders} />,
       subMenu: [
         { label: "Country-state-city", href: "/admin/website-function/country-state-city" },
         { label: "Website Schema", href: "/admin/website-function/website-schema" },
@@ -46,7 +31,8 @@ const Sidebar = () => {
     },
     {
       label: "Home Page",
-      icon: HomeIcon,
+      icon: () => <FontAwesomeIcon icon={faHome} />,
+     
       subMenu: [
         { label: "Banner", href: "#" },
         { label: "Other Management", href: "#" }
@@ -54,12 +40,12 @@ const Sidebar = () => {
     },
     {
       label: "Header / Footer",
-      icon: HeaderFooterIcon,
+      icon: () => <FontAwesomeIcon icon={faSort} />,
       href: "/admin/header-footer"
     },
     {
       label: "Package",
-      icon: PackageIcon,
+      icon: () => <FontAwesomeIcon icon={faLayerGroup} />,
       subMenu: [
         { label: "Package Master", href: "/admin/package/category" },
         { label: "Add Itinerary", href: "/admin/package/itinerary" },
@@ -70,7 +56,7 @@ const Sidebar = () => {
     },
     {
       label: "Car Rental",
-      icon: CarIcon,
+      icon: () => <FontAwesomeIcon icon={faCar} />,
       subMenu: [
         { label: "Create", href: "/admin/car-rental/create" },
         { label: "Package Master", href: "/admin/car-rental" },
@@ -81,7 +67,7 @@ const Sidebar = () => {
     },
     {
       label: "Hotels",
-      icon: HotelIcon,
+      icon: () => <FontAwesomeIcon icon={faHotel} />,
       subMenu: [
         { label: "Hotel Master", href: "#" },
         { label: "Packages", href: "/admin/hotel/packages-list" },
@@ -90,7 +76,7 @@ const Sidebar = () => {
     },
     {
       label: "Blog",
-      icon: BlogIcon,
+      icon: () => <FontAwesomeIcon icon={faBlog} />,
       subMenu: [
         { label: "Blog Master", href: "/admin/blog/category" },
         { label: "All Post", href: "/admin/blog/all-post" },
@@ -100,7 +86,7 @@ const Sidebar = () => {
     },
     {
       label: "Manage Order",
-      icon: CartIcon,
+      icon: () => <FontAwesomeIcon icon={faCartShopping} />,
       subMenu: [
         { label: "Package Order", href: "/admin/manage-order/package" },
         { label: "Hotel Order", href: "/admin/manage-order/hotel" },
@@ -109,27 +95,27 @@ const Sidebar = () => {
     },
     {
       label: "Pages ",
-      icon: PageIcon,
+      icon: () => <FontAwesomeIcon icon={faFile} />,
       href: "/admin/page-create"
     },
     {
       label: "Setting",
-      icon: SettingIcon,
+      icon: () => <FontAwesomeIcon icon={faGear} />,
       href: "/admin/setting-site"
     },
     {
       label: "Travel Guide",
-      icon: TravelGuideIcon,
+      icon: () => <FontAwesomeIcon icon={faBook} />,
       href: "#"
     },
     {
       label: "Deals Page",
-      icon: TagFillIcon,
+      icon: () => <FontAwesomeIcon icon={faTag} />,
       href: "#"
     },
     {
       label: "Logout",
-      icon: LogoutIcon,
+      icon: () => <FontAwesomeIcon icon={faRightFromBracket} />,
       href: "#"
     }
   ], []);

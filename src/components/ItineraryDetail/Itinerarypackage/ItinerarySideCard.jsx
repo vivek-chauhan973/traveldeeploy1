@@ -1,5 +1,8 @@
 import "../../../app/globals.css";
 import Image from "next/image";
+
+
+
  const ItinerarySideCard=()=>{
     return(
     <>

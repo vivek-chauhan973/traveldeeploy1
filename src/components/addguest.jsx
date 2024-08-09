@@ -1,22 +1,22 @@
 import { ChangeEvent, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import Image from "next/image";
-import { IoMan } from "react-icons/io5";
-import { FaChild } from "react-icons/fa";
-import { MdChildFriendly } from "react-icons/md";
-import { IoIosClose } from "react-icons/io";
-import { FaCircleMinus, FaCirclePlus } from "react-icons/fa6";
 import { useAppContext } from "./admin/context/Package/AddGuest";
-import { MdOutlineAirlineSeatReclineExtra } from "react-icons/md";
+
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChild, faCircleMinus, faPerson, faBaby, faCirclePlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+
 
 const Addguest = ({
-    children,
-    guestPrice,
-    inputData,
-    setInputData,
-    setCloseBtn,
-    addPackage
-  }) => {
+  children,
+  guestPrice,
+  inputData,
+  setInputData,
+  setCloseBtn,
+  addPackage
+}) => {
   const date = new Date();
   const { showAddguest } = useAppContext() ?? { showAddguest: false };
 
@@ -285,11 +285,11 @@ const Addguest = ({
     setIsAC(prevIsAC => !prevIsAC);
   };
 
-// ==================================Changes========================================================
+  // ==================================Changes========================================================
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
-      {addPackage?.prices?.addguest==="addGuest"&&<Dialog
+      {addPackage?.prices?.addguest === "addGuest" && <Dialog
         className="h-full my-auto px-0 z-[99999]"
         open={open}
         aria-labelledby="alert-dialog-title"
@@ -301,25 +301,27 @@ const Addguest = ({
               <div className="sticky top-0 shadow-md z-[5]">
                 <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
                   <p className=" capitalize text-md font-semibold">
-                    add guest & Choose from{}
+                    add guest & Choose from{ }
                   </p>
                   <div>
                     {/* <p className="text-lg font-medium"> ₹ {guestPrice}</p>
                     <p className="text-xxs">per person on twin sharing</p> */}
                   </div>
                 </div>
-                <IoIosClose
-                  className=" absolute top-0 right-0 cursor-pointer hover:scale-105"
+
+                <div className=" absolute top-3 right-3 cursor-pointer hover:scale-105"
                   onClick={handleClose}
-                  size={28}
-                />
+                  size={28}>
+                <FontAwesomeIcon icon={faCircleXmark} className='font1 cursor-pointer' />
+                </div>
+             
                 <hr />
               </div>
               <div className="overflow-y-auto md:px-12 px-2">
                 <div className="flex items-center gap-10 mt-5 md:w-72 w-64 justify-between">
                   <label htmlFor="Adultsdropdown" className="my-2">
                     <div className="flex gap-3 items-center">
-                      <IoMan />
+                      <FontAwesomeIcon icon={faPerson} className='font1 cursor-pointer' />
                       <div>
                         <p className="text-para">
                           Adults
@@ -353,7 +355,8 @@ const Addguest = ({
                   <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
                     <label htmlFor="Childdropdown" className="my-2">
                       <div className="flex gap-3 items-center">
-                        <FaChild />
+
+                        <FontAwesomeIcon icon={faChild} className='font1 cursor-pointer' />
                         <div>
                           <p className="text-para">
                             Child
@@ -370,11 +373,10 @@ const Addguest = ({
                         name="child"
                         value={inputData?.child}
                         id="Childdropdown"
-                        className={`border w-full py-1 rounded-md ${
-                          inputData?.child === 0 &&
+                        className={`border w-full py-1 rounded-md ${inputData?.child === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
-                        }`}
+                          }`}
                         onChange={handleChange}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
@@ -420,7 +422,7 @@ const Addguest = ({
                   <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
                     <label htmlFor="Childdropdown" className="my-2">
                       <div className="flex gap-3 items-center">
-                        <FaChild />
+                        <FontAwesomeIcon icon={faBaby} className='font1 cursor-pointer' />
                         <div>
                           <p className="text-para">
                             Infant
@@ -437,11 +439,10 @@ const Addguest = ({
                         name="infant"
                         value={inputData?.infant}
                         id="Infantdropdown"
-                        className={`border w-full py-1 rounded-md ${
-                          inputData?.infant === 0 &&
+                        className={`border w-full py-1 rounded-md ${inputData?.infant === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
-                        }`}
+                          }`}
                         onChange={handleChange1}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
@@ -496,22 +497,26 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1 ">
-                        <FaCircleMinus
+                        <div
                           onClick={() => handleDecrement("singleRoom")}
                           size={18}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                        >
+                          <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
+                        </div>
+
                         <p
                           className="text-para w-3 mr-1 text-center"
                           onChange={(e) => handleChange}
                         >
                           {countSingleRoom}
                         </p>
-                        <FaCirclePlus
-                          onClick={() => handleIncrement("singleRoom")}
+                        <div onClick={() => handleIncrement("singleRoom")}
                           size={19}
-                          className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                          className="cursor-pointer text-navyblack hover:text-slate-700">
+                          <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
+                        </div>
+
                       </div>
                     </div>
                     <hr className="my-2" />
@@ -522,22 +527,19 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1">
-                        <FaCircleMinus
-                          size={18}
-                          onClick={() => handleDecrement("twinRoom")}
-                          className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                        <div onClick={() => handleDecrement("twinRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700">
+                          <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
+                        </div>
                         <p
                           onChange={(e) => handleChange}
                           className="text-para w-3 mr-1 text-center"
                         >
                           {countTwinRoom}
                         </p>
-                        <FaCirclePlus
-                          size={19}
-                          onClick={() => handleIncrement("twinRoom")}
-                          className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                        <div onClick={() => handleIncrement("twinRoom")} className="cursor-pointer text-navyblack hover:text-slate-700">
+                          <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
+                        </div>
                       </div>
                     </div>
                     <hr className="my-2" />
@@ -548,22 +550,22 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1">
-                        <FaCircleMinus
-                          size={18}
-                          onClick={() => handleDecrement("tripleRoom")}
-                          className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                        <div onClick={() => handleDecrement("tripleRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700">
+                        <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
+                        </div>
+                     
                         <p
                           onChange={(e) => handleChange}
                           className="text-para w-3 mr-1 text-center"
                         >
                           {countTripleRoom}
                         </p>
-                        <FaCirclePlus
-                          size={19}
-                          onClick={() => handleIncrement("tripleRoom")}
-                          className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                        <div onClick={() => handleIncrement("tripleRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700">
+                        <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
+                        </div>
+                    
                       </div>
                     </div>
                     <hr className="my-2" />
@@ -574,22 +576,22 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1">
-                        <FaCircleMinus
-                          size={18}
-                          onClick={() => handleDecrement("quardRoom")}
-                          className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                        <div   onClick={() => handleDecrement("quardRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700">
+                        <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
+                        </div>
+                     
                         <p
                           onChange={(e) => handleChange}
                           className="text-para w-3 mr-1 text-center"
                         >
                           {countQuardRoom}
                         </p>
-                        <FaCirclePlus
-                          size={19}
-                          onClick={() => handleIncrement("quardRoom")}
-                          className="cursor-pointer text-navyblack hover:text-slate-700"
-                        />
+                        <div   onClick={() => handleIncrement("quardRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700">
+                        <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
+                        </div>
+                    
                       </div>
                     </div>
                   </div>
@@ -616,7 +618,6 @@ const Addguest = ({
                     <div className="items-center flex flex-col md:block">
                       <p className="font-semibold">Sedan{" "}</p>
                       <div className="flex itmes-center justify-center">
-                        <MdOutlineAirlineSeatReclineExtra />
                         <p className="text-para">6</p>
                       </div>
                     </div>
@@ -626,7 +627,7 @@ const Addguest = ({
                       </button>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
@@ -655,10 +656,10 @@ const Addguest = ({
                     Rooms
                   </p>
                 </div>
-                <div className="text-sm flex gap-2 md:gap-4"> 
+                <div className="text-sm flex gap-2 md:gap-4">
                   <p className="font-semibold">Sedan</p>
                   <div className="flex itmes-center justify-center">
-                    <MdOutlineAirlineSeatReclineExtra />
+
                     <p className="font-semibold">6</p>
                   </div>
                 </div>
@@ -673,7 +674,7 @@ const Addguest = ({
           </div>
         </form>
       </Dialog>}
-     
+
     </div>
   );
 };

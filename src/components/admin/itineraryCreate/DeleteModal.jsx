@@ -72,7 +72,7 @@ const DeleteModal = ({Deleted_id ,isOpen, onClose, onDelete }) => {
     <>
     <div className=''>
     <div>
-      <Button className='hidden' onClick={handleClick}>Open Snackbar</Button>
+    
       <Snackbar
         open={open}
         autoHideDuration={6000}

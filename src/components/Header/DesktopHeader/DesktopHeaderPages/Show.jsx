@@ -5,10 +5,10 @@ const Show = () => {
   // data1.map(item=>console.log(item.state));
   console.log(stateData)
   return (
-    <div className=" flex w-[1000px] ml-[340px] h-full bg-gray-100  mt-3" >
-      <div className="mt-2 text-sm  font-bold w-1/4 gap-x-6 bg-white ">
+    <div className=" flex w-[1000px] ml-[340px] h-full bg-gray-100  mt-3 rounded-[15px]" >
+      <div className="mt-2 text-sm  font-bold w-1/4 rounded-[15px] gap-x-6 bg-white ">
         <div className="cursor-pointer grid gap-4 grid-cols-1 p-3 ">
-          {stateData.map((item, i) => <h4 key={i} className=' font-medium text-[15px]  px-5 hover:px-5 hover:bg-gray-100  hover:p-2 hover:rounded-sm'
+          {stateData.map((item, i) => <h4 key={i} className=' font-medium text-[15px] rounded-[15px] px-5 hover:px-5 hover:bg-gray-100  hover:p-2 hover:rounded-sm'
             onMouseEnter={() => setChange(i)}
           >
             {item}

@@ -13,6 +13,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Gst from "@/components/admin/dashboard/Gst";
 
 
 
@@ -249,6 +250,7 @@ export default function Category () {
         <>
         <AppProvider>
             <Layout>
+            <Gst/>
                 {/* <SmartTabel/> */}
                 {/* <DynamicTable/> */}
                 <div>
@@ -275,53 +277,6 @@ export default function Category () {
                                 
                             </form>
                             {/* data is here show */}
-                            {/* <hr className='my-3 border border-slate-500' /> */}
-{/*                            
-                            <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
-                                <ul>
-                                    {badgesListData?.map((item, index) => (
-                                        <li key={item._id} className="even:bg-slate-50">
-                                            <div className='flex justify-between  px-1'>
-                                                 <p className='capitalize truncate hover:text-clip flex gap-2 leading-8 text-[14px]'>
-                                                    <span>{index + 1} </span>
-                                                    {editBadgeId === item._id ? (
-                                                        <input
-                                                             className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
-                                                            defaultValue={item.badge}
-                                                            onChange={(e) => setEditBadgeValue(e.target.value)}
-                                                        />
-                                                    ) : item.badge}
-                                                </p>
-                                                <div className='flex gap-2 basis-1/3'>
-                                                    {editBadgeId === item._id ? (
-                                                        <span className="flex gap-2 px-2">
-                                                            {editBadgeValue && <IoIosSave
-                                                                size={24}
-                                                                className='mt-1 hover:text-red-500 cursor-pointer'
-                                                                onClick={() => saveEditBadge(item._id)}
-                                                            />}
-                                                            <MdCancel
-                                                                size={24}
-                                                               
-                                                                className='mt-1 hover:text-red-500 cursor-pointer'
-                                                                onClick={() => toggleEditBadge(item._id)}
-                                                            />
-                                                        </span>
-                                                    ) : (
-                                                        <FaEdit onClick={() => toggleEditBadge(item._id)} size={20} className='mt-1 hover:text-red-500 cursor-pointer' />
-                                                    )}
-                                                    
-                                                   <MdDeleteForever onClick={() => handleDeleteBadge(item._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
-                                                </div>
-                                                <ToastContainer/>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                            </div>  */}
-
-
 
 
                             {/* trial code */}
@@ -428,9 +383,7 @@ export default function Category () {
 
                                                     <MdDeleteForever size={24} className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => handleDeleteCategory(item._id)} />
                                                 </div>
-                                                {/* <div className='flex gap-2'>
-                                                    <FaEdit size={20} className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => handleEditCategory(item._id)} />
-                                                </div> */}
+                                               
                                             </div>
                                         </div>
                                     ))}

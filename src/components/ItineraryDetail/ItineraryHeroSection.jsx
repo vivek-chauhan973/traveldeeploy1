@@ -1,5 +1,4 @@
 import "../../app/globals.css";
-import { MdOutlineWhatsapp } from "react-icons/md";
 import { Link as ScrollLink } from "react-scroll";
 import Addguest from "@/components/addguest";
 import { useEffect, useState } from "react";
@@ -8,6 +7,10 @@ import Slider from "react-slick";
 import { useAppContext } from "../admin/context/Package/AddGuest";
 import FixedDeparturePopup from "./Departure&Booking/FixedDeparturePopup";
 import Image from 'next/image';
+
+
+
+
 const ItineraryHeroSection = ({
   addPackage,
   guestPrice,
@@ -53,9 +56,9 @@ const ItineraryHeroSection = ({
   };
 
   // Inner shadow Main image
-// const boxShadowStyle = {
-//   background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
-// };
+  // const boxShadowStyle = {
+  //   background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+  // };
 
   // const mobileBoxShadowStyle = {
   //   boxShadow: 'inset 0px -50px 20px 5px rgba(0, 0, 0, 0.5)'
@@ -78,7 +81,7 @@ const ItineraryHeroSection = ({
                   />
                   <div className="container-wrapper">
                     <h1
-                      
+
                       className="box-Shadow-Style-Package gap-3 items-center flex  left-0 z-10 w-full absolute py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
                       {addPackage?.name}
                       <span className=" bg-primary py-1 px-4 text-white rounded text-base font-bold  "> {addPackage?.faqs?.days.length - 1}N/ {addPackage?.faqs?.days.length}D</span>
@@ -88,7 +91,7 @@ const ItineraryHeroSection = ({
               ))}
             </div>
           </div>
-          
+
         </div>
         <div className="container-wrapper  grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="relative rounded-md overflow-hidden">
@@ -102,9 +105,9 @@ const ItineraryHeroSection = ({
 
             <div className="box-Shadow-Style-Package hidden xl:flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-4xl pl-3 font-bold italic  bottom-0 ">
               <h1 className="flex items-center gap-2 mr-2"
-                >
+              >
                 {addPackage?.name}
-                <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">{addPackage?.faqs?.days.length-1}N/ {addPackage?.faqs?.days.length}D</span>
+                <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">{addPackage?.faqs?.days.length - 1}N/ {addPackage?.faqs?.days.length}D</span>
               </h1>
             </div>
 
@@ -139,7 +142,7 @@ const ItineraryHeroSection = ({
                 <h2 className=" text-lg   md:text-xl font-semibold capitalize ">
                   {addPackage?.name}
                 </h2>
-            
+
               </div>
               <div className="stick top-1">
                 <div className="flex flex-wrap gap-2 text-xxs font-semibold text-white">
@@ -170,7 +173,12 @@ const ItineraryHeroSection = ({
                   </div>
                   <div className="flex gap-2 items-center ">
                     <div>
-                      <MdOutlineWhatsapp size={25} className="cursor-pointer" />
+                      <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+                        </svg>
+                      </span>
+
                     </div>
 
                     <div>

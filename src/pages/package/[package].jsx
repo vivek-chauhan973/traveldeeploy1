@@ -8,7 +8,7 @@ export async function getServerSideProps(context) {
   const packageUrl  = context.params.package;
   const newPackageUrl = packageUrl.replace("-tour-package", " ");
   
-  const res = await fetch(`http://192.168.1.10:3000/api/public/package/${newPackageUrl}`);
+  const res = await fetch(`http://localhost:3000/api/public/package/${newPackageUrl}`);
   const data = await res.json();
   return{
     props:{
