@@ -1,6 +1,7 @@
 import "../../app/globals.css";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Package1 from "@/components/ItineraryDetail/Departure&Booking/package1";
+import FAQSchema from "@/components/seo/FAQSchema";
 import Head from 'next/head';
 
 export async function getServerSideProps(context) {
@@ -8,7 +9,7 @@ export async function getServerSideProps(context) {
   const packageUrl  = context.params.package;
   const newPackageUrl = packageUrl.replace("-tour-package", " ");
   
-  const res = await fetch(`http://192.168.1.10:3000/api/public/package/${newPackageUrl}`);
+  const res = await fetch(`http://localhost:3000/api/public/package/${newPackageUrl}`);
   const data = await res.json();
   return{
     props:{
@@ -18,7 +19,9 @@ export async function getServerSideProps(context) {
 }
 
 export default function TourPackage({data}) {
+  
   console.log("SEO data all is here ",data)
+  console.log("SEO data all is here ",data?.seoData)
   return (
     <>
     <Head>
@@ -39,9 +42,9 @@ export default function TourPackage({data}) {
       <meta name="twitter:site" content="BizareXpedition"></meta>
       <meta name="keywords" content="HTML, CSS, JavaScript"/>
       <link rel="canonical" href={data?.seoData?.canonicalUrl} />
-      <meta name="robots" content={data?.seoData ?"index, follow":"noindex, nofollow"}/>
+      <meta name="robots" content={data?.seoData ? "index, follow":"noindex, nofollow"}/>
     </Head>
-
+    <FAQSchema faqs={data?.faqs?.days}/>
       <AppProvider>
         <Package1 />
       </AppProvider>
