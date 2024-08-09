@@ -118,7 +118,7 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                     body: JSON.stringify(pricingData)
                 })
                 const data = await res.json();
-                setActiveTab("Tab10");
+                setActiveTab("Tab11");
                 // console.log("pricing data show is here", pricingData)
 
             } catch (error) {

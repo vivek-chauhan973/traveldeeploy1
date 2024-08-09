@@ -123,8 +123,9 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary }) {
           information: itineraryText,
         }),
       });
-      if (response.ok) {
-        setActiveTab("Tab5");
+      if (res.ok) {
+        setActiveTab("Tab6");
+        console.log("Itenary Faq successfully saved");
       } else {
         console.error("Failed to save itinerary");
       }

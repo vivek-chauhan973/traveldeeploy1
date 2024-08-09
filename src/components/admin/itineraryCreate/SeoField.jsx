@@ -5,7 +5,8 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
     const [isSEOField, setIsSEOField] = useState({
         title: '',
         description: '',
-        canonicalUrl: ''
+        canonicalUrl: '',
+        keyword: '',
     });
 
     useEffect(() => {
@@ -17,7 +18,8 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
                     setIsSEOField(data || {
                         title: '',
                         description: '',
-                        canonicalUrl: ''
+                        canonicalUrl: '',
+                        keyword: ''
                     });
                 } else {
                     throw new Error('Failed to fetch SEO data');
@@ -34,7 +36,8 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
 
     const [validationErrors, setValidationErrors] = useState({
         title: '',
-        description: ''
+        description: '',
+        keyword: ''
     });
 
     const handleMetaTag = (e) => {
@@ -47,7 +50,7 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
 
     const handleSubmitSeoField = async (e) => {
         e.preventDefault();
-        const { title, description } = isSEOField;
+        const { title, description, keyword } = isSEOField;
 
         if (title.trim() === '') {
             setValidationErrors(prevErrors => ({
@@ -68,13 +71,14 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
                     },
                     body: JSON.stringify(isSEOField)
                 });
+                console.log(isSEOField);
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
 
                 const data = await response.json();
-                setActiveTab("Tab9");
+                setActiveTab("Tab10");
                 console.log('Form submitted successfully:', data);
             } catch (error) {
                 console.error('Error submitting form:', error);
@@ -136,6 +140,18 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
                             id="canonicalUrl"
                             name="canonicalUrl"
                             value={isSEOField.canonicalUrl}
+                            onChange={handleMetaTag}
+                            className="h-8 px-2 rounded border text-para"
+                            type="text"
+                        />
+                    </div>
+                    {/* keyword */}
+                    <div className="flex flex-col mb-2">
+                        <label className="text-para font-semibold" htmlFor="keyword">Keyword</label>
+                        <input
+                            id="keyword"
+                            name="keyword"
+                            value={isSEOField.keyword}
                             onChange={handleMetaTag}
                             className="h-8 px-2 rounded border text-para"
                             type="text"

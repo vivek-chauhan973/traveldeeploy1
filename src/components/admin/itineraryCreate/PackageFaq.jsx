@@ -72,7 +72,7 @@ export default function PackageFaq({ itinerary,setActiveTab }) {
         },
         body: JSON.stringify({ days: itineraryDayWiseDataArray }),
       });
-      setActiveTab("Tab11");
+      setActiveTab("Tab12");
       // console.log("currently data pass", itineraryDayWiseDataArray);
     } catch (error) {
       console.error(error);
@@ -85,9 +85,9 @@ export default function PackageFaq({ itinerary,setActiveTab }) {
         <div>
           <p className="text-base font-semibold">Itinerary Days Wise</p>
         </div>
-        <div className="border p-3 rounded">
+        <div className="border bg-white p-3 rounded">
           <div className="justify-between gap-5">
-            <div className="border p-4 rounded-md bg-white grow">
+            <div className="border p-4 rounded-md bg-white grow mb-2">
               <div>
                 <label htmlFor="title" className="pb-2 font-semibold text-para">
                   Title
@@ -162,12 +162,9 @@ export default function PackageFaq({ itinerary,setActiveTab }) {
                 </span>
               </div>
             </div>
-            <button
-                    onClick={ItineraryFeqPost}
-                    className=" bg-navyblack text-white rounded px-10 py-1 w-full"
-                  >
-                    save
-                  </button>
+            <button onClick={ItineraryFeqPost} className="w-full rounded py-2 bg-black text-white">
+                Save
+            </button>
           </div>
         </div>
       </div>
