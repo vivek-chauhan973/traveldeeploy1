@@ -17,7 +17,7 @@ const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
   loading: () => <p>Loading...</p>,
 });
 
-export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo }) {
+export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo, setHighlightDot }) {
   const [aboutValidate, setAboutValidate] = useState("");
   const [highlightValidate, setHighlightValidate] = useState("");
   const [aboutEditorHtml, setAboutEditorHtml] = useState("");
@@ -85,6 +85,9 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
         },
         body: JSON.stringify({ highlights: itinerary.highlights, about: aboutEditorHtml })
       });
+      if(res.ok){
+        setHighlightDot(true);
+      }
       const data = await res.json();
       setActiveTab("Tab5");
       console.log("Highlight & About data show is here", data);

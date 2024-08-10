@@ -15,7 +15,8 @@ const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   loading: () => <p>Loading...</p>,
 });
 
-export default function ItineraryText_Faq({ setActiveTab, itinerary }) {
+export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryDot }) {
+
   const [itineraryText, setItineraryText] = useState(
     itinerary?.dayWiseInformation || " "
   );
@@ -125,6 +126,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary }) {
       });
       if (res.ok) {
         setActiveTab("Tab6");
+        setItenaryDot(true);
         console.log("Itenary Faq successfully saved");
       } else {
         console.error("Failed to save itinerary");

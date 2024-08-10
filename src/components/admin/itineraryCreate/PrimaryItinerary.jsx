@@ -43,7 +43,7 @@ const fetchImages=async (itinerary)=>{
     return data;
 }
 
-export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo }) {
+export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo,setBasicDot }) {
     const router = useRouter();
     const {pricingManagement}=useAppContext();
     const [priority,setPriority]=useState("0");
@@ -56,6 +56,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [dayWiseFaq,setDayWiseFaq]=useState([]);
     const [selectedCountry,setSelesctedCountry]=useState('');
     const [selectedState,setSelesctedState]=useState('');
+    
 
     console.log("country : ",selectedCountry)
     console.log("State  : ",selectedState)
@@ -267,6 +268,10 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         selectedCountry 
                     })
                 });
+                
+                if (res.ok){
+                    setBasicDot(true)
+                }
                 
                 const data = await res.json();
                 setActiveTab("Tab2");

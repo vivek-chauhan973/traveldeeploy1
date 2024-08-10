@@ -4,7 +4,7 @@ import "../../app/globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const DynamicTable = ({setTableData,tableData,tableColumn,setTableColumn}) => {
+const DynamicTable = ({ setTableData,tableData,tableColumn,setTableColumn, setTableDot}) => {
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
     const [submitted, setSubmitted] = useState(false);

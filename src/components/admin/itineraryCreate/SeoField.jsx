@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 
-const SeoPage = ({ itinerary,setActiveTab }) => {
+const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
     const [isSEOField, setIsSEOField] = useState({
         title: '',
         description: '',
@@ -14,6 +14,8 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
             try {
                 const response = await fetch(`/api/package/package-seo/${itinerary?._id}`);
                 if (response.ok) {
+                    setActiveTab("Tab10")
+                    setSeoDot(true);
                     const data = await response.json();
                     setIsSEOField(data || {
                         title: '',
@@ -79,6 +81,7 @@ const SeoPage = ({ itinerary,setActiveTab }) => {
 
                 const data = await response.json();
                 setActiveTab("Tab10");
+                setSeoDot(true);
                 console.log('Form submitted successfully:', data);
             } catch (error) {
                 console.error('Error submitting form:', error);

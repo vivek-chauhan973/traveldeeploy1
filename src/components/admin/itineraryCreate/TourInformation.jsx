@@ -18,7 +18,7 @@ const useFetchData = (url, setState) => {
     }, [url]);
 };
 
-const TourInformation = ({ itinerary }) => {
+const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
     const [tourInclusion, setTourInclusion] = useState([]);
     const [tourExclusion, setTourExclusion] = useState([]);
     const [tourCancellation, setTourCancellation] = useState([]);
@@ -71,7 +71,9 @@ const TourInformation = ({ itinerary }) => {
                 });
 
                 if (response.ok) {
+                    setActiveTab("Tab9")
                     alert('Tour information saved successfully!');
+                    setTourDot(true);
                 } else {
                     alert('Failed to save tour information.');
                 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const GoogleMap = ({ setActiveTab, itinerary }) => {
+const GoogleMap = ({ setActiveTab, itinerary, setMapDot }) => {
     const [mapCode, setMapCode] = useState(null);
 
     const handleChange = (e) => {
@@ -25,7 +25,7 @@ const GoogleMap = ({ setActiveTab, itinerary }) => {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch(`/api/package/map/${itinerary?._id}`, {
+            const res = await fetch(`/api/package/map/${itinerary?._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,8 +33,9 @@ const GoogleMap = ({ setActiveTab, itinerary }) => {
                 body: JSON.stringify({ mapCode })
             });
 
-            if (response.ok) {
+            if (res.ok) {
                 setActiveTab("Tab7");
+                setMapDot(true);
                 console.log("Map code successfully embedded");
             } else {
                 console.error('Failed to embed map code');

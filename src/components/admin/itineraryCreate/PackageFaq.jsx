@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import DeletePop from "../iternaryPopup/DeletePop";
-export default function PackageFaq({ itinerary,setActiveTab }) {
+export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
   // console.log("itinerary : ",itinerary);
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(
     []

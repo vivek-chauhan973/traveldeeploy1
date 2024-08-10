@@ -1,12 +1,13 @@
 import React from 'react';
 import PriceHike from './PriceHike';
 
-const Calender = ({ itinerary, setActiveTab }) => {
+const Calender = ({ itinerary, setActiveTab, setCalenderDot}) => {
     
     
     const handleSubmitNext = (e) => {
         e.preventDefault();
         setActiveTab("Tab4");
+        setCalenderDot(true);
       };
 
       console.log("itinerary show is here data ---",itinerary)

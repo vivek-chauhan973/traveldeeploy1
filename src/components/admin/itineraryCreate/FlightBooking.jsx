@@ -6,7 +6,7 @@ import {
 
 import DeletePop from "../iternaryPopup/DeletePop";
 
-export default function FlightBookingForm({ itinerary, setActiveTab }) {
+export default function FlightBookingForm({ itinerary, setActiveTab, setFlightDot }) {
   const [deletePopup, setDeletePopu] = useState(false);
   const [flightBooking, setFlightBooking] = useState({
     start: { to: "", time: "" },
@@ -99,6 +99,7 @@ const [selectedImg,setSelectedImg]=useState("");
       });
       if (response.ok) {
         setActiveTab("Tab8");
+        setFlightDot(true);
         console.log("Flights saved successfully");
       } else {
         console.error("Failed to save flights");

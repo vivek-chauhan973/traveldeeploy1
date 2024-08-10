@@ -6,7 +6,7 @@ import { FaEdit } from 'react-icons/fa';
 import { IoIosSave } from 'react-icons/io';
 import { useAppContext } from '../context/Package/AddGuest';
 
-const FixedDeparture = ({ itinerary ,setActiveTab}) => {
+const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
     const [basePrice, setBasePrice] = useState(itinerary?.prices?.basePrice || 0);
     const [rate, setRate] = useState(itinerary?.prices?.perRate|| 0);
     const [inventory, setInventory] = useState(itinerary?.prices?.inventory || 0);
