@@ -215,7 +215,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setSelectedLocation(itinerary?.location);
         handleSelectCountry(itinerary?.associateCountry?._id);
         handleSelectState(itinerary?.associateState?._id);
-        setPriority(((itinerary?.priority)?.toString())||"0");
+        setPriority((itinerary?.priority)||"0");
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
@@ -224,7 +224,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setSelesctedState(itinerary?.state);
         if(!itinerary){
             setCityPopup(true);
-            // console.log("countryId",itinerary?.associateCountry?._id)
+            console.log("countryId",itinerary?.associateCountry?._id)
             const fetchState = async () => {
                 const fetchedStates = await fetchStates(itinerary?.associateCountry?._id);
                 setStates(fetchedStates);

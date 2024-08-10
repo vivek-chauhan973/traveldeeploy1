@@ -45,7 +45,7 @@ const DeleteModal = ({Deleted_id ,isOpen, onClose, onDelete }) => {
             },
             body: JSON.stringify({ packageList_id })
         });
-
+        // console.log("badge id show for delete" ,packageList_id)
         if (response.ok) {
             // const fetchedFaqHeading = await fetchFaqHeading();
             console.log("your package is now delete")
@@ -63,7 +63,7 @@ const DeleteModal = ({Deleted_id ,isOpen, onClose, onDelete }) => {
     setIsDeleting(true);
     onDelete();
     
-    
+    // console.log("delete id value show is here",Deleted_id)
     deletePackage(Deleted_id)
     setOpen(true);
   };

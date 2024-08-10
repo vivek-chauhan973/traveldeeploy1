@@ -40,7 +40,7 @@ const ItineraryHeroSection = ({
   useEffect(() => {
     setHemages(images?.data);
   }, [images, hemages]);
-
+  // console.log("images12324432423",hemages);
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       togglePopup(true);
@@ -64,8 +64,9 @@ const ItineraryHeroSection = ({
                 >
                   <img
                     className="w-full h-[50vh] object-cover"
-                    src={item.path || "/logo.png"}
+                    src={item.path}
                     alt={`img ${i + 1}`}
+                    onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} 
                   />
                   <div className="box-Shadow-Style-Package flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
                     <h1 className="flex items-center gap-2 mr-2">
@@ -85,10 +86,12 @@ const ItineraryHeroSection = ({
           <div className="relative rounded-md overflow-hidden">
             <img
               className=" h-[400px] object-cover w-full hidden xl:flex"
-              src={(hemages && hemages[0]?.path) || "/logo.png"}
+              src={(hemages && hemages[0]?.path) }
               alt="img 1"
               width={200}
               height={100}
+              onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} 
+
             />
 
             <div className="box-Shadow-Style-Package hidden xl:flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
@@ -105,21 +108,23 @@ const ItineraryHeroSection = ({
             <div className="">
               <img
                 className="rounded-md h-[192px] w-full object-cover"
-                src={(hemages && hemages?.[1]?.path) || "/logo.png"}
+                src={(hemages && hemages[1]?.path)}
                 alt="img 2"
                 width={200}
                 height={100}
+                onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} 
+
               />
             </div>
             <div className="">
               <img
                 className="rounded-md h-[192px] max-md-full w-full object-cover"
-                src={(hemages && hemages?.[2]?.path) || "/logo.png"}
-                // src={imageSrc}
+                src={(hemages && hemages?.[2]?.path) }
                 alt="img 3"
                 width={200}
                 height={100}
-                // onError={handleError}
+                onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} 
+
               />
             </div>
           </div>

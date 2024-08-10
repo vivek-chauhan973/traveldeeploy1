@@ -13,13 +13,14 @@ import FlightBookingSchema from "@/models/package/FlightBooking";
 
  const packagePublicPackageUrl= async (req, res) => {
     const { method, query } = req;
+    console.log("data in query show is here",query)
     if (method !== 'GET') {
         res.setHeader('Allow', ['GET']);
         return res.status(405).json({ message: `Method ${method} not allowed` });
     }
 
     try {
-        const packageDetails = await Package.findOne({ url: query.packageUrl }).populate({path:"location"}).populate({path:"country"}).populate({path:"state"}).lean();
+        const packageDetails = await Package.findOne({ url: query.packageUrl }).populate("category").exec();
         if (!packageDetails) {
             return res.status(404).json({ message: 'Package not found.' });
         }

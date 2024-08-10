@@ -97,9 +97,10 @@ useEffect(()=>{
     };
 
     const updatedTourDuration=(newValue)=>{
-    
+            console.log("new value is here : : ",newValue)
     }
 
+    // console.log("package data",packageCategory)
     return (
         <>
             <div>

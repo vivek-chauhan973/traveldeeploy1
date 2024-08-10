@@ -11,6 +11,7 @@ const packageInfoIds= async (req, res) => {
             Package.findByIdAndUpdate(packageId, { about }),
             PackageHighlight.findOneAndUpdate({ package: packageId }, { highlights }, { upsert: true, new: true })
         ]);
+        // console.log(highlights, about)
         return res.status(201).json({ packageHighlights, tourPackage });
     } catch (error) {
         console.error('Error handling API request:', error);

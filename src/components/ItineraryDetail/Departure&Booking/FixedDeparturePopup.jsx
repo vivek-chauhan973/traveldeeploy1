@@ -13,6 +13,7 @@ const FixedDeparturePopup = ({togglePopup,addPackage}) => {
       }, []);
       console.log("true",check)
      
+// console.log("refdffdsfsfsdf",ref.current);
 const handleSubmit=()=>{
   if(check){
     handleCleckOnDepartureFixed();
@@ -22,6 +23,7 @@ const handleSubmit=()=>{
     return alert("please checke marked of confirm box");
   }
   togglePopup(false);
+  // console.log("refdffdsfsfsdf212323234",ref.current);
 }
 
   return (

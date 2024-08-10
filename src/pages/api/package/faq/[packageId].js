@@ -5,17 +5,19 @@
  * @returns {Promise<void>} - Promise representing the asynchronous operation.
  */
 import PackageFaqWise from "@/models/package/PackageFaq";
-
+// /api/package/faq/[packageId].js
+// import PackageFaqWise from "@/models/package/PackageFaqWise";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageFaq= async (req, res) => {
   const { packageId } = req.query;
-
+  // await dbConnect();
 
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
   }
   if (req.method === "POST") {
     const { days } = req.body;
+    // console.log("days show is here", days);
 
     try {
       const faq = await PackageFaqWise.findOneAndUpdate(
@@ -24,7 +26,7 @@ import { NextApiRequest, NextApiResponse } from "next";
         { upsert: true, new: true }
       );
 
-
+      // console.log("Saved data:", faq);
 
       return res.status(201).json({ faq });
     } catch (error) {

@@ -12,6 +12,7 @@ const fetchPackages = async (locationId) => {
     { method: "GET" }
   );
   const data = await response.json();
+  console.log("api public tour=package", data)
   return data.packages;
 };
 const filteredData = async (id, cat, min, max,minDay,maxDay) => {
@@ -65,7 +66,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
     
   }, [filterData1, locationId, currentPage, filterApi, filterPackage])
 
-
+  // console.log("packages is here ::: ",filterData1)
   for(let item of packages){
     if(maxDay<item.days){
       setMaxDay(item.days)
@@ -73,7 +74,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
   }
 
 
-
+// console.log("filter api here ::::: ",filterApi)
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     const windowHeight = window.innerHeight;
@@ -85,7 +86,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
   const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
+  // console.log("current dat is slkjshkljfh sadfkj",currentItems)
   return (
     <div>
       {currentItems?.map((packageData, i) => (
@@ -95,8 +96,9 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
                width={500}
                height={500}
               className=" h-[220px] mx-5   md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
-              src={packageData?.uploads?.[0]?packageData?.uploads?.[0] :"/logo.png" }
+              src={packageData?.uploads?.[0] }
               alt="ui/ux review check"
+              onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} 
             />
           </div>
           <div className="mx-6 md:m-0 mt-2">

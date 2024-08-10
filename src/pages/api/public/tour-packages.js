@@ -35,7 +35,7 @@ export default  packagePublicTour
 //   try {
 //     const { locationId } = req.query;
 
-
+//     console.log('Location ID:', locationId);
 
 //     if (!locationId || Array.isArray(locationId)) {
 //       return res.status(400).json({ message: 'Valid Location ID is required' });
@@ -43,14 +43,14 @@ export default  packagePublicTour
 
 //     // Fetch cities based on locationId
 //     const cities = await City.find({ state: locationId }).exec();
-
+//     console.log('Fetched Cities:', cities);
 
 //     if (cities.length === 0) {
 //       return res.status(404).json({ message: 'No cities found for the given location ID' });
 //     }
 
 //     const cityIds = cities.map(city => city._id);
-
+//     console.log('City IDs:', cityIds);
 
 //     // Fetch top 5 packages sorted by price in descending order
 //     const packages = await Package.find({ location: { $in: cityIds } })
@@ -59,7 +59,7 @@ export default  packagePublicTour
 //       .limit(5) // Limit to 5 results
 //       .exec();
 
-
+//     console.log('Fetched Packages:', packages);
 
 //     return res.status(200).json({ packages, cities });
 //   } catch (error) {

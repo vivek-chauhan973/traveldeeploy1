@@ -20,7 +20,7 @@ const SearchHeaderWpr = () => {
 
 const handleApplyFilter = (filters) => {
   alert(`Filters applied`);
-  
+  console.log(filters);
   handleCloseModal();  // Close the modal when filters are applied
 };
     

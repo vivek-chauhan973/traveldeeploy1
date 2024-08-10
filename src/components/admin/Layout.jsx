@@ -84,7 +84,7 @@ const Layout = ({ children }) => {
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
-       
+        // console.log("togle side bar ")
         setToglePopup(!toglePopup);
     };
 

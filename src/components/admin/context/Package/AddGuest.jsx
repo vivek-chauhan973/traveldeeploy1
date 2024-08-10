@@ -56,7 +56,7 @@ export const AppProvider = ({ children }) => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(9900);
   const [duration,setDuration]=useState([]);
-
+  // console.log("duration",duration)
   const filterApi = {
     locationId,
     catagoryId,
@@ -88,6 +88,8 @@ export const AppProvider = ({ children }) => {
     }
   }, [inputData, addPackage]);
 
+  // console.log("fixed Depature date selected",fixedDepDate)
+  // console.log("fixed Depature City selected",fixedDepCity)
 
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
@@ -100,6 +102,7 @@ export const AppProvider = ({ children }) => {
     allDetail: inputData
   };
 
+  // console.log("finalDataOfBookingByUsingMethodAddGuest",finalDataOfBookingByUsingMethodAddGuest)
   const handleCleckOnDepartureFixed=()=>{
 
   const finalDataOfBookingByUsingMethodFixedDeparture={
@@ -114,7 +117,9 @@ export const AppProvider = ({ children }) => {
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-
+// console.log("fetch api 123221",filterApi)
+  // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",fixedDepartureData1)
+  // console.log("packages sfsjbfbfjbsfhjdf",addPackage)
   const contextFun = {
     closeBtn,
     setCloseBtn,

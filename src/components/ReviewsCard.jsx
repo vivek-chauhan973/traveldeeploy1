@@ -5,6 +5,9 @@ import { FaStar } from "react-icons/fa";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark} from '@fortawesome/free-solid-svg-icons';
 
+
+
+
 const Carousel = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -94,7 +97,7 @@ const Carousel = () => {
                             <hr />
                             <div className="flex justify-between px-4 py-2 text-para">
                                 <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
+                                <span>07 Sept</span>
                             </div>
                         </div>
                         {/* reviewsCard pop up here */}

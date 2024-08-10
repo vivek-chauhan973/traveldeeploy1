@@ -63,6 +63,7 @@ export default function Package1() {
     fetchImages().then((res) => setImages(res));
   }, [addPackage, fetchImages]);
 
+  // console.log("packages is very smart",addPacka/
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       setFixedDeparturePopupOpen(true);
