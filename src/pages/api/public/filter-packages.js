@@ -8,7 +8,8 @@ import mongoose from "mongoose";
 const packagePublicFilter = async (req, res) => {
     try {
         const { locationId, priceMin, priceMax, cityId, categoryId,minDay,maxDay } = req.query;
-  
+     console.log("max day 223232",maxDay)
+     console.log("min day 223232",minDay)
         // Validate ObjectIds
         const isValidObjectId = mongoose.Types.ObjectId.isValid;
         if (cityId && !isValidObjectId(cityId)) {

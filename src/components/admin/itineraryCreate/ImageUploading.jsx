@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from 'next/image';
 
-export default function ImageUploading({ itinerary }) {
+export default function ImageUploading({ itinerary , setImageDot }) {
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
   const [titles, setTitles] = useState([]);
@@ -16,6 +16,9 @@ export default function ImageUploading({ itinerary }) {
   const fetchImages = useCallback(async () => {
     try {
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`);
+      if (res.ok){
+        setImageDot(true);
+      }
       const data = await res.json();
       if (data.data.length > 0) {
         const images = data.data;

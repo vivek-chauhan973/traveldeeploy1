@@ -5,6 +5,9 @@ import { FaStar } from "react-icons/fa";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark} from '@fortawesome/free-solid-svg-icons';
 
+
+
+
 const Carousel = () => {
     const [isOpen, setIsOpen] = useState(false);
 

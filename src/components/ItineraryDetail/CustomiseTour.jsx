@@ -156,11 +156,12 @@ export default function CustomiseTour({ children }) {
             </div>
             <Modal
                 open={open}
+                
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
-            >  
-             {!openConfirmation ?
-                    <Box sx={style} >
+            >
+                {!openConfirmation ?
+                    <Box sx={style}>
                         <div className="flex justify-end">
                             <div onClick={handleClose} className=" cursor-pointer">
                             <FontAwesomeIcon icon={faCircleXmark} className='font1' />
@@ -173,7 +174,7 @@ export default function CustomiseTour({ children }) {
                         </div>
 
 
-                        <form onSubmit={handleSubmit} >
+                        <form onSubmit={handleSubmit}>
                             <div className=' border-l-4 border-red-400 pl-3 -ml-4'>
                                 <h3 className='font-semibold'>Choose Date</h3>
                             </div>
@@ -482,7 +483,6 @@ export default function CustomiseTour({ children }) {
                         </div>
                     </Box>
                 }
-               
             </Modal>
         </div >
     );

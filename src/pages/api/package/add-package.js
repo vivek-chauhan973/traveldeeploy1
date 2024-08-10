@@ -8,7 +8,6 @@ import { NextApiRequest, NextApiResponse } from "next";
         }
         const {priority, name, price, status, location, category,badges ,startcity,uploads,addguest,fixedfixeddepartureweightedprice, selectedState,
             selectedCountry} = req.body;
-            const priority1=parseInt(priority);
         const images=uploads?.data?.map(item=>item?.path)
         const startcity1=startcity.split(",");
         const missingFields = [];
@@ -21,9 +20,8 @@ import { NextApiRequest, NextApiResponse } from "next";
             return res.status(400).json({ message: `Missing required fields: ${missingFields.join(', ')}` });
         }
         const url = name.replace(/[^\w\s]/gi, '-').toLowerCase().replace(/\s+/g, '-');
-        const packageBasic = await Package.create({priority:priority1, name, price, status, url, location, category,badges,startcity:startcity1,uploads:images,addguest,fixedfixeddepartureweightedprice,country:selectedCountry,state:selectedState})
+        const packageBasic = await Package.create({priority, name, price, status, url, location, category,badges,startcity:startcity1,uploads:images,addguest,fixedfixeddepartureweightedprice,country:selectedCountry,state:selectedState})
         // console.log('Package created', packageBasic)
-        
         return res.status(201).json({ message: 'Package created', packageBasic });
     } catch (error) {
         console.error('Error handling API request:', error);

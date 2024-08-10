@@ -40,7 +40,7 @@ const ItineraryHeroSection = ({
   useEffect(() => {
     setHemages(images?.data);
   }, [images, hemages]);
-
+  // console.log("images12324432423",hemages);
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       togglePopup(true);

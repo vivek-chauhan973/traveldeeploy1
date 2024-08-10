@@ -3,12 +3,15 @@ import Package from "@/models/Package";
 
 
  const packagePublicSuggestedPackage= async (req, res) => {
+    // console.log("req parasmdkjnkdjnkerbfhesbfs ejhbfehjbsd     ehfdbhejbfe  ejhrhf",req.params)
     try {
         const { packageId} = req.query;
 
+        // console.log("req parasmdkjnkdjnkerbfhesbfs ejhbfehjbsd     ehfdbhejbfe  ejhrhf",req.params)
         // Fetch the current package details
         const currentPackage = await Package.findById(packageId).exec();
 
+        // console.log("current Package @##@!2131333142343255254252 ; ;",currentPackage);
 
         if (!currentPackage) {
             return res.status(404).json({ message: "Package not found" });
@@ -32,3 +35,5 @@ import Package from "@/models/Package";
     }
 }
 export default packagePublicSuggestedPackage
+// use this method 
+// GET http://localhost:3000/api/suggested-packages?packageId=668666631a7c8d116888209f

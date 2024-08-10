@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import DeletePop from "../iternaryPopup/DeletePop";
-export default function PackageFaq({ itinerary,setActiveTab }) {
-
+export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
+  // console.log("itinerary : ",itinerary);
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(
     []
   );
@@ -50,7 +50,9 @@ export default function PackageFaq({ itinerary,setActiveTab }) {
     setItineraryDayWise(itineraryDayWiseDataArray[index]);
   };
 
+  // written by code
 
+  // console.log("package id show is here ", itinerary?._id);
 
   const removeItem = (index) => {
     const updatedArray = itineraryDayWiseDataArray?.filter(
@@ -59,7 +61,7 @@ export default function PackageFaq({ itinerary,setActiveTab }) {
     setItineraryDayWiseDataArray(updatedArray);
   };
 
-
+  // console.log(itineraryDayWise);
 
   const ItineraryFeqPost = async () => {
     try {
@@ -71,7 +73,7 @@ export default function PackageFaq({ itinerary,setActiveTab }) {
         body: JSON.stringify({ days: itineraryDayWiseDataArray }),
       });
       setActiveTab("Tab12");
-    
+      // console.log("currently data pass", itineraryDayWiseDataArray);
     } catch (error) {
       console.error(error);
     }

@@ -63,7 +63,9 @@ const Picker = () => {
     const handleSearch = () => {
         if (validateForm()) {
             if (activeTab === 'Tab1') {
+                // console.log('Local Data:', localData);
             } else {
+                // console.log('Outstation Data:', outstationData);
             }
         }
     };

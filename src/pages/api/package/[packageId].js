@@ -21,11 +21,10 @@ import { NextApiRequest, NextApiResponse } from "next";
             case 'PUT':
                 const {priority, name, price, status, location,category,badges ,startcity,uploads, selectedState,
                     selectedCountry } = req.body;
-                    const priority1=parseInt(priority);
                 const startcity1=startcity.split(",");
                 const images=uploads?.data?.map(item=>item?.path)
                 // console.log("startcity 134346387453465347534",badges);
-                updatedPackage = await Package.findByIdAndUpdate(packageId, {priority:priority1, name, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState }, { new: true });
+                updatedPackage = await Package.findByIdAndUpdate(packageId, {priority, name, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState }, { new: true });
 
                 if (!updatedPackage) {
                     return res.status(404).json({ message: 'Package not found' });
@@ -33,7 +32,7 @@ import { NextApiRequest, NextApiResponse } from "next";
                 break;
 
             default:
-                updatedPackage = await Package.findById(packageId).populate('location').populate('state').populate('country');
+                updatedPackage = await Package.findById(packageId).populate('location');
                 const associateState = await State.findById(updatedPackage.location?.state);
                 const associateCountry = await Country.findById(associateState?.country);
                 const highlightDetails = await PackageHighlight.findOne({ package: updatedPackage._id }, 'highlights');

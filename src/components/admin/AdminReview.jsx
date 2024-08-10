@@ -10,7 +10,7 @@ const AdminReview = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-       
+        console.log("Form Data:", { title, author, summary, sdate, rating });
 
         // Reset form fields
         setTitle("");
@@ -23,14 +23,14 @@ const AdminReview = () => {
     // Handler for date input change
     const handleStartDateChange = (event) => {
         setSdate(event.target.value);
-     
+        console.log("Selected Date:", event.target.value);
     };
 
     // Handler for rating input change
     const handleRatingChange = (event) => {
         const value = parseInt(event.target.value);
         setRating(value);
-        
+        console.log(`Rating: ${value}`);
     };
 
     return (

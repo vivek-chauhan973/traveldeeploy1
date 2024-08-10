@@ -45,8 +45,10 @@ import Image from "next/image";
                 </div>
                 <div className="flex justify-end mt-3">
                     <div className="text-right">
+                        {/* <p className="text-[14px] leading-5 text-cyan-400 font-semibold">SUPER DEAL PRICE</p> */}
                         <p className="text-xs leading-4 text-green-600">Starts From <span className="text-lg text-black font-medium">₹
                                 3,50,000</span></p>
+                        {/* <p className="text-[10px] leading-5">per person on twin sharing</p> */}
                         <p className="text-para leading-7 font-medium underline text-blue">from ₹ 19,423/months
                         </p>
                     </div>
