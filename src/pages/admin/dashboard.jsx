@@ -16,6 +16,8 @@ import Chart1 from "@/components/admin/dashboard/charts/chart1";
 import List from "@/components/admin/dashboard/transaction/index";
 import BlogTable from "@/components/admin/dashboard/BlogTable";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+import RatingForm from "@/components/admin/dashboard/Rating";
+import ReviewForm from "@/components/Reviews";
 // import Gst from "@/components/admin/dashboard/Gst";
 
 export default function AdminDashboard() {
@@ -64,12 +66,10 @@ export default function AdminDashboard() {
                         <Chart1 />
                     </div>
                     <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
-                        <div className="w-72 m-auto">
-                           {/* <Gst /> */}
+                        <div className="w-full m-auto -4">
+                           <RatingForm />
                         </div>
-                        <div className="flex">
-                            <p className="m-auto font-semibold text-md">Income</p>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -92,6 +92,9 @@ export default function AdminDashboard() {
                             <BlogTable />
                         </div>
                     </div>
+                </div>
+                <div>
+                    <ReviewForm/>
                 </div>
 
             </div>

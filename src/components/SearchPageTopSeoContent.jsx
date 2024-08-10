@@ -40,6 +40,7 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
           alt=""
           width={100}
           height={100}
+          onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} 
         />
       </div>
       <div className="container-wrapper py-5">
@@ -47,10 +48,11 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
         <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
           <p dangerouslySetInnerHTML={{ __html: promoData?.description }} />
         </div>
-
         {show && (
           <>
-            <div className="table-container mt-4">
+
+          {priorityPackage && priorityPackage.length > 0 ? (
+            <div className="table-container w-full md:w-2/3 m-auto mt-4">
               <table className="w-full border-collapse border text-center text-para">
                 <thead>
                   <tr className="border-b bg-black text-white">
@@ -58,38 +60,48 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
                       Name
                     </th>
                     <th className="border-t border-l border-r font-light">
-                      Badges
+                      Day/Night
                     </th>
                     <th className="border-t border-l border-r font-light">
-                      Days
+                      Price
                     </th>
                     <th className="border-t border-l border-r border-b w-36 font-light">
-                      PageUrl
+                      Visit
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                  {priorityPackage?.map((item, index) => (
+                <tbody className="bg-white">
+                  {priorityPackage.map((item, index) => (
                     <tr key={index}>
                       <td className="border-t border-l border-r border-b">
                         {item.name}
                       </td>
                       <td className="border-t border-l border-r border-b">
-                        {item.badges}
-                      </td>
-                      <td className="border-t border-l border-r border-b">
                         {item.days}
                       </td>
+                      <td className="border-t border-l border-r border-b font-semibold">
+                        ₹{item?.price.toLocaleString()}
+                      </td>
                       <td className="border-t border-l border-r border-b">
-                        {item.pageUrl}
+                        <a
+                          href={"/package/" + item.pageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-800 hover:underline"
+                        >
+                          View Details
+                        </a>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+          ) : null}
           </>
+
         )}
+
 
         <div className="flex justify-end items-center mt-2">
           <div className="inline-flex items-center justify-center px-1.5  py-0.5 bg-navyblack rounded shadow-sm text-white cursor-pointer">
