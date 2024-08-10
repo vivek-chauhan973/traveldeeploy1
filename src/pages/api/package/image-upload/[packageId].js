@@ -57,7 +57,7 @@ const apiRoute = async (req, res) => {
         // Update or insert files into database
         await PackageImage.findOneAndUpdate(
           { packageId },
-          { $push: { uploads: { $each: files } } },
+          { $set: { uploads: { $each: files } } },
           { upsert: true, new: true }
         );
         const imagesArray=files?.map(item=>item.path)

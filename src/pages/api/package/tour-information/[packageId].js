@@ -1,3 +1,4 @@
+import Package from "@/models/Package";
 import TourInformation from "@/models/package/TourInformation";
 // import dbConnect from "@/utils/db.ts";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -12,6 +13,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
   if (req.method === "POST") {
     const { inclusion, exclusion, cancellation, paymentTerm, needToKnow } = req.body;
+    const tourinfo2={tourInclusion:inclusion?._id,tourExclusion:exclusion?._id,tourCancelationPolicy:cancellation?._id,tourNeedToKonow:needToKnow?._id,tourPayment:paymentTerm?._id};
 
     try {
       const tourInfo = await TourInformation.findOneAndUpdate(
@@ -19,10 +21,10 @@ import { NextApiRequest, NextApiResponse } from "next";
         { inclusion, exclusion, cancellation, paymentTerm, needToKnow },
         { upsert: true, new: true }
       );
-
+    const tourInfo1=await Package.findByIdAndUpdate({_id:packageId},{tourinfo:tourinfo2},{ upsert: true, new: true })
       // console.log("Saved tour information:", tourInfo);
 
-      return res.status(201).json({ tourInfo });
+      return res.status(201).json({ tourInfo ,tourInfo1});
     } catch (error) {
       console.error("Error handling API request:", error);
       return res.status(500).json({ message: error.message });

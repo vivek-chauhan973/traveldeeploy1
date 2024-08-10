@@ -10,7 +10,6 @@ import PackageMap from "@/models/package/PackageMap";
 import { NextApiRequest, NextApiResponse } from "next";
 import TourInformation from "@/models/package/TourInformation";
 import FlightBookingSchema from "@/models/package/FlightBooking";
-
  const packagePublicPackageUrl= async (req, res) => {
     const { method, query } = req;
     console.log("data in query show is here",query)
@@ -20,7 +19,10 @@ import FlightBookingSchema from "@/models/package/FlightBooking";
     }
 
     try {
-        const packageDetails = await Package.findOne({ url: query.packageUrl }).populate({path:"location"}).populate({path:"country"}).populate({path:"state"}).lean();
+        const packageDetails = await Package.findOne({ url: query.packageUrl }).populate({path:"location"}).populate({path:"country"}).populate({path:"state"}).populate('tourinfo.tourInclusion')
+        .populate('tourinfo.tourExclusion')
+        .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
+        .populate('tourinfo.tourNeedToKonow').lean();
         if (!packageDetails) {
             return res.status(404).json({ message: 'Package not found.' });
         }
@@ -43,9 +45,7 @@ import FlightBookingSchema from "@/models/package/FlightBooking";
         packageDetails._doc.faqs = faqs;
         packageDetails._doc.prices = priceDetails ||packageDepartures;
         packageDetails._doc.seoData = seoDataDetails;
-        // packageDetails._doc.departures = packageDepartures;
         packageDetails._doc.TourInformations = packageTourInformations;
-
         return res.status(200).json(packageDetails);
     } catch (error) {
         console.error('Error handling GET request:', error);

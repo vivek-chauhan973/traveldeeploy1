@@ -4,6 +4,7 @@ import Image from 'next/image';
 export default function ImageUploading({ itinerary }) {
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [previews1, setPreviews1] = useState([]);
   const [titles, setTitles] = useState([]);
   const [alts, setAlts] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -13,26 +14,37 @@ export default function ImageUploading({ itinerary }) {
   const [hasChanges, setHasChanges] = useState(false); 
 
   // Function to fetch existing images
+  // console.log("files lengths :: :: ",files.length)
   const fetchImages = useCallback(async () => {
     try {
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`);
       const data = await res.json();
       if (data.data.length > 0) {
         const images = data.data;
+        // console.log("data is here ::: ",images)
         setSelectedImageIds(images.map((image) => image._id));
         setTitles(images.map((image) => image.title));
         setAlts(images.map((image) => image.alt));
-        setPreviews(images.map((image) => image.path));
         setExistingImagesCount(images.length);
         setIsUpdating(true);
-        setHasFetchedImages(true);
+       
+       
       }
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   }, [itinerary]);
-
-  // Fetch existing images on component mount or when itinerary changes
+  useEffect(()=>{
+    setPreviews(itinerary?.uploads||[]); 
+  },[itinerary])
+  useEffect(()=>{
+    if(previews.length>=4){
+      setHasFetchedImages(true)
+   }
+  //  if(files.length>=4){
+  //   setHasFetchedImages(true)
+  //  }
+  },[previews])
   useEffect(() => {
     fetchImages();
   }, [itinerary, fetchImages]);
@@ -41,9 +53,13 @@ export default function ImageUploading({ itinerary }) {
   const handleChange = (e, index) => {
     const newFiles = [...files];
     newFiles[index] = e.target.files[0];
+
     setFiles(newFiles);
     const newPreviews = [...previews];
+    const newPreviews1 = [...previews1];
     newPreviews[index] = URL.createObjectURL(e.target.files[0]);
+    newPreviews1[index] = URL.createObjectURL(e.target.files[0]);
+    setPreviews1(newPreviews1);
     setPreviews(newPreviews);
     setHasChanges(true);
   };
@@ -64,10 +80,10 @@ export default function ImageUploading({ itinerary }) {
     setHasChanges(true);
   };
 
-  // Function to handle image upload or update
+
   const handleUpload = async () => {
     const hasFilesToUpload = files.filter((file) => file !== null).length > 0;
-    const totalFilesCount = files.length + existingImagesCount;
+    const totalFilesCount = files.length;
 
     if (isUpdating && !hasFilesToUpload && !hasChanges) {
       alert("No changes detected for update.");
@@ -78,7 +94,7 @@ export default function ImageUploading({ itinerary }) {
       alert("Please select at least 3 files to upload.");
       return;
     }
-
+  //  setPreviews(previews1);
     const formData = new FormData();
     files.forEach((file, index) => {
       if (file) {
@@ -92,15 +108,15 @@ export default function ImageUploading({ itinerary }) {
     });
 
     try {
+      
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`, {
         method: "POST",
         body: formData,
       });
-
+    
       if (res.ok) {
         alert(`Files ${isUpdating ? "updated" : "uploaded"} successfully`);
         setFiles([]);
-        setPreviews([]);
         setTitles([]);
         setAlts([]);
         setIsUpdating(false);
@@ -118,6 +134,7 @@ export default function ImageUploading({ itinerary }) {
 
   // Function to add new image section
   const addNewImageSection = () => {
+    // console.log("hi bro kaise ho !!!!!!!!!!!!!!!!!!!!!!! ")
     if (files.length < 4) {
       setFiles([...files, null]);
       setPreviews([...previews, null]);
