@@ -11,7 +11,7 @@ const Custom404 = () => {
                     <div class="absolute">
                         <div class="">
                             <h1 class="my-2 text-gray-800 font-bold text-2xl">
-                                Looks like you've found the
+                                Looks like you ve found the
                                 doorway to the great nothing
                             </h1>
                             <p class="my-2 text-gray-800">Sorry about that! Please visit our hompage to get where you need to go.</p>

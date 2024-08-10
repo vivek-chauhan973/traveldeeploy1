@@ -96,7 +96,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
                width={500}
                height={500}
               className=" h-[220px] mx-5   md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
-              src={packageData?.uploads?.[0] }
+              src={packageData?.uploads?.[0] || '/logo.png' }
               alt="ui/ux review check"
               onError={(e) => {
                         e.target.onerror = null; // Prevent infinite loop if fallback also fails
