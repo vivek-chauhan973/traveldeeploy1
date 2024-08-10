@@ -16,6 +16,8 @@ import Chart1 from "@/components/admin/dashboard/charts/chart1";
 import List from "@/components/admin/dashboard/transaction/index";
 import BlogTable from "@/components/admin/dashboard/BlogTable";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+import RatingForm from "@/components/admin/dashboard/Rating";
+import ReviewForm from "@/components/Reviews";
 // import Gst from "@/components/admin/dashboard/Gst";
 
 export default function AdminDashboard() {
@@ -64,42 +66,10 @@ export default function AdminDashboard() {
                         <Chart1 />
                     </div>
                     <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
-                        <div className="w-72 m-auto">
-                           {/* <Gst /> */}
+                        <div className="w-full m-auto -4">
+                           <RatingForm />
                         </div>
-                        <div className="flex">
-                            <p className="m-auto font-semibold text-md">Income</p>
-                        </div>
-                        {/* ------------- */}
-                        <div className="p-3"> 
-                            <div className="p-4 rounded mb-2 overflow-scroll">
-                                <div className=" sm:flex items-center md:mb-5 mb-2">
-                                    <label htmlFor="ratingValue" className=" font-semibold w-36 text-para">Rating Value :</label>
-                                    <input type="text" id="ratingValue" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
-                                        placeholder="Enter Rating Value " />
-                                </div>
-                                <div className=" sm:flex items-center md:mb-5 mb-2">
-                                    <label htmlFor="ratingCount" className=" font-semibold w-36 text-para">Rating Count :</label>
-                                    <input type="text" id="ratingCount" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
-                                        placeholder="Enter Rating Count " />
-                                </div>
-                                <div className=" sm:flex items-center md:mb-4 mb-2">
-                                    <label htmlFor="startDate" className=" font-semibold w-36 text-para">Start Date :</label>
-                                    <input type="date" id="startDate" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
-                                        placeholder="Enter Start Date"/>
-                                </div>
-                                <div className=" sm:flex items-center md:mb-5 mb-2">
-                                    <label htmlFor="endDate" className=" font-semibold w-36 text-para">Price Valid Until/End Date :</label>
-                                    <input type="Date" id="endDate" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
-                                        placeholder="Enter End Date "/>
-                                </div>
-                                
-                                <button className="w-full rounded py-2 bg-black text-white">
-                                    Save
-                                </button>      
-                            </div>
-                        </div>
-                        {/* ---------- */}
+                        
                     </div>
                 </div>
 
@@ -122,6 +92,9 @@ export default function AdminDashboard() {
                             <BlogTable />
                         </div>
                     </div>
+                </div>
+                <div>
+                    <ReviewForm/>
                 </div>
 
             </div>
