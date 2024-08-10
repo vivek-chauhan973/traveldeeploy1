@@ -72,7 +72,10 @@ export default function CreatePackage() {
             getItinerary();
         }
     }, [edit, getItinerary]);
-
+useEffect(()=>{
+    setTableData(itinerary?.tableData||[]);
+    setTableColumn(itinerary?.tableColumn||[]);
+},[itinerary])
     const [select, setSelect] = useState("");
     const [selectedOption, setSelectedOption] = useState("");
 
