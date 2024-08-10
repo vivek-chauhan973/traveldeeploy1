@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { LiaRupeeSignSolid } from 'react-icons/lia';
 import { useAppContext } from '../context/Package/AddGuest';
 
-const PricingManagement = ({ itinerary,setActiveTab }) => {
+const PricingManagement = ({ itinerary, setActiveTab }) => {
     // console.log("Pricing data show is here itinerary", itinerary?._id)
-  const {pricingManagement}= useAppContext()
+    const { pricingManagement } = useAppContext()
     const [pricingData, setPricingData] = useState({
-        addguest:pricingManagement,
+        addguest: pricingManagement,
         singleRoom: '',
         twinSharingRoom: '',
         tripleSharingRoom: '',
@@ -15,14 +15,14 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
         childUnderFive: '',
         childOverFive: '',
         packageId: "",
-        misc:"",
-        markup:"",
-        diskHike:"",
-        gst:""
+        misc: "",
+        markup: "",
+        diskHike: "",
+        gst: ""
     });
 
     const [itineraryPriceApi, setItineraryPriceApi] = useState({
-        addguest:pricingManagement,
+        addguest: pricingManagement,
         singleRoom: '',
         twinSharingRoom: '',
         tripleSharingRoom: '',
@@ -31,17 +31,17 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
         childUnderFive: '',
         childOverFive: '',
         packageId: "",
-        misc:"",
-        markup:"",
-        diskHike:"",
-        gst:""
+        misc: "",
+        markup: "",
+        diskHike: "",
+        gst: ""
     });
 
     useEffect(() => {
         if (itinerary && itinerary.prices) {
-            const { addguest,singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childUnderFive, childOverFive,misc,diskHike,markup,gst } = itinerary.prices;
+            const { addguest, singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childUnderFive, childOverFive, misc, diskHike, markup, gst } = itinerary.prices;
             setPricingData({
-                addguest:pricingManagement||addguest,
+                addguest: pricingManagement || addguest,
                 singleRoom: singleRoom || '',
                 twinSharingRoom: twinSharingRoom || '',
                 tripleSharingRoom: tripleSharingRoom || '',
@@ -49,26 +49,22 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                 infantSharingRoom: infantSharingRoom || '',
                 childUnderFive: childUnderFive || '',
                 childOverFive: childOverFive || '',
-                gst:gst||"",
-                markup:markup||"",
-                misc:misc||"",
-                diskHike:diskHike||"",
+                gst: gst || "",
+                markup: markup || "",
+                misc: misc || "",
+                diskHike: diskHike || "",
                 packageId: itinerary._id || ''
             });
         }
-    }, [itinerary,pricingManagement]);
-    // console.log("itineray data show is here pricing management", itineraryPriceApi);
+    }, [itinerary, pricingManagement]);
 
 
     const [errors, setErrors] = useState({});
 
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setPricingData({ ...pricingData, [name]: value });
-    // };
+
     const handleChange = (event) => {
         const { name, value } = event.target;
-        
+
         if (value >= 0 || value === '') {
             setPricingData({ ...pricingData, [name]: value });
         } else {
@@ -87,29 +83,17 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
             if (pricingData[key] === '') {
                 errors[key] = 'This field is required';
                 hasError = true;
-                // console.log("key data ", key);
-                // console.log("pricing  data ", pricingData);
+
 
             }
         });
 
-        // Validate numeric fields
-        // const numericFields = ['singleRoom', 'twinSharingRoom', 'tripleSharingRoom', 'quadSharingRoom', 'infantSharingRoom', 'childUnderFive', 'childOverFive'];
-        // numericFields.forEach((field) => {
-        //     if (isNaN(pricingData[field])) {
-        //         errors[field] = 'Please enter a valid number';
-        //         hasError = true;
-        //     }
-        // });
 
-        // If there are errors, set them in state and prevent form submission
         if (hasError) {
             setErrors(errors);
         } else {
-            // If no errors, proceed with form submission
-            // console.log("your data is now on console", pricingData);
+
             try {
-                // console.log("pricing data of addguest is here",pricingData)
                 const res = await fetch(`/api/package/price/addguests/${itinerary?._id}`, {
                     method: 'POST',
                     headers: {
@@ -119,7 +103,6 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                 })
                 const data = await res.json();
                 setActiveTab("Tab11");
-                // console.log("pricing data show is here", pricingData)
 
             } catch (error) {
                 console.log(error);
@@ -128,18 +111,48 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
             setErrors({});
         }
     };
-    // console.log("pricing data is here :: :: :: ",pricingData)
+
+
+
+    // for gst data integration 
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/package-setting/gst');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxx", data)
+
+
+
+
+
+
 
     return (
         <>
-        
+
             <div className="p-2 rounded-md">
                 <div className="border bg-white rounded-md p-4">
                     <form action="" onSubmit={handleSubmit}>
                         <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
                             <label className="font-semibold w-40" htmlFor="">
                                 Single Room :
-                                
+
                             </label>
                             <div className="flex gap-1 items-center">
                                 <LiaRupeeSignSolid size={18} />
@@ -244,7 +257,7 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                             </div>
                             {errors.childUnderFive && <p className="text-red-500 text-sm ml-2">{errors.childUnderFive}</p>}
                         </div>
-                       
+
                         {/* Repeat similar structure for other fields */}
                         <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
                             <label className="font-semibold w-40" htmlFor="">
@@ -285,7 +298,7 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                                 Markup(%) :
                             </label>
                             <div className="flex gap-1 items-center">
-                               <p className='mx-1'>%</p>
+                                <p className='mx-1'>%</p>
                                 <input
                                     onChange={handleChange}
                                     className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
@@ -319,13 +332,24 @@ const PricingManagement = ({ itinerary,setActiveTab }) => {
                                 GST:
                             </label>
                             <div className="flex gap-1 items-center">
-                            <select name='gst' className='mx-4 w-52' value={pricingData.gst}
+                                {/* <select name='gst' className='mx-4 w-52' value={pricingData.gst}
                             onChange={handleChange}>
                                   <option value="">Select GST</option>
                                   <option value="5">5%</option>
                                   <option value="15">15%</option>
                                   <option value="0">All inclusive</option>
-                            </select>
+                            </select> */}
+
+                                <select
+                                    name='gst' className='mx-4 w-52' value={pricingData.gst} onChange={handleChange}>
+                                    <option value="">Select GST</option>
+                                    {data?.data?.map((item, i) => (
+                                        <option key={i} value={item.gstRate}>
+                                            {item.gstRate}
+                                        </option>
+                                    ))}
+                                </select>
+
                             </div>
                             {errors.infantSharingRoom && <p className="text-red-500 text-sm ml-2">{errors.infantSharingRoom}</p>}
                         </div>

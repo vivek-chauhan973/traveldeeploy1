@@ -1,9 +1,32 @@
+
 import mongoose, { Schema } from "mongoose";
 
 mongoose
   .connect(process.env.MONGODB_URI)
   .then((res) => console.log("db connected"));
 
+  const tourInfoSchema=new mongoose.Schema({
+    tourInclusion:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Inclusion"
+    },
+    tourExclusion:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Exclusion"
+    },
+    tourCancelationPolicy:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Cancellation"
+    },
+    tourNeedToKonow:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"NeedToKnow"
+    },
+    tourPayment:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"PaymentTerm"
+    },
+  })
 const packageSchema = new Schema({
     priority:{
         type: Number,
@@ -35,6 +58,12 @@ const packageSchema = new Schema({
         required: true,
       },
     ],
+    priceHike:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"PriceHike"
+    },
+
+    tourinfo:tourInfoSchema,
     badges: {
       type: [String],
       default: [],
@@ -64,6 +93,8 @@ const packageSchema = new Schema({
       ref: "Country",
       required: true,
     },
+    tableData:[{}],
+    tableColumn:[String],
     state:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "State",
