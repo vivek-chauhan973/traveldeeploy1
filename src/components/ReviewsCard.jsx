@@ -1,24 +1,40 @@
 import "../app/globals.css";
 import React, { useState, useRef, useEffect } from 'react';
-import { IoIosArrowForward } from "react-icons/io";
-import { FaStar } from "react-icons/fa";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark} from '@fortawesome/free-solid-svg-icons';
-
-
-
+import { faStar, faCircleXmark ,faAngleRight,faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Carousel = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [data, setData] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null); // New state for the selected item
 
-    const handleReadMore = () => {
-      setIsOpen(true);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/review');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                console.error('Error:', error.message);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const handleReadMore = (item) => {
+        setSelectedItem(item); // Set the selected item data
+        setIsOpen(true); // Open the popup
     };
-  
+
     const handleClose = () => {
-      setIsOpen(false);
+        setIsOpen(false);
+        setSelectedItem(null); // Clear the selected item data when closing
     };
-    // for fixed card pop up
+
+    // For fixed card popup
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -67,192 +83,84 @@ const Carousel = () => {
     return (
         <div className="bg-cyan-950">
             <div className="carousel-container relative container-wrapper ">
-
                 <div className="text-center pt-10 pb-5">
                     <h3 className="text-xl leading-8 font-medium text-white">Bizare Expenditure tour reviews</h3>
                     <p className="text-xs leading-8 font-semibold text-white"> What are you waiting for? Chalo Bag Bharo Nikal Pado!</p>
                 </div>
                 <div className="carousel gap-5 pb-10" ref={carouselRef}>
-                    {/* start is here code  */}  
-                        <div className="  bg-white min-w-80 rounded-lg ">
+                    {data.map((item, index) => (
+                        <div key={index} className="bg-white min-w-80 rounded-lg mb-4">
                             <div className="flex justify-between items-center px-4 mt-4">
-                                <div className="p-1  flex item-center gap-1 ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
+                                <div className="p-1 flex items-center gap-1">
+                                    <FontAwesomeIcon icon={faStar} className='font1 text-primary' />
+                                    <span className="text-sm">{item.rating}</span>
                                 </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
+                                <p className="text-sm text-gray-400 uppercase">Recommended</p>
                             </div>
 
-                            <div className=" px-3 py-1 ">
-                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
-                                <p className="mt-1   text-sm line-clamp-3">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                </p>
-                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
+                            <div className="px-3 py-1">
+                                <h1 className="text-lg font-semibold">{item.title}</h1>
+                                <p className="mt-1 text-para line-clamp-3">{item.information}</p>
+                                <button onClick={() => handleReadMore(item)} className="text-blue-500 text-para">read more..</button>
                             </div>
                             <hr />
                             <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>07 Sept</span>
+                                <span className="font-bold text-gray-700">{item.name}</span>
+                                <span>{new Date(item.selectDate).toLocaleDateString('en-US', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric'
+                                })}</span>
                             </div>
                         </div>
-                        {/* reviewsCard pop up here */}
-                        {isOpen && (
-                            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                                <div className="relative bg-white rounded-lg w-11/12 md:w-1/2 lg:w-1/3">                 
-                                    <div className='pr-3 pt-1 flex justify-end items-center '>
-                                        <button className='cursor-pointer py-0.5 px-2' onClick={handleClose}>
+                    ))}
 
-
-                                        <FontAwesomeIcon icon={faCircleXmark}  className='font'  />
-                                        </button>
+                    {isOpen && selectedItem && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                            <div className="relative bg-white rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
+                                <div className='pr-3 pt-1 flex justify-end items-center '>
+                                    <button className='cursor-pointer py-0.5 px-2' onClick={handleClose}>
+                                        <FontAwesomeIcon icon={faCircleXmark} className='font' />
+                                    </button>
+                                </div>
+                                <div className="bg-white min-w-80 rounded-lg">
+                                    <div className="flex justify-between items-center px-4">
+                                        <div className="p-1 border flex item-center gap-1 rounded-md border-black">
+                                            <FontAwesomeIcon icon={faStar} className='font1 text-primary' />
+                                            <span className="text-sm">{selectedItem.rating}</span>
+                                        </div>
+                                        <p className="text-sm text-gray-400 uppercase">Recommended</p>
                                     </div>
-                                    <div className="  bg-white min-w-80 rounded-lg">
-                                        <div className="flex justify-between items-center px-4">
-                                            <div className="p-1 border flex item-center gap-1 rounded-md border-black  ">
-                                                <FaStar size={18} className=" text-primary" />
-                                                <span className="text-sm">5</span>
-                                            </div>
 
-                                            <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                                        </div>
-
-                                        <div className=" px-4 py-3">
-                                            <h1 className=" text-lg font-semibold">Lorem Ipsum is simply dummy..</h1>
-                                            <p className="mt-3 text-sm">
-                                                If you are looking for comment and review cards suitable for
-                                                different projects and concepts, then look at our cards pack!
-                                                If you are looking for comment and review cards suitable for
-                                                different projects and concepts, then look at our cards pack!
-                                            </p>
-                                        </div>
-                                        <hr />
-                                        <div className="flex justify-between px-4 py-2 text-para">
-                                            <span className="font-bold text-gray-700">Someone Name</span>
-                                            <span>06 Sept</span>
-                                        </div>
+                                    <div className="px-4 py-3">
+                                        <h1 className="text-lg font-semibold">{selectedItem.title}</h1>
+                                        <p className="mt-3 text-sm">{selectedItem.information}</p>
+                                    </div>
+                                    <hr />
+                                    <div className="flex justify-between px-4 py-2 text-para">
+                                        <span className="font-bold text-gray-700">{selectedItem.name}</span>
+                                        <span>{new Date(selectedItem.selectDate).toLocaleDateString('en-US', {
+                                            day: '2-digit',
+                                            month: 'short',
+                                            year: 'numeric'
+                                        })}</span>
                                     </div>
                                 </div>
                             </div>
-                        )}
-                        {/* here start second code */}
-                        <div className="  bg-white min-w-80 rounded-lg ">
-                            <div className="flex justify-between items-center px-4 mt-4">
-                                <div className="p-1  flex item-center gap-1 ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" px-3 py-1 ">
-                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
-                                <p className="mt-1   text-sm line-clamp-3">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                </p>
-                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
                         </div>
-                        <div className="  bg-white min-w-80 rounded-lg ">
-                            <div className="flex justify-between items-center px-4 mt-4">
-                                <div className="p-1  flex item-center gap-1 ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" px-3 py-1 ">
-                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
-                                <p className="mt-1   text-sm line-clamp-3">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                </p>
-                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
-                        </div>
-                        <div className="  bg-white min-w-80 rounded-lg ">
-                            <div className="flex justify-between items-center px-4 mt-4">
-                                <div className="p-1  flex item-center gap-1 ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" px-3 py-1 ">
-                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
-                                <p className="mt-1   text-sm line-clamp-3">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                </p>
-                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
-                        </div>
-                        <div className="  bg-white min-w-80 rounded-lg ">
-                            <div className="flex justify-between items-center px-4 mt-4">
-                                <div className="p-1  flex item-center gap-1 ">
-                                    <FaStar size={18} className=" text-primary" />
-                                    <span className="text-sm">5</span>
-                                </div>
-
-                                <p className=" text-sm text-gray-400 uppercase">Recommended</p>
-                            </div>
-
-                            <div className=" px-3 py-1 ">
-                                <h1 className=" text-lg font-semibold">Dream big and dare to fail </h1>
-                                <p className="mt-1   text-sm line-clamp-3">
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                    If you are looking for comment and review cards suitable for
-                                    different projects and concepts, then look at our cards pack!
-                                </p>
-                                <button onClick={handleReadMore} className="text-blue-500 text-para">read more..</button>
-                            </div>
-                            <hr />
-                            <div className="flex justify-between px-4 py-2 text-para">
-                                <span className="font-bold text-gray-700">Someone Name</span>
-                                <span>06 Sept</span>
-                            </div>
-                        </div>
-                        {/* reviewsCard pop up end */}
-
-                        
+                    )}
                 </div>
-                <div className=" bg-gradient-to-l from-white opacity-95 w-10 h-[60%] mt-36 -right-5  md:hidden absolute z-30  top-0"></div>
-                <div className=" hidden md:block absolute top-3/4 -translate-y-[60px] justify-between w-full">
-                    <div className=' justify-between flex pl-2 '>
-                        <button onClick={scrollPrev} className="rounded-full   bg-black/50 hover:bg-black p-2 text-white rotate-180"><IoIosArrowForward size={20} /></button>
-                        <button onClick={scrollNext} className="rounded-full  bg-black/50 hover:bg-black p-2 text-white"><IoIosArrowForward size={20} /></button>
+                <div className="bg-gradient-to-l from-white opacity-95 w-10 h-[60%] mt-20 -right-5 md:hidden absolute z-30 top-0"></div>
+                <div className="hidden md:block absolute top-[70%] -translate-y-[60px] justify-between w-full">
+                    <div className='justify-between flex pl-2'>
+                        <button onClick={scrollPrev} className="rounded-full h-10 w-10 bg-black/50 hover:bg-black p-3 text-white ">
+                     
+                        <FontAwesomeIcon icon={faAngleLeft} className='font ' />
+                        
+                        </button>
+                        <button onClick={scrollNext} className="rounded-full bg-black/50 h-10  w-10 hover:bg-black p-3 text-white">
+                        <FontAwesomeIcon icon={faAngleRight} className='font' />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -261,3 +169,18 @@ const Carousel = () => {
 }
 
 export default Carousel;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

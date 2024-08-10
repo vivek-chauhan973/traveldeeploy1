@@ -50,7 +50,7 @@ const TourInformation = ({ itinerary }) => {
     useFetchData('/api/package/tour-info/cancellation/get', (data) => setTourCancellation(data.CancellationGroupData));
     useFetchData('/api/package/tour-info/payment-term/get', (data) => setPaymentTerm(data.PaymentTermGroupData));
     useFetchData('/api/package/tour-info/need-to-know/get', (data) => setNeedToKnow(data.NeedToKnowGroupData));
-
+// console.log("itinary of tour inclusion :: ",itinerary)
     const handleSave = async () => {
         if (selectedInclusion && selectedExclusion && selectedCancellation && selectedPaymentTerm && selectedNeedToKnow) {
             const payload = {
@@ -60,7 +60,7 @@ const TourInformation = ({ itinerary }) => {
                 paymentTerm: selectedPaymentTerm,
                 needToKnow: selectedNeedToKnow,
             };
-
+// console.log("payload :::  ",payload);
             try {
                 const response = await fetch('/api/package/tour-information/' + (itinerary ? itinerary.id : 'add-package'), {
                     method: 'POST',
