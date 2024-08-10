@@ -58,6 +58,11 @@ const packageSchema = new Schema({
         required: true,
       },
     ],
+    priceHike:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"PriceHike"
+    },
+
     tourinfo:tourInfoSchema,
     badges: {
       type: [String],

@@ -1,33 +1,39 @@
 // pages/api/applyPriceHike.js
+import Package from '@/models/Package';
 import PriceHike from '@/models/package/PriceHike';
 
-export default async function handler(req, res) {
+const handler=async(req, res)=> {
+  const {packageId}=req.query;
+  const { startDate,endDate,priceIncrease,isActive,svg} = req.body;
+     const price=parseInt(priceIncrease);
   if (req.method === 'POST') {
-    const { startDate, endDate, priceIncrease, isActive, packageId } = req.body;
-
+   
     if (!packageId) {
       return res.status(400).json({ error: 'Package ID is required' });
     }
 
     try {
       // Save or update the price hike in the database
-      const existingHike = await PriceHike.findOne({ packageId, startDate, endDate });
+      const response=await PriceHike.create({packageId, startDate,endDate,priceIncrease:price,isActive,svg})
+      if(response){
 
-      if (existingHike) {
-        // Update existing price hike
-        existingHike.priceIncrease = priceIncrease;
-        existingHike.isActive = isActive;
-        await existingHike.save();
-      } else {
-        // Create new price hike
-        await PriceHike.create({ packageId, startDate, endDate, priceIncrease, isActive });
+        const packageData=await Package.findByIdAndUpdate({_id:packageId},{$set:{priceHike:response?._id}},{upsert:true,new:true})
+
+        if(!packageData){
+          return res.status(404).json({ error: 'Package not found' });
+        }
+        return res.status(200).json({ error: 'data created and updated successfully',packageData,response });
+         
       }
-
-      res.status(200).json({ success: true });
+      else{
+        return res.status(301).json({ error: 'somthing went wrong' });
+      }
+      
     } catch (error) {
-      res.status(500).json({ error: 'Failed to apply price hike' });
+     return res.status(500).json({ error: 'Failed to apply price hike' });
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+export default handler;
