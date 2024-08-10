@@ -57,8 +57,8 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [selectedCountry,setSelesctedCountry]=useState('');
     const [selectedState,setSelesctedState]=useState('');
 
-    console.log("country : ",selectedCountry)
-    console.log("State  : ",selectedState)
+    // console.log("country : ",selectedCountry)
+    // console.log("State  : ",selectedState)
     useEffect(() => {
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();

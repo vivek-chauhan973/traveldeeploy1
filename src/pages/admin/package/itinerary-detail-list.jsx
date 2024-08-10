@@ -114,8 +114,8 @@ const YourComponent = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentItems.map((itinerary) => (
-                                <tr className="border-b" key={itinerary.id}>
+                            {currentItems?.map((itinerary) => (
+                                <tr className="border-b" key={itinerary?._id}>
                                     <td className="py-2 pl-4 w-52">
                                         <Image
                                             className="w-40 h-16 object-cover rounded"
@@ -128,10 +128,10 @@ const YourComponent = () => {
                                     <td className="py-4 pl-4 border-x">Rs {itinerary.price}</td>
                                     <td className="py-4 pl-4 border-x">{itinerary.status}</td>
                                     <td className="justify-center flex gap-2 items-center my-auto py-3">
-                                        <Link href={"./itinerary/" + itinerary.id + "?type=edit"}>
+                                        <Link href={"./itinerary/" + itinerary?._id + "?type=edit"}>
                                             <FaEdit size={20} className="mt-1 hover:text-red-500 cursor-pointer" />
                                         </Link>
-                                        <MdDeleteForever onClick={() => deleteItem(itinerary.id)} size={24} className="mt-1 hover:text-red-500 cursor-pointer" />
+                                        <MdDeleteForever onClick={() => deleteItem(itinerary?._id)} size={24} className="mt-1 hover:text-red-500 cursor-pointer" />
                                     </td>
                                 </tr>
                             ))}
