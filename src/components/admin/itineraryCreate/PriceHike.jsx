@@ -1,106 +1,89 @@
-import { useState } from 'react';
 
-// Utility function to generate dates
-const generateDates = () => {
-  const dates = [];
-  const startDate = new Date();
-  const endDate = new Date(startDate);
-  endDate.setMonth(startDate.getMonth() + 2);
+import { useState, useEffect } from 'react';
 
-  let currentDate = startDate;
+const insertDates = async () => {
+  const today = new Date();
+  const futureDate = new Date();
+  futureDate.setMonth(today.getMonth() + 2);
 
-  while (currentDate <= endDate) {
-    dates.push(new Date(currentDate));
+  let currentDate = today;
+
+  while (currentDate <= futureDate) {
+    try {
+      await fetch('/api/package/price-hike', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ date: currentDate }),
+      });
+    } catch (error) {
+      console.error('Error inserting date:', error);
+    }
     currentDate.setDate(currentDate.getDate() + 1);
   }
-
-  return dates;
 };
 
-const PriceHike = ({ packageId }) => {
-  const [selectedRange, setSelectedRange] = useState({ start: null, end: null });
-  const [priceIncrease, setPriceIncrease] = useState(0);
-  const [isActive, setIsActive] = useState(true); // Toggle state
-  const [dates, setDates] = useState(generateDates());
+const UpdatePrices = () => {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [price, setPrice] = useState('');
 
-  const handleDateChange = (e, type) => {
-    const date = new Date(e.target.value);
-    setSelectedRange((prev) => ({ ...prev, [type]: date }));
-  };
+  useEffect(() => {
+    insertDates();
+  }, []);
 
-  const handleToggleChange = () => {
-    setIsActive((prev) => !prev);
-  };
-
-  const handleApplyPriceHike = async () => {
-    if (!selectedRange.start || !selectedRange.end) {
-      alert('Please select a date range.');
-      return;
-    }
-
-    const response = await fetch('/api/package/price-hike', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        startDate: selectedRange.start.toISOString(),
-        endDate: selectedRange.end.toISOString(),
-        priceIncrease,
-        isActive,
-        packageId // Pass the package ID
-      })
-    });
-
-    if (response.ok) {
-      alert('Price hike applied successfully.');
-    } else {
-      alert('Failed to apply price hike.');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await fetch('/api/package/price-hike', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          startDate,
+          endDate,
+          price,
+        }),
+      });
+    } catch (error) {
+      console.error('Error updating prices:', error);
     }
   };
 
   return (
-    <div>
-      <h2>Admin Panel</h2>
-      <div>
-        <label>
-          Start Date:
-          <input
-            type="date"
-            onChange={(e) => handleDateChange(e, 'start')}
-          />
-        </label>
-        <label>
-          End Date:
-          <input
-            type="date"
-            onChange={(e) => handleDateChange(e, 'end')}
-          />
-        </label>
-        <label>
-          Price Increase:
-          <input
-            type="number"
-            onChange={(e) => setPriceIncrease(Number(e.target.value))}
-          />
-        </label>
-        <label>
-          Enable Price Hike:
-          <input
-            type="checkbox"
-            checked={isActive}
-            onChange={handleToggleChange}
-          />
-        </label>
-        <button onClick={handleApplyPriceHike}>Apply Price Hike</button>
-      </div>
-      <ul>
-        {dates.map((date, index) => (
-          <li key={index}>{date.toDateString()}</li>
-        ))}
-      </ul>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Start Date:
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        End Date:
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        Price:
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          required
+        />
+      </label>
+      <button type="submit">Update Prices</button>
+    </form>
   );
 };
 
-export default PriceHike;
-
-
+export default UpdatePrices;

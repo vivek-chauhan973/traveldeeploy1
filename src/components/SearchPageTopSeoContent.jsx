@@ -73,16 +73,16 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
                 <tbody className="bg-white">
                   {priorityPackage.map((item, index) => (
                     <tr key={index}>
-                      <td className="border-t border-l border-r border-b">
-                        {item.name}
+                      <td className="border-t border-l border-r border-b capitalize">
+                        {item.name} aman kharwar
                       </td>
-                      <td className="border-t border-l border-r border-b">
+                      <td className="border-t border-l border-r border-b capitalize">
                         {item.days}
                       </td>
-                      <td className="border-t border-l border-r border-b font-semibold">
+                      <td className="border-t border-l border-r border-b font-semibold capitalize">
                         ₹{item?.price.toLocaleString()}
                       </td>
-                      <td className="border-t border-l border-r border-b">
+                      <td className="border-t border-l border-r border-b capitalize">
                         <a
                           href={"/package/" + item.pageUrl}
                           target="_blank"

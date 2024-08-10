@@ -188,7 +188,9 @@ const Sidebar = () => {
                   <tab.icon size={20} /> {/* Use the icon component correctly */}
                   <p className='cursor-pointer'>{tab.label}</p>
                 </div>
-                <IoIosArrowDown className={`transition-transform duration-200 ${activeTab === tab.label ? 'rotate-180' : ''}`} />
+                <div>
+                  <IoIosArrowDown className={`transition-transform duration-200 ${activeTab === tab.label ? 'rotate-180' : ''}`} />
+                </div>
               </div>
             ) : (
               <Link href={tab.href}>
