@@ -24,7 +24,7 @@ const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureC
 const FixedDeparturePopup = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/FixedDeparturePopup"));
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope,faPrint} from '@fortawesome/free-solid-svg-icons';
-  
+
 
 
 
