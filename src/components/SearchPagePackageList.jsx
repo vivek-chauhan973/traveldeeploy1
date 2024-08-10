@@ -98,8 +98,13 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
               className=" h-[220px] mx-5   md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
               src={packageData?.uploads?.[0]?packageData?.uploads?.[0] :"/logo.png" }
               alt="ui/ux review check"
+              onError={(e) => {
+                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                      }}
             />
           </div>
+          
           <div className="mx-6 md:m-0 mt-2">
             <div className="">
               <div className="flex items-center justify-between mb-1">

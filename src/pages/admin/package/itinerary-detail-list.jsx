@@ -50,6 +50,7 @@ const YourComponent = () => {
         const newPackages=itineraries.filter(item=>item._id!==id);
         setItineraries(newPackages)
         setIsModalOpen(true);
+        
         setDeletedId(id);
     };
 
@@ -122,6 +123,10 @@ const YourComponent = () => {
                                             src={itinerary?.uploads?.[0]?itinerary?.uploads?.[0]:"https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                                             alt=""
                                             width="1920"   height="1280"
+                                            onError={(e) => {
+                                                e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                                                e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                                            }}
                                         />
                                     </td>
                                     <td className="py-4 pl-4 border-x capitalize">{itinerary.name}</td>

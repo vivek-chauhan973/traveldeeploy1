@@ -66,6 +66,10 @@ const ItineraryHeroSection = ({
                     className="w-full h-[50vh] object-cover"
                     src={item.path || "/logo.png"}
                     alt={`img ${i + 1}`}
+                    onError={(e) => {
+                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                      }}
                   />
                   <div className="box-Shadow-Style-Package flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
                     <h1 className="flex items-center gap-2 mr-2">
@@ -89,6 +93,10 @@ const ItineraryHeroSection = ({
               alt="img 1"
               width={200}
               height={100}
+              onError={(e) => {
+                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                      }}
             />
 
             <div className="box-Shadow-Style-Package hidden xl:flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
@@ -109,6 +117,10 @@ const ItineraryHeroSection = ({
                 alt="img 2"
                 width={200}
                 height={100}
+                onError={(e) => {
+                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                      }}
               />
             </div>
             <div className="">
@@ -119,6 +131,10 @@ const ItineraryHeroSection = ({
                 alt="img 3"
                 width={200}
                 height={100}
+                onError={(e) => {
+                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                      }}
                 // onError={handleError}
               />
             </div>
