@@ -64,6 +64,8 @@ const packageSchema = new Schema({
       ref: "Country",
       required: true,
     },
+    tableData:[{}],
+    tableColumn:[String],
     state:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "State",

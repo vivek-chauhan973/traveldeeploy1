@@ -28,13 +28,32 @@ export default function CreatePackage() {
     const [pricingPopup, setPricingPopup] = useState(true);
 
 
-    const { edit } = useRouter().query;
+    const router = useRouter();
+    const { edit }=router.query;
+    // console.log("iternary :::",router);
     const formType = useSearchParams()?.get("type");
     const [tableData,setTableData]=useState([]);
     const [itinerary, setItinerary] = useState();
     const [activeTab, setActiveTab] = useState(formType ? 'Tab1' : 'Tab2');
     const [tableColumn,setTableColumn]=useState([]);
 
+    
+    // console.log("table columns id :: ",itinerary);
+     const handleSubmit=async ()=>{
+        try {
+            const reponse=await fetch(`/api/package/table/${itinerary?._id}`,{
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify({tableData,tableColumn})
+            });
+        } catch (error) {
+            console.log("error :: ",error);
+        }
+        
+    }
+    
     const handleTabClick = (tabname) => {
         setActiveTab(tabname);
     };
@@ -42,6 +61,7 @@ export default function CreatePackage() {
     const getItinerary = useCallback(async () => {
         try {
             const itinerary = await (await fetch('/api/package/' + edit)).json();
+            
             setItinerary(itinerary.updatedPackage);
         } catch (error) {
             console.log(error);
@@ -53,7 +73,10 @@ export default function CreatePackage() {
             getItinerary();
         }
     }, [edit, getItinerary]);
-
+useEffect(()=>{
+    setTableData(itinerary?.tableData||[]);
+    setTableColumn(itinerary?.tableColumn||[]);
+},[itinerary])
     const [select, setSelect] = useState("");
     const [selectedOption, setSelectedOption] = useState("");
 
@@ -151,6 +174,7 @@ export default function CreatePackage() {
 
                 <div className={`${activeTab === 'Tab13' ? 'block' : 'hidden'}`}>
                 <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn}/>
+                <button className=" bg-black text-white py-1 mt-3 px-3 rounded-md" onClick={handleSubmit}>Save Data</button>
                 </div>
 
             </Layout>

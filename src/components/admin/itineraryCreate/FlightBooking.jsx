@@ -134,7 +134,7 @@ const [selectedImg,setSelectedImg]=useState("");
     );
   }, [itinerary]);
 
-  console.log("flight list :: ",flightBookingList)
+  // console.log("flight list :: ",flightBookingList)
   return (
     <>
       <div className="flex items-center gap-1">
