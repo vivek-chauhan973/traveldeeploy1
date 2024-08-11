@@ -3,6 +3,7 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Package1 from "@/components/ItineraryDetail/Departure&Booking/package1";
 import FAQSchema from "@/components/seo/FAQSchema";
 import Head from 'next/head';
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
 
@@ -11,17 +12,17 @@ export async function getServerSideProps(context) {
   
   const res = await fetch(`http://localhost:3000/api/public/package/${newPackageUrl}`);
   const data = await res.json();
+  console.log("data is here of package ::: ",data)
   return{
     props:{
       data
     }
   }
 }
-
 export default function TourPackage({data}) {
-  
-  console.log("SEO data all is here ",data)
-  console.log("SEO data all is here ",data?.seoData)
+  // console.log("router",useRouter());
+  // console.log("SEO data all is here ",data)
+  // console.log("SEO data all is here ",data?.seoData)
   return (
     <>
     <Head>
