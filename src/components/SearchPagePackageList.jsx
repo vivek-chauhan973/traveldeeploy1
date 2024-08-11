@@ -86,7 +86,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
   const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  // console.log("current dat is slkjshkljfh sadfkj",currentItems)
+  console.log("current dat is slkjshkljfh sadfkj",currentItems)
   return (
     <div>
       {currentItems?.map((packageData, i) => (

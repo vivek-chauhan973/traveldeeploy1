@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 const AppContext = createContext(null);
 
 const fetchPackage = async (packageUrl) => {
+  console.log("page url :: ",packageUrl)
   const response = await fetch(`/api/public/package/${packageUrl}`, {
     method: "GET",
   });
@@ -33,7 +34,7 @@ export const AppProvider = ({ children }) => {
   };
   const [inputData, setInputData] = useState(initialData);
   const packageUrl = router.query.package?.replace("-tour-package", "");
-
+  // console.log("package url 5454565",packageUrl)
   useEffect(() => {
     const fetchData = async () => {
       try {
