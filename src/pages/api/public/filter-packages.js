@@ -8,40 +8,37 @@ import mongoose from "mongoose";
 const packagePublicFilter = async (req, res) => {
     try {
         const { locationId, priceMin, priceMax, cityId, categoryId,minDay,maxDay } = req.query;
-     console.log("max day 223232",maxDay)
-     console.log("min day 223232",minDay)
-        // Validate ObjectIds
         const isValidObjectId = mongoose.Types.ObjectId.isValid;
         if (cityId && !isValidObjectId(cityId)) {
             return res.status(400).json({ message: 'Invalid cityId' });
         }
-        const query = {};
+        const query = [];
 
-        if (priceMin && priceMax) {
-            query.price = { $gte: Number(priceMin), $lte: Number(priceMax) };
-        } else if (priceMin) {
-            query.price = { $gte: Number(priceMin) };
-        } else if (priceMax) {
-            query.price = { $lte: Number(priceMax) };
+        if (priceMin || priceMax) {
+            const priceQuery = {};
+            if (priceMin) priceQuery.$gte = Number(priceMin);
+            if (priceMax) priceQuery.$lte = Number(priceMax);
+            query.push({ price: priceQuery });
         }
-          
+        
         if (minDay !== undefined || maxDay !== undefined) {
-            query.days={$lte:Number(maxDay),$gte:Number(minDay)}
+            const daysQuery = {};
+            if (minDay !== undefined) daysQuery.$gte = Number(minDay);
+            if (maxDay !== undefined) daysQuery.$lte = Number(maxDay);
+            query.push({ days: daysQuery });
         }
+        
         if (cityId) {
-            query.location = cityId;
+            query.push({ location: cityId });
         }
-
-        if (!categoryId) {
-            query.category = categoryId;
+        
+        if (categoryId) {
+            query.push({ category: categoryId });
         }
-
         // Fetch cities based on locationId
         const cities = await City.find({ state: locationId }).populate('state').exec();
         const cityIds = cities.map(city => city._id);
-
-        // Fetch packages based on the constructed query
-        const packages = await Package.find({ location: { $in: cityIds }, ...query })
+        const packages = await Package.find({ $and: query })
             .populate('location')
             .populate('category')
             .exec();

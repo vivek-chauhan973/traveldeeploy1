@@ -1,15 +1,16 @@
-// models/PriceHike.js
-import mongoose from 'mongoose';// Ensure correct path to Package model
+
+import mongoose from 'mongoose';
 
 const priceHikeSchema = new mongoose.Schema({
-  packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true }, // Reference to Package
+  packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true },
   startDate: { type: String, required: true },
   endDate: { type: String, required: true },
   priceIncrease: { type: Number, required: true },
-  isActive: { type: Boolean, default: true } ,// Toggle feature on or off
+  isActive: { type: Boolean, default: true } ,
   svg:{type:String}
 }, {
-  timestamps: true // Optional: adds createdAt and updatedAt fields
+  timestamps: true 
 });
 
-const PriceHike = mongoose.model('PriceHike', priceHikeSchema);
+const PriceHike = mongoose.models.PriceHike||mongoose.model('PriceHike', priceHikeSchema);
+export default PriceHike

@@ -33,7 +33,17 @@ const handler=async(req, res)=> {
      return res.status(500).json({ error: 'Failed to apply price hike' });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    try {
+      const response=await PriceHike.findOne({packageId});
+      if(!response){
+        return res.status(404).json({ message: 'package is not found' });
+      }
+      res.status(200).json({ message: 'package found successfully',response });
+      
+    } catch (error) {
+      return res.status(500).json({message:error.message})
+    }
+    
   }
 }
 export default handler;

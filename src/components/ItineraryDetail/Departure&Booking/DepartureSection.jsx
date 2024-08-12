@@ -1,8 +1,8 @@
 import CalendarFunc from "@/components/Calender";
 import "../../../app/globals.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
-import { AllDataRelatedCity, city } from "./DepartureSectionData";
+import useMyCustomHook from "./DepartureSectionData";
 import DeparturePopup from "./DeparturePopup";
 
  const DepartureSection= ( {addPackage})=> {
@@ -10,9 +10,19 @@ import DeparturePopup from "./DeparturePopup";
 const {setDepartureSectionData}=useAppContext();
 const [datePackage,setDatePackage]=useState(0);
 const [showPopup,setShowPopup]=useState(false);
-// const [color,setColor]=useState(null);
-  // console.log("highlight data show is here", addPackage);
-  // =====================changes===============================
+const [startCity,setStartCity]=useState([]);
+const AllDataRelatedCity=useMyCustomHook();
+useEffect(()=>{
+  setStartCity(addPackage?.startcity)
+  
+},[addPackage])
+useEffect(()=>{
+  startCity?.unshift('All');
+},[startCity])
+
+
+
+// console.log("cities is here as given :: ",AllDataRelatedCity)
   return (
     <>
       <div className="">
@@ -26,7 +36,7 @@ const [showPopup,setShowPopup]=useState(false);
             <hr/>
             <div className="overflow-y-auto ">
               <div className="flex flex-wrap gap-3 pt-4">
-                {addPackage?.startcity?.map((item,i)=><div onClick={()=>setDatePackage(i)} 
+                {addPackage?.startcity?.map((item,i)=><div onClick={()=>setDatePackage(0)} 
                   className="flex justify-center items-center font-semibold text-sm hover:bg-green-300 hover:text-white cursor-pointer border rounded-full ml-2 py-2  px-3 " key={i}>
                   <span>{item}</span>
                 </div>)}
@@ -34,10 +44,10 @@ const [showPopup,setShowPopup]=useState(false);
 
               {/* select departure city */}
               <div className=" relative gap-4  py-4 ">
-                <h6 className=" font-semibold text-base ml-2 mb-3">All Departure date({AllDataRelatedCity[datePackage].length})</h6>
+                <h6 className=" font-semibold text-base ml-2 mb-3">All Departure date({AllDataRelatedCity?.[datePackage]?.length})</h6>
                 {showPopup&&<DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
                 <div className="flex my-2 xl:gap-3 gap-5 flex-wrap ml-5">
-                  {AllDataRelatedCity[datePackage].map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className=" cursor-pointer" >
+                  {AllDataRelatedCity?.[datePackage]?.map((item,i)=><div key={i} onClick={()=>{setShowPopup(true);setDepartureSectionData(item)}} className=" cursor-pointer" >
                     <div className=" border-b-2 hover:bg-gray-300  text-white bg-gray-50 w-16 h-14 rounded-md overflow-hidden">
                       <p className="text-center text-xxs text-white group-hover:text-white  bg-navyblack">{item.day}</p>
                       <hr />
