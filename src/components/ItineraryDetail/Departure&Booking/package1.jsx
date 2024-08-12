@@ -51,14 +51,31 @@ export default function Package1() {
     fixedDepCity,
     fixedDepDate
   } = useAppContext();
+
   const [images, setImages] = useState(null);
   const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
+  const [isDisplayPrice,setDisplayPrice]=useState() //display price
   const fetchImages = useCallback(async () => {
     const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
     const data = await res.json();
     return data;
   }, [addPackage]);
-  console.log("state id is here --------",addPackage?.state)
+  console.log("state id is here --------",addPackage)
+  // displayPrice
+  useEffect(() => {
+    let calculateDisplayPrice
+    var price=addPackage?.prices
+    if (price){
+      calculateDisplayPrice=price?.twinSharingRoom + price?.misc
+      const markupAmount = (calculateDisplayPrice * price?.markup) / 100;
+      console.log("calcaultion priceing",markupAmount)
+    }
+    // setDisplayPrice()
+  }, [addPackage]);
+
+
+
+
   useEffect(() => {
     fetchImages().then((res) => setImages(res));
   }, [addPackage, fetchImages]);
