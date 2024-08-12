@@ -50,7 +50,7 @@ const ItineraryHeroSection = ({
       setFixedDepDate1(fixedDepDate);
     }
   };
-
+  console.log("adpackade sata ",addPackage?.days?.length)
   return (
     <>
       <div>
@@ -75,8 +75,8 @@ const ItineraryHeroSection = ({
                     <h1 className="flex items-center gap-2 mr-2">
                       {addPackage?.name}
                       <span className=" mt-1 bg-primary py-[2px] px-2 text-white rounded text-para font-bold ">
-                        {addPackage?.faqs?.days.length - 1}N/{" "}
-                        {addPackage?.faqs?.days.length}D
+                        {addPackage?.days?.length - 1}N/{" "}
+                        {addPackage?.days?.length}D
                       </span>
                     </h1>
                   </div>
@@ -103,8 +103,8 @@ const ItineraryHeroSection = ({
               <h1 className="flex items-center gap-2 mr-2">
                 {addPackage?.name}
                 <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">
-                  {addPackage?.faqs?.days.length - 1}N/{" "}
-                  {addPackage?.faqs?.days.length}D
+                  {addPackage?.days?.length - 1}N/{" "}
+                  {addPackage?.days?.length}D
                 </span>
               </h1>
             </div>

@@ -44,29 +44,33 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
         />
         
       </div>
-      <div className="container-wrapper py-5">
-        <h4 className="text-xl font-medium mb-2 capitalize">{state?.name}</h4>
-        <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
-          <p dangerouslySetInnerHTML={{ __html: promoData?.description }} />
+      <div className="container-wrapper py-5 ">
+      <div className="grid grid-cols-[1.8fr,1.2fr]">
+        <div className="text-wrap">
+          <h4 className="text-xl font-medium mb-2 capitalize">{state?.name}</h4>
+          <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
+            <div dangerouslySetInnerHTML={{ __html: promoData?.description }} ></div>
+          </div>
         </div>
+
+        <div>
         {show && (
           <>
-
           {priorityPackage && priorityPackage.length > 0 ? (
-            <div className="table-container w-full md:w-2/3 m-auto mt-4">
+            <div className="table-container md:w-full w-2/3 m-auto mt-4">
               <table className="w-full border-collapse border text-center text-para">
                 <thead>
                   <tr className="border-b bg-black text-white">
-                    <th className="border-t border-l border-r font-light">
+                    <th className="border-t border-l px-2 text-wrap font-semibold border-r w-40 ">
                       Name
                     </th>
-                    <th className="border-t border-l border-r font-light">
+                    <th className="border-t border-l px-2 text-wrap font-semibold w-2 border-r ">
                       Day/Night
                     </th>
-                    <th className="border-t border-l border-r font-light">
+                    <th className="border-t border-l px-2 text-wrap font-semibold border-r ">
                       Price
                     </th>
-                    <th className="border-t border-l border-r border-b w-36 font-light">
+                    <th className="border-t border-l px-2 text-wrap font-semibold border-r border-b w-24 ">
                       Visit
                     </th>
                   </tr>
@@ -74,16 +78,16 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
                 <tbody className="bg-white">
                   {priorityPackage.map((item, index) => (
                     <tr key={index}>
-                      <td className="border-t border-l border-r border-b capitalize">
-                        {item.name} aman kharwar
+                      <td className="border-t border-l text-left border-r px-2 py-2 border-b capitalize">
+                        {item.name} aman khr
                       </td>
-                      <td className="border-t border-l border-r border-b capitalize">
+                      <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
                         {item.days}
                       </td>
-                      <td className="border-t border-l border-r border-b font-semibold capitalize">
+                      <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
                         ₹{item?.price.toLocaleString()}
                       </td>
-                      <td className="border-t border-l border-r border-b capitalize">
+                      <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
                         <a
                           href={"/package/" + item.pageUrl}
                           target="_blank"
@@ -102,6 +106,8 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
           </>
 
         )}
+        </div>
+      </div>
 
 
         <div className="flex justify-end items-center mt-2">
