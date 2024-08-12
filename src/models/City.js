@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 mongoose.connect(process.env.MONGODB_URI);
 
-const citySchema = new Schema({
+const citySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
