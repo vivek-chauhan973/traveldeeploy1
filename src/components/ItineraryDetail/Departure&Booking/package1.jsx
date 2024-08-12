@@ -92,7 +92,7 @@ export default function Package1() {
       const gstAmount = (grandTotal * price?.gst) / 100;
     
       // Step 7: Final displayed price after adding GST
-      const displayedPrice = grandTotal + gstAmount;
+      const displayedPrice = (grandTotal + gstAmount)/2;
     
       console.log("Final Displayed Price:", displayedPrice);
       setDisplayPrice(displayedPrice)
