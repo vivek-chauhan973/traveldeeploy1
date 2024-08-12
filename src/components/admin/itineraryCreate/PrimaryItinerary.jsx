@@ -21,6 +21,7 @@ const fetchStates = async (countryId) => {
         const res = await fetch('/api/location?type=state&countryId=' + countryId, { method: 'GET' });
         const data = await res.json();
         return data.result;
+        
     } catch (err) {
         console.log(err);
         return [];
@@ -64,6 +65,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();
             setCountries(fetchedCountries);
+            
         };
 
         fetchCountry();
@@ -231,6 +233,11 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                 setStates(fetchedStates);
             };
             fetchState();
+        }
+        if(itinerary){
+            setBasicDot(true)
+        } else{
+            console.log("")
         }
     }, [itinerary]);
     const handleSaveBasic = async () => {

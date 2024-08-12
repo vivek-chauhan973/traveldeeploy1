@@ -40,6 +40,10 @@ export default function CreatePackage() {
     const [tableColumn,setTableColumn]=useState([]);
 
     const [basicDot , setBasicDot] = useState(false);
+//  trail 
+
+
+
     const [imageDot , setImageDot] = useState(false);
     const [calenderDot , setCalenderDot] = useState(false);
     const [highlightDot , setHighlightDot] = useState(false);
@@ -50,10 +54,8 @@ export default function CreatePackage() {
     const [seoDot , setSeoDot] = useState(false);
     const [priceManagementDot , setPriceManagementDot] = useState(false);
     const [faqDot , setFaqDot] = useState(false);
-    const [timeDot , setTimeDot] = useState(false);
     const [tableDot , setTableDot] = useState(false);
     // print dot status
-    console.log("basicDot",basicDot)
     
     // console.log("table columns id :: ",itinerary);
      const handleSubmit=async ()=>{
@@ -121,44 +123,42 @@ useEffect(()=>{
                 <div className="border-b border-slate-300 mb-5">
                     <div className="flex gap-2 text-[14px] pt-5 pb-2 flex-wrap">
                         <button onClick={() => handleTabClick('Tab1')} className={`${activeTab === "Tab1" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Basic info { basicDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> } 
+                            Basic info { basicDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> } 
                         </button>
                         <button onClick={() => handleTabClick('Tab2')} className={`${activeTab === "Tab2" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Images  { imageDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }
+                            Images  { imageDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
                         <button onClick={() => handleTabClick('Tab3')} className={`${activeTab === "Tab3" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Calender  { calenderDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }     
+                            Calender  { calenderDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }     
                         </button>
                         <button onClick={() => handleTabClick('Tab4')} className={`${activeTab === "Tab4" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Highlight About { highlightDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }
+                            Highlight About { highlightDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
                         <button onClick={() => handleTabClick('Tab5')} className={`${activeTab === 'Tab5' ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Itinerary Text { itenaryDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }
+                            Itinerary Text { itenaryDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
                         <button onClick={() => handleTabClick('Tab6')} className={`${activeTab === 'Tab6' ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Map Embedded { mapDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }
+                            Map Embedded { mapDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
                         <button onClick={() => handleTabClick('Tab7')} className={`${activeTab === "Tab7" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Flight { flightDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }
+                            Flight { flightDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
                         <button onClick={() => handleTabClick('Tab8')} className={`${activeTab === "Tab8" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Tour Info { tourDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }
+                            Tour Info { tourDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
                         <button onClick={() => handleTabClick('Tab9')} className={`${activeTab === "Tab9" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            SEO Field { seoDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> }
+                            SEO Field { seoDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
                         <button onClick={() => handleTabClick('Tab10')} className={`${activeTab === "Tab10" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Pricing Management { priceManagementDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-xxs text-red-500">●</span> } 
+                            Pricing Management { priceManagementDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-xxs text-red-500">●</span> } 
                         </button>
                         <button onClick={() => handleTabClick('Tab11')} className={`${activeTab === "Tab11" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            FAQ { faqDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> } 
+                            FAQ { faqDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> } 
                         </button>
                         <button onClick={() => handleTabClick('Tab12')} className={`${activeTab === "Tab12" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Time Range date { timeDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> } 
+                        Table { tableDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> } 
                         </button>
-                        <button onClick={() => handleTabClick('Tab13')} className={`${activeTab === "Tab13" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Table { tableDot ? <span className="text-[8px] text-green-500">●</span> : <span className="text-[8px] text-red-500">●</span> } 
-                        </button>
+                 
                     </div>
                 </div>
                 <div className={`tab-content ${activeTab === 'Tab1' ? 'block' : 'hidden'}`}>
@@ -199,8 +199,8 @@ useEffect(()=>{
                 </div>
                 <div className={` ${activeTab === 'Tab10' ? 'block' : 'hidden'}`}>
                     <div className="relative">
-                        {itinerary?.prices === null && pricingPopup && <PricingManagementPopup setPricingPopup={setPricingPopup} handleOnChange={handleOnChange} handleCleckbox={handleCleckbox} />}
-                        {(itinerary?.prices?.addguest === "addGuest" || selectedOption === "addGuest") && <PricingManagement itinerary={itinerary} setActiveTab={setActiveTab} />}
+                        {itinerary?.prices === null && pricingPopup && <PricingManagementPopup setPricingPopup={setPricingPopup} handleOnChange={handleOnChange} handleCleckbox={handleCleckbox}   />}
+                        {(itinerary?.prices?.addguest === "addGuest" || selectedOption === "addGuest") && <PricingManagement itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot}/>}
                         {(itinerary?.prices?.departure1 === "fixedDeparture" || selectedOption === "fixedDeparture") && (
                             <div>
                                 <p><FixedDeparture itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot}/></p>
@@ -211,12 +211,10 @@ useEffect(()=>{
                 <div className={` ${activeTab === 'Tab11' ? 'block' : 'hidden'}`}>
                     <PackageFaq itinerary={itinerary} setActiveTab={setActiveTab} setFaqDot={setFaqDot}/>
                 </div>
-                <div className={` ${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>
-                    <PriceRange itinerary={itinerary} setActiveTab={setActiveTab} setTimeDot={setTimeDot}/>
-                </div>
+           
 
-                <div className={`${activeTab === 'Tab13' ? 'block' : 'hidden'}`}>
-                <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn}/>
+                <div className={`${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>
+                <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn} setTableDot={setTableDot}/>
                 <button className=" bg-black text-white py-1 mt-3 px-3 rounded-md" onClick={handleSubmit}>Save Data</button>
                 </div>
 

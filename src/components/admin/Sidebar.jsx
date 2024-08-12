@@ -7,8 +7,7 @@ import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChartSimple,faSliders,faSort,faBook,faCar, faBlog,faHotel,faCartShopping,faFile,faGear,faRightFromBracket,faTag,faLayerGroup, faHome } from '@fortawesome/free-solid-svg-icons';
 
-const IoIosArrowDown = dynamic(() => import('react-icons/io').then(mod => mod.IoIosArrowDown));
-const Sidebar = () => {
+import { IoIosArrowDown } from "react-icons/io";const Sidebar = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(null);
   const [selectedSubMenu, setSelectedSubMenu] = useState(null);

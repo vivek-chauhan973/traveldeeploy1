@@ -39,6 +39,7 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
         setAgePolicy([...agePolicy, { text: inputAgePolicy, edit: false }]);
         setInputAgePolicy('');
         setAgePolicyValidate('');
+  
     };
 
     const handleAgePolicyEditChange = (text, index) => {
@@ -125,8 +126,20 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
                 },
                 body: JSON.stringify(payload),
             });
-            const data = await res.json();
-            setActiveTab("Tab10");
+            // const data = await res.json();
+            // if(res.ok){
+            //     setActiveTab("Tab10");
+            //     setPriceManagementDot (true)
+               
+            //   }
+
+
+              
+              const data = await res.json();
+              setActiveTab("Tab10");
+
+
+
             // setActiveTab("NextTab"); // Assuming there's a function to set the next tab
             console.log("Data submitted", data);
         } catch (error) {
