@@ -65,20 +65,37 @@ export default function Package1() {
 
   // displayPrice
   const [isDisplayPrice,setDisplayPrice]=useState() //display price
+  // calculated price show 
   useEffect(() => {
     let calculateDisplayPrice
     var price=addPackage?.prices
-    if (price){
-      const calculateDisplayPrice=price?.twinSharingRoom + price?.misc;
-      const markupAmount = (calculateDisplayPrice * price?.markup) / 100;
-      const basicCal=calculateDisplayPrice + markupAmount;
-      console.log("calcaultion priceing",markupAmount);
-      const discountAmount = (basicCal * price?.diskHike) / 100;
-      const grandTotal=discountAmount + calculateDisplayPrice;
-      const calculateGst=(grandTotal * price?.gst) / 100;
-      console.log("calcaultion calculateGst",calculateGst);
+    if (price) {
+      // Step 1: Calculate the base price
+      const basePrice = price.twinSharingRoom + price.misc;
+    
+      // Step 2: Calculate the markup amount
+      const markupAmount = (basePrice * price.markup) / 100;
       
+      // Step 3: Calculate the price with markup
+      const priceWithMarkup = basePrice + markupAmount;
+    
+      // Step 4: Calculate the discount amount (or additional charge)
+      const discountAmount = (priceWithMarkup * Math.abs(price.diskHike)) / 100;
+    
+      // Step 5: Apply discount or add extra charge based on the sign of diskHike
+      const grandTotal = price.diskHike < 0
+        ? priceWithMarkup - discountAmount
+        : priceWithMarkup + discountAmount;
+    
+      // Step 6: Calculate the GST amount
+      const gstAmount = (grandTotal * price.gst) / 100;
+    
+      // Step 7: Final displayed price after adding GST
+      const displayedPrice = grandTotal + gstAmount;
+    
+      console.log("Final Displayed Price:", displayedPrice);
     }
+    
     // setDisplayPrice()
   }, [addPackage]);
 
