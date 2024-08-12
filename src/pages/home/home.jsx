@@ -2,7 +2,7 @@ import Image from "next/image";
 import "../../app/globals.css";
 // import Card1 from "@/components/Home/Cards/Card1";
 import Card2 from "@/components/Home/Cards/Card2";
-import Card3 from "@/components/Home/Cards/Card3";
+// import Card3 from "@/components/Home/Cards/Card3";
 import HeroSection from "@/components/Home/HeroSection";
 import HorizontalCard from "@/components/Home/Cards/HorizontalCard";
 import Card4 from "@/components/Home/Cards/Card4";
@@ -11,7 +11,11 @@ import Footer from "@/components/Footer";
 import Cardwork from "@/components/Home/Cards/cardwork";
 import ArrowSection from "@/components/Home/Cards/ArrowSection";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
+import State from "@/components/Home/Cards/State";
 // import Booking from "@/components/profile/bookings";
+
+
+
 
 export default function home() {
 
@@ -49,55 +53,55 @@ export default function home() {
 
                 <div className="relative mb-2 group">
                     <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt=""
                         width={300}  //256 in phone
                         height={288} // 160
                     />
                     <div style={boxShadowStyle}
-                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                        Himacahl 
-                    </div>                     
-                </div>
-               <div className="relative mb-2 group">
-                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                        alt=""
-                        width={300}  //256 in phone
-                        height={288} // 160
-                    />
-                    <div style={boxShadowStyle}
-                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                        Kerala 
-                    </div>                     
+                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                    >
+                        Himacahl
+                    </div>
                 </div>
                 <div className="relative mb-2 group">
                     <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt=""
                         width={300}  //256 in phone
                         height={288} // 160
                     />
                     <div style={boxShadowStyle}
-                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                        Uttarakhand 
-                    </div>                     
+                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                    >
+                        Kerala
+                    </div>
                 </div>
                 <div className="relative mb-2 group">
                     <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt=""
                         width={300}  //256 in phone
                         height={288} // 160
                     />
                     <div style={boxShadowStyle}
-                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                        Rajasthan 
-                    </div>                     
+                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                    >
+                        Uttarakhand
+                    </div>
+                </div>
+                <div className="relative mb-2 group">
+                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt=""
+                        width={300}  //256 in phone
+                        height={288} // 160
+                    />
+                    <div style={boxShadowStyle}
+                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+                    >
+                        Rajasthan
+                    </div>
                 </div>
 
             </div>
@@ -200,47 +204,9 @@ export default function home() {
 
             </div>
 
-            {/* card tab section */}
-            <div className="my-1 mt-6 md:mt-10 ">
-                <div className="container-wrapper text-xl font-medium md:text-[25px]  text-center">
-                    <p>Lorem, ipsum dolor.</p>
-                    <p className="md:text-md text-para font-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo cupiditate nobis minus?</p>
-                </div>
-                <div className="container-wrapper grid grid-cols-5 gap-3 overflow-hidden">
-
-
-                    <div className="flex md:flex-col md:mt-14 gap-2 py-5">
-                        <div>
-                            <button className="shadow-md bg-amber-600 text-white md:text-[16px] md:py-2 md:px-[80px] py-1 px-[30px] rounded-md">Europe</button>
-                        </div>
-                        <div>
-                            <button className="shadow-md bg-amber-600 text-white md:text-[16px] md:py-2 md:px-[80px] py-1 px-[30px]  rounded-md">Europe</button>
-                        </div>
-                        <div>
-                            <button className="shadow-md bg-amber-600 text-white md:text-[16px] md:py-2  md:px-[80px] py-1 px-[30px]  rounded-md">Europe</button>
-                        </div>
-                        <div>
-                            <button className="shadow-md bg-amber-600 text-white md:text-[16px] md:py-2  md:px-[80px] py-1 px-[30px]  rounded-md">Europe</button>
-                        </div>
-                        <div>
-                            <button className="shadow-md bg-amber-600 text-white md:text-[16px] text-para md:py-2 md:px-[80px] py-1 px-[30px]  rounded-md">Europe</button>
-                        </div>
-
-                    </div>
-
-                    <div className="relative col-span-4 w-full overflow-auto">
-                        <div className="flex gap-4 ">
-                            {/*
-                    <!-- card 1 --> */}
-                            <Card3 />
-
-                        </div>
-                        <div className=" bg-gradient-to-l from-white opacity-100 w-10 h-full right-0 absolute z-30  top-0"></div>
-                    </div>
-
-                </div>
-            </div>
-
+            {/* state code start  */}
+            <State />
+            {/*  start code end */}
             <div>
 
             </div>
