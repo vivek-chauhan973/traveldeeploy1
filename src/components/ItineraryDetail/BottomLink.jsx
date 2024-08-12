@@ -1,6 +1,6 @@
 import "../../app/globals.css";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const BottomLink = ({ locationId }) => {
   // console.log("location in bottom link", locationId?._id);

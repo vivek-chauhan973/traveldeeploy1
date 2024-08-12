@@ -11,6 +11,5 @@ const priceHikeSchema = new mongoose.Schema({
 }, {
   timestamps: true 
 });
-
 const PriceHike = mongoose.models.PriceHike||mongoose.model('PriceHike', priceHikeSchema);
 export default PriceHike
