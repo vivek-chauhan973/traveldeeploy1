@@ -18,9 +18,7 @@ export default function ImageUploading({ itinerary , setImageDot }) {
   const fetchImages = useCallback(async () => {
     try {
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`);
-      if (res.ok){
-        setImageDot(true);
-      }
+      
       const data = await res.json();
       if (data.data.length > 0) {
         const images = data.data;
@@ -30,6 +28,8 @@ export default function ImageUploading({ itinerary , setImageDot }) {
         setAlts(images.map((image) => image.alt));
         setExistingImagesCount(images.length);
         setIsUpdating(true);
+        
+        
        
        
       }
@@ -43,6 +43,7 @@ export default function ImageUploading({ itinerary , setImageDot }) {
   useEffect(()=>{
     if(previews.length>=4){
       setHasFetchedImages(true)
+      setImageDot(true);
    }
   //  if(files.length>=4){
   //   setHasFetchedImages(true)

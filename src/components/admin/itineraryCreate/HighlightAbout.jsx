@@ -85,9 +85,9 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
         },
         body: JSON.stringify({ highlights: itinerary.highlights, about: aboutEditorHtml })
       });
-      if(res.ok){
-        setHighlightDot(true);
-      }
+      // if(res.ok){
+      //   setHighlightDot(true);
+      // }
       const data = await res.json();
       setActiveTab("Tab5");
       console.log("Highlight & About data show is here", data);
@@ -100,6 +100,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
   useEffect(() => {
     if (itinerary?.about) {
       setAboutEditorHtml(itinerary.about);
+      setHighlightDot(true);
     }
   }, [itinerary]);
 

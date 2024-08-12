@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LiaRupeeSignSolid } from 'react-icons/lia';
 import { useAppContext } from '../context/Package/AddGuest';
 
-const PricingManagement = ({ itinerary, setActiveTab }) => {
+const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot}) => {
     // console.log("Pricing data show is here itinerary", itinerary?._id)
     const { pricingManagement } = useAppContext()
     const [pricingData, setPricingData] = useState({
@@ -55,6 +55,7 @@ const PricingManagement = ({ itinerary, setActiveTab }) => {
                 diskHike: diskHike || "",
                 packageId: itinerary._id || ''
             });
+            setPriceManagementDot(true);
         }
     }, [itinerary, pricingManagement]);
 

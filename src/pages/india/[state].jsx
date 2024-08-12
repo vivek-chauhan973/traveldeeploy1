@@ -129,7 +129,7 @@ export default function SearchPage() {
           </div>
         </div>
         <div className="border-t border">
-          <BottomLink locationId={selectedLocation} />
+          <BottomLink locationId={selectedLocation}  />
         </div>
       </div>
     </AppProvider>

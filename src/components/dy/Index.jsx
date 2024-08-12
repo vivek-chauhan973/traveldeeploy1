@@ -25,9 +25,12 @@ useEffect(()=>{
     setColumns(tableColumn||[]);
     if(columns.length!==0){
         setSubmitted(true);
+ 
+    } 
+    if(tableColumn.length > 0){
+        setTableDot(true)
     }
   
-    
 },[tableData])
     const handleRemoveRow = (id) => {
         if (window.confirm('Are you sure you want to delete this row?')) {

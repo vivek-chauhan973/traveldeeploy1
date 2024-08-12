@@ -60,12 +60,18 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
       ...prevState,
       information: html,
     }));
+   
   };
 
   useEffect(() => {
     if (itinerary) {
       setItineraryText(itinerary.dayWiseInformation || "");
       setItineraryDayWiseDataArray(itinerary.days || []);
+  
+  if( itinerary?.dayWiseInformation)
+  {
+    setItenaryDot(true);
+  }
     }
   }, [itinerary]);
 

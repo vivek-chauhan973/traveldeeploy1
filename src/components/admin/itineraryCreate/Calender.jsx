@@ -25,6 +25,7 @@ const Calender = ({ itinerary, setActiveTab }) => {
         headers: {
             'Content-Type': 'application/json',
         },
+
         body:JSON.stringify(data)
     })
 

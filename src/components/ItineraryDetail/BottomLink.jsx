@@ -2,11 +2,11 @@ import "../../app/globals.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const BottomLink = ({ locationId }) => {
+const BottomLink = ({ locationId ,promoData,state}) => {
   // console.log("location in bottom link", locationId?._id);
   const locationIds = locationId?._id;
   const [bottomLinkData, setBottomLinkData] = useState(null);
-  // console.log("location down in bottom link", bottomLinkData);
+  console.log("location down in bottom link", locationId);
 
   const fetchPromoManagementData = async () => {
     if (!locationIds) return;
@@ -29,7 +29,8 @@ const BottomLink = ({ locationId }) => {
   return (
     <div className="bg-slate-100 py-8">
       <div className="container-wrapper">
-        <p className="text-para font-semibold">Manali Package</p>
+        <p className="text-para font-semibold capitalize">{locationId?.name}</p>
+
         <div className="text-[13px] flex gap-2 flex-wrap mt-3">
           {bottomLinkData ? (
             bottomLinkData?.map((item, index) => (

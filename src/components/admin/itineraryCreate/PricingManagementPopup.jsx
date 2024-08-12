@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../context/Package/AddGuest";
 
-const Login = ({ handleCleckbox, handleOnChange }) => {
+const Login = ({ handleCleckbox, handleOnChange ,setPriceManagementDot}) => {
   const { toglePopup,setPricingManagement } = useAppContext();
   const ref = useRef(null);
   const ref1 = useRef(null);
@@ -10,6 +10,7 @@ const Login = ({ handleCleckbox, handleOnChange }) => {
       // console.log( "ref11111111111",ref.current)
 
       handleCleckbox(true);
+      
     }
   };
   useEffect(() => {

@@ -11,6 +11,9 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
   useEffect(() => {
     if (itinerary) {
         setItineraryDayWiseDataArray( itinerary?.titles?.days|| []);
+        if( itinerary?.titles?.days){
+          setFaqDot(true);
+        }
     }
 }, [itinerary]);
   const [itineraryDayWise, setItineraryDayWise] = useState({
@@ -51,7 +54,6 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
   };
 
   // written by code
-
   // console.log("package id show is here ", itinerary?._id);
 
   const removeItem = (index) => {
@@ -72,7 +74,10 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
         },
         body: JSON.stringify({ days: itineraryDayWiseDataArray }),
       });
-      setActiveTab("Tab12");
+      // if(response.ok){
+      //   setFaqDot(true)
+      //   setActiveTab("Tab12");
+      // }
       // console.log("currently data pass", itineraryDayWiseDataArray);
     } catch (error) {
       console.error(error);

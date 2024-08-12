@@ -123,6 +123,10 @@ const [selectedImg,setSelectedImg]=useState("");
     const fetchedData = async (id) => {
       const response = await fetch(`/api/package/flight-create/${id}`);
       const fData = await response.json();
+      if(response.ok){
+        setFlightDot("Tab8")
+        setFlightDot(true);
+    } 
       return fData;
     };
 

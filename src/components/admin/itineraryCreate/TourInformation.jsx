@@ -8,7 +8,8 @@ const useFetchData = (url, setState) => {
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                setState(data || []);  // Ensure data is an array or empty object
+                setState(data || []); 
+              
             } catch (err) {
                 console.log(err);
             }
@@ -17,6 +18,16 @@ const useFetchData = (url, setState) => {
     // }, [url]);
     }, [url]);
 };
+
+
+
+// if (response.ok) {
+//     setActiveTab("Tab9")
+//     alert('Tour information saved successfully!');
+//     setTourDot(true);
+// }
+
+
 
 const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
     const [tourInclusion, setTourInclusion] = useState([]);
@@ -37,6 +48,10 @@ const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
     const fData = useCallback(async () => {
         const response = await fetch('/api/package/tour-information/' + (itinerary ? itinerary.id : 'add-package'));
         const data = await response.json();
+        if(response.ok){
+            setActiveTab("Tab9")
+            setTourDot(true);
+        } 
         return data;
     }, [itinerary]);
 

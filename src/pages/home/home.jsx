@@ -105,18 +105,15 @@ export default function home() {
             {/* image and text */}
             <div className="container-wrapper md:py-10 py-4">
                 <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
-
                     <div className="">
                         <p className=" text-amber-600  font-semibold mt-2">Indiafe</p>
                         <h1 className="md:text-[25px] text-xl font-medium">HEAVENLY HIMALAYS</h1>
                         <h1 className="md:text-[16px] text-para line-clamp-3 ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eligendi sed hic provident enim, rerum tempore aliquam numquam vitae, earum doloremque. Nam!
                             Indulge in the vibrant celebrations of Holi with our premier Holi Packages of 2024 near to Delhi, tailored to offer an unforgettable experience in some of India’s most iconic destinations. Whether you’re drawn to the spiritual aura of Rishikesh, the
                         </h1>
-
                         <div className=" mt-4 flex md:justify-between gap-3  ">
                             <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Kerala</button>
                             <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Himalay</button>
-
                         </div>
                     </div>
                     <div className=" md:ml-28 ">
