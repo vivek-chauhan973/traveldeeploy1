@@ -63,6 +63,28 @@ export default function Package1() {
     fetchImages().then((res) => setImages(res));
   }, [addPackage, fetchImages]);
 
+  // displayPrice
+  const [isDisplayPrice,setDisplayPrice]=useState() //display price
+  useEffect(() => {
+    let calculateDisplayPrice
+    var price=addPackage?.prices
+    if (price){
+      const calculateDisplayPrice=price?.twinSharingRoom + price?.misc;
+      const markupAmount = (calculateDisplayPrice * price?.markup) / 100;
+      const basicCal=calculateDisplayPrice + markupAmount;
+      console.log("calcaultion priceing",markupAmount);
+      const discountAmount = (basicCal * price?.diskHike) / 100;
+      const grandTotal=discountAmount + calculateDisplayPrice;
+      const calculateGst=(grandTotal * price?.gst) / 100;
+      console.log("calcaultion calculateGst",calculateGst);
+      
+    }
+    // setDisplayPrice()
+  }, [addPackage]);
+
+
+
+
   // console.log("packages is very smart",addPacka/
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
