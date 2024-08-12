@@ -66,21 +66,22 @@ export default function Package1() {
   // displayPrice
   const [isDisplayPrice,setDisplayPrice]=useState() //display price
   // calculated price show 
+  console.log("-==-=-=-=-=-=-=-=-=-=-==",isDisplayPrice)
   useEffect(() => {
     let calculateDisplayPrice
     var price=addPackage?.prices
     if (price) {
       // Step 1: Calculate the base price
-      const basePrice = price.twinSharingRoom + price.misc;
+      const basePrice = price?.twinSharingRoom + price?.misc;
     
       // Step 2: Calculate the markup amount
-      const markupAmount = (basePrice * price.markup) / 100;
+      const markupAmount = (basePrice * price?.markup) / 100;
       
       // Step 3: Calculate the price with markup
       const priceWithMarkup = basePrice + markupAmount;
     
       // Step 4: Calculate the discount amount (or additional charge)
-      const discountAmount = (priceWithMarkup * Math.abs(price.diskHike)) / 100;
+      const discountAmount = (priceWithMarkup * Math.abs(price?.diskHike)) / 100;
     
       // Step 5: Apply discount or add extra charge based on the sign of diskHike
       const grandTotal = price.diskHike < 0
@@ -88,15 +89,15 @@ export default function Package1() {
         : priceWithMarkup + discountAmount;
     
       // Step 6: Calculate the GST amount
-      const gstAmount = (grandTotal * price.gst) / 100;
+      const gstAmount = (grandTotal * price?.gst) / 100;
     
       // Step 7: Final displayed price after adding GST
       const displayedPrice = grandTotal + gstAmount;
     
       console.log("Final Displayed Price:", displayedPrice);
+      setDisplayPrice(displayedPrice)
     }
     
-    // setDisplayPrice()
   }, [addPackage]);
 
 
@@ -140,6 +141,7 @@ export default function Package1() {
           images={images}
           togglePopup={setFixedDeparturePopupOpen}
           fixedDeparturePopupOpen={fixedDeparturePopupOpen}
+          isDisplayPrice={isDisplayPrice}
         />
       </div>
       <div className="bg-gray-100  mt-[20px] pb-7">

@@ -17,6 +17,7 @@ const ItineraryHeroSection = ({
   images,
   togglePopup,
   fixedDeparturePopupOpen,
+  isDisplayPrice
 }) => {
   const {
     showAddguest,
@@ -26,6 +27,9 @@ const ItineraryHeroSection = ({
     fixedDepDate,
     fixedDepCity,
   } = useAppContext();
+  const formatINR = (number) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(number);
+  };
   const settings = {
     dots: true,
     fade: true,
@@ -219,7 +223,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     Starts From{" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{addPackage?.price}
+                      {formatINR(isDisplayPrice)}
                     </span>
                   </p>
                 )}
@@ -227,7 +231,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     Starts From{" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{addPackage?.price}
+                      ₹{formatINR(isDisplayPrice)}
                     </span>
                   </p>
                 )}
