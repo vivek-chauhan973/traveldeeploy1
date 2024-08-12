@@ -20,7 +20,7 @@ useEffect(()=>{
   startCity?.unshift('All');
 },[startCity])
 
-
+console.log("data seo data :::  ::  ",addPackage)
 
 // console.log("cities is here as given :: ",AllDataRelatedCity)
   return (
@@ -57,6 +57,52 @@ useEffect(()=>{
                     </div>
                   </div>)}
                 </div>
+                <div className="table-container md:w-full w-2/3 m-auto mt-4">
+              <table className="w-full border-collapse border text-center text-para">
+                <thead>
+                  <tr className="border-b bg-black text-white">
+                    <th className="border-t border-l px-2 text-wrap font-semibold border-r w-40 ">
+                      Name
+                    </th>
+                    <th className="border-t border-l px-2 text-wrap font-semibold w-2 border-r ">
+                      Day/Night
+                    </th>
+                    <th className="border-t border-l px-2 text-wrap font-semibold border-r ">
+                      Price
+                    </th>
+                    <th className="border-t border-l px-2 text-wrap font-semibold border-r border-b w-24 ">
+                      Visit
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white">
+                  
+                    <tr >
+                      <td className="border-t border-l text-left border-r px-2 py-2 border-b capitalize">
+                        {/* {item.name} aman khr */}
+                      </td>
+                      <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                        {/* {item.days} */}
+                      </td>
+                      <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
+                        {/* ₹{item?.price.toLocaleString()} */}
+                      </td>
+                      <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                        <a
+                          // href={"/package/" + item.pageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-800 hover:underline"
+                        >
+                          View Details
+                        </a>
+                      </td>
+                    </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <hr />
                 <div className="ml-2 my-4">
                   <h6 className="font-semibold text-base mb-2 text-graytext">
                     About us
