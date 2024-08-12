@@ -57,7 +57,6 @@ export default function SearchPage() {
       fetchPackages();
     }
   }, [selectedLocation]);
-
   useEffect(() => {
     setTourDuration([minDay, maxDay]);
   }, [maxDay, minDay]);
