@@ -24,7 +24,7 @@ const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureC
 const FixedDeparturePopup = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/FixedDeparturePopup"));
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope,faPrint} from '@fortawesome/free-solid-svg-icons';
-
+ 
 
 
 
@@ -70,7 +70,7 @@ export default function Package1() {
   // calculated price show 
   // console.log("-==-=-=-=-=-=-=-=-=-=-==",isDisplayPrice)
   useEffect(() => {
-    let calculateDisplayPrice
+   
     var price=addPackage?.prices
     if (price) {
       // Step 1: Calculate the base price
@@ -369,7 +369,7 @@ export default function Package1() {
       ) : null}
 
       {/* bottom link */}
-      <BottomLink locationId={addPackage?.state} />
+      <BottomLink locationId={addPackage?.state} addPackage={addPackage}/>
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">

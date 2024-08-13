@@ -97,7 +97,7 @@ const TestingCard = ({ addPackage }) => {
                     </div>
                     <div className="px-6 py-3">
                         <div className="flex items-center justify-between mb-1 md:mb-3">
-                        <h5 className="block text-md md:text-lg font-semibold leading-snug">
+                        <h5 className="block text-md md:text-lg font-semibold capitalize leading-snug">
                             {item?.name}
                         </h5>
                         <p className="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">

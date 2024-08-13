@@ -78,7 +78,7 @@ const ItineraryPricingCard = () => {
               <p className="text-sm ">Basic Price</p>
             </div>
             <div className="">
-              <p className="text-lg font-medium text-graytext"> {price1}</p>
+              <p className="text-lg font-medium text-graytext"> ₹{Math.floor(price1).toLocaleString()}</p>
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>

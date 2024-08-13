@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 import "../../../app/globals.css";
-
 // Custom hook to fetch data
 const useFetchData = (url, setState) => {
     useEffect(() => {

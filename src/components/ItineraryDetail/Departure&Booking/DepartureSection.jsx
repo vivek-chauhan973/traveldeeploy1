@@ -69,7 +69,7 @@ const DepartureSection = ({ addPackage }) => {
               {showPopup && <DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
 
               {/* Calendar Slider with Previous and Next Buttons */}
-              <div className="flex pr-5 justify-end gap-2 items-center">
+              <div className="flex pr-5 justify-end gap-2 items-center mt-2">
                 <button
                   className={`p-2 rounded-full ${currentMonthIndex === 0 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
                   onClick={handlePreviousMonth}
@@ -129,12 +129,23 @@ const DepartureSection = ({ addPackage }) => {
               </div>
 
               <hr />
-              <div className="">
+              <div className="ml-2 my-4">
+                <h6 className="font-semibold text-base mb-2 text-graytext">
+                  About This Itinerary
+
+
+                </h6>
+                <p
+                  className="xl:ml-3 ml-0 mr-2 about-margin text-para"
+                  dangerouslySetInnerHTML={{ __html: addPackage?.about }}
+                ></p>
+              </div>
+
+              <div className="mx-5">
                 <div className="mt-4">
-                  <p>Table Data is here</p>
-                  <table className="min-w-full mt-3 border-collapse border border-gray-300 text-center text-para">
-                    <thead className="bg-black text-white">
-                      <tr>
+                  <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
+                    <thead>
+                    <tr className="border-b bg-black text-white">
                         {columns.map((col, index) => (
                           <th key={index} className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">
                             {col}
@@ -142,11 +153,11 @@ const DepartureSection = ({ addPackage }) => {
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="border">
+                    <tbody className="bg-gray-100">
                       {submittedData.map((row, rowIndex) => (
-                        <tr key={rowIndex}>
+                        <tr key={rowIndex} >
                           {columns.map((col, colIndex) => (
-                            <td key={colIndex} className="border-y-2 border-x-2 overflow-hidden border-gray-300 px-3 py-1 whitespace-nowrap">
+                            <td key={colIndex} className="   border-t border-l  border-r px-2 py-2   capitalize overflow-hidden border-gray-300  whitespace-nowrap">
                               {row[col]}
                             </td>
                           ))}
@@ -156,17 +167,7 @@ const DepartureSection = ({ addPackage }) => {
                   </table>
                 </div>
               </div>
-
-              <hr />
-              <div className="ml-2 my-4">
-                <h6 className="font-semibold text-base mb-2 text-graytext">
-                  About us
-                </h6>
-                <p
-                  className="xl:ml-3 ml-0 mr-2 about-margin text-para"
-                  dangerouslySetInnerHTML={{ __html: addPackage?.about }}
-                ></p>
-              </div>
+         
 
               <hr />
               <div className="ml-2 mt-3">
@@ -195,9 +196,6 @@ export default DepartureSection;
 
 
 
-// <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack">
-// {dayAbbreviations[item.day] || item.day.slice(0, 3)}
-// </p>
 
 
 
@@ -206,22 +204,3 @@ export default DepartureSection;
 
 
 
-
-
-
-
-
-//
-
-
-//  {/* <div className="flex my-2 xl:gap-3 gap-5 flex-wrap ml-5">
-//                   {AllDataRelatedCity?.[datePackage]?.map((item, i) => <div key={i} onClick={() => { setShowPopup(true); setDepartureSectionData(item) }} className=" cursor-pointer" >
-//                     <div className=" border-b-2 hover:bg-gray-300  text-white bg-gray-50 w-16 h-14 rounded-md overflow-hidden">
-//                       <p className="text-center text-xxs text-white group-hover:text-white  bg-navyblack">{item.day}</p>
-//                       <hr />
-//                       <p className="text-center text-black group-hover:text-white  text-xxs">{item.date}</p>
-
-//                       <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">₹ <p>{item.price}</p></div>
-//                     </div>
-//                   </div>)}
-//                 </div> */}
