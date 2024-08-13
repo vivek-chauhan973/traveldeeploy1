@@ -26,6 +26,9 @@ const packageDepartureSchema = new Schema(
       type: Number,
       required: true,
     },
+    gst: {
+      type: Number,
+    },
     agePolicy: {
       type: [textSchema],
       required: true,

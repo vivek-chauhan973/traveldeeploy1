@@ -12,7 +12,7 @@ const fetchPriceHike=async (id)=>{
 const useMyCustomHook = () => {
 
     // all api calling is here
-const {addPackage}=useAppContext();
+const {addPackage,price1}=useAppContext();
 const [newPackageId,setNewPackageId]=useState();
 const [priceHike,setPriceHike]=useState({});
 const [initialDate,setInitialDate]=useState("");
@@ -22,6 +22,7 @@ const [isActiveState,setIsActiveState]=useState(false);
 const [packagePrice,setPackagePrice]=useState(0);
 const [totalPrice,setTotalPrice]=useState(0);
 
+console.log("price 1 7318472921 ::::: ::: ",price1);
 //create a array of date between the range of date
 
 const startdate1=new Date(initialDate);
@@ -38,7 +39,7 @@ useEffect(()=>{
 // console.log("Price hike ::: ::: :: :: :: ",addPackage?.startcity)
 },[priceHike])
 useEffect(()=>{
-    setTotalPrice(packagePrice+priceIncrease);
+    setTotalPrice(price1+priceIncrease);
 },[priceIncrease,packagePrice])
 
     const AllDataRelatedCity=[];
@@ -78,7 +79,7 @@ while (currentDate <= endDate) {
         AllDataRelatedCity?.[0]?.push({day:dayOfWeek,date:formattedDate,price:totalPrice})
     }
     else{
-        AllDataRelatedCity?.[0]?.push({day:dayOfWeek,date:formattedDate,price:packagePrice})
+        AllDataRelatedCity?.[0]?.push({day:dayOfWeek,date:formattedDate,price:price1})
     }
     
     currentDate.setDate(currentDate.getDate() + 1); 

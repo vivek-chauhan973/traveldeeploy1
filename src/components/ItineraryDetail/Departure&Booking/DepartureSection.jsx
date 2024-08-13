@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const DepartureSection = ({ addPackage }) => {
-  const { setDepartureSectionData } = useAppContext();
+  const { setDepartureSectionData,price1 } = useAppContext();
   const [datePackage, setDatePackage] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [startCity, setStartCity] = useState([]);
@@ -23,9 +23,6 @@ const DepartureSection = ({ addPackage }) => {
     setColumns(addPackage?.tableColumn || []);
   }, [addPackage]);
 
-  useEffect(() => {
-    startCity?.unshift('All');
-  }, [startCity]);
 
   const groupedByMonth = AllDataRelatedCity?.[datePackage]?.reduce((acc, item) => {
     const dateObj = new Date(item.date);

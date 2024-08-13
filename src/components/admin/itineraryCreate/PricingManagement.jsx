@@ -136,7 +136,7 @@ const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot}) =>
         fetchData();
     }, []);
 
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxx", data)
+    // console.log("xxxxxxxxxxxxxxxxxxxxxxxx", data)
 
 
 

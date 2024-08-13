@@ -160,7 +160,7 @@ export default function Package1() {
             {/*Select departure city */}
 
             <div id="departure" className=" hidden xl:block">
-              <DepartureSection addPackage={addPackage} />
+              <DepartureSection  addPackage={addPackage} />
             </div>
             <div className="xl:hidden">
               {addPackage?.prices?.addguest === "addGuest" && (
