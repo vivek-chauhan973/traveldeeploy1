@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LiaRupeeSignSolid } from 'react-icons/lia';
 import { MdOutlineAddCircle } from 'react-icons/md';
 import { MdDeleteForever } from 'react-icons/md';
@@ -11,6 +11,7 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
     const [rate, setRate] = useState(itinerary?.prices?.perRate|| 0);
     const [inventory, setInventory] = useState(itinerary?.prices?.inventory || 0);
     const [weightOptional, setWeightOptional] = useState(itinerary?.prices?.weight|| 0);
+    const [gst, setGst] = useState(itinerary?.prices?.gst|| 0);
     const {pricingManagement}=useAppContext();
     // State for Age Policy
     const [agePolicy, setAgePolicy] = useState(itinerary?.prices?.agePolicy || []);
@@ -41,6 +42,29 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
         setAgePolicyValidate('');
   
     };
+
+    // gst logics here 
+
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/package-setting/gst');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
 
     const handleAgePolicyEditChange = (text, index) => {
         const newAgePolicy = [...agePolicy];
@@ -112,6 +136,7 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
                 rate,
                 inventory,
                 weightOptional,
+                gst
             },
             agePolicy,
             notes,
@@ -146,7 +171,7 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
             console.log("Error submitting data", error);
         }
     };
-
+// console.log("type of data ::: ",typeof(data?.data?.[0]?.gstRate))
     return (
         <div>
             <div className='bg-white m-2 rounded p-2'>
@@ -215,6 +240,25 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
                             />
                         </div>
                     </div>
+                    <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
+                            <label className="font-semibold w-40" htmlFor="">
+                                GST:
+                            </label>
+                            <div className="flex gap-1 items-center">
+                               % <select
+                                value={gst} onChange={(e)=>setGst(e.target.value)}
+                                    name='gst' className='mx-2 w-52' >
+                                    <option value="">{gst!==0?gst:"Select GST"}</option>
+                                    {data?.data?.map((item, i) => (
+                                        <option key={i} value={item.gstRate}>
+                                            {item.gstRate}
+                                        </option>
+                                    ))}
+                                </select>
+
+                            </div>
+                            
+                        </div>
                 </div>
 
                 {/* Age Policy Section */}

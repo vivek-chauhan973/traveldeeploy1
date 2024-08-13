@@ -23,6 +23,7 @@ import FixedDeparture from "@/components/admin/itineraryCreate/FixedDeparture";
 import { AppProvider, useAppContext } from "@/components/admin/context/Package/AddGuest";
 import PriceRange from "@/components/admin/itineraryCreate/PriceRange";
 import ImageUploading from "@/components/admin/itineraryCreate/ImageUploading";
+import SelectedDatePrice from "@/components/admin/itineraryCreate/SelectedDatePrice";
 
 export default function CreatePackage() {
 
@@ -204,6 +205,7 @@ useEffect(()=>{
                         {(itinerary?.prices?.departure1 === "fixedDeparture" || selectedOption === "fixedDeparture") && (
                             <div>
                                 <p><FixedDeparture itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot}/></p>
+                                <SelectedDatePrice itinerary={itinerary}/>
                             </div>
                         )}
                     </div>

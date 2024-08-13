@@ -13,7 +13,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
   if (req.method === "POST") {
     const { prices, agePolicy, notes,departure1 } = req.body;
-    const { basePrice, rate, inventory, weightOptional } = prices;
+    const { basePrice, rate, inventory, weightOptional,gst } = prices;
 
     try {
       const departure = await PackageDeparture.findOneAndUpdate(
@@ -26,6 +26,7 @@ import { NextApiRequest, NextApiResponse } from "next";
           agePolicy,
           notes,
           departure1,
+          gst
         },
         { upsert: true, new: true }
       );
