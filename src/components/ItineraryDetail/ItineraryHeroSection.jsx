@@ -42,8 +42,8 @@ const ItineraryHeroSection = ({
   const [hemages, setHemages] = useState(null);
 
   useEffect(() => {
-    setHemages(images?.data);
-  }, [images, hemages]);
+    setHemages(images);
+  }, [images]);
   // console.log("images12324432423",hemages);
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
@@ -54,7 +54,7 @@ const ItineraryHeroSection = ({
       setFixedDepDate1(fixedDepDate);
     }
   };
-  console.log("adpackade sata ",addPackage?.days?.length)
+  // console.log("adpackade sata ",addPackage?.days?.length)
   return (
     <>
       <div>
@@ -68,7 +68,7 @@ const ItineraryHeroSection = ({
                 >
                   <img
                     className="w-full h-[50vh] object-cover"
-                    src={item.path}
+                    src={item}
                     alt={`img ${i + 1}`}
                     onError={(e) => {
                         e.target.onerror = null; // Prevent infinite loop if fallback also fails
@@ -93,7 +93,7 @@ const ItineraryHeroSection = ({
           <div className="relative rounded-md overflow-hidden">
             <img
               className=" h-[400px] object-cover w-full hidden xl:flex"
-              src={(hemages && hemages[0]?.path) }
+              src={(hemages && hemages?.[0]) }
               alt="img 1"
               width={200}
               height={100}
@@ -117,7 +117,7 @@ const ItineraryHeroSection = ({
             <div className="">
               <img
                 className="rounded-md h-[192px] w-full object-cover"
-                src={(hemages && hemages[1]?.path)}
+                src={(hemages && hemages?.[1])}
                 alt="img 2"
                 width={200}
                 height={100}
@@ -130,7 +130,7 @@ const ItineraryHeroSection = ({
             <div className="">
               <img
                 className="rounded-md h-[192px] max-md-full w-full object-cover"
-                src={(hemages && hemages?.[2]?.path) }
+                src={(hemages && hemages?.[2]) }
                 alt="img 3"
                 width={200}
                 height={100}

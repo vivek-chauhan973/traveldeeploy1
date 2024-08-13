@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomiseTour from "../CustomiseTour";
 import FixedDeparturePopup from "./FixedDeparturePopup";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
@@ -20,6 +20,8 @@ const ItinaryFixedDepartureCard = ({
   } = useAppContext();
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
+  const [columns,setColumns]=useState([]);
+const [submittedData,setSubmittedData]=useState([]);
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
   }
@@ -33,6 +35,11 @@ const ItinaryFixedDepartureCard = ({
       togglePopup(true);
     }
   };
+  useEffect(()=>{
+    setSubmittedData(addPackage?.tableData||[])
+    setColumns(addPackage?.tableColumn||[])
+    
+  },[addPackage])
 
   return (
     <>
@@ -104,6 +111,35 @@ const ItinaryFixedDepartureCard = ({
           </div>
           <hr className="border-dashed my-2" />
           {/* inject your code for mobile device */}
+          <div className=' xl:hidden'>
+                                    <div className="mt-4">
+                                       <p>Table Data is here</p>
+                                        <table className="min-w-full mt-3 border-collapse border border-gray-300 text-center text-para">
+                                            <thead className="bg-black text-white">
+                                                <tr>
+                                                    {columns.map((col, index) => (
+                                                        <th key={index} className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">
+                                                            {col}
+                                                        </th>
+                                                    ))}
+                                                </tr>
+                                            </thead>
+                                            <tbody className=" border">
+                                                {submittedData.map((row, rowIndex) => (
+                                                    <tr key={rowIndex}>
+                                                        {columns.map((col, colIndex) => (
+                                                            <td key={colIndex} className="border-y-2 border-x-2 overflow-hidden  border-gray-300 px-3 py-1 whitespace-nowrap">
+                                                                {row[col]}
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <hr />
           <div className="xl:hidden">
             <div className="ml-2">
               <p className="font-semibold text-lg mb-2 mt-1 text-graytext">

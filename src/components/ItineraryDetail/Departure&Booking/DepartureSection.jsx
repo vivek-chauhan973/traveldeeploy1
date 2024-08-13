@@ -11,9 +11,13 @@ const {setDepartureSectionData}=useAppContext();
 const [datePackage,setDatePackage]=useState(0);
 const [showPopup,setShowPopup]=useState(false);
 const [startCity,setStartCity]=useState([]);
+const [columns,setColumns]=useState([]);
+const [submittedData,setSubmittedData]=useState([]);
 const AllDataRelatedCity=useMyCustomHook();
 useEffect(()=>{
   setStartCity(addPackage?.startcity)
+  setSubmittedData(addPackage?.tableData||[])
+  setColumns(addPackage?.tableColumn||[])
   
 },[addPackage])
 useEffect(()=>{
@@ -57,6 +61,36 @@ useEffect(()=>{
                     </div>
                   </div>)}
                 </div>
+                <hr />
+                <div className=''>
+                                    <div className="mt-4">
+                                       <p>Table Data is here</p>
+                                        <table className="min-w-full mt-3 border-collapse border border-gray-300 text-center text-para">
+                                            <thead className="bg-black text-white">
+                                                <tr>
+                                                    {columns.map((col, index) => (
+                                                        <th key={index} className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">
+                                                            {col}
+                                                        </th>
+                                                    ))}
+                                                </tr>
+                                            </thead>
+                                            <tbody className=" border">
+                                                {submittedData.map((row, rowIndex) => (
+                                                    <tr key={rowIndex}>
+                                                        {columns.map((col, colIndex) => (
+                                                            <td key={colIndex} className="border-y-2 border-x-2 overflow-hidden  border-gray-300 px-3 py-1 whitespace-nowrap">
+                                                                {row[col]}
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <hr />
                 <div className="ml-2 my-4">
                   <h6 className="font-semibold text-base mb-2 text-graytext">
                     About us

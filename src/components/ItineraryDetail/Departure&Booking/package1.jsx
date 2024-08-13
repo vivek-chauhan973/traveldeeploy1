@@ -49,24 +49,26 @@ export default function Package1() {
     setFixedDepCity1,
     setFixedDepDate1,
     fixedDepCity,
+    setPrice1,
     fixedDepDate
   } = useAppContext();
   const [images, setImages] = useState(null);
   const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
-  const fetchImages = useCallback(async () => {
-    const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
-    const data = await res.json();
-    return data;
-  }, [addPackage]);
-  console.log("state id is here --------",addPackage?.state)
+  // const fetchImages = useCallback(async () => {
+  //   const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
+  //   const data = await res.json();
+  //   return data;
+  // }, [addPackage]);
+  // console.log("state id is here --------",addPackage?.state)
   useEffect(() => {
-    fetchImages().then((res) => setImages(res));
-  }, [addPackage, fetchImages]);
-
+    // fetchImages().then((res) => setImages(res));
+    setImages(addPackage?.uploads);
+  }, [addPackage]);
+// console.log("Images :: :: :: ",images)
   // displayPrice
   const [isDisplayPrice,setDisplayPrice]=useState() //display price
   // calculated price show 
-  console.log("-==-=-=-=-=-=-=-=-=-=-==",isDisplayPrice)
+  // console.log("-==-=-=-=-=-=-=-=-=-=-==",isDisplayPrice)
   useEffect(() => {
     let calculateDisplayPrice
     var price=addPackage?.prices
@@ -94,16 +96,16 @@ export default function Package1() {
       // Step 7: Final displayed price after adding GST
       const displayedPrice = (grandTotal + gstAmount)/2;
     
-      console.log("Final Displayed Price:", displayedPrice);
+      // console.log("Final Displayed Price:", displayedPrice);
       setDisplayPrice(displayedPrice)
+      
     }
     
-  }, [addPackage]);
-
-
-
-
+  }, [addPackage,guestPrice]);
   // console.log("packages is very smart",addPacka/
+  useEffect(()=>{
+    setPrice1(isDisplayPrice);
+  },[isDisplayPrice])
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       setFixedDeparturePopupOpen(true);
@@ -113,7 +115,7 @@ export default function Package1() {
       setFixedDepDate1(fixedDepDate);
     }
   };
-  console.log("addPackage12324", addPackage);
+  // console.log("addPackage12324", addPackage);
   const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
 
   useEffect(() => {
@@ -384,7 +386,7 @@ export default function Package1() {
               <p className="text-sm leading-5">
                 Starts From{" "}
                 <span className="text-lg text-graytext font-medium">
-                  {addPackage?.price}
+                  {isDisplayPrice}
                 </span>
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
