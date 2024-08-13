@@ -9,7 +9,7 @@ const fetchPackage = async (packageUrl) => {
     method: "GET",
   });
   const data = await response.json();
-  console.log("..............................",data)
+  // console.log("..............................",data)
   return data;
 };
 
@@ -50,6 +50,7 @@ export const AppProvider = ({ children }) => {
 
     fetchData();
   }, [packageUrl]);
+
 
   const [toglePopup, setToglePopup] = useState(true);
   const [pricingManagement, setPricingManagement] = useState(null);
@@ -119,13 +120,16 @@ export const AppProvider = ({ children }) => {
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-// console.log("fetch api 123221",filterApi)
+const [price1,setPrice1]=useState(0);
   // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",fixedDepartureData1)
-  // console.log("packages sfsjbfbfjbsfhjdf",addPackage)
+  console.log("packages sfsjbfbfjbsfhjdf",price1)
   const contextFun = {
     closeBtn,
     setCloseBtn,
     guestPrice,
+    setPrice1,
+    price1,
+    setGuestPrice,
     setInputData,
     addPackage,
     setAddPackage,

@@ -12,6 +12,7 @@ const ItineraryPricingCard = () => {
     setInputData,
     guestPrice,
     closeBtn,
+    price1,
     setCloseBtn,
     showAddguest,
   } = useAppContext();
@@ -77,7 +78,7 @@ const ItineraryPricingCard = () => {
               <p className="text-sm ">Basic Price</p>
             </div>
             <div className="">
-              <p className="text-lg font-medium text-graytext"> ₹ 40,000</p>
+              <p className="text-lg font-medium text-graytext"> {price1}</p>
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>
