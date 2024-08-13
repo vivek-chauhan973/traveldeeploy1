@@ -1,6 +1,5 @@
 import City from "@/models/City";
 import Package from "@/models/Package"; // Import your Package model
-import { NextApiRequest, NextApiResponse } from "next";
 
 const filterStateCategory = async (req, res) => {
     try {
@@ -24,7 +23,8 @@ const filterStateCategory = async (req, res) => {
 
         // Add category filter if categoryId is provided
         if (categoryId) {
-            packageQuery.category = categoryId;
+            const categories = Array.isArray(categoryId) ? categoryId : [categoryId];
+            packageQuery.category = { $in: categories };
         }
 
         // Fetch packages based on the location and category filters
