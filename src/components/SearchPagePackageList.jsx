@@ -236,7 +236,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
                 <div className="flex  justify-end items-baseline gap-2 md:block">
                   <p className="text-[12px] mt-1">Starts From </p>
                   <p className="text-[22px] font-medium">
-                    ₹{packageData.price.toLocaleString()}
+                    ₹{packageData?.prices?.displayPrice?.toLocaleString()}
                   </p>
                 </div>
                 <p className="text-[10px] leading-snug">

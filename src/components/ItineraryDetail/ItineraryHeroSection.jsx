@@ -210,20 +210,21 @@ const ItineraryHeroSection = ({
           <div className="flex justify-end">
             <div className="hidden xl:flex gap-5">
               <div className="text-right flex flex-col items-end justify-center ">
-                <p className="text-base leading-5 text-green-600 font-semibold uppercase">
-                  best deal price
-                </p>
-                <div className="flex gap-1 items-end">
-                  <p className="text-sm line-through">₹20,000</p>
-                  <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
-                    37% Off
-                  </button>
-                </div>
+                  <p className="text-base leading-5 text-green-600 font-semibold uppercase">
+                    best deal price
+                  </p>
+                  <div  className={`${addPackage?.prices?.diskHike < 0 ? 'flex' : 'hidden'} gap-1 items-end`}>
+                    <p className="text-sm line-through">₹{addPackage?.prices?.withoutDiscount}</p>
+                    <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                    {addPackage?.prices?.diskHike}% Off
+                    </button>
+                  </div>
+                
                 {addPackage?.prices?.addguest === "addGuest" && (
                   <p className="text-sm leading-5">
-                    Starts From{" "}
+                    with GST include {" "}
                     <span className="text-lg text-graytext font-medium">
-                      {formatINR(isDisplayPrice)}
+                      {formatINR(addPackage?.prices?.displayPrice)}
                     </span>
                   </p>
                 )}

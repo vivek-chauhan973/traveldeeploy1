@@ -7,7 +7,6 @@ import PackageDeparture from "@/models/package/PackageDeparture";
 
 import SeoData from '@/models/package/PackageSeo';
 import PackageMap from "@/models/package/PackageMap";
-
 import TourInformation from "@/models/package/TourInformation";
 import FlightBookingSchema from "@/models/package/FlightBooking";
  const packagePublicPackageUrl= async (req, res) => {
@@ -21,10 +20,11 @@ import FlightBookingSchema from "@/models/package/FlightBooking";
     }
 
     try {
-        const packageDetails = await Package.findOne({ url: newPackageUrl }).populate({path:"location"}).populate({path:"country"}).populate({path:"category"}).populate({path:"state"}).populate('tourinfo.tourInclusion')
+        const packageDetails = await Package.findOne({ url: newPackageUrl }).populate({path:"location"}).populate({path:"country"}).populate({path:"category"}).populate({path:"state"}).populate('priceHike').populate('tourinfo.tourInclusion')
         .populate('tourinfo.tourExclusion')
         .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
         .populate('tourinfo.tourNeedToKonow');
+
         if (!packageDetails) {
             return res.status(404).json({ message: 'Package not found.' });
         }

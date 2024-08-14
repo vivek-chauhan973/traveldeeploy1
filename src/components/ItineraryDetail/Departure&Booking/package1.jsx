@@ -36,6 +36,7 @@ import { Link as ScrollLink } from "react-scroll";
 import Faq1 from '@/components/Faq/Faq1';
 import Metatag from '@/components/ItineraryDetail/MetaTag';
 
+
 export default function Package1() {
   const {
     addPackage,
@@ -59,7 +60,7 @@ export default function Package1() {
   //   const data = await res.json();
   //   return data;
   // }, [addPackage]);
-  // console.log("state id is here --------",addPackage?.state)
+  console.log(":::::::::::::::::::::::::::::::::::::ad pad--------",addPackage)
   useEffect(() => {
     // fetchImages().then((res) => setImages(res));
     setImages(addPackage?.uploads);
@@ -383,10 +384,16 @@ export default function Package1() {
               <p className="text-base leading-5 text-green-600 font-semibold uppercase">
                 best deal price
               </p>
+              <div  className={`${addPackage?.prices?.diskHike < 0 ? 'flex' : 'hidden'} gap-1 items-end`}>
+                    <p className="text-sm line-through">₹{addPackage?.prices?.withoutDiscount}</p>
+                    <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                    {addPackage?.prices?.diskHike}% Off
+                    </button>
+                  </div>
               <p className="text-sm leading-5">
                 Starts From{" "}
                 <span className="text-lg text-graytext font-medium">
-                  {isDisplayPrice}
+                {addPackage?.prices?.displayPrice.toLocaleString()}
                 </span>
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
@@ -429,7 +436,7 @@ export default function Package1() {
                       : " bg-orange-200"
                       }  text-center text-para`}
                   >
-                    Book Noow
+                    Book Now
                   </button>
                 )}
                 {fixedDeparturePopupOpen && (

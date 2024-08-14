@@ -41,7 +41,7 @@ const filterStateCategory = async (req, res) => {
 
         // Fetch packages based on the location and category filters
         const packages = await Package.find(packageQuery)
-            .populate('category') // Populate category details
+            .populate('category').populate('priceHike')// Populate category details
             .exec();
 
         return res.status(200).json({ packages, cities });
