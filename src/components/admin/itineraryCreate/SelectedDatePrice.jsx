@@ -20,6 +20,7 @@ export default function SelectedDatePrice({ itinerary }) {
   const [price, setPrice] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [limit,setLimit]=useState('');
 
   useEffect(() => {
     const loadData = async () => {
@@ -28,6 +29,7 @@ export default function SelectedDatePrice({ itinerary }) {
       try {
         const res = await fetchData1(itinerary);
         setEntries(res?.data?.datePriceArray || []);
+        setLimit(res?.data?.limit?.join(","));
       } catch (err) {
         setError('Failed to fetch data');
       } finally {
@@ -46,7 +48,7 @@ export default function SelectedDatePrice({ itinerary }) {
       return;
     }
 
-    setEntries([...entries, { date: selectedDate, price }]);
+    setEntries([...entries, { date: selectedDate, price}]);
     setSelectedDate('');
     setPrice('');
     setError('');
@@ -65,7 +67,7 @@ export default function SelectedDatePrice({ itinerary }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(entries),
+        body: JSON.stringify({entries,limit}),
       });
       if (!response.ok) throw new Error('Network response was not ok');
       alert('Data saved successfully');
@@ -76,6 +78,7 @@ export default function SelectedDatePrice({ itinerary }) {
       setLoading(false);
     }
   };
+  console.log("limit is here :: :: ",limit);
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', margin: '20px' }}>
@@ -149,6 +152,17 @@ export default function SelectedDatePrice({ itinerary }) {
             </li>
           ))}
         </ul>
+{/* here is limit */}
+<label className='my-3'>
+            limit:
+            <input
+              type="text"
+              value={limit}
+              onChange={(e) => setLimit(e.target.value)}
+              style={{ marginLeft: '10px' }}
+            />
+          </label>
+
         <button
           onClick={handleSubmit}
           disabled={loading}

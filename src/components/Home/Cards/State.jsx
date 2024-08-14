@@ -20,7 +20,7 @@ const State = () => {
         fetchData();
     }, []);
 
-    console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnn", data)
+    // console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnn", data)
 
     return (
         <div>
@@ -42,9 +42,6 @@ const State = () => {
                                 </div>
                             ))}
                         </div> */}
-
-
-
                         {data?.states?.map((title) => (
                             <div key={title._id}>
                                 <div className=' overflow-x-hidden'>
@@ -54,7 +51,7 @@ const State = () => {
                                 </div>
                             </div>
                         ))}
-
+                        
                     </div>
 
                     <div className="relative col-span-4 w-full overflow-auto">

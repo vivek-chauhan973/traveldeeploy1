@@ -16,7 +16,8 @@ const DepartureSection = ({ addPackage }) => {
   const [columns, setColumns] = useState([]);
   const [submittedData, setSubmittedData] = useState([]);
   const AllDataRelatedCity = useMyCustomHook();
-
+  // const [selectedItemData,setSelectedItemData]=useState({});
+  // console.log("AllDataRelatedCity :: :: ",selectedItemData)
   useEffect(() => {
     setStartCity(addPackage?.startcity);
     setSubmittedData(addPackage?.tableData || []);
@@ -95,7 +96,7 @@ const DepartureSection = ({ addPackage }) => {
                         const dateObj = new Date(item.date);
                         const dayOfWeek = dateObj.toLocaleString('default', { weekday: 'short' });
                         const dayOfMonth = dateObj.getDate();
-
+                        // setSelectedItemData(item);
                         return (
                           <div
                             key={i}

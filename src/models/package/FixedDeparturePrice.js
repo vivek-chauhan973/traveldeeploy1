@@ -14,7 +14,8 @@ const fixedDeparturePriceSchema=new mongoose.Schema({
             type:String,
             required:true
         }
-    }]
+    }],
+    limit:[]
 },{timestamps:true})
 
 const FixedDeparturePrice=mongoose.models.FixedDeparturePrice|| mongoose.model("FixedDeparturePrice",fixedDeparturePriceSchema)

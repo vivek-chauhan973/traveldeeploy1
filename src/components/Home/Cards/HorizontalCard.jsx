@@ -1,8 +1,22 @@
+import { useEffect, useState } from "react";
 import "../../../app/globals.css";
 import Image from 'next/image'
-const HorizontalCard = () => {
+import Link from "next/link";
+const fetchAllPackagesAccordingToStateId=async (locationId)=>{
+  const response = await fetch(
+    `/api/public/tour-packages?locationId=${locationId}`,
+    { method: "GET" }
+  );
+  return await response.json();
+}
+const HorizontalCard = ({item}) => {
+const [packageList,setPackageList]=useState([]);
+useEffect(()=>{
+  fetchAllPackagesAccordingToStateId(item?._id).then(res=>setPackageList(res?.packages))
+},[item])
+console.log("res123 ------> ",item)
   return (
-    <div>
+    <Link href={`/india/${item?.pageUrl}`}>
       <div className="shadow-lg w-[320px] border gap-5 m-2 flex items-center rounded-md shrink-0">
         <div className=" h-full">
           {/* <Image className=" object-cover rounded-md" width={100} height={100}
@@ -14,11 +28,11 @@ const HorizontalCard = () => {
         </div>
         <div>
           <p className="text-[12px]">Tour Package from</p>
-          <p className="text-[16px] font-semibold">Ahemdabad</p>
-          <p className="text-[10px]">141 tours</p>
+          <p className="text-[16px] font-semibold">{item?.name}</p>
+          <p className="text-[10px]">{packageList?.length} tours</p>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

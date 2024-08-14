@@ -4,7 +4,7 @@ import  { useEffect, useRef, useState } from 'react'
 const DeparturePopup = ({setShowPopup,addPackage}) => {
 
     const [handleCity,setHandleCity]=useState(false);
-    const {setShowAddguest}=useAppContext();
+    const {setShowAddguest,setFixedDepartureButtonEnaibleAndDisable}=useAppContext();
     const [data,setData]=useState([]);
 
     useEffect(() => {
@@ -19,11 +19,15 @@ const DeparturePopup = ({setShowPopup,addPackage}) => {
       // },[data])
     }, [addPackage?.startcity, data]);
 
+
     const ref=useRef(null);
     // console.log("addpackage123456789",addPackage)
 
     const handleSubmit=()=>{
         // console.log(); 
+        if(addPackage?.addguest==="fixedDeparture" ){
+          setFixedDepartureButtonEnaibleAndDisable(true)
+        }
       if(handleCity){
         setShowAddguest(ref.current.value)
         setShowPopup(false);}

@@ -12,17 +12,25 @@ import Cardwork from "@/components/Home/Cards/cardwork";
 import ArrowSection from "@/components/Home/Cards/ArrowSection";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import State from "@/components/Home/Cards/State";
+import { useEffect, useState } from "react";
 // import Booking from "@/components/profile/bookings";
 
-
+const fetchState=async ()=>{
+    const response=await fetch("/api/public/states");
+    return await response.json();
+}
 
 
 export default function home() {
 
+    const [states,setStates]=useState([])
     const boxShadowStyle = {
         boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
     };
-
+    useEffect(()=>{
+        fetchState().then(res=>setStates(res?.states||[]));
+    },[])
+    // console.log("res---->  ",states)
     return (
         <>
             <DesktopHeader />
@@ -51,7 +59,7 @@ export default function home() {
             {/* Four image */}
             <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
 
-                <div className="relative mb-2 group">
+               {states?.map((item,i)=> <div key={i} className="relative mb-2 group">
                     <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                         src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         alt=""
@@ -61,9 +69,9 @@ export default function home() {
                     <div style={boxShadowStyle}
                         className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                     >
-                        Himacahl
+                       {item.name}
                     </div>
-                </div>
+                </div>)}
                 <div className="relative mb-2 group">
                     <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
                         src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -175,7 +183,7 @@ export default function home() {
                 {/* very small horizontal card */}
                 <div className="container-wrapper justify-center  flex flex-wrap">
                     {/* each small horizontal card */}
-                    <HorizontalCard />
+                    {states?.map((item,i)=><HorizontalCard key={i} item={item} />)}
                     <HorizontalCard />
                     <HorizontalCard />
                     <HorizontalCard />
@@ -192,6 +200,7 @@ export default function home() {
                     <p className="md:text-md text-para font-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo cupiditate nobis minus?</p>
                 </div>
                 <Card4 />
+                
             </div>
 
 
@@ -206,6 +215,7 @@ export default function home() {
 
             {/* state code start  */}
             <State />
+            
             {/*  start code end */}
             <div>
 

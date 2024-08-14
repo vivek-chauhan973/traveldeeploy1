@@ -3,6 +3,11 @@ import CustomiseTour from "../CustomiseTour";
 import FixedDeparturePopup from "./FixedDeparturePopup";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
+const fetchLimitData=async (id)=>{
+  const response = await fetch(`/api/save-data?packageId=${id}`);
+  return await response.json();
+}
+
 const ItinaryFixedDepartureCard = ({
   addPackage,
   togglePopup,
@@ -21,11 +26,18 @@ const ItinaryFixedDepartureCard = ({
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
   const [columns,setColumns]=useState([]);
+  const [limitData,setLimitData]=useState([]);
 const [submittedData,setSubmittedData]=useState([]);
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
   }
-
+const newLimitData=[];
+let i=parseInt(limitData?.[0])
+while(i<=parseInt(limitData?.[1])){
+  let data=i.toString();
+  newLimitData.push(data);
+  i=i+1
+}
   const handleSubmit = () => {
     if (fixedDepDate && fixedDepCity) {
       setFixedDepCity1(fixedDepCity);
@@ -38,9 +50,10 @@ const [submittedData,setSubmittedData]=useState([]);
   useEffect(()=>{
     setSubmittedData(addPackage?.tableData||[])
     setColumns(addPackage?.tableColumn||[])
-    
+    fetchLimitData(addPackage?._id).then(res=>setLimitData(res?.data?.limit||[]))
   },[addPackage])
 
+  // console.log("here is limitData ----->  ",limitData)
   return (
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[480px] overflow-scroll">
@@ -49,15 +62,15 @@ const [submittedData,setSubmittedData]=useState([]);
           <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3 p-2">
             <div>
               <div className="flex flex-col">
-                <label className="text-para font-semibold cursor-pointer" htmlFor="city">Select Dept. City : </label>
+                <label className="text-para font-semibold cursor-pointer" htmlFor="city">Select limit : </label>
                 <select name="city" id="city" className="border rounded w-full pl-3 cursor-pointer"
                   onChange={(e) => {
                     setFixedDepCity(e.target.value);
                     setCity(true);
                   }}
                 >
-                  <option value="" className="cursor-pointer">Departure City</option>
-                  {addPackage?.startcity?.map((item, i) => (
+                  <option value="" className="cursor-pointer">select limit</option>
+                  {newLimitData?.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
