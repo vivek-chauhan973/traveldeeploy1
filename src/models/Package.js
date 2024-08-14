@@ -62,7 +62,14 @@ const packageSchema = new Schema({
       type:mongoose.Schema.Types.ObjectId,
       ref:"PriceHike"
     },
-
+    addguestPrices:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"PackagePrice"
+    },
+    fixedDeparturePrices:{
+     type:mongoose.Schema.Types.ObjectId,
+      ref:"PackageDeparture"
+    },
     tourinfo:tourInfoSchema,
     badges: {
       type: [String],

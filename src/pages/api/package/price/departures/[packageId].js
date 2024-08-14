@@ -32,7 +32,7 @@ import { NextApiRequest, NextApiResponse } from "next";
       );
       const updatedPackage = await Package.updateOne(
         {_id:packageId},
-        { $set: { addguest: departure1,fixedfixeddepartureweightedprice:parseFloat(weightOptional) } },
+        { $set: { addguest: departure1,fixedfixeddepartureweightedprice:parseFloat(weightOptional),fixedDeparturePrices:departure?._id } },
         { new: true }
       );
       // console.log("Saved departure data:", departure);

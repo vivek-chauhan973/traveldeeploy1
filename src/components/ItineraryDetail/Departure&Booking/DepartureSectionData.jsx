@@ -24,10 +24,8 @@ const useMyCustomHook = () => {
   const [packagePrice, setPackagePrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [fixedDepartureData,setFixedDepartureData]=useState([]);
-
   // console.log("price 1 7318472921 ::::: ::: ",price1);
   //create a array of date between the range of date
-
   const startdate1 = new Date(initialDate);
   const enddate1 = new Date(lastDate);
   const dateArray = [];

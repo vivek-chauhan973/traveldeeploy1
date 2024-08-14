@@ -23,7 +23,7 @@ const fetchState=async ()=>{
 
 export default function home() {
 
-    const [states,setStates]=useState([])
+    const [states,setStates]=useState([]);
     const boxShadowStyle = {
         boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
     };

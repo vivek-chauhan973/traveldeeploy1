@@ -7,25 +7,38 @@ import { IoIosSave } from 'react-icons/io';
 import { useAppContext } from '../context/Package/AddGuest';
 
 const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
-    const [basePrice, setBasePrice] = useState(itinerary?.prices?.basePrice || 0);
-    const [rate, setRate] = useState(itinerary?.prices?.perRate|| 0);
-    const [inventory, setInventory] = useState(itinerary?.prices?.inventory || 0);
-    const [weightOptional, setWeightOptional] = useState(itinerary?.prices?.weight|| 0);
-    const [gst, setGst] = useState(itinerary?.prices?.gst|| 0);
+    const [basePrice, setBasePrice] = useState(0);
+    const [rate, setRate] = useState(0);
+    const [inventory, setInventory] = useState( 0);
+    const [weightOptional, setWeightOptional] = useState(0);
+    const [gst, setGst] = useState(0);
     const {pricingManagement}=useAppContext();
+    const [addguest,setAddguest]=useState("")
     // State for Age Policy
-    const [agePolicy, setAgePolicy] = useState(itinerary?.prices?.agePolicy || []);
+    const [agePolicy, setAgePolicy] = useState([]);
     const [inputAgePolicy, setInputAgePolicy] = useState('');
     const [agePolicyValidate, setAgePolicyValidate] = useState('');
     
     // State for Notes
-    const [notes, setNotes] = useState(itinerary?.prices?.notes || []);
+    const [notes, setNotes] = useState([]);
     const [inputNotes, setInputNotes] = useState('');
     const [notesValidate, setNotesValidate] = useState('');
 
     const handleInputChange = (setter) => (e) => {
         setter(e.target.value);
     };
+
+
+    useEffect(()=>{
+        setBasePrice(itinerary?.prices?.basePrice || 0)
+        setRate(itinerary?.prices?.perRate|| 0)
+        setInventory(itinerary?.prices?.inventory || 0)
+        setWeightOptional(itinerary?.prices?.weight|| 0)
+        setGst(itinerary?.prices?.gst|| 0)
+        setAddguest(itinerary?.addguest||"");
+        setAgePolicy(itinerary?.prices?.agePolicy || [])
+        setNotes(itinerary?.prices?.notes || [])
+    },[itinerary])
 
     // Age Policy Handlers
     const handleAgePolicyChange = (e) => {
@@ -140,7 +153,7 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
             },
             agePolicy,
             notes,
-            departure1:pricingManagement,
+            departure1:pricingManagement||addguest,
         };
 
         try {

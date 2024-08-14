@@ -278,6 +278,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                 
                 if (res.ok){
                     setBasicDot(true)
+                    // console.log("primary data submitted as : ",res)
                 }
                 
                 const data = await res.json();

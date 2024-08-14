@@ -21,7 +21,7 @@ import FlightBookingSchema from "@/models/package/FlightBooking";
 
     try {
         const packageDetails = await Package.findOne({ url: newPackageUrl }).populate({path:"location"}).populate({path:"country"}).populate({path:"category"}).populate({path:"state"}).populate('priceHike').populate('tourinfo.tourInclusion')
-        .populate('tourinfo.tourExclusion')
+        .populate('tourinfo.tourExclusion').populate("fixedDeparturePrices").populate("addguestPrices")
         .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
         .populate('tourinfo.tourNeedToKonow');
 

@@ -33,7 +33,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
             default:
                 updatedPackage = await Package.findById(packageId).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
-                .populate('tourinfo.tourExclusion')
+                .populate('tourinfo.tourExclusion').populate("addguestPrices").populate("fixedDeparturePrices")
                 .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
                 .populate('tourinfo.tourNeedToKonow');
                 const associateState = await State.findById(updatedPackage.location?.state);

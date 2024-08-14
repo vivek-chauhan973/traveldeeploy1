@@ -78,7 +78,7 @@ export default function SelectedDatePrice({ itinerary }) {
       setLoading(false);
     }
   };
-  console.log("limit is here :: :: ",limit);
+  // console.log("limit is here :: :: ",limit);
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', margin: '20px' }}>

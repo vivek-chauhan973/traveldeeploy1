@@ -40,7 +40,7 @@ import { NextApiRequest, NextApiResponse } from "next";
       // console.log("Saved price data:", price);
       const updatedPackage = await Package.updateOne(
         {_id:packageId},
-        { $set: { addguest: addguest } },
+        { $set: { addguest: addguest ,addguestPrices:price?._id} },
         { new: true }
       );
       console.log("updatedPackage",updatedPackage);
