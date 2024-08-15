@@ -75,7 +75,7 @@ export default function Package1() {
     var price=addPackage?.prices
     if (price) {
       // Step 1: Calculate the base price
-      const basePrice = price?.twinSharingRoom + price?.misc;
+      const basePrice = price?.twinSharingRoom + (price?.misc*addPackage?.days?.length);
     
       // Step 2: Calculate the markup amount
       const markupAmount = (basePrice * price?.markup) / 100;
@@ -393,7 +393,7 @@ export default function Package1() {
               <p className="text-sm leading-5">
                 Starts From{" "}
                 <span className="text-lg text-graytext font-medium">
-                {addPackage?.prices?.displayPrice.toLocaleString()}
+                ₹{Math.floor(isDisplayPrice).toLocaleString()}
                 </span>
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>

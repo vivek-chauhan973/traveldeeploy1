@@ -224,7 +224,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     with GST include {" "}
                     <span className="text-lg text-graytext font-medium">
-                      {formatINR(addPackage?.prices?.displayPrice)}
+                    ₹{Math.floor(isDisplayPrice).toLocaleString()}
                     </span>
                   </p>
                 )}

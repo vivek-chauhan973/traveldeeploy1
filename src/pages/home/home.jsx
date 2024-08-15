@@ -21,7 +21,7 @@ const fetchState=async ()=>{
 }
 
 
-export default function home() {
+export default function Home() {
 
     const [states,setStates]=useState([]);
     const boxShadowStyle = {
