@@ -5,12 +5,12 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import Head from 'next/head';
 import { useRouter } from "next/router";
 
-// export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
 
-//   const packageUrl  = context.params.package;
-//   const newPackageUrl = packageUrl.replace("-tour-package", " ");
+  const packageUrl  = context.params.package;
+  const newPackageUrl = packageUrl.replace("-tour-package", " ");
   
-  const res = await fetch(`http://localhost:3000/api/public/package/${newPackageUrl}`);
+  const res = await fetch(`http://89.116.34.248:3000/api/public/package/${newPackageUrl}`);
   const data = await res.json();
   console.log("data is here of package ::: ",data)
   return{
@@ -20,6 +20,7 @@ import { useRouter } from "next/router";
   }
 }
 export default function TourPackage({data}) {
+  console.log("data is here data ssr",data)
   return (
     <>
     <Head>
@@ -44,7 +45,7 @@ export default function TourPackage({data}) {
     </Head>
     <FAQSchema faqs={data?.faqs?.days}/>
       <AppProvider>
-        <Package1 />
+        <Package1  />
       </AppProvider>
 
     </>

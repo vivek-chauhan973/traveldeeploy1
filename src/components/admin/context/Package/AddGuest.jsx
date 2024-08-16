@@ -9,7 +9,7 @@ const fetchPackage = async (packageUrl) => {
     method: "GET",
   });
   const data = await response.json();
-  // console.log("..............................",data)
+  console.log("..............................",packageUrl)
   return data;
 };
 
