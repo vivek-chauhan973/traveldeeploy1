@@ -15,6 +15,7 @@ const ItineraryPricingCard = () => {
     price1,
     setCloseBtn,
     showAddguest,
+    submitButtonOfPricingCalculation
   } = useAppContext();
 
   return (
@@ -23,6 +24,7 @@ const ItineraryPricingCard = () => {
         <div className="bg-white">
           <div className="flex justify-between mb-2">
             <h5 className="text-md font-semibold text-graytext">Booking Summary</h5>
+            <p>{submitButtonOfPricingCalculation?guestPrice:price1}</p>
             <div>
               <Addguest
                 guestPrice={guestPrice}
@@ -78,7 +80,7 @@ const ItineraryPricingCard = () => {
               <p className="text-sm ">Basic Price</p>
             </div>
             <div className="">
-              <p className="text-lg font-medium text-graytext"> ₹{Math.floor(price1).toLocaleString()}</p>
+              <p className="text-lg font-medium text-graytext"> ₹{Math.floor( (submitButtonOfPricingCalculation&&guestPrice)||price1).toLocaleString()}</p>
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>

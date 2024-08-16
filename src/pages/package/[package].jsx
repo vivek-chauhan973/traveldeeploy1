@@ -5,24 +5,21 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import Head from 'next/head';
 import { useRouter } from "next/router";
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
 
-  const packageUrl  = context.params.package;
-  const newPackageUrl = packageUrl.replace("-tour-package", " ");
+//   const packageUrl  = context.params.package;
+//   const newPackageUrl = packageUrl.replace("-tour-package", " ");
   
-  const res = await fetch(`http://89.116.34.248:3000/api/public/package/${newPackageUrl}`);
-  const data = await res.json();
-  console.log("data is here of package ::: ",data)
-  return{
-    props:{
-      data
-    }
-  }
-}
+//   const res = await fetch(`http://89.116.34.248:3000/api/public/package/${newPackageUrl}`);
+//   const data = await res.json();
+//   console.log("data is here of package ::: ",data)
+//   return{
+//     props:{
+//       data
+//     }
+//   }
+// }
 export default function TourPackage({data}) {
-  // console.log("router",useRouter());
-  // console.log("SEO data all is here ",data)
-  // console.log("SEO data all is here ",data?.seoData)
   return (
     <>
     <Head>

@@ -18,7 +18,7 @@ const Addguest = ({
   addPackage
 }) => {
   const date = new Date();
-  const { showAddguest } = useAppContext() ?? { showAddguest: false };
+  const { showAddguest,setSubmitButtonOfPricingCalculation } = useAppContext() ?? { showAddguest: false };
 
   const infantMaxDate = date.toISOString().split("T")[0];
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
@@ -72,6 +72,7 @@ const Addguest = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCloseBtn(true);
+    setSubmitButtonOfPricingCalculation(true);
     const childDateInputs = document.querySelectorAll('input[id^="childDate"]');
     const isAnyChildDateEmpty = Array.from(childDateInputs).some(
       (input) => input.value === ""
@@ -304,8 +305,8 @@ const Addguest = ({
                     add guest & Choose from{ }
                   </p>
                   <div>
-                    {/* <p className="text-lg font-medium"> ₹ {guestPrice}</p>
-                    <p className="text-xxs">per person on twin sharing</p> */}
+                    <p className="text-lg font-medium"> ₹ {guestPrice}</p>
+                    <p className="text-xxs">per person on twin sharing</p>
                   </div>
                 </div>
 
