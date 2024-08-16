@@ -4,6 +4,7 @@ import CustomiseTour from "../CustomiseTour";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import { useEffect } from "react";
 
 const ItineraryPricingCard = () => {
   const {
@@ -17,7 +18,7 @@ const ItineraryPricingCard = () => {
     showAddguest,
     submitButtonOfPricingCalculation
   } = useAppContext();
-
+ 
   return (
     <>
       <div className=" border p-5 rounded-md bg-white xs:mt-5 xl:mt-0 xs:hidden xl:block overflow-hidden ">

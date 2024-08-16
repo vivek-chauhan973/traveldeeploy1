@@ -18,6 +18,7 @@ const ItinaryFixedDepartureCard = ({
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
+    price1,
     setFixedDepCity,
     setFixedDepCity1,
     setFixedDepartureButtonEnaibleAndDisable,
@@ -25,8 +26,12 @@ const ItinaryFixedDepartureCard = ({
   } = useAppContext();
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
+  const [calculatedPrizeOfGst,setCalculatedPrizeOfGst]=useState(0);
   const [columns,setColumns]=useState([]);
   const [limitData,setLimitData]=useState([]);
+  const [limitKey,setLimitKey]=useState(1);
+  const [gst,setGst]=useState(0);
+  const [grandTotal,setGrandTotal]=useState(0);
 const [submittedData,setSubmittedData]=useState([]);
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
@@ -51,9 +56,17 @@ while(i<=parseInt(limitData?.[1])){
     setSubmittedData(addPackage?.tableData||[])
     setColumns(addPackage?.tableColumn||[])
     fetchLimitData(addPackage?._id).then(res=>setLimitData(res?.data?.limit||[]))
+    setGst(addPackage?.fixedDeparturePrices?.gst||0);
   },[addPackage])
-
   // console.log("here is limitData ----->  ",limitData)
+  //  console.log("fixed departure addpackage:: ---->  ",addPackage);
+  
+  useEffect(()=>{
+    setCalculatedPrizeOfGst((price1*5)/100)
+  },[gst,price1])
+  useEffect(()=>{
+    setGrandTotal((price1+calculatedPrizeOfGst)*limitKey);
+  },[calculatedPrizeOfGst,limitKey])
   return (
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[480px] overflow-scroll">
@@ -66,6 +79,7 @@ while(i<=parseInt(limitData?.[1])){
                 <select name="city" id="city" className="border rounded w-full pl-3 cursor-pointer"
                   onChange={(e) => {
                     setFixedDepCity(e.target.value);
+                    setLimitKey(e.target.value)
                     setCity(true);
                   }}
                 >
@@ -102,7 +116,7 @@ while(i<=parseInt(limitData?.[1])){
             <div>
               <p className="text-lg font-medium text-graytext">
                 {" "}
-                {addPackage?.prices?.basePrice}
+                {price1}
               </p>
               <p className="text-xxs">per person on twin sharing</p>
             </div>
@@ -112,14 +126,14 @@ while(i<=parseInt(limitData?.[1])){
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
-              <p className="">70,000</p>
+              <p className="">{price1}</p>
             </div>
           </div>
           <div className="text-para grid-cols-2 -mt-2 hidden xl:grid">
             <div></div>
             <div className="grid grid-cols-2">
-              <p>GST 5% </p>
-              <p className="">2,300</p>
+              <p>GST {gst} % </p>
+              <p className="">{calculatedPrizeOfGst}</p>
             </div>
           </div>
           <hr className="border-dashed my-2" />
@@ -184,7 +198,7 @@ while(i<=parseInt(limitData?.[1])){
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p>Grand Total</p>
-              <p className="font-semibold text-graytext">70,000</p>
+              <p className="font-semibold text-graytext">{grandTotal}</p>
             </div>
           </div>
           <div className=" justify-center gap-10 my-3 hidden xl:flex">
