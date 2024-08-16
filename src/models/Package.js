@@ -77,7 +77,6 @@ const packageSchema = new Schema({
     },
     days: {
       type: Number,
-      default: 0,
     },
     uploads: [String],
     addguest: {
@@ -119,6 +118,25 @@ const packageSchema = new Schema({
 packageSchema.pre(/^find/, function (next) {
   this.populate("addguestPrices");
   next();
+});
+// Virtual field to calculate display price based on addguestPrices
+packageSchema.virtual('displayPrice').get(function () {
+  if (this.addguestPrices) {
+    const basePrice = this.addguestPrices.twinSharingRoom + (this.addguestPrices.misc * this.days);
+    const markupAmount = (basePrice * this.addguestPrices.markup) / 100;
+    const priceWithMarkup = basePrice + markupAmount;
+    const discountAmount = (priceWithMarkup * Math.abs(this.addguestPrices.diskHike)) / 100;
+    const grandTotal = this.addguestPrices.diskHike < 0
+      ? priceWithMarkup - discountAmount
+      : priceWithMarkup + discountAmount;
+    const gstAmount = (grandTotal * this.addguestPrices.gst) / 100;
+    return (grandTotal + gstAmount) / 2;
+  }
+  
+});
+packageSchema.virtual('alksdfjjkashdfjkashdfkas').get(function () {
+  return this.days
+  
 });
 
 packageSchema.virtual("pageUrl").get(function () {

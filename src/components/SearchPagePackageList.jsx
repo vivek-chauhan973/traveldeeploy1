@@ -12,7 +12,7 @@ const fetchPackages = async (locationId) => {
     { method: "GET" }
   );
   const data = await response.json();
-  console.log("api public tour=package", locationId)
+  console.log("api public tour=package---", data)
   return data?.packages;
 };
 const filteredData = async (id, cat, min, max,minDay,maxDay) => {

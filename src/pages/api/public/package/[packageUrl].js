@@ -20,7 +20,7 @@ const packagePublicPackageUrl = async (req, res) => {
 
   try {
     const packageDetails = await Package.findOne({ url: newPackageUrl })
-      .populate("location country state category priceHike addguestPrices fixedDeparturePrices")
+      .populate("location country state category priceHike fixedDeparturePrices")
       .populate('tourinfo.tourInclusion')
       .populate('tourinfo.tourExclusion')
       .populate('tourinfo.tourPayment') 
