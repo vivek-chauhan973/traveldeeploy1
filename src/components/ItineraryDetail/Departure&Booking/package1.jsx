@@ -34,9 +34,7 @@ import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from '@/components/Faq/Faq1';
-import Metatag from '@/components/ItineraryDetail/MetaTag';
-
-
+// import Metatag from '@/components/ItineraryDetail/MetaTag';
 export default function Package1() {
   const {
     addPackage,
@@ -51,7 +49,9 @@ export default function Package1() {
     setFixedDepDate1,
     fixedDepCity,
     setPrice1,
-    fixedDepDate
+    fixedDepDate,
+    price1,
+    submitButtonOfPricingCalculation
   } = useAppContext();
   const [images, setImages] = useState(null);
   const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
@@ -60,7 +60,7 @@ export default function Package1() {
   //   const data = await res.json();
   //   return data;
   // }, [addPackage]);
-  console.log(":::::::::::::::::::::::::::::::::::::ad pad--------",addPackage)
+  // console.log(":::::::::::::::::::::::::::::::::::::ad pad--------",addPackage)
   useEffect(() => {
     // fetchImages().then((res) => setImages(res));
     setImages(addPackage?.uploads);
@@ -393,7 +393,7 @@ export default function Package1() {
               <p className="text-sm leading-5">
                 Starts From{" "}
                 <span className="text-lg text-graytext font-medium">
-                ₹{Math.floor(isDisplayPrice).toLocaleString()}
+                ₹{Math.floor((submitButtonOfPricingCalculation&&guestPrice)||price1).toLocaleString()}
                 </span>
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
@@ -421,7 +421,7 @@ export default function Package1() {
                         : "bg-orange-200"
                         } px-5 py-2 rounded-md text-white text-center text-para`}
                     >
-                      <span className="disabled:opacity-75" onClick={() => setPricingShowPopup(true)}>
+                      <span className="disabled:opacity-75" >
                         {buttonGuest}
                       </span>
                     </p>

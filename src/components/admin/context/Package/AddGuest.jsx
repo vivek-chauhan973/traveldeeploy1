@@ -21,6 +21,7 @@ export const AppProvider = ({ children }) => {
   const [fixedDepDate,setFixedDepDate]=useState("");
   const [fixedDepCity1,setFixedDepCity1]=useState("");
   const [fixedDepDate1,setFixedDepDate1]=useState("");
+  const [submitButtonOfPricingCalculation,setSubmitButtonOfPricingCalculation]=useState(false);
   const [fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable]=useState(false);
   const router = useRouter();
   const initialData = {
@@ -122,7 +123,7 @@ export const AppProvider = ({ children }) => {
   }
 const [price1,setPrice1]=useState(0);
   // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",departureSectionData)
-  // console.log("packages sfsjbfbfjbsfhjdf",price1)
+  console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
   const contextFun = {
     closeBtn,
     setCloseBtn,
@@ -153,7 +154,9 @@ const [price1,setPrice1]=useState(0);
     setFixedDepCity1,
     handleCleckOnDepartureFixed,
     fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable,
-    setDuration
+    setDuration,
+    setSubmitButtonOfPricingCalculation,
+    submitButtonOfPricingCalculation
   };
 
   return (

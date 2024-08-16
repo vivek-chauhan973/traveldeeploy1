@@ -60,7 +60,7 @@ const packagePriceSchema = new Schema({
 });
 
 // Virtual field to calculate display price
-packagePriceSchema.virtual('displayPrice').get(function() {
+// packagePriceSchema.virtual('displayPrice').get(function() {
   // Calculate base price
   // const basePrice = this.twinSharingRoom + this.misc;
 
@@ -83,10 +83,10 @@ packagePriceSchema.virtual('displayPrice').get(function() {
 
   // Final displayed price after adding GST
   // (grandTotal + gstAmount) / 2
-  return "hello2";
-});
+//   return "hello2";
+// });
 // Virtual field to calculate display price
-packagePriceSchema.virtual('withoutDiscount').get(function() {
+// packagePriceSchema.virtual('withoutDiscount').get(function() {
     // Calculate base price
     // const basePrice = this.twinSharingRoom + this.misc;
   
@@ -96,8 +96,8 @@ packagePriceSchema.virtual('withoutDiscount').get(function() {
     // Calculate price with markup
     // const priceWithMarkup = basePrice + markupAmount;
   
-    return ("hello1")
-  });
+  //   return ("hello1")
+  // });
 
 const PackagePrice = mongoose.models.PackagePrice || mongoose.model('PackagePrice', packagePriceSchema);
 

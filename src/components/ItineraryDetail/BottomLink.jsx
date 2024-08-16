@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 const BottomLink = ({ locationId ,addPackage}) => {
   
   const selectedCategories=addPackage?.category?.map(item => item._id).join(',');
-  console.log("location in bottom link------------===============", selectedCategories);
+  // console.log("location in bottom link------------===============", selectedCategories);
   const locationIds = locationId?._id;
   const [bottomLinkData, setBottomLinkData] = useState(null);
-  console.log("=-0a=s-0df=s-0df=sa0dfas0= down in bottom link", bottomLinkData);
+  // console.log("=-0a=s-0df=s-0df=sa0dfas0= down in bottom link", bottomLinkData);
 
   const fetchPromoManagementData = async () => {
     if (!locationIds) return;
