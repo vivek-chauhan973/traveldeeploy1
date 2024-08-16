@@ -27,9 +27,7 @@ useEffect(()=>{
         setSubmitted(true);
  
     } 
-    if(tableColumn.length > 0){
-        setTableDot(true)
-    }
+    
   
 },[tableData])
     const handleRemoveRow = (id) => {
