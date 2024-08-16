@@ -12,7 +12,7 @@ const fetchPackages = async (locationId) => {
     { method: "GET" }
   );
   const data = await response.json();
-  console.log("api public tour=package", data)
+  console.log("api public tour=package", locationId)
   return data?.packages;
 };
 const filteredData = async (id, cat, min, max,minDay,maxDay) => {
@@ -20,7 +20,7 @@ const filteredData = async (id, cat, min, max,minDay,maxDay) => {
   const data = await response.json();
   return data;
 }
-const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll}) => {
+const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
   const router = useRouter();
 
   const pathnames = router.asPath.split("/").filter((x) => x);
@@ -66,7 +66,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll,setClearAll
     
   }, [filterData1, locationId, currentPage, filterApi, filterPackage])
 
-  // console.log("packages is here ::: ",filterData1)
+  console.log("packages is here ::: ",packages)
   for(let item of packages){
     if(maxDay<item?.days){
       setMaxDay(item?.days)

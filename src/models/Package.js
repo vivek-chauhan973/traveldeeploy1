@@ -116,6 +116,11 @@ const packageSchema = new Schema({
   }
 );
 
+packageSchema.pre(/^find/, function (next) {
+  this.populate("addguestPrices");
+  next();
+});
+
 packageSchema.virtual("pageUrl").get(function () {
   return `${this.url}-tour-package`;
 });

@@ -10,7 +10,7 @@ import { NextApiRequest, NextApiResponse } from "next";
         
         // Fetch packages and populate category details
         const packages = await Package.find({ location: { $in: cityIds } })
-            .populate('category').populate('addguestPrices') // Populate category details
+            .populate('category')// Populate category details
             .exec();
 
         return res.status(200).json({ packages, cities });
