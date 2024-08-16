@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const DepartureSection = ({ addPackage }) => {
-  const { setDepartureSectionData,price1 } = useAppContext();
+  const { setDepartureSectionData,setGuestPrice,guestPrice } = useAppContext();
   const [datePackage, setDatePackage] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [startCity, setStartCity] = useState([]);
@@ -38,6 +38,8 @@ const DepartureSection = ({ addPackage }) => {
     return acc;
   }, {});
 
+ 
+
   const monthKeys = Object.keys(groupedByMonth || {});
 
   const handlePreviousMonth = () => {
@@ -51,6 +53,7 @@ const DepartureSection = ({ addPackage }) => {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
+  
 
   return (
     <>
@@ -103,6 +106,10 @@ const DepartureSection = ({ addPackage }) => {
                             onClick={() => {
                               setShowPopup(true);
                               setDepartureSectionData(item);
+                              if(addPackage?.addguest==="fixedDeparture"){
+                                // console.log("departureSectionData :: ----> ",departureSectionData)
+                                   setGuestPrice(item?.price);
+                              }
                             }}
                             className="cursor-pointer"
                           >

@@ -26,7 +26,10 @@ const ItineraryHeroSection = ({
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
+    price1
   } = useAppContext();
+  const [data,setData]=useState(0);
+ 
   const formatINR = (number) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(number);
   };
@@ -224,7 +227,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     with GST include {" "}
                     <span className="text-lg text-graytext font-medium">
-                    ₹{Math.floor(isDisplayPrice).toLocaleString()}
+                    ₹{Math.floor(price1).toLocaleString()}
                     </span>
                   </p>
                 )}
@@ -232,7 +235,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     Starts From{" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{formatINR(isDisplayPrice)}
+                      ₹{formatINR(price1)}
                     </span>
                   </p>
                 )}

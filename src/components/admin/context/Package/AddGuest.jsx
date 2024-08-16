@@ -70,6 +70,7 @@ export const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    if(addPackage?.addguest==="addGuest"){
     if (addPackage && addPackage?.prices) {
       const {
         childOverFive,
@@ -90,14 +91,17 @@ export const AppProvider = ({ children }) => {
 
       setGuestPrice(calculatedPrice);
     }
+  }
+  
   }, [inputData, addPackage]);
 
   // console.log("fixed Depature date selected",fixedDepDate)
   // console.log("fixed Depature City selected",fixedDepCity)
-
+  const [price1,setPrice1]=useState(0);
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
   const [fixedDepartureData1,setFixedDepartureData1]=useState(null);
+  const [fixedDepartureProceedButton,setFixedDepartureProceedButton]=useState(false);
   const finalDataOfBookingByUsingMethodAddGuest = {
     departureCity: showAddguest,
     itemDateAndDay: departureSectionData,
@@ -105,7 +109,7 @@ export const AppProvider = ({ children }) => {
     totalCalculatedPrize: guestPrice,
     allDetail: inputData
   };
-
+  
   // console.log("finalDataOfBookingByUsingMethodAddGuest",finalDataOfBookingByUsingMethodAddGuest)
   const handleCleckOnDepartureFixed=()=>{
 
@@ -121,9 +125,15 @@ export const AppProvider = ({ children }) => {
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-const [price1,setPrice1]=useState(0);
-  // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",departureSectionData)
-  console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
+useEffect(()=>{
+  if(addPackage?.addguest==="fixedDeparture"&&fixedDepartureButtonEnaibleAndDisable){
+    setPrice1(parseInt(departureSectionData?.price))
+ }
+ setPrice1(parseInt(departureSectionData?.price))
+},[departureSectionData])
+
+  console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",price1)
+  // console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
   const contextFun = {
     closeBtn,
     setCloseBtn,
@@ -156,7 +166,8 @@ const [price1,setPrice1]=useState(0);
     fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable,
     setDuration,
     setSubmitButtonOfPricingCalculation,
-    submitButtonOfPricingCalculation
+    submitButtonOfPricingCalculation,
+    fixedDepartureProceedButton,setFixedDepartureProceedButton
   };
 
   return (

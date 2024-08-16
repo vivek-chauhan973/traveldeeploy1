@@ -72,6 +72,7 @@ export default function Package1() {
   // console.log("-==-=-=-=-=-=-=-=-=-=-==",isDisplayPrice)
   useEffect(() => {
    
+    if(addPackage?.addguest==="addGuest"){
     var price=addPackage?.prices
     if (price) {
       // Step 1: Calculate the base price
@@ -100,6 +101,10 @@ export default function Package1() {
       // console.log("Final Displayed Price:", displayedPrice);
       setDisplayPrice(displayedPrice)
       
+    }}
+    else{
+      // console.log("fixed departure Packages :: ",addPackage)
+      setPrice1(addPackage?.fixedDeparturePrices?.basePrice)
     }
     
   }, [addPackage,guestPrice]);
@@ -116,6 +121,9 @@ export default function Package1() {
       setFixedDepDate1(fixedDepDate);
     }
   };
+ 
+  
+  
   // console.log("addPackage12324", addPackage);
   const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
 
