@@ -1,5 +1,18 @@
 
 import mongoose, { Schema } from "mongoose";
+import "@/models/package/TourInfo/Inclusion";
+import "@/models/package/TourInfo/Exclusion";
+import "@/models/package/TourInfo/Cancellation";
+import "@/models/package/TourInfo/NeedToKnow";
+import "@/models/package/TourInfo/PaymentTerm";
+import "@/models/City";
+import "@/models/Country";
+import "@/models/State";
+import "@/models/package/PackageCategory";
+import "@/models/package/PackagePrice";
+import "@/models/package/PriceHike";
+import "@/models/package/PackageDeparture";
+
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -122,7 +135,7 @@ packageSchema.pre(/^find/, function (next) {
 // Virtual field to calculate display price based on addguestPrices
 packageSchema.virtual('displayPrice').get(function () {
   if (this.addguestPrices) {
-    const basePrice = this.addguestPrices.twinSharingRoom + (this.addguestPrices.misc * this.days);
+    const basePrice = this.addguestPrices.twinSharingRoom + (this.addguestPrices.misc * (this.days || 0));
     const markupAmount = (basePrice * this.addguestPrices.markup) / 100;
     const priceWithMarkup = basePrice + markupAmount;
     const discountAmount = (priceWithMarkup * Math.abs(this.addguestPrices.diskHike)) / 100;
@@ -132,7 +145,7 @@ packageSchema.virtual('displayPrice').get(function () {
     const gstAmount = (grandTotal * this.addguestPrices.gst) / 100;
     return (grandTotal + gstAmount) / 2;
   }
-  
+  return 0; // Return a default value if addguestPrices is not defined
 });
 packageSchema.virtual('alksdfjjkashdfjkashdfkas').get(function () {
   return this.days

@@ -7,12 +7,9 @@ import { useAppContext } from "./admin/context/Package/AddGuest";
 import Category from "@/pages/admin/package/category";
 
 const fetchPackages = async (locationId) => {
-  const response = await fetch(
-    `/api/public/tour-packages?locationId=${locationId}`,
-    { method: "GET" }
-  );
+  const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
   const data = await response.json();
-  console.log("api public tour=package---", data)
+  console.log("api public tour=package---", locationId)
   return data?.packages;
 };
 const filteredData = async (id, cat, min, max,minDay,maxDay) => {

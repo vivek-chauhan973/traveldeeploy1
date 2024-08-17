@@ -34,7 +34,7 @@ import { IoIosArrowDown } from "react-icons/io";const Sidebar = () => {
      
       subMenu: [
         { label: "Banner", href: "#" },
-        { label: "Other Management", href: "#" }
+        { label: "Other Management", href: "/admin/home/manage"}
       ]
     },
     {
