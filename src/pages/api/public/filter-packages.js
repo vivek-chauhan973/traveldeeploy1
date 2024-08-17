@@ -36,6 +36,8 @@ const packagePublicFilter = async (req, res) => {
             query.push({ category: categoryId });
         }
         // Fetch cities based on locationId
+console.log("query is here --------------------------------------->>>>>-----------> ",query)
+
         const cities = await City.find({ state: locationId }).populate('state').exec();
         const cityIds = cities.map(city => city._id);
         const packages = await Package.find({ $and: query })

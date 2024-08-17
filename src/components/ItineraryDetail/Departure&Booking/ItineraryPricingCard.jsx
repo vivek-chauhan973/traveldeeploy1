@@ -4,7 +4,7 @@ import CustomiseTour from "../CustomiseTour";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ItineraryPricingCard = () => {
   const {
@@ -18,6 +18,20 @@ const ItineraryPricingCard = () => {
     showAddguest,
     submitButtonOfPricingCalculation
   } = useAppContext();
+
+  const [gst,setGst]=useState(0);
+  const [calculatedPrizeOfGst,setCalculatedPrizeOfGst]=useState(0);
+  const [grandTotal,setGrandTotal]=useState(0);
+  useEffect(()=>{
+    (submitButtonOfPricingCalculation&&guestPrice)||price1
+    setGst(addPackage?.addguestPrices?.gst||0);
+  },[addPackage])
+  useEffect(()=>{
+    setCalculatedPrizeOfGst((( (submitButtonOfPricingCalculation&&guestPrice)||price1)*5)/100)
+  },[gst,price1])
+  useEffect(()=>{
+    setGrandTotal((((submitButtonOfPricingCalculation&&guestPrice)||price1)+calculatedPrizeOfGst));
+  },[calculatedPrizeOfGst])
  
   return (
     <>
@@ -25,7 +39,7 @@ const ItineraryPricingCard = () => {
         <div className="bg-white">
           <div className="flex justify-between mb-2">
             <h5 className="text-md font-semibold text-graytext">Booking Summary</h5>
-            <p>{submitButtonOfPricingCalculation?guestPrice:price1}</p>
+            <p> ₹{Math.floor( (submitButtonOfPricingCalculation&&guestPrice)||price1).toLocaleString()}</p>
             <div>
               <Addguest
                 guestPrice={guestPrice}
@@ -90,14 +104,14 @@ const ItineraryPricingCard = () => {
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
-              <p className="">70,000</p>
+              <p className=""> ₹{Math.floor( (submitButtonOfPricingCalculation&&guestPrice)||price1).toLocaleString()}</p>
             </div>
           </div>
           <div className="text-para grid grid-cols-2 mt-3">
             <div></div>
             <div className="grid grid-cols-2">
-              <p>GST 5% </p>
-              <p className="">2,300</p>
+              <p>GST {gst}% </p>
+              <p className="">₹{Math.floor(calculatedPrizeOfGst).toLocaleString()}</p>
             </div>
           </div>
           <hr className="border-dashed my-2" />
@@ -105,7 +119,7 @@ const ItineraryPricingCard = () => {
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p>Grand Total</p>
-              <p className="font-semibold text-graytext">70,000</p>
+              <p className="font-semibold text-graytext">₹{Math.floor(grandTotal).toLocaleString()}</p>
             </div>
           </div>
           {closeBtn && (

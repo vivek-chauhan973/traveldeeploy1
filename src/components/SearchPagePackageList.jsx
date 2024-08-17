@@ -18,6 +18,7 @@ const fetchPackages = async (locationId) => {
 const filteredData = async (id, cat, min, max,minDay,maxDay) => {
   const response = await fetch(`/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}&minDay=${minDay}&maxDay=${maxDay}`)
   const data = await response.json();
+  console.log("filter data is here --->:: ",data);
   return data;
 }
 const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
@@ -105,7 +106,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
   const calculatePrice = (packageData) => {
     
     const basePrice = packageData?.addguestPrices?.twinSharingRoom + (packageData?.addguestPrices?.misc * packageData?.days);
-    console.log("current dat is slkjshkljfh sadfkj",packageData?.days)
+    // console.log("current dat is slkjshkljfh sadfkj",packageData?.days)
     const markupAmount = (basePrice * packageData?.addguestPrices?.markup) / 100;
     const priceWithMarkup = basePrice + markupAmount;
     const discountAmount = (priceWithMarkup * Math.abs(packageData?.addguestPrices?.diskHike)) / 100;
@@ -264,7 +265,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
                   <div className="flex justify-end items-baseline gap-2 md:block">
                     <p className="text-[12px] mt-1">Starts From</p>
                     <p className="text-[22px] font-medium">
-                      ₹{Math.floor(displayPrice).toLocaleString()}
+                      ₹{Math.floor(displayPrice||packageData?.price).toLocaleString()}
                     </p>
                   </div>
                   <p className="text-[10px] leading-snug">

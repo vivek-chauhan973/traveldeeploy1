@@ -14,7 +14,6 @@ const ItinaryFixedDepartureCard = ({
   fixedDeparturePopupOpen,
 }) => {
   const {
-    setFixedDepDate,
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
@@ -30,6 +29,7 @@ const ItinaryFixedDepartureCard = ({
   const [columns,setColumns]=useState([]);
   const [limitData,setLimitData]=useState([]);
   const [limitKey,setLimitKey]=useState(1);
+  const [limitKey1,setLimitKey1]=useState(0);
   const [gst,setGst]=useState(0);
   const [grandTotal,setGrandTotal]=useState(0);
 const [submittedData,setSubmittedData]=useState([]);
@@ -58,8 +58,7 @@ while(i<=parseInt(limitData?.[1])){
     fetchLimitData(addPackage?._id).then(res=>setLimitData(res?.data?.limit||[]))
     setGst(addPackage?.fixedDeparturePrices?.gst||0);
   },[addPackage])
-  // console.log("here is limitData ----->  ",limitData)
-  //  console.log("fixed departure addpackage:: ---->  ",addPackage);
+
   
   useEffect(()=>{
     setCalculatedPrizeOfGst((price1*5)/100)
@@ -67,6 +66,30 @@ while(i<=parseInt(limitData?.[1])){
   useEffect(()=>{
     setGrandTotal((price1+calculatedPrizeOfGst)*limitKey);
   },[calculatedPrizeOfGst,limitKey])
+
+  // convert limit key into keys array , here is the logic of keys to convert array
+  const [input,setInput]=useState("")
+  const [lenkey,setLenKey]=useState(0);
+
+
+  const keys = Array.from({ length: limitKey1 }, (_, index) => index + 1);
+
+  // here is data of all persons' weight and data is already stored in state
+  
+  const [inputData1, setInputData1] = useState([]);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+  
+    setInputData1(prevState =>
+      prevState.map(item =>
+        item.hasOwnProperty(name) ? { ...item, [name]: value } : item
+      )
+    );
+    // console.log("input data is here : --->  ",inputData1)
+  };
+  useEffect(()=>{
+    setInputData1(keys.map(item => ({ [`input${item}`]: "" })))
+  },[limitKey1])
   return (
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[480px] overflow-scroll">
@@ -80,6 +103,7 @@ while(i<=parseInt(limitData?.[1])){
                   onChange={(e) => {
                     setFixedDepCity(e.target.value);
                     setLimitKey(e.target.value)
+                    setLimitKey1(e.target.value)
                     setCity(true);
                   }}
                 >
@@ -96,16 +120,19 @@ while(i<=parseInt(limitData?.[1])){
 
             <div>
               <div className="flex flex-col mt-2 ">
-                <label className="text-para font-semibold cursor-pointer" htmlFor="date">Select Dept. Date</label>
-                <input type="date" id="date" required className="w-full py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
+                <label className="text-para font-semibold cursor-pointer" htmlFor="date">{limitKey1?"weights of person":""}</label>
+                {keys.map((item,i)=><div key={i} className="flex gap-3 justify-center items-center">
+                  <p>person{i+1}</p>
+                <input type="text" id={`person ${i+1}`} name={`input${i+1}`} required className="mt-2 w-full py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
                   onChange={(e) => {
-                    setFixedDepDate(e.target.value);
+                    handleInputChange(e);
                     setDate(true);
+                    // console.log(e.target.value);
                   }} />
+                </div>)}
+                
               </div>
-              {fixedDepDate ? null : (
-                <p className="text-xs text-red-600">Please Select Date First</p>
-              )}
+              
             </div>
           </div>
 

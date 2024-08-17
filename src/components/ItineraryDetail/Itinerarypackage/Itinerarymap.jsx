@@ -14,7 +14,7 @@ const Itinerarymap= ()=>{
     useEffect(()=>{
         fetchPackageImage(addPackage).then(res=>setMap(res?.mapCode));
      },[addPackage])
-     console.log("mapcode",map)
+    //  console.log("mapcode",map)
     return(
         <>
             <div className='p-2 '>
