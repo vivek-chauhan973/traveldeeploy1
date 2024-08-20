@@ -554,3 +554,14 @@ blockquote {
     transform: translateX(-31px);
   }
 }
+
+
+
+.day ul,
+.day ol {
+  margin-left: 25px;
+}
+
+.payment-margin ul li {
+  margin-left: 20px;
+}

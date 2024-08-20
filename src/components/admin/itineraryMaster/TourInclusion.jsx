@@ -164,7 +164,7 @@ const TourInclusion = () => {
                                     value={inclusionGroup.description}
                                     onChange={(html) => setInclusionGroup({ ...inclusionGroup, description: html })}
                                     modules={modules}
-                                />
+                                />  
                             </div>
                         </div>
                     )}
