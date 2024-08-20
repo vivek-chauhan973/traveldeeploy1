@@ -45,70 +45,76 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
         
       </div>
       <div className="container-wrapper py-5 ">
-      <div className="grid grid-cols-[1.8fr,1.2fr]">
-        <div className="text-wrap">
-          <h4 className="text-xl font-medium mb-2 capitalize">{state?.name}</h4>
-          <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
-            <div dangerouslySetInnerHTML={{ __html: promoData?.description }} ></div>
+        <div className="grid md:grid-cols-[1.8fr,1.2fr] ">
+          <div className="text-wrap">
+            <h4 className="text-xl font-medium mb-2 capitalize">{state?.name}</h4>
+            <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
+              <div className="about-margin" dangerouslySetInnerHTML={{ __html: promoData?.description }} ></div>
+            </div>
+          </div>
+
+          <div className=''>
+            {show && (
+            <>
+              {priorityPackage && priorityPackage.length > 0 ? (
+                <div className="table-container w-full m-auto mt-4">
+                  <table className="w-full border-collapse border text-center text-para">
+                    <thead>
+                      <tr className="border-b bg-black text-white">
+                        <th className="border-t border-l px-2 text-wrap font-semibold border-r w-40 ">
+                          Name
+                        </th>
+                        <th className="border-t border-l px-2 text-wrap font-semibold w-2 border-r ">
+                          Day/Night
+                        </th>
+                        <th className="border-t border-l px-2 text-wrap font-semibold border-r ">
+                          Price
+                        </th>
+                        <th className="border-t border-l px-2 text-wrap font-semibold border-r border-b w-24 ">
+                          Visit
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white">
+                      {priorityPackage.map((item, index) => (
+                        <tr key={index}>
+                          <td className="border-t border-l text-left border-r px-2 py-2 border-b capitalize">
+                            {item.name}
+                          </td>
+                          <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                            {item.days}
+                          </td>
+                          <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
+                            ₹{item?.price.toLocaleString()}
+                          </td>
+                          <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                            <a
+                              href={"/package/" + item.pageUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-800 hover:underline md:block hidden"
+                            >
+                              View Details
+                            </a>
+                            <a
+                              href={"/package/" + item.pageUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-800 hover:underline md:hidden block"
+                            >
+                              View
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : null}
+            </>
+            )}
           </div>
         </div>
-
-        <div>
-        {show && (
-          <>
-          {priorityPackage && priorityPackage.length > 0 ? (
-            <div className="table-container md:w-full w-2/3 m-auto mt-4">
-              <table className="w-full border-collapse border text-center text-para">
-                <thead>
-                  <tr className="border-b bg-black text-white">
-                    <th className="border-t border-l px-2 text-wrap font-semibold border-r w-40 ">
-                      Name
-                    </th>
-                    <th className="border-t border-l px-2 text-wrap font-semibold w-2 border-r ">
-                      Day/Night
-                    </th>
-                    <th className="border-t border-l px-2 text-wrap font-semibold border-r ">
-                      Price
-                    </th>
-                    <th className="border-t border-l px-2 text-wrap font-semibold border-r border-b w-24 ">
-                      Visit
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white">
-                  {priorityPackage.map((item, index) => (
-                    <tr key={index}>
-                      <td className="border-t border-l text-left border-r px-2 py-2 border-b capitalize">
-                        {item.name} aman khr
-                      </td>
-                      <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
-                        {item.days}
-                      </td>
-                      <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
-                        ₹{item?.price.toLocaleString()}
-                      </td>
-                      <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
-                        <a
-                          href={"/package/" + item.pageUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-800 hover:underline"
-                        >
-                          View Details
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : null}
-          </>
-
-        )}
-        </div>
-      </div>
-
 
         <div className="flex justify-end items-center mt-2">
           <div className="inline-flex items-center justify-center px-1.5  py-0.5 bg-navyblack rounded shadow-sm text-white cursor-pointer">
@@ -125,6 +131,7 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
             </span>
           </div>
         </div>
+
       </div>
       <div>
         <hr className="container-wrapper border-slate-300" />

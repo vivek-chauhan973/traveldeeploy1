@@ -13,6 +13,8 @@ import ArrowSection from "@/components/Home/Cards/ArrowSection";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import State from "@/components/Home/Cards/State";
 import { useEffect, useState } from "react";
+import Loading from "@/components/Loading/Loading";
+
 // import Booking from "@/components/profile/bookings";
 
 const fetchState=async ()=>{
@@ -35,6 +37,7 @@ export default function Home() {
         <>
             <DesktopHeader />
             <HeroSection />
+            {/* <Loading/> */}
             {/* <Bookings/> */}
             {/* <Tostify/> */}
             {/* <AdminReview/> */}
