@@ -18,7 +18,7 @@ const Addguest = ({
   addPackage
 }) => {
   const date = new Date();
-  const { showAddguest,setSubmitButtonOfPricingCalculation } = useAppContext() ?? { showAddguest: false };
+  const { showAddguest, setSubmitButtonOfPricingCalculation } = useAppContext() ?? { showAddguest: false };
 
   const infantMaxDate = date.toISOString().split("T")[0];
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
@@ -285,6 +285,12 @@ const Addguest = ({
     e.preventDefault()
     setIsAC(prevIsAC => !prevIsAC);
   };
+  const [isChecked, setIsChecked] = useState(true );
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+    console.log("value is here ",isChecked)
+  };
 
   // ==================================Changes========================================================
   return (
@@ -313,9 +319,9 @@ const Addguest = ({
                 <div className=" absolute top-3 right-3 cursor-pointer hover:scale-105"
                   onClick={handleClose}
                   size={28}>
-                <FontAwesomeIcon icon={faCircleXmark} className='font1 cursor-pointer' />
+                  <FontAwesomeIcon icon={faCircleXmark} className='font1 cursor-pointer' />
                 </div>
-             
+
                 <hr />
               </div>
               <div className="overflow-y-auto md:px-12 px-2">
@@ -553,9 +559,9 @@ const Addguest = ({
                       <div className="flex gap-1">
                         <div onClick={() => handleDecrement("tripleRoom")}
                           className="cursor-pointer text-navyblack hover:text-slate-700">
-                        <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
+                          <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
                         </div>
-                     
+
                         <p
                           onChange={(e) => handleChange}
                           className="text-para w-3 mr-1 text-center"
@@ -564,9 +570,9 @@ const Addguest = ({
                         </p>
                         <div onClick={() => handleIncrement("tripleRoom")}
                           className="cursor-pointer text-navyblack hover:text-slate-700">
-                        <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
+                          <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
                         </div>
-                    
+
                       </div>
                     </div>
                     <hr className="my-2" />
@@ -577,22 +583,22 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1">
-                        <div   onClick={() => handleDecrement("quardRoom")}
+                        <div onClick={() => handleDecrement("quardRoom")}
                           className="cursor-pointer text-navyblack hover:text-slate-700">
-                        <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
+                          <FontAwesomeIcon icon={faCircleMinus} className='font1 cursor-pointer' />
                         </div>
-                     
+
                         <p
                           onChange={(e) => handleChange}
                           className="text-para w-3 mr-1 text-center"
                         >
                           {countQuardRoom}
                         </p>
-                        <div   onClick={() => handleIncrement("quardRoom")}
+                        <div onClick={() => handleIncrement("quardRoom")}
                           className="cursor-pointer text-navyblack hover:text-slate-700">
-                        <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
+                          <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
                         </div>
-                    
+
                       </div>
                     </div>
                   </div>
@@ -601,12 +607,19 @@ const Addguest = ({
                 <div className="mt-5">
                   <div className="pl-3 w-full bg-navyblack rounded-md text-white flex justify-between items-center">
                     <p>Transports</p>
-                    <button
+                    {/* <button
                       onClick={handleToggle}
                       className={`px-4 py-2 rounded-r-md ${isAC ? 'bg-primary' : 'bg-red-500'}`}
                     >
                       {isAC ? 'AC' : 'NonAC'}
-                    </button>
+                    </button> */}
+                    <div className="flex px-4 py-2 items-center gap-2">
+                      <span>Non-AC</span>
+                      <input class="switch" checked={isChecked}
+                        onChange={handleCheckboxChange} type="checkbox" ></input>
+                      <span>AC</span>
+
+                    </div>
                   </div>
                   <div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
                     <Image
