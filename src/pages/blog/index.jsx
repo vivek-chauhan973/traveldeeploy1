@@ -1,5 +1,4 @@
 import "../../app/globals.css";
-import Headertest from "@/components/Headertest";
 import Slider from "react-slick";
 import Image from 'next/image'
 import "slick-carousel/slick/slick.css";
@@ -74,7 +73,7 @@ export default function Index () {
     return (
         <> 
         
-            <Headertest />
+           
         <div className="font-lora">
             
             <div className=" pb-12 pt-5">

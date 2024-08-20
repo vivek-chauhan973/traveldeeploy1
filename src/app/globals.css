@@ -27,7 +27,7 @@ h2 {
 
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   margin: auto;
-  width:550px;
+  width: 550px;
 }
 
 /* react silk */
@@ -186,7 +186,7 @@ h2 {
 
 .carousel-item {
   flex: none;
-  
+
   /* Adjust the height as needed */
   scroll-snap-align: start;
   /* Add margin between items if needed */
@@ -208,7 +208,7 @@ table {
 
 /* option tag styling */
 select {
-  
+
   float: left;
   width: 21.4%;
   height: 34px;
@@ -238,7 +238,8 @@ select {
 .todayPrice {
   margin: 0;
   font-size: 0.75rem;
-  color: #ff5722; /* Customize the color */
+  color: #ff5722;
+  /* Customize the color */
 }
 
 
@@ -302,6 +303,7 @@ select {
     /* padding:0 20px !important; */
   }
 }
+
 @media screen and (min-width: 1400px) {
   .container-wrapper {
     width: 1330px !important;
@@ -309,6 +311,7 @@ select {
     /* padding:0 20px !important; */
   }
 }
+
 @media screen and (min-width: 1300px) {
   .container-wrapper {
     width: 1280px !important;
@@ -325,28 +328,32 @@ select {
 
 /* this is change the innerHtml into the  normal in payment term anditernery tour detail*/
 
-ol li{
+ol li {
   list-style: decimal outside;
-  margin-bottom:8px;
+  margin-bottom: 8px;
 
-} 
+}
+
 .Dot ol li::marker {
   color: #2A2C41;
 }
- ul li{
+
+ul li {
   list-style: disc outside;
   margin-bottom: 8px;
 }
+
 /* For Editore we are use of our custom css */
 
 h1 {
   /* font-size: 40px; */
-  font-size: 32px; 
+  font-size: 32px;
   line-height: 42px;
 }
+
 h2 {
   /* font-size: 30px; */
-  font-size: 24px; 
+  font-size: 24px;
   line-height: 35px;
 }
 
@@ -358,20 +365,24 @@ blockquote {
   color: #3f849d;
 }
 
-.ql-indent-1{
-text-indent: 40px;
+.ql-indent-1 {
+  text-indent: 40px;
 }
-.ql-indent-2{
-text-indent: 60px;
+
+.ql-indent-2 {
+  text-indent: 60px;
 }
-.ql-indent-3{
-text-indent: 80px;
+
+.ql-indent-3 {
+  text-indent: 80px;
 }
-.ql-indent-4{
-text-indent: 100px;
+
+.ql-indent-4 {
+  text-indent: 100px;
 }
-.ql-indent-5{
-text-indent: 120px;
+
+.ql-indent-5 {
+  text-indent: 120px;
 }
 
 /* a{
@@ -380,50 +391,75 @@ text-indent: 120px;
 
 
 .pagination-item {
-  list-style: none; /* Removes bullets/numbers */
+  list-style: none;
+  /* Removes bullets/numbers */
 }
 
-.font{
+.font {
   height: 20px;
   width: 13px;
 }
-.font1{
+
+.rewiew {
+  height: 25px;
+  width: 20px;
+}
+
+.font1 {
   height: 17px;
   width: 17px;
 }
 
-.about-margin ul  {
+.about-margin ul {
   margin-left: 25px;
 }
-.about-margin ol{
+
+.about-margin ol {
   margin-left: 25px;
 }
-.about-margin ol li s{
+
+.about-margin ol li s {
   margin-left: 7px;
 }
-.about-margin p{
+
+.about-margin p {
   margin-bottom: 3px;
 }
-.about-margin h1,.about-margin h2{
+
+.about-margin h1,
+.about-margin h2 {
   margin: 10px 0px;
 }
 
-.package-list p{
-  margin-bottom:10px;
+.package-list p {
+  margin-bottom: 10px;
 }
-.payment-margin ol{
+
+.payment-margin ol {
   margin-left: 18px;
 }
 
-.box-Shadow-Style-Package{
+.box-Shadow-Style-Package {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
 }
-  /* footer */
+
+/* footer */
 .footer-content:hover {
   text-decoration: underline;
   color: white;
 }
+
 .footer-head:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+
+.day ul,
+.day ol {
+  margin-left: 25px;
+}
+
+.payment-margin ul li {
+  margin-left: 20px;
 }

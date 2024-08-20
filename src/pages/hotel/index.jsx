@@ -4,7 +4,6 @@ import { useState } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 // import Picker from "./picker";
 import Carousel from "@/components/car-rental/CarouselCard";
-import Headertest from "@/components/Headertest";
 import { MdLocationPin } from "react-icons/md";
 import HotelCarousel from "@/components/hotelCarousel";
 import Image from 'next/image'
@@ -86,7 +85,7 @@ export default function App() {
     return (
         <>
             <div>
-                <Headertest />
+        
                 <div className="container-wrapper">
                 </div>
                 <div className="">

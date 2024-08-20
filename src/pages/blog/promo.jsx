@@ -1,11 +1,9 @@
 import "../../app/globals.css";
-import Headertest from "@/components/Headertest";
 import Image from 'next/image'
 
 export default function Promo () {
     return (
         <>
-            <Headertest/>            
             <div className="container-wrapper py-3 font-lora">
                 <div className="flex justify-end">
                     <input className="border " type="text" />
