@@ -17,152 +17,206 @@ import Loading from "@/components/Loading/Loading";
 
 // import Booking from "@/components/profile/bookings";
 
-const fetchState=async ()=>{
-    const response=await fetch("/api/public/states");
-    return await response.json();
-}
-
+const fetchState = async () => {
+  const response = await fetch("/api/public/states");
+  return await response.json();
+};
 
 export default function Home() {
+  const [states, setStates] = useState([]);
+  const boxShadowStyle = {
+    boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
+  };
+  useEffect(() => {
+    fetchState().then((res) => setStates(res?.states || []));
+  }, []);
+  // console.log("res---->  ",states)
+  return (
+    <>
+      <DesktopHeader />
+      <HeroSection />
+      {/* <Loading/> */}
+      {/* <Bookings/> */}
+      {/* <Tostify/> */}
+      {/* <AdminReview/> */}
 
-    const [states,setStates]=useState([]);
-    const boxShadowStyle = {
-        boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
-    };
-    useEffect(()=>{
-        fetchState().then(res=>setStates(res?.states||[]));
-    },[])
-    // console.log("res---->  ",states)
-    return (
-        <>
-            <DesktopHeader />
-            <HeroSection />
-            {/* <Loading/> */}
-            {/* <Bookings/> */}
-            {/* <Tostify/> */}
-            {/* <AdminReview/> */}
-
-            <div className="container-wrapper  md:py-11 py-5">
-                <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
-
-                    <div className=" md:shrink-0">
-                        <p className=" text-amber-600   font-semibold mt-2">Holi Celebration Packages for 2024</p>
-                        <h1 className=" md:text-[25px] text-xl  font-medium">Holi Tour</h1>
-                        <h1 className="md:text-[16px] text-para line-clamp-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eligendi sed hic provident enim, rerum tempore aliquam numquam vitae, earum doloremque. Nam!
-                            Indulge in the vibrant celebrations of Holi with our premier Holi Packages of 2024 near to Delhi, tailored to offer an unforgettable experience in some of India’s most iconic destinations. Whether you’re drawn to the spiritual aura of Rishikesh, the
-                        </h1>
-                        <button className="ml-2 mt-3 hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5 rounded-full">Know more</button>
-                    </div>
-                    <div className=" md:ml-28 ">
-                        <Image width={450} height={450} className="   object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                    </div>
-
-                </div>
+      <div className="container-wrapper  md:py-11 py-5">
+        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
+          <div className=" md:shrink-0">
+            <p className=" text-amber-600   font-semibold mt-2">
+              Holi Celebration Packages for 2024
+            </p>
+            <h1 className=" md:text-[25px] text-xl  font-medium">Holi Tour</h1>
+            <h1 className="md:text-[16px] text-para line-clamp-3">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Adipisci, eligendi sed hic provident enim, rerum tempore aliquam
+              numquam vitae, earum doloremque. Nam! Indulge in the vibrant
+              celebrations of Holi with our premier Holi Packages of 2024 near
+              to Delhi, tailored to offer an unforgettable experience in some of
+              India’s most iconic destinations. Whether you’re drawn to the
+              spiritual aura of Rishikesh, the
+            </h1>
+            <button className="ml-2 mt-3 hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5 rounded-full">
+              Know more
+            </button>
+          </div>
+          <div className=" md:ml-28 ">
+            <Image
+              width={450}
+              height={450}
+              className="   object-cover rounded-[17px]"
+              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      {/* Four image */}
+      <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
+        {states?.map((item, i) => (
+          <div key={i} className="relative mb-2 group">
+            <Image
+              className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+              width={300} //256 in phone
+              height={288} // 160
+            />
+            <div
+              style={boxShadowStyle}
+              className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+            >
+              {item.name}
             </div>
-            {/* Four image */}
-            <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
+          </div>
+        ))}
+        <div className="relative mb-2 group">
+          <Image
+            className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+            width={300} //256 in phone
+            height={288} // 160
+          />
+          <div
+            style={boxShadowStyle}
+            className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+          >
+            Kerala
+          </div>
+        </div>
+        <div className="relative mb-2 group">
+          <Image
+            className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+            width={300} //256 in phone
+            height={288} // 160
+          />
+          <div
+            style={boxShadowStyle}
+            className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+          >
+            Uttarakhand
+          </div>
+        </div>
+        <div className="relative mb-2 group">
+          <Image
+            className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+            width={300} //256 in phone
+            height={288} // 160
+          />
+          <div
+            style={boxShadowStyle}
+            className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
+          >
+            Rajasthan
+          </div>
+        </div>
+      </div>
 
-               {states?.map((item,i)=> <div key={i} className="relative mb-2 group">
-                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        width={300}  //256 in phone
-                        height={288} // 160
-                    />
-                    <div style={boxShadowStyle}
-                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                    >
-                       {item.name}
-                    </div>
-                </div>)}
-                <div className="relative mb-2 group">
-                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        width={300}  //256 in phone
-                        height={288} // 160
-                    />
-                    <div style={boxShadowStyle}
-                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                    >
-                        Kerala
-                    </div>
-                </div>
-                <div className="relative mb-2 group">
-                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        width={300}  //256 in phone
-                        height={288} // 160
-                    />
-                    <div style={boxShadowStyle}
-                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                    >
-                        Uttarakhand
-                    </div>
-                </div>
-                <div className="relative mb-2 group">
-                    <Image className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        width={300}  //256 in phone
-                        height={288} // 160
-                    />
-                    <div style={boxShadowStyle}
-                        className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                    >
-                        Rajasthan
-                    </div>
-                </div>
-
+      {/* image and text */}
+      <div className="container-wrapper md:py-10 py-4">
+        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
+          <div className="">
+            <p className=" text-amber-600  font-semibold mt-2">Indiafe</p>
+            <h1 className="md:text-[25px] text-xl font-medium">
+              HEAVENLY HIMALAYS
+            </h1>
+            <h1 className="md:text-[16px] text-para line-clamp-3 ">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Adipisci, eligendi sed hic provident enim, rerum tempore aliquam
+              numquam vitae, earum doloremque. Nam! Indulge in the vibrant
+              celebrations of Holi with our premier Holi Packages of 2024 near
+              to Delhi, tailored to offer an unforgettable experience in some of
+              India’s most iconic destinations. Whether you’re drawn to the
+              spiritual aura of Rishikesh, the
+            </h1>
+            <div className=" mt-4 flex md:justify-between gap-3  ">
+              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
+                Kerala
+              </button>
+              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
+                Himalay
+              </button>
             </div>
+          </div>
+          <div className=" md:ml-28 ">
+            <Image
+              width={450}
+              height={450}
+              className="object-cover rounded-[17px]"
+              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
 
-            {/* image and text */}
-            <div className="container-wrapper md:py-10 py-4">
-                <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
-                    <div className="">
-                        <p className=" text-amber-600  font-semibold mt-2">Indiafe</p>
-                        <h1 className="md:text-[25px] text-xl font-medium">HEAVENLY HIMALAYS</h1>
-                        <h1 className="md:text-[16px] text-para line-clamp-3 ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eligendi sed hic provident enim, rerum tempore aliquam numquam vitae, earum doloremque. Nam!
-                            Indulge in the vibrant celebrations of Holi with our premier Holi Packages of 2024 near to Delhi, tailored to offer an unforgettable experience in some of India’s most iconic destinations. Whether you’re drawn to the spiritual aura of Rishikesh, the
-                        </h1>
-                        <div className=" mt-4 flex md:justify-between gap-3  ">
-                            <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Kerala</button>
-                            <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Himalay</button>
-                        </div>
-                    </div>
-                    <div className=" md:ml-28 ">
-                        <Image width={450} height={450} className="object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                    </div>
-                </div>
+      {/*  */}
+      <div className="container-wrapper md:pb-10  ">
+        <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
+          <div className="">
+            <Image
+              width={450}
+              height={450}
+              className=" object-cover rounded-[17px]"
+              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+            />
+          </div>
+
+          <div className="">
+            <p className=" text-amber-600  font-semibold mt-2">Indiafe</p>
+            <h1 className="md:text-[25px] text-xl font-medium">
+              HEAVENLY HIMALAYS
+            </h1>
+            <h1 className="md:text-[16px] text-para line-clamp-3 ">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Adipisci, eligendi sed hic provident enim, rerum tempore aliquam
+              numquam vitae, earum doloremque. Nam! Indulge in the vibrant
+              celebrations of Holi with our premier Holi Packages of 2024 near
+              to Delhi, tailored to offer an unforgettable experience in some of
+              India’s most iconic destinations. Whether you’re drawn to the
+              spiritual aura of Rishikesh, the
+            </h1>
+
+            <div className=" mt-4  flex md:justify-between gap-3  ">
+              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
+                Know more
+              </button>
+              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
+                Know more
+              </button>
             </div>
+          </div>
+        </div>
+      </div>
+      {/* image */}
 
-            {/*  */}
-            <div className="container-wrapper md:pb-10  ">
-                <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
-                    <div className="">
-                        <Image width={450} height={450} className=" object-cover rounded-[17px]" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                    </div>
-
-                    <div className="">
-                        <p className=" text-amber-600  font-semibold mt-2">Indiafe</p>
-                        <h1 className="md:text-[25px] text-xl font-medium">HEAVENLY HIMALAYS</h1>
-                        <h1 className="md:text-[16px] text-para line-clamp-3 ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eligendi sed hic provident enim, rerum tempore aliquam numquam vitae, earum doloremque. Nam!
-                            Indulge in the vibrant celebrations of Holi with our premier Holi Packages of 2024 near to Delhi, tailored to offer an unforgettable experience in some of India’s most iconic destinations. Whether you’re drawn to the spiritual aura of Rishikesh, the
-                        </h1>
-
-                        <div className=" mt-4  flex md:justify-between gap-3  ">
-                            <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Know more</button>
-                            <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">Know more</button>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            {/* image */}
-
-            {/* <div className=" container-wrapper md:grid md:grid-cols-2  justify-around items-center mt-5 md:mb-16 md:mt-8 gap-1">
+      {/* <div className=" container-wrapper md:grid md:grid-cols-2  justify-around items-center mt-5 md:mb-16 md:mt-8 gap-1">
                 <div className="relative mb-3">
                     <Image height={450} width={450} className=" md:ml-16 object-cover rounded-md  transition-transform duration-300 transform hover:scale-110 " src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
 
@@ -170,88 +224,87 @@ export default function Home() {
                 <div className="relative ">
                     <Image height={450} width={450}  className=" object-cover rounded-md transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
             {/* md:h-72 md:w-[550px] h-56 w-full */}
-            {/* </div>
+      {/* </div>
 
             </div>  */}
 
-            {/* weekend package */}
-            <Cardwork />
+      {/* weekend package */}
+      <Cardwork />
 
-            {/* horizontal card */}
-            <div className="">
-                <div className="container-wrapper  md:mt-8">
-                    <p className="text-center mt-1 md:font-semibold  text-xl font-medium md:text-[25px]">Plan an unforgettable trip from your city</p>
-                </div>
+      {/* horizontal card */}
+      <div className="">
+        <div className="container-wrapper  md:mt-8">
+          <p className="text-center mt-1 md:font-semibold  text-xl font-medium md:text-[25px]">
+            Plan an unforgettable trip from your city
+          </p>
+        </div>
 
-                {/* very small horizontal card */}
-                <div className="container-wrapper justify-center  flex flex-wrap">
-                    {/* each small horizontal card */}
-                    {states?.map((item,i)=><HorizontalCard key={i} item={item} />)}
-                    <HorizontalCard />
-                    <HorizontalCard />
-                    <HorizontalCard />
-                    <HorizontalCard />
-                    {/* each small horizontal card */}
+        {/* very small horizontal card */}
+        <div className="container-wrapper justify-center  flex flex-wrap">
+          {/* each small horizontal card */}
+          {states?.map((item, i) => (
+            <HorizontalCard key={i} item={item} />
+          ))}
+          <HorizontalCard />
+          <HorizontalCard />
+          <HorizontalCard />
+          <HorizontalCard />
+          {/* each small horizontal card */}
+        </div>
+      </div>
 
-                </div>
+      <div className="md:mt-9  mt-4  bg-slate-100">
+        <div className="container-wrapper text-xl md:text-[22px] font-medium text-center pb-7">
+          <p>Lorem, ipsum dolor.</p>
+          <p className="md:text-md text-para font-normal">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
+            cupiditate nobis minus?
+          </p>
+        </div>
+        <Card4 />
+      </div>
 
-            </div>
+      {/* Card Kuoni copy */}
+      <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
+        <div className=" md:mt-4 mt-4">
+          <ArrowSection />
+        </div>
+      </div>
 
-            <div className="md:mt-9  mt-4  bg-slate-100">
-                <div className="container-wrapper text-xl md:text-[22px] font-medium text-center pb-7">
-                    <p>Lorem, ipsum dolor.</p>
-                    <p className="md:text-md text-para font-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo cupiditate nobis minus?</p>
-                </div>
-                <Card4 />
-                
-            </div>
+      {/* state code start  */}
+      <State />
 
+      {/*  start code end */}
+      <div></div>
 
-            {/* Card Kuoni copy */}
-            <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
+      <div className="pb-5 -mt-1  md:pb-6">
+        {/* rounded card */}
+        <div className="container-wrapper md:text-[25px] text-xl font-medium text-center pb-2 md:pb-7">
+          <p>Lorem, ipsum dolor.</p>
+          <p className="md:text-md text-para font-normal">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
+            cupiditate nobis minus?
+          </p>
+        </div>
+        <div className="container-wrapper  grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-3">
+          {/* card multiple */}
+          <Card2 />
+          <Card2 />
+          <Card2 />
+          <Card2 />
+          <Card2 />
+          <Card2 />
+          <Card2 />
+          <Card2 />
+          <Card2 />
+          <Card2 />
+        </div>
+      </div>
 
-                <div className=" md:mt-4 mt-4">
-                    <ArrowSection />
-                </div>
-
-            </div>
-
-            {/* state code start  */}
-            <State />
-            
-            {/*  start code end */}
-            <div>
-
-            </div>
-
-            <div className="pb-5 -mt-1  md:pb-6">
-
-                {/* rounded card */}
-                <div className="container-wrapper md:text-[25px] text-xl font-medium text-center pb-2 md:pb-7">
-                    <p>Lorem, ipsum dolor.</p>
-                    <p className="md:text-md text-para font-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo cupiditate nobis minus?</p>
-                </div>
-                <div className="container-wrapper  grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-3">
-                    {/* card multiple */}
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                    <Card2 />
-                </div>
-            </div>
-
-
-
-            <div className="md:pb-6 pb-5">
-                <ReviewsCard />
-            </div>
-            {/* 
+      <div className="md:pb-6 pb-5">
+        <ReviewsCard />
+      </div>
+      {/* 
 
             <div className="py-14  bg-slate-200 mb:6 md:mb-10">
                 <div className="container-wrapper md:text-[25px] text-xl font-medium text-center pb-10">
@@ -259,8 +312,8 @@ export default function Home() {
                     <p className="md:text-md  text-para font-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo cupiditate nobis minus?</p>
                 </div>
                 <div className="grid grid-cols-3 container-wrapper gap-x-3 gap-y-10 "> */}
-            {/* multiple card */}
-            {/* <div className="flex gap-2  ">
+      {/* multiple card */}
+      {/* <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
                             <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -271,8 +324,8 @@ export default function Home() {
                             <p className="text-para font-light">Lorem ipsum dolor sit amet </p>
                         </div>
                     </div> */}
-            {/* multiple card */}
-            {/* <div className="flex gap-2  ">
+      {/* multiple card */}
+      {/* <div className="flex gap-2  ">
                         <div className=" overflow-hidden h-6 w-6">
                             <Image className=" object-cover w-5 h-5 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -283,8 +336,8 @@ export default function Home() {
                             <p className="text-para font-light">Lorem ipsum dolor sit amet .</p>
                         </div>
                     </div> */}
-            {/* multiple card */}
-            {/* <div className="flex gap-2  ">
+      {/* multiple card */}
+      {/* <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
                             <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -295,8 +348,8 @@ export default function Home() {
                             <p className="text-para font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                     </div> */}
-            {/* multiple card */}
-            {/* <div className="flex gap-2  ">
+      {/* multiple card */}
+      {/* <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
                             <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -307,8 +360,8 @@ export default function Home() {
                             <p className="text-para font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                     </div> */}
-            {/* multiple card */}
-            {/* <div className="flex gap-2  ">
+      {/* multiple card */}
+      {/* <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
                             <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -319,8 +372,8 @@ export default function Home() {
                             <p className="text-para font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                     </div> */}
-            {/* multiple card */}
-            {/* <div className="flex gap-2  ">
+      {/* multiple card */}
+      {/* <div className="flex gap-2  ">
                         <div className=" overflow-hidden ">
                             <Image className=" object-cover w-14 h-14 rounded-full"
                                 src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -334,9 +387,155 @@ export default function Home() {
                 </div>
             </div> */}
 
-
-            <Footer />
-
-        </>
-    )
+      <Footer />
+    </>
+  );
 }
+
+// <div className="grid grid-cols-1  md:px-16  md:grid-cols-2 lg:grid-cols-4 gap-5">
+//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
+//     <div className=" py-4 px-4 ">
+//       <img
+//         className="w-full rounded-md "
+//         src="/image/ab.webp"
+//         alt="Sample Image"
+//       />
+//     </div>
+//     <div className="px-6 text-center   py-2 ">
+//       <div className=" font-semibold  text-md ">Card Title</div>
+//       <p className="text-gray-700  text-base">Web Developer.....</p>
+//     </div>
+//     <div className="px-6 text-center pt-3 pb-3">
+//       <span className="inline-block  rounded-[100%]  p-1 bg-blue-500 text-sm font-semibold text-white mr-2">
+//       <FaTwitter  size={20}/>
+
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag2
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+//         #tag3
+//       </span>
+//     </div>
+//   </div>
+//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
+//     <div className="  py-4 px-4 ">
+//       <img
+//         className="w-full rounded-md"
+//         src="/image/ab.webp"
+//         alt="Sample Image"
+//       />
+//     </div>
+//     <div className="px-6 text-center py-2 ">
+//       <div className=" font-semibold text-md ">Card Title</div>
+//       <p className="text-gray-700 text-base">Web Developer.....</p>
+//     </div>
+//     <div className="px-6 text-center pt-3 pb-3">
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag1
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag2
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+//         #tag3
+//       </span>
+//     </div>
+//   </div>
+//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
+//     <div className="  py-4 px-4 ">
+//       <img
+//         className="w-full rounded-md"
+//         src="/image/ab.webp"
+//         alt="Sample Image"
+//       />
+//     </div>
+//     <div className="px-6 text-center py-2 ">
+//       <div className=" font-semibold text-md ">Card Title</div>
+//       <p className="text-gray-700 text-base">Web Developer.....</p>
+//     </div>
+//     <div className="px-6 text-center pt-3 pb-3">
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag1
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag2
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+//         #tag3
+//       </span>
+//     </div>
+//   </div>
+//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
+//     <div className="  py-4 px-4 ">
+//       <img
+//         className="w-full rounded-md"
+//         src="/image/ab.webp"
+//         alt="Sample Image"
+//       />
+//     </div>
+//     <div className="px-6 text-center py-2 ">
+//       <div className=" font-semibold text-md ">Card Title</div>
+//       <p className="text-gray-700 text-base">Web Developer.....</p>
+//     </div>
+//     <div className="px-6 text-center pt-3 pb-3">
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag1
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag2
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+//         #tag3
+//       </span>
+//     </div>
+//   </div>
+//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
+//     <div className="  py-4 px-4 ">
+//       <img
+//         className="w-full rounded-md"
+//         src="/image/ab.webp"
+//         alt="Sample Image"
+//       />
+//     </div>
+//     <div className="px-6 text-center py-2 ">
+//       <div className=" font-semibold text-md ">Card Title</div>
+//       <p className="text-gray-700 text-base">Web Developer.....</p>
+//     </div>
+//     <div className="px-6 pt-3 pb-3">
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag1
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag2
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+//         #tag3
+//       </span>
+//     </div>
+//   </div>
+//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
+//     <div className="  py-4 px-4 ">
+//       <img
+//         className="w-full rounded-md"
+//         src="/image/ab.webp"
+//         alt="Sample Image"
+//       />
+//     </div>
+//     <div className="px-6 text-center py-2 ">
+//       <div className=" font-semibold text-md ">Card Title</div>
+//       <p className="text-gray-700 text-base">Web Developer.....</p>
+//     </div>
+//     <div className="px-6 pt-3 pb-3">
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag1
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+//         #tag2
+//       </span>
+//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+//         #tag3
+//       </span>
+//     </div>
+//   </div>
+// </div>
