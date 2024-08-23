@@ -1,6 +1,17 @@
 
 import mongoose, { Schema } from "mongoose";
-
+import "@/models/package/TourInfo/Inclusion";
+import "@/models/package/TourInfo/Exclusion";
+import "@/models/package/TourInfo/Cancellation";
+import "@/models/package/TourInfo/NeedToKnow";
+import "@/models/package/TourInfo/PaymentTerm";
+import "@/models/City";
+import "@/models/Country";
+import "@/models/State";
+import "@/models/package/PackageCategory";
+import "@/models/package/PackagePrice";
+import "@/models/package/PriceHike";
+import "@/models/package/PackageDeparture";
 mongoose
   .connect(process.env.MONGODB_URI)
   .then((res) => console.log("db connected"));
