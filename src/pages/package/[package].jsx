@@ -10,7 +10,7 @@ export async function getServerSideProps(context) {
   const newPackageUrl = packageUrl.replace("-tour-package", " ");
 
   const res = await fetch(
-    `http://localhost:3000/api/public/package/${newPackageUrl}`
+    `http://89.116.34.248:3000/api/public/package/${newPackageUrl}`
   );
   const data = await res.json();
   console.log("data is here of package ::: ", data);
