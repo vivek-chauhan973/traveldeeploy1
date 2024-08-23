@@ -1,7 +1,7 @@
 import City from "@/models/City";
 import Country from "@/models/Country";
 import State from "@/models/State"
-import { middleware } from "@/utils/middleware";
+import { middleware } from "@/middleware";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const locationIndex= async (req, res) => {

@@ -111,7 +111,7 @@ export default function Package1() {
   // console.log("packages is very smart",addPacka/
   useEffect(()=>{
     setPrice1(isDisplayPrice);
-  },[isDisplayPrice])
+  },[isDisplayPrice,price1])
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       setFixedDeparturePopupOpen(true);

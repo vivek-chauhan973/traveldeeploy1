@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import Login from "../account/login";
+
 import { useRouter } from "next/router";
 import AdminDashboard from "./dashboard";
-import Layout from "@/components/admin/Layout";
-
+import Login from "../account/login";
 export default function AdminIndex() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
