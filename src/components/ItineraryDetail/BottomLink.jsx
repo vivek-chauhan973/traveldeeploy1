@@ -18,7 +18,7 @@ const BottomLink = ({ locationId ,addPackage}) => {
         `/api/public/filter-state-category?locationId=${locationIds}&categoryId=66baeb9660c5e33b13ee6f26,66bb31f67de371e77413ba4d,66bb320e7de371e77413ba50`
       );
       const data = await response.json();
-      console.log("data in bottom link-------", data);
+      // console.log("data in bottom link-------", data);
       setBottomLinkData(data.packages); // Store the fetched data
       // console.log("bottom fetching data:", data);
     } catch (error) {

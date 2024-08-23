@@ -132,7 +132,7 @@ useEffect(()=>{
  setPrice1(parseInt(departureSectionData?.price))
 },[departureSectionData])
 
-  console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",price1)
+  // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",price1)
   // console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
   const contextFun = {
     closeBtn,

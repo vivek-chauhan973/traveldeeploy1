@@ -23,8 +23,8 @@ import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 const ItinaryFixedDepartureCard = dynamic(() => import("./ItinaryFixedDepartureCard"));
 const FixedDeparturePopup = dynamic(() => import("@/components/ItineraryDetail/Departure&Booking/FixedDeparturePopup"));
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope,faPrint} from '@fortawesome/free-solid-svg-icons';
- 
+import { faEnvelope, faPrint } from '@fortawesome/free-solid-svg-icons';
+
 
 
 
@@ -65,53 +65,54 @@ export default function Package1() {
     // fetchImages().then((res) => setImages(res));
     setImages(addPackage?.uploads);
   }, [addPackage]);
-// console.log("Images :: :: :: ",images)
+  // console.log("Images :: :: :: ",images)
   // displayPrice
-  const [isDisplayPrice,setDisplayPrice]=useState() //display price
+  const [isDisplayPrice, setDisplayPrice] = useState() //display price
   // calculated price show 
   // console.log("-==-=-=-=-=-=-=-=-=-=-==",isDisplayPrice)
   useEffect(() => {
-   
-    if(addPackage?.addguest==="addGuest"){
-    var price=addPackage?.prices
-    if (price) {
-      // Step 1: Calculate the base price
-      const basePrice = price?.twinSharingRoom + (price?.misc*addPackage?.days?.length);
-    
-      // Step 2: Calculate the markup amount
-      const markupAmount = (basePrice * price?.markup) / 100;
-      
-      // Step 3: Calculate the price with markup
-      const priceWithMarkup = basePrice + markupAmount;
-    
-      // Step 4: Calculate the discount amount (or additional charge)
-      const discountAmount = (priceWithMarkup * Math.abs(price?.diskHike)) / 100;
-    
-      // Step 5: Apply discount or add extra charge based on the sign of diskHike
-      const grandTotal = price.diskHike < 0
-        ? priceWithMarkup - discountAmount
-        : priceWithMarkup + discountAmount;
-    
-      // Step 6: Calculate the GST amount
-      const gstAmount = (grandTotal * price?.gst) / 100;
-    
-      // Step 7: Final displayed price after adding GST
-      const displayedPrice = (grandTotal + gstAmount)/2;
-    
-      // console.log("Final Displayed Price:", displayedPrice);
-      setDisplayPrice(displayedPrice)
-      
-    }}
-    else{
+
+    if (addPackage?.addguest === "addGuest") {
+      var price = addPackage?.prices
+      if (price) {
+        // Step 1: Calculate the base price
+        const basePrice = price?.twinSharingRoom + (price?.misc * addPackage?.days?.length);
+
+        // Step 2: Calculate the markup amount
+        const markupAmount = (basePrice * price?.markup) / 100;
+
+        // Step 3: Calculate the price with markup
+        const priceWithMarkup = basePrice + markupAmount;
+
+        // Step 4: Calculate the discount amount (or additional charge)
+        const discountAmount = (priceWithMarkup * Math.abs(price?.diskHike)) / 100;
+
+        // Step 5: Apply discount or add extra charge based on the sign of diskHike
+        const grandTotal = price.diskHike < 0
+          ? priceWithMarkup - discountAmount
+          : priceWithMarkup + discountAmount;
+
+        // Step 6: Calculate the GST amount
+        const gstAmount = (grandTotal * price?.gst) / 100;
+
+        // Step 7: Final displayed price after adding GST
+        const displayedPrice = (grandTotal + gstAmount) / 2;
+
+        // console.log("Final Displayed Price:", displayedPrice);
+        setDisplayPrice(displayedPrice)
+
+      }
+    }
+    else {
       // console.log("fixed departure Packages :: ",addPackage)
       setPrice1(addPackage?.fixedDeparturePrices?.basePrice)
     }
-    
-  }, [addPackage,guestPrice]);
+
+  }, [addPackage, guestPrice]);
   // console.log("packages is very smart",addPacka/
-  useEffect(()=>{
+  useEffect(() => {
     setPrice1(isDisplayPrice);
-  },[isDisplayPrice])
+  }, [isDisplayPrice])
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       setFixedDeparturePopupOpen(true);
@@ -121,9 +122,9 @@ export default function Package1() {
       setFixedDepDate1(fixedDepDate);
     }
   };
- 
-  
-  
+
+
+
   // console.log("addPackage12324", addPackage);
   const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
 
@@ -169,7 +170,7 @@ export default function Package1() {
             {/*Select departure city */}
 
             <div id="departure" className=" hidden xl:block">
-              <DepartureSection  addPackage={addPackage} />
+              <DepartureSection addPackage={addPackage} />
             </div>
             <div className="xl:hidden">
               {addPackage?.prices?.addguest === "addGuest" && (
@@ -321,6 +322,37 @@ export default function Package1() {
             <div id="Policy&TermsSection" className="pt-7">
               <ItineraryPaymentTerms />
             </div>
+            {/* be responsible */}
+            <div className='pt-7'>
+              <h2 className='md:text-lg text-md font-semibold text-graytext'>Be Responsible Traveller</h2>
+              <ol className='text-para pl-4 pt-3'>
+                <li>
+                  Minimize Plastic Use: Bring a reusable water bottle, shopping bag, and utensils to reduce the need for single-use plastics. Many destinations have water refill stations and eco-friendly stores.
+                </li>
+                <li>
+                  Support Local and Sustainable Businesses: Eat at local restaurants, buy souvenirs from local artisans, and choose tour operators that prioritize sustainable practices and support the local community.
+                </li>
+                <li>
+                  Respect Wildlife and Natural Habitats: Avoid disturbing wildlife or their natural habitats. Stick to designated paths and observe animals from a distance without feeding or touching them.
+                </li>
+                <li>
+                  Dispose of Waste Properly: Follow local guidelines for recycling and waste disposal. If facilities aren&apos;t available, carry your waste with you until you can dispose of it responsibly.
+                </li>
+                <li>
+                  Educate Yourself and Others: Learn about the local environment, culture, and customs. Respect local practices and traditions, and share your knowledge about responsible travel with others.
+                </li>
+                <li>
+                  Choose Sustainable Activities: Engage in eco-friendly activities such as hiking, snorkeling, or visiting national parks. Avoid activities that exploit animals or damage the environment.
+                </li>
+                <li>
+                  Leave No Trace: Follow the principle of &quot;Leave No Trace,&quot; which means leaving natural areas as you found them. Pack out all trash, avoid picking plants, and refrain from carving or writing on rocks or trees.
+                </li>
+                <li>
+                  Plant Trees Whenever Possible: Participate in local tree-planting initiatives or plant trees in your own community. Trees absorb carbon dioxide, provide oxygen, and help support biodiversity, making them vital for a healthy environment.
+                </li>
+              </ol>
+
+            </div>
           </div>
           <div className=" mt-10">
             <div className="sticky top-[50px] z-20">
@@ -336,14 +368,14 @@ export default function Package1() {
                   <p className="text-[12px]">Send Itinerary</p>
                 </div>
                 <div className="border-l h-full items-center flex flex-col p-2 text-center">
-                <FontAwesomeIcon icon={faPrint} className='font1' />
-                 
+                  <FontAwesomeIcon icon={faPrint} className='font1' />
+
                   <p className="text-[12px]">Print Itinerary</p>
                 </div>
                 <div className="border-l h-full items-center flex flex-col p-2 text-center">
-              
-                <FontAwesomeIcon icon={faEnvelope} className='font1' />
-             
+
+                  <FontAwesomeIcon icon={faEnvelope} className='font1' />
+
                   <p className="text-[12px]">Email Itinerary</p>
                 </div>
 
@@ -378,7 +410,7 @@ export default function Package1() {
       ) : null}
 
       {/* bottom link */}
-      <BottomLink locationId={addPackage?.state} addPackage={addPackage}/>
+      <BottomLink locationId={addPackage?.state} addPackage={addPackage} />
       <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">
@@ -392,16 +424,16 @@ export default function Package1() {
               <p className="text-base leading-5 text-green-600 font-semibold uppercase">
                 best deal price
               </p>
-              <div  className={`${addPackage?.prices?.diskHike < 0 ? 'flex' : 'hidden'} gap-1 items-end`}>
-                    <p className="text-sm line-through">₹{addPackage?.prices?.withoutDiscount}</p>
-                    <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
-                    {addPackage?.prices?.diskHike}% Off
-                    </button>
-                  </div>
+              <div className={`${addPackage?.prices?.diskHike < 0 ? 'flex' : 'hidden'} gap-1 items-end`}>
+                <p className="text-sm line-through">₹{addPackage?.prices?.withoutDiscount}</p>
+                <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                  {addPackage?.prices?.diskHike}% Off
+                </button>
+              </div>
               <p className="text-sm leading-5">
                 Starts From{" "}
                 <span className="text-lg text-graytext font-medium">
-                ₹{Math.floor((submitButtonOfPricingCalculation&&guestPrice)||price1).toLocaleString()}
+                  ₹{Math.floor((submitButtonOfPricingCalculation && guestPrice) || price1).toLocaleString()}
                 </span>
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
