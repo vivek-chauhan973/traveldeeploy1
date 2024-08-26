@@ -23,7 +23,7 @@ const Addguest = ({
   const date = new Date();
   const { showAddguest, setSubmitButtonOfPricingCalculation } = useAppContext() ?? { showAddguest: false };
 const [cars,setCars]=useState([]);
-const [selectedCar,setSelectedCar]=useState({});
+const [selectedCar,setSelectedCar]=useState(null);
   const infantMaxDate = date.toISOString().split("T")[0];
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
     .toISOString()
@@ -78,6 +78,18 @@ const [selectedCar,setSelectedCar]=useState({});
   useEffect(()=>{
     fetchCarAllCars().then(res=>setCars(res?.data||[]))
   },[])
+  // here is the logic of select car
+
+const carselector=async (e)=>{
+  const id=e.target.value;
+ const response= await fetch(`/api/cars/car/${id}`)
+ const data=await response.json();
+ console.log("data is here ",data)
+
+  //  console.log(e.target.value);
+}
+
+console.log(selectedCar)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCloseBtn(true);
@@ -617,7 +629,8 @@ const [selectedCar,setSelectedCar]=useState({});
                       {isAC ? 'AC' : 'NonAC'}
                     </button>
                   </div>
-                  {isAC&&<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                  {<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                    <div>
                     <Image
                       className=" w-32 h-24 object-cover"
                       src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
@@ -631,11 +644,24 @@ const [selectedCar,setSelectedCar]=useState({});
                         <p className="text-para">6</p>
                       </div>
                     </div>
-                    <div className="items-center flex flex-col">
-                      <button className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md hover:bg-navyblack hover:text-white">
-                        Select
-                      </button>
                     </div>
+                    {isAC?
+                      <select id="cars" onChange={(e)=>carselector(e)} className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md">
+                    
+                      <option value="">select AC car</option>
+                       { cars.filter(item=>item.ac=="AC")?.map(item=>
+                        <option value={item?._id}>{item?.name}</option>
+                       )}
+                      </select>
+                    :
+                    
+                      <select id="cars" onChange={(e)=>carselector(e)} className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md ">
+                      <option value="">select Non AC car</option>
+                       { cars.filter(item=>item.ac=="Non AC")?.map(item=>
+                        <option value={item?._id}>{item?.name}</option>
+                       )}
+                      </select>
+                    }
                   </div>}
 
                 </div>
