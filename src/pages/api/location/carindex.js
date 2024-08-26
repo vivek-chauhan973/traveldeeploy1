@@ -2,7 +2,7 @@
 import CarCity from "@/models/CarCity";
 import CarCountry from "@/models/CarCountry";
 import CarState from "@/models/CarState";
-import { middleware } from "@/utils/middleware";
+import { middleware } from "@/middleware";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const CarlocationIndex= async (req, res) => {

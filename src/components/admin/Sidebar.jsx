@@ -3,15 +3,21 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-
+import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChartSimple,faSliders,faSort,faBook,faCar, faBlog,faHotel,faCartShopping,faFile,faGear,faRightFromBracket,faTag,faLayerGroup, faHome } from '@fortawesome/free-solid-svg-icons';
 
-import { IoIosArrowDown } from "react-icons/io";const Sidebar = () => {
+import { IoIosArrowDown } from "react-icons/io";
+const Sidebar = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(null);
   const [selectedSubMenu, setSelectedSubMenu] = useState(null);
-
+const handleLogout=async ()=>{
+  localStorage.removeItem('accessToken');
+  Cookies.remove('token');
+  console.log("cookies",Cookies)
+  // window.location.href = '/account/login';
+}
   const sidebarTabs = useMemo(() => [
     {
       label: "Dashboard",
@@ -112,11 +118,6 @@ import { IoIosArrowDown } from "react-icons/io";const Sidebar = () => {
       icon: () => <FontAwesomeIcon icon={faTag} />,
       href: "#"
     },
-    {
-      label: "Logout",
-      icon: () => <FontAwesomeIcon icon={faRightFromBracket} />,
-      href: "#"
-    }
   ], []);
 
   useEffect(() => {
@@ -206,6 +207,10 @@ import { IoIosArrowDown } from "react-icons/io";const Sidebar = () => {
             )}
           </div>
         ))}
+        <div className={`flex items-center gap-2 ${activeTab === "Logout" ? 'text-green-500 font-semibold' : ''} hover:text-orange-500`} onClick={handleLogout}>
+                  <FontAwesomeIcon icon={faRightFromBracket} size={20} /> {/* Use the icon component correctly */}
+                  <p className='cursor-pointer'>Logout</p>
+                </div>
       </div>
     </div>
   );
