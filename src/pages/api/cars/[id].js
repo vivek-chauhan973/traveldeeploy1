@@ -44,7 +44,7 @@ const handler = nextConnect()
     }
   })
   .delete(async (req, res) => {
-    try {
+    try{
       const { id } = req.query;
       const car = await Car.findByIdAndDelete(id);
       if (!car) {
@@ -54,6 +54,5 @@ const handler = nextConnect()
     } catch (error) {
       res.status(400).json({ success: false, error });
     }
-  });
-
+  })
 export default handler;
