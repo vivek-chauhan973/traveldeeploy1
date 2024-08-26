@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import Image from "next/image";
 import { useAppContext } from "./admin/context/Package/AddGuest";
@@ -7,7 +7,10 @@ import { useAppContext } from "./admin/context/Package/AddGuest";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChild, faCircleMinus, faPerson, faBaby, faCirclePlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-
+const fetchCarAllCars=async ()=>{
+  const response=await fetch("/api/cars/carapi");
+  return await response.json();
+}
 
 const Addguest = ({
   children,
@@ -19,7 +22,8 @@ const Addguest = ({
 }) => {
   const date = new Date();
   const { showAddguest, setSubmitButtonOfPricingCalculation } = useAppContext() ?? { showAddguest: false };
-
+const [cars,setCars]=useState([]);
+const [selectedCar,setSelectedCar]=useState({});
   const infantMaxDate = date.toISOString().split("T")[0];
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
     .toISOString()
@@ -69,6 +73,11 @@ const Addguest = ({
     }
   };
 
+// here fetch all cars
+
+  useEffect(()=>{
+    fetchCarAllCars().then(res=>setCars(res?.data||[]))
+  },[])
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCloseBtn(true);
@@ -597,8 +606,39 @@ const Addguest = ({
                     </div>
                   </div>
                 </div>
+{/* here is display all cars */}
+                <div className="mt-5">
+                  <div className="pl-3 w-full bg-navyblack rounded-md text-white flex justify-between items-center">
+                    <p>Transports</p>
+                    <button
+                      onClick={handleToggle}
+                      className={`px-4 py-2 rounded-r-md ${isAC ? 'bg-primary' : 'bg-red-500'}`}
+                    >
+                      {isAC ? 'AC' : 'NonAC'}
+                    </button>
+                  </div>
+                  {isAC&&<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                    <Image
+                      className=" w-32 h-24 object-cover"
+                      src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
+                      alt=""
+                      width="125"
+                      height="150"
+                    />
+                    <div className="items-center flex flex-col md:block">
+                      <p className="font-semibold">Sedan{" "}</p>
+                      <div className="flex itmes-center justify-center">
+                        <p className="text-para">6</p>
+                      </div>
+                    </div>
+                    <div className="items-center flex flex-col">
+                      <button className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md hover:bg-navyblack hover:text-white">
+                        Select
+                      </button>
+                    </div>
+                  </div>}
 
-                
+                </div>
               </div>
             </div>
             <div className=" bottom-0 sticky bg-slate-50 border-t py-2 md:px-7 px-5 flex justify-between items-center">
