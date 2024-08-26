@@ -14,9 +14,17 @@ const Sidebar = () => {
   const [selectedSubMenu, setSelectedSubMenu] = useState(null);
 const handleLogout=async ()=>{
   localStorage.removeItem('accessToken');
-  Cookies.remove('token');
-  console.log("cookies",Cookies)
-  // window.location.href = '/account/login';
+  const response = await fetch('/api/account/logout', {
+    method: 'POST',
+  });
+
+  if (response.ok) {
+    console.log('User logged out');
+    // Optionally, redirect or perform any other action after logging out
+  } else {
+    console.error('Failed to log out');
+  }
+  window.location.href = '/account/login';
 }
   const sidebarTabs = useMemo(() => [
     {
@@ -40,7 +48,7 @@ const handleLogout=async ()=>{
      
       subMenu: [
         { label: "Banner", href: "#" },
-        { label: "Other Management", href: "/admin/home/manage"}
+        { label: "Other Management", href: "#" }
       ]
     },
     {
