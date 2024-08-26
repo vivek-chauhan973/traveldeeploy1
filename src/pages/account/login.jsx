@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import "../../app/globals.css";
-import Image from "next/image";
-
 export default function Login({ page }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
   const [errors, setErrors] = useState({
     username: "",
     password: "",
@@ -29,7 +26,6 @@ export default function Login({ page }) {
       newErrors.password = "Password is required";
       isValid = false;
     }
-
     setErrors(newErrors);
     return isValid;
   };

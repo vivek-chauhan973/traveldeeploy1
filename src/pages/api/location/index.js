@@ -1,12 +1,12 @@
 import City from "@/models/City";
 import Country from "@/models/Country";
 import State from "@/models/State"
-import { middleware } from "@/utils/middleware";
+
 import { NextApiRequest, NextApiResponse } from "next";
 
  const locationIndex= async (req, res) => {
     try {
-        // middleware(req);
+        
         let result
         switch (req.query.type) {
             case 'country':
