@@ -41,9 +41,20 @@ export default function CreatePackage() {
     const [tableColumn,setTableColumn]=useState([]);
 
     const [basicDot , setBasicDot] = useState(false);
-//  trail 
 
+    // show calender Tab
+    const [showCalenderTab, setShowCalenderTab] = useState(false)
 
+    useEffect(() => {
+        if (itinerary) {
+            if (itinerary.addguest === "addGuest") {
+                setShowCalenderTab(true);
+            } else {
+                setShowCalenderTab(false);
+            }
+        }
+    }, [itinerary]);
+    console.log(itinerary)
 
     const [imageDot , setImageDot] = useState(false);
     const [calenderDot , setCalenderDot] = useState(false);
@@ -93,10 +104,10 @@ export default function CreatePackage() {
             getItinerary();
         }
     }, [edit, getItinerary]);
-useEffect(()=>{
-    setTableData(itinerary?.tableData||[]);
-    setTableColumn(itinerary?.tableColumn||[]);
-},[itinerary])
+    useEffect(()=>{
+        setTableData(itinerary?.tableData||[]);
+        setTableColumn(itinerary?.tableColumn||[]);
+    },[itinerary])
     const [select, setSelect] = useState("");
     const [selectedOption, setSelectedOption] = useState("");
 
@@ -128,31 +139,36 @@ useEffect(()=>{
                         </button>
                         <button onClick={() => handleTabClick('Tab2')} className={`${activeTab === "Tab2" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             Images  { imageDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
-                        </button>
-                        <button onClick={() => handleTabClick('Tab3')} className={`${activeTab === "Tab3" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            Calender  { calenderDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }     
-                        </button>
-                        <button onClick={() => handleTabClick('Tab4')} className={`${activeTab === "Tab4" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                        </button>             
+                        <button onClick={() => handleTabClick('Tab3')} className={`${activeTab === "Tab4" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             Highlight About { highlightDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
-                        <button onClick={() => handleTabClick('Tab5')} className={`${activeTab === 'Tab5' ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                        <button onClick={() => handleTabClick('Tab4')} className={`${activeTab === 'Tab5' ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             Itinerary Text { itenaryDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
-                        <button onClick={() => handleTabClick('Tab6')} className={`${activeTab === 'Tab6' ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                        <button onClick={() => handleTabClick('Tab5')} className={`${activeTab === 'Tab6' ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             Map Embedded { mapDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
-                        <button onClick={() => handleTabClick('Tab7')} className={`${activeTab === "Tab7" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                        <button onClick={() => handleTabClick('Tab6')} className={`${activeTab === "Tab7" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             Flight { flightDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
-                        <button onClick={() => handleTabClick('Tab8')} className={`${activeTab === "Tab8" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                        <button onClick={() => handleTabClick('Tab7')} className={`${activeTab === "Tab8" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             Tour Info { tourDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
-                        <button onClick={() => handleTabClick('Tab9')} className={`${activeTab === "Tab9" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                        <button onClick={() => handleTabClick('Tab8')} className={`${activeTab === "Tab9" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             SEO Field { seoDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }
                         </button>
-                        <button onClick={() => handleTabClick('Tab10')} className={`${activeTab === "Tab10" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                        <button onClick={() => handleTabClick('Tab9')} className={`${activeTab === "Tab10" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             Pricing Management { priceManagementDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-xxs text-red-500">●</span> } 
                         </button>
+                        {/* <button onClick={() => handleTabClick('Tab3')} className={`${activeTab === "Tab3" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                            Calender  { calenderDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }     
+                        </button> */}
+                        {showCalenderTab && (
+                            <button onClick={() => handleTabClick('Tab10')} className={`${activeTab === "Tab11" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
+                                Calender  { calenderDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> }     
+                            </button>
+                        )}
                         <button onClick={() => handleTabClick('Tab11')} className={`${activeTab === "Tab11" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
                             FAQ { faqDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span> } 
                         </button>
@@ -174,31 +190,28 @@ useEffect(()=>{
                     </div>
                 </div>
                 <div className={` ${activeTab === 'Tab3' ? 'block' : 'hidden'}`}>
-                    <Calender itinerary={itinerary} setActiveTab={setActiveTab} setCalenderDot={setCalenderDot}/>
-                </div>
-                <div className={` ${activeTab === 'Tab4' ? 'block' : 'hidden'}`}>
                     <HighlightAbout setActiveTab={setActiveTab} itinerary={itinerary} itineraryInfo={undefined} setItineraryInfo={undefined} setHighlightDot={setHighlightDot}/>
                 </div>
-                <div className={` ${activeTab === 'Tab5' ? 'block' : 'hidden'}`}>
+                <div className={` ${activeTab === 'Tab4' ? 'block' : 'hidden'}`}>
                     <div className="my-5">
                         <div className="bg-white rounded-md px-3m p-2">
                             <ItineraryText setActiveTab={setActiveTab} itinerary={itinerary} setItenaryDot={setItenaryDot}/>
                         </div>
                     </div>
                 </div>
-                <div className={` ${activeTab === 'Tab6' ? 'block' : 'hidden'}`}>
+                <div className={` ${activeTab === 'Tab5' ? 'block' : 'hidden'}`}>
                     <GoogleMap setActiveTab={setActiveTab} itinerary={itinerary} setMapDot={setMapDot}/>
                 </div>
-                <div className={` ${activeTab === 'Tab7' ? 'block' : 'hidden'}`}>
+                <div className={` ${activeTab === 'Tab6' ? 'block' : 'hidden'}`}>
                     <FlightBooking setActiveTab={setActiveTab} itinerary={itinerary} setFlightDot={setFlightDot}/>
                 </div>
-                <div className={` ${activeTab === 'Tab8' ? 'block' : 'hidden'}`}>
+                <div className={` ${activeTab === 'Tab7' ? 'block' : 'hidden'}`}>
                     <TourInformation itinerary={itinerary} setActiveTab={setActiveTab} setTourDot={setTourDot}/>
                 </div>
-                <div className={` ${activeTab === 'Tab9' ? 'block' : 'hidden'}`}>
+                <div className={` ${activeTab === 'Tab8' ? 'block' : 'hidden'}`}>
                     <SeoField itinerary={itinerary} setActiveTab={setActiveTab} setSeoDot={setSeoDot}/>
                 </div>
-                <div className={` ${activeTab === 'Tab10' ? 'block' : 'hidden'}`}>
+                <div className={` ${activeTab === 'Tab9' ? 'block' : 'hidden'}`}>
                     <div className="relative">
                         {itinerary?.prices === null && pricingPopup && <PricingManagementPopup setPricingPopup={setPricingPopup} handleOnChange={handleOnChange} handleCleckbox={handleCleckbox}   />}
                         {(itinerary?.prices?.addguest === "addGuest" || selectedOption === "addGuest") && <PricingManagement itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot}/>}
@@ -209,6 +222,9 @@ useEffect(()=>{
                             </div>
                         )}
                     </div>
+                </div>
+                <div className={` ${activeTab === 'Tab10' ? 'block' : 'hidden'}`}>
+                    <Calender itinerary={itinerary} setActiveTab={setActiveTab} setCalenderDot={setCalenderDot}/>
                 </div>
                 <div className={` ${activeTab === 'Tab11' ? 'block' : 'hidden'}`}>
                     <PackageFaq itinerary={itinerary} setActiveTab={setActiveTab} setFaqDot={setFaqDot}/>
