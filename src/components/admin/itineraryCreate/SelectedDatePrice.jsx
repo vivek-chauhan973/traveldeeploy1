@@ -192,30 +192,7 @@ export default function SelectedDatePrice({ itinerary }) {
           ))}
         </ul>
         {/* here is limit */}
-        <label className='my-3'>
-          limit:
-          <input
-            type="text"
-            value={limit}
-            onChange={(e) => setLimit(e.target.value)}
-            style={{ marginLeft: '10px' }}
-          />
-        </label>
-
-        <button
-          onClick={handleSubmit}
-          disabled={loading}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          {loading ? 'Submitting...' : 'Submit All Entries'}
-        </button>
+        
       </div>
     </div>
   );
