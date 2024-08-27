@@ -84,6 +84,7 @@ const carselector=async (e)=>{
   const id=e.target.value;
  const response= await fetch(`/api/cars/car/${id}`)
  const data=await response.json();
+ setSelectedCar(data?.data);
  console.log("data is here ",data)
 
   //  console.log(e.target.value);
@@ -629,8 +630,22 @@ console.log(selectedCar)
                       {isAC ? 'AC' : 'NonAC'}
                     </button>
                   </div>
-                  {<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
-                    <div>
+                  <div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                    {selectedCar?<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                    <Image
+                      className=" w-32 h-24 object-cover"
+                      src={selectedCar?.imageDetails?.[0]?.url}
+                      alt=""
+                      width="125"
+                      height="150"
+                    />
+                    <div className="items-center flex flex-col md:block">
+                      <p className="font-semibold">{selectedCar?.vehicleType} {" "}</p>
+                      <div className="flex itmes-center justify-center">
+                        <p className="text-para">{selectedCar?.seatingCapacity}</p>
+                      </div>
+                    </div>
+                    </div>:<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
                     <Image
                       className=" w-32 h-24 object-cover"
                       src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
@@ -644,25 +659,25 @@ console.log(selectedCar)
                         <p className="text-para">6</p>
                       </div>
                     </div>
-                    </div>
+                    </div>}
                     {isAC?
                       <select id="cars" onChange={(e)=>carselector(e)} className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md">
                     
                       <option value="">select AC car</option>
-                       { cars.filter(item=>item.ac=="AC")?.map(item=>
-                        <option value={item?._id}>{item?.name}</option>
+                       { cars.filter(item=>item.ac=="AC")?.map((item,i)=>
+                        <option key={i} value={item?._id}>{item?.name}</option>
                        )}
                       </select>
                     :
                     
                       <select id="cars" onChange={(e)=>carselector(e)} className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md ">
                       <option value="">select Non AC car</option>
-                       { cars.filter(item=>item.ac=="Non AC")?.map(item=>
-                        <option value={item?._id}>{item?.name}</option>
+                       { cars.filter(item=>item.ac=="Non AC")?.map((item,i)=>
+                        <option key={i} value={item?._id}>{item?.name}</option>
                        )}
                       </select>
                     }
-                  </div>}
+                  </div>
 
                 </div>
               </div>
