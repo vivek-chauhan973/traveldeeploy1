@@ -46,20 +46,34 @@ export default function CreatePackage() {
 
     // show calendar Tab
     const [calendarPricemanagement, setCalendarPricemanagement] = useState("") 
+    const [calendarPricemanagementf, setCalendarPricemanagementf] = useState("") 
     const [showCalendarTab, setShowCalendarTab] = useState(false)
+    const [showCalendarTabf, setShowCalendarTabf] = useState(false)
     
     useEffect(() => {
-        if (calendarPricemanagement) {
+        if (calendarPricemanagement||itinerary) {
            
-            if (calendarPricemanagement === "addGuest") {
+            if (calendarPricemanagement==="addGuest"||itinerary?.addguest==="addGuest") {
               
                 setShowCalendarTab(true);
             } else {
-                setShowCalendarTabf(true);
+                setShowCalendarTab(false);
             }
         }
 
-    }, [calendarPricemanagement]);
+    }, [calendarPricemanagement,itinerary]);
+    useEffect(() => {
+        if (calendarPricemanagementf||itinerary) {
+           
+            if (calendarPricemanagementf==="fixedDeparture"||itinerary?.addguest==="fixedDeparture") {
+              
+                setShowCalendarTabf(true);
+            } else {
+                setShowCalendarTabf(false);
+            }
+        }
+
+    }, [calendarPricemanagementf,itinerary]);
 
     const [imageDot, setImageDot] = useState(false);
     const [calenderDot, setCalenderDot] = useState(false);
@@ -226,7 +240,7 @@ export default function CreatePackage() {
                         )}
                         {(itinerary?.prices?.departure1 === "fixedDeparture" || selectedOption === "fixedDeparture") && (
                             <div>
-                                <p><FixedDeparture itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot} /></p>
+                                <p><FixedDeparture setCalendarPricemanagementf={setCalendarPricemanagementf} itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot} /></p>
                                 {/* <SelectedDatePrice itinerary={itinerary} /> */}
                             </div>
                         )}
@@ -247,7 +261,7 @@ export default function CreatePackage() {
                 )}
                 {showCalendarTabf && (
                 <div className={` ${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>
-                    <Calendar itinerary={itinerary} setActiveTab={setActiveTab} setCalenderDot={setCalenderDot} />
+                    <SelectedDatePrice itinerary={itinerary} setActiveTab={setActiveTab} setCalenderDot={setCalenderDot} />
                 </div>
                 )}
             </Layout>

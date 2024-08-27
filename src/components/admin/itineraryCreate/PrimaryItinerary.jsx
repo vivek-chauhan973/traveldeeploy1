@@ -275,14 +275,10 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         selectedCountry 
                     })
                 });
-                
-                if (res.ok){
-                    setBasicDot(true)
-                    // console.log("primary data submitted as : ",res)
-                }
-                
                 const data = await res.json();
-                setActiveTab("Tab2");
+                if(data){
+                    setActiveTab("Tab2");
+                }
                 setItineraryInfo(data?.packageBasic);
                 router.push('/admin/package/itinerary/' + data?.packageBasic.id);
                

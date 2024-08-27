@@ -6,7 +6,7 @@ import { FaEdit } from 'react-icons/fa';
 import { IoIosSave } from 'react-icons/io';
 import { useAppContext } from '../context/Package/AddGuest';
 
-const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
+const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot ,setCalendarPricemanagementf}) => {
     const [basePrice, setBasePrice] = useState(0);
     const [rate, setRate] = useState(0);
     const [inventory, setInventory] = useState( 0);
@@ -165,6 +165,10 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
                 body: JSON.stringify(payload),
             });
             const data = await res.json();
+            if(data){
+                setCalendarPricemanagementf(data?.departure?.departure1)
+            }
+            console.log("data -->",data)
             setActiveTab("Tab10");
 
             // if(res.ok){
