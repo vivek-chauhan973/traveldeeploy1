@@ -1,9 +1,9 @@
 import Car from "@/models/car-package/cars";
 const carApi=async (req,res)=>{
    const {id}=req.query;
-   console.log("id28329432746782534856982798409-9438729---> ",id)
+   // console.log("id28329432746782534856982798409-9438729---> ",id)
 try {
-   const data=await Car.findOne({id});
+   const data=await Car.findById(id);
    if(!data){
     return res.status(404).json({message:"car not found"});
    }

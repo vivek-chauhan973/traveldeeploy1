@@ -882,11 +882,12 @@ const Addguest = ({
   }, []);
   // here is the logic of select car
 
-  const carselector = async (e) => {
-    const id = e.target.value;
-    const response = await fetch(`/api/cars/car/${id}`);
-    const data = await response.json();
-    console.log("data is here ", data);
+const carselector=async (e)=>{
+  const id=e.target.value;
+ const response= await fetch(`/api/cars/car/${id}`)
+ const data=await response.json();
+ setSelectedCar(data?.data);
+ console.log("data is here ",data)
 
     //  console.log(e.target.value);
   };
@@ -1453,140 +1454,129 @@ const Addguest = ({
                             />
                           </div>
 
-                          <p
-                            onChange={(e) => handleChange}
-                            className="text-para w-3 mr-1 text-center"
-                          >
-                            {countQuardRoom}
-                          </p>
-                          <div
-                            onClick={() => handleIncrement("quardRoom")}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCirclePlus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
+                        <p
+                          onChange={(e) => handleChange}
+                          className="text-para w-3 mr-1 text-center"
+                        >
+                          {countQuardRoom}
+                        </p>
+                        <div onClick={() => handleIncrement("quardRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700">
+                          <FontAwesomeIcon icon={faCirclePlus} className='font1 cursor-pointer' />
                         </div>
+
                       </div>
                     </div>
                   </div>
-                  {/* here is display all cars */}
-
-                  <div className="mt-8 p-4 bg-gray-800 rounded-lg shadow-lg">
-                    <div className="w-full bg-navyblack rounded-md  gap-2 text-white flex justify-between items-center p-3 mb-4">
-                      <p className="font-semibold text-base md:text-lg">
-                        Transports
-                      </p>
-                      <div className="flex items-center  gap-2">
-                        <button
-                          onClick={handleToggle}
-                          className={`px-6  py-2 rounded-l-full text-sm md:text-md transition-all ${
-                            isAC
-                              ? "bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-md"
-                              : "bg-gray-600 text-gray-300"
-                          } hover:bg-blue-600`}
-                        >
-                          AC
-                        </button>
-                        <button
-                          onClick={handleToggle}
-                          className={`md:px-6 py-2 px-[4px] md:py-2  rounded-r-full text-sm md:text-md transition-all ${
-                            !isAC
-                              ? "bg-gradient-to-r from-red-500 to-red-700 text-white shadow-md"
-                              : "bg-gray-600 text-gray-300"
-                          } hover:bg-red-600`}
-                        >
-                          Non AC
-                        </button>
+                </div>
+{/* here is display all cars */}
+                <div className="mt-5">
+                  <div className="pl-3 w-full bg-navyblack rounded-md text-white flex justify-between items-center">
+                    <p>Transports</p>
+                    <button
+                      onClick={handleToggle}
+                      className={`px-4 py-2 rounded-r-md ${isAC ? 'bg-primary' : 'bg-red-500'}`}
+                    >
+                      {isAC ? 'AC' : 'NonAC'}
+                    </button>
+                  </div>
+                  <div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                    {selectedCar?<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                    <Image
+                      className=" w-32 h-24 object-cover"
+                      src={selectedCar?.imageDetails?.[0]?.url}
+                      alt=""
+                      width="125"
+                      height="150"
+                    />
+                    <div className="items-center flex flex-col md:block">
+                      <p className="font-semibold">{selectedCar?.vehicleType} {" "}</p>
+                      <div className="flex itmes-center justify-center">
+                        <p className="text-para">{selectedCar?.seatingCapacity}</p>
                       </div>
                     </div>
-                    <div className="flex-col flex items-center justify-between md:border-b py-4 md:flex-row mb-4 space-y-4 md:space-y-0">
-                      <div className="flex items-center gap-4">
-                        <Image
-                          className="w-40 h-28 object-cover rounded-md shadow-md"
-                          src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
-                          alt=""
-                          width="160"
-                          height="180"
-                        />
-                        <div className="flex flex-col items-center md:items-start">
-                          <p className="font-semibold text-white text-lg">
-                            Sedan
-                          </p>
-                          <div className="flex items-center justify-center mt-2">
-                            <p className="text-gray-300">Seats: 6</p>
-                          </div>
-                        </div>
+                    </div>:<div className="flex-col flex items-center justify-between md:border-b md:flex-row mb-2">
+                    <Image
+                      className=" w-32 h-24 object-cover"
+                      src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
+                      alt=""
+                      width="125"
+                      height="150"
+                    />
+                    <div className="items-center flex flex-col md:block">
+                      <p className="font-semibold">Sedan{" "}</p>
+                      <div className="flex itmes-center justify-center">
+                        <p className="text-para">6</p>
                       </div>
-                      <select
-                        id="cars"
-                        onChange={(e) => carselector(e)}
-                        className="border   border-gray-600 mt-4 w-32 bg-gray-700 text-gray-300 px-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                      >
-                        <option value="" className="  py-2 ">
-                          {isAC ? "Select AC car" : "Select Non AC car"}
-                        </option>
-                        {cars
-                          .filter(
-                            (item) => item.ac === (isAC ? "AC" : "Non AC")
-                          )
-                          ?.map((item, i) => (
-                            <option key={i} value={item?._id}>
-                              {item?.name}
-                            </option>
-                          ))}
+                    </div>
+                    </div>}
+                    {isAC?
+                      <select id="cars" onChange={(e)=>carselector(e)} className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md">
+                    
+                      <option value="">select AC car</option>
+                       { cars.filter(item=>item.ac=="AC")?.map((item,i)=>
+                        <option key={i} value={item?._id}>{item?.name}</option>
+                       )}
                       </select>
-                    </div>
+                    :
+                    
+                      <select id="cars" onChange={(e)=>carselector(e)} className="border border-navyblack  text-navyblack text-para px-5 py-2 rounded-md ">
+                      <option value="">select Non AC car</option>
+                       { cars.filter(item=>item.ac=="Non AC")?.map((item,i)=>
+                        <option key={i} value={item?._id}>{item?.name}</option>
+                       )}
+                      </select>
+                    }
                   </div>
 
-                  {/* ac trail end*/}
                 </div>
-              </div>
-              <div className=" bottom-0 sticky bg-slate-50 border-t mt-3 py-2 md:px-7 px-5 flex justify-between items-center">
-                <div>
-                  <div className="flex gap-4">
-                    <p className="text-sm">
-                      <span className="font-semibold">{inputData?.adult}</span>
-                      Adults
-                    </p>
-                    <p className="text-sm">
-                      <span className="font-semibold">{inputData?.child}</span>
-                      Child
-                    </p>
-                    <p className="text-sm">
-                      <span className="font-semibold">{inputData?.infant}</span>
-                      Infant
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm md:text-base">
-                      {inputData?.singleRoom +
-                        inputData?.twinRoom +
-                        inputData?.tripleRoom +
-                        inputData?.quardRoom}{" "}
-                      Rooms
-                    </p>
-                  </div>
-                  <div className="text-sm flex gap-2 md:gap-4">
-                    <p className="font-semibold">Sedan</p>
-                    <div className="flex itmes-center justify-center">
-                      <p className="font-semibold">6</p>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  onClick={(e) => handleSubmit(e)}
-                  className="bg-navyblack  py-2 text-white rounded-md hover:bg-slate-400 px-5"
-                >
-                  Submit
-                </button>
               </div>
             </div>
-          </form>
-        </Dialog>
-      )}
+            <div className=" bottom-0 sticky bg-slate-50 border-t py-2 md:px-7 px-5 flex justify-between items-center">
+              <div>
+                <div className="flex gap-4">
+                  <p className="text-sm">
+                    <span className="font-semibold">{inputData?.adult}</span>
+                    Adults
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-semibold">{inputData?.child}</span>
+                    Child
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-semibold">{inputData?.infant}</span>
+                    Infant
+                  </p>
+                </div>
+                <div>
+                  <p className="font-semibold text-sm md:text-base">
+                    {inputData?.singleRoom +
+                      inputData?.twinRoom +
+                      inputData?.tripleRoom +
+                      inputData?.quardRoom}{" "}
+                    Rooms
+                  </p>
+                </div>
+                <div className="text-sm flex gap-2 md:gap-4">
+                  <p className="font-semibold">Sedan</p>
+                  <div className="flex itmes-center justify-center">
+
+                    <p className="font-semibold">6</p>
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={(e) => handleSubmit(e)}
+                className="bg-navyblack  py-2 text-white rounded-md hover:bg-slate-400 px-5"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </Dialog>
+      }
+
     </div>
   );
 };
