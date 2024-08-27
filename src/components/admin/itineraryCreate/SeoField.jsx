@@ -14,7 +14,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
             try {
                 const response = await fetch(`/api/package/package-seo/${itinerary?._id}`);
                 if (response.ok) {
-                    setActiveTab("Tab10")
+                    setActiveTab("Tab9")
                     setSeoDot(true);
                     const data = await response.json();
                     setIsSEOField(data || {
@@ -80,7 +80,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                 }
 
                 const data = await response.json();
-                setActiveTab("Tab10");
+                setActiveTab("Tab9");
                 setSeoDot(true);
                 console.log('Form submitted successfully:', data);
             } catch (error) {

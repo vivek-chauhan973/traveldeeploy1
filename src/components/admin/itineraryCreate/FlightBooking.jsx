@@ -814,7 +814,7 @@ export default function FlightBookingForm({
         }
       );
       if (response.ok) {
-        setActiveTab("Tab8");
+        setActiveTab("Tab7");
         setFlightDot(true);
         console.log("Flights saved successfully");
       } else {
@@ -830,6 +830,8 @@ export default function FlightBookingForm({
       alert("At least one booking must be made");
     } else {
       saveFlightBooking();
+      // Implement your logic to switch to the next tab
+      // setActiveTab("Tab7");
     }
   };
 

@@ -131,7 +131,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
         }),
       });
       if (res.ok) {
-        setActiveTab("Tab6");
+        setActiveTab("Tab5");
         setItenaryDot(true);
         console.log("Itenary Faq successfully saved");
       } else {

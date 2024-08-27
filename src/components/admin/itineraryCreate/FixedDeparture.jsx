@@ -164,17 +164,15 @@ const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot }) => {
                 },
                 body: JSON.stringify(payload),
             });
-            // const data = await res.json();
+            const data = await res.json();
+            setActiveTab("Tab10");
+
             // if(res.ok){
             //     setActiveTab("Tab10");
             //     setPriceManagementDot (true)
                
             //   }
 
-
-              
-              const data = await res.json();
-              setActiveTab("Tab10");
 
 
 

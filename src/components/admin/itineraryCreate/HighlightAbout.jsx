@@ -89,7 +89,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
       //   setHighlightDot(true);
       // }
       const data = await res.json();
-      setActiveTab("Tab5");
+      setActiveTab("Tab4");
       console.log("Highlight & About data show is here", data);
       setIsEditingAbout(false); // Hide the editor after saving
     } catch (error) {

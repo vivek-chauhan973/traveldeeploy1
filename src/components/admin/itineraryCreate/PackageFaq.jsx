@@ -74,10 +74,10 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
         },
         body: JSON.stringify({ days: itineraryDayWiseDataArray }),
       });
-      // if(response.ok){
-      //   setFaqDot(true)
-      //   setActiveTab("Tab12");
-      // }
+      if(response.ok){
+        setFaqDot(true)
+        setActiveTab("Tab11");
+      }
       // console.log("currently data pass", itineraryDayWiseDataArray);
     } catch (error) {
       console.error(error);

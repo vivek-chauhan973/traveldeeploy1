@@ -18,8 +18,8 @@ export default function SelectedDatePrice({ itinerary }) {
   const [selectedDate, setSelectedDate] = useState("");
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [limit, setLimit] = useState("");
+  const [error, setError] = useState('');
+  const [limit, setLimit] = useState('');
 
   useEffect(() => {
     const loadData = async () => {
@@ -48,9 +48,9 @@ export default function SelectedDatePrice({ itinerary }) {
     }
 
     setEntries([...entries, { date: selectedDate, price }]);
-    setSelectedDate("");
-    setPrice("");
-    setError("");
+    setSelectedDate('');
+    setPrice('');
+    setError('');
   };
 
   const handleDeleteEntry = (index) => {
@@ -61,18 +61,15 @@ export default function SelectedDatePrice({ itinerary }) {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(
-        `/api/save-data?packageId=${itinerary?._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ entries, limit }),
-        }
-      );
-      if (!response.ok) throw new Error("Network response was not ok");
-      alert("Data saved successfully");
+      const response = await fetch(`/api/save-data?packageId=${itinerary?._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ entries, limit }),
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+      alert('Data saved successfully');
     } catch (error) {
       console.error("Error saving data:", error);
       setError("An error occurred while saving data");
@@ -162,6 +159,63 @@ export default function SelectedDatePrice({ itinerary }) {
             {loading ? "Submitting..." : "Submit All Entries"}
           </button>
         </div>
+        <ul style={{ listStyleType: 'none', padding: '0' }}>
+          {entries.map((entry, index) => (
+            <li
+              key={index}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '10px',
+                padding: '10px',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                backgroundColor: '#f9f9f9',
+              }}
+            >
+              {entry.date}: ${entry.price}
+              <button
+                onClick={() => handleDeleteEntry(index)}
+                style={{
+                  backgroundColor: '#dc3545',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '5px 10px',
+                  cursor: 'pointer',
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+        {/* here is limit */}
+        <label className='my-3'>
+          limit:
+          <input
+            type="text"
+            value={limit}
+            onChange={(e) => setLimit(e.target.value)}
+            style={{ marginLeft: '10px' }}
+          />
+        </label>
+
+        <button
+          onClick={handleSubmit}
+          disabled={loading}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#007bff',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          {loading ? 'Submitting...' : 'Submit All Entries'}
+        </button>
       </div>
     </div>
   );
