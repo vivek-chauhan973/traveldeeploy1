@@ -677,7 +677,7 @@ const Addguest = ({
                   {/* here is display all cars */}
 
                   <div className="mt-8 p-4 bg-gray-800 rounded-lg shadow-lg">
-                    <div className="w-full bg-navyblack rounded-md  gap-2 text-white flex justify-between items-center p-3 mb-4">
+                    {/* <div className="w-full bg-navyblack rounded-md  gap-2 text-white flex justify-between items-center p-3 mb-4">
                       <p className="font-semibold text-base md:text-lg">
                         Transports
                       </p>
@@ -702,6 +702,36 @@ const Addguest = ({
                         >
                           Non AC
                         </button>
+                      </div>
+                    </div> */}
+
+                    <div className="w-full bg-navyblack rounded-md gap-2 text-white flex justify-between items-center p-3 mb-4">
+                      <p className="font-semibold text-base md:text-lg">
+                        Transports
+                      </p>
+                      <div className="w-30 h-11 flex items-center rounded-full bg-gray-300 p-1">
+                        {/* AC Option */}
+                        <div
+                          className={`flex items-center justify-center w-12 h-10 text-sm px-1 cursor-pointer rounded-full transition-all duration-300 ${
+                            isAC
+                              ? "bg-blue-500 text-white shadow-md"
+                              : "bg-gray-300 text-gray-500 blur-[1px] opacity-50"
+                          }`}
+                          onClick={() => setIsAC(true)}
+                        >
+                          AC
+                        </div>
+                        {/* Non AC Option */}
+                        <div
+                          className={`flex items-center justify-center w-12   h-10 text-sm cursor-pointer rounded-full transition-all duration-300 ${
+                            !isAC
+                              ? "bg-red-500 text-white shadow-sm"
+                              : "bg-gray-300  text-gray-500 blur-[1px] opacity-50"
+                          }`}
+                          onClick={() => setIsAC(false)}
+                        >
+                          Non AC
+                        </div>
                       </div>
                     </div>
                     <div className="flex-col flex items-center justify-between md:border-b py-4 md:flex-row mb-4 space-y-4 md:space-y-0">
