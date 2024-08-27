@@ -304,7 +304,6 @@ const Addguest = ({
         break;
     }
   };
-
   // AC/NonAC
   const [isAC, setIsAC] = useState(true);
 
@@ -313,7 +312,10 @@ const Addguest = ({
     setIsAC((prevIsAC) => !prevIsAC);
   };
 
+<<<<<<< HEAD
   // ==================================Changes========================================================
+=======
+>>>>>>> origin/op5
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>

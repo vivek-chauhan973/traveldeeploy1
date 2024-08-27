@@ -4,7 +4,7 @@ import  { useEffect, useRef, useState } from 'react'
 const DeparturePopup = ({setShowPopup,addPackage}) => {
 
     const [handleCity,setHandleCity]=useState(false);
-    const {setShowAddguest,setFixedDepartureButtonEnaibleAndDisable,fixedDepartureButtonEnaibleAndDisable,setFixedDepartureProceedButton,guestPrice}=useAppContext();
+    const {setShowAddguest,setFixedDepartureButtonEnaibleAndDisable,setPrice2,setGuestPrice,fixedDepartureButtonEnaibleAndDisable,setFixedDepartureProceedButton,guestPrice,departureSectionData}=useAppContext();
     const [data,setData]=useState([]);
 
     useEffect(() => {
@@ -30,6 +30,13 @@ const DeparturePopup = ({setShowPopup,addPackage}) => {
           setFixedDepartureButtonEnaibleAndDisable(true)
         
         }
+        if(addPackage?.addguest==="fixedDeparture"){
+                                // console.log("departureSectionData :: ----> ",departureSectionData)
+                                   setGuestPrice(departureSectionData?.price);
+                              }
+                              else{
+                                setPrice2(departureSectionData?.price)
+                              }
       if(handleCity){
         setShowAddguest(ref.current.value)
         setShowPopup(false);}

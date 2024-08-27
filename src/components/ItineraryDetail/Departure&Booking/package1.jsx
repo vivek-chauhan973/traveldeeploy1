@@ -48,9 +48,9 @@ export default function Package1() {
     setFixedDepCity1,
     setFixedDepDate1,
     fixedDepCity,
-    setPrice1,
+    // setPrice1,
     fixedDepDate,
-    price1,
+    price2,
     submitButtonOfPricingCalculation
   } = useAppContext();
   const [images, setImages] = useState(null);
@@ -73,46 +73,18 @@ export default function Package1() {
   useEffect(() => {
 
     if (addPackage?.addguest === "addGuest") {
-      var price = addPackage?.prices
-      if (price) {
-        // Step 1: Calculate the base price
-        const basePrice = price?.twinSharingRoom + (price?.misc * addPackage?.days?.length);
-
-        // Step 2: Calculate the markup amount
-        const markupAmount = (basePrice * price?.markup) / 100;
-
-        // Step 3: Calculate the price with markup
-        const priceWithMarkup = basePrice + markupAmount;
-
-        // Step 4: Calculate the discount amount (or additional charge)
-        const discountAmount = (priceWithMarkup * Math.abs(price?.diskHike)) / 100;
-
-        // Step 5: Apply discount or add extra charge based on the sign of diskHike
-        const grandTotal = price.diskHike < 0
-          ? priceWithMarkup - discountAmount
-          : priceWithMarkup + discountAmount;
-
-        // Step 6: Calculate the GST amount
-        const gstAmount = (grandTotal * price?.gst) / 100;
-
-        // Step 7: Final displayed price after adding GST
-        const displayedPrice = (grandTotal + gstAmount) / 2;
-
-        // console.log("Final Displayed Price:", displayedPrice);
-        setDisplayPrice(displayedPrice)
-
-      }
+      // setPrice1(addPackage.price)
     }
     else {
       // console.log("fixed departure Packages :: ",addPackage)
-      setPrice1(addPackage?.fixedDeparturePrices?.basePrice)
+    
     }
 
   }, [addPackage, guestPrice]);
   // console.log("packages is very smart",addPacka/
-  useEffect(() => {
-    setPrice1(isDisplayPrice);
-  },[isDisplayPrice,price1])
+  // useEffect(() => {
+  //   setPrice1(isDisplayPrice);
+  // },[isDisplayPrice])
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       setFixedDeparturePopupOpen(true);
@@ -433,7 +405,7 @@ export default function Package1() {
               <p className="text-sm leading-5">
                 Starts From{" "}
                 <span className="text-lg text-graytext font-medium">
-                  ₹{Math.floor((submitButtonOfPricingCalculation && guestPrice) || price1).toLocaleString()}
+                  ₹{Math.floor(((submitButtonOfPricingCalculation && guestPrice)||price2)||addPackage?.price ).toLocaleString()}
                 </span>
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>

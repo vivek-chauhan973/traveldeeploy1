@@ -26,7 +26,7 @@ const ItineraryHeroSection = ({
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
-    price1
+    price2
   } = useAppContext();
   const [data,setData]=useState(0);
  
@@ -227,7 +227,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     with GST include {" "}
                     <span className="text-lg text-graytext font-medium">
-                    ₹{Math.floor(price1).toLocaleString()}
+                    ₹{Math.floor(price2||addPackage?.price).toLocaleString()}
                     </span>
                   </p>
                 )}
@@ -235,7 +235,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     Starts From{" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{formatINR(price1)}
+                      ₹{(addPackage.price)}
                     </span>
                   </p>
                 )}
