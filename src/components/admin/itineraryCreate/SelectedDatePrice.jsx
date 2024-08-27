@@ -79,7 +79,7 @@ export default function SelectedDatePrice({ itinerary }) {
   };
 
   return (
-    <div className="flex justify-center items-center mt-4">
+    <div className="flex w-full justify-center items-center mt-4">
       <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-center text-2xl font-semibold text-gray-800 mb-6">
           Date and Price Form
@@ -159,39 +159,7 @@ export default function SelectedDatePrice({ itinerary }) {
             {loading ? "Submitting..." : "Submit All Entries"}
           </button>
         </div>
-        <ul style={{ listStyleType: 'none', padding: '0' }}>
-          {entries.map((entry, index) => (
-            <li
-              key={index}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '10px',
-                padding: '10px',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                backgroundColor: '#f9f9f9',
-              }}
-            >
-              {entry.date}: ${entry.price}
-              <button
-                onClick={() => handleDeleteEntry(index)}
-                style={{
-                  backgroundColor: '#dc3545',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '4px',
-                  padding: '5px 10px',
-                  cursor: 'pointer',
-                }}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-        {/* here is limit */}
+       
         
       </div>
     </div>

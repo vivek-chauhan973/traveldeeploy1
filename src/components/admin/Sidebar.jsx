@@ -48,7 +48,7 @@ const handleLogout=async ()=>{
      
       subMenu: [
         { label: "Banner", href: "#" },
-        { label: "Other Management", href: "#" }
+        { label: "Other Management", href: "/admin/home/manage" }
       ]
     },
     {
