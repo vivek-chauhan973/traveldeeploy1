@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LiaRupeeSignSolid } from 'react-icons/lia';
 import { useAppContext } from '../context/Package/AddGuest';
 
-const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot}) => {
+const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot, setCalendarPricemanagement}) => {
     // console.log("Pricing data show is here itinerary", itinerary?._id)
     const { pricingManagement } = useAppContext()
     const [pricingData, setPricingData] = useState({
@@ -102,15 +102,24 @@ const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot}) =>
                     },
                     body: JSON.stringify(pricingData)
                 })
-                const data = await res.json();
-                setActiveTab("Tab11");
 
+                const data = await res.json();
+
+                console.log("Data from price",data);
+                if(data){
+                    setCalendarPricemanagement(data?.price?.addguest);
+                }
+                if(res.ok){
+                    setActiveTab("Tab10");
+                }   
+                
             } catch (error) {
                 console.log(error);
             }
             // Reset errors
             setErrors({});
         }
+        console.log("pricing from price tab",itinerary);
     };
 
 

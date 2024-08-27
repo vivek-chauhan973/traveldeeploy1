@@ -48,7 +48,7 @@ const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
         const response = await fetch('/api/package/tour-information/' + (itinerary ? itinerary.id : 'add-package'));
         const data = await response.json();
         if(response.ok){
-            setActiveTab("Tab9")
+            setActiveTab("Tab8")
             setTourDot(true);
         } 
         return data;
@@ -85,7 +85,7 @@ const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
                 });
 
                 if (response.ok) {
-                    setActiveTab("Tab9")
+                    setActiveTab("Tab8")
                     alert('Tour information saved successfully!');
                     setTourDot(true);
                 } else {

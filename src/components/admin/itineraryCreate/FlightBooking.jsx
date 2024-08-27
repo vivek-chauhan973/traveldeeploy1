@@ -98,7 +98,7 @@ const [selectedImg,setSelectedImg]=useState("");
         body: JSON.stringify({ flights: flightBookingList,flightNo,selectedImg })
       });
       if (response.ok) {
-        setActiveTab("Tab8");
+        setActiveTab("Tab7");
         setFlightDot(true);
         console.log("Flights saved successfully");
       } else {
@@ -115,7 +115,7 @@ const [selectedImg,setSelectedImg]=useState("");
     } else {
       saveFlightBooking();
       // Implement your logic to switch to the next tab
-      // setActiveTab("Tab3");
+      // setActiveTab("Tab7");
     }
   };
 
