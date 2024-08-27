@@ -312,10 +312,6 @@ const Addguest = ({
     setIsAC((prevIsAC) => !prevIsAC);
   };
 
-<<<<<<< HEAD
-  // ==================================Changes========================================================
-=======
->>>>>>> origin/op5
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
