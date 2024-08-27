@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const DepartureSection = ({ addPackage }) => {
-  const { setDepartureSectionData,setGuestPrice,guestPrice } = useAppContext();
+  const { setDepartureSectionData,setGuestPrice,guestPrice ,setPrice2} = useAppContext();
   const [datePackage, setDatePackage] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [startCity, setStartCity] = useState([]);
@@ -106,10 +106,7 @@ const DepartureSection = ({ addPackage }) => {
                             onClick={() => {
                               setShowPopup(true);
                               setDepartureSectionData(item);
-                              if(addPackage?.addguest==="fixedDeparture"){
-                                // console.log("departureSectionData :: ----> ",departureSectionData)
-                                   setGuestPrice(item?.price);
-                              }
+                              
                             }}
                             className="cursor-pointer"
                           >

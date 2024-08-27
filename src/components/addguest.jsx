@@ -299,7 +299,6 @@ console.log(selectedCar)
         break;
     }
   };
-
   // AC/NonAC
   const [isAC, setIsAC] = useState(true);
 
@@ -307,8 +306,7 @@ console.log(selectedCar)
     e.preventDefault()
     setIsAC(prevIsAC => !prevIsAC);
   };
-  
-  // ==================================Changes========================================================
+
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>

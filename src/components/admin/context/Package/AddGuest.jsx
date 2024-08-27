@@ -9,7 +9,7 @@ const fetchPackage = async (packageUrl) => {
     method: "GET",
   });
   const data = await response.json();
-  console.log("..............................",packageUrl)
+  // console.log("..............................",packageUrl)
   return data;
 };
 
@@ -95,9 +95,7 @@ export const AppProvider = ({ children }) => {
   
   }, [inputData, addPackage]);
 
-  // console.log("fixed Depature date selected",fixedDepDate)
-  // console.log("fixed Depature City selected",fixedDepCity)
-  const [price1,setPrice1]=useState(0);
+  const [price2,setPrice2]=useState(0);
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
   const [fixedDepartureData1,setFixedDepartureData1]=useState(null);
@@ -125,21 +123,24 @@ export const AppProvider = ({ children }) => {
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-useEffect(()=>{
-  if(addPackage?.addguest==="fixedDeparture"&&fixedDepartureButtonEnaibleAndDisable){
-    setPrice1(parseInt(departureSectionData?.price))
- }
- setPrice1(parseInt(departureSectionData?.price))
-},[departureSectionData])
+  console.log("price2------> ",price2)
+// useEffect(()=>{
+//   if(addPackage?.addguest==="fixedDeparture"&&fixedDepartureButtonEnaibleAndDisable){
+//     setPrice1(parseInt(departureSectionData?.price))
+    
+//  }
+//  setPrice1(parseInt(departureSectionData?.price))
+// },[departureSectionData])
 
   // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",price1)
   // console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
+  // console.log("price1 -------> ",price1)
   const contextFun = {
     closeBtn,
     setCloseBtn,
     guestPrice,
-    setPrice1,
-    price1,
+    // setPrice1,
+    // price1,
     setGuestPrice,
     setInputData,
     addPackage,
@@ -157,6 +158,7 @@ useEffect(()=>{
     setCatagoryId,
     setMinPrice,
     setMaxPrice,
+    price2,setPrice2,
     filterApi,
     fixedDepDate,setFixedDepDate,
     fixedDepCity,setFixedDepCity,

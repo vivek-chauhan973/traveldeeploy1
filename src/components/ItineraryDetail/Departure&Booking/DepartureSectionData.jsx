@@ -14,7 +14,7 @@ const fetchFixedDepartureData=async (itinerary)=>{
 }
 const useMyCustomHook = () => {
   // all api calling is here
-  const { addPackage, price1 } = useAppContext();
+  const { addPackage } = useAppContext();
   const [newPackageId, setNewPackageId] = useState();
   const [priceHike, setPriceHike] = useState({});
   const [initialDate, setInitialDate] = useState("");
@@ -24,8 +24,6 @@ const useMyCustomHook = () => {
   const [packagePrice, setPackagePrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [fixedDepartureData,setFixedDepartureData]=useState([]);
-  // console.log("price 1 7318472921 ::::: ::: ",price1);
-  //create a array of date between the range of date
   const startdate1 = new Date(initialDate);
   const enddate1 = new Date(lastDate);
   const dateArray = [];
@@ -36,10 +34,12 @@ const useMyCustomHook = () => {
     setLastDate(priceHike?.endDate || "");
     setPriceIncrease(priceHike?.priceIncrease);
     setPackagePrice(addPackage?.price);
-    // console.log("Price hike ::: ::: :: :: :: ",addPackage?.startcity)
+    console.log("Price hike ::: ::: :: :: :: ",addPackage?.price)
   }, [priceHike]);
   useEffect(() => {
-    setTotalPrice(price1 + priceIncrease);
+    const incprice=(priceIncrease*packagePrice)/100;
+    setTotalPrice(packagePrice + incprice);
+    // setPrice1(packagePrice + incprice)
   }, [priceIncrease, packagePrice]);
 
   const AllDataRelatedCity = [];
@@ -47,7 +47,8 @@ const useMyCustomHook = () => {
     AllDataRelatedCity.push([]);
   }
 
-  // claculate two months logic here
+  // claculate two months logic here and addguest calculation 
+
   if (addPackage?.addguest === "addGuest") {
     const currentDate = new Date();
 
@@ -93,7 +94,7 @@ const useMyCustomHook = () => {
         AllDataRelatedCity?.[0]?.push({
           day: dayOfWeek,
           date: formattedDate,
-          price: price1,
+          price: packagePrice,
         });
       }
 
