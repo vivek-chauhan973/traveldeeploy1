@@ -10,8 +10,7 @@ const CarSchema = new mongoose.Schema({
     required: [true, 'Capacity is required'],
   },
   ac: {
-    type: String,
-    enum: ['AC', 'Non AC'],
+    type: Number,
     required: [true, 'AC type is required'],
   },
   seatingCapacity: {

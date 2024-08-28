@@ -12,11 +12,15 @@ import {
   faCirclePlus,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { set } from "mongoose";
 const fetchCarAllCars = async () => {
   const response = await fetch("/api/cars/carapi");
   return await response.json();
 };
-
+const fetchCarById=async (id)=>{
+  const data=await fetch(`/api/cars/car/${id}`)
+  return await data.json();
+}
 const Addguest = ({
   children,
   guestPrice,
@@ -26,11 +30,22 @@ const Addguest = ({
   addPackage,
 }) => {
   const date = new Date();
-  const { showAddguest, setSubmitButtonOfPricingCalculation } =
+  const { showAddguest, setSubmitButtonOfPricingCalculation,setGuestPrice } =
     useAppContext() ?? { showAddguest: false };
   const [cars, setCars] = useState([]);
-  const [selectedCar, setSelectedCar] = useState(null);
-  const infantMaxDate = date.toISOString().split("T")[0];
+  const [selectedCar, setSelectedCar] = useState("");
+  const [selectedCarIdFetchApi, setSelectedCarIdFetchApi] = useState("");
+  const infantMaxDate = date.toISOString().split("T")[0]; 
+  const [isAC, setIsAC] = useState(true);
+  const [carWithCapacity,setCarWithCapacity]=useState([]);
+
+//here are the all states for calculation of transport
+
+  const [days,setDays]=useState(0);
+useEffect(()=>{
+  setDays(addPackage?.days?.length);
+},[])
+
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
     .toISOString()
     .split("T")[0];
@@ -53,6 +68,7 @@ const Addguest = ({
   };
 
   // console.log("fixed departure package::::",addPackage);
+
   const handleChange = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
     setInputData({ ...inputData, [e.target.name]: value });
@@ -78,24 +94,14 @@ const Addguest = ({
       setInputData((prevData) => ({ ...prevData, child: 0, infant: 0 }));
     }
   };
-
+  
   // here fetch all cars
 
   useEffect(() => {
     fetchCarAllCars().then((res) => setCars(res?.data || []));
   }, []);
+
   // here is the logic of select car
-
-  const carselector = async (e) => {
-    const id = e.target.value;
-    const response = await fetch(`/api/cars/car/${id}`);
-    const data = await response.json();
-    console.log("data is here ", data);
-
-    //  console.log(e.target.value);
-  };
-
-  console.log(selectedCar);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCloseBtn(true);
@@ -304,14 +310,92 @@ const Addguest = ({
         break;
     }
   };
-  // AC/NonAC
-  const [isAC, setIsAC] = useState(true);
+// toggle AC is here 
+  //here is the calculation
+  useEffect(() => {
+    if(addPackage?.addguest==="addGuest"){
+    if (addPackage && addPackage?.prices) {
+      // console.log("addPackage?.prices",addPackage?.prices)
+      const {
+        childOverFive,
+        childUnderFive,
+        diskHike,
+        misc,
+        markup,
+        singleRoom,
+        twinSharingRoom,
+        tripleSharingRoom,
+        quadSharingRoom,
+      } = addPackage?.prices;
 
+      const calculatedPrice =
+        childOverFive * inputData?.child*(days-1) +
+        childUnderFive * inputData?.infant*(days-1) +
+        singleRoom * inputData?.singleRoom*(days-1) +
+        twinSharingRoom * inputData?.twinRoom*(days-1) +
+        tripleSharingRoom * inputData?.tripleRoom*(days-1) +
+        quadSharingRoom * inputData?.quardRoom*(days-1)+misc*(days-1);
+
+        const newCalculatedPrice=calculatedPrice+Math.floor((calculatedPrice*markup)/100);
+        if(diskHike>0){
+            const newCalculatedPrice1=newCalculatedPrice+Math.floor((calculatedPrice*diskHike)/100)
+            setGuestPrice(newCalculatedPrice1);
+        }
+        else if(diskHike<0){
+           const newDiskHike=Math.abs(diskHike);
+          const newCalculatedPrice1=newCalculatedPrice-Math.floor((calculatedPrice*newDiskHike)/100)
+          setGuestPrice(newCalculatedPrice1);
+        }
+    }
+  }
+ 
+  
+  }, [inputData, addPackage]);
+  
   const handleToggle = (e) => {
     e.preventDefault();
     setIsAC((prevIsAC) => !prevIsAC);
-  };
+  }; 
+  // console.log("Is Ac is here ---- > ",isAC)
+  // console.log("here is All Car ---- > ",cars)
+  useEffect(()=>{
+    const filteredData=cars?.filter(item=>item?.seatingCapacity===inputData?.adult);
+    const filteredData1=cars?.find(item=>item?.seatingCapacity>inputData?.adult);
+    const filteredData2=cars?.filter(item=>item?.seatingCapacity===filteredData1?.seatingCapacity)
+    if(filteredData1){
+      filteredData2?.forEach(item=>filteredData.push(item))
+    }
+    setCarWithCapacity(filteredData);
+  },[inputData.adult])
+  
+  useEffect(()=>{
+    fetchCarById(selectedCar).then(res=>setSelectedCarIdFetchApi(res?.data))
+  },[selectedCar])
+  const [withAc,setWithAc]=useState(0)
+  const [withNonAc,setWithNonAc]=useState(0)
+useEffect(()=>{
+  // console.log("guest price --> ",guestPrice);
+  const farePrice=guestPrice+selectedCarIdFetchApi?.capacity*days;
+  // console.log("guest price --> ",farePrice);
+  const data1=selectedCarIdFetchApi?.ac*(days-1);
+setGuestPrice(farePrice+data1);
+},[selectedCarIdFetchApi])
+useEffect(()=>{
+  if(isAC){
+    const data1=selectedCarIdFetchApi?.ac*(days-1);
+    setGuestPrice(guestPrice+data1);
+    // console.log("with ac",data1)
+  }
+  else{
+    const data1=selectedCarIdFetchApi?.ac*(days-1);
+   setGuestPrice(guestPrice-data1);
+  }
+ 
+},[isAC])
 
+
+
+  // console.log("filtered Car --> ",totalTransportPrice);
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
@@ -367,7 +451,6 @@ const Addguest = ({
                         </div>
                       </div>
                     </label>
-
                     <div className=" w-14">
                       <select
                         name="adult"
@@ -404,7 +487,6 @@ const Addguest = ({
                           </div>
                         </div>
                       </label>
-
                       <div className="w-14">
                         <select
                           name="child"
@@ -735,7 +817,23 @@ const Addguest = ({
                       </div>
                     </div>
                     <div className="flex-col flex items-center justify-between md:border-b py-4 md:flex-row mb-4 space-y-4 md:space-y-0">
-                      <div className="flex items-center gap-4">
+                      {selectedCarIdFetchApi?<div className="flex items-center gap-4">
+                        <Image
+                          className="w-40 h-28 object-cover rounded-md shadow-md"
+                          src={selectedCarIdFetchApi?.imageDetails?.[0]?.url}
+                          alt=""
+                          width="160"
+                          height="180"
+                        />
+                        <div className="flex flex-col items-center md:items-start">
+                          <p className="font-semibold text-white text-lg">
+                            {selectedCarIdFetchApi?.name}
+                          </p>
+                          <div className="flex items-center justify-center mt-2">
+                            <p className="text-gray-300">{selectedCarIdFetchApi?.seatingCapacity}</p>
+                          </div>
+                        </div>
+                      </div>:<div className="flex items-center gap-4">
                         <Image
                           className="w-40 h-28 object-cover rounded-md shadow-md"
                           src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
@@ -751,20 +849,20 @@ const Addguest = ({
                             <p className="text-gray-300">Seats: 6</p>
                           </div>
                         </div>
-                      </div>
+                      </div>}
                       <select
                         id="cars"
-                        onChange={(e) => carselector(e)}
+                        onChange={(e) => setSelectedCar(e.target.value)}
                         className="border   border-gray-600 mt-4 w-32 bg-gray-700 text-gray-300 px-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                       >
                         <option value="" className="  py-2 ">
-                          {isAC ? "Select AC car" : "Select Non AC car"}
+                          Select Car
                         </option>
-                        {cars
-                          .filter(
-                            (item) => item.ac === (isAC ? "AC" : "Non AC")
-                          )
-                          ?.map((item, i) => (
+                        {carWithCapacity.length!==0?(carWithCapacity)?.map((item, i) => (
+                            <option key={i} value={item?._id}>
+                              {item?.name}
+                            </option>
+                          )):(cars)?.map((item, i) => (
                             <option key={i} value={item?._id}>
                               {item?.name}
                             </option>

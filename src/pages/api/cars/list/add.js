@@ -2,6 +2,7 @@ import Car from "@/models/car-package/cars";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const CarListAdd= async (req, res) => {
+    console.log("req body -----> ",req.body);
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

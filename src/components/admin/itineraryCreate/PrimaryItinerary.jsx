@@ -4,7 +4,6 @@ import MultipleSelectChip from "./Select";
 import MultipleSelectCheckmarks from "./CheckMarkSelect";
 import { useRouter } from "next/router";
 import { useAppContext } from "../context/Package/AddGuest";
-
 const fetchCountries = async () => {
     try {
         const res = await fetch('/api/location?type=country', { method: 'GET' });
@@ -57,10 +56,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [dayWiseFaq,setDayWiseFaq]=useState([]);
     const [selectedCountry,setSelesctedCountry]=useState('');
     const [selectedState,setSelesctedState]=useState('');
-    
-
-    // console.log("country : ",selectedCountry)
-    // console.log("State  : ",selectedState)
     useEffect(() => {
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();
@@ -81,8 +76,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         }
  
     },[itinerary])
-
-    // console.log("countries",countries)
     const [file, setFile] = useState();
     function handleChange(e) {
         setFile(URL.createObjectURL(e.target.files[0]));
@@ -100,8 +93,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     };
 
     const [packageBadges, setPackageBadges] = useState();
-    const [selectedBadges, setSelectedBadges] = useState([]); // Added selectedBadges state
-    // console.log("selected badges show is here",itinerary)
+    const [selectedBadges, setSelectedBadges] = useState([]); 
     const fetchBadges = async () => {
         try {
             const badgeList = await fetch('/api/package-setting/get-badges');
@@ -131,7 +123,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             return [];
         }
     };
-// console.log("Images12232343253453",imageDetails)
     useEffect(() => {
         const fetchData = async () => {
             await fetchCategories();
@@ -287,7 +278,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             }
         }
     };
-// console.log("cacategoryValidate223224234",selectedCategories);
  return (
         <>
             <div className="bg-white p-4 rounded-md">

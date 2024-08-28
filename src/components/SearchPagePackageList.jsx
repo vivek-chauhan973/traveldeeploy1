@@ -100,24 +100,10 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   // Function to calculate price details
-  const calculatePrice = (packageData) => {
-    
-    const basePrice = packageData?.addguestPrices?.twinSharingRoom + (packageData?.addguestPrices?.misc * packageData?.days);
-    // console.log("current dat is slkjshkljfh sadfkj",packageData?.days)
-    const markupAmount = (basePrice * packageData?.addguestPrices?.markup) / 100;
-    const priceWithMarkup = basePrice + markupAmount;
-    const discountAmount = (priceWithMarkup * Math.abs(packageData?.addguestPrices?.diskHike)) / 100;
-    const grandTotal = packageData?.addguestPrices?.diskHike < 0
-      ? priceWithMarkup - discountAmount
-      : priceWithMarkup + discountAmount;
-    const gstAmount = (grandTotal * packageData?.addguestPrices?.gst) / 100;
-    return (grandTotal + gstAmount)/2;
-  };
+
   return (
     <div>
       {currentItems?.map((packageData, i) => {
-        const displayPrice = calculatePrice(packageData);
-
         return (
           <div key={i} className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
             <div className="md:pl-5 flex items-center">
@@ -262,7 +248,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
                   <div className="flex justify-end items-baseline gap-2 md:block">
                     <p className="text-[12px] mt-1">Starts From</p>
                     <p className="text-[22px] font-medium">
-                      ₹{Math.floor(displayPrice||packageData?.price).toLocaleString()}
+                      ₹{packageData?.price.toLocaleString()}
                     </p>
                   </div>
                   <p className="text-[10px] leading-snug">

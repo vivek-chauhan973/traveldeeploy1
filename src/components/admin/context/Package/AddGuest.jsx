@@ -68,32 +68,8 @@ export const AppProvider = ({ children }) => {
     maxPrice,
     duration
   };
-
-  useEffect(() => {
-    if(addPackage?.addguest==="addGuest"){
-    if (addPackage && addPackage?.prices) {
-      const {
-        childOverFive,
-        childUnderFive,
-        singleRoom,
-        twinSharingRoom,
-        tripleSharingRoom,
-        quadSharingRoom,
-      } = addPackage?.prices;
-
-      const calculatedPrice =
-        childOverFive * inputData?.child +
-        childUnderFive * inputData?.infant +
-        singleRoom * inputData?.singleRoom +
-        twinSharingRoom * inputData?.twinRoom +
-        tripleSharingRoom * inputData?.tripleRoom +
-        quadSharingRoom * inputData?.quardRoom;
-
-      setGuestPrice(calculatedPrice);
-    }
-  }
-  
-  }, [inputData, addPackage]);
+// console.log("pakage is here in context ----> ",addPackage);
+ 
 
   const [price2,setPrice2]=useState(0);
   const [showAddguest, setShowAddguest] = useState(null);
@@ -123,7 +99,7 @@ export const AppProvider = ({ children }) => {
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-  console.log("price2------> ",price2)
+  // console.log("price2------> ",price2)
 // useEffect(()=>{
 //   if(addPackage?.addguest==="fixedDeparture"&&fixedDepartureButtonEnaibleAndDisable){
 //     setPrice1(parseInt(departureSectionData?.price))

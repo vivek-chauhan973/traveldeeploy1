@@ -214,11 +214,11 @@ export default function AddCar() {
                 {[
                   { label: "Car Name", name: "name", type: "text" },
                   { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
-                  { label: "Ac /Non Ac", name: "ac", type: "select", options: ["AC", "Non AC"] },
+                  { label: "AC per Day", name: "ac",type:"number"},
                   { label: "Vehicle Type", name: "vehicleType", type: "select", options: ["Sedan", "SUV", "Hatchback"] },
                   { label: "Daily Limit", name: "dailyLimit", type: "number" },
                   { label: "Rate", name: "rate", type: "number" },
-                  { label: "Base price for KM's", name: "capacity", type: "number" },
+                  { label: "Base Fare/Per Day", name: "capacity", type: "number" },
                   { label: "Out Station Base Price for KM", name: "outStationBasePrice", type: "number" },
                   { label: "Per KM Rate", name: "perKmRate", type: "number" },
                   { label: "Markup", name: "markup", type: "number" },

@@ -461,7 +461,7 @@ export default function Package1() {
                 <span className="text-lg text-graytext font-medium">
                   ₹
                   {Math.floor(
-                    (submitButtonOfPricingCalculation && guestPrice) ||
+                    (submitButtonOfPricingCalculation && (guestPrice/2)) ||
                       price2 ||
                       addPackage?.price
                   ).toLocaleString()}

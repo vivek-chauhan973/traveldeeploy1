@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
   };
 }
 export default function TourPackage({ data }) {
-  console.log("data is here data ssr", data);
+  // console.log("data is here data ssr", data);
   return (
     <>
       <Head>

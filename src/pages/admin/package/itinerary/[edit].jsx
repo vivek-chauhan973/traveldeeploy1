@@ -142,7 +142,7 @@ export default function CreatePackage() {
     };
 
     useEffect(() => { }, [select]);
-
+// console.log("itinary is here ------> ",itinerary);
     return (
         <AppProvider>
             <Layout>
