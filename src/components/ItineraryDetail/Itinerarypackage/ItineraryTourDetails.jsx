@@ -9,6 +9,7 @@ const ItineraryTourDetails = () => {
         setActiveTab(tour_details);
 
     };
+    // console.log("addPackgae --->",addPackage?.flights);
     return (
         <>
             <div id="TourDetailsSection">
@@ -17,9 +18,9 @@ const ItineraryTourDetails = () => {
                     <p className="md:text-md text-para italic text-slate-600">Best facilities with no added cost.</p>
                 </div>
                 <div className="flex justify-between mt-3 gap-2 border-b-2 border-navyblack">
-                    <div onClick={() => handleTabClick('tab1')} className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px]   ${activeTab === 'tab1' ? 'bg-navyblack text-white' : 'text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200'}`}>
+                    {addPackage?.flights&&<div onClick={() => handleTabClick('tab1')} className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px]   ${activeTab === 'tab1' ? 'bg-navyblack text-white' : 'text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200'}`}>
                         <p className='text-sm  '>Flight Details </p>
-                    </div>
+                    </div> }
                     <div onClick={() => handleTabClick('tab2')} className={`cursor-pointer rounded-t-lg py-2   grow text-center text-[16px]   ${activeTab === 'tab2' ? 'bg-navyblack text-white' : 'text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200'}`}>
                         <p className='text-sm '>Inclusion </p>
                     </div>
@@ -29,7 +30,7 @@ const ItineraryTourDetails = () => {
 
                 </div>
                 <div className="border rounded-b-lg  overflow-hidden">
-                    <div className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${activeTab === 'tab1' ? 'block' : 'hidden'}`}>
+                    {addPackage?.flights&&<div className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${activeTab === 'tab1' ? 'block' : 'hidden'}`}>
                         <div>
                             <div className=' md:my-0 my-3'>
                                 <p className='text-sm font-semibold text-graytext'>Departure & Arrival</p>
@@ -62,7 +63,7 @@ const ItineraryTourDetails = () => {
 
                             </div>)}
                         </div>
-                    </div>
+                    </div>}
 
                     <div className={`py-4  pl-9 pr-4  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
                         {

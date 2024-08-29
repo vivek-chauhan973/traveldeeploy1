@@ -306,7 +306,7 @@ export default function Package1() {
               <Itinerarymap />
             </div>
             {/* <!- TOUR DETAILS IS HERE --> */}
-            <ItineraryTourDetails />
+            <ItineraryTourDetails/>
             {/* Privacy policy Terms */}
             <div id="Policy&TermsSection" className="pt-7">
               <ItineraryPaymentTerms />
