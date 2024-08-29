@@ -14,6 +14,16 @@ const handler=async(req, res)=> {
 
     try {
       // Save or update the price hike in the database
+      const data=await PriceHike.findOne({packageId});
+      if(data){
+        const packageData=await Package.findByIdAndUpdate({_id:packageId},{$set:{priceHike:data?._id}},{upsert:true,new:true});
+        const priceHikeData=await PriceHike.findOneAndReplace({packageId:packageId},{packageId, startDate,endDate,priceIncrease:price,isActive,svg},{upsert:false})
+        if(!packageData){
+          return res.status(404).json({ error: 'Package not found' });
+        }
+        return res.status(200).json({ error: 'data created and updated successfully',packageData,response:priceHikeData });
+      }
+
       const response=await PriceHike.create({packageId, startDate,endDate,priceIncrease:price,isActive,svg})
       if(response){
 

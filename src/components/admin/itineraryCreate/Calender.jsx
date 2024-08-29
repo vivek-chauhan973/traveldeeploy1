@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useAppContext } from "../context/Package/AddGuest";
 
 const Calendar = ({ itinerary, setActiveTab }) => {
+console.log("itineary is of calender is here ---> ",itinerary);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [priceIncrease, setPriceIncrease] = useState("");
