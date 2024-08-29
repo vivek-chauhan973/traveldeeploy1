@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/Package/AddGuest";
 
 const Calendar = ({ itinerary, setActiveTab }) => {
-console.log("itineary is of calender is here ---> ",itinerary);
+// console.log("itineary is of calender is here ---> ",itinerary);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [priceIncrease, setPriceIncrease] = useState("");
@@ -45,7 +45,7 @@ console.log("itineary is of calender is here ---> ",itinerary);
       setIsActive(true);
     }
     setNum(num + 1);
-    console.log("num:::  ", num)
+    // console.log("num:::  ", num)
     if (num % 2 !== 0) {
       setIsActive(false);
     }

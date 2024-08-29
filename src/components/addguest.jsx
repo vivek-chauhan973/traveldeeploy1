@@ -315,7 +315,6 @@ useEffect(()=>{
   useEffect(() => {
     if(addPackage?.addguest==="addGuest"){
     if (addPackage && addPackage?.prices) {
-      // console.log("addPackage?.prices",addPackage?.prices)
       const {
         childOverFive,
         childUnderFive,
@@ -348,26 +347,25 @@ useEffect(()=>{
         }
     }
   }
- 
-  
   }, [inputData, addPackage]);
   
   const handleToggle = (e) => {
     e.preventDefault();
     setIsAC((prevIsAC) => !prevIsAC);
   }; 
-  // console.log("Is Ac is here ---- > ",isAC)
-  // console.log("here is All Car ---- > ",cars)
   useEffect(()=>{
     const filteredData=cars?.filter(item=>item?.seatingCapacity===inputData?.adult);
-    const filteredData1=cars?.find(item=>item?.seatingCapacity>inputData?.adult);
-    const filteredData2=cars?.filter(item=>item?.seatingCapacity===filteredData1?.seatingCapacity)
+    const filteredData1=cars?.find(item=>{
+      return item?.seatingCapacity>inputData?.adult});
+    const filteredData2=cars?.filter(item=>{
+      return item?.seatingCapacity===filteredData1?.seatingCapacity})
     if(filteredData1){
       filteredData2?.forEach(item=>filteredData.push(item))
     }
     setCarWithCapacity(filteredData);
+    
   },[inputData.adult])
-  
+  console.log("flightbookings ---> ",carWithCapacity);
   useEffect(()=>{
     fetchCarById(selectedCar).then(res=>setSelectedCarIdFetchApi(res?.data))
   },[selectedCar])
