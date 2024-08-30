@@ -45,7 +45,7 @@ export default async function handler(req, res) {
 }
 
 function handlePost(req, res) {
-  console.log("req body --------------------->",req?.body)
+  // console.log("req body --------------------->",req?.body)
   upload.array('images')(req, res, async (err) => {
     if (err) {
       return res.status(500).json({ success: false, error: 'Error uploading files' });

@@ -53,7 +53,7 @@ const DepartureSection = ({ addPackage }) => {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
-  console.log("departure section data ----> : ",departureSectionData)
+  // console.log("departure section data ----> : ",departureSectionData)
 
   return (
     <>

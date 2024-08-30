@@ -39,6 +39,8 @@ const Addguest = ({
   const [isAC, setIsAC] = useState(true);
   const [carWithCapacity,setCarWithCapacity]=useState([]);
   const [finalPrice,setFinalPrice]=useState(0);
+  const[acDisable,setAcDisable]=useState(false);
+  const [transportPrice,setTransportPrice]=useState(0);
 
 //here are the all states for calculation of transport
 // console.log("departureSectionData ----- >123 ",departureSectionData)
@@ -313,6 +315,7 @@ useEffect(()=>{
     }
   };
 // toggle AC is here 
+const [final,setFinal]=useState(0);
   //here is the calculation
   useEffect(() => {
     if(addPackage?.addguest==="addGuest"){
@@ -336,15 +339,17 @@ useEffect(()=>{
         quadSharingRoom * inputData?.quardRoom*(days-1)+misc*(days);
 
         setGuestPrice(calculatedPrice);
+        setFinal(calculatedPrice);
     }
   }
   }, [inputData, addPackage]);
+
+  
   useEffect(()=>{
     const {
       // diskHike,
       markup,
     } = addPackage?.prices;
-    
     const newCalculatedPrice=finalPrice+Math.floor((finalPrice*markup)/100);
         // setGuestPrice(newCalculatedPrice)
        
@@ -363,40 +368,51 @@ useEffect(()=>{
          setGuestPrice(newCalculatedPrice);
         }
   },[finalPrice])
+  
   // console.log("final prize ",finalPrice)
   const handleToggle = (e) => {
     e.preventDefault();
     setIsAC((prevIsAC) => !prevIsAC);
   }; 
   useEffect(()=>{
-    const filteredData=cars?.filter(item=>item?.seatingCapacity===inputData?.adult);
+    const newarr=[];
+    // console.log("cars stage1 ----> ",cars);
+    const filteredData=cars?.find(item=>item?.seatingCapacity>=inputData?.adult);
+    newarr.push(filteredData);
+    // console.log("cars stage2 ----> ",filteredData);
+    const filteredData3=cars?.filter(item=>item?.vehicleType!==filteredData?.vehicleType&&item?.seatingCapacity===filteredData?.seatingCapacity);
+    if(filteredData3?.length!==0){
+      filteredData3.forEach(item=>{
+        newarr.push(item);
+        cars.pop(item);
+      })
+    }  
     const filteredData1=cars?.find(item=>{
-      return item?.seatingCapacity>inputData?.adult});
+      return item?.seatingCapacity>filteredData?.seatingCapacity});
+      if(filteredData1){
+        newarr.push(filteredData1);
+      }   
     const filteredData2=cars?.filter(item=>{
-      return item?.seatingCapacity===filteredData1?.seatingCapacity})
-    if(filteredData1){
+      return item?.vehicleType!==filteredData1?.vehicleType&&item?.seatingCapacity===filteredData1?.seatingCapacity})
+    if(filteredData1?.length!==0){
       filteredData2?.forEach(item=>{
-        return filteredData.push(item)})
+         newarr.push(item)})
     }
-    setCarWithCapacity(filteredData);
-    
-  },[inputData.adult])
-  useEffect(()=>{
-    fetchCarById(selectedCar).then(res=>setSelectedCarIdFetchApi(res?.data))
-  },[selectedCar])
+    // console.log("new car array --> ",newarr)
+    setCarWithCapacity(newarr);
+  },[inputData?.adult])
 
 useEffect(()=>{
-  
-  // console.log("guest price --> ",guestPrice);
-  const farePrice=guestPrice+selectedCarIdFetchApi?.capacity*days;
-  // console.log("guest price --> ",farePrice);
-  const data1=selectedCarIdFetchApi?.ac*(days);
+  // console.log("final price ---> ",final)
+const farePrice=final+selectedCarIdFetchApi?.capacity*days;
+const data1=selectedCarIdFetchApi?.ac*(days);
 setFinalPrice(farePrice+data1);
 },[selectedCarIdFetchApi])
 useEffect(()=>{
   const {
     markup,
   } = addPackage?.prices;
+  // console.log("selected --> ",selectedCarIdFetchApi?.ac)
   if(departureSectionData?.hike){const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
   if(departureSectionData?.hike>0){const data2=Math.floor(data1+(data1*(departureSectionData?.hike))/100)
   if(isAC){
@@ -426,6 +442,11 @@ else{
   }
  
 },[isAC])
+
+const handleSelected=(item)=>{
+  setSelectedCarIdFetchApi(item)
+  setAcDisable(true);
+}
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
@@ -828,7 +849,10 @@ else{
                               ? "bg-blue-500 text-white shadow-md"
                               : "bg-gray-300 text-gray-500 blur-[1px] opacity-50"
                             }`}
-                          onClick={() => setIsAC(true)}
+                          onClick={() => {
+                            if(acDisable){setIsAC(true)}
+                            
+                          }}
                         >
                           <p className="text-[10px] text-center">AC</p>
                         </div>
@@ -838,70 +862,34 @@ else{
                               ? "bg-red-500 text-white shadow-sm"
                               : "bg-gray-300  text-red-500 blur-[0.5px] opacity-50"
                             }`}
-                          onClick={() => setIsAC(false)}
+                          onClick={() => {if(acDisable){setIsAC(false)}}}
                         >
                           <p className="text-[10px] text-center">Non AC</p>
                         </div>
                       </div>
                     </div>
-                    <div className="flex-col flex items-center justify-between  py-4 md:flex-row mb-4 space-y-4 md:space-y-0">
-                      {selectedCarIdFetchApi ? 
-                        <div className="flex items-center justify-center gap-4">
+                    
+                  </div>
+
+{/* All listed Cars is here */}
+
+                  {carWithCapacity?.map(item=><div onClick={()=>handleSelected(item)} className="flex items-center gap-4">
                           <Image
                             className="w-40 h-28 object-cover rounded-md"
-                            src={selectedCarIdFetchApi?.imageDetails?.[0]?.url}
-                            alt=""
-                            width="160"
-                            height="180"
-                          />
-                          <div className="flex-col items-start">
-                            <p className="font-semibold capitalize text-lg">
-                              {selectedCarIdFetchApi?.name}
-                            </p>
-                            <div className="flex md:items-start justify-center">
-                              <p className="">Seats : {selectedCarIdFetchApi?.seatingCapacity}</p>
-                              {/* <p className="text-gray-300">{selectedCarIdFetchApi?.price!==0?"":+ selectedCarIdFetchApi?.price}</p> */}
-                            </div>
-                          </div>
-                        </div> : 
-                        <div className="flex items-center gap-4">
-                          <Image
-                            className="w-40 h-28 object-cover rounded-md"
-                            src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
+                            src={item?.imageDetails?.[0]?.url}
                             alt=""
                             width="160"
                             height="180"
                           />
                           <div className="flex flex-col items-center md:items-start">
                             <p className="font-semibold capitalize text-lg">
-                              Sedan
+                              {item?.vehicleType}
                             </p>
                             <div className="flex items-center justify-center mt-2">
-                              <p>Seats : 6</p>
+                              <p>Seats : {item?.seatingCapacity}</p>
                             </div>
                           </div>
-                        </div>
-                      }
-                      <select
-                        id="cars"
-                        onChange={(e) => setSelectedCar(e.target.value)}
-                        className="border capitalize   border-gray-600 mt-4 w-24  px-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                      >
-                        <option value="" className="text-center py-2 capitalize">
-                          Select Car
-                        </option>
-                        {carWithCapacity.length !== 0 ? (carWithCapacity)?.map((item, i) => (
-                          <option key={i} value={item?._id} className="text-center py-2 capitalize">
-                            {item?.name}
-                          </option>
-                        )) : (cars)?.map((item, i) => (
-                          <option key={i} value={item?._id} className="text-center py-2 capitalize">
-                            {item?.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
+                        </div>)}
                   {/* ac trail end*/}
                 </div>
               </div>

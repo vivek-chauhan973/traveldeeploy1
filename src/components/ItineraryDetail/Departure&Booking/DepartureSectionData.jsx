@@ -34,7 +34,7 @@ const useMyCustomHook = () => {
     setLastDate(priceHike?.endDate || "");
     setPriceIncrease(priceHike?.priceIncrease);
     setPackagePrice(addPackage?.price);
-    console.log("Price hike ::: ::: :: :: :: ",addPackage?.price)
+    // console.log("Price hike ::: ::: :: :: :: ",addPackage?.price)
   }, [priceHike]);
   useEffect(() => {
     const incprice=(priceIncrease*packagePrice)/100;
