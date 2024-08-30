@@ -273,9 +273,9 @@ export default function AddCar() {
                 <tr>
                   <th className="border-b px-4 py-2 text-left">Vehicle Selection</th>
                   <th className="border-b px-4 py-2 text-left">Seating Capacity</th>
-                  <th className="border-b px-4 py-2 text-left">Daily Limit KM's</th>
+                  <th className="border-b px-4 py-2 text-left">Daily Limit KMs</th>
                   <th className="border-b px-4 py-2 text-left">Base Fare/Per Day</th>
-                  <th className="border-b px-4 py-2 text-left">Base price for KM's</th>
+                  <th className="border-b px-4 py-2 text-left">Base price for KMs</th>
                   <th className="border-b px-4 py-2 text-left">Out Station Base Price for KM</th>
                   <th className="border-b px-4 py-2 text-left">Per KM Rate</th>
                   <th className="border-b px-4 py-2 text-left">Markup</th>
