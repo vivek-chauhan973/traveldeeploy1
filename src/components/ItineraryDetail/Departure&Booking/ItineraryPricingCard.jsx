@@ -5,7 +5,6 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
-
 const ItineraryPricingCard = () => {
   const {
     addPackage,

@@ -38,6 +38,7 @@ const Addguest = ({
   const infantMaxDate = date.toISOString().split("T")[0]; 
   const [isAC, setIsAC] = useState(true);
   const [carWithCapacity,setCarWithCapacity]=useState([]);
+  const [finalPrice,setFinalPrice]=useState(0);
 
 //here are the all states for calculation of transport
 
@@ -318,9 +319,7 @@ useEffect(()=>{
       const {
         childOverFive,
         childUnderFive,
-        diskHike,
         misc,
-        markup,
         singleRoom,
         twinSharingRoom,
         tripleSharingRoom,
@@ -333,22 +332,33 @@ useEffect(()=>{
         singleRoom * inputData?.singleRoom*(days-1) +
         twinSharingRoom * inputData?.twinRoom*(days-1) +
         tripleSharingRoom * inputData?.tripleRoom*(days-1) +
-        quadSharingRoom * inputData?.quardRoom*(days-1)+misc*(days-1);
+        quadSharingRoom * inputData?.quardRoom*(days-1)+misc*(days);
 
-        const newCalculatedPrice=calculatedPrice+Math.floor((calculatedPrice*markup)/100);
+        setGuestPrice(calculatedPrice);
+    }
+  }
+  }, [inputData, addPackage]);
+  useEffect(()=>{
+    const {
+      diskHike,
+      markup,
+    } = addPackage?.prices;
+    
+    const newCalculatedPrice=finalPrice+Math.floor((finalPrice*markup)/100);
+        // setGuestPrice(newCalculatedPrice)
+       
         if(diskHike>0){
-            const newCalculatedPrice1=newCalculatedPrice+Math.floor((calculatedPrice*diskHike)/100)
+            const newCalculatedPrice1=newCalculatedPrice+Math.floor((newCalculatedPrice*diskHike)/100)
+            console.log("final price",Math.floor((newCalculatedPrice*diskHike)/100));
             setGuestPrice(newCalculatedPrice1);
         }
         else if(diskHike<0){
            const newDiskHike=Math.abs(diskHike);
-          const newCalculatedPrice1=newCalculatedPrice-Math.floor((calculatedPrice*newDiskHike)/100)
+          const newCalculatedPrice1=newCalculatedPrice-Math.floor((newCalculatedPrice*newDiskHike)/100)
           setGuestPrice(newCalculatedPrice1);
         }
-    }
-  }
-  }, [inputData, addPackage]);
-  
+  },[finalPrice])
+  // console.log("final prize ",finalPrice)
   const handleToggle = (e) => {
     e.preventDefault();
     setIsAC((prevIsAC) => !prevIsAC);
@@ -360,40 +370,39 @@ useEffect(()=>{
     const filteredData2=cars?.filter(item=>{
       return item?.seatingCapacity===filteredData1?.seatingCapacity})
     if(filteredData1){
-      filteredData2?.forEach(item=>filteredData.push(item))
+      filteredData2?.forEach(item=>{
+        return filteredData.push(item)})
     }
     setCarWithCapacity(filteredData);
     
   },[inputData.adult])
-  console.log("flightbookings ---> ",carWithCapacity);
   useEffect(()=>{
     fetchCarById(selectedCar).then(res=>setSelectedCarIdFetchApi(res?.data))
   },[selectedCar])
-  const [withAc,setWithAc]=useState(0)
-  const [withNonAc,setWithNonAc]=useState(0)
+
 useEffect(()=>{
+  
   // console.log("guest price --> ",guestPrice);
   const farePrice=guestPrice+selectedCarIdFetchApi?.capacity*days;
   // console.log("guest price --> ",farePrice);
-  const data1=selectedCarIdFetchApi?.ac*(days-1);
-setGuestPrice(farePrice+data1);
+  const data1=selectedCarIdFetchApi?.ac*(days);
+setFinalPrice(farePrice+data1);
 },[selectedCarIdFetchApi])
 useEffect(()=>{
+  const {
+    diskHike,
+    markup,
+  } = addPackage?.prices;
+  const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
+  const data2=Math.floor(data1+(data1*diskHike)/100)
   if(isAC){
-    const data1=selectedCarIdFetchApi?.ac*(days-1);
-    setGuestPrice(guestPrice+data1);
-    // console.log("with ac",data1)
+    setGuestPrice(guestPrice+data2);
   }
   else{
-    const data1=selectedCarIdFetchApi?.ac*(days-1);
-   setGuestPrice(guestPrice-data1);
+   setGuestPrice(guestPrice-data2);
   }
  
 },[isAC])
-
-
-
-  // console.log("filtered Car --> ",totalTransportPrice);
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
@@ -413,7 +422,7 @@ useEffect(()=>{
                       add guest & Choose from{}
                     </p>
                     <div>
-                      <p className="text-lg font-medium"> ₹ {guestPrice}</p>
+                      <p className="text-lg font-medium"> ₹ {guestPrice?guestPrice:"--"}</p>
                       <p className="text-xxs">per person on twin sharing</p>
                     </div>
                   </div>
@@ -534,7 +543,7 @@ useEffect(()=>{
                       </div>
                     ))}
                   </div>
-
+                
                   {/* Infant date is here */}
                   <div className="mt-2">
                     <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
@@ -829,6 +838,7 @@ useEffect(()=>{
                           </p>
                           <div className="flex items-center justify-center mt-2">
                             <p className="text-gray-300">{selectedCarIdFetchApi?.seatingCapacity}</p>
+                            {/* <p className="text-gray-300">{selectedCarIdFetchApi?.price!==0?"":+ selectedCarIdFetchApi?.price}</p> */}
                           </div>
                         </div>
                       </div>:<div className="flex items-center gap-4">

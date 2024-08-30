@@ -89,12 +89,14 @@ const useMyCustomHook = () => {
           day: dayOfWeek,
           date: formattedDate,
           price: totalPrice,
+          bool1:1
         });
       } else {
         AllDataRelatedCity?.[0]?.push({
           day: dayOfWeek,
           date: formattedDate,
           price: packagePrice,
+          bool1:0
         });
       }
 
