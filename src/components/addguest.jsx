@@ -30,7 +30,7 @@ const Addguest = ({
   addPackage,
 }) => {
   const date = new Date();
-  const { showAddguest, setSubmitButtonOfPricingCalculation,setGuestPrice } =
+  const { showAddguest, setSubmitButtonOfPricingCalculation,setGuestPrice,departureSectionData } =
     useAppContext() ?? { showAddguest: false };
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState("");
@@ -41,6 +41,7 @@ const Addguest = ({
   const [finalPrice,setFinalPrice]=useState(0);
 
 //here are the all states for calculation of transport
+// console.log("departureSectionData ----- >123 ",departureSectionData)
 
   const [days,setDays]=useState(0);
 useEffect(()=>{
@@ -340,22 +341,26 @@ useEffect(()=>{
   }, [inputData, addPackage]);
   useEffect(()=>{
     const {
-      diskHike,
+      // diskHike,
       markup,
     } = addPackage?.prices;
     
     const newCalculatedPrice=finalPrice+Math.floor((finalPrice*markup)/100);
         // setGuestPrice(newCalculatedPrice)
        
-        if(diskHike>0){
-            const newCalculatedPrice1=newCalculatedPrice+Math.floor((newCalculatedPrice*diskHike)/100)
-            console.log("final price",Math.floor((newCalculatedPrice*diskHike)/100));
+      if(departureSectionData?.hike){  if(departureSectionData?.hike>0){
+            const newCalculatedPrice1=newCalculatedPrice+Math.floor((newCalculatedPrice*(departureSectionData?.hike))/100)
+            // console.log("final price",Math.floor((newCalculatedPrice*(departureSectionData?.hike))/100));
             setGuestPrice(newCalculatedPrice1);
         }
-        else if(diskHike<0){
-           const newDiskHike=Math.abs(diskHike);
+        else if(departureSectionData?.hike<0){
+           const newDiskHike=Math.abs((departureSectionData?.hike));
+          //  console.log("new dishike",(newCalculatedPrice*newDiskHike)/100)
           const newCalculatedPrice1=newCalculatedPrice-Math.floor((newCalculatedPrice*newDiskHike)/100)
           setGuestPrice(newCalculatedPrice1);
+        }}
+        else{
+         setGuestPrice(newCalculatedPrice);
         }
   },[finalPrice])
   // console.log("final prize ",finalPrice)
@@ -390,16 +395,34 @@ setFinalPrice(farePrice+data1);
 },[selectedCarIdFetchApi])
 useEffect(()=>{
   const {
-    diskHike,
     markup,
   } = addPackage?.prices;
-  const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
-  const data2=Math.floor(data1+(data1*diskHike)/100)
+  if(departureSectionData?.hike){const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
+  if(departureSectionData?.hike>0){const data2=Math.floor(data1+(data1*(departureSectionData?.hike))/100)
   if(isAC){
     setGuestPrice(guestPrice+data2);
   }
   else{
    setGuestPrice(guestPrice-data2);
+  }}
+else{
+  const data2=Math.floor(data1-(data1*Math.abs(departureSectionData?.hike))/100)
+  // console.log("non ac --> ",data2)
+  if(isAC){
+    setGuestPrice(guestPrice+data2);
+  }
+  else{
+   setGuestPrice(guestPrice-data2);
+  }
+}}
+  else{
+    const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
+    if(isAC){
+      setGuestPrice(guestPrice+data1);
+    }
+    else{
+     setGuestPrice(guestPrice-data1);
+    }
   }
  
 },[isAC])

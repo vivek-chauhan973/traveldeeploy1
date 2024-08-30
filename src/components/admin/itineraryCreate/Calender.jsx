@@ -8,7 +8,7 @@ const Calendar = ({ itinerary, setActiveTab }) => {
   const [priceIncrease, setPriceIncrease] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [svg, setSvg] = useState("");
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState();
 
 
   //   console.log("itinary ::: ",itinerary)
@@ -95,7 +95,7 @@ const Calendar = ({ itinerary, setActiveTab }) => {
                   Price Hike %:
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   id="price"
                   onChange={(e) => setPriceIncrease(e.target.value)}
                   className="  border w-full  rounded-md h-8 ml-7 px-2 focus:border-primary outline-none text-para"

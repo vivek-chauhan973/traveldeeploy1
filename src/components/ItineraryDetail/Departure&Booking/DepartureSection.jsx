@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const DepartureSection = ({ addPackage }) => {
-  const { setDepartureSectionData,setGuestPrice,guestPrice ,setPrice2} = useAppContext();
+  const { departureSectionData,setDepartureSectionData,setGuestPrice,guestPrice ,setPrice2} = useAppContext();
   const [datePackage, setDatePackage] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [startCity, setStartCity] = useState([]);
@@ -53,7 +53,7 @@ const DepartureSection = ({ addPackage }) => {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
-  
+  console.log("departure section data ----> : ",departureSectionData)
 
   return (
     <>
@@ -98,8 +98,7 @@ const DepartureSection = ({ addPackage }) => {
                       {groupedByMonth[monthKeys[currentMonthIndex]].map((item, i) => {
                         const dateObj = new Date(item.date);
                         const dayOfWeek = dateObj.toLocaleString('default', { weekday: 'short' });
-                        const dayOfMonth = dateObj.getDate();
-                        // setSelectedItemData(item);
+                        const dayOfMonth = dateObj.getDate()
                         return (
                           <div
                             key={i}
