@@ -11,6 +11,7 @@ export async function getServerSideProps(context) {
     `http://localhost:3000/api/public/package/${newPackageUrl}`
   );
   const data = await res.json();
+  console.log("hi")
   return {
     props: {
       data,
