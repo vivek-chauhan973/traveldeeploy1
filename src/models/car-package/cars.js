@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const CarSchema = new mongoose.Schema({
-  name: {
-    type: String,
+  misc: {
+    type: Number,
     required: [true, 'Car name is required'],
   },
   capacity: {
@@ -19,7 +19,7 @@ const CarSchema = new mongoose.Schema({
   },
   vehicleType: {
     type: String,
-    enum: ['Sedan', 'SUV', 'Hatchback'],
+    enum: ["Sedan", "Innova", "Crysta","Tempo 12S","Tempo 14S"],
     required: [true, 'Vehicle type is required'],
   },
   dailyLimit: {

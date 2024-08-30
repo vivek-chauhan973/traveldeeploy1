@@ -28,6 +28,7 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  
   switch (req.method) {
     case 'POST':
       return handlePost(req, res);
@@ -44,12 +45,13 @@ export default async function handler(req, res) {
 }
 
 function handlePost(req, res) {
+  console.log("req body --------------------->",req?.body)
   upload.array('images')(req, res, async (err) => {
     if (err) {
       return res.status(500).json({ success: false, error: 'Error uploading files' });
     }
     try {
-      const { name, capacity, ac, seatingCapacity, vehicleType, dailyLimit, rate, outStationBasePrice, perKmRate, markup, imageDetails } = req.body;
+      const { misc, capacity, ac, seatingCapacity, vehicleType, dailyLimit, rate, outStationBasePrice, perKmRate, markup, imageDetails } = req.body;
       
 
       // Process image details
@@ -60,7 +62,7 @@ function handlePost(req, res) {
       }));
 
       const car = await Car.create({ 
-        name, 
+        misc, 
         capacity, 
         ac, 
         seatingCapacity, 

@@ -17,7 +17,7 @@ const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot, set
         packageId: "",
         misc: "",
         markup: "",
-        diskHike: "",
+        diskHike: "12",
         gst: ""
     });
 
@@ -33,7 +33,7 @@ const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot, set
         packageId: "",
         misc: "",
         markup: "",
-        diskHike: "",
+        diskHike: "12",
         gst: ""
     });
 
@@ -320,7 +320,7 @@ const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot, set
                             </div>
                             {errors.infantSharingRoom && <p className="text-red-500 text-sm ml-2">{errors.infantSharingRoom}</p>}
                         </div>
-                        <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
+                        {/* <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
                             <label className="font-semibold w-40" htmlFor="">
                                 Discount/Hike(%):
                             </label>
@@ -330,13 +330,12 @@ const PricingManagement = ({ itinerary, setActiveTab ,setPriceManagementDot, set
                                     onChange={handleChange}
                                     className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
                                     name="diskHike"
-                                    // defaultValue={itinerary?.prices?.infantSharingRoom}
                                     value={pricingData.diskHike}
                                     type="number"
                                 />
                             </div>
                             {errors.infantSharingRoom && <p className="text-red-500 text-sm ml-2">{errors.infantSharingRoom}</p>}
-                        </div>
+                        </div> */}
                         <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
                             <label className="font-semibold w-40" htmlFor="">
                                 GST:

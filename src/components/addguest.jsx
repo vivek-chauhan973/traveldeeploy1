@@ -788,7 +788,7 @@ else{
                   </div>
                   {/* here is display all cars */}
 
-                  <div className="mt-8 p-4 bg-gray-800 rounded-lg shadow-lg">
+                  <div className="mt-8 ">
                     {/* <div className="w-full bg-navyblack rounded-md  gap-2 text-white flex justify-between items-center p-3 mb-4">
                       <p className="font-semibold text-base md:text-lg">
                         Transports
@@ -817,91 +817,91 @@ else{
                       </div>
                     </div> */}
 
-                    <div className="w-full bg-navyblack rounded-md gap-2 text-white flex justify-between items-center p-3 mb-4">
+                    <div className="w-full bg-navyblack rounded-md gap-2 text-white flex justify-between items-center mb-4 px-3 py-2 ">
                       <p className="font-semibold text-base md:text-lg">
                         Transports
                       </p>
-                      <div className="w-30 h-11 flex items-center rounded-full bg-gray-300 p-1">
+                      <div className="w-16  h-8 flex justify-between items-center rounded-full bg-gray-300">
                         {/* AC Option */}
                         <div
-                          className={`flex items-center justify-center w-12 h-10 text-sm px-1 cursor-pointer rounded-full transition-all duration-300 ${
-                            isAC
+                          className={`flex items-center justify-center w-10 h-8 py-1 cursor-pointer rounded-full transition-all duration-300 ${isAC
                               ? "bg-blue-500 text-white shadow-md"
                               : "bg-gray-300 text-gray-500 blur-[1px] opacity-50"
-                          }`}
+                            }`}
                           onClick={() => setIsAC(true)}
                         >
-                          AC
+                          <p className="text-[10px] text-center">AC</p>
                         </div>
                         {/* Non AC Option */}
                         <div
-                          className={`flex items-center justify-center w-12   h-10 text-sm cursor-pointer rounded-full transition-all duration-300 ${
-                            !isAC
+                          className={`flex items-center justify-center w-10 h-8 py-1 cursor-pointer rounded-full transition-all duration-300 ${!isAC
                               ? "bg-red-500 text-white shadow-sm"
-                              : "bg-gray-300  text-gray-500 blur-[1px] opacity-50"
-                          }`}
+                              : "bg-gray-300  text-red-500 blur-[0.5px] opacity-50"
+                            }`}
                           onClick={() => setIsAC(false)}
                         >
-                          Non AC
+                          <p className="text-[10px] text-center">Non AC</p>
                         </div>
                       </div>
                     </div>
-                    <div className="flex-col flex items-center justify-between md:border-b py-4 md:flex-row mb-4 space-y-4 md:space-y-0">
-                      {selectedCarIdFetchApi?<div className="flex items-center gap-4">
-                        <Image
-                          className="w-40 h-28 object-cover rounded-md shadow-md"
-                          src={selectedCarIdFetchApi?.imageDetails?.[0]?.url}
-                          alt=""
-                          width="160"
-                          height="180"
-                        />
-                        <div className="flex flex-col items-center md:items-start">
-                          <p className="font-semibold text-white text-lg">
-                            {selectedCarIdFetchApi?.name}
-                          </p>
-                          <div className="flex items-center justify-center mt-2">
-                            <p className="text-gray-300">{selectedCarIdFetchApi?.seatingCapacity}</p>
-                            {/* <p className="text-gray-300">{selectedCarIdFetchApi?.price!==0?"":+ selectedCarIdFetchApi?.price}</p> */}
+                    <div className="flex-col flex items-center justify-between  py-4 md:flex-row mb-4 space-y-4 md:space-y-0">
+                      {selectedCarIdFetchApi ? 
+                        <div className="flex items-center justify-center gap-4">
+                          <Image
+                            className="w-40 h-28 object-cover rounded-md"
+                            src={selectedCarIdFetchApi?.imageDetails?.[0]?.url}
+                            alt=""
+                            width="160"
+                            height="180"
+                          />
+                          <div className="flex-col items-start">
+                            <p className="font-semibold capitalize text-lg">
+                              {selectedCarIdFetchApi?.name}
+                            </p>
+                            <div className="flex md:items-start justify-center">
+                              <p className="">Seats : {selectedCarIdFetchApi?.seatingCapacity}</p>
+                              {/* <p className="text-gray-300">{selectedCarIdFetchApi?.price!==0?"":+ selectedCarIdFetchApi?.price}</p> */}
+                            </div>
+                          </div>
+                        </div> : 
+                        <div className="flex items-center gap-4">
+                          <Image
+                            className="w-40 h-28 object-cover rounded-md"
+                            src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
+                            alt=""
+                            width="160"
+                            height="180"
+                          />
+                          <div className="flex flex-col items-center md:items-start">
+                            <p className="font-semibold capitalize text-lg">
+                              Sedan
+                            </p>
+                            <div className="flex items-center justify-center mt-2">
+                              <p>Seats : 6</p>
+                            </div>
                           </div>
                         </div>
-                      </div>:<div className="flex items-center gap-4">
-                        <Image
-                          className="w-40 h-28 object-cover rounded-md shadow-md"
-                          src="https://imgd.aeplcdn.com/370x208/n/cw/ec/130591/fronx-exterior-right-front-three-quarter-109.jpeg?isig=0&q=80"
-                          alt=""
-                          width="160"
-                          height="180"
-                        />
-                        <div className="flex flex-col items-center md:items-start">
-                          <p className="font-semibold text-white text-lg">
-                            Sedan
-                          </p>
-                          <div className="flex items-center justify-center mt-2">
-                            <p className="text-gray-300">Seats: 6</p>
-                          </div>
-                        </div>
-                      </div>}
+                      }
                       <select
                         id="cars"
                         onChange={(e) => setSelectedCar(e.target.value)}
-                        className="border   border-gray-600 mt-4 w-32 bg-gray-700 text-gray-300 px-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                        className="border capitalize   border-gray-600 mt-4 w-24  px-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                       >
-                        <option value="" className="  py-2 ">
+                        <option value="" className="text-center py-2 capitalize">
                           Select Car
                         </option>
-                        {carWithCapacity.length!==0?(carWithCapacity)?.map((item, i) => (
-                            <option key={i} value={item?._id}>
-                              {item?.name}
-                            </option>
-                          )):(cars)?.map((item, i) => (
-                            <option key={i} value={item?._id}>
-                              {item?.name}
-                            </option>
-                          ))}
+                        {carWithCapacity.length !== 0 ? (carWithCapacity)?.map((item, i) => (
+                          <option key={i} value={item?._id} className="text-center py-2 capitalize">
+                            {item?.name}
+                          </option>
+                        )) : (cars)?.map((item, i) => (
+                          <option key={i} value={item?._id} className="text-center py-2 capitalize">
+                            {item?.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
-
                   {/* ac trail end*/}
                 </div>
               </div>

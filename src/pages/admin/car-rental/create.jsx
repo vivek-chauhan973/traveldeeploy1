@@ -10,7 +10,7 @@ import Image from 'next/image';
 export default function AddCar() {
   const [cars, setCars] = useState([]);
   const [form, setForm] = useState({
-    name: '',
+    misc: '',
     capacity: '',
     ac: '',
     seatingCapacity: '',
@@ -53,7 +53,7 @@ export default function AddCar() {
     e.preventDefault();
 
     // Validation
-    if (!form.name || !form.capacity || !form.ac || !form.seatingCapacity || !form.vehicleType || !form.dailyLimit || !form.rate || !form.outStationBasePrice || !form.perKmRate || !form.markup || !form.imageDetails[0].title || !form.imageDetails[0].alt) {
+    if (!form.misc || !form.capacity || !form.ac || !form.seatingCapacity || !form.vehicleType || !form.dailyLimit || !form.rate || !form.outStationBasePrice || !form.perKmRate || !form.markup || !form.imageDetails[0].title || !form.imageDetails[0].alt) {
       alert('All fields are required');
       return;
     }
@@ -86,6 +86,7 @@ export default function AddCar() {
 
   const sendFormData = async (formData) => {
     try {
+      
       const method = editMode ? 'PUT' : 'POST';
       const url = editMode ? `/api/cars/carapi?id=${editId}` : '/api/cars/carapi';
 
@@ -99,7 +100,7 @@ export default function AddCar() {
       if (result.success) {
         fetchCars(); // Refresh the car list
         setForm({
-          name: '',
+          misc: '',
           capacity: '',
           ac: '',
           seatingCapacity: '',
@@ -124,7 +125,7 @@ export default function AddCar() {
 
   const handleEdit = (car) => {
     setForm({
-      name: car.name,
+      misc: car.misc,
       capacity: car.capacity,
       ac: car.ac,
       seatingCapacity: car.seatingCapacity,
@@ -212,16 +213,16 @@ export default function AddCar() {
               </div>
               <div className="border p-2 rounded">
                 {[
-                  { label: "Car Name", name: "name", type: "text" },
+                  { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Innova", "Crysta","Tempo 12S","Tempo 14S"] },
                   { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
-                  { label: "AC per Day", name: "ac",type:"number"},
-                  { label: "Vehicle Type", name: "vehicleType", type: "select", options: ["Sedan", "SUV", "Hatchback"] },
-                  { label: "Daily Limit", name: "dailyLimit", type: "number" },
-                  { label: "Rate", name: "rate", type: "number" },
+                  { label: "Daily Limit KM's", name: "dailyLimit", type: "number" },
                   { label: "Base Fare/Per Day", name: "capacity", type: "number" },
+                  { label: "Base price for KM KM's", name: "rate", type: "number" },
                   { label: "Out Station Base Price for KM", name: "outStationBasePrice", type: "number" },
                   { label: "Per KM Rate", name: "perKmRate", type: "number" },
                   { label: "Markup", name: "markup", type: "number" },
+                  { label: "AC Charge per Day", name: "ac",type:"number"},
+                  { label: "Misc", name: "misc", type: "number" },
                 ].map((field) => (
                   <div key={field.name} className="mt-2 flex items-center pb-2">
                     <div className="w-40">
@@ -270,32 +271,32 @@ export default function AddCar() {
             <table className="min-w-full bg-white border border-gray-300">
               <thead>
                 <tr>
-                  <th className="border-b px-4 py-2 text-left">Name</th>
-                  <th className="border-b px-4 py-2 text-left">Capacity</th>
-                  <th className="border-b px-4 py-2 text-left">AC</th>
-                  <th className="border-b px-4 py-2 text-left">Seating</th>
-                  <th className="border-b px-4 py-2 text-left">Vehicle Type</th>
-                  <th className="border-b px-4 py-2 text-left">Daily Limit</th>
-                  <th className="border-b px-4 py-2 text-left">Rate</th>
-                  <th className="border-b px-4 py-2 text-left">Out Station Base Price</th>
+                  <th className="border-b px-4 py-2 text-left">Vehicle Selection</th>
+                  <th className="border-b px-4 py-2 text-left">Seating Capacity</th>
+                  <th className="border-b px-4 py-2 text-left">Daily Limit KM's</th>
+                  <th className="border-b px-4 py-2 text-left">Base Fare/Per Day</th>
+                  <th className="border-b px-4 py-2 text-left">Base price for KM's</th>
+                  <th className="border-b px-4 py-2 text-left">Out Station Base Price for KM</th>
                   <th className="border-b px-4 py-2 text-left">Per KM Rate</th>
                   <th className="border-b px-4 py-2 text-left">Markup</th>
+                  <th className="border-b px-4 py-2 text-left">AC Charge per Day</th>
+                  <th className="border-b px-4 py-2 text-left">Misc</th>
                   <th className="border-b px-4 py-2 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {cars?.map((car) => (
                   <tr key={car._id}>
-                    <td className="border-b px-4 py-2">{car.name}</td>
-                    <td className="border-b px-4 py-2">{car.capacity}</td>
-                    <td className="border-b px-4 py-2">{car.ac}</td>
-                    <td className="border-b px-4 py-2">{car.seatingCapacity}</td>
                     <td className="border-b px-4 py-2">{car.vehicleType}</td>
+                    <td className="border-b px-4 py-2">{car.seatingCapacity}</td>
                     <td className="border-b px-4 py-2">{car.dailyLimit}</td>
+                    <td className="border-b px-4 py-2">{car.capacity}</td>
                     <td className="border-b px-4 py-2">{car.rate}</td>
                     <td className="border-b px-4 py-2">{car.outStationBasePrice}</td>
                     <td className="border-b px-4 py-2">{car.perKmRate}</td>
                     <td className="border-b px-4 py-2">{car.markup}</td>
+                    <td className="border-b px-4 py-2">{car.ac}</td>
+                    <td className="border-b px-4 py-2">{car.misc}</td>
                     <td className="border-b px-4 py-2 flex space-x-2">
                       <button onClick={() => handleEdit(car)} className="text-blue-500 hover:text-blue-600">
                         <FaEdit />

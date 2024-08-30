@@ -68,7 +68,7 @@ const ItineraryPricingCard = () => {
           <div className="flex mb-2.5 text-sm">
             <p className=" w-20">Traveller :</p>
             <p className=" font-semibold text-graytext">
-              Adults:{inputData?.adult}, Child:{inputData?.child}, Infant:
+              Adults:{inputData?.adult||"2"}, Child:{inputData?.child}, Infant:
               {inputData?.infant}
             </p>
           </div>
