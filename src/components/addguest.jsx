@@ -71,6 +71,7 @@ useEffect(()=>{
 
   const handleClose = () => {
     setOpen(false);
+
   };
 
   // console.log("fixed departure package::::",addPackage);
@@ -87,11 +88,9 @@ useEffect(()=>{
       setInputData((prevData) => ({ ...prevData, child: 0, infant: 0 }));
     }
   };
-
   const handleChange1 = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
     setInputData({ ...inputData, [e.target.name]: value });
-
     if (e.target.name === "adult") {
       setCountSingleRoom(0);
       setCountTwinRoom(0);
@@ -100,13 +99,10 @@ useEffect(()=>{
       setInputData((prevData) => ({ ...prevData, child: 0, infant: 0 }));
     }
   };
-  
   // here fetch all cars
-
   useEffect(() => {
     fetchCarAllCars().then((res) => setCars(res?.data || []));
   }, []);
-
   // here is the logic of select car
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -581,8 +577,8 @@ useEffect(()=>{
 
                           <span className="text-red-400 text-sm">
                             Select{" "}
-                            {inputData?.childAges[index] &&
-                              `${inputData?.childAges[index].years} yrs ${inputData?.childAges[index].months} months`}
+                            {inputData?.childAges?.[index] &&
+                              `${inputData?.childAges?.[index].years} yrs ${inputData?.childAges?.[index].months} months`}
                           </span>
                         </div>
                       </div>
@@ -651,8 +647,8 @@ useEffect(()=>{
 
                           <span className="text-red-400 text-sm">
                             Select{" "}
-                            {inputData?.infantAges[index] &&
-                              `${inputData?.infantAges[index].years} yrs ${inputData?.infantAges[index].months} months`}
+                            {inputData?.infantAges?.[index] &&
+                              `${inputData?.infantAges?.[index].years} yrs ${inputData?.infantAges?.[index].months} months`}
                           </span>
                         </div>
                       </div>

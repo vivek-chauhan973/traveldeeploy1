@@ -15,7 +15,7 @@ const Calendar = ({ itinerary, setActiveTab }) => {
   const [editIndex, setEditIndex] = useState(null); // To track which item is being edited
 
   useEffect(()=>{
-    fetchPriceHikeData(itinerary).then(res=>{setCalenderArr(res?.response?.priceHiKe||[]);console.log("res",res?.response?.priceHiKe)});
+    fetchPriceHikeData(itinerary).then(res=>{setCalenderArr(res?.response?.priceHiKe||[]);});
   },[itinerary])
 
   const handleSubmitNext = async (e) => {
@@ -167,13 +167,13 @@ const Calendar = ({ itinerary, setActiveTab }) => {
           </button>
         </div>
         <div>
-          <div className="grid grid-cols-5 bg-black my-4 rounded-sm">
+         {calenderArr.length!==0&&<div className="grid grid-cols-5 bg-black my-4 rounded-sm">
             <p className="text-white px-2 py-3">Start Date</p>
             <p className="text-white px-2 py-3">End Date</p>
             <p className="text-white px-2 py-3">Price Hike</p>
             <p className="text-white px-2 py-3">SVG</p>
             <p className="text-white px-2 py-3">Action</p>
-          </div>
+          </div>}
           {calenderArr.map((item, i) => (
             <div key={i} className="grid grid-cols-5 my-4">
               <p className="px-2 py-3">{item.startDate}</p>

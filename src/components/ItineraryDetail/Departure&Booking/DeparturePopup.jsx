@@ -57,16 +57,16 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       <div className="bg-white rounded-xl  shadow-lg z-50">
-        <div className='pr-3 pt-1 flex justify-end items-center my-2'>
+        <div className='pr-2 pt-1 flex justify-end items-center my-1'>
           <FontAwesomeIcon
             icon={faXmark}
             className='h-7 w-7  hover:bg-gray-100  rounded-full cursor-pointer p-1.5'
             onClick={handlePopupClose}
           />
         </div>
-        <div className="py-0 px-5">
-          <div className="md:text-md text-md capitalize font-semibold">
-            <p>Select your preferred departure city</p>
+        <div className="px-5">
+          <div>
+            <p className='md:px-10 md:text-xl text-md font-semibold'>Select your preferred departure city</p>
           </div>
           <div className='my-3'>
             {data?.map((item, i) => {
