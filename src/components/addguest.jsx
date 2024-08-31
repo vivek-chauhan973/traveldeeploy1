@@ -41,6 +41,8 @@ const Addguest = ({
   const [finalPrice,setFinalPrice]=useState(0);
   const[acDisable,setAcDisable]=useState(false);
   const [transportPrice,setTransportPrice]=useState(0);
+  const [final,setFinal]=useState(0);
+  const [selectedDataOfCar,setSelectedDataOfCar]=useState(0);
 
 //here are the all states for calculation of transport
 // console.log("departureSectionData ----- >123 ",departureSectionData)
@@ -315,7 +317,6 @@ useEffect(()=>{
     }
   };
 // toggle AC is here 
-const [final,setFinal]=useState(0);
   //here is the calculation
   useEffect(() => {
     if(addPackage?.addguest==="addGuest"){
@@ -343,8 +344,6 @@ const [final,setFinal]=useState(0);
     }
   }
   }, [inputData, addPackage]);
-
-  
   useEffect(()=>{
     const {
       // diskHike,
@@ -378,6 +377,7 @@ const [final,setFinal]=useState(0);
     const newarr=[];
     // console.log("cars stage1 ----> ",cars);
     const filteredData=cars?.find(item=>item?.seatingCapacity>=inputData?.adult);
+    setSelectedDataOfCar(filteredData?.capacity);
     newarr.push(filteredData);
     // console.log("cars stage2 ----> ",filteredData);
     const filteredData3=cars?.filter(item=>item?.vehicleType!==filteredData?.vehicleType&&item?.seatingCapacity===filteredData?.seatingCapacity);
@@ -398,12 +398,10 @@ const [final,setFinal]=useState(0);
       filteredData2?.forEach(item=>{
          newarr.push(item)})
     }
-    // console.log("new car array --> ",newarr)
     setCarWithCapacity(newarr);
   },[inputData?.adult])
 
 useEffect(()=>{
-  // console.log("final price ---> ",final)
 const farePrice=final+selectedCarIdFetchApi?.capacity*days;
 const data1=selectedCarIdFetchApi?.ac*(days);
 setFinalPrice(farePrice+data1);
@@ -412,7 +410,6 @@ useEffect(()=>{
   const {
     markup,
   } = addPackage?.prices;
-  // console.log("selected --> ",selectedCarIdFetchApi?.ac)
   if(departureSectionData?.hike){const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
   if(departureSectionData?.hike>0){const data2=Math.floor(data1+(data1*(departureSectionData?.hike))/100)
   if(isAC){
@@ -423,7 +420,6 @@ useEffect(()=>{
   }}
 else{
   const data2=Math.floor(data1-(data1*Math.abs(departureSectionData?.hike))/100)
-  // console.log("non ac --> ",data2)
   if(isAC){
     setGuestPrice(guestPrice+data2);
   }
@@ -442,11 +438,16 @@ else{
   }
  
 },[isAC])
-
 const handleSelected=(item)=>{
   setSelectedCarIdFetchApi(item)
+  setSelectedDataOfCar(item?.capacity);
   setAcDisable(true);
+  setIsAC(true);
 }
+
+useEffect(()=>{
+  console.log("selectedCarOf Price ",selectedDataOfCar)
+},[selectedDataOfCar])
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
@@ -889,6 +890,12 @@ const handleSelected=(item)=>{
                               <p>Seats : {item?.seatingCapacity}</p>
                             </div>
                           </div>
+                          <div className="flex items-center justify-center mt-2">
+                            {(item?.capacity-selectedDataOfCar)===0&&<p></p>}
+                            {(item?.capacity-selectedDataOfCar)>0&&<p>+{item?.capacity-selectedDataOfCar}</p>}
+                            {(item?.capacity-selectedDataOfCar)<0&&<p>{item?.capacity-selectedDataOfCar}</p>}
+                             
+                            </div>
                         </div>)}
                   {/* ac trail end*/}
                 </div>
@@ -919,9 +926,9 @@ const handleSelected=(item)=>{
                     </p>
                   </div>
                   <div className="text-sm flex gap-2 md:gap-4">
-                    <p className="font-semibold">Sedan</p>
+                    <p className="font-semibold">{selectedCarIdFetchApi?.vehicleType}</p>
                     <div className="flex itmes-center justify-center">
-                      <p className="font-semibold">6</p>
+                      <p className="font-semibold">{selectedCarIdFetchApi?.seatingCapacity}</p>
                     </div>
                   </div>
                 </div>
