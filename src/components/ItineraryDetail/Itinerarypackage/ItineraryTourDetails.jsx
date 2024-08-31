@@ -65,11 +65,11 @@ const ItineraryTourDetails = () => {
                         </div>
                     </div>}
 
-                    <div className={`py-4  pl-9 pr-4  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
+                    <div className={`py-4  pl-5 pr-4  ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
                         {
 
 
-                            <p className="text-para marker:text-green-800" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
+                            <p className="text-para marker:text-green-800 payment-margin" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }} />
 
                         }
 
@@ -86,10 +86,10 @@ const ItineraryTourDetails = () => {
 
 
 
-                    <div className={` py-4  pl-9 pr-4 ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
+                    <div className={` py-4  pl-5 pr-4 ${activeTab === 'tab3' ? 'block' : 'hidden'}`}>
                         {
 
-                            <p className="text-para marker:text-red-800 " dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
+                            <p className="text-para marker:text-red-800 payment-margin" dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} />
                         }
                     </div> 
                 </div>

@@ -53,14 +53,14 @@ const ItineraryPaymentTerms = () => {
           </div>
           <div className="border rounded-b-lg  overflow-hidden">
             <div
-              className={`  xs:overflow-x-auto list-disc  pl-9 pr-4 ${
+              className={`  xs:overflow-x-auto list-disc  pl-5 pr-4 ${
                 activeTab === "tab1" ? "block" : "hidden"
               }`}
             >
               <div className="py-3">
                 {
                   <p
-                    className="text-para marker:text-green-800"
+                    className="text-para marker:text-green-800 payment payment-margin"
                     dangerouslySetInnerHTML={{
                       __html:
                         addPackage?.TourInformations?.cancellation?.description,
@@ -70,13 +70,13 @@ const ItineraryPaymentTerms = () => {
               </div>
             </div>
             <div
-              className={`py-3  pl-9 pr-4 ${
+              className={`py-3  pl-5 pr-4 ${
                 activeTab === "tab2" ? "block" : "hidden"
               }`}
             >
               {
                 <p
-                  className="text-para marker:text-red-800 payment"
+                  className="text-para marker:text-red-800 payment payment-margin"
                   dangerouslySetInnerHTML={{
                     __html:
                       addPackage?.TourInformations?.needToKnow?.description,

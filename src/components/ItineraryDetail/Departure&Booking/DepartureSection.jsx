@@ -131,10 +131,8 @@ const DepartureSection = ({ addPackage }) => {
 
               <hr />
               <div className="ml-2 my-4">
-                <h6 className="font-semibold text-base mb-2 text-graytext">
+                <h6 className="font-semibold text-md mb-3 text-graytext">
                   About This Itinerary
-
-
                 </h6>
                 <p
                   className="xl:ml-3 ml-0 mr-2 about-margin text-para"
@@ -143,7 +141,7 @@ const DepartureSection = ({ addPackage }) => {
               </div>
 
               <div className="mx-5">
-                <div className="mt-4">
+                <div className="md:my-7 my-5">
                   <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
                     <thead>
                     <tr className="border-b bg-black text-white">
@@ -171,8 +169,8 @@ const DepartureSection = ({ addPackage }) => {
          
 
               <hr />
-              <div className="ml-2 mt-3">
-                <h6 className="text-md font-semibold mb-2 text-graytext">Highlights</h6>
+              <div className="ml-2 my-4">
+                <h6 className="font-semibold text-md mb-5 text-graytext">Highlights</h6>
                 <div>
                   {addPackage?.highlights?.map((highlight) => (
                     <ul key={highlight._id} className="ml-3">

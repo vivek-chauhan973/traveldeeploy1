@@ -45,7 +45,7 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
           />
        
           <div className="box-Shadow-Style-Package  justify-end  gap-3  absolute z-10 w-full  py-5  bottom-0 ">
-            <h1 className="absolute    uppercase font-bold italic bottom-0 text-white">{state?.name}</h1>
+            <h1 className="absolute uppercase font-bold italic bottom-0 right-2 text-white">{state?.name}</h1>
           </div>
       </div>
       <div className="container-wrapper py-5 ">

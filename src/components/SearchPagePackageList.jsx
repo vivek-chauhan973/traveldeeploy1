@@ -119,6 +119,15 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
                 }}
               />
             </div>
+            <div className="absolute top-3">
+              <div className="rounded-r-sm px-2 bg-black"> {/* bg-gradient-to-r from-cyan-500 to-blue-500 */}
+                <p className="py-1 text-sm text-white">
+                  {(packageData?.addguest === "addGuest") && "Group Departure"}
+                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice !== 0)) && "Charter"}
+                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 0)) && "Fixed Departure"}
+                </p>
+              </div>
+            </div>
 
             <div className="mx-6 md:m-0 mt-2">
               <div>
@@ -265,16 +274,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
                   View details
                 </Link>
               </div>
-            </div>
-            <div className="absolute top-3">
-              <div className="rounded-tr-sm rounded-br-sm px-2 bg-gradient-to-r from-cyan-500 to-blue-500">
-                <p className="py-1 text-sm text-white">
-                  {(packageData?.addguest === "addGuest") && "Group Departure"}
-                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice !== 0)) && "Charter"}
-                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 0)) && "Fixed Departure"}
-                </p>
-              </div>
-            </div>
+            </div>          
           </div>
         );
       })}
