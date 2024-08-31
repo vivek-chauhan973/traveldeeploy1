@@ -874,7 +874,7 @@ useEffect(()=>{
 
 {/* All listed Cars is here */}
 
-                  {carWithCapacity?.map(item=><div onClick={()=>handleSelected(item)} className="flex items-center gap-4">
+                  {carWithCapacity?.map(item=><div key={item?._id} onClick={()=>handleSelected(item)} className="flex items-center gap-4">
                           <Image
                             className="w-40 h-28 object-cover rounded-md"
                             src={item?.imageDetails?.[0]?.url}
