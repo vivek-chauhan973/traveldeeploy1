@@ -17,8 +17,8 @@ const fetchCarAllCars = async () => {
   const response = await fetch("/api/cars/carapi");
   return await response.json();
 };
-const fetchCarById=async (id)=>{
-  const data=await fetch(`/api/cars/car/${id}`)
+const fetchCarById = async (id) => {
+  const data = await fetch(`/api/cars/car/${id}`)
   return await data.json();
 }
 const Addguest = ({
@@ -30,27 +30,27 @@ const Addguest = ({
   addPackage,
 }) => {
   const date = new Date();
-  const { showAddguest, setSubmitButtonOfPricingCalculation,setGuestPrice,departureSectionData } =
+  const { showAddguest, setSubmitButtonOfPricingCalculation, setGuestPrice, departureSectionData } =
     useAppContext() ?? { showAddguest: false };
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState("");
   const [selectedCarIdFetchApi, setSelectedCarIdFetchApi] = useState("");
-  const infantMaxDate = date.toISOString().split("T")[0]; 
+  const infantMaxDate = date.toISOString().split("T")[0];
   const [isAC, setIsAC] = useState(true);
-  const [carWithCapacity,setCarWithCapacity]=useState([]);
-  const [finalPrice,setFinalPrice]=useState(0);
-  const[acDisable,setAcDisable]=useState(false);
-  const [transportPrice,setTransportPrice]=useState(0);
-  const [final,setFinal]=useState(0);
-  const [selectedDataOfCar,setSelectedDataOfCar]=useState(0);
+  const [carWithCapacity, setCarWithCapacity] = useState([]);
+  const [finalPrice, setFinalPrice] = useState(0);
+  const [acDisable, setAcDisable] = useState(false);
+  const [transportPrice, setTransportPrice] = useState(0);
+  const [final, setFinal] = useState(0);
+  const [selectedDataOfCar, setSelectedDataOfCar] = useState(0);
 
-//here are the all states for calculation of transport
-// console.log("departureSectionData ----- >123 ",departureSectionData)
+  //here are the all states for calculation of transport
+  // console.log("departureSectionData ----- >123 ",departureSectionData)
 
-  const [days,setDays]=useState(0);
-useEffect(()=>{
-  setDays(addPackage?.days?.length);
-},[])
+  const [days, setDays] = useState(0);
+  useEffect(() => {
+    setDays(addPackage?.days?.length);
+  }, [])
 
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
     .toISOString()
@@ -312,138 +312,147 @@ useEffect(()=>{
         break;
     }
   };
-// toggle AC is here 
+  // toggle AC is here 
   //here is the calculation
   useEffect(() => {
-    if(addPackage?.addguest==="addGuest"){
-    if (addPackage && addPackage?.prices) {
-      const {
-        childOverFive,
-        childUnderFive,
-        misc,
-        singleRoom,
-        twinSharingRoom,
-        tripleSharingRoom,
-        quadSharingRoom,
-      } = addPackage?.prices;
+    if (addPackage?.addguest === "addGuest") {
+      if (addPackage && addPackage?.prices) {
+        const {
+          childOverFive,
+          childUnderFive,
+          misc,
+          singleRoom,
+          twinSharingRoom,
+          tripleSharingRoom,
+          quadSharingRoom,
+        } = addPackage?.prices;
 
-      const calculatedPrice =
-        childOverFive * inputData?.child*(days-1) +
-        childUnderFive * inputData?.infant*(days-1) +
-        singleRoom * inputData?.singleRoom*(days-1) +
-        twinSharingRoom * inputData?.twinRoom*(days-1) +
-        tripleSharingRoom * inputData?.tripleRoom*(days-1) +
-        quadSharingRoom * inputData?.quardRoom*(days-1)+misc*(days);
+        const calculatedPrice =
+          childOverFive * inputData?.child * (days - 1) +
+          childUnderFive * inputData?.infant * (days - 1) +
+          singleRoom * inputData?.singleRoom * (days - 1) +
+          twinSharingRoom * inputData?.twinRoom * (days - 1) +
+          tripleSharingRoom * inputData?.tripleRoom * (days - 1) +
+          quadSharingRoom * inputData?.quardRoom * (days - 1) + misc * (days);
 
         setGuestPrice(calculatedPrice);
         setFinal(calculatedPrice);
+      }
     }
-  }
   }, [inputData, addPackage]);
-  useEffect(()=>{
+  useEffect(() => {
     const {
       // diskHike,
       markup,
     } = addPackage?.prices;
-    const newCalculatedPrice=finalPrice+Math.floor((finalPrice*markup)/100);
-        // setGuestPrice(newCalculatedPrice)
-       
-      if(departureSectionData?.hike){  if(departureSectionData?.hike>0){
-            const newCalculatedPrice1=newCalculatedPrice+Math.floor((newCalculatedPrice*(departureSectionData?.hike))/100)
-            // console.log("final price",Math.floor((newCalculatedPrice*(departureSectionData?.hike))/100));
-            setGuestPrice(newCalculatedPrice1);
-        }
-        else if(departureSectionData?.hike<0){
-           const newDiskHike=Math.abs((departureSectionData?.hike));
-          //  console.log("new dishike",(newCalculatedPrice*newDiskHike)/100)
-          const newCalculatedPrice1=newCalculatedPrice-Math.floor((newCalculatedPrice*newDiskHike)/100)
-          setGuestPrice(newCalculatedPrice1);
-        }}
-        else{
-         setGuestPrice(newCalculatedPrice);
-        }
-  },[finalPrice])
-  
+    const newCalculatedPrice = finalPrice + Math.floor((finalPrice * markup) / 100);
+    // setGuestPrice(newCalculatedPrice)
+
+    if (departureSectionData?.hike) {
+      if (departureSectionData?.hike > 0) {
+        const newCalculatedPrice1 = newCalculatedPrice + Math.floor((newCalculatedPrice * (departureSectionData?.hike)) / 100)
+        // console.log("final price",Math.floor((newCalculatedPrice*(departureSectionData?.hike))/100));
+        setGuestPrice(newCalculatedPrice1);
+      }
+      else if (departureSectionData?.hike < 0) {
+        const newDiskHike = Math.abs((departureSectionData?.hike));
+        //  console.log("new dishike",(newCalculatedPrice*newDiskHike)/100)
+        const newCalculatedPrice1 = newCalculatedPrice - Math.floor((newCalculatedPrice * newDiskHike) / 100)
+        setGuestPrice(newCalculatedPrice1);
+      }
+    }
+    else {
+      setGuestPrice(newCalculatedPrice);
+    }
+  }, [finalPrice])
+
   // console.log("final prize ",finalPrice)
   const handleToggle = (e) => {
     e.preventDefault();
     setIsAC((prevIsAC) => !prevIsAC);
-  }; 
-  useEffect(()=>{
-    const newarr=[];
+  };
+  useEffect(() => {
+    const newarr = [];
     // console.log("cars stage1 ----> ",cars);
-    const filteredData=cars?.find(item=>item?.seatingCapacity>=inputData?.adult);
+    const filteredData = cars?.find(item => item?.seatingCapacity >= inputData?.adult);
     setSelectedDataOfCar(filteredData?.capacity);
     newarr.push(filteredData);
     // console.log("cars stage2 ----> ",filteredData);
-    const filteredData3=cars?.filter(item=>item?.vehicleType!==filteredData?.vehicleType&&item?.seatingCapacity===filteredData?.seatingCapacity);
-    if(filteredData3?.length!==0){
-      filteredData3.forEach(item=>{
+    const filteredData3 = cars?.filter(item => item?.vehicleType !== filteredData?.vehicleType && item?.seatingCapacity === filteredData?.seatingCapacity);
+    if (filteredData3?.length !== 0) {
+      filteredData3.forEach(item => {
         newarr.push(item);
         cars.pop(item);
       })
-    }  
-    const filteredData1=cars?.find(item=>{
-      return item?.seatingCapacity>filteredData?.seatingCapacity});
-      if(filteredData1){
-        newarr.push(filteredData1);
-      }   
-    const filteredData2=cars?.filter(item=>{
-      return item?.vehicleType!==filteredData1?.vehicleType&&item?.seatingCapacity===filteredData1?.seatingCapacity})
-    if(filteredData1?.length!==0){
-      filteredData2?.forEach(item=>{
-         newarr.push(item)})
+    }
+    const filteredData1 = cars?.find(item => {
+      return item?.seatingCapacity > filteredData?.seatingCapacity
+    });
+    if (filteredData1) {
+      newarr.push(filteredData1);
+    }
+    const filteredData2 = cars?.filter(item => {
+      return item?.vehicleType !== filteredData1?.vehicleType && item?.seatingCapacity === filteredData1?.seatingCapacity
+    })
+    if (filteredData1?.length !== 0) {
+      filteredData2?.forEach(item => {
+        newarr.push(item)
+      })
     }
     setCarWithCapacity(newarr);
-  },[inputData?.adult])
+  }, [inputData?.adult])
 
-useEffect(()=>{
-const farePrice=final+selectedCarIdFetchApi?.capacity*days;
-const data1=selectedCarIdFetchApi?.ac*(days);
-setFinalPrice(farePrice+data1);
-},[selectedCarIdFetchApi])
-useEffect(()=>{
-  const {
-    markup,
-  } = addPackage?.prices;
-  if(departureSectionData?.hike){const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
-  if(departureSectionData?.hike>0){const data2=Math.floor(data1+(data1*(departureSectionData?.hike))/100)
-  if(isAC){
-    setGuestPrice(guestPrice+data2);
-  }
-  else{
-   setGuestPrice(guestPrice-data2);
-  }}
-else{
-  const data2=Math.floor(data1-(data1*Math.abs(departureSectionData?.hike))/100)
-  if(isAC){
-    setGuestPrice(guestPrice+data2);
-  }
-  else{
-   setGuestPrice(guestPrice-data2);
-  }
-}}
-  else{
-    const data1=Math.floor(selectedCarIdFetchApi?.ac*(days)+((selectedCarIdFetchApi?.ac*(days))*markup)/100);
-    if(isAC){
-      setGuestPrice(guestPrice+data1);
+  useEffect(() => {
+    const farePrice = final + selectedCarIdFetchApi?.capacity * days;
+    const data1 = selectedCarIdFetchApi?.ac * (days);
+    setFinalPrice(farePrice + data1);
+  }, [selectedCarIdFetchApi])
+  useEffect(() => {
+    const {
+      markup,
+    } = addPackage?.prices;
+    if (departureSectionData?.hike) {
+      const data1 = Math.floor(selectedCarIdFetchApi?.ac * (days) + ((selectedCarIdFetchApi?.ac * (days)) * markup) / 100);
+      if (departureSectionData?.hike > 0) {
+        const data2 = Math.floor(data1 + (data1 * (departureSectionData?.hike)) / 100)
+        if (isAC) {
+          setGuestPrice(guestPrice + data2);
+        }
+        else {
+          setGuestPrice(guestPrice - data2);
+        }
+      }
+      else {
+        const data2 = Math.floor(data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100)
+        if (isAC) {
+          setGuestPrice(guestPrice + data2);
+        }
+        else {
+          setGuestPrice(guestPrice - data2);
+        }
+      }
     }
-    else{
-     setGuestPrice(guestPrice-data1);
+    else {
+      const data1 = Math.floor(selectedCarIdFetchApi?.ac * (days) + ((selectedCarIdFetchApi?.ac * (days)) * markup) / 100);
+      if (isAC) {
+        setGuestPrice(guestPrice + data1);
+      }
+      else {
+        setGuestPrice(guestPrice - data1);
+      }
     }
-  }
- 
-},[isAC])
-const handleSelected=(item)=>{
-  setSelectedCarIdFetchApi(item)
-  setSelectedDataOfCar(item?.capacity);
-  setAcDisable(true);
-  setIsAC(true);
-}
 
-useEffect(()=>{
-  console.log("selectedCarOf Price ",selectedDataOfCar)
-},[selectedDataOfCar])
+  }, [isAC])
+  const handleSelected = (item) => {
+    setSelectedCarIdFetchApi(item)
+    setSelectedDataOfCar(item?.capacity);
+    setAcDisable(true);
+    setIsAC(true);
+  }
+
+  useEffect(() => {
+    console.log("selectedCarOf Price ", selectedDataOfCar)
+  }, [selectedDataOfCar])
   return (
     <div>
       <span onClick={handleClickOpen}>{children}</span>
@@ -460,10 +469,10 @@ useEffect(()=>{
                 <div className="sticky top-0 shadow-md z-[5]">
                   <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
                     <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
-                      add guest & Choose from{}
+                      add guest & Choose from{ }
                     </p>
                     <div>
-                      <p className="text-lg font-medium"> ₹ {guestPrice?guestPrice:"--"}</p>
+                      <p className="text-lg font-medium"> ₹ {guestPrice ? guestPrice : "--"}</p>
                       <p className="text-xxs">per person on twin sharing</p>
                     </div>
                   </div>
@@ -540,11 +549,10 @@ useEffect(()=>{
                           name="child"
                           value={inputData?.child}
                           id="Childdropdown"
-                          className={`border w-full py-1 rounded-md ${
-                            inputData?.child === 0 &&
+                          className={`border w-full py-1 rounded-md ${inputData?.child === 0 &&
                             inputData?.adult === 0 &&
                             "opacity-50"
-                          }`}
+                            }`}
                           onChange={handleChange}
                           disabled={inputData?.adult === 0} // Disable if adult count is 0
                         >
@@ -584,7 +592,7 @@ useEffect(()=>{
                       </div>
                     ))}
                   </div>
-                
+
                   {/* Infant date is here */}
                   <div className="mt-2">
                     <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
@@ -610,11 +618,10 @@ useEffect(()=>{
                           name="infant"
                           value={inputData?.infant}
                           id="Infantdropdown"
-                          className={`border w-full py-1 rounded-md ${
-                            inputData?.infant === 0 &&
+                          className={`border w-full py-1 rounded-md ${inputData?.infant === 0 &&
                             inputData?.adult === 0 &&
                             "opacity-50"
-                          }`}
+                            }`}
                           onChange={handleChange1}
                           disabled={inputData?.adult === 0} // Disable if adult count is 0
                         >
@@ -839,60 +846,64 @@ useEffect(()=>{
                       <p className="font-semibold text-base md:text-lg">
                         Transports
                       </p>
-                      <div className="w-16  h-8 flex justify-between items-center rounded-full bg-gray-300">
-                        {/* AC Option */}
-                        <div
-                          className={`flex items-center justify-center w-10 h-8 py-1 cursor-pointer rounded-full transition-all duration-300 ${isAC
-                              ? "bg-blue-500 text-white shadow-md"
-                              : "bg-gray-300 text-gray-500 blur-[1px] opacity-50"
-                            }`}
-                          onClick={() => {
-                            if(acDisable){setIsAC(true)}
-                            
-                          }}
-                        >
-                          <p className="text-[10px] text-center">AC</p>
+                      <div className="flex items-center space-x-2">
+                        {/* AC Option / Non AC Option toggle */}
+                        <p className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-white" : "text-gray-400 blur-none"}`}>AC</p>
+                        <div className="w-12 h-7 flex justify-between items-center rounded-full bg-gray-300 border border-[#5CDE96]">
+                          <div
+                            className={`flex items-center justify-center w-6 h-6 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-blue-500 text-white shadow-md" : "bg-gray-300 text-gray-500"
+                              }`}
+                            onClick={() => {
+                              if (acDisable) {
+                                setIsAC(true);
+                              }
+                            }}
+                          >
+
+                          </div>                         
+                          <div
+                            className={`flex items-center justify-center w-6 h-6 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-red-500 text-white shadow-md" : "bg-gray-300 text-red-500"
+                              }`}
+                            onClick={() => {
+                              if (acDisable) {
+                                setIsAC(false);
+                              }
+                            }}
+                          >
+                          </div>
                         </div>
-                        {/* Non AC Option */}
-                        <div
-                          className={`flex items-center justify-center w-10 h-8 py-1 cursor-pointer rounded-full transition-all duration-300 ${!isAC
-                              ? "bg-red-500 text-white shadow-sm"
-                              : "bg-gray-300  text-red-500 blur-[0.5px] opacity-50"
-                            }`}
-                          onClick={() => {if(acDisable){setIsAC(false)}}}
-                        >
-                          <p className="text-[10px] text-center">Non AC</p>
-                        </div>
+                        <p className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-white" : "text-gray-400 blur-none"}`}>Non AC</p>
                       </div>
+
                     </div>
-                    
+
                   </div>
 
-{/* All listed Cars is here */}
+                  {/* All listed Cars is here */}
 
-                  {carWithCapacity?.map(item=><div key={item?._id} onClick={()=>handleSelected(item)} className="flex items-center gap-4">
-                          <Image
-                            className="w-40 h-28 object-cover rounded-md"
-                            src={item?.imageDetails?.[0]?.url}
-                            alt=""
-                            width="160"
-                            height="180"
-                          />
-                          <div className="flex flex-col items-center md:items-start">
-                            <p className="font-semibold capitalize text-lg">
-                              {item?.vehicleType}
-                            </p>
-                            <div className="flex items-center justify-center mt-2">
-                              <p>Seats : {item?.seatingCapacity}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center justify-center mt-2">
-                            {(item?.capacity-selectedDataOfCar)===0&&<p></p>}
-                            {(item?.capacity-selectedDataOfCar)>0&&<p>+{item?.capacity-selectedDataOfCar}</p>}
-                            {(item?.capacity-selectedDataOfCar)<0&&<p>{item?.capacity-selectedDataOfCar}</p>}
-                             
-                            </div>
-                        </div>)}
+                  {carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex items-center gap-4">
+                    <Image
+                      className="w-40 h-28 object-cover rounded-md"
+                      src={item?.imageDetails?.[0]?.url}
+                      alt=""
+                      width="160"
+                      height="180"
+                    />
+                    <div className="flex flex-col items-center md:items-start">
+                      <p className="font-semibold capitalize text-lg">
+                        {item?.vehicleType}
+                      </p>
+                      <div className="flex items-center justify-center mt-2">
+                        <p>Seats : {item?.seatingCapacity}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-center mt-2">
+                      {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
+                      {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
+                      {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
+
+                    </div>
+                  </div>)}
                   {/* ac trail end*/}
                 </div>
               </div>
