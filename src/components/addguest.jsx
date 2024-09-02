@@ -458,14 +458,14 @@ const Addguest = ({
       <span onClick={handleClickOpen}>{children}</span>
       {addPackage?.prices?.addguest === "addGuest" && (
         <Dialog
-          className="h-full my-auto px-0 z-[99999]"
+          className="h-[90%] my-auto px-0 z-[99999] md:mt-24 mt-20"
           open={open}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
           <form className="w-full" action="">
             <div>
-              <div className="relative md:mt-0 mt-14">
+              <div className="relative">
                 <div className="sticky top-0 shadow-md z-[5]">
                   <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
                     <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
@@ -491,7 +491,7 @@ const Addguest = ({
                   <hr />
                 </div>
                 <div className="overflow-y-auto md:px-12 px-2">
-                  <div className="flex items-center gap-10 mt-5 md:w-72 w-64 justify-between">
+                  <div className="flex items-center md:gap-10 mt-5 md:w-96 w-60 justify-between">
                     <label htmlFor="Adultsdropdown" className="my-2">
                       <div className="flex gap-3 items-center">
                         <FontAwesomeIcon
@@ -527,7 +527,7 @@ const Addguest = ({
                     </div>
                   </div>
                   <div className="mt-2">
-                    <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
+                    <div className="flex items-center md:gap-10 md:w-96 w-60- justify-between">
                       <label htmlFor="Childdropdown" className="my-2">
                         <div className="flex gap-3 items-center">
                           <FontAwesomeIcon
@@ -566,8 +566,8 @@ const Addguest = ({
                     </div>
                     {/* child date is here */}
                     {[...Array(inputData?.child)].map((_, index) => (
-                      <div key={index} className="ml-5 pt-2 ">
-                        <div className="border-l-4 border-red-400 pl-5 flex items-center gap-2">
+                      <div key={index} className="md:ml-5 pt-2 ">
+                        <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
                           <label
                             className="text-para"
                             htmlFor={`childDate${index}`}
@@ -576,7 +576,7 @@ const Addguest = ({
                           </label>
                           <input
                             id={`childDate${index}`}
-                            className="px-2 border focus:border rounded-md cursor-pointer text-base"
+                            className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
                             type="date"
                             max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
                             min={childMinDate}
@@ -594,8 +594,8 @@ const Addguest = ({
                   </div>
 
                   {/* Infant date is here */}
-                  <div className="mt-2">
-                    <div className="flex items-center gap-10 md:w-72 w-64 justify-between">
+                  <div className="mt-2 ">
+                    <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
                       <label htmlFor="Childdropdown" className="my-2">
                         <div className="flex gap-3 items-center">
                           <FontAwesomeIcon
@@ -635,8 +635,8 @@ const Addguest = ({
                     </div>
                     {/* child date is here */}
                     {[...Array(inputData?.infant)].map((_, index) => (
-                      <div key={index} className="ml-5 pt-2 ">
-                        <div className="border-l-4 border-red-400 pl-5 flex items-center gap-2">
+                      <div key={index} className="md:ml-5 pt-2 ">
+                        <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
                           <label
                             className="text-para"
                             htmlFor={`InfantDate${index}`}
@@ -645,7 +645,7 @@ const Addguest = ({
                           </label>
                           <input
                             id={`InfantDate${index}`}
-                            className="px-2 border focus:border rounded-md cursor-pointer text-base"
+                            className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
                             type="date"
                             max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
                             min={infantMinDate}
@@ -814,34 +814,6 @@ const Addguest = ({
                   {/* here is display all cars */}
 
                   <div className="mt-8 ">
-                    {/* <div className="w-full bg-navyblack rounded-md  gap-2 text-white flex justify-between items-center p-3 mb-4">
-                      <p className="font-semibold text-base md:text-lg">
-                        Transports
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={handleToggle}
-                          className={`px-6  py-2 rounded-l-full text-sm md:text-md transition-all ${
-                            isAC
-                              ? "bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-md"
-                              : "bg-gray-600 text-gray-300"
-                          } hover:bg-blue-600`}
-                        >
-                          AC
-                        </button>
-                        <button
-                          onClick={handleToggle}
-                          className={` px-[2px] md:px-2 py-2 rounded-r-full text-sm md:text-md transition-all ${
-                            !isAC
-                              ? "bg-gradient-to-r from-red-500 to-red-700 text-white shadow-md"
-                              : "bg-gray-600 text-gray-300"
-                          } hover:bg-red-600`}
-                        >
-                          Non AC
-                        </button>
-                      </div>
-                    </div> */}
-
                     <div className="w-full bg-navyblack rounded-md gap-2 text-white flex justify-between items-center mb-4 px-3 py-2 ">
                       <p className="font-semibold text-base md:text-lg">
                         Transports
@@ -849,9 +821,9 @@ const Addguest = ({
                       <div className="flex items-center space-x-2">
                         {/* AC Option / Non AC Option toggle */}
                         <p className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-white" : "text-gray-400 blur-none"}`}>AC</p>
-                        <div className="w-12 h-7 flex justify-between items-center rounded-full bg-gray-300 border border-[#5CDE96]">
+                        <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-gray-300 border border-[#5CDE96]">
                           <div
-                            className={`flex items-center justify-center w-6 h-6 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-blue-500 text-white shadow-md" : "bg-gray-300 text-gray-500"
+                            className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-blue-500 text-white shadow-md" : "bg-gray-300 text-gray-500"
                               }`}
                             onClick={() => {
                               if (acDisable) {
@@ -860,9 +832,9 @@ const Addguest = ({
                             }}
                           >
 
-                          </div>                         
+                          </div>
                           <div
-                            className={`flex items-center justify-center w-6 h-6 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-red-500 text-white shadow-md" : "bg-gray-300 text-red-500"
+                            className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-red-500 text-white shadow-md" : "bg-gray-300 text-red-500"
                               }`}
                             onClick={() => {
                               if (acDisable) {
@@ -881,7 +853,7 @@ const Addguest = ({
 
                   {/* All listed Cars is here */}
 
-                  {carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex items-center gap-4">
+                  {carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
                     <Image
                       className="w-40 h-28 object-cover rounded-md"
                       src={item?.imageDetails?.[0]?.url}
@@ -889,19 +861,21 @@ const Addguest = ({
                       width="160"
                       height="180"
                     />
-                    <div className="flex flex-col items-center md:items-start">
-                      <p className="font-semibold capitalize text-lg">
-                        {item?.vehicleType}
-                      </p>
-                      <div className="flex items-center justify-center mt-2">
-                        <p>Seats : {item?.seatingCapacity}</p>
+                    <div>
+                      <div className="flex flex-col items-center md:items-start ">
+                        <p className="font-semibold capitalize md:text-lg text-md">
+                          {item?.vehicleType}
+                        </p>
+                        <div className="flex items-center justify-center mt-2">
+                          <p className="md:text-base text-para font-medium">Seats : {item?.seatingCapacity}</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center justify-center mt-2">
-                      {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
-                      {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
-                      {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
+                      <div className="flex items-center justify-center mt-2 md:text-base text-para font-medium">
+                        {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
+                        {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
+                        {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
 
+                      </div>
                     </div>
                   </div>)}
                   {/* ac trail end*/}
