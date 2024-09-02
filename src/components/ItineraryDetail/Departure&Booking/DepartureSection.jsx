@@ -140,7 +140,7 @@ const DepartureSection = ({ addPackage }) => {
                 ></p>
               </div>
 
-              <div className="mx-5">
+              <div className="md:mx-5">
                 <div className="md:my-7 my-5">
                   <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
                     <thead>
