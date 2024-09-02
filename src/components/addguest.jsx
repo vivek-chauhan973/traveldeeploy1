@@ -160,7 +160,7 @@ const Addguest = ({
       } catch (error) {
         console.error("Error posting data:", error.message);
       }
-      handleClose();
+       setOpen(false);
     } else {
       alert("Please select at least one guest or one room.");
     }
@@ -881,7 +881,7 @@ const Addguest = ({
 
                   {/* All listed Cars is here */}
 
-                  {carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex items-center gap-4">
+                  {inputData?.adult&&carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex items-center gap-4">
                     <Image
                       className="w-40 h-28 object-cover rounded-md"
                       src={item?.imageDetails?.[0]?.url}
