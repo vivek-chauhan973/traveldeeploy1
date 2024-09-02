@@ -42,6 +42,7 @@ const Header3 = () => {
       setImageSrc('/logo.png');
     }
   }, [logo]);
+  // console.log("logo is here :: ",imageSrc)
 
   return (
     <div className=" top-0 sticky z-[999]">

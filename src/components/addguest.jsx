@@ -68,12 +68,25 @@ const Addguest = ({
       setOpen(false);
     }
   };
-
+const [close1,setClose1]=useState(false);
   const handleClose = () => {
     setOpen(false);
+    setClose1(!close1);
 
   };
-
+// useEffect(()=>{
+//   const initialData = {
+//     child: 0,
+//     infant: 0,
+//     singleRoom: 0,
+//     twinRoom: 0,
+//     tripleRoom: 0,
+//     quardRoom: 0,
+//     childAges: {},
+//     infantAges: {},
+//   };
+//   setInputData(initialData);
+// },[close1])
   // console.log("fixed departure package::::",addPackage);
 
   const handleChange = (e) => {
@@ -881,7 +894,7 @@ const Addguest = ({
 
                   {/* All listed Cars is here */}
 
-                  {inputData?.adult&&carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex items-center gap-4">
+                  {carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex items-center gap-4">
                     <Image
                       className="w-40 h-28 object-cover rounded-md"
                       src={item?.imageDetails?.[0]?.url}

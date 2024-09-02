@@ -77,6 +77,7 @@ const apiRoute = async (req, res) => {
     }
   } else if (req.method === 'DELETE') {
     const { id } = req.query;
+    console.log("file image id by selected logo ",path.join(uploadDirectory));
     try {
       const file = await File.findById(id);
       if (file) {
