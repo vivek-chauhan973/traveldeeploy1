@@ -8,8 +8,10 @@ const fetchPriceHike = async (id) => {
 };
 
 const fetchFixedDepartureData = async (id) => {
-  const response = await fetch(`/api/save-data?packageId=${id}`);
-  return await response.json();
+  const response = await fetch(`/api/package/price/departures/${id}`);
+  const data=await response.json()
+  console.log("data",data)
+  return data
 };
 
 const useMyCustomHook = () => {
@@ -30,7 +32,7 @@ const useMyCustomHook = () => {
         setPriceHike1(res?.response?.priceHiKe || []);
       });
       fetchFixedDepartureData(newPackageId).then((res) => {
-        setFixedDepartureData(res?.data?.datePriceArray || []);
+        setFixedDepartureData(res?.departureData||[])
       });
     }
   }, [newPackageId]);
@@ -118,14 +120,17 @@ const useMyCustomHook = () => {
         // console.log("result --->", result);
     }
 
-    if (addPackage?.addguest === "fixedDeparture") {
-      result.push(...fixedDepartureData);
-    }
+   
 
     return [result];
   }, [priceHike1]);
-  // console.log("AllDataRelatedCity",AllDataRelatedCity)
-
+  
+  if(AllDataRelatedCity.length===1){
+    if(AllDataRelatedCity[0].length===0){
+      fixedDepartureData?.map(item=>AllDataRelatedCity.push(item));
+    }
+  }
+  console.log("AllDataRelatedCity",AllDataRelatedCity)
   return AllDataRelatedCity;
 };
 

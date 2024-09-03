@@ -471,7 +471,7 @@ const [close1,setClose1]=useState(false);
       <span onClick={handleClickOpen}>{children}</span>
       {addPackage?.prices?.addguest === "addGuest" && (
         <Dialog
-          className="h-[90%] my-auto px-0 z-[99999] md:mt-24 mt-20"
+          className="h-[80%] my-auto px-0 z-[99999] md:mt-24 mt-20"
           open={open}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -866,7 +866,7 @@ const [close1,setClose1]=useState(false);
 
                   {/* All listed Cars is here */}
 
-                  {carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
+                  {inputData?.adult&&carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
                     <Image
                       className="w-40 h-28 object-cover rounded-md"
                       src={item?.imageDetails?.[0]?.url}

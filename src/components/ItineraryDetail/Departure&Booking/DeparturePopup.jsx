@@ -8,7 +8,7 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
   const [handleCity, setHandleCity] = useState(false);
   const { setShowAddguest, setFixedDepartureButtonEnaibleAndDisable, setPrice2, setGuestPrice, fixedDepartureButtonEnaibleAndDisable, setFixedDepartureProceedButton, guestPrice, departureSectionData } = useAppContext();
   const [data, setData] = useState([]);
-
+//  console.log("add package------> ",addPackage)
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {

@@ -48,7 +48,6 @@ export default function CreatePackage() {
     const [calendarPricemanagement, setCalendarPricemanagement] = useState("") 
     const [calendarPricemanagementf, setCalendarPricemanagementf] = useState("") 
     const [showCalendarTab, setShowCalendarTab] = useState(false)
-    const [showCalendarTabf, setShowCalendarTabf] = useState(false)
     
     useEffect(() => {
         if (calendarPricemanagement||itinerary) {
@@ -62,18 +61,6 @@ export default function CreatePackage() {
         }
 
     }, [calendarPricemanagement,itinerary]);
-    useEffect(() => {
-        if (calendarPricemanagementf||itinerary) {
-           
-            if (calendarPricemanagementf==="fixedDeparture"||itinerary?.addguest==="fixedDeparture") {
-              
-                setShowCalendarTabf(true);
-            } else {
-                setShowCalendarTabf(false);
-            }
-        }
-
-    }, [calendarPricemanagementf,itinerary]);
 
     const [imageDot, setImageDot] = useState(false);
     const [calenderDot, setCalenderDot] = useState(false);
@@ -142,7 +129,7 @@ export default function CreatePackage() {
     };
 
     useEffect(() => { }, [select]);
-// console.log("itinary is here ------> ",itinerary);
+console.log("itinary is here ------> ",itinerary);
     return (
         <AppProvider>
             <Layout>
@@ -191,11 +178,7 @@ export default function CreatePackage() {
                             AddGuestCalendar  {calenderDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span>}
                         </button>
                         )}
-                        {showCalendarTabf && (
-                        <button onClick={() => handleTabClick('Tab12')} className={`${activeTab === "Tab12" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"} px-3 py-1`}>
-                            FixDeptCalendar  {calenderDot ? <span className="text-[12px] text-green-500">●</span> : <span className="text-[12px] text-red-500">●</span>}
-                        </button>
-                        )}
+                       
                     </div>
                 </div>
 
@@ -240,7 +223,7 @@ export default function CreatePackage() {
                         )}
                         {(itinerary?.prices?.departure1 === "fixedDeparture" || selectedOption === "fixedDeparture") && (
                             <div>
-                                <p><FixedDeparture setCalendarPricemanagementf={setCalendarPricemanagementf} itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot} /></p>
+                                <p><FixedDeparture  itinerary={itinerary} setActiveTab={setActiveTab} setPriceManagementDot={setPriceManagementDot} /></p>
                                 {/* <SelectedDatePrice itinerary={itinerary} /> */}
                             </div>
                         )}
@@ -259,11 +242,7 @@ export default function CreatePackage() {
                     <Calendar itinerary={itinerary} setActiveTab={setActiveTab} setCalenderDot={setCalenderDot} />
                 </div>
                 )}
-                {showCalendarTabf && (
-                <div className={` ${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>
-                    <SelectedDatePrice itinerary={itinerary} setActiveTab={setActiveTab} setCalenderDot={setCalenderDot} />
-                </div>
-                )}
+               
             </Layout>
         </AppProvider>
     );

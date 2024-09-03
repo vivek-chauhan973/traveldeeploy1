@@ -4,7 +4,7 @@ import FixedDeparturePopup from "./FixedDeparturePopup";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 const fetchLimitData=async (id)=>{
-  const response = await fetch(`/api/save-data?packageId=${id}`);
+  const response = await fetch(`/api/package/price/departures/${id}`);
   return await response.json();
 }
 

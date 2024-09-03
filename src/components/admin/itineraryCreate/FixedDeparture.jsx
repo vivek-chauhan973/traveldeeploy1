@@ -1,379 +1,147 @@
 import React, { useEffect, useState } from 'react';
-import { LiaRupeeSignSolid } from 'react-icons/lia';
-import { MdOutlineAddCircle } from 'react-icons/md';
-import { MdDeleteForever } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
-import { IoIosSave } from 'react-icons/io';
+import { MdDeleteForever } from 'react-icons/md';
+import * as XLSX from 'xlsx';
 import { useAppContext } from '../context/Package/AddGuest';
+const fetchFixedDepartureData=async (itinerary)=>{
+    const res = await fetch('/api/package/price/departures/' + itinerary.id);
+    return await res.json();
+}
+const FixedDeparture = ({itinerary,setActiveTab,setPriceManagementDot}) => {
+  const [data, setData] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editFormData, setEditFormData] = useState({});
+  const [fixedDeparture,setFixedDeparture]=useState(null);
+const {pricingManagement}=useAppContext();
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const binaryStr = e.target.result;
+        const workbook = XLSX.read(binaryStr, { type: 'binary' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(sheet, {
+          raw: false,
+          dateNF: 'mm/dd/yyyy',
+        });
+        setData(jsonData);
+      };
+      reader.readAsBinaryString(file);
+    }
+  };
 
-const FixedDeparture = ({ itinerary ,setActiveTab, setPriceManagementDot ,setCalendarPricemanagementf}) => {
-    const [basePrice, setBasePrice] = useState(0);
-    const [rate, setRate] = useState(0);
-    const [inventory, setInventory] = useState( 0);
-    const [weightOptional, setWeightOptional] = useState(0);
-    const [gst, setGst] = useState(0);
-    const {pricingManagement}=useAppContext();
-    const [addguest,setAddguest]=useState("")
-    // State for Age Policy
-    const [agePolicy, setAgePolicy] = useState([]);
-    const [inputAgePolicy, setInputAgePolicy] = useState('');
-    const [agePolicyValidate, setAgePolicyValidate] = useState('');
+  const handleEdit = (index) => {
+    setEditingIndex(index);
+    setEditFormData(data[index]);
+  };
+
+  const handleDelete = (index) => {
+    const updatedData = data.filter((_, i) => i !== index);
+    setData(updatedData);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditFormData({ ...editFormData, [name]: value });
+  };
+
+  const handleSave = () => {
+    const updatedData = [...data];
+    updatedData[editingIndex] = editFormData;
+    setData(updatedData);
+    setEditingIndex(null);
+    setEditFormData({});
+  };
+  useEffect(()=>{
+if(itinerary?.prices){
+  setData(itinerary?.prices?.departureData)
+}
+   
+   setFixedDeparture(itinerary?.addguest);
     
-    // State for Notes
-    const [notes, setNotes] = useState([]);
-    const [inputNotes, setInputNotes] = useState('');
-    const [notesValidate, setNotesValidate] = useState('');
-
-    const handleInputChange = (setter) => (e) => {
-        setter(e.target.value);
-    };
-
-
-    useEffect(()=>{
-        setBasePrice(itinerary?.prices?.basePrice || 0)
-        setRate(itinerary?.prices?.perRate|| 0)
-        setInventory(itinerary?.prices?.inventory || 0)
-        setWeightOptional(itinerary?.prices?.weight|| 0)
-        setGst(itinerary?.prices?.gst|| 0)
-        setAddguest(itinerary?.addguest||"");
-        setAgePolicy(itinerary?.prices?.agePolicy || [])
-        setNotes(itinerary?.prices?.notes || [])
-    },[itinerary])
-
-    // Age Policy Handlers
-    const handleAgePolicyChange = (e) => {
-        setInputAgePolicy(e.target.value);
-    };
-
-    const addAgePolicy = () => {
-        if (!inputAgePolicy) {
-            setAgePolicyValidate("Age Policy is required");
-            return;
-        }
-        setAgePolicy([...agePolicy, { text: inputAgePolicy, edit: false }]);
-        setInputAgePolicy('');
-        setAgePolicyValidate('');
-  
-    };
-
-    // gst logics here 
-
-
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/package-setting/gst');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                setData(result);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-
-    const handleAgePolicyEditChange = (text, index) => {
-        const newAgePolicy = [...agePolicy];
-        newAgePolicy[index].text = text;
-        setAgePolicy(newAgePolicy);
-    };
-
-    const toggleEditAgePolicy = (index) => {
-        const newAgePolicy = [...agePolicy];
-        newAgePolicy[index].edit = !newAgePolicy[index].edit;
-        setAgePolicy(newAgePolicy);
-    };
-
-    const saveAgePolicy = (index) => {
-        const newAgePolicy = [...agePolicy];
-        newAgePolicy[index].edit = false;
-        setAgePolicy(newAgePolicy);
-    };
-
-    const handleRemoveAgePolicy = (index) => {
-        const newAgePolicy = [...agePolicy];
-        newAgePolicy.splice(index, 1);
-        setAgePolicy(newAgePolicy);
-    };
-
-    // Notes Handlers
-    const handleNotesChange = (e) => {
-        setInputNotes(e.target.value);
-    };
-
-    const addNotes = () => {
-        if (!inputNotes) {
-            setNotesValidate("Note is required");
-            return;
-        }
-        setNotes([...notes, { text: inputNotes, edit: false }]);
-        setInputNotes('');
-        setNotesValidate('');
-    };
-
-    const handleNotesEditChange = (text, index) => {
-        const newNotes = [...notes];
-        newNotes[index].text = text;
-        setNotes(newNotes);
-    };
-
-    const toggleEditNotes = (index) => {
-        const newNotes = [...notes];
-        newNotes[index].edit = !newNotes[index].edit;
-        setNotes(newNotes);
-    };
-
-    const saveNotes = (index) => {
-        const newNotes = [...notes];
-        newNotes[index].edit = false;
-        setNotes(newNotes);
-    };
-
-    const handleRemoveNotes = (index) => {
-        const newNotes = [...notes];
-        newNotes.splice(index, 1);
-        setNotes(newNotes);
-    };
-
-    const handleSubmit = async () => {
-        const payload = {
-            prices: {
-                basePrice,
-                rate,
-                inventory,
-                weightOptional,
-                gst
+  },[itinerary])
+  console.log("itinary is here ------> ",);
+  const handleSubmit=async ()=>{
+    try {
+        const res = await fetch('/api/package/price/departures/' + itinerary.id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             },
-            agePolicy,
-            notes,
-            departure1:pricingManagement||addguest,
-        };
+            body: JSON.stringify({departure1:fixedDeparture||pricingManagement,data}),
+        });
+        setActiveTab("Tab10");
+    } catch (error) {
+        console.log("Error submitting data", error);
+    }
+  }
 
-        try {
-            const res = await fetch('/api/package/price/departures/' + itinerary.id, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
-            const data = await res.json();
-            if(data){
-                setCalendarPricemanagementf(data?.departure?.departure1)
-            }
-            console.log("data -->",data)
-            setActiveTab("Tab10");
-
-            // if(res.ok){
-            //     setActiveTab("Tab10");
-            //     setPriceManagementDot (true)
-               
-            //   }
-
-
-
-
-            // setActiveTab("NextTab"); // Assuming there's a function to set the next tab
-            console.log("Data submitted", data);
-        } catch (error) {
-            console.log("Error submitting data", error);
-        }
-    };
-// console.log("type of data ::: ",typeof(data?.data?.[0]?.gstRate))
-    return (
-        <div>
-            <div className='bg-white m-2 rounded p-2'>
-                <div>
-                    <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
-                        <label className="font-semibold w-40" htmlFor="basePrice">
-                            Base Price :
-                        </label>
-                        <div className="flex gap-1 items-center">
-                            <LiaRupeeSignSolid size={18} />
-                            <input
-                                className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
-                                name="basePrice"
-                                value={basePrice}
-                                onChange={handleInputChange(setBasePrice)}
-                                type="number"
-                                min={0}
-                            />
-                        </div>
-                    </div>
-                    <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
-                        <label className="font-semibold w-40" htmlFor="rate">
-                            Rate :
-                        </label>
-                        <div className="flex gap-1 items-center">
-                            <LiaRupeeSignSolid size={18} />
-                            <input
-                                className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
-                                name="rate"
-                                value={rate}
-                                onChange={handleInputChange(setRate)}
-                                type="number"
-                                min={0}
-                            />
-                        </div>
-                    </div>
-                    <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
-                        <label className="font-semibold w-40" htmlFor="inventory">
-                            Inventory :
-                        </label>
-                        <div className="flex gap-1 items-center">
-                            <LiaRupeeSignSolid size={18} />
-                            <input
-                                className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
-                                name="inventory"
-                                value={inventory}
-                                onChange={handleInputChange(setInventory)}
-                                type="number"
-                                min={0}
-                            />
-                        </div>
-                    </div>
-                    <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
-                        <label className="font-semibold w-40" htmlFor="weightOptional">
-                            Weight Optional :
-                        </label>
-                        <div className="flex gap-1 items-center">
-                            <LiaRupeeSignSolid size={18} />
-                            <input
-                                className="h-8 appearance-none bg-white border px-4 py-2 pr-8 rounded leading-tight focus:outline"
-                                name="weightOptional"
-                                value={weightOptional}
-                                onChange={handleInputChange(setWeightOptional)}
-                                type="number"
-                                min={0}
-                            />
-                        </div>
-                    </div>
-                    <div className="text-para flex flex-col sm:flex-row items-baseline mb-5">
-                            <label className="font-semibold w-40" htmlFor="">
-                                GST:
-                            </label>
-                            <div className="flex gap-1 items-center">
-                               % <select
-                                value={gst} onChange={(e)=>setGst(e.target.value)}
-                                    name='gst' className='mx-2 w-52' >
-                                    <option value="">{gst!==0?gst:"Select GST"}</option>
-                                    {data?.data?.map((item, i) => (
-                                        <option key={i} value={item.gstRate}>
-                                            {item.gstRate}
-                                        </option>
-                                    ))}
-                                </select>
-
-                            </div>
-                            
-                        </div>
-                </div>
-
-                {/* Age Policy Section */}
-                <div className="mt-5">
-                    <label htmlFor="agePolicy" className="pb-2 font-semibold text-para">Age Policy</label>
-                    <div>
-                        <div className='w-full mt-2 flex gap-5 items-center'>
-                            <input
-                                onChange={handleAgePolicyChange}
-                                value={inputAgePolicy}
-                                className='w-full border rounded-md h-8 px-2 text-para grow focus:border-primary outline-none'
-                                type="text"
-                                placeholder="Enter an Age Policy"
-                            />
-                            <MdOutlineAddCircle onClick={addAgePolicy} size={35} className='cursor-pointer hover:text-primary' />
-                        </div>
-                        <div className="border h-48 w-full overflow-y-auto py-2 rounded-md mt-2">
-                            {agePolicy.map((item, index) => (
-                                <div key={index} className='flex justify-between even:bg-slate-50 px-5'>
-                                    {item.edit ? (
-                                        <input
-                                            type="text"
-                                            value={item.text}
-                                            onChange={(e) => handleAgePolicyEditChange(e.target.value, index)}
-                                            className="border rounded-md h-8 px-2"
-                                        />
-                                    ) : (
-                                        <p className='capitalize flex gap-2 leading-8'><span>{index + 1}.</span>{item.text}</p>
-                                    )}
-                                    <div className='flex gap-2'>
-                                        {item.edit ? (
-                                            <IoIosSave onClick={() => saveAgePolicy(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
-                                        ) : (
-                                            <>
-                                                <FaEdit onClick={() => toggleEditAgePolicy(index)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
-                                                <MdDeleteForever onClick={() => handleRemoveAgePolicy(index)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <div>
-                            <span className="text-xs text-red-700 capitalize">{agePolicyValidate}</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Notes Section */}
-                <div className="mt-5">
-                    <label htmlFor="notes" className="pb-2 font-semibold text-para">Notes</label>
-                    <div>
-                        <div className='w-full mt-2 flex gap-5 items-center'>
-                            <input
-                                onChange={handleNotesChange}
-                                value={inputNotes}
-                                className='w-full border rounded-md h-8 px-2 text-para grow focus:border-primary outline-none'
-                                type="text"
-                                placeholder="Enter a Note"
-                            />
-                            <MdOutlineAddCircle onClick={addNotes} size={35} className='cursor-pointer hover:text-primary' />
-                        </div>
-                        <div className="border h-48 w-full overflow-y-auto py-2 rounded-md mt-2">
-                            {notes.map((item, index) => (
-                                <div key={index} className='flex justify-between even:bg-slate-50 px-5'>
-                                    {item.edit ? (
-                                        <input
-                                            type="text"
-                                            value={item.text}
-                                            onChange={(e) => handleNotesEditChange(e.target.value, index)}
-                                            className="border rounded-md h-8 px-2"
-                                        />
-                                    ) : (
-                                        <p className='capitalize flex gap-2 leading-8'><span>{index + 1}.</span>{item.text}</p>
-                                    )}
-                                    <div className='flex gap-2'>
-                                        {item.edit ? (
-                                            <IoIosSave onClick={() => saveNotes(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
-                                        ) : (
-                                            <>
-                                                <FaEdit onClick={() => toggleEditNotes(index)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
-                                                <MdDeleteForever onClick={() => handleRemoveNotes(index)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <div>
-                            <span className="text-xs text-red-700 capitalize">{notesValidate}</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <button onClick={handleSubmit} className="bg-black text-white w-full rounded py-2 mt-4">
-                Submit All Data
-            </button>
+  return (
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <div className="bg-white shadow-md rounded-lg p-6">
+        <div className="mb-4 flex justify-between items-center">
+          <p className="text-xl font-semibold text-gray-700">Upload Excel File</p>
+          <input 
+            type="file" 
+            onChange={handleFileUpload} 
+            accept=".xls,.xlsx" 
+            className="p-2 border rounded-lg"
+          />
         </div>
-    );
+        <div>
+          {data?.length!==0&&<h1 className="text-2xl font-bold text-gray-800 mb-4">Fixed Departure Entries</h1>}
+         { data?.length!==0&&<div className="grid bg-black text-white grid-cols-7 gap-4 text-center font-semibold rounded border-b pb-2">
+            <h2>Date</h2>
+            <h2>Price</h2>
+            <h2>Start</h2>
+            <h2>End</h2>
+            <h2>Weight</h2>
+            <h2>Ava</h2>
+            <h2>Actions</h2>
+          </div>}
+          {data?.map((item, i) => (
+            <div key={i} className="grid grid-cols-7 gap-4 text-center py-2 border-b">
+              {editingIndex === i ? (
+                <>
+                  <input name="Date" value={editFormData.Date} onChange={handleInputChange} className="p-1 border text-lg rounded-md" />
+                  <input name="Price" value={editFormData.Price} onChange={handleInputChange} className="p-1 border text-lg rounded-md" />
+                  <input name="Start_drop_down" value={editFormData.Start_drop_down} onChange={handleInputChange} className="p-1 text-lg border rounded-md" />
+                  <input name="End_drop_down" value={editFormData.End_drop_down} onChange={handleInputChange} className="p-1 text-lg border rounded-md" />
+                  <input name="Weight" value={editFormData.Weight} onChange={handleInputChange} className="p-1 border text-lg rounded-md" />
+                  <input name="Avilability" value={editFormData.Avilability} onChange={handleInputChange} className="p-1 border text-lg rounded-md" />
+                  <button onClick={handleSave} className="text-green-500 text-lg">
+                    Save
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h2>{item?.Date}</h2>
+                  <h2>{item?.Price}</h2>
+                  <h2>{item?.Start_drop_down}</h2>
+                  <h2>{item?.End_drop_down}</h2>
+                  <h2>{item?.Weight}</h2>
+                  <h2>{item?.Avilability}</h2>
+                  <div className="flex justify-center gap-2">
+                    <button onClick={() => handleEdit(i)} className="text-blue-500">
+                      <FaEdit className=' text-xl' />
+                    </button>
+                    <button onClick={() => handleDelete(i)} className="text-red-500">
+                      <MdDeleteForever className=' text-2xl' />
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      <button onClick={handleSubmit} className="bg-blue-600 text-white w-full rounded-lg py-3 mt-6 hover:bg-blue-700 transition duration-300">
+        Submit All Data
+      </button>
+    </div>
+  );
 };
 
 export default FixedDeparture;

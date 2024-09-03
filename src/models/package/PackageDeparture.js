@@ -1,44 +1,33 @@
 import mongoose, { Schema } from "mongoose";
-
-const textSchema = new Schema(
-  {
-    text: { type: String, required: true },
-    edit: { type: Boolean, required: true },
+const departureSchema=new Schema({
+  Date: {
+    type: String,
+    required: true,
   },
-  { _id: false }
-);
-
+  Price: {
+    type: Number,
+    required: true,
+  },
+  Start_drop_down: {
+    type: Number
+  },
+  End_drop_down: {
+    type: Number,
+  },
+  GST: {
+    type: String,
+  },
+  Weight: {
+    type: Number,
+    required:true
+  },
+})
 const packageDepartureSchema = new Schema(
   {
-    basePrice: {
-      type: Number,
-      required: true,
-    },
-    perRate: {
-      type: Number,
-      required: true,
-    },
-    inventory: {
-      type: Number,
-      required: true,
-    },
-    weight: {
-      type: Number,
-      required: true,
-    },
-    gst: {
-      type: Number,
-    },
-    agePolicy: {
-      type: [textSchema],
-      required: true,
-    },
-    notes: {
-      type: [textSchema],
-      required: true,
-    },
+   departureData:[departureSchema],
     departure1:{
-      type:String
+      type:String,
+      required:true
     },
     package: {
       type: mongoose.Schema.Types.ObjectId,

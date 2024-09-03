@@ -120,13 +120,13 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
               />
             </div>
             <div className="absolute top-3">
-              <div className="rounded-r-sm px-2 bg-black"> {/* bg-gradient-to-r from-cyan-500 to-blue-500 */}
+             { (packageData?.addguest === "fixedDeparture") &&<div className="rounded-r-sm px-2 bg-black"> {/* bg-gradient-to-r from-cyan-500 to-blue-500 */}
                 <p className="py-1 text-sm text-white">
-                  {(packageData?.addguest === "addGuest") && "Group Departure"}
-                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice !== 0)) && "Charter"}
-                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 0)) && "Fixed Departure"}
+                 
+                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 1)) && "Group Departure"}
+                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 2)) && "Charture"}
                 </p>
-              </div>
+              </div>}
             </div>
 
             <div className="mx-6 md:m-0 mt-2">
