@@ -56,11 +56,11 @@ const ItineraryPricingCard = () => {
 
         <div className=" overflow-y-auto">
           <div className="flex mb-2.5 mt-3 text-sm">
-            <p className=" w-20">Dept. city : </p>
+            <p className=" w-20">Dept. City : </p>
             <p className="font-semibold text-graytext">Mumbai</p>
           </div>
           <div className="flex mb-2.5 text-sm">
-            <p className=" w-20">Dept. date :</p>
+            <p className=" w-20">Dept. Date :</p>
             <p className=" font-bold text-graytext">
               10 Mar 2024 - 17 Mar 2024
             </p>
@@ -68,8 +68,7 @@ const ItineraryPricingCard = () => {
           <div className="flex mb-2.5 text-sm">
             <p className=" w-20">Traveller :</p>
             <p className=" font-semibold text-graytext">
-              Adults:{inputData?.adult||"2"}, Child:{inputData?.child}, Infant:
-              {inputData?.infant}
+              Adults : {inputData?.adult||"2"}, Child : {inputData?.child}, Infant : {inputData?.infant}
             </p>
           </div>
           <div className="flex mb-2.5 text-sm">
@@ -94,7 +93,7 @@ const ItineraryPricingCard = () => {
               <p className="text-sm ">Basic Price</p>
             </div>
             <div className="">
-              <p className="text-lg font-medium text-graytext"> ₹{Math.floor( ((submitButtonOfPricingCalculation&&(guestPrice/2))||price2)||addPackage?.price).toLocaleString()}</p>
+              <p className="text-lg font-medium text-graytext text-center"> ₹{Math.floor( ((submitButtonOfPricingCalculation&&(guestPrice/2))||price2)||addPackage?.price).toLocaleString()}</p>
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>
@@ -117,7 +116,7 @@ const ItineraryPricingCard = () => {
           <div className="text-para grid grid-cols-2">
             <div></div>
             <div className="grid grid-cols-2 gap-1">
-              <p>Grand Total</p>
+              <p className="font-semibold">Grand Total</p>
               <p className="font-semibold text-graytext">₹ {grandTotal}</p>
             </div>
           </div>

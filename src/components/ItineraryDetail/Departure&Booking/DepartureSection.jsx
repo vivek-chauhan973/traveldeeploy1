@@ -132,7 +132,7 @@ const DepartureSection = ({ addPackage }) => {
               <hr />
               <div className="ml-2 my-4">
                 <h6 className="font-semibold text-md mb-3 text-graytext">
-                  About This Itinerary
+                  About
                 </h6>
                 <p
                   className="xl:ml-3 ml-0 mr-2 about-margin text-para"
@@ -140,8 +140,8 @@ const DepartureSection = ({ addPackage }) => {
                 ></p>
               </div>
 
-              <div className="md:mx-5">
-                <div className="md:my-7 my-5">
+              <div className="md:mx-5 ">
+                <div className="md:my-7 my-5 overflow-x-scroll">
                   <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
                     <thead>
                     <tr className="border-b bg-black text-white">
@@ -156,7 +156,7 @@ const DepartureSection = ({ addPackage }) => {
                       {submittedData.map((row, rowIndex) => (
                         <tr key={rowIndex} >
                           {columns.map((col, colIndex) => (
-                            <td key={colIndex} className="   border-t border-l  border-r px-2 py-2   capitalize overflow-hidden border-gray-300  whitespace-nowrap">
+                            <td key={colIndex} className="   border-t border-l  border-r px-2 py-2   capitalize overflow-hidden border-gray-300  text-wrap">
                               {row[col]}
                             </td>
                           ))}

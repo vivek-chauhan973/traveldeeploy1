@@ -69,8 +69,8 @@ useEffect(() => {
       </div>
           
       <Modal open={isModalOpen} onClose={handleCloseModal}>
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-2">
-          <div className="relative bg-white p-6 rounded-lg w-full max-w-md h-full max-h-[95vh] overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-2 mt-7">
+          <div className="relative bg-white px-6 py-8 rounded-lg w-full max-w-md md:h-[75%] h-[65%] max-h-[95vh] overflow-y-auto">
             <button onClick={handleCloseModal} 
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
               <CancelIcon/>

@@ -68,25 +68,25 @@ const Addguest = ({
       setOpen(false);
     }
   };
-const [close1,setClose1]=useState(false);
+  const [close1, setClose1] = useState(false);
   const handleClose = () => {
     setOpen(false);
     setClose1(!close1);
 
   };
-// useEffect(()=>{
-//   const initialData = {
-//     child: 0,
-//     infant: 0,
-//     singleRoom: 0,
-//     twinRoom: 0,
-//     tripleRoom: 0,
-//     quardRoom: 0,
-//     childAges: {},
-//     infantAges: {},
-//   };
-//   setInputData(initialData);
-// },[close1])
+  // useEffect(()=>{
+  //   const initialData = {
+  //     child: 0,
+  //     infant: 0,
+  //     singleRoom: 0,
+  //     twinRoom: 0,
+  //     tripleRoom: 0,
+  //     quardRoom: 0,
+  //     childAges: {},
+  //     infantAges: {},
+  //   };
+  //   setInputData(initialData);
+  // },[close1])
   // console.log("fixed departure package::::",addPackage);
 
   const handleChange = (e) => {
@@ -173,7 +173,7 @@ const [close1,setClose1]=useState(false);
       } catch (error) {
         console.error("Error posting data:", error.message);
       }
-       setOpen(false);
+      setOpen(false);
     } else {
       alert("Please select at least one guest or one room.");
     }
@@ -480,18 +480,8 @@ const [close1,setClose1]=useState(false);
             <div>
               <div className="relative">
                 <div className="sticky top-0 shadow-md z-[5]">
-                  <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
-                    <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
-                      add guest & Choose from{ }
-                    </p>
-                    <div>
-                      <p className="text-lg font-medium"> ₹ {guestPrice ? guestPrice : "--"}</p>
-                      <p className="text-xxs">per person on twin sharing</p>
-                    </div>
-                  </div>
-
                   <div
-                    className=" absolute top-3 right-3 cursor-pointer hover:scale-105"
+                    className=" absolute md:top-3 top-1 md:right-3 right-2 cursor-pointer hover:scale-105 "
                     onClick={handleClose}
                     size={28}
                   >
@@ -500,6 +490,17 @@ const [close1,setClose1]=useState(false);
                       className="font1 cursor-pointer"
                     />
                   </div>
+                  <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
+                    <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
+                      add guest & Choose from{ }
+                    </p>
+                    <div>
+                      <p className="text-xl font-semibold"> ₹ {guestPrice ? guestPrice : "--"}</p>
+                      <p className="text-xxs">per person on twin sharing</p>
+                    </div>
+                  </div>
+
+
 
                   <hr />
                 </div>
@@ -540,7 +541,7 @@ const [close1,setClose1]=useState(false);
                     </div>
                   </div>
                   <div className="mt-2">
-                    <div className="flex items-center md:gap-10 md:w-96 w-60- justify-between">
+                    <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
                       <label htmlFor="Childdropdown" className="my-2">
                         <div className="flex gap-3 items-center">
                           <FontAwesomeIcon
@@ -722,7 +723,7 @@ const [close1,setClose1]=useState(false);
                       <div className="mb-2 flex justify-between pr-5 items-center">
                         <div>
                           <p className="ml-2 text-para font-semibold cursor-pointer">
-                            Twin Sharing Room
+                            Double Room
                           </p>
                         </div>
                         <div className="flex gap-1">
@@ -756,7 +757,7 @@ const [close1,setClose1]=useState(false);
                       <div className="mb-2 flex justify-between pr-5 items-center">
                         <div>
                           <p className="ml-2 text-para font-semibold cursor-pointer">
-                            Triple Sharing Room
+                            Double Room + 1 Extra Bed
                           </p>
                         </div>
                         <div className="flex gap-1">
@@ -791,7 +792,7 @@ const [close1,setClose1]=useState(false);
                       <div className="mb-2 flex justify-between pr-5 items-center">
                         <div>
                           <p className="ml-2 text-para font-semibold cursor-pointer">
-                            Quard Sharing Room
+                            Double Room + 2 Extra Bed
                           </p>
                         </div>
                         <div className="flex gap-1">
@@ -827,16 +828,16 @@ const [close1,setClose1]=useState(false);
                   {/* here is display all cars */}
 
                   <div className="mt-8 ">
-                    <div className="w-full bg-navyblack rounded-md gap-2 text-white flex justify-between items-center mb-4 px-3 py-2 ">
-                      <p className="font-semibold text-base md:text-lg">
-                        Transports
+                    <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center mb-4 px-3 py-2 ">
+                      <p className="font-semibold text-md">
+                        Transport Options
                       </p>
                       <div className="flex items-center space-x-2">
                         {/* AC Option / Non AC Option toggle */}
-                        <p className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-white" : "text-gray-400 blur-none"}`}>AC</p>
-                        <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-gray-300 border border-[#5CDE96]">
+                        <p className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-black" : "text-gray-400 blur-none"}`}>AC</p>
+                        <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
                           <div
-                            className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-blue-500 text-white shadow-md" : "bg-gray-300 text-gray-500"
+                            className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-navyblack shadow-md" : "bg-white text-gray-500"
                               }`}
                             onClick={() => {
                               if (acDisable) {
@@ -847,7 +848,7 @@ const [close1,setClose1]=useState(false);
 
                           </div>
                           <div
-                            className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-red-500 text-white shadow-md" : "bg-gray-300 text-red-500"
+                            className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-navyblack  shadow-md" : "bg-white text-red-500"
                               }`}
                             onClick={() => {
                               if (acDisable) {
@@ -857,7 +858,7 @@ const [close1,setClose1]=useState(false);
                           >
                           </div>
                         </div>
-                        <p className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-white" : "text-gray-400 blur-none"}`}>Non AC</p>
+                        <p className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-black" : "text-gray-400 blur-none"}`}>Non AC</p>
                       </div>
 
                     </div>
@@ -866,31 +867,68 @@ const [close1,setClose1]=useState(false);
 
                   {/* All listed Cars is here */}
 
-                  {carWithCapacity?.map(item => <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
-                    <Image
-                      className="w-40 h-28 object-cover rounded-md"
-                      src={item?.imageDetails?.[0]?.url}
-                      alt=""
-                      width="160"
-                      height="180"
-                    />
-                    <div>
-                      <div className="flex flex-col items-center md:items-start ">
-                        <p className="font-semibold capitalize md:text-lg text-md">
-                          {item?.vehicleType}
-                        </p>
-                        <div className="flex items-center justify-center mt-2">
-                          <p className="md:text-base text-para font-medium">Seats : {item?.seatingCapacity}</p>
+                  {carWithCapacity?.map(item =>
+                    // <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
+                    //   <Image
+                    //     className="w-40 h-28 object-cover rounded-md"
+                    //     src={item?.imageDetails?.[0]?.url}
+                    //     alt=""
+                    //     width="160"
+                    //     height="180"
+                    //   />
+                    //   <div>
+                    //     <div className="flex flex-col items-center md:items-start ">
+                    //       <p className="font-semibold capitalize md:text-lg text-md">
+                    //         {item?.vehicleType}
+                    //       </p>
+                    //       <div className="flex items-center justify-center mt-2">
+                    //         <p className="md:text-base text-para font-medium">Seats : {item?.seatingCapacity}</p>
+                    //       </div>
+                    //     </div>
+                    //     <div className="flex items-center justify-center mt-2 md:text-base text-para font-medium">
+                    //       {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
+                    //       {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
+                    //       {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
+
+                    //     </div>
+                    //   </div>
+                    // </div>
+
+                    <div key={item?._id} onClick={() => handleSelected(item)} className="border-b-2   my-3 pb-3">
+                      <div className="grid md:grid-cols-2 place-content-center place-items-center ">
+                        <div className="md:w-44 md:h-28 w-36 h-24 ">
+                          <Image
+                            className="w-full h-full object-cover rounded-md"
+                            src={item?.imageDetails?.[0]?.url}
+                            alt=""
+                            width="200"
+                            height="200"
+                          />
+                        </div>
+                        <div className="md:block hidden md:text-lg text-md font-bold">
+                          {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
+                          {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
+                          {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
+
                         </div>
                       </div>
-                      <div className="flex items-center justify-center mt-2 md:text-base text-para font-medium">
-                        {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
-                        {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
-                        {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
+                      <div className="grid grid-cols-2  place-items-center">
+                        <div>
+                          <p className="font-bold capitalize text-md ">
+                            {item?.vehicleType}
+                          </p>
+                          <p className="text-para font-medium">Seats : {item?.seatingCapacity}</p>
+                        </div>
+                        <div className="md:hidden block md:text-lg text-md font-bold">
+                          {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
+                          {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
+                          {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
 
+                        </div>
                       </div>
                     </div>
-                  </div>)}
+
+                  )}
                   {/* ac trail end*/}
                 </div>
               </div>
@@ -899,15 +937,15 @@ const [close1,setClose1]=useState(false);
                   <div className="flex gap-4">
                     <p className="text-sm">
                       <span className="font-semibold">{inputData?.adult}</span>
-                      Adults
+                      {" "}Adults
                     </p>
                     <p className="text-sm">
                       <span className="font-semibold">{inputData?.child}</span>
-                      Child
+                      {" "}Child
                     </p>
                     <p className="text-sm">
                       <span className="font-semibold">{inputData?.infant}</span>
-                      Infant
+                      {" "}Infant
                     </p>
                   </div>
                   <div>
@@ -918,6 +956,12 @@ const [close1,setClose1]=useState(false);
                         inputData?.quardRoom}{" "}
                       Rooms
                     </p>
+                    {/* <p className="font-semibold text-sm ">
+                      {"Single : "}{inputData?.singleRoom},
+                      {" Double : "}{ inputData?.twinRoom }, <br />
+                      {" Double + 1 bed : "}{inputData?.tripleRoom },
+                      {" Double + 2 bed : "}{inputData?.quardRoom}                                    
+                    </p> */}
                   </div>
                   <div className="text-sm flex gap-2 md:gap-4">
                     <p className="font-semibold">{selectedCarIdFetchApi?.vehicleType}</p>
@@ -928,16 +972,18 @@ const [close1,setClose1]=useState(false);
                 </div>
                 <button
                   onClick={(e) => handleSubmit(e)}
-                  className="bg-navyblack  py-2 text-white rounded-md hover:bg-slate-400 px-5"
+                  className="bg-navyblack md:text-base text-sm text-white rounded-md hover:bg-slate-400 md:px-5 md:py-2 px-4 py-1.5"
                 >
                   Submit
                 </button>
               </div>
+              
             </div>
           </form>
         </Dialog>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 export default Addguest;
