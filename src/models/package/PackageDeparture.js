@@ -19,7 +19,6 @@ const departureSchema=new Schema({
   },
   Weight: {
     type: Number,
-    required:true
   },
 })
 const packageDepartureSchema = new Schema(

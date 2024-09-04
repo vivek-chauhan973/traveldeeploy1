@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import CustomiseTour from "../CustomiseTour";
 import FixedDeparturePopup from "./FixedDeparturePopup";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
-const fetchLimitData=async (id)=>{
+const fetchLimitData = async (id) => {
   const response = await fetch(`/api/package/price/departures/${id}`);
   return await response.json();
 }
 
-const ItinaryFixedDepartureCard = ({
-  addPackage,
-  togglePopup,
-  fixedDeparturePopupOpen,
-}) => {
+const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopupOpen, }) => {
+
   const {
     setFixedDepDate1,
     fixedDepDate,
@@ -23,26 +22,28 @@ const ItinaryFixedDepartureCard = ({
     setFixedDepartureButtonEnaibleAndDisable,
     fixedDepartureButtonEnaibleAndDisable,
   } = useAppContext();
+
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
-  const [calculatedPrizeOfGst,setCalculatedPrizeOfGst]=useState(0);
-  const [columns,setColumns]=useState([]);
-  const [limitData,setLimitData]=useState([]);
-  const [limitKey,setLimitKey]=useState(1);
-  const [limitKey1,setLimitKey1]=useState(0);
-  const [gst,setGst]=useState(0);
-  const [grandTotal,setGrandTotal]=useState(0);
-const [submittedData,setSubmittedData]=useState([]);
+  const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
+  const [columns, setColumns] = useState([]);
+  const [limitData, setLimitData] = useState([]);
+  const [limitKey, setLimitKey] = useState(1);
+  const [limitKey1, setLimitKey1] = useState(0);
+  const [gst, setGst] = useState(0);
+  const [grandTotal, setGrandTotal] = useState(0);
+  const [submittedData, setSubmittedData] = useState([]);
+  
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
   }
-const newLimitData=[];
-let i=parseInt(limitData?.[0])
-while(i<=parseInt(limitData?.[1])){
-  let data=i.toString();
-  newLimitData.push(data);
-  i=i+1
-}
+  const newLimitData = [];
+  let i = parseInt(limitData?.[0])
+  while (i <= parseInt(limitData?.[1])) {
+    let data = i.toString();
+    newLimitData.push(data);
+    i = i + 1
+  }
   const handleSubmit = () => {
     if (fixedDepDate && fixedDepCity) {
       setFixedDepCity1(fixedDepCity);
@@ -52,34 +53,34 @@ while(i<=parseInt(limitData?.[1])){
       togglePopup(true);
     }
   };
-  useEffect(()=>{
-    setSubmittedData(addPackage?.tableData||[])
-    setColumns(addPackage?.tableColumn||[])
-    fetchLimitData(addPackage?._id).then(res=>setLimitData(res?.data?.limit||[]))
-    setGst(addPackage?.fixedDeparturePrices?.gst||0);
-  },[addPackage])
+  useEffect(() => {
+    setSubmittedData(addPackage?.tableData || [])
+    setColumns(addPackage?.tableColumn || [])
+    fetchLimitData(addPackage?._id).then(res => setLimitData(res?.data?.limit || []))
+    setGst(addPackage?.fixedDeparturePrices?.gst || 0);
+  }, [addPackage])
 
-  
-  useEffect(()=>{
-    setCalculatedPrizeOfGst((price1*5)/100)
-  },[gst,price1])
-  useEffect(()=>{
-    setGrandTotal((price1+calculatedPrizeOfGst)*limitKey);
-  },[calculatedPrizeOfGst,limitKey])
+
+  useEffect(() => {
+    setCalculatedPrizeOfGst((price1 * 5) / 100)
+  }, [gst, price1])
+  useEffect(() => {
+    setGrandTotal((price1 + calculatedPrizeOfGst) * limitKey);
+  }, [calculatedPrizeOfGst, limitKey])
 
   // convert limit key into keys array , here is the logic of keys to convert array
-  const [input,setInput]=useState("")
-  const [lenkey,setLenKey]=useState(0);
+  const [input, setInput] = useState("")
+  const [lenkey, setLenKey] = useState(0);
 
 
   const keys = Array.from({ length: limitKey1 }, (_, index) => index + 1);
 
   // here is data of all persons' weight and data is already stored in state
-  
+
   const [inputData1, setInputData1] = useState([]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-  
+
     setInputData1(prevState =>
       prevState.map(item =>
         item.hasOwnProperty(name) ? { ...item, [name]: value } : item
@@ -87,18 +88,45 @@ while(i<=parseInt(limitData?.[1])){
     );
     // console.log("input data is here : --->  ",inputData1)
   };
-  useEffect(()=>{
+  useEffect(() => {
     setInputData1(keys.map(item => ({ [`input${item}`]: "" })))
-  },[limitKey1])
+  }, [limitKey1])
   return (
     <>
-      <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[480px] overflow-scroll">
+      <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[490px] overflow-scroll">
         <div className=" overflow-y-auto">
-          <h4 className="xl:block hidden text-md font-semibold text-center ">Booking Summary</h4>
-          <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3 p-2">
+          <div className="xl:block hidden">
+            <div className="flex justify-between mb-2">
+              <h5 className="text-md font-semibold text-graytext">Booking Summary</h5>
+              <div>
+                <FontAwesomeIcon icon={faPenToSquare} className='font1 cursor-pointer' />
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div className="">
+            <div className="flex mb-2.5 mt-3 text-sm">
+              <p className=" w-20">Dept. City : </p>
+              <p className="font-semibold text-graytext">Mumbai</p>
+            </div>
+            <div className="flex mb-2.5 text-sm">
+              <p className=" w-20">Dept. Date :</p>
+              <p className=" font-bold text-graytext">
+                10 Mar 2024 - 17 Mar 2024
+              </p>
+            </div>
+            <div className="flex mb-2.5 text-sm">
+              <p className=" w-20">Traveller :</p>
+              <p className=" font-semibold text-graytext">
+                Adults : , Child : , Infant :
+                {/* Adults : {inputData?.adult || "2"}, Child : {inputData?.child}, Infant : {inputData?.infant} */}
+              </p>
+            </div>
+          </div>
+          <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3">
             <div>
               <div className="flex flex-col">
-                <label className="text-para font-semibold cursor-pointer" htmlFor="city">Select limit : </label>
+                <label className="text-para font-semibold cursor-pointer capitalize" htmlFor="city">Number Of Person : </label>
                 <select name="city" id="city" className="border rounded w-full pl-3 cursor-pointer"
                   onChange={(e) => {
                     setFixedDepCity(e.target.value);
@@ -107,36 +135,36 @@ while(i<=parseInt(limitData?.[1])){
                     setCity(true);
                   }}
                 >
-                  <option value="" className="cursor-pointer">select limit</option>
+                  <option value="" className="cursor-pointer">Select Person</option>
                   {newLimitData?.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
               </div>
               {fixedDepCity ? null : (
-                <p className="text-xs text-red-600">Please Select City First</p>
+                <p className="text-xxs text-red-600">Please Select Person First</p>
               )}
             </div>
 
             <div>
               <div className="flex flex-col mt-2 ">
-                <label className="text-para font-semibold cursor-pointer" htmlFor="date">{limitKey1?"weights of person":""}</label>
-                {keys.map((item,i)=><div key={i} className="flex gap-3 justify-center items-center">
-                  <p>person{i+1}</p>
-                <input type="text" id={`person ${i+1}`} name={`input${i+1}`} required className="mt-2 w-full py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
-                  onChange={(e) => {
-                    handleInputChange(e);
-                    setDate(true);
-                    // console.log(e.target.value);
-                  }} />
+                <label className="text-para font-semibold cursor-pointer" htmlFor="date">{limitKey1 ? "weights of person" : ""}</label>
+                {keys.map((item, i) => <div key={i} className="flex gap-3 justify-center items-center">
+                  <p>person{i + 1}</p>
+                  <input type="text" id={`person ${i + 1}`} name={`input${i + 1}`} required className="mt-2 w-full py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
+                    onChange={(e) => {
+                      handleInputChange(e);
+                      setDate(true);
+                      // console.log(e.target.value);
+                    }} />
                 </div>)}
-                
+
               </div>
-              
+
             </div>
           </div>
 
-          <div className=" justify-between hidden xl:flex px-2">
+          <div className=" justify-between hidden xl:flex ">
             <div>
               <p className="text-sm ">Basic Price</p>
             </div>
@@ -165,36 +193,35 @@ while(i<=parseInt(limitData?.[1])){
           </div>
           <hr className="border-dashed my-2" />
           {/* inject your code for mobile device */}
-          <div className=' xl:hidden'>
-                                    <div className="mt-4">
-                                       <p>Table Data is here</p>
-                                        <table className="min-w-full mt-3 border-collapse border border-gray-300 text-center text-para">
-                                            <thead className="bg-black text-white">
-                                                <tr>
-                                                    {columns.map((col, index) => (
-                                                        <th key={index} className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">
-                                                            {col}
-                                                        </th>
-                                                    ))}
-                                                </tr>
-                                            </thead>
-                                            <tbody className=" border">
-                                                {submittedData.map((row, rowIndex) => (
-                                                    <tr key={rowIndex}>
-                                                        {columns.map((col, colIndex) => (
-                                                            <td key={colIndex} className="border-y-2 border-x-2 overflow-hidden  border-gray-300 px-3 py-1 whitespace-nowrap">
-                                                                {row[col]}
-                                                            </td>
-                                                        ))}
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                                <hr />
-          <div className="xl:hidden">
+          <div className=' xl:hidden '>
+            <p>Table Data is here</p>
+            <div className="overflow-x-scroll">
+              <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
+                <thead>
+                  <tr className="border-b bg-black text-white">
+                    {columns.map((col, index) => (
+                      <th key={index} className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">
+                        {col}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="bg-gray-100">
+                  {submittedData.map((row, rowIndex) => (
+                    <tr key={rowIndex} >
+                      {columns.map((col, colIndex) => (
+                        <td key={colIndex} className="   border-t border-l  border-r px-2 py-2   capitalize overflow-hidden border-gray-300  text-wrap">
+                          {row[col]}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {/* <hr /> */}
+          <div className="xl:hidden my-5">
             <div className="ml-2">
               <p className="font-semibold text-lg mb-2 mt-1 text-graytext">
                 About us
@@ -249,30 +276,34 @@ while(i<=parseInt(limitData?.[1])){
               </p>
             </label>
           </div>
-          <div className=" gap-3 justify-center  hidden xl:flex">
-            {
-              <button
-                onClick={handleSubmit}
-                className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
+          <div className="xl:block hidden">
+            <div className=" grid grid-cols-2 gap-3 my-3">
+              <CustomiseTour>
+                <button className=" border-primary w-full border text-primary flex-flow  flex justify-center px-5 py-2 text-para rounded-md">
+                  Customise
+                </button>
+              </CustomiseTour>
+
+
+              {fixedDeparturePopupOpen && (
+                <FixedDeparturePopup
+                  togglePopup={togglePopup}
+                  addPackage={addPackage}
+                />
+              )}
+
+              {
+                <button
+                  onClick={handleSubmit}
+                  className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                     ? "bg-primary"
                     : "bg-orange-200"
-                  } text-center text-para`}
-              >
-                Book now
-              </button>
-            }
-
-            {fixedDeparturePopupOpen && (
-              <FixedDeparturePopup
-                togglePopup={togglePopup}
-                addPackage={addPackage}
-              />
-            )}
-            <CustomiseTour>
-              <button className=" border-primary w-full border text-primary flex-flow  flex justify-center px-5 py-2 text-para rounded-md">
-                Customise
-              </button>
-            </CustomiseTour>
+                    } text-center text-para`}
+                >
+                  Book now
+                </button>
+              }
+            </div>
           </div>
         </div>
       </div>

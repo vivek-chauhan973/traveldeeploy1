@@ -127,7 +127,7 @@ const TestingCard = ({ addPackage }) => {
                         </div>
                         <div className="text-right">
                             <p className="text-sm leading-5 text-green-700 font-bold">SUPER DEAL PRICE</p>
-                            <p className="text-xxs leading-5">Starts From <span className="text-md font-semibold">₹ {item?.price}</span></p>
+                            <p className="text-xxs leading-5">Starts From <span className="text-md font-semibold">₹ {(item?.price).toLocaleString()}</span></p>
                             <p className="text-sm leading-5 font-medium underline text-blue">from ₹ 19,423/months</p>
                         </div>
                         </div>
