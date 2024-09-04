@@ -114,7 +114,7 @@ export default function Package1() {
     }
   };
 
-  // console.log("addPackage12324", addPackage);
+  console.log("addPackage12324", addPackage);
   const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
 
   useEffect(() => {

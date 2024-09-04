@@ -477,398 +477,398 @@ const Addguest = ({
           aria-describedby="alert-dialog-description"
         >
           <form className="w-full" action="">
-            
-              <div className="relative">
-                <div className="sticky top-0 shadow-md z-[5]">
-                  <div
-                    className=" absolute md:top-3 top-1 md:right-3 right-2 cursor-pointer hover:scale-105 "
-                    onClick={handleClose}
-                    size={28}
-                  >
-                    <FontAwesomeIcon
-                      icon={faCircleXmark}
-                      className="font1 cursor-pointer"
-                    />
-                  </div>
-                  <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
-                    <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
-                      add guest & Choose from{ }
-                    </p>
-                    <div>
-                      <p className="text-xl font-semibold"> ₹ {guestPrice ? guestPrice : "--"}</p>
-                      <p className="text-xxs">per person on twin sharing</p>
-                    </div>
-                  </div>
 
-
-
-                  <hr />
+            <div className="relative">
+              <div className="sticky top-0 shadow-md z-[5]">
+                <div
+                  className=" absolute md:top-3 top-1 md:right-3 right-2 cursor-pointer hover:scale-105 "
+                  onClick={handleClose}
+                  size={28}
+                >
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    className="font1 cursor-pointer"
+                  />
                 </div>
-                <div className="overflow-y-auto md:px-12 px-2">
-                  <div className="flex items-center md:gap-10 mt-5 md:w-96 w-60 justify-between">
-                    <label htmlFor="Adultsdropdown" className="my-2">
+                <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
+                  <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
+                    add guest & Choose from{ }
+                  </p>
+                  <div>
+                    <p className="text-xl font-semibold"> ₹ {guestPrice ? (guestPrice).toLocaleString() : "--"}</p>
+                    <p className="text-xxs">per person on twin sharing</p>
+                  </div>
+                </div>
+
+
+
+                <hr />
+              </div>
+              <div className="overflow-y-auto md:px-12 px-2">
+                <div className="flex items-center md:gap-10 mt-5 md:w-96 w-60 justify-between">
+                  <label htmlFor="Adultsdropdown" className="my-2">
+                    <div className="flex gap-3 items-center">
+                      <FontAwesomeIcon
+                        icon={faPerson}
+                        className="font1 cursor-pointer"
+                      />
+                      <div>
+                        <p className="text-para">
+                          Adults
+                          <span className=" text-slate-400 font-light">
+                            (Above 12 yrs)
+                          </span>{" "}
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                  <div className=" w-14">
+                    <select
+                      name="adult"
+                      value={inputData?.adult}
+                      id="Adultsdropdown"
+                      className="border w-full py-1 rounded-md"
+                      onChange={handleChange}
+                    >
+                      <option value="0"> 0</option>
+                      <option value="1"> 1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
+                    <label htmlFor="Childdropdown" className="my-2">
                       <div className="flex gap-3 items-center">
                         <FontAwesomeIcon
-                          icon={faPerson}
+                          icon={faChild}
                           className="font1 cursor-pointer"
                         />
                         <div>
                           <p className="text-para">
-                            Adults
-                            <span className=" text-slate-400 font-light">
-                              (Above 12 yrs)
+                            Child
+                            <span className="  text-slate-400 font-light">
+                              (Age 6 - 11 yrs)
                             </span>{" "}
                           </p>
                         </div>
                       </div>
                     </label>
-                    <div className=" w-14">
+                    <div className="w-14">
                       <select
-                        name="adult"
-                        value={inputData?.adult}
-                        id="Adultsdropdown"
-                        className="border w-full py-1 rounded-md"
+                        name="child"
+                        value={inputData?.child}
+                        id="Childdropdown"
+                        className={`border w-full py-1 rounded-md ${inputData?.child === 0 &&
+                          inputData?.adult === 0 &&
+                          "opacity-50"
+                          }`}
                         onChange={handleChange}
+                        disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
-                        <option value="0"> 0</option>
-                        <option value="1"> 1</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
                       </select>
                     </div>
                   </div>
-                  <div className="mt-2">
-                    <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
-                      <label htmlFor="Childdropdown" className="my-2">
-                        <div className="flex gap-3 items-center">
+                  {/* child date is here */}
+                  {[...Array(inputData?.child)].map((_, index) => (
+                    <div key={index} className="md:ml-5 pt-2 ">
+                      <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
+                        <label
+                          className="text-para"
+                          htmlFor={`childDate${index}`}
+                        >
+                          Child {index + 1}
+                        </label>
+                        <input
+                          id={`childDate${index}`}
+                          className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
+                          type="date"
+                          max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
+                          min={childMinDate}
+                          onChange={(e) => handleDateChange(e, index)}
+                        />
+
+                        <span className="text-red-400 text-sm">
+                          Select{" "}
+                          {inputData?.childAges?.[index] &&
+                            `${inputData?.childAges?.[index].years} yrs ${inputData?.childAges?.[index].months} months`}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Infant date is here */}
+                <div className="mt-2 ">
+                  <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
+                    <label htmlFor="Childdropdown" className="my-2">
+                      <div className="flex gap-3 items-center">
+                        <FontAwesomeIcon
+                          icon={faBaby}
+                          className="font1 cursor-pointer"
+                        />
+                        <div>
+                          <p className="text-para">
+                            Infant
+                            <span className="  text-slate-400 font-light">
+                              (Age 0 - 5 yrs)
+                            </span>{" "}
+                          </p>
+                        </div>
+                      </div>
+                    </label>
+
+                    <div className="w-14">
+                      <select
+                        name="infant"
+                        value={inputData?.infant}
+                        id="Infantdropdown"
+                        className={`border w-full py-1 rounded-md ${inputData?.infant === 0 &&
+                          inputData?.adult === 0 &&
+                          "opacity-50"
+                          }`}
+                        onChange={handleChange1}
+                        disabled={inputData?.adult === 0} // Disable if adult count is 0
+                      >
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                    </div>
+                  </div>
+                  {/* child date is here */}
+                  {[...Array(inputData?.infant)].map((_, index) => (
+                    <div key={index} className="md:ml-5 pt-2 ">
+                      <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
+                        <label
+                          className="text-para"
+                          htmlFor={`InfantDate${index}`}
+                        >
+                          Infant {index + 1}
+                        </label>
+                        <input
+                          id={`InfantDate${index}`}
+                          className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
+                          type="date"
+                          max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
+                          min={infantMinDate}
+                          onChange={(e) => handleDateChange1(e, index)}
+                        />
+
+                        <span className="text-red-400 text-sm">
+                          Select{" "}
+                          {inputData?.infantAges?.[index] &&
+                            `${inputData?.infantAges?.[index].years} yrs ${inputData?.infantAges?.[index].months} months`}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="my-4">
+                  {/* <CalendarFunc /> */}
+                  {/* <DatePickerCalendar /> */}
+                </div>
+
+                <div>
+                  <div className="flex flex-col mt-5">
+                    <div className="mb-2 flex justify-between pr-5 items-center">
+                      <div>
+                        <p className="ml-2 text-para font-semibold cursor-pointer">
+                          Single Room
+                        </p>
+                      </div>
+                      <div className="flex gap-1 ">
+                        <div
+                          onClick={() => handleDecrement("singleRoom")}
+                          size={18}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
+                        >
                           <FontAwesomeIcon
-                            icon={faChild}
+                            icon={faCircleMinus}
                             className="font1 cursor-pointer"
                           />
-                          <div>
-                            <p className="text-para">
-                              Child
-                              <span className="  text-slate-400 font-light">
-                                (Age 6 - 11 yrs)
-                              </span>{" "}
-                            </p>
-                          </div>
                         </div>
-                      </label>
-                      <div className="w-14">
-                        <select
-                          name="child"
-                          value={inputData?.child}
-                          id="Childdropdown"
-                          className={`border w-full py-1 rounded-md ${inputData?.child === 0 &&
-                            inputData?.adult === 0 &&
-                            "opacity-50"
-                            }`}
-                          onChange={handleChange}
-                          disabled={inputData?.adult === 0} // Disable if adult count is 0
+
+                        <p
+                          className="text-para w-3 mr-1 text-center"
+                          onChange={(e) => handleChange}
                         >
-                          <option value="0">0</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
-                      </div>
-                    </div>
-                    {/* child date is here */}
-                    {[...Array(inputData?.child)].map((_, index) => (
-                      <div key={index} className="md:ml-5 pt-2 ">
-                        <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
-                          <label
-                            className="text-para"
-                            htmlFor={`childDate${index}`}
-                          >
-                            Child {index + 1}
-                          </label>
-                          <input
-                            id={`childDate${index}`}
-                            className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
-                            type="date"
-                            max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
-                            min={childMinDate}
-                            onChange={(e) => handleDateChange(e, index)}
-                          />
-
-                          <span className="text-red-400 text-sm">
-                            Select{" "}
-                            {inputData?.childAges?.[index] &&
-                              `${inputData?.childAges?.[index].years} yrs ${inputData?.childAges?.[index].months} months`}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Infant date is here */}
-                  <div className="mt-2 ">
-                    <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
-                      <label htmlFor="Childdropdown" className="my-2">
-                        <div className="flex gap-3 items-center">
+                          {countSingleRoom}
+                        </p>
+                        <div
+                          onClick={() => handleIncrement("singleRoom")}
+                          size={19}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
+                        >
                           <FontAwesomeIcon
-                            icon={faBaby}
+                            icon={faCirclePlus}
                             className="font1 cursor-pointer"
                           />
-                          <div>
-                            <p className="text-para">
-                              Infant
-                              <span className="  text-slate-400 font-light">
-                                (Age 0 - 5 yrs)
-                              </span>{" "}
-                            </p>
-                          </div>
                         </div>
-                      </label>
-
-                      <div className="w-14">
-                        <select
-                          name="infant"
-                          value={inputData?.infant}
-                          id="Infantdropdown"
-                          className={`border w-full py-1 rounded-md ${inputData?.infant === 0 &&
-                            inputData?.adult === 0 &&
-                            "opacity-50"
-                            }`}
-                          onChange={handleChange1}
-                          disabled={inputData?.adult === 0} // Disable if adult count is 0
+                      </div>
+                    </div>
+                    <hr className="my-2" />
+                    <div className="mb-2 flex justify-between pr-5 items-center">
+                      <div>
+                        <p className="ml-2 text-para font-semibold cursor-pointer">
+                          Double Room
+                        </p>
+                      </div>
+                      <div className="flex gap-1">
+                        <div
+                          onClick={() => handleDecrement("twinRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
-                          <option value="0">0</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
-                      </div>
-                    </div>
-                    {/* child date is here */}
-                    {[...Array(inputData?.infant)].map((_, index) => (
-                      <div key={index} className="md:ml-5 pt-2 ">
-                        <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
-                          <label
-                            className="text-para"
-                            htmlFor={`InfantDate${index}`}
-                          >
-                            Infant {index + 1}
-                          </label>
-                          <input
-                            id={`InfantDate${index}`}
-                            className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
-                            type="date"
-                            max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
-                            min={infantMinDate}
-                            onChange={(e) => handleDateChange1(e, index)}
+                          <FontAwesomeIcon
+                            icon={faCircleMinus}
+                            className="font1 cursor-pointer"
                           />
-
-                          <span className="text-red-400 text-sm">
-                            Select{" "}
-                            {inputData?.infantAges?.[index] &&
-                              `${inputData?.infantAges?.[index].years} yrs ${inputData?.infantAges?.[index].months} months`}
-                          </span>
+                        </div>
+                        <p
+                          onChange={(e) => handleChange}
+                          className="text-para w-3 mr-1 text-center"
+                        >
+                          {countTwinRoom}
+                        </p>
+                        <div
+                          onClick={() => handleIncrement("twinRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
+                        >
+                          <FontAwesomeIcon
+                            icon={faCirclePlus}
+                            className="font1 cursor-pointer"
+                          />
                         </div>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="my-4">
-                    {/* <CalendarFunc /> */}
-                    {/* <DatePickerCalendar /> */}
-                  </div>
-
-                  <div>
-                    <div className="flex flex-col mt-5">
-                      <div className="mb-2 flex justify-between pr-5 items-center">
-                        <div>
-                          <p className="ml-2 text-para font-semibold cursor-pointer">
-                            Single Room
-                          </p>
+                    </div>
+                    <hr className="my-2" />
+                    <div className="mb-2 flex justify-between pr-5 items-center">
+                      <div>
+                        <p className="ml-2 text-para font-semibold cursor-pointer">
+                          Double Room + 1 Extra Bed
+                        </p>
+                      </div>
+                      <div className="flex gap-1">
+                        <div
+                          onClick={() => handleDecrement("tripleRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
+                        >
+                          <FontAwesomeIcon
+                            icon={faCircleMinus}
+                            className="font1 cursor-pointer"
+                          />
                         </div>
-                        <div className="flex gap-1 ">
-                          <div
-                            onClick={() => handleDecrement("singleRoom")}
-                            size={18}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCircleMinus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
 
-                          <p
-                            className="text-para w-3 mr-1 text-center"
-                            onChange={(e) => handleChange}
-                          >
-                            {countSingleRoom}
-                          </p>
-                          <div
-                            onClick={() => handleIncrement("singleRoom")}
-                            size={19}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCirclePlus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
+                        <p
+                          onChange={(e) => handleChange}
+                          className="text-para w-3 mr-1 text-center"
+                        >
+                          {countTripleRoom}
+                        </p>
+                        <div
+                          onClick={() => handleIncrement("tripleRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
+                        >
+                          <FontAwesomeIcon
+                            icon={faCirclePlus}
+                            className="font1 cursor-pointer"
+                          />
                         </div>
                       </div>
-                      <hr className="my-2" />
-                      <div className="mb-2 flex justify-between pr-5 items-center">
-                        <div>
-                          <p className="ml-2 text-para font-semibold cursor-pointer">
-                            Double Room
-                          </p>
-                        </div>
-                        <div className="flex gap-1">
-                          <div
-                            onClick={() => handleDecrement("twinRoom")}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCircleMinus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
-                          <p
-                            onChange={(e) => handleChange}
-                            className="text-para w-3 mr-1 text-center"
-                          >
-                            {countTwinRoom}
-                          </p>
-                          <div
-                            onClick={() => handleIncrement("twinRoom")}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCirclePlus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
-                        </div>
+                    </div>
+                    <hr className="my-2" />
+                    <div className="mb-2 flex justify-between pr-5 items-center">
+                      <div>
+                        <p className="ml-2 text-para font-semibold cursor-pointer">
+                          Double Room + 2 Extra Bed
+                        </p>
                       </div>
-                      <hr className="my-2" />
-                      <div className="mb-2 flex justify-between pr-5 items-center">
-                        <div>
-                          <p className="ml-2 text-para font-semibold cursor-pointer">
-                            Double Room + 1 Extra Bed
-                          </p>
+                      <div className="flex gap-1">
+                        <div
+                          onClick={() => handleDecrement("quardRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
+                        >
+                          <FontAwesomeIcon
+                            icon={faCircleMinus}
+                            className="font1 cursor-pointer"
+                          />
                         </div>
-                        <div className="flex gap-1">
-                          <div
-                            onClick={() => handleDecrement("tripleRoom")}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCircleMinus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
 
-                          <p
-                            onChange={(e) => handleChange}
-                            className="text-para w-3 mr-1 text-center"
-                          >
-                            {countTripleRoom}
-                          </p>
-                          <div
-                            onClick={() => handleIncrement("tripleRoom")}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCirclePlus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <hr className="my-2" />
-                      <div className="mb-2 flex justify-between pr-5 items-center">
-                        <div>
-                          <p className="ml-2 text-para font-semibold cursor-pointer">
-                            Double Room + 2 Extra Bed
-                          </p>
-                        </div>
-                        <div className="flex gap-1">
-                          <div
-                            onClick={() => handleDecrement("quardRoom")}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCircleMinus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
-
-                          <p
-                            onChange={(e) => handleChange}
-                            className="text-para w-3 mr-1 text-center"
-                          >
-                            {countQuardRoom}
-                          </p>
-                          <div
-                            onClick={() => handleIncrement("quardRoom")}
-                            className="cursor-pointer text-navyblack hover:text-slate-700"
-                          >
-                            <FontAwesomeIcon
-                              icon={faCirclePlus}
-                              className="font1 cursor-pointer"
-                            />
-                          </div>
+                        <p
+                          onChange={(e) => handleChange}
+                          className="text-para w-3 mr-1 text-center"
+                        >
+                          {countQuardRoom}
+                        </p>
+                        <div
+                          onClick={() => handleIncrement("quardRoom")}
+                          className="cursor-pointer text-navyblack hover:text-slate-700"
+                        >
+                          <FontAwesomeIcon
+                            icon={faCirclePlus}
+                            className="font1 cursor-pointer"
+                          />
                         </div>
                       </div>
                     </div>
                   </div>
-                  {/* here is display all cars */}
+                </div>
+                {/* here is display all cars */}
 
-                  <div className="mt-8 ">
-                    <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center mb-4 px-3 py-2 ">
-                      <p className="font-semibold text-md">
-                        Transport Options
-                      </p>
-                      <div className="flex items-center space-x-2">
-                        {/* AC Option / Non AC Option toggle */}
-                        <p className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-black" : "text-gray-400 blur-none"}`}>AC</p>
-                        <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
-                          <div
-                            className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-navyblack shadow-md" : "bg-white text-gray-500"
-                              }`}
-                            onClick={() => {
-                              if (acDisable) {
-                                setIsAC(true);
-                              }
-                            }}
-                          >
+                <div className="mt-8 ">
+                  <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center mb-4 px-3 py-2 ">
+                    <p className="font-semibold text-md">
+                      Transport Options
+                    </p>
+                    <div className="flex items-center space-x-2">
+                      {/* AC Option / Non AC Option toggle */}
+                      <p className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-black" : "text-gray-400 blur-none"}`}>AC</p>
+                      <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
+                        <div
+                          className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-navyblack shadow-md" : "bg-white text-gray-500"
+                            }`}
+                          onClick={() => {
+                            if (acDisable) {
+                              setIsAC(true);
+                            }
+                          }}
+                        >
 
-                          </div>
-                          <div
-                            className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-navyblack  shadow-md" : "bg-white text-red-500"
-                              }`}
-                            onClick={() => {
-                              if (acDisable) {
-                                setIsAC(false);
-                              }
-                            }}
-                          >
-                          </div>
                         </div>
-                        <p className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-black" : "text-gray-400 blur-none"}`}>Non AC</p>
+                        <div
+                          className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-navyblack  shadow-md" : "bg-white text-red-500"
+                            }`}
+                          onClick={() => {
+                            if (acDisable) {
+                              setIsAC(false);
+                            }
+                          }}
+                        >
+                        </div>
                       </div>
-
+                      <p className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-black" : "text-gray-400 blur-none"}`}>Non AC</p>
                     </div>
 
                   </div>
 
-                  {/* All listed Cars is here */}
+                </div>
 
-                  {inputData?.adult&&carWithCapacity?.map(item =>
-                     <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
+                {/* All listed Cars is here */}
+
+                {/* {inputData?.adult && carWithCapacity?.map(item =>
+                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
                     <Image
                       className="w-40 h-28 object-cover rounded-md"
                       src={item?.imageDetails?.[0]?.url}
@@ -876,31 +876,52 @@ const Addguest = ({
                       width="160"
                       height="180"
                     />
-                    <div>
-                      <div className="flex flex-col items-center md:items-start ">
-                        <p className="font-semibold capitalize md:text-lg text-md">
-                          {item?.vehicleType}
-                        </p>
-                        <div className="flex items-center justify-center mt-2">
-                          <p className="md:text-base text-para font-medium">Seats : {item?.seatingCapacity}</p>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2  place-items-center">
+                    <div>                    
+                      <div className="grid grid-cols-2 gap-4 place-items-start">
                         <div>
                           <p className="font-bold capitalize text-md ">
                             {item?.vehicleType}
                           </p>
                           <p className="text-para font-medium">Seats : {item?.seatingCapacity}</p>
                         </div>
-                        <div className="md:hidden block md:text-lg text-md font-bold">
+                        <div className="md:text-lg text-md font-bold">
                           {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
                           {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
                           {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
 
                         </div>
                       </div>
-                    </div>                 
-                </div>  )}
+                    </div>
+                  </div>)} */}
+
+                {inputData?.adult && carWithCapacity?.map(item =>
+                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex-col md:flex-row flex flex-1 gap-5 border-b-2 border-navyblack  my-3">
+
+                    <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
+                      <Image
+                        className="w-40 h-28 object-cover rounded-md"
+                        src={item?.imageDetails?.[0]?.url}
+                        alt=""
+                        width="160"
+                        height="180"
+                      />
+                    </div>
+                    <div className=" flex flex-1 mb-3">
+                      <div className="flex flex-col flex-1 justify-start md:justify-center ">
+                        <p className="font-bold capitalize text-md ">
+                          {item?.vehicleType}
+                        </p>
+                        <p className="text-xxs md:text-xs font-semibold capitalize">{item?.seatingCapacity} passenger seating capacity</p>
+                      </div>
+
+
+                      <div className="flex flex-2 justify-center items-center w-16 md:w-24  md:text-lg text-md font-bold">
+                        {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
+                        {(item?.capacity - selectedDataOfCar) > 0 && <p>₹ +{(item?.capacity - selectedDataOfCar).toLocaleString()}</p>}
+                        {(item?.capacity - selectedDataOfCar) < 0 && <p>₹ {(item?.capacity - selectedDataOfCar).toLocaleString()}</p>}
+                      </div>
+                    </div>
+                  </div>)}
               </div>
               <div className=" bottom-0 sticky bg-slate-50 border-t mt-3 py-2 md:px-7 px-5 flex justify-between items-center">
                 <div>
@@ -947,7 +968,7 @@ const Addguest = ({
                   Submit
                 </button>
               </div>
-              
+
             </div>
           </form>
         </Dialog>

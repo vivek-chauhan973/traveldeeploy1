@@ -109,7 +109,7 @@ const ItineraryPricingCard = () => {
             <div></div>
             <div className="grid grid-cols-2">
               <p>GST {gst} % </p>
-              <p className="">₹ {calculatedPrizeOfGst}</p>
+              <p className="">₹ {(calculatedPrizeOfGst).toLocaleString()}</p>
             </div>
           </div>
           <hr className="border-dashed my-2" />
@@ -117,7 +117,7 @@ const ItineraryPricingCard = () => {
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p className="font-semibold">Grand Total</p>
-              <p className="font-semibold text-graytext">₹ {grandTotal}</p>
+              <p className="font-semibold text-graytext">₹ {(grandTotal).toLocaleString()}</p>
             </div>
           </div>
           {closeBtn && (
