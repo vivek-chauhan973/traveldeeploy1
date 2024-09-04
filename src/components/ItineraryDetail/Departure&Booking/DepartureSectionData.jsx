@@ -10,7 +10,7 @@ const fetchPriceHike = async (id) => {
 const fetchFixedDepartureData = async (id) => {
   const response = await fetch(`/api/package/price/departures/${id}`);
   const data=await response.json()
-  console.log("data",data)
+  // console.log("data",data)
   return data
 };
 
@@ -125,12 +125,7 @@ const useMyCustomHook = () => {
     return [result];
   }, [priceHike1]);
   
-  if(AllDataRelatedCity.length===1){
-    if(AllDataRelatedCity[0].length===0){
-      fixedDepartureData?.map(item=>AllDataRelatedCity.push(item));
-    }
-  }
-  console.log("AllDataRelatedCity",AllDataRelatedCity)
+// console.log("AllDataRelatedCity",fixedDepartureData)
   return AllDataRelatedCity;
 };
 
