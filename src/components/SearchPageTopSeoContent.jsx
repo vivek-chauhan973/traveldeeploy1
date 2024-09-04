@@ -45,7 +45,7 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
           />
        
           <div className="box-Shadow-Style-Package  justify-end  gap-3  absolute z-10 w-full  py-5  bottom-0 ">
-            <h1 className="absolute uppercase font-bold italic bottom-0 right-2 text-white">{state?.name}</h1>
+            <h1 className="absolute uppercase font-bold  italic md:bottom-5 bottom-2 md:right-16 right-2 text-white">{state?.name}</h1>
           </div>
       </div>
       <div className="container-wrapper py-5 ">
@@ -121,8 +121,8 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
         </div>
 
         <div className="flex justify-end items-center mt-2">
-          <div className="inline-flex items-center justify-center px-1.5  py-0.5 bg-navyblack rounded shadow-sm text-white cursor-pointer">
-            <button className="text-xxs flex-shrink-0" onClick={handleToggle}>
+          <div className="inline-flex items-center justify-center md:px-2 px-1.5 md:py-1 py-0.5 bg-navyblack rounded shadow-sm text-white cursor-pointer">
+            <button className="text-xs  flex-shrink-0" onClick={handleToggle}>
               {show ? "Read less" : "Read more"}
             </button>
             <span className="flex items-center justify-center">

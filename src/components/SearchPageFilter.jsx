@@ -2,8 +2,10 @@ import "../app/globals.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "./admin/context/Package/AddGuest";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 const MAX = 99100;
@@ -22,20 +24,20 @@ const marks = [
 function valuetext(value) {
     return `${value}°C`;
 }
-const fetchCatagory=async ()=>{
+const fetchCatagory = async () => {
     const response = await fetch('/api/package-setting/category/get-categories');
-    const data=await response.json();
+    const data = await response.json();
     return data;
 }
 
-export default function SearchPageFilter({ onApplyFilter,setTourDuration,tourDuration,setMaxDay,setMinDay,setClearAll}) {
-    const {setCatagoryId}=useAppContext()
-    const { setMinPrice, setMaxPrice,setDuration } = useAppContext();
+export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourDuration, setMaxDay, setMinDay, setClearAll }) {
+    const { setCatagoryId } = useAppContext()
+    const { setMinPrice, setMaxPrice, setDuration } = useAppContext();
     const [priceRange, setPriceRange] = useState([0, 9900]);
-    
+
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
-const [filter,setFilter]=useState(false);
+    const [filter, setFilter] = useState(false);
     // const handleApplyFilter = () => {
     //     onApplyFilter(priceRange);
     // };
@@ -50,9 +52,9 @@ const [filter,setFilter]=useState(false);
     //   const handleChange = (event: any, newValue: any) => {
     //       setValue(newValue);
     //   };
-    useEffect(()=>{
-        fetchCatagory().then(res=>setPackageCategory(res?.data||[]))
-    },[])
+    useEffect(() => {
+        fetchCatagory().then(res => setPackageCategory(res?.data || []))
+    }, [])
 
     const handleCheckboxChange = (event, stateSetter) => {
         const value = event.target.value;
@@ -76,17 +78,17 @@ const [filter,setFilter]=useState(false);
         onApplyFilter(filters);
         setClearAll(false)
     };
-useEffect(()=>{
-    if (priceRange[0] > priceRange[1]) {
-        setMaxPrice(priceRange[0])
-        setMinPrice(priceRange[1])
-    }
-    else {
-        setMaxPrice(priceRange[1])
-        setMinPrice(priceRange[0])
-    }
-    setDuration(tourDuration)
-},[filter])
+    useEffect(() => {
+        if (priceRange[0] > priceRange[1]) {
+            setMaxPrice(priceRange[0])
+            setMinPrice(priceRange[1])
+        }
+        else {
+            setMaxPrice(priceRange[1])
+            setMinPrice(priceRange[0])
+        }
+        setDuration(tourDuration)
+    }, [filter])
     const handleClearAll = () => {
         setPriceRange([0, 9900]);
         setTourDuration([0, 6]);
@@ -96,16 +98,16 @@ useEffect(()=>{
         document.querySelectorAll("input[type=checkbox]").forEach(el => el.checked = false);
     };
 
-    const updatedTourDuration=(newValue)=>{
-            console.log("new value is here : : ",newValue)
+    const updatedTourDuration = (newValue) => {
+        console.log("new value is here : : ", newValue)
     }
 
     // console.log("package data",packageCategory)
     return (
         <>
             <div>
-                <div className="bg-white rounded-md sticky top-2 ">
-                    <div className="md:p-5 p-2  ">
+                <div className="bg-white rounded-md sticky top-2">
+                    <div className="md:p-5 p-2  ">                        
                         <div className="flex justify-between md:pb-2 pb-1">
                             <h3 className="md:text-[16px] text-[14px] font-medium">Package Prices</h3>
                             <p className="text-[12px] underline text-blue-800 cursor-pointer" onClick={handleClearAll}>Clear All</p>
@@ -143,7 +145,7 @@ useEffect(()=>{
                                 <Slider
                                     getAriaLabel={() => 'Tour duration range'}
                                     value={tourDuration}
-                                    onChange={(_, newValue) => {setMaxDay(newValue[1]);setMinDay(newValue[0]);setTourDuration(newValue)}}
+                                    onChange={(_, newValue) => { setMaxDay(newValue[1]); setMinDay(newValue[0]); setTourDuration(newValue) }}
                                     valueLabelDisplay="auto"
                                     getAriaValueText={valuetext}
                                     sx={{ color: "#2A2C41" }}
@@ -194,18 +196,18 @@ useEffect(()=>{
                         <div className="pr-5 py-2">
                             <h3 className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</h3>
                             <div>
-                               {packageCategory?.map( item=><div key={item._id} className="flex capitalize items-center gap-2 px-5 pb-2 py-2 ">
+                                {packageCategory?.map(item => <div key={item._id} className="flex capitalize items-center gap-2 px-5 pb-2 py-2 ">
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
                                         id="category1" name={item?.category} value={item?._id} onChange={(e) => setCatagoryId(e.target.value)} />
                                     <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
                                         {item?.category}</label>
                                 </div>)}
-                                
-                            </div>  
+
+                            </div>
                         </div>
                     </div>
-                    <div className="flex justify-center mt-2">
-                        <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-1 text-xs rounded-md mb-2 block">Apply Filters</button>
+                    <div className="flex justify-center mt-2 ">
+                        <button onClick={handleSubmit} className="bg-black text-white px-4 py-1.5 text-xs rounded-md mb-3 block">Apply Filters</button>
                     </div>
                 </div>
             </div>
