@@ -828,8 +828,8 @@ const Addguest = ({
                 {/* here is display all cars */}
 
                 <div className="mt-8 ">
-                  <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center mb-4 px-3 py-2 ">
-                    <p className="font-semibold text-md">
+                  <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center p-2">
+                    <p className="font-semibold text-base md:text-md">
                       Transport Options
                     </p>
                     <div className="flex items-center space-x-2">
@@ -867,35 +867,8 @@ const Addguest = ({
 
                 {/* All listed Cars is here */}
 
-                {/* {inputData?.adult && carWithCapacity?.map(item =>
-                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex border-b-2 border-navyblack justify-around items-center my-3">
-                    <Image
-                      className="w-40 h-28 object-cover rounded-md"
-                      src={item?.imageDetails?.[0]?.url}
-                      alt=""
-                      width="160"
-                      height="180"
-                    />
-                    <div>                    
-                      <div className="grid grid-cols-2 gap-4 place-items-start">
-                        <div>
-                          <p className="font-bold capitalize text-md ">
-                            {item?.vehicleType}
-                          </p>
-                          <p className="text-para font-medium">Seats : {item?.seatingCapacity}</p>
-                        </div>
-                        <div className="md:text-lg text-md font-bold">
-                          {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
-                          {(item?.capacity - selectedDataOfCar) > 0 && <p>+{item?.capacity - selectedDataOfCar}</p>}
-                          {(item?.capacity - selectedDataOfCar) < 0 && <p>{item?.capacity - selectedDataOfCar}</p>}
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>)} */}
-
                 {inputData?.adult && carWithCapacity?.map(item =>
-                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex-col md:flex-row flex flex-1 gap-5 border-b-2 border-navyblack  my-3">
+                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex-col md:flex-row flex flex-1 gap-5 border-b-2 border-navyblack py-3">
 
                     <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
                       <Image
@@ -907,7 +880,7 @@ const Addguest = ({
                       />
                     </div>
                     <div className=" flex flex-1 mb-3">
-                      <div className="flex flex-col flex-1 justify-start md:justify-center ">
+                      <div className="flex flex-col flex-1 justify-start md:justify-center md:pl-0 pl-4">
                         <p className="font-bold capitalize text-md ">
                           {item?.vehicleType}
                         </p>
@@ -915,7 +888,7 @@ const Addguest = ({
                       </div>
 
 
-                      <div className="flex flex-2 justify-center items-center w-16 md:w-24  md:text-lg text-md font-bold">
+                      <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
                         {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
                         {(item?.capacity - selectedDataOfCar) > 0 && <p>₹ +{(item?.capacity - selectedDataOfCar).toLocaleString()}</p>}
                         {(item?.capacity - selectedDataOfCar) < 0 && <p>₹ {(item?.capacity - selectedDataOfCar).toLocaleString()}</p>}
@@ -947,17 +920,12 @@ const Addguest = ({
                         inputData?.quardRoom}{" "}
                       Rooms
                     </p>
-                    {/* <p className="font-semibold text-sm ">
-                      {"Single : "}{inputData?.singleRoom},
-                      {" Double : "}{ inputData?.twinRoom }, <br />
-                      {" Double + 1 bed : "}{inputData?.tripleRoom },
-                      {" Double + 2 bed : "}{inputData?.quardRoom}                                    
-                    </p> */}
+                 
                   </div>
-                  <div className="text-sm flex gap-2 md:gap-4">
-                    <p className="font-semibold">{selectedCarIdFetchApi?.vehicleType}</p>
+                  <div className="text-sm flex gap-2">
+                    <p className="font-semibold text-sm md:text-base">{selectedCarIdFetchApi?.vehicleType}</p>
                     <div className="flex itmes-center justify-center">
-                      <p className="font-semibold">{selectedCarIdFetchApi?.seatingCapacity}</p>
+                      <p className="font-semibold text-sm md:text-base">{selectedCarIdFetchApi?.seatingCapacity}</p>
                     </div>
                   </div>
                 </div>

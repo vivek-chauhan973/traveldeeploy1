@@ -18,7 +18,7 @@ const departureSchema=new Schema({
     type: String,
   },
   Weight: {
-    type: Number
+    type: Number,
   },
 })
 const packageDepartureSchema = new Schema(
