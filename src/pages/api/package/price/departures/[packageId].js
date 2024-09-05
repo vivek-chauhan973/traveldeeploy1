@@ -13,7 +13,7 @@ if(data1?.length!==0){
 else{
   Weight=1;
 }
-// console.log("data18345634278948790353879438673489 -->",packageId)
+console.log("data18345634278948790353879438673489 -->",departure1)
   await dbConnect();
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });

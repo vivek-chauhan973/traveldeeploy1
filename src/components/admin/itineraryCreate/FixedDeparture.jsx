@@ -58,11 +58,11 @@ const {pricingManagement}=useAppContext();
 if(itinerary?.prices){
   setData(itinerary?.prices?.departureData)
 }
-   
+   console.log("itinerary?.addguest---> ",itinerary?.addguest)
    setFixedDeparture(itinerary?.addguest);
     
   },[itinerary])
-  console.log("itinary is here ------> ",);
+  // console.log("itinary is here ------> ",);
   const handleSubmit=async ()=>{
     try {
         const res = await fetch('/api/package/price/departures/' + itinerary.id, {
