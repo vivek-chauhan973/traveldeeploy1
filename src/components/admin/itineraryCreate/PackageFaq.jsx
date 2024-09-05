@@ -88,14 +88,14 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
     <div>
       <div>
         <div>
-          <p className="text-base font-semibold">Itinerary Days Wise</p>
+          <p className="text-base font-semibold">FAQs</p>
         </div>
         <div className="border bg-white p-3 rounded">
           <div className="justify-between gap-5">
             <div className="border p-4 rounded-md bg-white grow mb-2">
               <div>
                 <label htmlFor="title" className="pb-2 font-semibold text-para">
-                  Title
+                  Questions
                 </label>
                 <div className="grow flex gap-5 items-center">
                   <input
@@ -105,7 +105,7 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                     name="title"
                     value={itineraryDayWise.title}
                     onChange={handleChange}
-                    placeholder="Enter the Title"
+                    placeholder="Enter the Questions"
                   />
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                 <div className="w-full">
                   <textarea
                     className="rounded h-48 resize-none border px-3 py-2 w-full"
-                    placeholder="Enter Your Day wise Description"
+                    placeholder="Enter Your Answer"
                     name="information"
                     value={itineraryDayWise.information}
                     onChange={handleChange}
@@ -133,12 +133,13 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
               <hr className="my-3" />
               <div className="text-[15px]">
                 <div>
+                  <p>Questions</p>
                   {itineraryDayWiseDataArray?.map((item, index) => (
                     <div key={index}>
                       <div className="flex justify-between even:bg-slate-50 px-1">
                         <div>
                           <p className="capitalize flex gap-2">
-                            <span>Day {index + 1}. </span>
+                            <span>{index + 1}. </span>
                             {item?.title}
                           </p>
                         </div>

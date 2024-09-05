@@ -40,7 +40,7 @@ const Login = ({ handleCheckbox, handleOnChange, setPriceManagementDot }) => {
                 className=" w-5 h-5"
                 onChange={(e) => { handleOnChange(e); setPricingManagement(e.target.value) }}
               />
-              <p className=" text-10">Add Guest</p>
+              <p className="">Package</p>
             </div>
             <div className="flex gap-3 items-center justify-start mt-2">
               <input
@@ -51,7 +51,7 @@ const Login = ({ handleCheckbox, handleOnChange, setPriceManagementDot }) => {
                 className="w-5 h-5"
                 onChange={(e) => { handleOnChange(e); setPricingManagement(e.target.value) }}
               />
-              <p className=" text-10">Fixed Departure</p>
+              <p className="">Fixed Departure</p>
             </div>
             <div className="flex gap-3 items-center justify-start mt-2 ">
               <input
