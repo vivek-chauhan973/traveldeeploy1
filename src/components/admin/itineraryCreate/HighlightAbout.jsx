@@ -106,7 +106,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
 
   return (
     <div className="bg-white p-2 px-5 grow rounded-md flex flex-col gap-3">
-      <div>
+      <div className="md:mb-0 mb-5">
         <p className="pb-2 font-semibold text-para">About</p>
         {isEditingAbout ? (
           <div className='w-full h-44'>

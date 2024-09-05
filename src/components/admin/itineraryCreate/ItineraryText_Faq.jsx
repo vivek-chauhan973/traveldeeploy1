@@ -219,7 +219,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                       <div key={index}>
                         <div className="flex justify-between even:bg-slate-50 px-1">
                           <div>
-                            <p className="capitalize flex gap-2">
+                            <p className="capitalize flex gap-2 md:text-para text-sm">
                               <span>Day {index + 1}. </span>
                               {item?.title}
                             </p>
@@ -227,7 +227,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                           <div className="flex gap-2">
                             <FaEdit
                               onClick={() => editItem(index)}
-                              size={20}
+                              size={16}
                               className="mt-1 hover:text-primary cursor-pointer"
                             />
                             {editingIndex !== index && deletePopup ? (
@@ -239,7 +239,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                             ) : (
                               <MdDeleteForever
                                 onClick={() => setDeletePopu(true)}
-                                size={24}
+                                size={16}
                                 className="mt-1 hover:text-red-500 cursor-pointer"
                               />
                             )}

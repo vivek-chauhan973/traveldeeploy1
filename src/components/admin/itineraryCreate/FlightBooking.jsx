@@ -883,7 +883,7 @@ export default function FlightBookingForm({
             >
               <div className="md:flex justify-between">
                 <div className="block md:flex gap-5 items-center">
-                  <div className="flex md:flex-col gap-3">
+                  <div className="flex flex-col gap-3">
                     <div className="flex flex-col">
                       <label
                         htmlFor="start.to"
@@ -925,7 +925,7 @@ export default function FlightBookingForm({
                       )}
                     </div>
                   </div>
-                  <div className="flex md:flex-col gap-3 md:border-l md:pl-3">
+                  <div className="mt-3 flex flex-col gap-3 md:border-l md:pl-3">
                     <div className="flex flex-col">
                       <label
                         htmlFor="end.to"
@@ -970,28 +970,28 @@ export default function FlightBookingForm({
                 </div>
               </div>
               <div className="mt-3 flex gap-3 flex-col">
-                <div className="flex items-center gap-4">
+                <div className="md:flex items-center gap-4">
                   <div className="font-medium">Flight No. :</div>
                   <div>
                     <input
                       type="text"
-                      className="h-8 px-2 rounded border text-para ml-7 w-44 pl-2"
+                      className="h-8 px-2 rounded border text-para md:ml-7 md:w-44 w-full pl-2"
                       onChange={(e) => setFlightNo(e.target.value)}
                       value={flightNo}
                     />
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="md:flex items-center gap-6">
                   <div className="font-medium">Select Image :</div>
                   <div className="">
                     <select
                       name=""
                       id=""
-                      className="w-44 outline-none border text-md"
+                      className="md:w-44 w-full outline-none border text-sm"
                       value={selectedImg}
                       onChange={(e) => setSelectedImg(e.target.value)}
                     >
-                      <option className="py-1 text-md">select one</option>
+                      <option className="py-1 text-sm">Select One</option>
                       <option className="py-1" value="A">
                         A
                       </option>
@@ -1006,17 +1006,17 @@ export default function FlightBookingForm({
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="md:flex items-center gap-3">
                 <button
                   type="submit"
-                  className="mt-4 rounded px-4 py-2 bg-blue-500 text-white"
+                  className="mt-4 md:w-auto w-full rounded px-4 py-2 bg-blue-500 text-white"
                 >
                   {editingIndex !== null ? "Update Booking" : "Add Booking"}
                 </button>
                 <button
                   type="button"
                   onClick={handleSubmitNext}
-                  className="mt-4 rounded px-4 py-2 bg-green-500 text-white"
+                  className="mt-4 md:w-auto w-full rounded px-4 py-2 bg-green-500 text-white"
                 >
                   Save & Next
                 </button>

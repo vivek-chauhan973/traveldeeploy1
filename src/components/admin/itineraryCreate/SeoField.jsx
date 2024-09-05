@@ -162,7 +162,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                     </div>
                     
                     <button
-                        className="w-full h-8 px-2 rounded bg-black text-white"
+                        className="mt-2 w-full h-8 px-2 rounded bg-black text-white"
                         type="submit">
                         Save Meta Tags
                     </button>

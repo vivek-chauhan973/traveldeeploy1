@@ -136,9 +136,9 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                   <p>Questions</p>
                   {itineraryDayWiseDataArray?.map((item, index) => (
                     <div key={index}>
-                      <div className="flex justify-between even:bg-slate-50 px-1">
+                      <div className="flex justify-between gap-2 even:bg-slate-50 px-1">
                         <div>
-                          <p className="capitalize flex gap-2">
+                          <p className="capitalize flex gap-2 md:text-para text-sm">
                             <span>{index + 1}. </span>
                             {item?.title}
                           </p>
@@ -146,13 +146,13 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                         <div className="flex gap-2">
                           <FaEdit
                             onClick={() => editItem(index)}
-                            size={20}
+                            size={16}
                             className="mt-1 hover:text-primary cursor-pointer"
                           />
                           {(editingIndex !== index && deletePopup)?
                            <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={removeItem}/>:<MdDeleteForever
                               onClick={() => setDeletePopu(true)}
-                              size={24}
+                              size={16}
                               className="mt-1 hover:text-red-500 cursor-pointer"
                             />
                           }

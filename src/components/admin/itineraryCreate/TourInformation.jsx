@@ -7,14 +7,14 @@ const useFetchData = (url, setState) => {
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                setState(data || []); 
-              
+                setState(data || []);
+
             } catch (err) {
                 console.log(err);
             }
         };
         fetchData();
-    // }, [url]);
+        // }, [url]);
     }, [url]);
 };
 
@@ -47,10 +47,10 @@ const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
     const fData = useCallback(async () => {
         const response = await fetch('/api/package/tour-information/' + (itinerary ? itinerary.id : 'add-package'));
         const data = await response.json();
-        if(response.ok){
+        if (response.ok) {
             setActiveTab("Tab8")
             setTourDot(true);
-        } 
+        }
         return data;
     }, [itinerary]);
 
@@ -64,7 +64,7 @@ const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
     useFetchData('/api/package/tour-info/cancellation/get', (data) => setTourCancellation(data.CancellationGroupData));
     useFetchData('/api/package/tour-info/payment-term/get', (data) => setPaymentTerm(data.PaymentTermGroupData));
     useFetchData('/api/package/tour-info/need-to-know/get', (data) => setNeedToKnow(data.NeedToKnowGroupData));
-// console.log("itinary of tour inclusion :: ",itinerary)
+    // console.log("itinary of tour inclusion :: ",itinerary)
     const handleSave = async () => {
         if (selectedInclusion && selectedExclusion && selectedCancellation && selectedPaymentTerm && selectedNeedToKnow) {
             const payload = {
@@ -74,7 +74,7 @@ const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
                 paymentTerm: selectedPaymentTerm,
                 needToKnow: selectedNeedToKnow,
             };
-// console.log("payload :::  ",payload);
+            // console.log("payload :::  ",payload);
             try {
                 const response = await fetch('/api/package/tour-information/' + (itinerary ? itinerary.id : 'add-package'), {
                     method: 'POST',
@@ -110,76 +110,78 @@ const TourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
             <div>
                 <p className="text-base font-semibold">Tour Information</p>
             </div>
-            <div className="px-5 border rounded">
-                <div className="flex gap-5 py-3">
-                    <label htmlFor="tourInclusion" className="font-semibold">Tour Inclusion:</label>
-                    <select
-                        className="border"
-                        id="tourInclusion"
-                        value={selectedInclusion?.groupName || ""}
-                        onChange={(e) => handleSelectChange(setSelectedInclusion, tourInclusion, e)}
-                    >
-                        <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.inclusion?.groupName : "Select an option"}</option>
-                        {tourInclusion.map((item) => (
-                            <option key={item.id} value={item.groupName}>{item.groupName}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="flex gap-5 py-3">
-                    <label htmlFor="tourExclusion" className="font-semibold">Tour Exclusion:</label>
-                    <select
-                        className="border"
-                        id="tourExclusion"
-                        value={selectedExclusion?.groupName || ""}
-                        onChange={(e) => handleSelectChange(setSelectedExclusion, tourExclusion, e)}
-                    >
-                        <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.exclusion?.groupName : "Select an option"}</option>
-                        {tourExclusion.map((item) => (
-                            <option key={item.id} value={item.groupName}>{item.groupName}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="flex gap-5 py-3">
-                    <label htmlFor="cancellationPolicy" className="font-semibold">Cancellation Policy:</label>
-                    <select
-                        className="border"
-                        id="cancellationPolicy"
-                        value={selectedCancellation?.groupName || ""}
-                        onChange={(e) => handleSelectChange(setSelectedCancellation, tourCancellation, e)}
-                    >
-                        <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.cancellation?.groupName : "Select an option"}</option>
-                        {tourCancellation.map((item) => (
-                            <option key={item.id} value={item.groupName}>{item.groupName}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="flex gap-5 py-3">
-                    <label htmlFor="paymentTerm" className="font-semibold">Payment Term:</label>
-                    <select
-                        className="border"
-                        id="paymentTerm"
-                        value={selectedPaymentTerm?.groupName || ""}
-                        onChange={(e) => handleSelectChange(setSelectedPaymentTerm, paymentTerm, e)}
-                    >
-                        <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.paymentTerm?.groupName : "Select an option"}</option>
-                        {paymentTerm.map((item) => (
-                            <option key={item.id} value={item.groupName}>{item.groupName}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="flex gap-5 py-3">
-                    <label htmlFor="needToKnow" className="font-semibold">Need To Know:</label>
-                    <select
-                        className="border"
-                        id="needToKnow"
-                        value={selectedNeedToKnow?.groupName || ""}
-                        onChange={(e) => handleSelectChange(setSelectedNeedToKnow, needToKnow, e)}
-                    >
-                        <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.needToKnow?.groupName : "Select an option"}</option>
-                        {needToKnow.map((item) => (
-                            <option key={item.id} value={item.groupName}>{item.groupName}</option>
-                        ))}
-                    </select>
+            <div className="px-5 border rounded overflow-auto py-1">
+                <div className="xl:w-2/5 md:w-11/12">
+                    <div className="md:flex gap-5 py-3 justify-between">
+                        <label htmlFor="tourInclusion" className="font-semibold">Tour Inclusion:</label>
+                        <select
+                            className="border w-full md:w-60 md:mb-0 mb-3"
+                            id="tourInclusion"
+                            value={selectedInclusion?.groupName || ""}
+                            onChange={(e) => handleSelectChange(setSelectedInclusion, tourInclusion, e)}
+                        >
+                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.inclusion?.groupName : "Select an option"}</option>
+                            {tourInclusion.map((item) => (
+                                <option key={item.id} value={item.groupName}>{item.groupName}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="md:flex gap-5 py-3 justify-between">
+                        <label htmlFor="tourExclusion" className="font-semibold">Tour Exclusion:</label>
+                        <select
+                            className="border w-full md:w-60 md:mb-0 mb-3"
+                            id="tourExclusion"
+                            value={selectedExclusion?.groupName || ""}
+                            onChange={(e) => handleSelectChange(setSelectedExclusion, tourExclusion, e)}
+                        >
+                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.exclusion?.groupName : "Select an option"}</option>
+                            {tourExclusion.map((item) => (
+                                <option key={item.id} value={item.groupName}>{item.groupName}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="md:flex gap-5 py-3 justify-between">
+                        <label htmlFor="cancellationPolicy" className="font-semibold">Cancellation Policy:</label>
+                        <select
+                            className="border w-full md:w-60 md:mb-0 mb-3"
+                            id="cancellationPolicy"
+                            value={selectedCancellation?.groupName || ""}
+                            onChange={(e) => handleSelectChange(setSelectedCancellation, tourCancellation, e)}
+                        >
+                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.cancellation?.groupName : "Select an option"}</option>
+                            {tourCancellation.map((item) => (
+                                <option key={item.id} value={item.groupName}>{item.groupName}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="md:flex gap-5 py-3 justify-between">
+                        <label htmlFor="paymentTerm" className="font-semibold">Payment Term:</label>
+                        <select
+                            className="border w-full md:w-60 md:mb-0 mb-3"
+                            id="paymentTerm"
+                            value={selectedPaymentTerm?.groupName || ""}
+                            onChange={(e) => handleSelectChange(setSelectedPaymentTerm, paymentTerm, e)}
+                        >
+                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.paymentTerm?.groupName : "Select an option"}</option>
+                            {paymentTerm.map((item) => (
+                                <option key={item.id} value={item.groupName}>{item.groupName}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="md:flex gap-5 py-3 justify-between">
+                        <label htmlFor="needToKnow" className="font-semibold">Need To Know:</label>
+                        <select
+                            className="border w-full md:w-60 md:mb-0 mb-3"
+                            id="needToKnow"
+                            value={selectedNeedToKnow?.groupName || ""}
+                            onChange={(e) => handleSelectChange(setSelectedNeedToKnow, needToKnow, e)}
+                        >
+                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.needToKnow?.groupName : "Select an option"}</option>
+                            {needToKnow.map((item) => (
+                                <option key={item.id} value={item.groupName}>{item.groupName}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             </div>
             <button
