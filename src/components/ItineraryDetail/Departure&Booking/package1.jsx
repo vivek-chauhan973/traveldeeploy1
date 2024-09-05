@@ -114,7 +114,7 @@ export default function Package1() {
     }
   };
 
-  console.log("addPackage12324", addPackage);
+ // console.log("addPackage12324", addPackage);
   const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
 
   useEffect(() => {
@@ -458,14 +458,21 @@ export default function Package1() {
               </div>
               <p className="text-sm leading-5">
                 Starts From{" "}
-                <span className="text-lg text-graytext font-medium">
+                {addPackage?.addguest==="addGuest"&&<span className="text-lg text-graytext font-medium">
                   ₹
                   {Math.floor(
                     (submitButtonOfPricingCalculation && (guestPrice/2)) ||
                       price2 ||
                       addPackage?.price
                   ).toLocaleString()}
-                </span>
+                </span>}
+                {addPackage?.addguest==="fixedDeparture"&&<span className="text-lg text-graytext font-medium">
+                  ₹
+                  {Math.floor(
+                    ((guestPrice)) ||
+                      addPackage?.price
+                  ).toLocaleString()}
+                </span>}
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
             </div>

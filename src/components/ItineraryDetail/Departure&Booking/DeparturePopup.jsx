@@ -34,7 +34,7 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
     }
     if (addPackage?.addguest === "fixedDeparture") {
       // console.log("departureSectionData :: ----> ",departureSectionData)
-      setGuestPrice(departureSectionData?.price);
+      setGuestPrice(departureSectionData?.Price);
     }
     else {
       setPrice2(departureSectionData?.price)

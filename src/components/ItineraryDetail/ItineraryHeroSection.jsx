@@ -235,7 +235,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     Starts From{" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{(addPackage.price)}
+                      ₹{(guestPrice ||addPackage.price)?.toLocaleString()}
                     </span>
                   </p>
                 )}

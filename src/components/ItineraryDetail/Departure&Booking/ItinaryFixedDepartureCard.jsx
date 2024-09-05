@@ -17,7 +17,7 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
-    price1,
+    guestPrice,
     setFixedDepCity,
     setFixedDepCity1,
     setFixedDepartureButtonEnaibleAndDisable,
@@ -33,24 +33,24 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
   const [gst, setGst] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
   const [submittedData, setSubmittedData] = useState([]);
-  
+
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
   }
-  const limitData=[];
-  if(departureSectionData){
-    if(addPackage?.addguest==="fixedDeparture"){
-      if(addPackage?.fixedfixeddepartureweightedprice===1){
+  const limitData = [];
+  if (departureSectionData) {
+    if (addPackage?.addguest === "fixedDeparture") {
+      if (addPackage?.fixedfixeddepartureweightedprice === 1) {
         limitData.push(departureSectionData?.Start_drop_down);
         limitData.push(departureSectionData?.End_drop_down);
       }
-      if(addPackage?.fixedfixeddepartureweightedprice===2){
+      if (addPackage?.fixedfixeddepartureweightedprice === 2) {
         limitData.push(1);
         limitData.push(departureSectionData?.Avilability);
       }
 
     }
-     
+
   }
   const newLimitData = [];
   let i = parseInt(limitData?.[0])
@@ -76,11 +76,15 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
 
 
   useEffect(() => {
-    setCalculatedPrizeOfGst((price1 * 5) / 100)
-  }, [gst, price1])
+    if(departureSectionData?.GST === "All Inclusice"){
+      setCalculatedPrizeOfGst(0)
+    }else{
+      setCalculatedPrizeOfGst((guestPrice * 5) / 100)
+    }
+  }, [guestPrice])
   useEffect(() => {
-    setGrandTotal((price1 + calculatedPrizeOfGst) * limitKey);
-  }, [calculatedPrizeOfGst, limitKey])
+    setGrandTotal((guestPrice + calculatedPrizeOfGst) * limitKey);
+  }, [calculatedPrizeOfGst, limitKey,guestPrice])
 
   // convert limit key into keys array , here is the logic of keys to convert array
   const [input, setInput] = useState("")
@@ -128,20 +132,13 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
               <p className=" font-bold text-graytext">
                 10 Mar 2024 - 17 Mar 2024
               </p>
-            </div>
-            <div className="flex mb-2.5 text-sm">
-              <p className=" w-20">Traveller :</p>
-              <p className=" font-semibold text-graytext">
-                Adults : , Child : , Infant :
-                {/* Adults : {inputData?.adult || "2"}, Child : {inputData?.child}, Infant : {inputData?.infant} */}
-              </p>
-            </div>
+            </div>          
           </div>
           <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3">
             <div>
-              <div className="flex flex-col">
+              <div className="flex gap-4 justify-between items-center">
                 <label className="text-para font-semibold cursor-pointer capitalize" htmlFor="city">Number Of Person : </label>
-                <select name="city" id="city" className="border rounded w-full pl-3 cursor-pointer"
+                <select name="city" id="city" className="border rounded w-1/2 pl-3 cursor-pointer"
                   onChange={(e) => {
                     setFixedDepCity(e.target.value);
                     setLimitKey(e.target.value)
@@ -156,38 +153,41 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
                 </select>
               </div>
               {fixedDepCity ? null : (
-                <p className="text-xxs text-red-600">Please Select Person First</p>
+                <p className="text-xxs text-red-600 text-end pr-7">Please Select Person First</p>
               )}
             </div>
 
             <div>
               <div className="flex flex-col mt-2 ">
-                <label className="text-para font-semibold cursor-pointer" htmlFor="date">{limitKey1 ? "weights of person" : ""}</label>
-                {keys.map((item, i) => <div key={i} className="flex gap-3 justify-center items-center">
-                  <p>person{i + 1}</p>
-                  <input type="text" id={`person ${i + 1}`} name={`input${i + 1}`} required className="mt-2 w-full py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
+                <p className="text-para font-semibold cursor-pointer capitalize">{limitKey1 ? "weights of person :" : ""}</p>
+                {keys.map((item, i) => <div key={i} className="flex gap-3 md:border-l-4 border-l-2 border-red-400 justify-center items-center my-2">
+                  {/* <p>Person{i + 1}</p> */}
+                  <label
+                    className="text-para"
+                    htmlFor={`person${i + 1}`}
+                  >
+                    Person{i + 1}
+                  </label>
+                  <input type="text" id={`person${i + 1}`} name={`input${i + 1}`} required className="mt-2 w-1/2 py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
                     onChange={(e) => {
                       handleInputChange(e);
                       setDate(true);
                       // console.log(e.target.value);
                     }} />
                 </div>)}
-
               </div>
-
             </div>
           </div>
 
           <div className=" justify-between hidden xl:flex ">
             <div>
-              <p className="text-sm ">Basic Price</p>
+              <p className="text-sm ">Price BreakUp</p>
             </div>
             <div>
               <p className="text-lg font-medium text-graytext">
-                {" "}
-                {price1}
+              ₹{" "}
+                {(guestPrice)?.toLocaleString()}
               </p>
-              <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>
           <hr className="border-dashed my-2 hidden xl:block" />
@@ -195,14 +195,14 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
-              <p className="">{price1}</p>
+              <p className="">₹ {" "}{(guestPrice*limitKey)?.toLocaleString()}</p>
             </div>
           </div>
           <div className="text-para grid-cols-2 -mt-2 hidden xl:grid">
             <div></div>
             <div className="grid grid-cols-2">
-              <p>GST {gst} % </p>
-              <p className="">{calculatedPrizeOfGst}</p>
+              <p>GST {fixedDepartureButtonEnaibleAndDisable?departureSectionData?.GST:null} </p>
+              <p className="">₹ {" "}{(calculatedPrizeOfGst*limitKey)?.toLocaleString()}</p>
             </div>
           </div>
           <hr className="border-dashed my-2" />
@@ -266,7 +266,7 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p>Grand Total</p>
-              <p className="font-semibold text-graytext">{grandTotal}</p>
+              <p className="font-semibold text-graytext">₹ {" "}{(grandTotal)?.toLocaleString()}</p>
             </div>
           </div>
           <div className=" justify-center gap-10 my-3 hidden xl:flex">

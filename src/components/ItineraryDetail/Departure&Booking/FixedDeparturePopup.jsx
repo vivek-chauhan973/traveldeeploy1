@@ -2,7 +2,7 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect,  useState } from "react";
 
 const FixedDeparturePopup = ({togglePopup,addPackage}) => {
-  const {fixedDepDate,fixedDepCity,handleCleckOnDepartureFixed}=useAppContext();
+  const {fixedDepDate,fixedDepCity,handleCleckOnDepartureFixed,departureSectionData,showAddguest}=useAppContext();
   const [check,setCheck]=useState(false);
 
     useEffect(() => {
@@ -36,26 +36,26 @@ const handleSubmit=()=>{
       <p className="text-xl font-semibold mb-4 text-center">Name : Pradhumn</p>
       
       <div className="mb-4">
-        <p className="block text-gray-700 font-medium mb-2">Package Name : {addPackage?.name}</p>
+        <p className="block text-gray-700 font-medium mb-2 capitalize">Package Name : {addPackage?.name}</p>
       </div>
 
       <div className="mb-4">
-        <p className="block text-gray-700 mb-2">BasePrice :  ${addPackage?.price}</p>  
+        <p className="block text-gray-700 mb-2">BasePrice : ₹{" "}{departureSectionData?.Price||addPackage?.price}</p>  
       </div>
 
       <div className="mb-4">
-        <p className="block text-gray-700 mb-2">Departure City : {fixedDepCity}</p>
+        <p className="block text-gray-700 mb-2 capitalize">Departure City : {showAddguest}</p>
       </div>
 
       <div className="mb-4">
-        <p className="block text-gray-700 mb-2">Departure Date : {fixedDepDate}</p>
+        <p className="block text-gray-700 mb-2">Departure Date : {departureSectionData?.Date}</p>
       </div>
         
       <div className="mb-4 flex justify-start items-center gap-2">
         <input className="cursor-pointer h-4 w-4 rounded-lg accent-navyblack" 
                type="checkbox" id="checked" onChange={()=>setCheck(true)}/>
         <label htmlFor="checked" className="cursor-pointer label-text text-para  text-gray-700">
-          Please confirm
+          Please Confirm
         </label>
       </div>
 
