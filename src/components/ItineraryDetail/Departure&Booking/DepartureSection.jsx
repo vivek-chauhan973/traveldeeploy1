@@ -53,7 +53,7 @@ const DepartureSection = ({ addPackage }) => {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
-  // console.log("departure section data ----> : ",departureSectionData)
+  // console.log("departure section data ----> : ",addPackage)
 
   return (
     <>
@@ -70,7 +70,7 @@ const DepartureSection = ({ addPackage }) => {
               {showPopup && <DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
 
               {/* Calendar Slider with Previous and Next Buttons */}
-              <div className="flex pr-5 justify-end gap-2 items-center mt-2">
+              {addPackage?.addguest==="addGuest"&&<div className="flex pr-5 justify-end gap-2 items-center mt-2">
                 <button
                   className={`p-2 rounded-full ${currentMonthIndex === 0 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
                   onClick={handlePreviousMonth}
@@ -85,9 +85,10 @@ const DepartureSection = ({ addPackage }) => {
                 >
                   <FontAwesomeIcon icon={faAngleRight} className='font1' />
                 </button>
-              </div>
+              </div>}
 
               {/* Display the current month's calendar */}
+              {addPackage?.addguest==="addGuest"&&
               <div className="mb-2 ml-5">
                 {groupedByMonth && monthKeys[currentMonthIndex] && (
                   <div key={currentMonthIndex} className="mb-5">
@@ -127,7 +128,47 @@ const DepartureSection = ({ addPackage }) => {
                     </div>
                   </div>
                 )}
+              </div>}
+              {
+                addPackage?.addguest==="fixedDeparture"&& <div className="mb-2 ml-5">
+                {AllDataRelatedCity?.[0]?.[0] && (
+                  <div className="mb-5">
+                    
+                    <div className="flex gap-3 flex-wrap">
+                      {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
+                        const dateObj = new Date(item.date);
+                        const dayOfWeek = dateObj.toLocaleString('default', { weekday: 'short' });
+                        const dayOfMonth = dateObj.getDate()
+                        return (
+                          <div
+                            key={i}
+                            onClick={() => {
+                              setShowPopup(true);
+                              setDepartureSectionData(item);
+                              
+                            }}
+                            className="cursor-pointer"
+                          >
+                            <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 h-14 rounded-md overflow-hidden">
+                              <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
+                                {dayOfWeek}
+                              </p>
+                              <hr />
+                              <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
+                                {dayOfMonth}
+                              </p>
+                              <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
+                                ₹ <p>{item?.price?.toLocaleString()}</p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
+              }
 
               <hr />
               <div className="ml-2 my-4">

@@ -10,7 +10,7 @@ const fetchPriceHike = async (id) => {
 const fetchFixedDepartureData = async (id) => {
   const response = await fetch(`/api/package/price/departures/${id}`);
   const data=await response.json()
-  // console.log("data",data)
+ 
   return data
 };
 
@@ -36,6 +36,7 @@ const useMyCustomHook = () => {
       });
     }
   }, [newPackageId]);
+  
 
   const AllDataRelatedCity = useMemo(() => {
     const result = [];
@@ -119,13 +120,17 @@ const useMyCustomHook = () => {
         }
         // console.log("result --->", result);
     }
+    if (addPackage?.addguest === "fixedDeparture"){
+      result.push(fixedDepartureData);
+    }
 
    
 
     return [result];
-  }, [priceHike1]);
+  }, [priceHike1,fixedDepartureData]);
   
-// console.log("AllDataRelatedCity",fixedDepartureData)
+  
+console.log("AllDataRelatedCity",AllDataRelatedCity)
   return AllDataRelatedCity;
 };
 
