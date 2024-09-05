@@ -53,7 +53,7 @@ const DepartureSection = ({ addPackage }) => {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
-  // console.log("departure section data ----> : ",addPackage)
+  console.log("AllDataRelatedCity?.[0]?.[0] ----> : ",departureSectionData)
 
   return (
     <>
@@ -130,13 +130,14 @@ const DepartureSection = ({ addPackage }) => {
                 )}
               </div>}
               {
-                addPackage?.addguest==="fixedDeparture"&& <div className="mb-2 ml-5">
+                (addPackage?.addguest==="fixedDeparture"&&addPackage?.fixedfixeddepartureweightedprice===1)&&
+                <div className="mb-2 ml-5">
                 {AllDataRelatedCity?.[0]?.[0] && (
                   <div className="mb-5">
                     
                     <div className="flex gap-3 flex-wrap">
                       {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
-                        const dateObj = new Date(item.date);
+                        const dateObj = new Date(item.Date);
                         const dayOfWeek = dateObj.toLocaleString('default', { weekday: 'short' });
                         const dayOfMonth = dateObj.getDate()
                         return (
@@ -155,10 +156,59 @@ const DepartureSection = ({ addPackage }) => {
                               </p>
                               <hr />
                               <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                {dayOfMonth}
+                                {item.Date}
                               </p>
                               <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                ₹ <p>{item?.price?.toLocaleString()}</p>
+                                ₹ <p>{item?.Price?.toLocaleString()}</p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+              }
+              {
+                (addPackage?.addguest==="fixedDeparture"&&addPackage?.fixedfixeddepartureweightedprice===2)&&
+                <div className="mb-2 ml-5">
+                {AllDataRelatedCity?.[0]?.[0] && (
+                  <div className="mb-5">
+                    
+                    <div className="flex gap-3 flex-wrap">
+                      {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
+                        const dateObj = new Date(item.Date);
+                        const dayOfWeek = dateObj.toLocaleString('default', { weekday: 'short' });
+                        const dayOfMonth = dateObj.getDate()
+                        return (
+                          <div
+                            key={i}
+                            onClick={() => {
+                              setShowPopup(true);
+                              setDepartureSectionData(item);
+                              
+                            }}
+                            className="cursor-pointer"
+                          >
+                            <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 rounded-md overflow-hidden">
+                              <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
+                                {dayOfWeek}
+                              </p>
+                              <hr />
+                              <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
+                                {item.Date}
+                              </p>
+                              <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
+                                ₹ <p>{item?.Price?.toLocaleString()}</p>
+                              </div>
+                              <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
+                              <p >
+                                Ava -
+                              </p>
+                              <p >
+                                {item.Avilability}
+                              </p>
                               </div>
                             </div>
                           </div>

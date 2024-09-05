@@ -13,6 +13,7 @@ const fetchLimitData = async (id) => {
 const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopupOpen, }) => {
 
   const {
+    departureSectionData,
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
@@ -27,7 +28,6 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
   const [date, setDate] = useState(false);
   const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
   const [columns, setColumns] = useState([]);
-  const [limitData, setLimitData] = useState([]);
   const [limitKey, setLimitKey] = useState(1);
   const [limitKey1, setLimitKey1] = useState(0);
   const [gst, setGst] = useState(0);
@@ -36,6 +36,21 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
   
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
+  }
+  const limitData=[];
+  if(departureSectionData){
+    if(addPackage?.addguest==="fixedDeparture"){
+      if(addPackage?.fixedfixeddepartureweightedprice===1){
+        limitData.push(departureSectionData?.Start_drop_down);
+        limitData.push(departureSectionData?.End_drop_down);
+      }
+      if(addPackage?.fixedfixeddepartureweightedprice===2){
+        limitData.push(1);
+        limitData.push(departureSectionData?.Avilability);
+      }
+
+    }
+     
   }
   const newLimitData = [];
   let i = parseInt(limitData?.[0])
@@ -56,7 +71,6 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
   useEffect(() => {
     setSubmittedData(addPackage?.tableData || [])
     setColumns(addPackage?.tableColumn || [])
-    fetchLimitData(addPackage?._id).then(res => setLimitData(res?.data?.limit || []))
     setGst(addPackage?.fixedDeparturePrices?.gst || 0);
   }, [addPackage])
 

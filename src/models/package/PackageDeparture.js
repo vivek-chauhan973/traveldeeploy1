@@ -20,6 +20,10 @@ const departureSchema=new Schema({
   Weight: {
     type: Number,
   },
+  Avilability:{
+    type: Number,
+  }
+
 })
 const packageDepartureSchema = new Schema(
   {
