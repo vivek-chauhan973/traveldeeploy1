@@ -36,7 +36,6 @@ const useMyCustomHook = () => {
       });
     }
   }, [newPackageId]);
-  
 
   const AllDataRelatedCity = useMemo(() => {
     const result = [];
@@ -45,7 +44,6 @@ const useMyCustomHook = () => {
       const currentDate = new Date();
       const endDate = new Date(currentDate);
       endDate.setMonth(currentDate.getMonth() + 2);
-
       const formatDate = (date) => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -102,8 +100,7 @@ const useMyCustomHook = () => {
               bool1: 1,
               hike: dateArray[index]?.pricerate,
             });
-            }
-            
+            } 
           } else {
             result.push({
               day: dayOfWeek,
@@ -120,9 +117,6 @@ const useMyCustomHook = () => {
     if (addPackage?.addguest === "fixedDeparture"){
       result.push(fixedDepartureData);
     }
-
-   
-
     return [result];
   }, [priceHike1,fixedDepartureData]);
   
