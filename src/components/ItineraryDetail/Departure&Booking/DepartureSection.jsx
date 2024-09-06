@@ -16,8 +16,6 @@ const DepartureSection = ({ addPackage }) => {
   const [columns, setColumns] = useState([]);
   const [submittedData, setSubmittedData] = useState([]);
   const AllDataRelatedCity = useMyCustomHook();
-  // const [selectedItemData,setSelectedItemData]=useState({});
-  // console.log("AllDataRelatedCity :: :: ",selectedItemData)
   useEffect(() => {
     setStartCity(addPackage?.startcity);
     setSubmittedData(addPackage?.tableData || []);
@@ -53,7 +51,7 @@ const DepartureSection = ({ addPackage }) => {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
-  console.log("AllDataRelatedCity?.[0]?.[0] ----> : ",departureSectionData)
+
 
   return (
     <>

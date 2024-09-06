@@ -82,13 +82,11 @@ const useMyCustomHook = () => {
           dateArray.push(obj);
           startdate1.setDate(startdate1.getDate() + 1);
         }
-        // console.log("dateArray",dateArray);
       }
       const dateArray1=[];
       for(let item of dateArray){
         dateArray1.push(item.date);
       }
-      // console.log("dateArray1",dateArray1);
         while (currentDate <= endDate) {
           const formattedDate = formatDate(currentDate);
           const dayOfWeek = getDayOfWeek(currentDate);
@@ -118,7 +116,6 @@ const useMyCustomHook = () => {
 
           currentDate.setDate(currentDate.getDate() + 1);
         }
-        // console.log("result --->", result);
     }
     if (addPackage?.addguest === "fixedDeparture"){
       result.push(fixedDepartureData);
@@ -129,8 +126,6 @@ const useMyCustomHook = () => {
     return [result];
   }, [priceHike1,fixedDepartureData]);
   
-  
-console.log("AllDataRelatedCity",AllDataRelatedCity)
   return AllDataRelatedCity;
 };
 

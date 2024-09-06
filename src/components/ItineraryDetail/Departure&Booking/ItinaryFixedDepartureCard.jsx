@@ -33,6 +33,7 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
   const [gst, setGst] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
   const [submittedData, setSubmittedData] = useState([]);
+  const [contactAdmin,setContactAdimn]=useState(false);
 
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
@@ -89,26 +90,36 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
   // convert limit key into keys array , here is the logic of keys to convert array
   const [input, setInput] = useState("")
   const [lenkey, setLenKey] = useState(0);
-
+const [totalWeight,setTotalWeight]=useState(0);
 
   const keys = Array.from({ length: limitKey1 }, (_, index) => index + 1);
 
   // here is data of all persons' weight and data is already stored in state
-
+const [totalv,setTotalv]=useState(0);
   const [inputData1, setInputData1] = useState([]);
-  const handleInputChange = (e) => {
+  const [inputValues, setInputValues] = useState({});
+  const handleInputChange = (e,i) => {
     const { name, value } = e.target;
-
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [i]: Number(value), // Store value as a number
+    }));
     setInputData1(prevState =>
       prevState.map(item =>
-        item.hasOwnProperty(name) ? { ...item, [name]: value } : item
+        item.hasOwnProperty(name) ? { ...item, [name]: Number(value )} : item
       )
     );
-    // console.log("input data is here : --->  ",inputData1)
   };
   useEffect(() => {
     setInputData1(keys.map(item => ({ [`input${item}`]: "" })))
   }, [limitKey1])
+  const totalSum = Object.values(inputValues).reduce((acc, curr) => acc + curr, 0);
+  useEffect(()=>{
+    if(totalSum>(departureSectionData?.Weight*limitKey)){
+      setContactAdimn(true)
+    }
+  },[totalSum])
+  // console.log("sum-->",totalSum);
   return (
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[490px] overflow-scroll">
@@ -168,16 +179,20 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
                   >
                     Person{i + 1}
                   </label>
-                  <input type="text" id={`person${i + 1}`} name={`input${i + 1}`} required className="mt-2 w-1/2 py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
+                  <input type="number" id={`person${i + 1}`} name={`input${i + 1}`} required className="mt-2 w-1/2 py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
                     onChange={(e) => {
-                      handleInputChange(e);
+                      handleInputChange(e,i);
                       setDate(true);
+                      
                       // console.log(e.target.value);
-                    }} />
+                    }}
+                    disabled={contactAdmin} />
                 </div>)}
               </div>
             </div>
           </div>
+
+          {contactAdmin&&<p className=" text-red-600 py-4">Please contact admin package to increase weight limit</p>}
 
           <div className=" justify-between hidden xl:flex ">
             <div>

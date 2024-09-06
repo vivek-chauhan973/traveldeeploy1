@@ -53,8 +53,6 @@ const DynamicTable = () => {
         setRows(submittedData);
         setSubmitted(false);
     };
-    // console.log("all data is here",submittedData)
-
     return (
         <div>
             <div className='flex items-center justify-center mb-4'>

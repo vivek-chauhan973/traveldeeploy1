@@ -4,12 +4,12 @@ import { useRouter } from "next/router";
 const AppContext = createContext(null);
 
 const fetchPackage = async (packageUrl) => {
-  console.log("page url :: ",packageUrl)
+  // console.log("page url :: ",packageUrl)
   const response = await fetch(`/api/public/package/${packageUrl}`, {
     method: "GET",
   });
   const data = await response.json();
-  console.log("..............................",packageUrl)
+  // console.log("..............................",packageUrl)
   return data;
 };
 
@@ -36,7 +36,6 @@ export const AppProvider = ({ children }) => {
   };
   const [inputData, setInputData] = useState(initialData);
   const packageUrl = router.query.package?.replace("-tour-package", "");
-  // console.log("package url 5454565",packageUrl)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,7 +59,6 @@ export const AppProvider = ({ children }) => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(9900);
   const [duration,setDuration]=useState([]);
-  // console.log("duration",duration)
   const filterApi = {
     locationId,
     catagoryId,
@@ -68,9 +66,6 @@ export const AppProvider = ({ children }) => {
     maxPrice,
     duration
   };
-// console.log("pakage is here in context ----> ",addPackage);
- 
-
   const [price2,setPrice2]=useState(0);
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
@@ -83,8 +78,6 @@ export const AppProvider = ({ children }) => {
     totalCalculatedPrize: guestPrice,
     allDetail: inputData
   };
-  
-  // console.log("finalDataOfBookingByUsingMethodAddGuest",finalDataOfBookingByUsingMethodAddGuest)
   const handleCleckOnDepartureFixed=()=>{
 
   const finalDataOfBookingByUsingMethodFixedDeparture={
@@ -107,13 +100,11 @@ export const AppProvider = ({ children }) => {
 
   // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",price1)
   // console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
-   console.log("showAddguest -------> ",fixedDepartureData1)
+  //  console.log("showAddguest -------> ",fixedDepartureData1)
   const contextFun = {
     closeBtn,
     setCloseBtn,
     guestPrice,
-    // setPrice1,
-    // price1,
     setGuestPrice,
     setInputData,
     addPackage,
