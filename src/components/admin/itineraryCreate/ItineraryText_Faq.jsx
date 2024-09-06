@@ -202,10 +202,10 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                       modules={modules}
                     />
                   </div>
-                  <div className="pt-12">
+                  <div className="md:pt-12 pt-24">
                     <button
                       onClick={addItem}
-                      className={`bg-navyblack text-white rounded px-10 py-1`}
+                      className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1`}
                     >
                       {editingIndex !== null ? "Update" : "Add"}
                     </button>
@@ -213,11 +213,11 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                 </div>
 
                 <hr className="my-3" />
-                <div className="text-[15px]">
+                <div className="">
                   <div>
                     {itineraryDayWiseDataArray?.map((item, index) => (
                       <div key={index}>
-                        <div className="flex justify-between even:bg-slate-50 px-1">
+                        <div className="flex justify-between even:bg-slate-50 md:px-1">
                           <div>
                             <p className="capitalize flex gap-2 md:text-para text-sm">
                               <span>Day {index + 1}. </span>
@@ -254,7 +254,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
           </div>
         </div>
       </div>
-      <div>
+      <div className="mt-2">
         <button
           onClick={ItineraryTextPost}
           className="bg-black text-white w-full rounded py-2"

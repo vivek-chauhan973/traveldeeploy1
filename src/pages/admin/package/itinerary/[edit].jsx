@@ -135,7 +135,7 @@ export default function CreatePackage() {
             <Layout>
                 <div className="flex items-center gap-5 text-primary pb-3">
                     <LuPackagePlus size={28} className="font-semibold" />
-                    <p className="text-[28px] text-black">Create Package</p>
+                    <p className="md:text-[28px] text-2xl text-black">Create Package</p>
                     <HiOutlineArrowNarrowRight size={28} className=" text-teal-700" />
                 </div>
                 <div className="border-b border-slate-300 mb-5">
@@ -235,7 +235,7 @@ export default function CreatePackage() {
 
                 <div className={`${activeTab === 'Tab11' ? 'block' : 'hidden'}`}>
                     <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn} setTableDot={setTableDot} setActiveTab={setActiveTab} itinerary={itinerary}/>
-                    <button className=" bg-black text-white py-1 mt-3 px-3 rounded-md" onClick={handleSubmit}>Save Data</button>
+                    <button className=" bg-black text-white py-1.5 md:w-auto w-full mt-3 md:ml-2 px-3 rounded-md" onClick={handleSubmit}>Save Data</button>
                 </div>
                 {showCalendarTab && (
                 <div className={` ${activeTab === 'Tab12' ? 'block' : 'hidden'}`}>

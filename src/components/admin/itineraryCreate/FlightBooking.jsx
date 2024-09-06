@@ -860,7 +860,7 @@ export default function FlightBookingForm({
     <>
       <div className="flex items-center gap-1">
         <button
-          className={`px-4 py-2 rounded-full focus:outline-none ${
+          className={`px-3 py-1.5 rounded-full focus:outline-none ${
             showFlightForm ? "bg-red-500 text-white" : "bg-green-500 text-white"
           }`}
           onClick={() => setShowFlightForm(!showFlightForm)} // Toggle visibility and color
@@ -870,7 +870,7 @@ export default function FlightBookingForm({
       </div>
 
       {showFlightForm && ( // Conditionally render the form
-        <div className="bg-white rounded p-3 mt-4">
+        <div className="bg-white rounded p-3 mt-2">
           <div>
             <p className="font-semibold text-base">Flight</p>
           </div>
@@ -1028,21 +1028,15 @@ export default function FlightBookingForm({
               {flightBookingList.map((booking, index) => (
                 <li key={index} className="p-3 flex justify-between">
                   <div>
-                    <p>From: {booking.start.to}</p>
-                    <p>To: {booking.end.to}</p>
+                    <p className="text-para font-medium">From: {booking.start.to}</p>
+                    <p className="text-para font-medium">To: {booking.end.to}</p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <button
-                      className="rounded px-3 py-1 bg-blue-400 text-white"
-                      onClick={() => editFlightBooking(index)}
-                    >
-                      <EditIcon />
+                  <div className="flex justify-center items-center gap-3">
+                    <button onClick={() => editFlightBooking(index)}>
+                      <EditIcon size={20}/>
                     </button>
-                    <button
-                      className="rounded px-3 py-1 bg-red-500 text-white"
-                      onClick={() => setDeletePopu(true)}
-                    >
-                      <DeleteIcon />
+                    <button onClick={() => setDeletePopu(true)}>
+                      <DeleteIcon size={16}/>
                     </button>
                   </div>
                 </li>

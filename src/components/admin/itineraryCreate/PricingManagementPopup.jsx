@@ -19,19 +19,19 @@ const Login = ({ handleCheckbox, handleOnChange, setPriceManagementDot }) => {
   }, []);
 
   return (
-    <div className="relative sm:w-[300px] sm:h-[400px] ">
+    <div className="relative sm:w-[300px] sm:h-[400px]">
       <div
-        className={` fixed inset-0 ${toglePopup ? "ml-28" : ""
-          }  transition-all duration-300 ease-in-out w-full h-full flex items-center justify-center bg-black/50`}
+        className={` fixed inset-0 ${toglePopup ? "md:ml-28" : ""
+          }  transition-all duration-300 ease-in-out w-full h-full flex items-center md:justify-center justify-start bg-black/50 p-5`}
       >
-        <div className="flex flex-col gap-4 w-1/3 justify-center items-center  bg-slate-400 rounded-lg  ">
-          <div className="pt-5 ">
-            <p className="font-bold text-xl">
+        <div className="flex flex-col gap-4 md:w-auto w-full justify-start   bg-slate-400 rounded-lg  p-5">
+          <div className="">
+            <p className="font-bold md:text-lg text-base">
               Please select Package category
             </p>
           </div>
           <div className=" flex flex-col gap-2">
-            <div className="flex w-full gap-4 items-center justify-start">
+            <div className="flex w-full gap-3 items-center justify-start">
               <input
                 type="radio"
                 value="addGuest"
@@ -55,20 +55,21 @@ const Login = ({ handleCheckbox, handleOnChange, setPriceManagementDot }) => {
             </div>
             <div className="flex gap-3 items-center justify-start mt-2 ">
               <input
+                id="confirm"
                 type="checkbox"
                 placeholder="Password"
                 name="password"
-                className="w-3 h-3"
+                className="w-4 h-4"
                 ref={ref}
               />
-              <p className=" text-[12px] font-bold">Please confirm checkbox</p>
+              <label htmlFor="confirm" className=" text-sm font-semibold cursor-pointer">Please confirm checkbox</label>
             </div>
             <div className="text-center my-2">
               <button
                 onClick={handleSubmit}
-                className=" text-center bg-blue-600 text-white px-2 py-1 rounded-sm"
+                className=" text-center bg-navyblack text-white px-4 py-1.5 rounded-md cursor-pointer"
               >
-                Ok
+                OK
               </button>
             </div>
           </div>

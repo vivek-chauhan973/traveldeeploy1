@@ -123,7 +123,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
           <div className="flex items-center gap-5">
             <div dangerouslySetInnerHTML={{ __html: aboutEditorHtml }}></div>
             <div className="w-20">
-              <EditIcon onClick={() => setIsEditingAbout(true)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
+              <EditIcon onClick={() => setIsEditingAbout(true)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
             </div>
           </div>
         )}
@@ -144,7 +144,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
           </div>
           <div className="border h-48 w-full overflow-y-auto py-2 rounded-md mt-2">
             {itinerary?.highlights?.map((item, index) => (
-              <div key={index} className='flex justify-between even:bg-slate-50 px-5'>
+              <div key={index} className='flex justify-between even:bg-slate-50 md:px-5 px-2'>
                 {item.edit ? (
                   <input
                     type="text"
@@ -160,8 +160,8 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
                     <SaveIcon onClick={() => saveHighlight(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
                   ) : (
                     <>
-                      <EditIcon onClick={() => toggleEditHighlight(index)} size={20} className='mt-1 hover:text-primary cursor-pointer' />
-                      {deletePopup ? <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={handleRemoveHighlight} /> : <DeleteIcon onClick={() => setDeletePopu(true)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />}
+                      <EditIcon onClick={() => toggleEditHighlight(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
+                      {deletePopup ? <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={handleRemoveHighlight} /> : <DeleteIcon onClick={() => setDeletePopu(true)} size={20} className='mt-1 hover:text-red-500 cursor-pointer' />}
                     </>
                   )}
                 </div>

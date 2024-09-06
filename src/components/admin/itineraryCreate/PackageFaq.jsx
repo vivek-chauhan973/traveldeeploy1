@@ -119,10 +119,10 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                     onChange={handleChange}
                   ></textarea>
                 </div>
-                <div className="pt-12">
+                <div className="pt-3">
                   <button
                     onClick={addItem}
-                    className={`bg-navyblack text-white rounded px-10 py-1`}
+                    className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1`}
                   >
                     {editingIndex !== null ? "Update" : "Add"}
                   </button>
@@ -136,7 +136,7 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                   <p>Questions</p>
                   {itineraryDayWiseDataArray?.map((item, index) => (
                     <div key={index}>
-                      <div className="flex justify-between gap-2 even:bg-slate-50 px-1">
+                      <div className="mt-1 flex justify-between gap-2 even:bg-slate-50 px-1">
                         <div>
                           <p className="capitalize flex gap-2 md:text-para text-sm">
                             <span>{index + 1}. </span>

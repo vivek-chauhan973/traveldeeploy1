@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from 'next/image';
 
-export default function ImageUploading({ itinerary , setImageDot }) {
+export default function ImageUploading({ itinerary, setImageDot }) {
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
   const [previews1, setPreviews1] = useState([]);
@@ -9,16 +9,16 @@ export default function ImageUploading({ itinerary , setImageDot }) {
   const [alts, setAlts] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedImageIds, setSelectedImageIds] = useState([]);
-  const [hasFetchedImages, setHasFetchedImages] = useState(false); 
+  const [hasFetchedImages, setHasFetchedImages] = useState(false);
   const [existingImagesCount, setExistingImagesCount] = useState(0);
-  const [hasChanges, setHasChanges] = useState(false); 
+  const [hasChanges, setHasChanges] = useState(false);
 
   // Function to fetch existing images
   // console.log("files lengths :: :: ",files.length)
   const fetchImages = useCallback(async () => {
     try {
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`);
-      
+
       const data = await res.json();
       if (data.data.length > 0) {
         const images = data.data;
@@ -28,27 +28,27 @@ export default function ImageUploading({ itinerary , setImageDot }) {
         setAlts(images.map((image) => image.alt));
         setExistingImagesCount(images.length);
         setIsUpdating(true);
-        
-        
-       
-       
+
+
+
+
       }
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   }, [itinerary]);
-  useEffect(()=>{
-    setPreviews(itinerary?.uploads||[]); 
-  },[itinerary])
-  useEffect(()=>{
-    if(previews.length>=4){
+  useEffect(() => {
+    setPreviews(itinerary?.uploads || []);
+  }, [itinerary])
+  useEffect(() => {
+    if (previews.length >= 4) {
       setHasFetchedImages(true)
       setImageDot(true);
-   }
-  //  if(files.length>=4){
-  //   setHasFetchedImages(true)
-  //  }
-  },[previews])
+    }
+    //  if(files.length>=4){
+    //   setHasFetchedImages(true)
+    //  }
+  }, [previews])
   useEffect(() => {
     fetchImages();
   }, [itinerary, fetchImages]);
@@ -98,7 +98,7 @@ export default function ImageUploading({ itinerary , setImageDot }) {
       alert("Please select at least 3 files to upload.");
       return;
     }
-  //  setPreviews(previews1);
+    //  setPreviews(previews1);
     const formData = new FormData();
     files.forEach((file, index) => {
       if (file) {
@@ -112,12 +112,12 @@ export default function ImageUploading({ itinerary , setImageDot }) {
     });
 
     try {
-      
+
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`, {
         method: "POST",
         body: formData,
       });
-    
+
       if (res.ok) {
         alert(`Files ${isUpdating ? "updated" : "uploaded"} successfully`);
         setFiles([]);
@@ -152,38 +152,38 @@ export default function ImageUploading({ itinerary , setImageDot }) {
 
   return (
     <>
-      <div className="my-20 bg-white p-3 rounded-md">
-        <div>
+      <div className="my-5  bg-white p-5 rounded-md">
+        <div className="">
           {previews.map((preview, index) => (
-            <div key={index} className="flex my-10 items-center pl-10">
+            <div key={index} className="flex flex-col md:flex-row pb-3 mb-5 items-center md:pl-10 space-y-4 md:space-y-0 border-b-2 border-gray-50">
               <input
                 type="file"
                 onChange={(e) => handleChange(e, index)}
-                className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-black/20 file:text-black/50 hover:file:bg-black/75 hover:file:text-white cursor-pointer"
+                className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-black/20 file:text-black/50 hover:file:bg-black/75 hover:file:text-white cursor-pointer w-full md:w-auto"
               />
-              <div className="ml-4">
+              <div className="mx-4 w-full md:w-auto">
                 {preview && (
                   <Image
-                    className="w-36 shadow-md"
+                    className="w-full md:w-36 shadow-md"
                     src={preview}
                     alt="Preview"
                     width="220"
                     height="120"
                   />
                 )}
-                <div>
+                <div className="mt-2">
                   <p>Title</p>
                   <input
-                    className="border px-2 rounded-lg"
+                    className="border px-2 py-1 rounded-lg w-full md:w-auto"
                     type="text"
                     value={titles[index] || ""}
                     onChange={(e) => handleTitleChange(e, index)}
                   />
                 </div>
-                <div>
+                <div className="mt-2">
                   <p>Alt</p>
                   <input
-                    className="border px-2 rounded-lg"
+                    className="border px-2 py-1 rounded-lg w-full md:w-auto"
                     type="text"
                     value={alts[index] || ""}
                     onChange={(e) => handleAltChange(e, index)}
@@ -194,7 +194,7 @@ export default function ImageUploading({ itinerary , setImageDot }) {
           ))}
           {files.length < 4 && (
             <button
-              className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] ${hasFetchedImages ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${hasFetchedImages ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
               onClick={addNewImageSection}
               disabled={hasFetchedImages}
             >
@@ -203,7 +203,7 @@ export default function ImageUploading({ itinerary , setImageDot }) {
           )}
           {files.length >= 4 && (
             <button
-              className="bg-gray-300 text-gray-600 px-3 py-2 cursor-not-allowed"
+              className="bg-gray-300 text-gray-600 px-3 py-2 rounded-[17px] w-full md:w-auto cursor-not-allowed"
               disabled
             >
               Maximum 4 images uploaded
@@ -211,7 +211,7 @@ export default function ImageUploading({ itinerary , setImageDot }) {
           )}
           <div className="mt-4">
             <button
-              className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] ${!hasChanges && !isUpdating ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${!hasChanges && !isUpdating ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
               onClick={handleUpload}
               disabled={!hasChanges && !isUpdating}
             >
@@ -220,6 +220,7 @@ export default function ImageUploading({ itinerary , setImageDot }) {
           </div>
         </div>
       </div>
+
     </>
   );
 }
