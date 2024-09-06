@@ -2,8 +2,6 @@ import dynamic from "next/dynamic";
 import "../../../app/globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-// Dynamically import components
 const DepartureSection = dynamic(() =>
   import("@/components/ItineraryDetail/Departure&Booking/DepartureSection")
 );
@@ -50,14 +48,11 @@ const FixedDeparturePopup = dynamic(() =>
 );
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPrint } from "@fortawesome/free-solid-svg-icons";
-
-// Import React and other dependencies
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from "@/components/Faq/Faq1";
-// import Metatag from '@/components/ItineraryDetail/MetaTag';
 export default function Package1() {
   const {
     addPackage,
@@ -71,39 +66,21 @@ export default function Package1() {
     setFixedDepCity1,
     setFixedDepDate1,
     fixedDepCity,
-    // setPrice1,
     fixedDepDate,
     price2,
     submitButtonOfPricingCalculation,
   } = useAppContext();
   const [images, setImages] = useState(null);
   const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
-  // const fetchImages = useCallback(async () => {
-  //   const res = await fetch(`/api/package/image-upload/${addPackage?._id}`);
-  //   const data = await res.json();
-  //   return data;
-  // }, [addPackage]);
-  // console.log(":::::::::::::::::::::::::::::::::::::ad pad--------",addPackage)
   useEffect(() => {
-    // fetchImages().then((res) => setImages(res));
     setImages(addPackage?.uploads);
   }, [addPackage]);
-  // console.log("Images :: :: :: ",images)
-  // displayPrice
-  const [isDisplayPrice, setDisplayPrice] = useState(); //display price
-  // calculated price show
-  // console.log("-==-=-=-=-=-=-=-=-=-=-==",isDisplayPrice)
+  const [isDisplayPrice, setDisplayPrice] = useState(); 
   useEffect(() => {
     if (addPackage?.addguest === "addGuest") {
-      // setPrice1(addPackage.price)
     } else {
-      // console.log("fixed departure Packages :: ",addPackage)
     }
   }, [addPackage, guestPrice]);
-  // console.log("packages is very smart",addPacka/
-  // useEffect(() => {
-  //   setPrice1(isDisplayPrice);
-  // },[isDisplayPrice])
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       setFixedDeparturePopupOpen(true);
@@ -113,8 +90,6 @@ export default function Package1() {
       setFixedDepDate1(fixedDepDate);
     }
   };
-
- // console.log("addPackage12324", addPackage);
   const [buttonGuest, setButtonGuest] = useState("Add Guest & Room");
 
   useEffect(() => {
@@ -124,7 +99,6 @@ export default function Package1() {
   }, [closeBtn]);
   return (
     <div>
-      {/* <Metatag seoData={addPackage}/> */}
       <div className=" absolute w-full ">
         <DesktopHeader />
       </div>
@@ -156,7 +130,6 @@ export default function Package1() {
             </p>
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
-            {/*Select departure city */}
 
             <div id="departure" className=" hidden xl:block">
               <DepartureSection addPackage={addPackage} />
@@ -166,12 +139,9 @@ export default function Package1() {
                 <DepartureSection addPackage={addPackage} />
               )}
               {addPackage?.prices?.departure1 === "fixedDeparture" && (
-                <ItinaryFixedDepartureCard
-                  addPackage={addPackage}
-                  togglePopup={setFixedDeparturePopupOpen}
-                  fixedDeparturePopupOpen={fixedDeparturePopupOpen}
-                />
+                <DepartureSection addPackage={addPackage} setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>
               )}
+              
             </div>
             {/* Pricing */}
             <div>
