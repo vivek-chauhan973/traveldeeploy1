@@ -1,12 +1,12 @@
 import { useAppContext } from '@/components/admin/context/Package/AddGuest';
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const DeparturePopup = ({ setShowPopup, addPackage }) => {
 
   const [handleCity, setHandleCity] = useState(false);
-  const { setShowAddguest, setFixedDepartureButtonEnaibleAndDisable, setPrice2, setGuestPrice, fixedDepartureButtonEnaibleAndDisable, setFixedDepartureProceedButton, guestPrice, departureSectionData } = useAppContext();
+  const { setShowAddguest, setFixedDepartureButtonEnaibleAndDisable, setPrice2, setGuestPrice, fixedDepartureButtonEnaibleAndDisable, setFixedDepartureProceedButton, guestPrice, departureSectionData,showAddguest } = useAppContext();
   const [data, setData] = useState([]);
 //  console.log("add package------> ",addPackage)
   useEffect(() => {
@@ -21,8 +21,6 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
     // },[data])
   }, [addPackage?.startcity, data]);
 
-
-  const ref = useRef(null);
   // console.log("addpackage123456789",addPackage)
 
   const handleSubmit = () => {
@@ -40,14 +38,14 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
       setPrice2(departureSectionData?.price)
     }
     if (handleCity) {
-      setShowAddguest(ref.current.value)
+      // setShowAddguest(ref.current.value)
+      // console.log("handle city ",ref.current.value)
       setShowPopup(false);
     }
     else {
       setShowPopup(true);
     }
   }
-
   const handlePopupClose = () => {
     setShowPopup(false);
   }
@@ -74,7 +72,7 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
               return (
                 <div key={i} className='flex justify-start items-center gap-3 my-2'>
                   <input type="radio" name='radio' value={item} id={id} className='w-5 h-5'
-                    onChange={() => setHandleCity(true)} ref={ref} />
+                    onChange={(e) => {setHandleCity(true);setShowAddguest(e.target.value)}} />
                   <label htmlFor={id} className='text-base cursor-pointer capitalize'>{item}</label>
                 </div>
               )

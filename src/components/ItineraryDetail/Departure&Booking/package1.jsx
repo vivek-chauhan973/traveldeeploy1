@@ -166,12 +166,9 @@ export default function Package1() {
                 <DepartureSection addPackage={addPackage} />
               )}
               {addPackage?.prices?.departure1 === "fixedDeparture" && (
-                <ItinaryFixedDepartureCard
-                  addPackage={addPackage}
-                  togglePopup={setFixedDeparturePopupOpen}
-                  fixedDeparturePopupOpen={fixedDeparturePopupOpen}
-                />
+                <DepartureSection addPackage={addPackage} setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>
               )}
+              
             </div>
             {/* Pricing */}
             <div>

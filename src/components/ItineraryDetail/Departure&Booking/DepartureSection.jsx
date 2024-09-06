@@ -6,9 +6,9 @@ import useMyCustomHook from "./DepartureSectionData";
 import DeparturePopup from "./DeparturePopup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-
-const DepartureSection = ({ addPackage }) => {
-  const { departureSectionData,setDepartureSectionData,setGuestPrice,guestPrice ,setPrice2} = useAppContext();
+import ItinaryFixedDepartureCard from "./ItinaryFixedDepartureCard";
+const DepartureSection = ({ addPackage,setFixedDeparturePopupOpen ,fixedDeparturePopupOpen}) => {
+  const { departureSectionData,setDepartureSectionData,setGuestPrice,guestPrice ,setPrice2,fixedDepartureButtonEnaibleAndDisable} = useAppContext();
   const [datePackage, setDatePackage] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [startCity, setStartCity] = useState([]);
@@ -21,38 +21,28 @@ const DepartureSection = ({ addPackage }) => {
     setSubmittedData(addPackage?.tableData || []);
     setColumns(addPackage?.tableColumn || []);
   }, [addPackage]);
-
-
   const groupedByMonth = AllDataRelatedCity?.[datePackage]?.reduce((acc, item) => {
     const dateObj = new Date(item.date);
     const month = dateObj.toLocaleString('default', { month: 'long' });
     const year = dateObj.getFullYear();
     const monthWithYear = `${month} ${year}`;
-
     if (!acc[monthWithYear]) {
       acc[monthWithYear] = [];
     }
     acc[monthWithYear].push(item);
     return acc;
   }, {});
-
- 
-
   const monthKeys = Object.keys(groupedByMonth || {});
-
   const handlePreviousMonth = () => {
     if (currentMonthIndex > 0) {
       setCurrentMonthIndex(currentMonthIndex - 1);
     }
   };
-
   const handleNextMonth = () => {
     if (currentMonthIndex < monthKeys.length - 1) {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
-
-
   return (
     <>
       <div className="">
@@ -66,7 +56,6 @@ const DepartureSection = ({ addPackage }) => {
             <hr />
             <div className="overflow-y-auto">
               {showPopup && <DeparturePopup setShowPopup={setShowPopup} addPackage={addPackage} />}
-
               {/* Calendar Slider with Previous and Next Buttons */}
               {addPackage?.addguest==="addGuest"&&<div className="flex pr-5 justify-end gap-2 items-center mt-2">
                 <button
@@ -84,7 +73,6 @@ const DepartureSection = ({ addPackage }) => {
                   <FontAwesomeIcon icon={faAngleRight} className='font1' />
                 </button>
               </div>}
-
               {/* Display the current month's calendar */}
               {addPackage?.addguest==="addGuest"&&
               <div className="mb-2 ml-5">
@@ -103,8 +91,7 @@ const DepartureSection = ({ addPackage }) => {
                             key={i}
                             onClick={() => {
                               setShowPopup(true);
-                              setDepartureSectionData(item);
-                              
+                              setDepartureSectionData(item); 
                             }}
                             className="cursor-pointer"
                           >
@@ -127,12 +114,12 @@ const DepartureSection = ({ addPackage }) => {
                   </div>
                 )}
               </div>}
-              {
-                (addPackage?.addguest==="fixedDeparture"&&addPackage?.fixedfixeddepartureweightedprice===1)&&
+              {(addPackage?.addguest==="fixedDeparture"&&fixedDepartureButtonEnaibleAndDisable&&addPackage?.fixedfixeddepartureweightedprice===1)?<ItinaryFixedDepartureCard  addPackage={addPackage}
+                    togglePopup={setFixedDeparturePopupOpen}
+                    fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>:(addPackage?.addguest==="fixedDeparture"&&addPackage?.fixedfixeddepartureweightedprice===1)&&
                 <div className="mb-2 ml-5">
                 {AllDataRelatedCity?.[0]?.[0] && (
                   <div className="mb-5">
-                    
                     <div className="flex gap-3 flex-wrap">
                       {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
                         const dateObj = new Date(item.Date);
@@ -143,8 +130,7 @@ const DepartureSection = ({ addPackage }) => {
                             key={i}
                             onClick={() => {
                               setShowPopup(true);
-                              setDepartureSectionData(item);
-                              
+                              setDepartureSectionData(item);  
                             }}
                             className="cursor-pointer"
                           >
@@ -168,12 +154,13 @@ const DepartureSection = ({ addPackage }) => {
                 )}
               </div>
               }
-              {
+              {(addPackage?.addguest==="fixedDeparture"&&fixedDepartureButtonEnaibleAndDisable&&addPackage?.fixedfixeddepartureweightedprice===2)?<ItinaryFixedDepartureCard  addPackage={addPackage}
+                    togglePopup={setFixedDeparturePopupOpen}
+                    fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>:
                 (addPackage?.addguest==="fixedDeparture"&&addPackage?.fixedfixeddepartureweightedprice===2)&&
                 <div className="mb-2 ml-5">
                 {AllDataRelatedCity?.[0]?.[0] && (
-                  <div className="mb-5">
-                    
+                  <div className="mb-5"> 
                     <div className="flex gap-3 flex-wrap">
                       {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
                         const dateObj = new Date(item.Date);
@@ -217,7 +204,6 @@ const DepartureSection = ({ addPackage }) => {
                 )}
               </div>
               }
-
               <hr />
               <div className="ml-2 my-4">
                 <h6 className="font-semibold text-md mb-3 text-graytext">
@@ -228,7 +214,6 @@ const DepartureSection = ({ addPackage }) => {
                   dangerouslySetInnerHTML={{ __html: addPackage?.about }}
                 ></p>
               </div>
-
               <div className="md:mx-5 ">
                 <div className="md:my-7 my-5 overflow-x-scroll">
                   <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
@@ -255,8 +240,6 @@ const DepartureSection = ({ addPackage }) => {
                   </table>
                 </div>
               </div>
-         
-
               <hr />
               <div className="ml-2 my-4">
                 <h6 className="font-semibold text-md mb-5 text-graytext">Highlights</h6>

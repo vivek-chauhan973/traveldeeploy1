@@ -51,8 +51,10 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
       }
 
     }
-
   }
+  useEffect(()=>{
+    setLimitKey(1);
+  },[parseInt(departureSectionData?.Price)])
   const newLimitData = [];
   let i = parseInt(limitData?.[0])
   while (i <= parseInt(limitData?.[1])) {
@@ -80,7 +82,7 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
     if(departureSectionData?.GST === "All Inclusice"){
       setCalculatedPrizeOfGst(0)
     }else{
-      setCalculatedPrizeOfGst((guestPrice * 5) / 100)
+      setCalculatedPrizeOfGst((guestPrice * parseInt(departureSectionData?.GST)) / 100)
     }
   }, [guestPrice])
   useEffect(() => {
@@ -120,6 +122,8 @@ const [totalv,setTotalv]=useState(0);
     }
   },[totalSum])
   // console.log("sum-->",totalSum);
+  const WeightPropertyPresentedOrNot=departureSectionData?.hasOwnProperty("Weight");
+  // console.log("departureSectionData.hasOwnProperty",a);
   return (
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[490px] overflow-scroll">
@@ -157,7 +161,7 @@ const [totalv,setTotalv]=useState(0);
                     setCity(true);
                   }}
                 >
-                  <option value="" className="cursor-pointer">Select Person</option>
+                  <option value="" className="cursor-pointer">{limitKey===1&&"Select Person"}</option>
                   {newLimitData?.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
@@ -168,10 +172,11 @@ const [totalv,setTotalv]=useState(0);
               )}
             </div>
 
-            <div>
+            {WeightPropertyPresentedOrNot&&<div>
               <div className="flex flex-col mt-2 ">
                 <p className="text-para font-semibold cursor-pointer capitalize">{limitKey1 ? "weights of person :" : ""}</p>
-                {keys.map((item, i) => <div key={i} className="flex gap-3 md:border-l-4 border-l-2 border-red-400 justify-center items-center my-2">
+                {keys.map((item, i) => 
+                <div key={i} className="flex gap-3 md:border-l-4 border-l-2 border-red-400 justify-center items-center my-2">
                   {/* <p>Person{i + 1}</p> */}
                   <label
                     className="text-para"
@@ -189,12 +194,12 @@ const [totalv,setTotalv]=useState(0);
                     disabled={contactAdmin} />
                 </div>)}
               </div>
-            </div>
+            </div>}
           </div>
 
           {contactAdmin&&<p className=" text-red-600 py-4">Please contact admin package to increase weight limit</p>}
 
-          <div className=" justify-between hidden xl:flex ">
+          <div className=" justify-between flex my-2 ">
             <div>
               <p className="text-sm ">Price BreakUp</p>
             </div>
@@ -205,15 +210,15 @@ const [totalv,setTotalv]=useState(0);
               </p>
             </div>
           </div>
-          <hr className="border-dashed my-2 hidden xl:block" />
-          <div className="text-para  grid-cols-2 my-3 hidden xl:grid">
+          <hr className="border-dashed my-2 " />
+          <div className="text-para  grid-cols-2 my-3 grid">
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
               <p className="">₹ {" "}{(guestPrice*limitKey)?.toLocaleString()}</p>
             </div>
           </div>
-          <div className="text-para grid-cols-2 -mt-2 hidden xl:grid">
+          <div className="text-para grid-cols-2 -mt-2 grid">
             <div></div>
             <div className="grid grid-cols-2">
               <p>GST {fixedDepartureButtonEnaibleAndDisable?departureSectionData?.GST:null} </p>
@@ -222,7 +227,7 @@ const [totalv,setTotalv]=useState(0);
           </div>
           <hr className="border-dashed my-2" />
           {/* inject your code for mobile device */}
-          <div className=' xl:hidden '>
+          {/* <div className=' xl:hidden '>
             <p>Table Data is here</p>
             <div className="overflow-x-scroll">
               <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
@@ -248,9 +253,9 @@ const [totalv,setTotalv]=useState(0);
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
           {/* <hr /> */}
-          <div className="xl:hidden my-5">
+          {/* <div className="xl:hidden my-5">
             <div className="ml-2">
               <p className="font-semibold text-lg mb-2 mt-1 text-graytext">
                 About us
@@ -276,15 +281,15 @@ const [totalv,setTotalv]=useState(0);
                 ))}
               </div>
             </div>
-          </div>
-          <div className="text-para  grid-cols-2 hidden xl:grid">
+          </div> */}
+          <div className="text-para  grid-cols-2 grid">
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p>Grand Total</p>
               <p className="font-semibold text-graytext">₹ {" "}{(grandTotal)?.toLocaleString()}</p>
             </div>
           </div>
-          <div className=" justify-center gap-10 my-3 hidden xl:flex">
+          <div className=" justify-center gap-10 my-3 flex">
             <label className=" inline-flex items-center">
               <input
                 type="radio"
@@ -297,10 +302,10 @@ const [totalv,setTotalv]=useState(0);
             <label className=" inline-flex items-center">
               <input
                 type="radio"
-                className="form-radio text-primary hidden xl:block"
+                className="form-radio text-primary  "
                 name="radio-group"
               />
-              <p className="ml-2 font-semibold text-graytext hidden xl:block">
+              <p className="ml-2 font-semibold text-graytext ">
                 Pay Full Online
               </p>
             </label>
