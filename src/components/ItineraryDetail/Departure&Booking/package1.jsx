@@ -75,7 +75,7 @@ export default function Package1() {
   useEffect(() => {
     setImages(addPackage?.uploads);
   }, [addPackage]);
-  const [isDisplayPrice, setDisplayPrice] = useState(); 
+  const [isDisplayPrice, setDisplayPrice] = useState();
   useEffect(() => {
     if (addPackage?.addguest === "addGuest") {
     } else {
@@ -130,7 +130,6 @@ export default function Package1() {
             </p>
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
-
             <div id="departure" className=" hidden xl:block">
               <DepartureSection addPackage={addPackage} />
             </div>
@@ -139,9 +138,12 @@ export default function Package1() {
                 <DepartureSection addPackage={addPackage} />
               )}
               {addPackage?.prices?.departure1 === "fixedDeparture" && (
-                <DepartureSection addPackage={addPackage} setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>
+                <DepartureSection
+                  addPackage={addPackage}
+                  setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}
+                  fixedDeparturePopupOpen={fixedDeparturePopupOpen}
+                />
               )}
-              
             </div>
             {/* Pricing */}
             <div>
@@ -276,7 +278,7 @@ export default function Package1() {
               <Itinerarymap />
             </div>
             {/* <!- TOUR DETAILS IS HERE --> */}
-            <ItineraryTourDetails/>
+            <ItineraryTourDetails />
             {/* Privacy policy Terms */}
             <div id="Policy&TermsSection" className="pt-7">
               <ItineraryPaymentTerms />
@@ -428,21 +430,24 @@ export default function Package1() {
               </div>
               <p className="text-sm leading-5">
                 Starts From{" "}
-                {addPackage?.addguest==="addGuest"&&<span className="text-lg text-graytext font-medium">
-                  ₹
-                  {Math.floor(
-                    (submitButtonOfPricingCalculation && (guestPrice/2)) ||
-                      price2 ||
-                      addPackage?.price
-                  ).toLocaleString()}
-                </span>}
-                {addPackage?.addguest==="fixedDeparture"&&<span className="text-lg text-graytext font-medium">
-                  ₹
-                  {Math.floor(
-                    ((guestPrice)) ||
-                      addPackage?.price
-                  ).toLocaleString()}
-                </span>}
+                {addPackage?.addguest === "addGuest" && (
+                  <span className="text-lg text-graytext font-medium">
+                    ₹
+                    {Math.floor(
+                      (submitButtonOfPricingCalculation && guestPrice / 2) ||
+                        price2 ||
+                        addPackage?.price
+                    ).toLocaleString()}
+                  </span>
+                )}
+                {addPackage?.addguest === "fixedDeparture" && (
+                  <span className="text-lg text-graytext font-medium">
+                    ₹
+                    {Math.floor(
+                      guestPrice || addPackage?.price
+                    ).toLocaleString()}
+                  </span>
+                )}
               </p>
               <p className="text-xxs leading-5">per person on twin sharing</p>
             </div>

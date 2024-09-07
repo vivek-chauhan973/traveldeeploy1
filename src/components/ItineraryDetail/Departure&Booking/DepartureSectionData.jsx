@@ -9,9 +9,9 @@ const fetchPriceHike = async (id) => {
 
 const fetchFixedDepartureData = async (id) => {
   const response = await fetch(`/api/package/price/departures/${id}`);
-  const data=await response.json()
- 
-  return data
+  const data = await response.json();
+
+  return data;
 };
 
 const useMyCustomHook = () => {
@@ -32,7 +32,7 @@ const useMyCustomHook = () => {
         setPriceHike1(res?.response?.priceHiKe || []);
       });
       fetchFixedDepartureData(newPackageId).then((res) => {
-        setFixedDepartureData(res?.departureData||[])
+        setFixedDepartureData(res?.departureData || []);
       });
     }
   }, [newPackageId]);
@@ -72,27 +72,27 @@ const useMyCustomHook = () => {
         const enddate1 = new Date(item?.endDate || "");
         while (startdate1 <= enddate1) {
           const date1 = formatDate(startdate1);
-          const obj={
-            date:date1,
-            pricerate:pricerate
-
-          }
+          const obj = {
+            date: date1,
+            pricerate: pricerate,
+          };
           dateArray.push(obj);
           startdate1.setDate(startdate1.getDate() + 1);
         }
       }
-      const dateArray1=[];
-      for(let item of dateArray){
+      const dateArray1 = [];
+      for (let item of dateArray) {
         dateArray1.push(item.date);
       }
-        while (currentDate <= endDate) {
-          const formattedDate = formatDate(currentDate);
-          const dayOfWeek = getDayOfWeek(currentDate);
-          const index = dateArray1.indexOf(formattedDate)
-        
-          if (dateArray1.includes(formattedDate)) {
-            if(index>=0){
-            const incprice=packagePrice + (dateArray[index]?.pricerate * packagePrice) / 100;
+      while (currentDate <= endDate) {
+        const formattedDate = formatDate(currentDate);
+        const dayOfWeek = getDayOfWeek(currentDate);
+        const index = dateArray1.indexOf(formattedDate);
+
+        if (dateArray1.includes(formattedDate)) {
+          if (index >= 0) {
+            const incprice =
+              packagePrice + (dateArray[index]?.pricerate * packagePrice) / 100;
             result.push({
               day: dayOfWeek,
               date: formattedDate,
@@ -100,26 +100,26 @@ const useMyCustomHook = () => {
               bool1: 1,
               hike: dateArray[index]?.pricerate,
             });
-            } 
-          } else {
-            result.push({
-              day: dayOfWeek,
-              date: formattedDate,
-              price: packagePrice,
-              bool1: 0,
-              hike: 0,
-            });
           }
-
-          currentDate.setDate(currentDate.getDate() + 1);
+        } else {
+          result.push({
+            day: dayOfWeek,
+            date: formattedDate,
+            price: packagePrice,
+            bool1: 0,
+            hike: 0,
+          });
         }
+
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
     }
-    if (addPackage?.addguest === "fixedDeparture"){
+    if (addPackage?.addguest === "fixedDeparture") {
       result.push(fixedDepartureData);
     }
     return [result];
-  }, [priceHike1,fixedDepartureData]);
-  
+  }, [priceHike1, fixedDepartureData]);
+
   return AllDataRelatedCity;
 };
 

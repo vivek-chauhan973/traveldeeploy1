@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import CustomiseTour from "../CustomiseTour";
 import FixedDeparturePopup from "./FixedDeparturePopup";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 const fetchLimitData = async (id) => {
   const response = await fetch(`/api/package/price/departures/${id}`);
   return await response.json();
-}
-
-const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopupOpen, }) => {
-
+};
+const ItinaryFixedDepartureCard = ({
+  addPackage,
+  togglePopup,
+  fixedDeparturePopupOpen,
+}) => {
   const {
     departureSectionData,
     setFixedDepDate1,
@@ -23,7 +24,6 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
     setFixedDepartureButtonEnaibleAndDisable,
     fixedDepartureButtonEnaibleAndDisable,
   } = useAppContext();
-
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
   const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
@@ -33,8 +33,7 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
   const [gst, setGst] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
   const [submittedData, setSubmittedData] = useState([]);
-  const [contactAdmin,setContactAdimn]=useState(false);
-
+  const [contactAdmin, setContactAdimn] = useState(false);
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
   }
@@ -49,18 +48,17 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
         limitData.push(1);
         limitData.push(departureSectionData?.Avilability);
       }
-
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     setLimitKey(1);
-  },[parseInt(departureSectionData?.Price)])
+  }, [parseInt(departureSectionData?.Price)]);
   const newLimitData = [];
-  let i = parseInt(limitData?.[0])
+  let i = parseInt(limitData?.[0]);
   while (i <= parseInt(limitData?.[1])) {
     let data = i.toString();
     newLimitData.push(data);
-    i = i + 1
+    i = i + 1;
   }
   const handleSubmit = () => {
     if (fixedDepDate && fixedDepCity) {
@@ -72,67 +70,71 @@ const ItinaryFixedDepartureCard = ({ addPackage, togglePopup, fixedDeparturePopu
     }
   };
   useEffect(() => {
-    setSubmittedData(addPackage?.tableData || [])
-    setColumns(addPackage?.tableColumn || [])
+    setSubmittedData(addPackage?.tableData || []);
+    setColumns(addPackage?.tableColumn || []);
     setGst(addPackage?.fixedDeparturePrices?.gst || 0);
-  }, [addPackage])
-
-
+  }, [addPackage]);
   useEffect(() => {
-    if(departureSectionData?.GST === "All Inclusice"){
-      setCalculatedPrizeOfGst(0)
-    }else{
-      setCalculatedPrizeOfGst((guestPrice * parseInt(departureSectionData?.GST)) / 100)
+    if (departureSectionData?.GST === "All Inclusice") {
+      setCalculatedPrizeOfGst(0);
+    } else {
+      setCalculatedPrizeOfGst(
+        (guestPrice * parseInt(departureSectionData?.GST)) / 100
+      );
     }
-  }, [guestPrice])
+  }, [guestPrice]);
   useEffect(() => {
     setGrandTotal((guestPrice + calculatedPrizeOfGst) * limitKey);
-  }, [calculatedPrizeOfGst, limitKey,guestPrice])
-
+  }, [calculatedPrizeOfGst, limitKey, guestPrice]);
   // convert limit key into keys array , here is the logic of keys to convert array
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState("");
   const [lenkey, setLenKey] = useState(0);
-const [totalWeight,setTotalWeight]=useState(0);
-
+  const [totalWeight, setTotalWeight] = useState(0);
   const keys = Array.from({ length: limitKey1 }, (_, index) => index + 1);
-
   // here is data of all persons' weight and data is already stored in state
-const [totalv,setTotalv]=useState(0);
+  const [totalv, setTotalv] = useState(0);
   const [inputData1, setInputData1] = useState([]);
   const [inputValues, setInputValues] = useState({});
-  const handleInputChange = (e,i) => {
+  const handleInputChange = (e, i) => {
     const { name, value } = e.target;
     setInputValues((prevValues) => ({
       ...prevValues,
-      [i]: Number(value), // Store value as a number
+      [i]: Number(value),
     }));
-    setInputData1(prevState =>
-      prevState.map(item =>
-        item.hasOwnProperty(name) ? { ...item, [name]: Number(value )} : item
+    setInputData1((prevState) =>
+      prevState.map((item) =>
+        item.hasOwnProperty(name) ? { ...item, [name]: Number(value) } : item
       )
     );
   };
   useEffect(() => {
-    setInputData1(keys.map(item => ({ [`input${item}`]: "" })))
-  }, [limitKey1])
-  const totalSum = Object.values(inputValues).reduce((acc, curr) => acc + curr, 0);
-  useEffect(()=>{
-    if(totalSum>(departureSectionData?.Weight*limitKey)){
-      setContactAdimn(true)
+    setInputData1(keys.map((item) => ({ [`input${item}`]: "" })));
+  }, [limitKey1]);
+  const totalSum = Object.values(inputValues).reduce(
+    (acc, curr) => acc + curr,
+    0
+  );
+  useEffect(() => {
+    if (totalSum > departureSectionData?.Weight * limitKey) {
+      setContactAdimn(true);
     }
-  },[totalSum])
-  // console.log("sum-->",totalSum);
-  const WeightPropertyPresentedOrNot=departureSectionData?.hasOwnProperty("Weight");
-  // console.log("departureSectionData.hasOwnProperty",a);
+  }, [totalSum]);
+  const WeightPropertyPresentedOrNot =
+    departureSectionData?.hasOwnProperty("Weight");
   return (
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[490px] overflow-scroll">
         <div className=" overflow-y-auto">
           <div className="xl:block hidden">
             <div className="flex justify-between mb-2">
-              <h5 className="text-md font-semibold text-graytext">Booking Summary</h5>
+              <h5 className="text-md font-semibold text-graytext">
+                Booking Summary
+              </h5>
               <div>
-                <FontAwesomeIcon icon={faPenToSquare} className='font1 cursor-pointer' />
+                <FontAwesomeIcon
+                  icon={faPenToSquare}
+                  className="font1 cursor-pointer"
+                />
               </div>
             </div>
             <hr />
@@ -147,57 +149,84 @@ const [totalv,setTotalv]=useState(0);
               <p className=" font-bold text-graytext">
                 10 Mar 2024 - 17 Mar 2024
               </p>
-            </div>          
+            </div>
           </div>
           <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3">
             <div>
               <div className="flex gap-4 justify-between items-center">
-                <label className="text-para font-semibold cursor-pointer capitalize" htmlFor="city">Number Of Person : </label>
-                <select name="city" id="city" className="border rounded w-1/2 pl-3 cursor-pointer"
+                <label
+                  className="text-para font-semibold cursor-pointer capitalize"
+                  htmlFor="city"
+                >
+                  Number Of Person :{" "}
+                </label>
+                <select
+                  name="city"
+                  id="city"
+                  className="border rounded w-1/2 pl-3 cursor-pointer"
                   onChange={(e) => {
                     setFixedDepCity(e.target.value);
-                    setLimitKey(e.target.value)
-                    setLimitKey1(e.target.value)
+                    setLimitKey(e.target.value);
+                    setLimitKey1(e.target.value);
                     setCity(true);
                   }}
                 >
-                  <option value="" className="cursor-pointer">{limitKey===1&&"Select Person"}</option>
+                  <option value="" className="cursor-pointer">
+                    {limitKey === 1 && "Select Person"}
+                  </option>
                   {newLimitData?.map((item, i) => (
-                    <option key={i} value={item}>{item}</option>
+                    <option key={i} value={item}>
+                      {item}
+                    </option>
                   ))}
                 </select>
               </div>
               {fixedDepCity ? null : (
-                <p className="text-xxs text-red-600 text-end pr-7">Please Select Person First</p>
+                <p className="text-xxs text-red-600 text-end pr-7">
+                  Please Select Person First
+                </p>
               )}
             </div>
 
-            {WeightPropertyPresentedOrNot&&<div>
-              <div className="flex flex-col mt-2 ">
-                <p className="text-para font-semibold cursor-pointer capitalize">{limitKey1 ? "weights of person :" : ""}</p>
-                {keys.map((item, i) => 
-                <div key={i} className="flex gap-3 md:border-l-4 border-l-2 border-red-400 justify-center items-center my-2">
-                  {/* <p>Person{i + 1}</p> */}
-                  <label
-                    className="text-para"
-                    htmlFor={`person${i + 1}`}
-                  >
-                    Person{i + 1}
-                  </label>
-                  <input type="number" id={`person${i + 1}`} name={`input${i + 1}`} required className="mt-2 w-1/2 py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
-                    onChange={(e) => {
-                      handleInputChange(e,i);
-                      setDate(true);
-                      
-                      // console.log(e.target.value);
-                    }}
-                    disabled={contactAdmin} />
-                </div>)}
+            {WeightPropertyPresentedOrNot && (
+              <div>
+                <div className="flex flex-col mt-2 ">
+                  <p className="text-para font-semibold cursor-pointer capitalize">
+                    {limitKey1 ? "weights of person :" : ""}
+                  </p>
+                  {keys.map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex gap-3 md:border-l-4 border-l-2 border-red-400 justify-center items-center my-2"
+                    >
+                      {/* <p>Person{i + 1}</p> */}
+                      <label className="text-para" htmlFor={`person${i + 1}`}>
+                        Person{i + 1}
+                      </label>
+                      <input
+                        type="number"
+                        id={`person${i + 1}`}
+                        name={`input${i + 1}`}
+                        required
+                        className="mt-2 w-1/2 py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
+                        onChange={(e) => {
+                          handleInputChange(e, i);
+                          setDate(true);
+                        }}
+                        disabled={contactAdmin}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>}
+            )}
           </div>
 
-          {contactAdmin&&<p className=" text-red-600 py-4">Please contact admin package to increase weight limit</p>}
+          {contactAdmin && (
+            <p className=" text-red-600 py-4">
+              Please contact admin package to increase weight limit
+            </p>
+          )}
 
           <div className=" justify-between flex my-2 ">
             <div>
@@ -205,8 +234,7 @@ const [totalv,setTotalv]=useState(0);
             </div>
             <div>
               <p className="text-lg font-medium text-graytext">
-              ₹{" "}
-                {(guestPrice)?.toLocaleString()}
+                ₹ {guestPrice?.toLocaleString()}
               </p>
             </div>
           </div>
@@ -215,14 +243,21 @@ const [totalv,setTotalv]=useState(0);
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
-              <p className="">₹ {" "}{(guestPrice*limitKey)?.toLocaleString()}</p>
+              <p className="">₹ {(guestPrice * limitKey)?.toLocaleString()}</p>
             </div>
           </div>
           <div className="text-para grid-cols-2 -mt-2 grid">
             <div></div>
             <div className="grid grid-cols-2">
-              <p>GST {fixedDepartureButtonEnaibleAndDisable?departureSectionData?.GST:null} </p>
-              <p className="">₹ {" "}{(calculatedPrizeOfGst*limitKey)?.toLocaleString()}</p>
+              <p>
+                GST{" "}
+                {fixedDepartureButtonEnaibleAndDisable
+                  ? departureSectionData?.GST
+                  : null}{" "}
+              </p>
+              <p className="">
+                ₹ {(calculatedPrizeOfGst * limitKey)?.toLocaleString()}
+              </p>
             </div>
           </div>
           <hr className="border-dashed my-2" />
@@ -286,7 +321,9 @@ const [totalv,setTotalv]=useState(0);
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p>Grand Total</p>
-              <p className="font-semibold text-graytext">₹ {" "}{(grandTotal)?.toLocaleString()}</p>
+              <p className="font-semibold text-graytext">
+                ₹ {grandTotal?.toLocaleString()}
+              </p>
             </div>
           </div>
           <div className=" justify-center gap-10 my-3 flex">
@@ -318,7 +355,6 @@ const [totalv,setTotalv]=useState(0);
                 </button>
               </CustomiseTour>
 
-
               {fixedDeparturePopupOpen && (
                 <FixedDeparturePopup
                   togglePopup={togglePopup}
@@ -329,10 +365,11 @@ const [totalv,setTotalv]=useState(0);
               {
                 <button
                   onClick={handleSubmit}
-                  className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                    ? "bg-primary"
-                    : "bg-orange-200"
-                    } text-center text-para`}
+                  className={`border px-5 py-2 rounded-md ${
+                    fixedDepartureButtonEnaibleAndDisable
+                      ? "bg-primary"
+                      : "bg-orange-200"
+                  } text-center text-para`}
                 >
                   Book now
                 </button>

@@ -47,7 +47,6 @@ const ItineraryHeroSection = ({
   useEffect(() => {
     setHemages(images);
   }, [images]);
-  // console.log("images12324432423",hemages);
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       togglePopup(true);
@@ -57,7 +56,6 @@ const ItineraryHeroSection = ({
       setFixedDepDate1(fixedDepDate);
     }
   };
-  // console.log("adpackade sata ",addPackage?.days?.length)
   return (
     <>
       <div>
@@ -110,7 +108,7 @@ const ItineraryHeroSection = ({
               <h1 className="flex items-center gap-2 mr-2">
                 {addPackage?.name}
                 <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">
-                  {addPackage?.days?.length - 1}N/{" "}
+                  {addPackage?.days?.length - 1>0?addPackage?.days?.length - 1:0}N/{" "}
                   {addPackage?.days?.length}D
                 </span>
               </h1>
