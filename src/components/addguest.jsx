@@ -540,6 +540,7 @@ const Addguest = ({
                     </select>
                   </div>
                 </div>
+                {/* Child 5-11 here */}
                 <div className="mt-2">
                   <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
                     <label htmlFor="Childdropdown" className="my-2">
@@ -552,7 +553,7 @@ const Addguest = ({
                           <p className="text-para">
                             Child
                             <span className="  text-slate-400 font-light">
-                              (Age 6 - 11 yrs)
+                              (Age 5 - 11 yrs)
                             </span>{" "}
                           </p>
                         </div>
@@ -578,10 +579,10 @@ const Addguest = ({
                       </select>
                     </div>
                   </div>
-                  {/* child date is here */}
+                  {/* child 5-11 date is here */}
                   {[...Array(inputData?.child)].map((_, index) => (
                     <div key={index} className="md:ml-5 pt-2 ">
-                      <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
+                      <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex flex-col md:flex-row md:items-center md:gap-3 gap-1 my-1">
                         <label
                           className="text-para"
                           htmlFor={`childDate${index}`}
@@ -607,20 +608,20 @@ const Addguest = ({
                   ))}
                 </div>
 
-                {/* Infant date is here */}
+                {/* Child 3-5  is here */}
                 <div className="mt-2 ">
                   <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
-                    <label htmlFor="Childdropdown" className="my-2">
+                    <label htmlFor="Childdropdown2" className="my-2">
                       <div className="flex gap-3 items-center">
                         <FontAwesomeIcon
-                          icon={faBaby}
+                          icon={faChild}
                           className="font1 cursor-pointer"
                         />
                         <div>
                           <p className="text-para">
-                            Infant
+                            Child
                             <span className="  text-slate-400 font-light">
-                              (Age 0 - 5 yrs)
+                              (Age 3 - 5 yrs)
                             </span>{" "}
                           </p>
                         </div>
@@ -631,7 +632,7 @@ const Addguest = ({
                       <select
                         name="infant"
                         value={inputData?.infant}
-                        id="Infantdropdown"
+                        id="Childdropdown2"
                         className={`border w-full py-1 rounded-md ${inputData?.infant === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
@@ -647,10 +648,74 @@ const Addguest = ({
                       </select>
                     </div>
                   </div>
-                  {/* child date is here */}
+                  {/* child 3-5 date is here */}
                   {[...Array(inputData?.infant)].map((_, index) => (
                     <div key={index} className="md:ml-5 pt-2 ">
-                      <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex items-center md:gap-5 gap-1 my-1">
+                      <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex flex-col md:flex-row mditems-center md:gap-3 gap-1 my-1">
+                        <label
+                          className="text-para"
+                          htmlFor={`Childdropdown2${index}`}
+                        >
+                          Child {index + 1}
+                        </label>
+                        <input
+                          id={`Childdropdown2${index}`}
+                          className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
+                          type="date"
+                          max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
+                          min={infantMinDate}
+                          onChange={(e) => handleDateChange1(e, index)}
+                        />
+
+                        <span className="text-red-400 text-sm">
+                          Select{" "}
+                          {inputData?.infantAges?.[index] &&
+                            `${inputData?.infantAges?.[index].years} yrs ${inputData?.infantAges?.[index].months} months`}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {/* Infant  is here */}
+                <div className="mt-2 ">
+                  <div className="flex items-center md:gap-10 md:w-96 w-60 justify-between">
+                    <label htmlFor="infantdropdown" className="my-2">
+                      <div className="flex gap-3 items-center">
+                        <FontAwesomeIcon
+                          icon={faBaby}
+                          className="font1 cursor-pointer"
+                        />
+                        <div>
+                          <p className="text-para">
+                            Infant
+                            <span className="  text-slate-400 font-light">
+                              (Age 0 - 3 yrs)
+                            </span>{" "}
+                          </p>
+                        </div>
+                      </div>
+                    </label>
+
+                    <div className="w-14">
+                      <select
+                        name="infant"
+                        value={""}
+                        id="infantdropdown"
+                        className="border w-full py-1 rounded-md opacity-50"
+                        disabled={inputData?.adult === 0} // Disable if adult count is 0
+                      >
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                    </div>
+                  </div>
+                  {/* Infant date is here */}
+                  {[...Array(inputData?.infant)].map((_, index) => (
+                    <div key={index} className="md:ml-5 pt-2 ">
+                      <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex flex-col md:flex-row mditems-center md:gap-3 gap-1 my-1">
                         <label
                           className="text-para"
                           htmlFor={`InfantDate${index}`}
@@ -666,7 +731,7 @@ const Addguest = ({
                           onChange={(e) => handleDateChange1(e, index)}
                         />
 
-                        <span className="text-red-400 text-sm">
+                        <span className="text-red-400 text-xs font-medium">
                           Select{" "}
                           {inputData?.infantAges?.[index] &&
                             `${inputData?.infantAges?.[index].years} yrs ${inputData?.infantAges?.[index].months} months`}
@@ -868,7 +933,7 @@ const Addguest = ({
                 {/* All listed Cars is here */}
 
                 {inputData?.adult && carWithCapacity?.map(item =>
-                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex-col md:flex-row flex flex-1 gap-5 border-b-2 border-navyblack py-3">
+                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex-col md:flex-row flex flex-1 gap-5 border-b py-3">
 
                     <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
                       <Image
@@ -884,7 +949,7 @@ const Addguest = ({
                         <p className="font-bold capitalize text-md ">
                           {item?.vehicleType}
                         </p>
-                        <p className="text-xxs md:text-xs font-semibold capitalize">{item?.seatingCapacity} passenger seating capacity</p>
+                        <p className="text-[10px] font-medium text-gray-500 capitalize">{item?.seatingCapacity} passenger seating capacity</p>
                       </div>
 
 
@@ -920,7 +985,7 @@ const Addguest = ({
                         inputData?.quardRoom}{" "}
                       Rooms
                     </p>
-                 
+
                   </div>
                   <div className="text-sm flex gap-2">
                     <p className="font-semibold text-sm md:text-base">{selectedCarIdFetchApi?.vehicleType}</p>

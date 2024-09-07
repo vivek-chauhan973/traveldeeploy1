@@ -27,6 +27,9 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
     setData(addPackage?.startcity || []);
   }, [addPackage?.startcity, data]);
   const handleSubmit = () => {
+    if (addPackage?.addguest === "addGuest") {
+      setFixedDepartureButtonEnaibleAndDisable(true);
+    }
     if (addPackage?.addguest === "fixedDeparture") {
       setFixedDepartureButtonEnaibleAndDisable(true);
     }
@@ -40,10 +43,13 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
     } else {
       setShowPopup(true);
     }
+    
   };
   const handlePopupClose = () => {
     setShowPopup(false);
   };
+ 
+  
 
   return (
     <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
@@ -59,33 +65,28 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
         </div>
         <div className="md:px-7 px-5">
           <div>
-            <p className="md:text-xl text-md font-semibold">
+            <p className="md:text-lg text-base font-semibold capitalize">
               Select your preferred departure city
             </p>
           </div>
-          <div className="my-5">
+          <div className="my-3">
             {data?.map((item, i) => {
               const id = `radio-${i}`;
               return (
-                <div
-                  key={i}
-                  className="flex justify-start items-center gap-3 my-2"
-                >
+                <div key={i} className="flex justify-start items-center gap-3 my-2">
                   <input
                     type="radio"
                     name="radio"
                     value={item}
                     id={id}
-                    className="w-5 h-5"
-                    onChange={(e) => {
+                    className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
+                     onChange={ (e) => {
                       setHandleCity(true);
                       setShowAddguest(e.target.value);
-                    }}
+                    }
+                    }
                   />
-                  <label
-                    htmlFor={id}
-                    className="text-base cursor-pointer capitalize"
-                  >
+                  <label htmlFor={id} className="text-base cursor-pointer capitalize">
                     {item}
                   </label>
                 </div>
@@ -93,9 +94,6 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
             })}
           </div>
           <div className="flex justify-center mt-4 mb-5">
-            {/* <button onClick={() => toggleModal(null)} className="mr-5 bg-gray-500 hover:bg-gray-700 text-white font-normal py-3 px-8 rounded-[25px] ">
-                      Cancel
-                  </button> */}
             <button
               onClick={handleSubmit}
               className="  bg-yellow-300 hover:bg-yellow-600 text-black font-normal py-2 px-4 rounded-md"

@@ -64,7 +64,7 @@ return(
                 </div>
             </div>
             <div className="px-6 pt-1 pb-3 mb-1">
-                <button className="text-white bg-primary w-full py-3 rounded-md font-semibold text-base " type="button">
+                <button className="text-white bg-gradient-to-r from-orange-500 to-red-500 w-full py-3 rounded-md font-semibold text-base " type="button">
                     View details
                 </button>
             </div>

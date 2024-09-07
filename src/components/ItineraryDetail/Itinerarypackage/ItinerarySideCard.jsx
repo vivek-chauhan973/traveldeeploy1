@@ -56,7 +56,7 @@ import Image from "next/image";
             </div>
             <div className="p-6 pt-3">
                 <button
-                    className="text-white bg-primary w-full py-3 rounded-md font-semibold text-base "
+                    className="text-white bg-gradient-to-r from-orange-500 to-red-500  w-full py-3 rounded-md font-semibold text-base "
                     type="button">
                     View details
                 </button>

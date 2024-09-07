@@ -250,9 +250,9 @@ const ItineraryHeroSection = ({
                   >
                     <p
                       className={` ${
-                        showAddguest
-                          ? "bg-primary cursor-pointer"
-                          : "bg-orange-200"
+                        fixedDepartureButtonEnaibleAndDisable
+                          ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
+                          : "bg-gradient-to-r from-orange-200 to-red-200"
                       } px-5 py-2 rounded-md text-white text-center text-para`}
                     >
                       <span>

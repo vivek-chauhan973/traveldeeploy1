@@ -470,7 +470,7 @@ export default function Package1() {
                   >
                     <p
                       className={` ${
-                        showAddguest
+                        fixedDepartureButtonEnaibleAndDisable
                           ? "bg-primary cursor-pointer"
                           : "bg-orange-200"
                       } px-5 py-2 rounded-md text-white text-center text-para`}

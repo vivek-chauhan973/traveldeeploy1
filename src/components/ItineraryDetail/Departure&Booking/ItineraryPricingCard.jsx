@@ -15,7 +15,8 @@ const ItineraryPricingCard = () => {
     price2,
     setCloseBtn,
     showAddguest,
-    submitButtonOfPricingCalculation
+    submitButtonOfPricingCalculation,
+    fixedDepartureButtonEnaibleAndDisable
   } = useAppContext();
 
   const [gst,setGst]=useState(0);
@@ -32,6 +33,7 @@ const ItineraryPricingCard = () => {
   useEffect(()=>{
     setGrandTotal(((((submitButtonOfPricingCalculation&&Math.floor(guestPrice/2))||price2)||addPackage?.price)+calculatedPrizeOfGst));
   },[calculatedPrizeOfGst,grandTotal])
+  
  
   return (
     <>
@@ -77,14 +79,24 @@ const ItineraryPricingCard = () => {
               {inputData &&
                 Object.keys(inputData).map(
                   (roomType, index) =>
-                    inputData?.[roomType] > 0 &&
-                    roomType !== "adult" &&
-                    roomType !== "child" &&
-                    roomType !== "infant" && (
-                      <p key={index} className="font-semibold capitalize">
-                        {roomType}: {inputData[roomType]}
-                      </p>
+                   {
+                    return (
+                      <>
+                      {(inputData?.[roomType]>0&&roomType==="singleRoom")&&<p>
+                        Single Room : {inputData?.[roomType]} 
+                        </p>}
+                        {(inputData?.[roomType]>0&&roomType==="twinRoom")&&<p>
+                          Double Room : {inputData?.[roomType]} 
+                        </p>}
+                        {(inputData?.[roomType]>0&&roomType==="tripleRoom")&&<p>
+                          Double Room + 1 Extra Bed : {inputData?.[roomType]} 
+                        </p>}
+                        {(inputData?.[roomType]>0&&roomType==="quardRoom")&&<p>
+                        Double Room + 2 Extra Bed: {inputData?.[roomType]} 
+                        </p>}
+                      </>
                     )
+                   }
                 )}
             </div>
           </div>
@@ -160,7 +172,7 @@ const ItineraryPricingCard = () => {
               >
                 <button
                   className={` ${
-                    showAddguest ? "bg-primary cursor-pointer" : "bg-orange-200"
+                    fixedDepartureButtonEnaibleAndDisable ? " cursor-pointer bg-gradient-to-r from-orange-500 to-red-500 " : "bg-gradient-to-r from-orange-200 to-red-200 "
                   } px-5 py-2 rounded-md text-white text-center text-para`}
                 >
                   {closeBtn ? "Book now" : "Add Guest & room"}
