@@ -60,12 +60,13 @@ const DepartureSection = ({
   return (
     <>
       <div className="">
-        <div className="flex lg:hidden flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
+        <div className="flex xl:hidden flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
           <div>
             <div>
-              <h4 className="font-semibold text-base p-3 text-graytext">
+           
+            { fixedDepartureButtonEnaibleAndDisable ?"": <h4 className="font-semibold text-base p-3 text-graytext">
                 1. SELECT DEPARTURE CITY & DATE
-              </h4>
+              </h4>}
             </div>
             <hr />
             <div className="overflow-y-auto">

@@ -167,7 +167,7 @@ export default function Package1() {
       <div>
         <div
           id="ItinerarySection"
-          className="bg-white py-1 shadow-md sticky top-0 z-40"
+          className="bg-white py-1 shadow-md sticky top-0 z-30"
         >
           <div className="container-wrapper gap-3  md:gap-12 xs:pb-5 md:pb-0 hide-scrollbar flex justity-start overflow-x-auto ">
             <div>
@@ -403,7 +403,7 @@ export default function Package1() {
 
       {/* bottom link */}
       <BottomLink locationId={addPackage?.state} addPackage={addPackage} />
-      <div className=" flex xl:hidden z-[999]  sticky bottom-0 bg-white border-t-2 border-primary">
+      <div className=" flex xl:hidden z-30  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">
             <p className=" text-[20px] font-semibold">{addPackage?.name}</p>
