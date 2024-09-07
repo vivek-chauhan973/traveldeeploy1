@@ -21,6 +21,7 @@ export const AppProvider = ({ children }) => {
   const [fixedDepDate,setFixedDepDate]=useState("");
   const [fixedDepCity1,setFixedDepCity1]=useState("");
   const [fixedDepDate1,setFixedDepDate1]=useState("");
+  const [contactAdmin, setContactAdimn] = useState(false);
   const [submitButtonOfPricingCalculation,setSubmitButtonOfPricingCalculation]=useState(false);
   const [fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable]=useState(false);
   const router = useRouter();
@@ -133,7 +134,8 @@ export const AppProvider = ({ children }) => {
     setDuration,
     setSubmitButtonOfPricingCalculation,
     submitButtonOfPricingCalculation,
-    fixedDepartureProceedButton,setFixedDepartureProceedButton
+    fixedDepartureProceedButton,setFixedDepartureProceedButton,
+    contactAdmin, setContactAdimn
   };
 
   return (

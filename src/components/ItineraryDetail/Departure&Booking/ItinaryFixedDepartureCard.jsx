@@ -4,6 +4,7 @@ import FixedDeparturePopup from "./FixedDeparturePopup";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import ExtraWeightPopup from "./ExtraWeightPopup";
 const fetchLimitData = async (id) => {
   const response = await fetch(`/api/package/price/departures/${id}`);
   return await response.json();
@@ -23,6 +24,7 @@ const ItinaryFixedDepartureCard = ({
     setFixedDepCity1,
     setFixedDepartureButtonEnaibleAndDisable,
     fixedDepartureButtonEnaibleAndDisable,
+    contactAdmin, setContactAdimn
   } = useAppContext();
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
@@ -33,7 +35,6 @@ const ItinaryFixedDepartureCard = ({
   const [gst, setGst] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
   const [submittedData, setSubmittedData] = useState([]);
-  const [contactAdmin, setContactAdimn] = useState(false);
   if (city && date) {
     setFixedDepartureButtonEnaibleAndDisable(true);
   }
@@ -222,11 +223,7 @@ const ItinaryFixedDepartureCard = ({
             )}
           </div>
 
-          {contactAdmin && (
-            <p className=" text-red-600 py-4">
-              Please contact admin package to increase weight limit
-            </p>
-          )}
+          {contactAdmin &&<ExtraWeightPopup/>}
 
           <div className=" justify-between flex my-2 ">
             <div>
