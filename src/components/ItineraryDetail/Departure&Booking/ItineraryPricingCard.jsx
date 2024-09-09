@@ -3,8 +3,9 @@ import "../../../app/globals.css";
 import CustomiseTour from "../CustomiseTour";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
+import FixedDeparturePopup from "./FixedDeparturePopup";
 const ItineraryPricingCard = () => {
   const {
     addPackage,
@@ -14,37 +15,67 @@ const ItineraryPricingCard = () => {
     closeBtn,
     price2,
     setCloseBtn,
+    showPopup, setShowPopup,
+    showPopup1, setShowPopup1,
     submitButtonOfPricingCalculation,
     fixedDepartureButtonEnaibleAndDisable
   } = useAppContext();
-  const [gst,setGst]=useState(0);
-  const [calculatedPrizeOfGst,setCalculatedPrizeOfGst]=useState(0);
-  const [grandTotal,setGrandTotal]=useState(0);
-  useEffect(()=>{
-    setGst(addPackage?.addguestPrices?.gst||0);
-  },[addPackage])
-  useEffect(()=>{
-    setCalculatedPrizeOfGst((( ((submitButtonOfPricingCalculation&&Math.floor(guestPrice/2))||price2)||addPackage?.price)*5)/100)
-  },[gst,( ((submitButtonOfPricingCalculation&&Math.floor(guestPrice/2))||price2)||addPackage?.price)])
-  useEffect(()=>{
-    setGrandTotal(((((submitButtonOfPricingCalculation&&Math.floor(guestPrice/2))||price2)||addPackage?.price)+calculatedPrizeOfGst));
-  },[calculatedPrizeOfGst,grandTotal])
+
+  const [gst, setGst] = useState(0);
+  // const [displayPrice,setDisplayPrice]=useState(0);
+  const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
+  const [grandTotal, setGrandTotal] = useState(0);
+
+
+
+  useEffect(() => {
+
+    setGst(addPackage?.addguestPrices?.gst || 0);
+  }, [addPackage])
+  useEffect(() => {
+    setCalculatedPrizeOfGst(((((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price) * 5) / 100)
+  }, [gst, (((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price)])
+  useEffect(() => {
+    setGrandTotal(((((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price) + calculatedPrizeOfGst));
+  }, [calculatedPrizeOfGst, grandTotal])
+
+  const handleBookNowClick = () => {
+    if (closeBtn) {
+      setShowPopup(true); // Show popup on "Book Now" click
+    }
+    if (!closeBtn) {
+      setShowPopup1(true);
+    }
+  };
+
+
+  if (showPopup1) {
+    console.log("addguest file called");
+  }
+  if (showPopup) {
+    console.log("Booking Popup file called");
+  }
+  const handleEdit = () => {
+    setShowPopup1(true);
+  }
+
+
   return (
     <>
+      {showPopup1 && <Addguest guestPrice={guestPrice}
+        inputData={inputData}
+        setInputData={setInputData}
+        setCloseBtn={setCloseBtn}
+        addPackage={addPackage}
+        setShowPopup1={setShowPopup1} />}
       <div className=" border p-5 rounded-md bg-white xs:mt-5 xl:mt-0 xs:hidden xl:block overflow-hidden ">
         <div className="bg-white">
           <div className="flex justify-between mb-2">
             <h5 className="text-md font-semibold text-graytext">Booking Summary</h5>
             <div>
-              <Addguest
-                guestPrice={guestPrice}
-                setInputData={setInputData}
-                inputData={inputData} 
-                setCloseBtn={setCloseBtn}
-                addPackage={addPackage}
-              >
-                <FontAwesomeIcon icon={faPenToSquare} className='font1 cursor-pointer' />
-              </Addguest>
+
+              <FontAwesomeIcon icon={faPenToSquare} className='font1 cursor-pointer' onClick={handleEdit} />
+
             </div>
           </div>
           <hr />
@@ -64,7 +95,7 @@ const ItineraryPricingCard = () => {
           <div className="flex mb-2.5 text-sm">
             <p className=" w-20">Traveller :</p>
             <p className=" font-semibold text-graytext">
-              Adults : {inputData?.adult||"2"}, Child : {inputData?.child}, Infant : {inputData?.infant}
+              Adults : {inputData?.adult || "2"}, Child : {inputData?.child}, Infant : {inputData?.infant}
             </p>
           </div>
           <div className="flex mb-2.5 text-sm">
@@ -72,25 +103,24 @@ const ItineraryPricingCard = () => {
             <div>
               {inputData &&
                 Object.keys(inputData).map(
-                  (roomType, index) =>
-                   {
+                  (roomType, index) => {
                     return (
                       <>
-                      {(inputData?.[roomType]>0&&roomType==="singleRoom")&&<p>
-                        Single Room : {inputData?.[roomType]} 
+                        {(inputData?.[roomType] > 0 && roomType === "singleRoom") && <p>
+                          Single Room : {inputData?.[roomType]}
                         </p>}
-                        {(inputData?.[roomType]>0&&roomType==="twinRoom")&&<p>
-                          Double Room : {inputData?.[roomType]} 
+                        {(inputData?.[roomType] > 0 && roomType === "twinRoom") && <p>
+                          Double Room : {inputData?.[roomType]}
                         </p>}
-                        {(inputData?.[roomType]>0&&roomType==="tripleRoom")&&<p>
-                          Double Room + 1 Extra Bed : {inputData?.[roomType]} 
+                        {(inputData?.[roomType] > 0 && roomType === "tripleRoom") && <p>
+                          Double Room + 1 Extra Bed : {inputData?.[roomType]}
                         </p>}
-                        {(inputData?.[roomType]>0&&roomType==="quardRoom")&&<p>
-                        Double Room + 2 Extra Bed: {inputData?.[roomType]} 
+                        {(inputData?.[roomType] > 0 && roomType === "quardRoom") && <p>
+                          Double Room + 2 Extra Bed: {inputData?.[roomType]}
                         </p>}
                       </>
                     )
-                   }
+                  }
                 )}
             </div>
           </div>
@@ -99,7 +129,7 @@ const ItineraryPricingCard = () => {
               <p className="text-sm ">Basic Price</p>
             </div>
             <div className="">
-              <p className="text-lg font-medium text-graytext text-center"> ₹{Math.floor( ((submitButtonOfPricingCalculation&&(guestPrice/2))||price2)||addPackage?.price).toLocaleString()}</p>
+              <p className="text-lg font-medium text-graytext text-center"> ₹{Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString()}</p>
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>
@@ -108,7 +138,7 @@ const ItineraryPricingCard = () => {
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
-              <p className=""> ₹{Math.floor( (((submitButtonOfPricingCalculation&&(guestPrice/2))||price2))||addPackage?.price).toLocaleString()}</p>
+              <p className=""> ₹{Math.floor((((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2)) || addPackage?.price).toLocaleString()}</p>
             </div>
           </div>
           <div className="text-para grid grid-cols-2 mt-3">
@@ -156,27 +186,40 @@ const ItineraryPricingCard = () => {
               </button>
             </CustomiseTour>
 
-            {
+            {/* {
               <Addguest
-              guestPrice={guestPrice}
-              setInputData={setInputData}
-              inputData={inputData}
-              setCloseBtn={setCloseBtn}
-              addPackage={addPackage}
+                guestPrice={guestPrice}
+                setInputData={setInputData}
+                inputData={inputData}
+                setCloseBtn={setCloseBtn}
+                addPackage={addPackage}
               >
                 <button
-                  className={` ${
-                    fixedDepartureButtonEnaibleAndDisable ? " cursor-pointer bg-gradient-to-r from-orange-500 to-red-500 " : "bg-gradient-to-r from-orange-200 to-red-200 "
-                  } px-5 py-2 rounded-md text-white text-center text-para`}
+                  className={` ${fixedDepartureButtonEnaibleAndDisable ? " cursor-pointer bg-gradient-to-r from-orange-500 to-red-500 " : "bg-gradient-to-r from-orange-200 to-red-200 "
+                    } px-5 py-2 rounded-md text-white text-center text-para`}
+                  onClick={handleBookNowClick}
                 >
                   {closeBtn ? "Book now" : "Add Guest & room"}
                 </button>
               </Addguest>
-            }
+            } */}
+
+            <button
+              className={` ${fixedDepartureButtonEnaibleAndDisable ? " cursor-pointer bg-gradient-to-r from-orange-500 to-red-500 " : "bg-gradient-to-r from-orange-200 to-red-200 "
+                } px-5 py-2 rounded-md text-white text-center text-para`}
+              onClick={handleBookNowClick}
+            >
+              {closeBtn ? "Book now" : "Add Guest & room"}
+            </button>
+
           </div>
         </div>
       </div>
-      {/* mobile Devices */}
+
+      {/* Show Popup when 'Book Now' is clicked */}
+      {showPopup && (
+        <FixedDeparturePopup  />
+      )}
     </>
   );
 };

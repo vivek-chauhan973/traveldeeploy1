@@ -26,6 +26,10 @@ const ItineraryHeroSection = ({
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
+    showPopup1,
+    setShowPopup1,
+    showPopup,
+    setShowPopup,
     price2,submitButtonOfPricingCalculation
   } = useAppContext();
   const [data,setData]=useState(0);
@@ -56,8 +60,24 @@ const ItineraryHeroSection = ({
       setFixedDepDate1(fixedDepDate);
     }
   };
+ const  handleClickPopup=()=>{
+  if(closeBtn){
+    setShowPopup(true);
+  }
+  if(!closeBtn){
+    setShowPopup1(true)
+  }
+ 
+ }
   return (
     <>
+    {showPopup&&<FixedDeparturePopup />}
+    {showPopup1&&<Addguest  guestPrice={guestPrice}
+  inputData={inputData}
+  setInputData={setInputData}
+  setCloseBtn={setCloseBtn}
+  addPackage={addPackage}
+  setShowPopup1={setShowPopup1}/>}
       <div>
         <div className="">
           <div className="slider-container xl:hidden  mt-6 ">
@@ -241,14 +261,9 @@ const ItineraryHeroSection = ({
               </div>
               <div className="flex flex-col align-middle my-auto pl-2 gap-2">
                 {addPackage?.prices?.addguest === "addGuest" && (
-                  <Addguest
-                    guestPrice={guestPrice}
-                    setInputData={setInputData}
-                    inputData={inputData}
-                    setCloseBtn={setCloseBtn}
-                    addPackage={addPackage}
-                  >
+                  
                     <p
+                    onClick={handleClickPopup}
                       className={` ${
                         fixedDepartureButtonEnaibleAndDisable
                           ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
@@ -259,7 +274,7 @@ const ItineraryHeroSection = ({
                         {closeBtn ? "Book Now" : "Add Guest and Room"}
                       </span>
                     </p>
-                  </Addguest>
+                 
                 )}
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button

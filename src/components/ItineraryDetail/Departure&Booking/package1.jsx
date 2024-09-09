@@ -61,13 +61,16 @@ export default function Package1() {
     setInputData,
     closeBtn,
     setCloseBtn,
-    showAddguest,
     fixedDepartureButtonEnaibleAndDisable,
     setFixedDepCity1,
     setFixedDepDate1,
     fixedDepCity,
     fixedDepDate,
     price2,
+    setShowPopup1,
+    showPopup1,
+    setShowPopup,
+    showPopup,
     submitButtonOfPricingCalculation,
   } = useAppContext();
   const [images, setImages] = useState(null);
@@ -97,8 +100,24 @@ export default function Package1() {
       setButtonGuest("Book Now");
     }
   }, [closeBtn]);
+  const handleClickPopup = () => {
+    if (closeBtn) {
+      setShowPopup(true);
+    }
+    if (!closeBtn) {
+      setShowPopup1(true)
+    }
+
+  }
   return (
     <div>
+      {showPopup && <FixedDeparturePopup />}
+      {showPopup1 && <Addguest guestPrice={guestPrice}
+        inputData={inputData}
+        setInputData={setInputData}
+        setCloseBtn={setCloseBtn}
+        addPackage={addPackage}
+        setShowPopup1={setShowPopup1} />}
       <div className=" absolute w-full ">
         <DesktopHeader />
       </div>
@@ -417,9 +436,8 @@ export default function Package1() {
                 best deal price
               </p>
               <div
-                className={`${
-                  addPackage?.prices?.diskHike < 0 ? "flex" : "hidden"
-                } gap-1 items-end`}
+                className={`${addPackage?.prices?.diskHike < 0 ? "flex" : "hidden"
+                  } gap-1 items-end`}
               >
                 <p className="text-sm line-through">
                   ₹{addPackage?.prices?.withoutDiscount}
@@ -435,8 +453,8 @@ export default function Package1() {
                     ₹
                     {Math.floor(
                       (submitButtonOfPricingCalculation && guestPrice / 2) ||
-                        price2 ||
-                        addPackage?.price
+                      price2 ||
+                      addPackage?.price
                     ).toLocaleString()}
                   </span>
                 )}
@@ -461,33 +479,26 @@ export default function Package1() {
                 duration={1000}
               >
                 {addPackage?.prices?.addguest === "addGuest" && (
-                  <Addguest
-                    guestPrice={guestPrice}
-                    setInputData={setInputData}
-                    inputData={inputData}
-                    setCloseBtn={setCloseBtn}
-                    addPackage={addPackage}
-                  >
-                    <p
-                      className={` ${
-                        fixedDepartureButtonEnaibleAndDisable
-                          ? "bg-primary cursor-pointer"
-                          : "bg-orange-200"
+
+                  <p
+                    onClick={handleClickPopup}
+                    className={` ${fixedDepartureButtonEnaibleAndDisable
+                        ? "bg-primary cursor-pointer"
+                        : "bg-orange-200"
                       } px-5 py-2 rounded-md text-white text-center text-para`}
-                    >
-                      <span className="disabled:opacity-75">{buttonGuest}</span>
-                    </p>
-                  </Addguest>
+                  >
+                    <span className="disabled:opacity-75">{buttonGuest}</span>
+                  </p>
                 )}
+
 
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
-                    className={`border px-5 py-1 rounded-md ${
-                      fixedDepartureButtonEnaibleAndDisable
+                    className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                         ? "bg-primary"
                         : " bg-orange-200"
-                    }  text-center text-para`}
+                      }  text-center text-para`}
                   >
                     Book Now
                   </button>

@@ -1,10 +1,13 @@
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-const FixedDeparturePopup = ({ togglePopup, addPackage }) => {
+const FixedDeparturePopup = () => {
   const {
     fixedDepDate,
     fixedDepCity,
+    setShowPopup,
     handleCleckOnDepartureFixed,
     departureSectionData,
     showAddguest,
@@ -17,7 +20,8 @@ const FixedDeparturePopup = ({ togglePopup, addPackage }) => {
       document.body.style.overflow = "auto";
     };
   }, []);
-  console.log("true", check);
+
+  // console.log("true", check);
 
   // console.log("refdffdsfsfsdf",ref.current);
   const handleSubmit = () => {
@@ -26,13 +30,29 @@ const FixedDeparturePopup = ({ togglePopup, addPackage }) => {
     } else {
       return alert("please checke marked of confirm box");
     }
-    togglePopup(false);
+    setShowPopup(false);
     // console.log("refdffdsfsfsdf212323234",ref.current);
   };
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
+      <div
+        className=" cursor-pointer hover:scale-105 flex justify-end bg-white mb-3"
+        size={28}
+      >
+        <FontAwesomeIcon
+          icon={faCircleXmark}
+          className="font1 cursor-pointer"
+          onClick={() => setShowPopup(false)}
+        />
+      </div>
+      <div className="md:w-1/2 w-full h-auto ">
+        <img src="https://usatodayhss.com/wp-content/uploads/sites/96/2022/08/11268798.jpeg?w=1000&h=600&crop=1"
+          alt="fsdv"
+          className="w-full h-full object-cover" />
+      </div>
+      <div className="bg-white rounded-lg p-6 md:w-1/2 w-full h-auto max-w-md shadow-lg">
+
         <div className=" flex gap-3 flex-col">
           <div>
             <input

@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import Dialog from "@mui/material/Dialog";
+
 import Image from "next/image";
 import { useAppContext } from "./admin/context/Package/AddGuest";
 
@@ -12,7 +12,6 @@ import {
   faCirclePlus,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { set } from "mongoose";
 const fetchCarAllCars = async () => {
   const response = await fetch("/api/cars/carapi");
   return await response.json();
@@ -22,12 +21,12 @@ const fetchCarById = async (id) => {
   return await data.json();
 }
 const Addguest = ({
-  children,
   guestPrice,
   inputData,
   setInputData,
   setCloseBtn,
   addPackage,
+  setShowPopup1
 }) => {
   const date = new Date();
   const { showAddguest, setSubmitButtonOfPricingCalculation, setGuestPrice, departureSectionData } =
@@ -46,6 +45,12 @@ const Addguest = ({
 
   //here are the all states for calculation of transport
   // console.log("departureSectionData ----- >123 ",departureSectionData)
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const [days, setDays] = useState(0);
   useEffect(() => {
@@ -106,6 +111,7 @@ const Addguest = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCloseBtn(true);
+    setShowPopup1(false)
     setSubmitButtonOfPricingCalculation(true);
     const childDateInputs = document.querySelectorAll('input[id^="childDate"]');
     const isAnyChildDateEmpty = Array.from(childDateInputs).some(
@@ -453,27 +459,27 @@ const Addguest = ({
     console.log("selectedCarOf Price ", selectedDataOfCar)
   }, [selectedDataOfCar])
   return (
-    <div>
-      <span onClick={handleClickOpen}>{children}</span>
-      {addPackage?.prices?.addguest === "addGuest" && (
-        <Dialog
-          className="h-[80%] my-auto px-0 z-[99999] md:mt-24 mt-20"
-          open={open}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white">
+        {addPackage?.prices?.addguest === "addGuest" && (
+          // <Dialog
+          //   className="h-[80%] my-auto px-0 z-[99999] md:mt-24 mt-20"
+          //   open={open}
+          //   aria-labelledby="alert-dialog-title"
+          //   aria-describedby="alert-dialog-description"
+          // >
           <form className="w-full" action="">
 
             <div className="relative">
               <div className="sticky top-0 shadow-md z-[5]">
                 <div
                   className=" absolute md:top-3 top-1 md:right-3 right-2 cursor-pointer hover:scale-105 "
-                  onClick={handleClose}
                   size={28}
                 >
                   <FontAwesomeIcon
                     icon={faCircleXmark}
                     className="font1 cursor-pointer"
+                    onClick={() => setShowPopup1(false)}
                   />
                 </div>
                 <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
@@ -990,9 +996,10 @@ const Addguest = ({
 
             </div>
           </form>
-        </Dialog>
-      )
-      }
+          // </Dialog>
+        )
+        }
+      </div>
     </div >
   );
 };

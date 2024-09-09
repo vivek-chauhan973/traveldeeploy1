@@ -24,6 +24,13 @@ export const AppProvider = ({ children }) => {
   const [contactAdmin, setContactAdimn] = useState(false);
   const [submitButtonOfPricingCalculation,setSubmitButtonOfPricingCalculation]=useState(false);
   const [fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable]=useState(false);
+
+
+// handle popup sate of booking and addguest
+
+const [showPopup, setShowPopup] = useState(false);
+const [showPopup1, setShowPopup1] = useState(false);
+
   const router = useRouter();
   const initialData = {
     child: 0,
@@ -135,7 +142,9 @@ export const AppProvider = ({ children }) => {
     setSubmitButtonOfPricingCalculation,
     submitButtonOfPricingCalculation,
     fixedDepartureProceedButton,setFixedDepartureProceedButton,
-    contactAdmin, setContactAdimn
+    contactAdmin, setContactAdimn,
+    showPopup, setShowPopup,
+    showPopup1, setShowPopup1
   };
 
   return (
