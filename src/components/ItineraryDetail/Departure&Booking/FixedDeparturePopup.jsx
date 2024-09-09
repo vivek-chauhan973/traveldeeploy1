@@ -35,101 +35,122 @@ const FixedDeparturePopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-      <div
-        className=" cursor-pointer hover:scale-105 flex justify-end bg-white mb-3"
-        size={28}
-      >
-        <FontAwesomeIcon
-          icon={faCircleXmark}
-          className="font1 cursor-pointer"
-          onClick={() => setShowPopup(false)}
-        />
-      </div>
-      <div className="md:w-1/2 w-full h-auto ">
-        <img src="https://usatodayhss.com/wp-content/uploads/sites/96/2022/08/11268798.jpeg?w=1000&h=600&crop=1"
-          alt="fsdv"
-          className="w-full h-full object-cover" />
-      </div>
-      <div className="bg-white rounded-lg p-6 md:w-1/2 w-full h-auto max-w-md shadow-lg">
+    <>
+      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+        <div className="flex justify-center items-center h-screen">
+          <div className=" overflow-hidden max-w-lg md:max-w-2xl mx-auto">
+            <div className="flex">
+              <div className="bg-navyblack rounded-l-lg shadow-lg text-white md:w-1/3  md:block hidden">
+                <div className="mb-4 w-full h-2/5">
+                  {/* <img
+                    src="https://via.placeholder.com/150"
+                    alt="pickyourtrail"
+                    className="w-full h-full"
+                  /> */}
+                </div>
+                <div className="p-6">
+                  <div className="flex justify-center items-center">
+                    <div className="mr-2 text-4xl">4.6</div>
+                    <span className="text-yellow-400">★</span>
+                  </div>
+                  <p className="text-sm mb-2 text-center">3800 + reviews</p>
+                  <p className="text-sm text-center  mt-20">“Our dream trip to Europe with Pickyourtrail was delightful & seamless”</p>
+                  <p className="font-semibold mt-2 text-center">Rakesh Kumar</p>
+                </div>
+              </div>
+              <div className="md:w-2/3 w-full p-5 bg-white  rounded-r-lg shadow-lg">
+                <div className=" cursor-pointer flex justify-end mb-3"  >
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    className="font1 cursor-pointer"
+                    size={28}
+                    onClick={() => setShowPopup(false)}
+                  />
+                </div>
+                <form>
+                  <div className="space-y-4 mb-6">
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    />
+                    <div className="flex space-x-4">
+                      <input
+                        type="text"
+                        placeholder="+91"
+                        className="w-2/12 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Mobile Number"
+                        className="w-10/12 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                    </div>
+                    <input
+                      type="email"
+                      placeholder="Email ID"
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    />
+                  </div>
 
-        <div className=" flex gap-3 flex-col">
-          <div>
-            <input
-              type="text"
-              placeholder="Name"
-              className=" py-2 px-4 w-full outline-none border border-gray-400 rounded-md"
-            />
-          </div>
-          <div className=" w-full flex gap-3">
-            <div className=" py-1 px-2 flex-7  border border-gray-400 rounded-md">
-              <p className="text-[10px] ">IND</p>
-              <p className=" text-[12px] font-medium">+91</p>
+
+                  <div className="mb-6">
+                    <h5 className="md:text-lg text-md font-semibold text-graytext">Booking Summary</h5>
+                    <div className="flex mb-2.5 mt-3 text-sm border-t ">
+                      <p className=" w-20 mt-3 font-medium">Dept. City : </p>
+                      <p className="font-semibold text-graytext mt-3">Mumbai</p>
+                    </div>
+                    <div className="flex mb-2.5 text-sm">
+                      <p className=" w-20 font-medium">Dept. Date :</p>
+                      <p className=" font-bold text-graytext">
+                        10 Mar 2024 - 17 Mar 2024
+                      </p>
+                    </div>
+                    <div className="flex mb-2.5 text-sm">
+                      <p className=" w-20 font-medium">Traveller :</p>
+                      <p className=" font-semibold text-graytext">
+                        Adults : 0, Child : 0, Infant : 0
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-1">
+                      <p className="font-semibold">Grand Total</p>
+                      <p className="font-semibold text-graytext">₹ {" "}</p>
+                    </div>
+                  </div>
+
+                  <textarea
+                    placeholder="Comments"
+                    className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  ></textarea>
+
+                  <div className=" flex justify-start items-center gap-2 mb-4">
+                    <input
+                      className="cursor-pointer h-4 w-4 rounded-lg accent-navyblack"
+                      type="checkbox"
+                      id="checked"
+                      onChange={() => setCheck(true)}
+                    />
+                    <label
+                      htmlFor="checked"
+                      className="cursor-pointer label-text text-para font-medium  text-gray-700"
+                    >
+                      Please Confirm
+                    </label>
+                  </div>
+                  <button className="bg-gradient-to-r from-orange-400 to-red-500 text-white w-full p-3 rounded-lg hover:opacity-90"
+                    onClick={handleSubmit}>
+                    Book Now
+                  </button>
+                </form>
+              </div>
             </div>
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Mobile Number"
-                className=" py-2 px-4 w-full outline-none border border-gray-400 rounded-md"
-              />
-            </div>
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="Email Id"
-              className=" py-2 px-4 w-full outline-none border border-gray-400 rounded-md"
-            />
-          </div>
-          <div className=" flex flex-col gap-2">
-            <h2 className="font-semibold">Booking Summary</h2>
-            <hr />
-            <div className=" flex flex-col gap-3">
-              <p className="">
-                Dept. City :  <span className="font-medium">Mumbai</span>
-              </p>
-              <p>
-                Dept. Date :  <span className="font-medium">10 Mar 2024-17 Mar 2024</span>
-              </p>
-              <p>
-                Traveller :  <span className="font-medium">Adults : 2, Child : 0,infant : 0</span>
-              </p>
-              <p>
-                Price :  <span className=" font-medium">₹ 100000</span>
-              </p>
-            </div>
-          </div>
-          <div>
-            <textarea
-              name="textarea"
-              id="textarea"
-              rows="4" cols="8" placeholder="Enter your message..."
-              className=" py-2 px-4 w-full outline-none border border-gray-400 rounded-md"
-            ></textarea>
-          </div>
-          <div>
-            <div className=" flex justify-start items-center gap-2">
-              <input
-                className="cursor-pointer h-4 w-4 rounded-lg accent-navyblack"
-                type="checkbox"
-                id="checked"
-                onChange={() => setCheck(true)}
-              />
-              <label
-                htmlFor="checked"
-                className="cursor-pointer label-text text-para  text-gray-700"
-              >
-                Please Confirm
-              </label>
-            </div>
-          </div>
-          <div className=" w-full">
-            <button className=" bg-orange-400 text-center w-full py-2 rounded-md">Book Now</button>
           </div>
         </div>
       </div>
-    </div>
+
+    </>
   );
 };
 
 export default FixedDeparturePopup;
+
