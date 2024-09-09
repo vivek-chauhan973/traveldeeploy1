@@ -14,17 +14,13 @@ const ItineraryPricingCard = () => {
     closeBtn,
     price2,
     setCloseBtn,
-    showAddguest,
     submitButtonOfPricingCalculation,
     fixedDepartureButtonEnaibleAndDisable
   } = useAppContext();
-
   const [gst,setGst]=useState(0);
-  // const [displayPrice,setDisplayPrice]=useState(0);
   const [calculatedPrizeOfGst,setCalculatedPrizeOfGst]=useState(0);
   const [grandTotal,setGrandTotal]=useState(0);
   useEffect(()=>{
-
     setGst(addPackage?.addguestPrices?.gst||0);
   },[addPackage])
   useEffect(()=>{
@@ -33,8 +29,6 @@ const ItineraryPricingCard = () => {
   useEffect(()=>{
     setGrandTotal(((((submitButtonOfPricingCalculation&&Math.floor(guestPrice/2))||price2)||addPackage?.price)+calculatedPrizeOfGst));
   },[calculatedPrizeOfGst,grandTotal])
-  
- 
   return (
     <>
       <div className=" border p-5 rounded-md bg-white xs:mt-5 xl:mt-0 xs:hidden xl:block overflow-hidden ">

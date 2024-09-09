@@ -75,14 +75,15 @@ const FixedDeparturePopup = ({ togglePopup, addPackage }) => {
                 Traveller :  <span className="font-medium">Adults : 2, Child : 0,infant : 0</span>
               </p>
               <p>
-                Price :  <span className=" font-medium">100000</span>
+                Price :  <span className=" font-medium">₹ 100000</span>
               </p>
             </div>
           </div>
           <div>
             <textarea
-              name=""
-              id=""
+              name="textarea"
+              id="textarea"
+              rows="4" cols="8" placeholder="Enter your message..."
               className=" py-2 px-4 w-full outline-none border border-gray-400 rounded-md"
             ></textarea>
           </div>

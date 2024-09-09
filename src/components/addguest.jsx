@@ -74,20 +74,6 @@ const Addguest = ({
     setClose1(!close1);
 
   };
-  // useEffect(()=>{
-  //   const initialData = {
-  //     child: 0,
-  //     infant: 0,
-  //     singleRoom: 0,
-  //     twinRoom: 0,
-  //     tripleRoom: 0,
-  //     quardRoom: 0,
-  //     childAges: {},
-  //     infantAges: {},
-  //   };
-  //   setInputData(initialData);
-  // },[close1])
-  // console.log("fixed departure package::::",addPackage);
 
   const handleChange = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
