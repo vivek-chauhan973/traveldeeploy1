@@ -317,8 +317,7 @@ const Addguest = ({
         break;
     }
   };
-  // toggle AC is here 
-  //here is the calculation
+
   useEffect(() => {
     if (addPackage?.addguest === "addGuest") {
       if (addPackage && addPackage?.prices) {
