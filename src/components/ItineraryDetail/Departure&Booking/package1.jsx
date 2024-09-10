@@ -470,18 +470,12 @@ export default function Package1() {
               <p className="text-xxs leading-5">per person on twin sharing</p>
             </div>
 
-            <div className=" flex-col  align-middle my-auto pl-2 gap-2 py-2">
-              <ScrollLink
-                to="departure"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={1000}
-              >
+            <div className="flex-col align-middle my-auto pl-2 gap-2 py-2">
+            
                 {addPackage?.prices?.addguest === "addGuest" && (
 
                   <p
-                    onClick={handleClickPopup}
+                    onClick={fixedDepartureButtonEnaibleAndDisable?handleClickPopup:null}
                     className={` ${fixedDepartureButtonEnaibleAndDisable
                         ? "bg-primary cursor-pointer"
                         : "bg-orange-200"
@@ -490,8 +484,6 @@ export default function Package1() {
                     <span className="disabled:opacity-75">{buttonGuest}</span>
                   </p>
                 )}
-
-
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
@@ -509,8 +501,6 @@ export default function Package1() {
                     addPackage={addPackage}
                   />
                 )}
-              </ScrollLink>
-
               {
                 <CustomiseTour>
                   <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">

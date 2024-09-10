@@ -361,7 +361,7 @@ const ItinaryFixedDepartureCard = ({
 
               {
                 <button
-                  onClick={handleSubmit}
+                  onClick={fixedDepartureButtonEnaibleAndDisable&&handleSubmit}
                   className={`border px-5 py-2 rounded-md ${
                     fixedDepartureButtonEnaibleAndDisable
                       ? "bg-primary"

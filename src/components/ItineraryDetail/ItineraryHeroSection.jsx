@@ -263,7 +263,7 @@ const ItineraryHeroSection = ({
                 {addPackage?.prices?.addguest === "addGuest" && (
                   
                     <p
-                    onClick={handleClickPopup}
+                    onClick={fixedDepartureButtonEnaibleAndDisable?handleClickPopup:null}
                       className={` ${
                         fixedDepartureButtonEnaibleAndDisable
                           ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
