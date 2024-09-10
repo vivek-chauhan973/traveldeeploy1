@@ -14,6 +14,8 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Gst from "@/components/admin/dashboard/Gst";
+import TermsAndCondition from "@/components/admin/itineraryMaster/TermsAndCondition";
+
 
 
 
@@ -247,7 +249,13 @@ export default function Category () {
         <>
         <AppProvider>
             <Layout>
-            <Gst/>
+                <div>
+                <Gst/>
+                </div>
+                <div>
+                <TermsAndCondition/>
+                </div>
+            
                 {/* <SmartTabel/> */}
                 {/* <DynamicTable/> */}
                 <div>

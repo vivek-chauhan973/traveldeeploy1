@@ -110,19 +110,19 @@ const Addguest = ({
   // here is the logic of select car
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setCloseBtn(true);
     setShowPopup1(false)
     setSubmitButtonOfPricingCalculation(true);
     const childDateInputs = document.querySelectorAll('input[id^="childDate"]');
     const isAnyChildDateEmpty = Array.from(childDateInputs).some(
       (input) => input.value === ""
     );
-
+if(inputData.adult ==="" ){
+  return alert("Please choose adult first");
+}
     if (isAnyChildDateEmpty) {
-      alert("Please fill in the date for each child.");
-      return;
+      return alert("Please fill in the date for each child.");
     }
-
+  
     if (
       (inputData.adult > 0 || inputData.child > 0 || inputData.infant > 0) &&
       (inputData.singleRoom > 0 ||
@@ -140,7 +140,7 @@ const Addguest = ({
         alert("Please assign rooms for all adults.");
         return;
       }
-
+setCloseBtn(true)
       try {
         const response = await fetch(
           "http://localhost:3000/api/public/package/book-tour",

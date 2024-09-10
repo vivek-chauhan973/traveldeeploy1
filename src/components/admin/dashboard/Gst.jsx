@@ -57,7 +57,7 @@ export default function Gst() {
     };
 
     return (
-        <>
+        <div>
             <div className="flex items-center gap-5 text-primary pb-3">
                 <p className="text-[28px] text-black">GST Management</p>
             </div>
@@ -132,6 +132,6 @@ export default function Gst() {
                 </div>
             </div>
             <ToastContainer />
-        </>
+        </div>
     );
 }
