@@ -309,49 +309,49 @@ export default function Package1() {
               </h2>
               <ol className="text-para ml-6 pt-3">
                 <li>
-                  Minimize Plastic Use: Bring a reusable water bottle, shopping
+                  <span className="font-semibold">Minimize Plastic Use : </span> Bring a reusable water bottle, shopping
                   bag, and utensils to reduce the need for single-use plastics.
                   Many destinations have water refill stations and eco-friendly
                   stores.
                 </li>
                 <li>
-                  Support Local and Sustainable Businesses: Eat at local
+                  <span className="font-semibold">Support Local and Sustainable Businesses : </span> Eat at local
                   restaurants, buy souvenirs from local artisans, and choose
                   tour operators that prioritize sustainable practices and
                   support the local community.
                 </li>
                 <li>
-                  Respect Wildlife and Natural Habitats: Avoid disturbing
+                  <span className="font-semibold">Respect Wildlife and Natural Habitats : </span> Avoid disturbing
                   wildlife or their natural habitats. Stick to designated paths
                   and observe animals from a distance without feeding or
                   touching them.
                 </li>
                 <li>
-                  Dispose of Waste Properly: Follow local guidelines for
+                  <span className="font-semibold">Dispose of Waste Properly : </span> Follow local guidelines for
                   recycling and waste disposal. If facilities aren&apos;t
                   available, carry your waste with you until you can dispose of
                   it responsibly.
                 </li>
                 <li>
-                  Educate Yourself and Others: Learn about the local
+                  <span className="font-semibold">Educate Yourself and Others : </span> Learn about the local
                   environment, culture, and customs. Respect local practices and
                   traditions, and share your knowledge about responsible travel
                   with others.
                 </li>
                 <li>
-                  Choose Sustainable Activities: Engage in eco-friendly
+                  <span className="font-semibold">Choose Sustainable Activities : </span> Engage in eco-friendly
                   activities such as hiking, snorkeling, or visiting national
                   parks. Avoid activities that exploit animals or damage the
                   environment.
                 </li>
                 <li>
-                  Leave No Trace: Follow the principle of &quot;Leave No
+                  <span className="font-semibold">Leave No Trace : </span> Follow the principle of &quot;Leave No
                   Trace,&quot; which means leaving natural areas as you found
                   them. Pack out all trash, avoid picking plants, and refrain
                   from carving or writing on rocks or trees.
                 </li>
                 <li>
-                  Plant Trees Whenever Possible: Participate in local
+                  <span className="font-semibold">Plant Trees Whenever Possible : </span> Participate in local
                   tree-planting initiatives or plant trees in your own
                   community. Trees absorb carbon dioxide, provide oxygen, and
                   help support biodiversity, making them vital for a healthy
