@@ -127,7 +127,7 @@ const ItinaryFixedDepartureCard = ({
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[490px] overflow-scroll">
         <div className=" overflow-y-auto">
           <div className="xl:block hidden">
-            <div className="flex justify-between mb-2">
+            <div className="flex justify-between mb-2 pr-3">
               <h5 className="text-md font-semibold text-graytext">
                 Booking Summary
               </h5>
@@ -154,9 +154,9 @@ const ItinaryFixedDepartureCard = ({
           </div>
           <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3">
             <div>
-              <div className="flex gap-4 justify-between items-center">
+              <div className="flex gap-4 justify-between items-center md:pr-5 pr-1">
                 <label
-                  className="text-para font-semibold cursor-pointer capitalize"
+                  className="text-sm font-semibold cursor-pointer capitalize"
                   htmlFor="city"
                 >
                   Number Of Person :{" "}
@@ -183,7 +183,7 @@ const ItinaryFixedDepartureCard = ({
                 </select>
               </div>
               {fixedDepCity ? null : (
-                <p className="text-xxs text-red-600 text-end pr-7">
+                <p className="md:text-xxs text-[10px] text-red-600 xl:text-end md:text-center text-end xl:pr-10 md:pl-28">
                   Please Select Person First
                 </p>
               )}
@@ -192,13 +192,13 @@ const ItinaryFixedDepartureCard = ({
             {WeightPropertyPresentedOrNot && (
               <div>
                 <div className="flex flex-col mt-2 ">
-                  <p className="text-para font-semibold cursor-pointer capitalize">
+                  <p className="text-sm font-semibold cursor-pointer capitalize">
                     {limitKey1 ? "weights of person :" : ""}
                   </p>
                   {keys.map((item, i) => (
                     <div
                       key={i}
-                      className="flex gap-3 md:border-l-4 border-l-2 border-red-400 justify-center items-center my-2"
+                      className="flex md:gap-5 gap-3 md:border-l-4 border-l-2 border-red-400 justify-center items-center my-2"
                     >
                       {/* <p>Person{i + 1}</p> */}
                       <label className="text-para" htmlFor={`person${i + 1}`}>
@@ -209,7 +209,7 @@ const ItinaryFixedDepartureCard = ({
                         id={`person${i + 1}`}
                         name={`input${i + 1}`}
                         required
-                        className="mt-2 w-1/2 py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
+                        className="mt-2 md:w-2/3 w-1/2 py-1.5 px-3 text-para border border-[#999999] rounded text-center cursor-pointer"
                         onChange={(e) => {
                           handleInputChange(e, i);
                           setDate(true);
@@ -223,27 +223,21 @@ const ItinaryFixedDepartureCard = ({
             )}
           </div>
 
-          {contactAdmin &&<ExtraWeightPopup/>}
+          {contactAdmin && <ExtraWeightPopup />}
 
-          <div className=" justify-between flex my-2 ">
-            <div>
-              <p className="text-sm ">Price BreakUp</p>
-            </div>
-            <div>
-              <p className="text-lg font-medium text-graytext">
-                ₹ {guestPrice?.toLocaleString()}
-              </p>
-            </div>
+          <div className="grid grid-cols-2 gap-1">
+            <p className="text-sm font-semibold">Price BreakUp</p>
+            <p className="text-md font-medium text-graytext">₹ {guestPrice?.toLocaleString()}</p>
           </div>
           <hr className="border-dashed my-2 " />
-          <div className="text-para  grid-cols-2 my-3 grid">
+          <div className="text-para  grid-cols-2 my-3 grid pr-1">
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
               <p className="">₹ {(guestPrice * limitKey)?.toLocaleString()}</p>
             </div>
           </div>
-          <div className="text-para grid-cols-2 -mt-2 grid">
+          <div className="text-para grid-cols-2 -mt-2 grid pr-1">
             <div></div>
             <div className="grid grid-cols-2">
               <p>
@@ -314,10 +308,10 @@ const ItinaryFixedDepartureCard = ({
               </div>
             </div>
           </div> */}
-          <div className="text-para  grid-cols-2 grid">
+          <div className="text-para  grid-cols-2 grid pr-1">
             <div></div>
             <div className="grid grid-cols-2 gap-1">
-              <p>Grand Total</p>
+              <p className="font-semibold">Grand Total</p>
               <p className="font-semibold text-graytext">
                 ₹ {grandTotal?.toLocaleString()}
               </p>
@@ -358,19 +352,16 @@ const ItinaryFixedDepartureCard = ({
                   addPackage={addPackage}
                 />
               )}
-
               {
                 <button
-                  onClick={fixedDepartureButtonEnaibleAndDisable&&handleSubmit}
-                  className={`border px-5 py-2 rounded-md ${
-                    fixedDepartureButtonEnaibleAndDisable
+                  onClick={fixedDepartureButtonEnaibleAndDisable ? handleSubmit:null}
+                  className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                       ? "bg-primary"
                       : "bg-orange-200"
-                  } text-center text-para`}
+                    } text-center text-para`}
                 >
                   Book now
-                </button>
-              }
+                </button>}
             </div>
           </div>
         </div>

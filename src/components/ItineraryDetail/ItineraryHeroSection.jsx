@@ -30,10 +30,10 @@ const ItineraryHeroSection = ({
     setShowPopup1,
     showPopup,
     setShowPopup,
-    price2,submitButtonOfPricingCalculation
+    price2, submitButtonOfPricingCalculation
   } = useAppContext();
-  const [data,setData]=useState(0);
- 
+  const [data, setData] = useState(0);
+
   const formatINR = (number) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(number);
   };
@@ -60,24 +60,24 @@ const ItineraryHeroSection = ({
       setFixedDepDate1(fixedDepDate);
     }
   };
- const  handleClickPopup=()=>{
-  if(closeBtn){
-    setShowPopup(true);
+  const handleClickPopup = () => {
+    if (closeBtn) {
+      setShowPopup(true);
+    }
+    if (!closeBtn) {
+      setShowPopup1(true)
+    }
+
   }
-  if(!closeBtn){
-    setShowPopup1(true)
-  }
- 
- }
   return (
     <>
-    {showPopup&&<FixedDeparturePopup />}
-    {showPopup1&&<Addguest  guestPrice={guestPrice}
-  inputData={inputData}
-  setInputData={setInputData}
-  setCloseBtn={setCloseBtn}
-  addPackage={addPackage}
-  setShowPopup1={setShowPopup1}/>}
+      {showPopup && <FixedDeparturePopup />}
+      {showPopup1 && <Addguest guestPrice={guestPrice}
+        inputData={inputData}
+        setInputData={setInputData}
+        setCloseBtn={setCloseBtn}
+        addPackage={addPackage}
+        setShowPopup1={setShowPopup1} />}
       <div>
         <div className="">
           <div className="slider-container xl:hidden  mt-6 ">
@@ -92,13 +92,14 @@ const ItineraryHeroSection = ({
                     src={item}
                     alt={`img ${i + 1}`}
                     onError={(e) => {
-                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
-                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
-                      }}
+                      e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                      e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                    }}
                   />
-                  <div className="box-Shadow-Style-Package flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
-                    <h1 className="flex items-center gap-2 mr-2">
-                      {addPackage?.name}
+                  {/* phone */}
+                  <div className="box-Shadow-Style-Package flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white  pl-3 font-bold italic  bottom-0 ">
+                    <h1 className="flex items-center text-2xl gap-2 mr-2">
+                      {addPackage?.name}{" Tour Packages"}
                       <span className=" mt-1 bg-primary py-[2px] px-2 text-white rounded text-para font-bold ">
                         {addPackage?.days?.length - 1}N/{" "}
                         {addPackage?.days?.length}D
@@ -110,25 +111,26 @@ const ItineraryHeroSection = ({
             </div>
           </div>
         </div>
+        {/* medium devices */}
         <div className="container-wrapper  grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="relative rounded-md overflow-hidden">
             <img
               className=" h-[400px] object-cover w-full hidden xl:flex"
-              src={(hemages && hemages?.[0]) }
+              src={(hemages && hemages?.[0])}
               alt="img 1"
               width={200}
               height={100}
               onError={(e) => {
-                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
-                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
-                      }}
+                e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+              }}
             />
 
-            <div className="box-Shadow-Style-Package hidden xl:flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white text-2xl md:text-4xl pl-3 font-bold italic  bottom-0 ">
-              <h1 className="flex items-center gap-2 mr-2">
-                {addPackage?.name}
+            <div className="box-Shadow-Style-Package hidden xl:flex justify-end gap-3 absolute right-0 z-10 w-full py-3 uppercase text-white  pl-3 font-bold italic bottom-0">
+              <h1 className="flex items-center gap-2 mr-2 ">
+                {addPackage?.name}{" Tour packages"}
                 <span className=" bg-primary py-[2px] px-2 text-white rounded text-para font-bold  ">
-                  {addPackage?.days?.length - 1>0?addPackage?.days?.length - 1:0}N/{" "}
+                  {addPackage?.days?.length - 1 > 0 ? addPackage?.days?.length - 1 : 0}N/{" "}
                   {addPackage?.days?.length}D
                 </span>
               </h1>
@@ -143,23 +145,23 @@ const ItineraryHeroSection = ({
                 width={200}
                 height={100}
                 onError={(e) => {
-                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
-                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
-                      }}
+                  e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                  e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                }}
               />
             </div>
             <div className="">
               <img
                 className="rounded-md h-[192px] max-md-full w-full object-cover"
-                src={(hemages && hemages?.[2]) }
+                src={(hemages && hemages?.[2])}
                 alt="img 3"
                 width={200}
                 height={100}
                 onError={(e) => {
-                        e.target.onerror = null; // Prevent infinite loop if fallback also fails
-                        e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
-                      }}
-                // onError={handleError}
+                  e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                  e.target.src = "/logo.png"; // Set fallback image if the original image fails to load
+                }}
+              // onError={handleError}
               />
             </div>
           </div>
@@ -167,7 +169,7 @@ const ItineraryHeroSection = ({
             <div>
               <div className=" mb-2 ">
                 <h2 className=" text-lg   md:text-xl font-semibold capitalize ">
-                  {addPackage?.name}
+                  {addPackage?.name}{" Tour packages"}
                 </h2>
               </div>
               <div className="stick top-1">
@@ -175,11 +177,10 @@ const ItineraryHeroSection = ({
                   {addPackage?.badges?.map((badge, index) => (
                     <button
                       key={index}
-                      className={`rounded-full py-1 px-2 ${
-                        index === 0
+                      className={`rounded-full py-1 px-2 ${index === 0
                           ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize"
                           : "bg-navyblack"
-                      }`}
+                        }`}
                     >
                       {badge}
                     </button>
@@ -231,21 +232,21 @@ const ItineraryHeroSection = ({
           <div className="flex justify-end">
             <div className="hidden xl:flex gap-5">
               <div className="text-right flex flex-col items-end justify-center ">
-                  <p className="text-base leading-5 text-green-600 font-semibold uppercase">
-                    best deal price
-                  </p>
-                  <div  className={`${addPackage?.prices?.diskHike < 0 ? 'flex' : 'hidden'} gap-1 items-end`}>
-                    <p className="text-sm line-through">₹{addPackage?.prices?.withoutDiscount}</p>
-                    <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                <p className="text-base leading-5 text-green-600 font-semibold uppercase">
+                  best deal price
+                </p>
+                <div className={`${addPackage?.prices?.diskHike < 0 ? 'flex' : 'hidden'} gap-1 items-end`}>
+                  <p className="text-sm line-through">₹{addPackage?.prices?.withoutDiscount}</p>
+                  <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
                     {addPackage?.prices?.diskHike}% Off
-                    </button>
-                  </div>
-                
+                  </button>
+                </div>
+
                 {addPackage?.prices?.addguest === "addGuest" && (
                   <p className="text-sm leading-5">
                     with GST include {" "}
                     <span className="text-lg text-graytext font-medium">
-                    ₹{Math.floor(((submitButtonOfPricingCalculation &&(guestPrice/2))||price2)||addPackage?.price).toLocaleString()}
+                      ₹{Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString()}
                     </span>
                   </p>
                 )}
@@ -253,7 +254,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     Starts From{" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{(guestPrice ||addPackage.price)?.toLocaleString()}
+                      ₹{(guestPrice || addPackage.price)?.toLocaleString()}
                     </span>
                   </p>
                 )}
@@ -261,29 +262,27 @@ const ItineraryHeroSection = ({
               </div>
               <div className="flex flex-col align-middle my-auto pl-2 gap-2">
                 {addPackage?.prices?.addguest === "addGuest" && (
-                  
-                    <p
-                    onClick={fixedDepartureButtonEnaibleAndDisable?handleClickPopup:null}
-                      className={` ${
-                        fixedDepartureButtonEnaibleAndDisable
-                          ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
-                          : "bg-gradient-to-r from-orange-200 to-red-200"
+
+                  <p
+                    onClick={fixedDepartureButtonEnaibleAndDisable ? handleClickPopup : null}
+                    className={` ${fixedDepartureButtonEnaibleAndDisable
+                        ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
+                        : "bg-gradient-to-r from-orange-200 to-red-200"
                       } px-5 py-2 rounded-md text-white text-center text-para`}
-                    >
-                      <span>
-                        {closeBtn ? "Book Now" : "Add Guest and Room"}
-                      </span>
-                    </p>
-                 
+                  >
+                    <span>
+                      {closeBtn ? "Book Now" : "Add Guest and Room"}
+                    </span>
+                  </p>
+
                 )}
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <button
                     onClick={handleSubmit}
-                    className={`border px-5 py-2 rounded-md ${
-                      fixedDepartureButtonEnaibleAndDisable
+                    className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                         ? " bg-primary"
                         : " bg-orange-200"
-                    } text-center text-para`}
+                      } text-center text-para`}
                   >
                     Book now
                   </button>

@@ -5,7 +5,6 @@ const IoMdArrowDropdown = dynamic(() =>
 );
 import Image from "next/image";
 import { useAppContext } from "./admin/context/Package/AddGuest";
-import { DownArrow } from "@/components/icons/index";
 
 // Function to strip HTML tags
 const stripHtmlTags = (html) => {
@@ -45,13 +44,13 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
           />
        
           <div className="box-Shadow-Style-Package  justify-end  gap-3  absolute z-10 w-full  py-5  bottom-0 ">
-            <h1 className="absolute uppercase font-bold  italic md:bottom-5 bottom-2 md:right-16 right-2 text-white">{state?.name}</h1>
+            <h1 className="absolute uppercase font-bold xl:text-[38px] md:text-[32px] text-xl italic md:bottom-5 bottom-2 xl:right-16 md:right-5 right-4 text-white">{state?.name}{" Tour Packages"}</h1>
           </div>
       </div>
       <div className="container-wrapper py-5 ">
         <div className="grid md:grid-cols-[1.8fr,1.2fr] ">
           <div className="text-wrap">
-            <h4 className="text-xl font-medium mb-2 capitalize">{state?.name}</h4>
+            <h4 className="md:text-xl text-md font-medium mb-2 capitalize">{state?.name}{" Tour Packages"}</h4>
             <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
               <div className="about-margin" dangerouslySetInnerHTML={{ __html: promoData?.description }} ></div>
             </div>

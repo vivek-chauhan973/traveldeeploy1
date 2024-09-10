@@ -161,9 +161,9 @@ const DepartureSection = ({
               ) : (
                 addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 1 && (
-                  <div className="mb-2 ml-5">
+                  <div className=" ml-5">
                     {AllDataRelatedCity?.[0]?.[0] && (
-                      <div className="mb-5">
+                      <div className="my-5">
                         <div className="flex gap-3 flex-wrap">
                           {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
                             const dateObj = new Date(item.Date);
@@ -213,9 +213,9 @@ const DepartureSection = ({
               ) : (
                 addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 2 && (
-                  <div className="mb-2 ml-5">
+                  <div className="ml-5">
                     {AllDataRelatedCity?.[0]?.[0] && (
-                      <div className="mb-5">
+                      <div className="my-5">
                         <div className="flex gap-3 flex-wrap">
                           {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
                             const dateObj = new Date(item.Date);
@@ -411,9 +411,9 @@ const DepartureSection = ({
              
                 addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 1 && (
-                  <div className="mb-2 ml-5">
+                  <div className="ml-5">
                     {AllDataRelatedCity?.[0]?.[0] && (
-                      <div className="mb-5">
+                      <div className="my-5">
                         <div className="flex gap-3 flex-wrap">
                           {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
                             const dateObj = new Date(item.Date);
@@ -456,9 +456,9 @@ const DepartureSection = ({
               
                 addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 2 && (
-                  <div className="mb-2 ml-5">
+                  <div className=" ml-5">
                     {AllDataRelatedCity?.[0]?.[0] && (
-                      <div className="mb-5">
+                      <div className="my-5">
                         <div className="flex gap-3 flex-wrap">
                           {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
                             const dateObj = new Date(item.Date);
@@ -488,7 +488,7 @@ const DepartureSection = ({
                                     ₹ <p>{item?.Price?.toLocaleString()}</p>
                                   </div>
                                   <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
-                                    <p>Ava -</p>
+                                    <p>Avai -</p>
                                     <p>{item.Avilability}</p>
                                   </div>
                                 </div>

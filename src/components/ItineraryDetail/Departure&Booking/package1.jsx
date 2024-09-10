@@ -408,11 +408,11 @@ export default function Package1() {
       {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
         <div className="my-7 md:p-0 px-4">
           <div className="text-center mb-4">
-            <p className="md:text-[22px] text-[20px] mb-2">
-              HighLight & Inclusion
+            <p className="md:text-[22px] text-[20px] mb-2 capitalize">
+            {addPackage?.name}{" "}Frequently Asked Questions
             </p>
             <p className="text-para md:text-base">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
             </p>
           </div>
           {/* <Faq1 data={addPackage?.faqs?.days} /> */}
@@ -471,36 +471,36 @@ export default function Package1() {
             </div>
 
             <div className="flex-col align-middle my-auto pl-2 gap-2 py-2">
-            
-                {addPackage?.prices?.addguest === "addGuest" && (
 
-                  <p
-                    onClick={fixedDepartureButtonEnaibleAndDisable?handleClickPopup:null}
-                    className={` ${fixedDepartureButtonEnaibleAndDisable
-                        ? "bg-primary cursor-pointer"
-                        : "bg-orange-200"
-                      } px-5 py-2 rounded-md text-white text-center text-para`}
-                  >
-                    <span className="disabled:opacity-75">{buttonGuest}</span>
-                  </p>
-                )}
-                {addPackage?.prices?.departure1 === "fixedDeparture" && (
-                  <button
-                    onClick={handleSubmit}
-                    className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                        ? "bg-primary"
-                        : " bg-orange-200"
-                      }  text-center text-para`}
-                  >
-                    Book Now
-                  </button>
-                )}
-                {fixedDeparturePopupOpen && (
-                  <FixedDeparturePopup
-                    togglePopup={setFixedDeparturePopupOpen}
-                    addPackage={addPackage}
-                  />
-                )}
+              {addPackage?.prices?.addguest === "addGuest" && (
+
+                <p
+                  onClick={fixedDepartureButtonEnaibleAndDisable ? handleClickPopup : null}
+                  className={` ${fixedDepartureButtonEnaibleAndDisable
+                    ? "bg-primary cursor-pointer"
+                    : "bg-orange-200"
+                    } px-5 py-2 rounded-md text-white text-center text-para`}
+                >
+                  <span className="disabled:opacity-75">{buttonGuest}</span>
+                </p>
+              )}
+              {addPackage?.prices?.departure1 === "fixedDeparture" && (
+                <button
+                  onClick={handleSubmit}
+                  className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
+                    ? "bg-primary"
+                    : " bg-orange-200"
+                    }  text-center text-para`}
+                >
+                  Book Now
+                </button>
+              )}
+              {fixedDeparturePopupOpen && (
+                <FixedDeparturePopup
+                  togglePopup={setFixedDeparturePopupOpen}
+                  addPackage={addPackage}
+                />
+              )}
               {
                 <CustomiseTour>
                   <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">

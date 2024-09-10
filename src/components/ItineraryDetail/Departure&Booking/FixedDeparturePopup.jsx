@@ -22,6 +22,7 @@ const FixedDeparturePopup = () => {
   }, []);
 
   // console.log("true", check);
+  console.log("fixed derparture section ----> ",departureSectionData);
 
   // console.log("refdffdsfsfsdf",ref.current);
   const handleSubmit = () => {

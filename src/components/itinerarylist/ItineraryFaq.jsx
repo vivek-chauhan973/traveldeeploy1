@@ -29,14 +29,16 @@ const ItineraryFaq = ({ faq }) => {
 
   return (
     <div className="w-full m-auto">
-      <div className='flex justify-end items-center'>
-        <button
-          className="underline underline-offset-[6px] text-sm px-2 py-1.5 hover:bg-slate-100 rounded-md"
-          onClick={isAllOpen ? handleHideAll : handleExpandAll}
-        >
-          {isAllOpen ? 'Hide all' : 'Expand all'}
-        </button>
-      </div>
+      {faq?.length > 0 && (
+        <div className='flex justify-end items-center'>
+          <button
+            className="underline underline-offset-[6px] text-sm px-2 py-1.5 hover:bg-slate-100 rounded-md"
+            onClick={isAllOpen ? handleHideAll : handleExpandAll}
+          >
+            {isAllOpen ? 'Hide all' : 'Expand all'}
+          </button>
+        </div>
+      )}
       <div className="w-full mx-auto md:mt-5 mt-3">
         {faq?.map((item, i) => (
           <div key={i} className="mb-4">

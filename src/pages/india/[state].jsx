@@ -29,7 +29,7 @@ const fetchLocation = async (state) => {
 export default function SearchPage() {
   const router = useRouter();
   const state = router.query.state?.replace("-tour-packages", "");
-  console.log("state is here :: ",state);
+  console.log("state is here :: ", state);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
@@ -39,7 +39,7 @@ export default function SearchPage() {
   const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
-  
+
   useEffect(() => {
     const fetchPackages = async () => {
       try {
@@ -120,16 +120,16 @@ export default function SearchPage() {
         <div className="border-t border">
           <div className="w-full md:w-3/4 m-auto px-2 pb-5">
             <div className="text-center mt-5 mb-10">
-              <p className="md:text-[22px] text-[20px] mb-2">HighLight & Inclusion</p>
+              <p className="md:text-[22px] text-[20px] mb-2 capitalize">{state?.split("-")?.join(" ")} Frequently Asked Questions</p>
               <p className="text-para md:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
               </p>
             </div>
             <Faq1 data={promoData.faq} />
           </div>
         </div>
         <div className="border-t border">
-          <BottomLink locationId={selectedLocation}  />
+          <BottomLink locationId={selectedLocation} />
         </div>
       </div>
     </AppProvider>
