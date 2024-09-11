@@ -154,9 +154,6 @@ const DepartureSection = ({
               fixedDepartureButtonEnaibleAndDisable &&
               addPackage?.fixedfixeddepartureweightedprice === 1 ? (
                 <ItinaryFixedDepartureCard
-                  addPackage={addPackage}
-                  togglePopup={setFixedDeparturePopupOpen}
-                  fixedDeparturePopupOpen={fixedDeparturePopupOpen}
                 />
               ) : (
                 addPackage?.addguest === "fixedDeparture" &&
@@ -206,9 +203,6 @@ const DepartureSection = ({
               fixedDepartureButtonEnaibleAndDisable &&
               addPackage?.fixedfixeddepartureweightedprice === 2 ? (
                 <ItinaryFixedDepartureCard
-                  addPackage={addPackage}
-                  togglePopup={setFixedDeparturePopupOpen}
-                  fixedDeparturePopupOpen={fixedDeparturePopupOpen}
                 />
               ) : (
                 addPackage?.addguest === "fixedDeparture" &&

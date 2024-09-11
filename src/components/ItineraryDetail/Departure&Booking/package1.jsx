@@ -133,8 +133,6 @@ export default function Package1() {
           inputData={inputData}
           setCloseBtn={setCloseBtn}
           images={images}
-          togglePopup={setFixedDeparturePopupOpen}
-          fixedDeparturePopupOpen={fixedDeparturePopupOpen}
           isDisplayPrice={isDisplayPrice}
         />
       </div>
@@ -168,14 +166,10 @@ export default function Package1() {
             <div>
               <div className="hidden xl:block">
                 {addPackage?.prices?.addguest === "addGuest" && (
-                  <ItineraryPricingCard  setFixedDeparturePopupOpen={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>
+                  <ItineraryPricingCard />
                 )}
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <ItinaryFixedDepartureCard
-                    addPackage={addPackage}
-                    togglePopup={setFixedDeparturePopupOpen}
-                    fixedDeparturePopupOpen={fixedDeparturePopupOpen}
-                    setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}
                   />
                 )}
               </div>
@@ -496,10 +490,8 @@ export default function Package1() {
                   Book Now
                 </button>
               )}
-              {fixedDeparturePopupOpen && (
+              {showPopup && (
                 <FixedDeparturePopup
-                  togglePopup={setFixedDeparturePopupOpen}
-                  addPackage={addPackage}
                 />
               )}
               {

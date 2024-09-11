@@ -18,7 +18,7 @@ const fetchChartureTerm = async () => {
   return await response.json();
 };
 
-const FixedDeparturePopup = ({setFixedDeparturePopupOpen}) => {
+const FixedDeparturePopup = () => {
   const {
     addPackage,
     fixedDepDate,
@@ -64,7 +64,7 @@ const FixedDeparturePopup = ({setFixedDeparturePopupOpen}) => {
       return alert("please checke marked of confirm box");
     }
     setShowPopup(false);
-    setFixedDeparturePopupOpen(false)
+   
     // console.log("refdffdsfsfsdf212323234",ref.current);
   };
 
@@ -97,7 +97,7 @@ const FixedDeparturePopup = ({setFixedDeparturePopupOpen}) => {
               </div>
               <div className="md:w-2/3 w-full p-5 bg-white  rounded-r-lg shadow-lg">
                 <div
-                  onClick={() =>{setFixedDeparturePopupOpen(false);console.log("fixed departure clicked on cross button");console.log("showPopup -->",showPopup)}}
+                  onClick={() =>{setShowPopup(false)}}
                   className=" cursor-pointer flex justify-end mb-3"
                 >
                   <FontAwesomeIcon

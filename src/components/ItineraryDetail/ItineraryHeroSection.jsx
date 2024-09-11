@@ -15,8 +15,6 @@ const ItineraryHeroSection = ({
   closeBtn,
   setCloseBtn,
   images,
-  togglePopup,
-  fixedDeparturePopupOpen,
   isDisplayPrice
 }) => {
   const {
@@ -53,7 +51,7 @@ const ItineraryHeroSection = ({
   }, [images]);
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
-      togglePopup(true);
+      setShowPopup(true);
     }
     if (fixedDepDate && fixedDepCity) {
       setFixedDepCity1(fixedDepCity);
@@ -294,13 +292,6 @@ const ItineraryHeroSection = ({
                     </button>
                   </CustomiseTour>
                 }
-
-                {fixedDeparturePopupOpen && (
-                  <FixedDeparturePopup
-                    togglePopup={togglePopup}
-                    addPackage={addPackage}
-                  />
-                )}
               </div>
             </div>
           </div>

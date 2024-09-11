@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import FixedDeparturePopup from "./FixedDeparturePopup";
-const ItineraryPricingCard = ({setFixedDeparturePopupOpen}) => {
+const ItineraryPricingCard = () => {
   const {
     addPackage,
     inputData,
@@ -48,13 +48,6 @@ const ItineraryPricingCard = ({setFixedDeparturePopupOpen}) => {
     }
   };
 
-
-  if (showPopup1) {
-    console.log("addguest file called");
-  }
-  if (showPopup) {
-    console.log("Booking Popup file called");
-  }
   const handleEdit = () => {
     setShowPopup1(true);
   }
@@ -218,7 +211,7 @@ const ItineraryPricingCard = ({setFixedDeparturePopupOpen}) => {
 
       {/* Show Popup when 'Book Now' is clicked */}
       {showPopup && (
-        <FixedDeparturePopup  setFixedDeparturePopupOpen={setFixedDeparturePopupOpen} />
+        <FixedDeparturePopup />
       )}
     </>
   );

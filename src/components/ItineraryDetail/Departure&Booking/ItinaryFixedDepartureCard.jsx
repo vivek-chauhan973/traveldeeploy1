@@ -9,18 +9,15 @@ const fetchLimitData = async (id) => {
   const response = await fetch(`/api/package/price/departures/${id}`);
   return await response.json();
 };
-const ItinaryFixedDepartureCard = ({
-  addPackage,
-  togglePopup,
-  fixedDeparturePopupOpen,
-  setFixedDeparturePopupOpen
-}) => {
+const ItinaryFixedDepartureCard = () => {
   const {
     departureSectionData,
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
     showPopup,
+    setShowPopup,
+    addPackage,
     guestPrice,
     setFixedDepCity,
     setFixedDepCity1,
@@ -69,7 +66,7 @@ const ItinaryFixedDepartureCard = ({
       setFixedDepDate1(fixedDepDate);
     }
     if (fixedDepartureButtonEnaibleAndDisable) {
-      togglePopup(true);
+      setShowPopup(true);
     }
   };
   useEffect(() => {
@@ -348,11 +345,8 @@ const ItinaryFixedDepartureCard = ({
                 </button>
               </CustomiseTour>
 
-              {fixedDeparturePopupOpen && (
+              {showPopup && (
                 <FixedDeparturePopup
-                  togglePopup={togglePopup}
-                  addPackage={addPackage}
-                  setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}
                 />
               )}
               {
