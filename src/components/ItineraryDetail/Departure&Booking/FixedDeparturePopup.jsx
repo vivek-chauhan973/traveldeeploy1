@@ -3,6 +3,25 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
+const fetchPackgesTerm=async ()=>{
+  const response = await fetch(
+    "/api/package/terms-condition/packageTerm/get"
+  );
+  return await response.json();
+}
+const fetchGroupDepartureTerm=async ()=>{
+  const response = await fetch(
+    "/api/package/terms-condition/GroupDepartureTerm/get"
+  );
+  return await response.json();
+}
+const fetchChartureTerm=async ()=>{
+  const response = await fetch(
+    "/api/package/terms-condition/chartureTerm/get"
+  );
+  return await response.json();
+}
+
 const FixedDeparturePopup = () => {
   const {
     fixedDepDate,
@@ -20,6 +39,13 @@ const FixedDeparturePopup = () => {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  useEffect(()=>{
+    fetchPackgesTerm().then(res=>console.log("res1 ==>",res));
+    fetchGroupDepartureTerm().then(res=>console.log("res2   ====> ",res));
+    fetchChartureTerm().then(res=>console.log("res3     =====>  ",res))
+    
+  },[])
 
   // console.log("true", check);
   console.log("fixed derparture section ----> ",departureSectionData);
