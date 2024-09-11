@@ -3,35 +3,36 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-const fetchPackgesTerm=async ()=>{
-  const response = await fetch(
-    "/api/package/terms-condition/packageTerm/get"
-  );
+const fetchPackgesTerm = async () => {
+  const response = await fetch("/api/package/terms-condition/packageTerm/get");
   return await response.json();
-}
-const fetchGroupDepartureTerm=async ()=>{
+};
+const fetchGroupDepartureTerm = async () => {
   const response = await fetch(
     "/api/package/terms-condition/GroupDepartureTerm/get"
   );
   return await response.json();
-}
-const fetchChartureTerm=async ()=>{
-  const response = await fetch(
-    "/api/package/terms-condition/chartureTerm/get"
-  );
+};
+const fetchChartureTerm = async () => {
+  const response = await fetch("/api/package/terms-condition/chartureTerm/get");
   return await response.json();
-}
+};
 
-const FixedDeparturePopup = () => {
+const FixedDeparturePopup = ({setFixedDeparturePopupOpen}) => {
   const {
+    addPackage,
     fixedDepDate,
     fixedDepCity,
     setShowPopup,
+    showPopup,
     handleCleckOnDepartureFixed,
     departureSectionData,
     showAddguest,
   } = useAppContext();
   const [check, setCheck] = useState(false);
+  const [packageTerm, setPackageTerm] = useState([]);
+  const [groupDepartureTerm, setGroupDepartureTerm] = useState([]);
+  const [chartureTerm, setChartureTerm] = useState([]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -40,15 +41,20 @@ const FixedDeparturePopup = () => {
     };
   }, []);
 
-  useEffect(()=>{
-    fetchPackgesTerm().then(res=>console.log("res1 ==>",res));
-    fetchGroupDepartureTerm().then(res=>console.log("res2   ====> ",res));
-    fetchChartureTerm().then(res=>console.log("res3     =====>  ",res))
-    
-  },[])
+  useEffect(() => {
+    fetchPackgesTerm().then((res) =>
+      setPackageTerm(res?.CancellationGroupData || [])
+    );
+    fetchGroupDepartureTerm().then((res) =>
+      setGroupDepartureTerm(res?.CancellationGroupData || [])
+    );
+    fetchChartureTerm().then((res) =>
+      setChartureTerm(res?.CancellationGroupData || [])
+    );
+  }, []);
 
   // console.log("true", check);
-  console.log("fixed derparture section ----> ",departureSectionData);
+  console.log("fixed derparture section ----> ", departureSectionData);
 
   // console.log("refdffdsfsfsdf",ref.current);
   const handleSubmit = () => {
@@ -58,6 +64,7 @@ const FixedDeparturePopup = () => {
       return alert("please checke marked of confirm box");
     }
     setShowPopup(false);
+    setFixedDeparturePopupOpen(false)
     // console.log("refdffdsfsfsdf212323234",ref.current);
   };
 
@@ -81,17 +88,22 @@ const FixedDeparturePopup = () => {
                     <span className="text-yellow-400">★</span>
                   </div>
                   <p className="text-sm mb-2 text-center">3800 + reviews</p>
-                  <p className="text-sm text-center  mt-20">“Our dream trip to Europe with Pickyourtrail was delightful & seamless”</p>
+                  <p className="text-sm text-center  mt-20">
+                    “Our dream trip to Europe with Pickyourtrail was delightful
+                    & seamless”
+                  </p>
                   <p className="font-semibold mt-2 text-center">Rakesh Kumar</p>
                 </div>
               </div>
               <div className="md:w-2/3 w-full p-5 bg-white  rounded-r-lg shadow-lg">
-                <div className=" cursor-pointer flex justify-end mb-3"  >
+                <div
+                  onClick={() =>{setFixedDeparturePopupOpen(false);console.log("fixed departure clicked on cross button");console.log("showPopup -->",showPopup)}}
+                  className=" cursor-pointer flex justify-end mb-3"
+                >
                   <FontAwesomeIcon
                     icon={faCircleXmark}
                     className="font1 cursor-pointer"
                     size={28}
-                    onClick={() => setShowPopup(false)}
                   />
                 </div>
                 <form>
@@ -103,6 +115,7 @@ const FixedDeparturePopup = () => {
                     />
                     <div className="flex space-x-4">
                       <input
+                        disabled
                         type="text"
                         placeholder="+91"
                         className="w-2/12 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -120,9 +133,10 @@ const FixedDeparturePopup = () => {
                     />
                   </div>
 
-
                   <div className="mb-6">
-                    <h5 className="md:text-lg text-md font-semibold text-graytext">Booking Summary</h5>
+                    <h5 className="md:text-lg text-md font-semibold text-graytext">
+                      Booking Summary
+                    </h5>
                     <div className="flex mb-2.5 mt-3 text-sm border-t ">
                       <p className=" w-20 mt-3 font-medium">Dept. City : </p>
                       <p className="font-semibold text-graytext mt-3">Mumbai</p>
@@ -141,15 +155,48 @@ const FixedDeparturePopup = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-1">
                       <p className="font-semibold">Grand Total</p>
-                      <p className="font-semibold text-graytext">₹ {" "}</p>
+                      <p className="font-semibold text-graytext">₹ </p>
                     </div>
                   </div>
 
-                  <textarea
-                    placeholder="Comments"
-                    className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  ></textarea>
-
+                  <div className="w-full p-2 border border-gray-300 max-h-28 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500 overflow-y-scroll">
+                    {addPackage?.addguest==="addGuest"&&packageTerm?.map((item, index) => {
+                      // console.log(item);
+                      return (
+                        <div
+                          key={index} // Add a unique key for each item
+                          className="mt-2"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.description,
+                          }}
+                        ></div>
+                      );
+                    })}
+                    {(addPackage?.addguest==="fixedDeparture"&&addPackage?.fixedfixeddepartureweightedprice === 2)&&chartureTerm?.map((item, index) => {
+                      // console.log(item);
+                      return (
+                        <div
+                          key={index} // Add a unique key for each item
+                          className="mt-2"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.description,
+                          }}
+                        ></div>
+                      );
+                    })}
+                    {(addPackage?.addguest==="fixedDeparture"&&addPackage?.fixedfixeddepartureweightedprice === 1)&&groupDepartureTerm?.map((item, index) => {
+                      // console.log(item);
+                      return (
+                        <div
+                          key={index} // Add a unique key for each item
+                          className="mt-2"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.description,
+                          }}
+                        ></div>
+                      );
+                    })}
+                  </div>
                   <div className=" flex justify-start items-center gap-2 mb-4">
                     <input
                       className="cursor-pointer h-4 w-4 rounded-lg accent-navyblack"
@@ -164,8 +211,10 @@ const FixedDeparturePopup = () => {
                       Please Confirm
                     </label>
                   </div>
-                  <button className="bg-gradient-to-r from-orange-400 to-red-500 text-white w-full p-3 rounded-lg hover:opacity-90"
-                    onClick={handleSubmit}>
+                  <button
+                    className="bg-gradient-to-r from-orange-400 to-red-500 text-white w-full p-3 rounded-lg hover:opacity-90"
+                    onClick={handleSubmit}
+                  >
                     Book Now
                   </button>
                 </form>
@@ -174,10 +223,8 @@ const FixedDeparturePopup = () => {
           </div>
         </div>
       </div>
-
     </>
   );
 };
 
 export default FixedDeparturePopup;
-

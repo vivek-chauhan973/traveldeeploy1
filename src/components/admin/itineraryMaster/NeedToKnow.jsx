@@ -150,7 +150,6 @@ const NeedToKnowComponent = () => {
                     </div>
                 </div>
                 <div className="grow mt-2 md:mt-0">
-                    
                     {isEditing && (
                         <div>
                         {/* Display the currently selected group name */}

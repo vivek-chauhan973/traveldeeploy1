@@ -13,12 +13,14 @@ const ItinaryFixedDepartureCard = ({
   addPackage,
   togglePopup,
   fixedDeparturePopupOpen,
+  setFixedDeparturePopupOpen
 }) => {
   const {
     departureSectionData,
     setFixedDepDate1,
     fixedDepDate,
     fixedDepCity,
+    showPopup,
     guestPrice,
     setFixedDepCity,
     setFixedDepCity1,
@@ -350,6 +352,7 @@ const ItinaryFixedDepartureCard = ({
                 <FixedDeparturePopup
                   togglePopup={togglePopup}
                   addPackage={addPackage}
+                  setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}
                 />
               )}
               {

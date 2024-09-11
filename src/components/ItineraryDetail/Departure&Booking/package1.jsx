@@ -168,13 +168,14 @@ export default function Package1() {
             <div>
               <div className="hidden xl:block">
                 {addPackage?.prices?.addguest === "addGuest" && (
-                  <ItineraryPricingCard />
+                  <ItineraryPricingCard  setFixedDeparturePopupOpen={setFixedDeparturePopupOpen} fixedDeparturePopupOpen={fixedDeparturePopupOpen}/>
                 )}
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
                   <ItinaryFixedDepartureCard
                     addPackage={addPackage}
                     togglePopup={setFixedDeparturePopupOpen}
                     fixedDeparturePopupOpen={fixedDeparturePopupOpen}
+                    setFixedDeparturePopupOpen={setFixedDeparturePopupOpen}
                   />
                 )}
               </div>
