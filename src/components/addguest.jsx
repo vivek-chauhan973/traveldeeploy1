@@ -29,7 +29,7 @@ const Addguest = ({
   setShowPopup1
 }) => {
   const date = new Date();
-  const { showAddguest, setSubmitButtonOfPricingCalculation, setGuestPrice, departureSectionData } =
+  const { showAddguest, setSubmitButtonOfPricingCalculation,initialData, setGuestPrice, departureSectionData } =
     useAppContext() ?? { showAddguest: false };
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState("");
@@ -42,9 +42,6 @@ const Addguest = ({
   const [transportPrice, setTransportPrice] = useState(0);
   const [final, setFinal] = useState(0);
   const [selectedDataOfCar, setSelectedDataOfCar] = useState(0);
-
-  //here are the all states for calculation of transport
-  // console.log("departureSectionData ----- >123 ",departureSectionData)
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -56,7 +53,6 @@ const Addguest = ({
   useEffect(() => {
     setDays(addPackage?.days?.length);
   }, [])
-
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
     .toISOString()
     .split("T")[0];
@@ -75,10 +71,17 @@ const Addguest = ({
   };
   const [close1, setClose1] = useState(false);
   const handleClose = () => {
+    
     setOpen(false);
     setClose1(!close1);
 
   };
+  useEffect(()=>{
+    if(!open){
+      setInputData(initialData);
+    }
+    
+  },[open])
 
   const handleChange = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
@@ -108,6 +111,7 @@ const Addguest = ({
     fetchCarAllCars().then((res) => setCars(res?.data || []));
   }, []);
   // here is the logic of select car
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setShowPopup1(false)
@@ -122,7 +126,6 @@ if(inputData.adult ==="" ){
     if (isAnyChildDateEmpty) {
       return alert("Please fill in the date for each child.");
     }
-  
     if (
       (inputData.adult > 0 || inputData.child > 0 || inputData.infant > 0) &&
       (inputData.singleRoom > 0 ||
@@ -140,7 +143,7 @@ if(inputData.adult ==="" ){
         alert("Please assign rooms for all adults.");
         return;
       }
-setCloseBtn(true)
+      setCloseBtn(true)
       try {
         const response = await fetch(
           "http://localhost:3000/api/public/package/book-tour",
@@ -188,7 +191,6 @@ setCloseBtn(true)
       },
     }));
   };
-
   const handleDateChange1 = (e, index) => {
     const selectedDate = new Date(e.target.value);
     const currentDate = new Date();
@@ -197,7 +199,6 @@ setCloseBtn(true)
       (currentDate.getMonth() - selectedDate.getMonth());
     const years = Math.floor(differenceInMonths / 12);
     const months = differenceInMonths % 12;
-
     setInputData((prevState) => ({
       ...prevState,
       infantAges: {
@@ -206,7 +207,6 @@ setCloseBtn(true)
       },
     }));
   };
-
   const [countSingleRoom, setCountSingleRoom] = useState(0);
   const [countTwinRoom, setCountTwinRoom] = useState(0);
   const [countTripleRoom, setCountTripleRoom] = useState(0);
@@ -220,7 +220,6 @@ setCloseBtn(true)
       );
       return;
     }
-
     let remainingAdults;
     let maxRooms;
 
@@ -281,7 +280,6 @@ setCloseBtn(true)
         break;
     }
   };
-
   const handleDecrement = (roomType) => {
     let newCount;
     switch (roomType) {
@@ -339,28 +337,27 @@ setCloseBtn(true)
           tripleSharingRoom * inputData?.tripleRoom * (days - 1) +
           quadSharingRoom * inputData?.quardRoom * (days - 1) + misc * (days);
 
-        setGuestPrice(calculatedPrice);
-        setFinal(calculatedPrice);
+          if(inputData?.singleRoom>0||inputData?.twinRoom>0||inputData?.tripleRoom>0||inputData?.quardRoom>0){
+            setGuestPrice(calculatedPrice);
+            setFinal(calculatedPrice);
+          }
+       
       }
     }
   }, [inputData, addPackage]);
+  
   useEffect(() => {
     const {
-      // diskHike,
       markup,
     } = addPackage?.prices;
     const newCalculatedPrice = finalPrice + Math.floor((finalPrice * markup) / 100);
-    // setGuestPrice(newCalculatedPrice)
-
     if (departureSectionData?.hike) {
       if (departureSectionData?.hike > 0) {
         const newCalculatedPrice1 = newCalculatedPrice + Math.floor((newCalculatedPrice * (departureSectionData?.hike)) / 100)
-        // console.log("final price",Math.floor((newCalculatedPrice*(departureSectionData?.hike))/100));
         setGuestPrice(newCalculatedPrice1);
       }
       else if (departureSectionData?.hike < 0) {
         const newDiskHike = Math.abs((departureSectionData?.hike));
-        //  console.log("new dishike",(newCalculatedPrice*newDiskHike)/100)
         const newCalculatedPrice1 = newCalculatedPrice - Math.floor((newCalculatedPrice * newDiskHike) / 100)
         setGuestPrice(newCalculatedPrice1);
       }
@@ -370,22 +367,19 @@ setCloseBtn(true)
     }
   }, [finalPrice])
 
-  // console.log("final prize ",finalPrice)
   const handleToggle = (e) => {
     e.preventDefault();
     setIsAC((prevIsAC) => !prevIsAC);
   };
   useEffect(() => {
     const newarr = [];
-    // console.log("cars stage1 ----> ",cars);
     const filteredData = cars?.find(item => item?.seatingCapacity >= inputData?.adult);
     setSelectedDataOfCar(filteredData?.capacity);
     newarr.push(filteredData);
-    // console.log("cars stage2 ----> ",filteredData);
     const filteredData3 = cars?.filter(item => item?.vehicleType !== filteredData?.vehicleType && item?.seatingCapacity === filteredData?.seatingCapacity);
     if (filteredData3?.length !== 0) {
       filteredData3.forEach(item => {
-        newarr.push(item);
+        newarr.push(item); 
         cars.pop(item);
       })
     }

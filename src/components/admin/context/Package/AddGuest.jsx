@@ -33,6 +33,7 @@ const [showPopup1, setShowPopup1] = useState(false);
 
   const router = useRouter();
   const initialData = {
+    adult:0,
     child: 0,
     infant: 0,
     singleRoom: 0,
@@ -110,6 +111,7 @@ const [showPopup1, setShowPopup1] = useState(false);
   // console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
   //  console.log("showAddguest -------> ",fixedDepartureData1)
   const contextFun = {
+    initialData,
     closeBtn,
     setCloseBtn,
     guestPrice,
