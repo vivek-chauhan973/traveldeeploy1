@@ -565,3 +565,7 @@ blockquote {
 .payment-margin ul li {
   margin-left: 20px;
 }
+
+.breadCrumbs li {
+  list-style: none;
+}

@@ -103,6 +103,7 @@ export default function SearchPage() {
     <AppProvider>
       <div className='bg-slate-100'>
         <DesktopHeader />
+        <Breadcrumbs/>
         <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} priorityPackage={priorityPackage} />
         <SearchHeaderWpr />
         <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
