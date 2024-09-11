@@ -16,7 +16,7 @@ const ExtraWeightPopup = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className='bg-white shadow-sm flex flex-col md:w-[40%] w-[80%] h-auto z-50 rounded-md'>
         <div className='mt-4 flex justify-between items-center px-3 md:px-5'>
-          <h2 className='text-3xl md:text-5xl font-semibold text-navyblack'>Important Notice</h2>
+          <h2 className='text-3xl md:ml-1 ml-3 md:text-5xl font-semibold text-navyblack'>Important Notice</h2>
           <div className="">
             <FontAwesomeIcon
               icon={faXmark}

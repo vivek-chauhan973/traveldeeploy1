@@ -118,13 +118,13 @@ export default function Package1() {
         setCloseBtn={setCloseBtn}
         addPackage={addPackage}
         setShowPopup1={setShowPopup1} />}
-      <div className=" absolute w-full ">
+      <div className="w-full ">
         <DesktopHeader />
       </div>
 
       {/* <Caraousel /> */}
-      <Breadcrumbs />
-      <div className="md:mt-20 mt-3">
+      <div>
+        <Breadcrumbs />
         <ItineraryHeroSection
           addPackage={addPackage}
           closeBtn={closeBtn}
@@ -404,7 +404,7 @@ export default function Package1() {
         <div className="my-7 md:p-0 px-4">
           <div className="text-center mb-4">
             <p className="md:text-[22px] text-[20px] mb-2 capitalize">
-            {addPackage?.name}{" "}Frequently Asked Questions
+              {addPackage?.name}{" "}Frequently Asked Questions
             </p>
             <p className="text-para md:text-base">
               We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
