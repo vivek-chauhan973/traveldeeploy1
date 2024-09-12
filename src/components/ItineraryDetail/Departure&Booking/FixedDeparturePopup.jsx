@@ -256,9 +256,12 @@ const FixedDeparturePopup = () => {
     fixedDepCity,
     setShowPopup,
     showPopup,
+    inputData,
     handleCleckOnDepartureFixed,
     departureSectionData,
     showAddguest,
+    fixedDeparturePopupPrice,
+    groupDeparturePerson
   } = useAppContext();
 
   const [check, setCheck] = useState(false);
@@ -313,6 +316,7 @@ const FixedDeparturePopup = () => {
       alert("Please check all the terms and the confirmation box.");
     }
   };
+  // console.log("departure section data is here ---> ",departureSectionData)
 
   return (
     <>
@@ -378,23 +382,41 @@ const FixedDeparturePopup = () => {
                     </h5>
                     <div className="flex mb-2.5 mt-3 text-sm border-t ">
                       <p className=" w-20 mt-3 font-medium">Dept. City : </p>
-                      <p className="font-semibold text-graytext mt-3">Mumbai</p>
+                      <p className="font-semibold text-graytext mt-3">{showAddguest}</p>
                     </div>
-                    <div className="flex mb-2.5 text-sm">
+                    {addPackage?.addguest==="addGuest"&&<div className="flex mb-2.5 text-sm">
                       <p className=" w-20 font-medium">Dept. Date :</p>
                       <p className=" font-bold text-graytext">
-                        10 Mar 2024 - 17 Mar 2024
+                        {departureSectionData?.date}
                       </p>
-                    </div>
-                    <div className="flex mb-2.5 text-sm">
+                    </div>}
+                    {addPackage?.addguest==="fixedDeparture"&&<div className="flex mb-2.5 text-sm">
+                      <p className=" w-20 font-medium">Dept. Date :</p>
+                      <p className=" font-bold text-graytext">
+                        {departureSectionData?.Date}
+                      </p>
+                    </div>}
+                    {addPackage?.addguest==="addGuest"&&<div className="flex mb-2.5 text-sm">
                       <p className=" w-20 font-medium">Traveller :</p>
                       <p className=" font-semibold text-graytext">
-                        Adults : 0, Child : 0, Infant : 0
+                        Adults : {inputData?.adult}, Child : {inputData?.child+inputData?.infant}, Infant : 0
                       </p>
-                    </div>
+                    </div>}
+                    {(addPackage?.addguest === "fixedDeparture" &&addPackage?.fixedfixeddepartureweightedprice === 2 )&&<div className="flex mb-2.5 text-sm">
+                      <p className=" w-20 font-medium">Avilability :</p>
+                      <p className=" font-semibold text-graytext">
+                       {departureSectionData?.Avilability}
+                      </p>
+                    </div>}
+                    {(addPackage?.addguest === "fixedDeparture" &&addPackage?.fixedfixeddepartureweightedprice === 1 )&&<div className="flex mb-2.5 text-sm">
+                      <p className=" w-20 font-medium">Avilability :</p>
+                      <p className=" font-semibold text-graytext">
+                       {groupDeparturePerson}
+                      </p>
+                    </div>}
                     <div className="grid grid-cols-2 gap-1">
                       <p className="font-semibold">Grand Total</p>
-                      <p className="font-semibold text-graytext">₹ </p>
+                      <p className="font-semibold text-graytext">₹ {fixedDeparturePopupPrice}</p>
                     </div>
                   </div>
 

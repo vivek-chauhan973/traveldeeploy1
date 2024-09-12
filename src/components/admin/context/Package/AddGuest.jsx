@@ -24,9 +24,12 @@ export const AppProvider = ({ children }) => {
   const [contactAdmin, setContactAdimn] = useState(false);
   const [submitButtonOfPricingCalculation,setSubmitButtonOfPricingCalculation]=useState(false);
   const [fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable]=useState(false);
+// set final price to show fixed departure popup
 
+const [fixedDeparturePopupPrice,setFixedDeparturePopupPrice]=useState(0);
 
 // handle popup sate of booking and addguest
+
 
 const [showPopup, setShowPopup] = useState(false);
 const [showPopup1, setShowPopup1] = useState(false);
@@ -110,6 +113,11 @@ const [showPopup1, setShowPopup1] = useState(false);
   // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",price1)
   // console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
   //  console.log("showAddguest -------> ",fixedDepartureData1)
+
+
+  // select person selected in group departure
+
+  const [groupDeparturePerson,setGroupDeparturePerson]=useState(0);
   const contextFun = {
     initialData,
     closeBtn,
@@ -146,9 +154,10 @@ const [showPopup1, setShowPopup1] = useState(false);
     fixedDepartureProceedButton,setFixedDepartureProceedButton,
     contactAdmin, setContactAdimn,
     showPopup, setShowPopup,
-    showPopup1, setShowPopup1
+    showPopup1, setShowPopup1,
+    fixedDeparturePopupPrice,setFixedDeparturePopupPrice,
+    groupDeparturePerson,setGroupDeparturePerson
   };
-
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>
   );
@@ -157,3 +166,4 @@ const [showPopup1, setShowPopup1] = useState(false);
 export const useAppContext = () => {
   return useContext(AppContext);
 };
+ 

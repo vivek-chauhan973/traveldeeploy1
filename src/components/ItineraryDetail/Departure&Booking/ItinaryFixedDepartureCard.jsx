@@ -23,7 +23,9 @@ const ItinaryFixedDepartureCard = () => {
     setFixedDepCity1,
     setFixedDepartureButtonEnaibleAndDisable,
     fixedDepartureButtonEnaibleAndDisable,
-    contactAdmin, setContactAdimn
+    contactAdmin, setContactAdimn,
+    setFixedDeparturePopupPrice,
+    setGroupDeparturePerson
   } = useAppContext();
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
@@ -85,6 +87,8 @@ const ItinaryFixedDepartureCard = () => {
   }, [guestPrice]);
   useEffect(() => {
     setGrandTotal((guestPrice + calculatedPrizeOfGst) * limitKey);
+    setGroupDeparturePerson(limitKey);
+    setFixedDeparturePopupPrice((guestPrice + calculatedPrizeOfGst) * limitKey)
   }, [calculatedPrizeOfGst, limitKey, guestPrice]);
   // convert limit key into keys array , here is the logic of keys to convert array
   const [input, setInput] = useState("");

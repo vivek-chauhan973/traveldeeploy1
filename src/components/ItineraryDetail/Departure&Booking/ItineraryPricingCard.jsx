@@ -18,7 +18,8 @@ const ItineraryPricingCard = () => {
     showPopup, setShowPopup,
     showPopup1, setShowPopup1,
     submitButtonOfPricingCalculation,
-    fixedDepartureButtonEnaibleAndDisable
+    fixedDepartureButtonEnaibleAndDisable,
+    setFixedDeparturePopupPrice
   } = useAppContext();
 
   const [gst, setGst] = useState(0);
@@ -37,6 +38,7 @@ const ItineraryPricingCard = () => {
   }, [gst, (((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price)])
   useEffect(() => {
     setGrandTotal(((((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price) + calculatedPrizeOfGst));
+    setFixedDeparturePopupPrice(((((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price) + calculatedPrizeOfGst))
   }, [calculatedPrizeOfGst, grandTotal])
 
   const handleBookNowClick = () => {
