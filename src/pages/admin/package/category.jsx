@@ -259,9 +259,9 @@ export default function Category () {
                 {/* <SmartTabel/> */}
                 {/* <DynamicTable/> */}
                 <div>
-                    <div className="flex items-center gap-5 text-primary pb-3">
+                    <div className="flex items-center gap-5 text-primary py-3">
                         <LuPackagePlus size={28} className="font-semibold"/>
-                        <p className="text-[28px] text-black">Package Master</p>
+                        <p className="md:text-[28px] text-xl text-black">Package Master</p>
                         <HiOutlineArrowNarrowRight size={28} className=" text-teal-700"/>
                     </div>
                     <div className=" grid  grid-cols-1 md:grid-cols-2 gap-5 rounded">

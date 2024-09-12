@@ -16,7 +16,7 @@ const Faq1 = ({ data }) => {
             <div className="w-full mx-auto mt-10">
                 {data?.map((item, i) => (
                     <div key={i} className="mb-3">
-                        <div className="w-full h-12 flex justify-between items-center md:px-5 px-3 py-2 bg-[#f3f3f3] rounded-md hover:bg-gray-200"
+                        <div className="w-full h-12 flex justify-between items-center md:px-5 px-3 py-2 bg-[#f3f3f3] rounded-md hover:bg-gray-200 cursor-pointer"
                             onClick={() => handleToggle(i)}>
                             <div className='flex justify-start items-center w-[95%] h-full'>
                                 <p className="md:text-base text-sm capitalize font-semibold">{item.title}</p>

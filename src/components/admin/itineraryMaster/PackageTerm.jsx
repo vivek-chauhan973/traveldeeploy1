@@ -136,12 +136,12 @@ const PackageTerm = () => {
   return (
     <div>
       <div className="md:flex gap-5">
-        <div className=" grow border rounded p-4 h-72">
+        <div className=" grow border rounded p-3 h-72">
           <div className="flex flex-col">
             <label className="pb-2 font-semibold">
               Package Terms and Condition
             </label>
-            <div className="flex items-center gap-5">
+            <div className="flex items-center md:gap-5 gap-1">
               <input
                 className="border rounded-md h-8 px-2 grow focus:border-primary outline-none"
                 type="text"
@@ -166,7 +166,7 @@ const PackageTerm = () => {
             {groupsData.map((group, index) => (
               <div
                 key={group._id}
-                className="flex justify-between items-center gap-10 even:bg-slate-100 hover:bg-slate-300 cursor-pointer"
+                className="flex justify-between items-center md:gap-10 gap-5 even:bg-slate-100 hover:bg-slate-300 cursor-pointer"
               >
                 <p className="capitalize leading-8">
                   {index + 1}. {group.groupName}
@@ -205,7 +205,7 @@ const PackageTerm = () => {
             <div>
               {/* Display the currently selected group name */}
               <p className="font-semibold">Group : {selectedGroupName}</p>
-              <div className="w-full  h-[225px]">
+              <div className="w-full  xl:h-[225px]  h-[180px]">
                 <QuillNoSSRWrapper
                   className="rounded h-[100%]"
                   theme="snow"
@@ -228,7 +228,7 @@ const PackageTerm = () => {
       >
         <button
           onClick={handleSave}
-          className=" w-full bg-black text-white p-2 mt-2"
+          className=" w-full bg-black rounded-md text-white p-2 mt-2"
         >
           Save Information
         </button>
