@@ -117,15 +117,16 @@ const Addguest = ({
     setShowPopup1(false)
     setSubmitButtonOfPricingCalculation(true);
     const childDateInputs = document.querySelectorAll('input[id^="childDate"]');
-    const isAnyChildDateEmpty = Array.from(childDateInputs).some(
-      (input) => input.value === ""
-    );
+    // console.log("child date Inputs --- > ",childDateInputs);
+    // const isAnyChildDateEmpty = Array.from(childDateInputs).some(
+    //   (input) => input.value === ""
+    // );
 if(inputData.adult ==="" ){
   return alert("Please choose adult first");
 }
-    if (isAnyChildDateEmpty) {
-      return alert("Please fill in the date for each child.");
-    }
+    // if (isAnyChildDateEmpty) {
+    //   return alert("Please fill in the date for each child.");
+    // }
     if (
       (inputData.adult > 0 || inputData.child > 0 || inputData.infant > 0) &&
       (inputData.singleRoom > 0 ||
