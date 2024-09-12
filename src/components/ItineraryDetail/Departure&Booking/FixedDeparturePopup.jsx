@@ -402,10 +402,10 @@ const FixedDeparturePopup = () => {
                   <div className="w-full p-2 border-t border-gray-300 max-h-36 mb-4 overflow-y-scroll">
                     {addPackage?.addguest === "addGuest" &&
                       packageTerm.map((item, index) => (
-                        <div key={index} className="text-sm mt-2 ml-4 leading-6 px-5">
+                        <div key={index} className="text-sm mt-2 ml-4 leading-6 px-5 flex items-start">
                           <input
                             type="checkbox"
-                            className="mr-2"
+                            className="mr-2 mt-2 cursor-pointer  rounded-lg accent-navyblack"
                             checked={termsChecked.package[index] || false}
                             onChange={() => handleTermChange("package", index)}
                           />
@@ -420,10 +420,10 @@ const FixedDeparturePopup = () => {
                     {addPackage?.addguest === "fixedDeparture" &&
                       addPackage?.fixedfixeddepartureweightedprice === 2 &&
                       chartureTerm.map((item, index) => (
-                        <div key={index} className="text-sm mt-2 leading-6 flex justify-start  gap-2">
+                        <div key={index} className="text-sm mt-2 leading-6 flex justify-start  flex items-start gap-2">
                           <input
                             type="checkbox"
-                            className="mr-2"
+                            className="mr-2 mt-2 cursor-pointer  rounded-lg accent-navyblack"
                             checked={termsChecked.charture[index] || false}
                             onChange={() => handleTermChange("charture", index)}
                           />
@@ -438,10 +438,10 @@ const FixedDeparturePopup = () => {
                     {addPackage?.addguest === "fixedDeparture" &&
                       addPackage?.fixedfixeddepartureweightedprice === 1 &&
                       groupDepartureTerm.map((item, index) => (
-                        <div key={index} className="text-sm mt-2 ml-4 leading-6 px-5">
+                        <div key={index} className="text-sm mt-2 ml-4 leading-6 px-5 flex items-start">
                           <input
                             type="checkbox"
-                            className="mr-2"
+                            className="mr-2 mt-2 cursor-pointer  rounded-lg accent-navyblack"
                             checked={termsChecked.group[index] || false}
                             onChange={() => handleTermChange("group", index)}
                           />
