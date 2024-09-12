@@ -25,7 +25,8 @@ const ItinaryFixedDepartureCard = () => {
     fixedDepartureButtonEnaibleAndDisable,
     contactAdmin, setContactAdimn,
     setFixedDeparturePopupPrice,
-    setGroupDeparturePerson
+    setGroupDeparturePerson,
+    showAddguest
   } = useAppContext();
   const [city, setCity] = useState(false);
   const [date, setDate] = useState(false);
@@ -146,12 +147,12 @@ const ItinaryFixedDepartureCard = () => {
           <div className="">
             <div className="flex mb-2.5 mt-3 text-sm">
               <p className=" w-20">Dept. City : </p>
-              <p className="font-semibold text-graytext">Mumbai</p>
+              <p className="font-semibold text-graytext">{showAddguest||"Mumbai"}</p>
             </div>
             <div className="flex mb-2.5 text-sm">
               <p className=" w-20">Dept. Date :</p>
               <p className=" font-bold text-graytext">
-                10 Mar 2024 - 17 Mar 2024
+               {departureSectionData?.Date||" 10 Mar 2024 - 17 Mar 2024"}
               </p>
             </div>
           </div>

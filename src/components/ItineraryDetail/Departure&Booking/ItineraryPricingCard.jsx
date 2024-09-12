@@ -19,7 +19,9 @@ const ItineraryPricingCard = () => {
     showPopup1, setShowPopup1,
     submitButtonOfPricingCalculation,
     fixedDepartureButtonEnaibleAndDisable,
-    setFixedDeparturePopupPrice
+    setFixedDeparturePopupPrice,
+    showAddguest,
+    departureSectionData
   } = useAppContext();
 
   const [gst, setGst] = useState(0);
@@ -77,16 +79,16 @@ const ItineraryPricingCard = () => {
         </div>
 
         <div className=" overflow-y-auto">
-          <div className="flex mb-2.5 mt-3 text-sm">
-            <p className=" w-20">Dept. City : </p>
-            <p className="font-semibold text-graytext">Mumbai</p>
-          </div>
-          <div className="flex mb-2.5 text-sm">
-            <p className=" w-20">Dept. Date :</p>
-            <p className=" font-bold text-graytext">
-              10 Mar 2024 - 17 Mar 2024
-            </p>
-          </div>
+        <div className="flex mb-2.5 mt-3 text-sm">
+              <p className=" w-20">Dept. City : </p>
+              <p className="font-semibold text-graytext">{showAddguest||"Mumbai"}</p>
+            </div>
+            <div className="flex mb-2.5 text-sm">
+              <p className=" w-20">Dept. Date :</p>
+              <p className=" font-bold text-graytext">
+               {departureSectionData?.date||" 10 Mar 2024 - 17 Mar 2024"}
+              </p>
+            </div>
           <div className="flex mb-2.5 text-sm">
             <p className=" w-20">Traveller :</p>
             <p className=" font-semibold text-graytext">
