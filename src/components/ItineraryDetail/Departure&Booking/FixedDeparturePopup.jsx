@@ -173,31 +173,31 @@ const FixedDeparturePopup = () => {
                     <h5 className="md:text-lg text-md font-semibold text-graytext">
                       Booking Summary
                     </h5>
-                    <div className="flex mb-2.5 mt-3 text-sm border-t ">
-                      <p className=" w-20 mt-3 font-medium">Dept. City : </p>
-                      <p className="font-semibold text-graytext mt-3">{showAddguest}</p>
+                    <div className="flex mb-2.5 mt-1 text-sm border-t ">
+                      <p className=" w-20 mt-2 font-medium">Dept. City : </p>
+                      <p className="font-semibold text-graytext mt-2 capitalize">{showAddguest}</p>
                     </div>
-                    {addPackage?.addguest === "addGuest" && <div className="flex mb-2.5 text-sm">
+                    {addPackage?.addguest === "addGuest" && <div className="flex mb-2 text-sm">
                       <p className=" w-20 font-medium">Dept. Date :</p>
                       <p className=" font-bold text-graytext">
                         {departureSectionData?.date}
                       </p>
                     </div>}
-                    {addPackage?.addguest === "fixedDeparture" && <div className="flex mb-2.5 text-sm">
+                    {addPackage?.addguest === "fixedDeparture" && <div className="flex mb-2 text-sm">
                       <p className=" w-20 font-medium">Dept. Date :</p>
                       <p className=" font-bold text-graytext">
                         {departureSectionData?.Date}
                       </p>
                     </div>}
-                    {addPackage?.addguest === "addGuest" && <div className="flex mb-2.5 text-sm">
+                    {addPackage?.addguest === "addGuest" && <div className="flex mb-2 text-sm">
                       <p className=" w-20 font-medium">Traveller :</p>
                       <p className=" font-semibold text-graytext">
                         Adults : {inputData?.adult}, Child : {inputData?.child + inputData?.infant}, Infant : 0
                       </p>
                     </div>}
-                    <div className="grid grid-cols-2 gap-1">
+                    <div className="grid grid-cols-2">
                       <p className="font-semibold">Grand Total</p>
-                      <p className="font-semibold text-graytext">₹ {fixedDeparturePopupPrice}</p>
+                      <p className="font-semibold text-graytext">₹ {fixedDeparturePopupPrice?.toLocaleString()}</p>
                     </div>
                   </div>
 

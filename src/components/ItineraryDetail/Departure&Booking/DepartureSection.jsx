@@ -7,11 +7,8 @@ import DeparturePopup from "./DeparturePopup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import ItinaryFixedDepartureCard from "./ItinaryFixedDepartureCard";
-const DepartureSection = ({
-  addPackage,
-  setFixedDeparturePopupOpen,
-  fixedDeparturePopupOpen,
-}) => {
+
+const DepartureSection = ({ addPackage }) => {
   const {
     departureSectionData,
     setDepartureSectionData,
@@ -57,14 +54,15 @@ const DepartureSection = ({
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
+  console.log("add ",AllDataRelatedCity)
   return (
     <>
       <div className="">
         <div className="flex xl:hidden flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
           <div>
             <div>
-           
-            { fixedDepartureButtonEnaibleAndDisable ?"": <h4 className="font-semibold text-base p-3 text-graytext">
+
+              {fixedDepartureButtonEnaibleAndDisable ? "" : <h4 className="font-semibold text-base p-3 text-graytext">
                 1. SELECT DEPARTURE CITY & DATE
               </h4>}
             </div>
@@ -80,22 +78,20 @@ const DepartureSection = ({
               {addPackage?.addguest === "addGuest" && (
                 <div className="flex pr-5 justify-end gap-2 items-center mt-2">
                   <button
-                    className={`p-2 rounded-full ${
-                      currentMonthIndex === 0
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                    className={`p-2 rounded-full ${currentMonthIndex === 0
+                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      : "bg-gray-200 hover:bg-gray-300"
+                      }`}
                     onClick={handlePreviousMonth}
                     disabled={currentMonthIndex === 0}
                   >
                     <FontAwesomeIcon icon={faAngleLeft} className="font1" />
                   </button>
                   <button
-                    className={`p-2 rounded-full ${
-                      currentMonthIndex === monthKeys.length - 1
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                    className={`p-2 rounded-full ${currentMonthIndex === monthKeys.length - 1
+                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      : "bg-gray-200 hover:bg-gray-300"
+                      }`}
                     onClick={handleNextMonth}
                     disabled={currentMonthIndex === monthKeys.length - 1}
                   >
@@ -151,107 +147,109 @@ const DepartureSection = ({
                 </div>
               )}
               {
-              fixedDepartureButtonEnaibleAndDisable &&
-              addPackage?.fixedfixeddepartureweightedprice === 1 ? (
-                <ItinaryFixedDepartureCard
-                />
-              ) : (
-                addPackage?.addguest === "fixedDeparture" &&
-                addPackage?.fixedfixeddepartureweightedprice === 1 && (
-                  <div className=" ml-5">
-                    {AllDataRelatedCity?.[0]?.[0] && (
-                      <div className="my-5">
-                        <div className="flex gap-3 flex-wrap">
-                          {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
-                            const dateObj = new Date(item.Date);
-                            const dayOfWeek = dateObj.toLocaleString(
-                              "default",
-                              { weekday: "short" }
-                            );
-                            const dayOfMonth = dateObj.getDate();
-                            return (
-                              <div
-                                key={i}
-                                onClick={() => {
-                                  setShowPopup(true);
-                                  setDepartureSectionData(item);
-                                }}
-                                className="cursor-pointer"
-                              >
-                                <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 h-14 rounded-md overflow-hidden">
-                                  <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
-                                    {dayOfWeek}
-                                  </p>
-                                  <hr />
-                                  <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                    {item.Date}
-                                  </p>
-                                  <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                    ₹ <p>{item?.Price?.toLocaleString()}</p>
+                fixedDepartureButtonEnaibleAndDisable &&
+                  addPackage?.fixedfixeddepartureweightedprice === 1 ? (
+                  <ItinaryFixedDepartureCard
+                  />
+                ) : (
+                  addPackage?.addguest === "fixedDeparture" &&
+                  addPackage?.fixedfixeddepartureweightedprice === 1 && (
+                    <div className=" ml-5">
+                      {AllDataRelatedCity?.[0]?.[0] && (
+                        <div className="my-5">
+                          <div className="flex gap-3 flex-wrap">
+                            {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
+                              const dateObj = new Date(item.date1);
+                              const dayOfWeek = dateObj.toLocaleString(
+                                "default",
+                                { weekday: "short" }
+                              );
+                              const dayOfMonth = dateObj.getDate();
+                              console.log("date1",item?.date1)
+                              return (
+                                <div
+                                  key={i}
+                                  onClick={() => {
+                                    setShowPopup(true);
+                                    setDepartureSectionData(item);
+                                  }}
+                                  className="cursor-pointer"
+                                >
+                                  <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 h-14 rounded-md overflow-hidden">
+                                    <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
+                                      {dayOfWeek}
+                                    </p>
+                                    <hr />
+                                    <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
+                                     hi
+                                    </p>
+                                    <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
+                                      ₹ <p>{item?.Price?.toLocaleString()}</p>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            );
-                          })}
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                )
-              )}
+                      )}
+                    </div>
+                  )
+                )}
               {
-              fixedDepartureButtonEnaibleAndDisable &&
-              addPackage?.fixedfixeddepartureweightedprice === 2 ? (
-                <ItinaryFixedDepartureCard
-                />
-              ) : (
-                addPackage?.addguest === "fixedDeparture" &&
-                addPackage?.fixedfixeddepartureweightedprice === 2 && (
-                  <div className="ml-5">
-                    {AllDataRelatedCity?.[0]?.[0] && (
-                      <div className="my-5">
-                        <div className="flex gap-3 flex-wrap">
-                          {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
-                            const dateObj = new Date(item.Date);
-                            const dayOfWeek = dateObj.toLocaleString(
-                              "default",
-                              { weekday: "short" }
-                            );
-                            const dayOfMonth = dateObj.getDate();
-                            return (
-                              <div
-                                key={i}
-                                onClick={() => {
-                                  setShowPopup(true);
-                                  setDepartureSectionData(item);
-                                }}
-                                className="cursor-pointer"
-                              >
-                                <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 rounded-md overflow-hidden">
-                                  <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
-                                    {dayOfWeek}
-                                  </p>
-                                  <hr />
-                                  <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                    {item.Date}
-                                  </p>
-                                  <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                    ₹ <p>{item?.Price?.toLocaleString()}</p>
-                                  </div>
-                                  <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
-                                    <p>Ava -</p>
-                                    <p>{item.Avilability}</p>
+                fixedDepartureButtonEnaibleAndDisable &&
+                  addPackage?.fixedfixeddepartureweightedprice === 2 ? (
+                  <ItinaryFixedDepartureCard
+                  />
+                ) : (
+                  addPackage?.addguest === "fixedDeparture" &&
+                  addPackage?.fixedfixeddepartureweightedprice === 2 && (
+                    <div className="ml-5">
+                      {AllDataRelatedCity?.[0]?.[0] && (
+                        <div className="my-5">
+                          <div className="flex gap-3 flex-wrap">
+                            {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
+                              const dateObj = new Date(item.Date);
+                              const dayOfWeek = dateObj.toLocaleString(
+                                "default",
+                                { weekday: "short" }
+                              );
+                              const dayOfMonth = dateObj.getDate();
+                              console.log("date1",item?.date1)
+                              return (
+                                <div
+                                  key={i}
+                                  onClick={() => {
+                                    setShowPopup(true);
+                                    setDepartureSectionData(item);
+                                  }}
+                                  className="cursor-pointer"
+                                >
+                                  <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 rounded-md overflow-hidden">
+                                    <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
+                                      {dayOfWeek}
+                                    </p>
+                                    <hr />
+                                    <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
+                                     hi
+                                    </p>
+                                    <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
+                                      ₹ <p>{item?.Price?.toLocaleString()}</p>
+                                    </div>
+                                    <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
+                                      <p>Ava -</p>
+                                      <p>{item.Avilability}</p>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            );
-                          })}
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                )
-              )}
+                      )}
+                    </div>
+                  )
+                )}
               <hr />
               <div className="ml-2 my-4">
                 <h6 className="font-semibold text-md mb-3 text-graytext">
@@ -331,22 +329,20 @@ const DepartureSection = ({
               {addPackage?.addguest === "addGuest" && (
                 <div className="flex pr-5 justify-end gap-2 items-center mt-2">
                   <button
-                    className={`p-2 rounded-full ${
-                      currentMonthIndex === 0
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                    className={`p-2 rounded-full ${currentMonthIndex === 0
+                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      : "bg-gray-200 hover:bg-gray-300"
+                      }`}
                     onClick={handlePreviousMonth}
                     disabled={currentMonthIndex === 0}
                   >
                     <FontAwesomeIcon icon={faAngleLeft} className="font1" />
                   </button>
                   <button
-                    className={`p-2 rounded-full ${
-                      currentMonthIndex === monthKeys.length - 1
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                    className={`p-2 rounded-full ${currentMonthIndex === monthKeys.length - 1
+                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      : "bg-gray-200 hover:bg-gray-300"
+                      }`}
                     onClick={handleNextMonth}
                     disabled={currentMonthIndex === monthKeys.length - 1}
                   >
@@ -402,7 +398,7 @@ const DepartureSection = ({
                 </div>
               )}
               {
-             
+
                 addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 1 && (
                   <div className="ml-5">
@@ -447,7 +443,7 @@ const DepartureSection = ({
                 )
               }
               {
-              
+
                 addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 2 && (
                   <div className=" ml-5">
@@ -555,7 +551,7 @@ const DepartureSection = ({
             </div>
           </div>
         </div>
-        
+
       </div>
     </>
   );

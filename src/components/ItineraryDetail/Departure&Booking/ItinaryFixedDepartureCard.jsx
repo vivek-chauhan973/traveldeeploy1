@@ -126,6 +126,11 @@ const ItinaryFixedDepartureCard = () => {
   }, [totalSum]);
   const WeightPropertyPresentedOrNot =
     departureSectionData?.hasOwnProperty("Weight");
+    console.log("Rakesh", departureSectionData);
+    
+    const newDate = new Date(departureSectionData?.Date+"-2024")
+    console.log("Rikki",newDate);
+    
   return (
     <>
       <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[490px] overflow-scroll">
@@ -147,7 +152,7 @@ const ItinaryFixedDepartureCard = () => {
           <div className="">
             <div className="flex mb-2.5 mt-3 text-sm">
               <p className=" w-20">Dept. City : </p>
-              <p className="font-semibold text-graytext">{showAddguest||"Mumbai"}</p>
+              <p className="font-semibold text-graytext capitalize">{showAddguest||"Mumbai"}</p>
             </div>
             <div className="flex mb-2.5 text-sm">
               <p className=" w-20">Dept. Date :</p>
