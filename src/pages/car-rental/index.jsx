@@ -6,6 +6,7 @@ import Carousel from "@/components/car-rental/CarouselCard";
 import Image from 'next/image';
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import { IoMdArrowDropdown } from "react-icons/io";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const CarHireSection = ({ title, services }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +92,7 @@ export default function App() {
             <div>
                  {/* CarRentalHomeSkelton  */} 
                 <DesktopHeader/>
-                
+                <Breadcrumbs/>
                 <div className="container-wrapper">
                 </div>
                 <div className="mb-5">

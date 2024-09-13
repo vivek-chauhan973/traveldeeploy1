@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { IoMdArrowDropdown } from "react-icons/io";
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function CarDetail(){
     const [show, setShow] = useState(false)
@@ -63,7 +64,8 @@ export default function CarDetail(){
     <>
     {/* CarDetailSkeleton  */} 
         <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%">
-            <DesktopHeader />      
+            <DesktopHeader />   
+            <Breadcrumbs/>   
             <div className="container-wrapper ">
                 <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5">
                     <div className=" col-span-2  ">

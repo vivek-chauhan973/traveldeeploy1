@@ -12,6 +12,7 @@ import { useState } from "react";
 import ItineraryFaq from "../../../src/components/itinerarylist/ItineraryFaq"
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const MAX = 20000;
 const MIN = 0;
@@ -96,6 +97,7 @@ export default function CarPromo(){
         {/* CarPromoSkeleton */}
             < div className="bg-slate-50 h-ful l">
                 <DesktopHeader/> 
+                <Breadcrumbs/>
                 {/* Filter Popuop here */}
                 <div className=" xl:hidden  w-full flex justify-end items-center pr-5">
                     <button className="border rounded-sm border-gray-400 text-base px-3 py-0.5"
