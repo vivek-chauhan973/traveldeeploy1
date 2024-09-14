@@ -255,7 +255,7 @@ const FixedDeparturePopup = () => {
                   </div>
 
                   <button
-                    className={`${isFormValid ? "bg-gradient-to-r from-orange-400 to-red-500" : "bg-gray-400 cursor-not-allowed"}
+                    className={`${isFormValid ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-200 to-red-200 cursor-not-allowed"}
                                text-white w-full p-3 rounded-lg hover:opacity-90`}
                     onClick={(e) => {
                       e.preventDefault();

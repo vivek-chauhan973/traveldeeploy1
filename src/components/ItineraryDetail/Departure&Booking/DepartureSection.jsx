@@ -54,7 +54,6 @@ const DepartureSection = ({ addPackage }) => {
       setCurrentMonthIndex(currentMonthIndex + 1);
     }
   };
-  console.log("add ",AllDataRelatedCity)
   return (
     <>
       <div className="">
@@ -165,7 +164,6 @@ const DepartureSection = ({ addPackage }) => {
                                 { weekday: "short" }
                               );
                               const dayOfMonth = dateObj.getDate();
-                              console.log("date1",item?.date1)
                               return (
                                 <div
                                   key={i}
@@ -181,7 +179,7 @@ const DepartureSection = ({ addPackage }) => {
                                     </p>
                                     <hr />
                                     <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                     hi
+                                    {item?.date1}
                                     </p>
                                     <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
                                       ₹ <p>{item?.Price?.toLocaleString()}</p>
@@ -215,7 +213,6 @@ const DepartureSection = ({ addPackage }) => {
                                 { weekday: "short" }
                               );
                               const dayOfMonth = dateObj.getDate();
-                              console.log("date1",item?.date1)
                               return (
                                 <div
                                   key={i}
@@ -231,7 +228,7 @@ const DepartureSection = ({ addPackage }) => {
                                     </p>
                                     <hr />
                                     <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                     hi
+                                    {item?.date1}
                                     </p>
                                     <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
                                       ₹ <p>{item?.Price?.toLocaleString()}</p>
@@ -427,7 +424,7 @@ const DepartureSection = ({ addPackage }) => {
                                   </p>
                                   <hr />
                                   <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                    {item.Date}
+                                    {item?.date1}
                                   </p>
                                   <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
                                     ₹ <p>{item?.Price?.toLocaleString()}</p>
@@ -472,7 +469,7 @@ const DepartureSection = ({ addPackage }) => {
                                   </p>
                                   <hr />
                                   <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                    {item.Date}
+                                    {item?.date1}
                                   </p>
                                   <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
                                     ₹ <p>{item?.Price?.toLocaleString()}</p>
