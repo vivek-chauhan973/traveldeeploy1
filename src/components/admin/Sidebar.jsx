@@ -160,14 +160,14 @@ const handleLogout=async ()=>{
     return (
       <div className={`pl-4 my-2 py-2 text-para bg-slate-50 rounded-md text-black ${activeTab === parentLabel ? "block" : "hidden"}`}>
         {items.map((item, index) => (
-          <Link href={item.href} key={index}>
+          <a href={item.href} key={index}>
             <p
               onClick={() => handleSubMenuClick(item.label, parentLabel)}
               className={`text-[12px] cursor-pointer hover:underline hover:font-semibold hover:text-orange-500 ${selectedSubMenu === item.label ? 'text-green-500 ' : ''}`}
             >
               {item.label}
             </p>
-          </Link>
+          </a>
         ))}
       </div>
     );

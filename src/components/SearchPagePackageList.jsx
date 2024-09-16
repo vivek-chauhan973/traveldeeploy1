@@ -163,9 +163,9 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
                         alt=""
                       />
                     </span>
-                    15 Days
+                    {packageData?.days}Days / {packageData?.days-1}Nights
                   </p>
-                  <p className="text-[11px] flex gap-1 items-center">
+                  {/* <p className="text-[11px] flex gap-1 items-center">
                     <span>
                       <Image width={100} height={100}
                         className="w-3"
@@ -174,7 +174,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
                       />
                     </span>
                     {packageData?.days?.length} Days
-                  </p>
+                  </p> */}
                   <p className="text-[11px] flex gap-1 items-center">
                     <span>
                       <Image width={100} height={100}
@@ -254,8 +254,10 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
             <div className="md:w-[420px] m-auto md:m-0 md:border-l justify-center px-5 flex flex-col">
               <div>
                 <div className="text-right">
-                  <p className="text-[16px] leading-snug text-green-700 font-semibold">
-                    SUPER DEAL PRICE
+                  <p className="text-[16px] leading-snug text-green-700 font-semibold uppercase">
+                  {((packageData?.addguest === "addGuest") && "Awesome Price")}
+                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
+                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}
                   </p>
                   <div className="flex justify-end items-baseline gap-2 md:block">
                     <p className="text-[12px] mt-1">Starts From</p>

@@ -121,6 +121,14 @@ const packageSchema = new Schema({
     },
     about: { type: String, trim: true },
     dayWiseInformation: { type: String, trim: true },
+    packageRating:{
+      type:String,
+      required:true
+    }
+    ,PackageIdGenerate:{
+      type:String,
+      required:true
+    }
   },
   {
     timestamps: true,

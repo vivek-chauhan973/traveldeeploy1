@@ -4,6 +4,7 @@ import MultipleSelectChip from "./Select";
 import MultipleSelectCheckmarks from "./CheckMarkSelect";
 import { useRouter } from "next/router";
 import { useAppContext } from "../context/Package/AddGuest";
+import { customAlphabet } from 'nanoid';
 const fetchCountries = async () => {
     try {
         const res = await fetch('/api/location?type=country', { method: 'GET' });
@@ -56,7 +57,10 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [dayWiseFaq,setDayWiseFaq]=useState([]);
     const [selectedCountry,setSelesctedCountry]=useState('');
     const [selectedState,setSelesctedState]=useState('');
+    const [PackageIdGenerate,setPackageIdGenerate]=useState("");
+    const [packageRating,setPackageRating]=useState('');
     useEffect(() => {
+
         const fetchCountry = async () => {
             const fetchedCountries = await fetchCountries();
             setCountries(fetchedCountries);
@@ -216,9 +220,12 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setDayWiseFaq(itinerary?.days);
         setSelesctedCountry(itinerary?.country);
         setSelesctedState(itinerary?.state);
+        setPackageRating(itinerary?.packageRating||"");
+        setPackageIdGenerate(itinerary?.PackageIdGenerate||"")
+
         if(!itinerary){
             setCityPopup(true);
-            console.log("countryId",itinerary?.associateCountry?._id)
+            // console.log("countryId",itinerary?.associateCountry?._id)
             const fetchState = async () => {
                 const fetchedStates = await fetchStates(itinerary?.associateCountry?._id);
                 setStates(fetchedStates);
@@ -263,14 +270,16 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         days:dayWiseFaq,
                         fixedfixeddepartureweightedprice:0 ,
                         selectedState,
-                        selectedCountry 
+                        selectedCountry ,
+                        packageRating,
+                        PackageIdGenerate
                     })
                 });
                 const data = await res.json();
                 if(data){
                     setActiveTab("Tab2");
                 }
-                setItineraryInfo(data?.packageBasic);
+                // setItineraryInfo(data?.packageBasic);
                 router.push('/admin/package/itinerary/' + data?.packageBasic.id);
                
             } catch (error) {
@@ -278,6 +287,15 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             }
         }
     };
+
+    const handleGenUniqueKey = () => {
+        const nanoid = customAlphabet('1234567890', 4);
+        const fourDigitNumber = nanoid();
+        const key="BXP"+fourDigitNumber;
+
+        setPackageIdGenerate(key);
+
+    }
  return (
         <>
             <div className="bg-white p-4 rounded-md">
@@ -285,12 +303,18 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                     <div className="border p-4 rounded">
                         <div>
                             <div className=" sm:flex items-center mb-2">
-                                <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Priority:</label>
+                                <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Priority :</label>
                                 <input type="text"  className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => setPriority(e.target.value)} placeholder="Enter Priority " defaultValue={priority} />
                             </div>
+                            <div className=" sm:flex items-center mb-2">
+                                <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Pckage ID :</label>
+                                <input type="text"  className='  border w-60  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                 disabled placeholder="Package Id " value={PackageIdGenerate} />
+                                <button  className="bg-navyblack hover:bg-black text-white rounded px-4 py-1 ml-10" onClick={handleGenUniqueKey}>Genrate ID</button>
+                            </div>
                             <div className=" sm:flex items-center">
-                                <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Title:</label>
+                                <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Title:</label>
                                 <input ref={packageTitleRef} className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => handlePackageTitle(e.target.value)} placeholder="Enter package name" defaultValue={itinerary?.name} />
                             </div>
@@ -301,7 +325,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         <div className="">
                             <div>
                                 <div className=" sm:flex items-center">
-                                    <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Price:</label>
+                                    <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Price:</label>
                                     <input ref={displayPriceRef} className='border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para' type="number"
                                         onChange={(e) => handleDisplayPrice(e.target.value)} name="packagetitle" placeholder="Package Price" defaultValue={itinerary?.price} />
                                 </div>
@@ -310,6 +334,11 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                                 </div>
                             </div>
                         </div>
+                        <div className=" sm:flex items-center mb-2">
+                                <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Package Rating :</label>
+                                <input type="text"  className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                    onChange={(e) => setPackageRating(e.target.value)} placeholder="Enter Package Rating " defaultValue={packageRating} />
+                            </div>
                         <div className=" border-b-2 pb-4">
                             <div className="">
                                 <div>
