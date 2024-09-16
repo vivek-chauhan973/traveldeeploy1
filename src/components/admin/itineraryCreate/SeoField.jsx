@@ -7,6 +7,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
         description: '',
         canonicalUrl: '',
         keyword: '',
+        priceValid: ''
     });
 
     useEffect(() => {
@@ -21,7 +22,8 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                         title: '',
                         description: '',
                         canonicalUrl: '',
-                        keyword: ''
+                        keyword: '',
+                        priceValid: ''
                     });
                 } else {
                     throw new Error('Failed to fetch SEO data');
@@ -39,7 +41,8 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
     const [validationErrors, setValidationErrors] = useState({
         title: '',
         description: '',
-        keyword: ''
+        keyword: '',
+        priceValid: ''
     });
 
     const handleMetaTag = (e) => {
@@ -52,7 +55,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
 
     const handleSubmitSeoField = async (e) => {
         e.preventDefault();
-        const { title, description, keyword } = isSEOField;
+        const { title, description, keyword , priceValid } = isSEOField;
 
         if (title.trim() === '') {
             setValidationErrors(prevErrors => ({
@@ -73,7 +76,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                     },
                     body: JSON.stringify(isSEOField)
                 });
-                console.log(isSEOField);
+                console.log("Rakesh" , isSEOField);
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -87,6 +90,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                 console.error('Error submitting form:', error);
             }
         }
+
     };
 
     return (
@@ -159,6 +163,18 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                             className="h-8 px-2 rounded border text-para"
                             type="text"
                         />
+                    </div>
+                    {/* Prce Valid Until */}
+                    <div className="flex flex-col mb-2">
+                        <label className="text-para font-semibold" htmlFor="priceValid">Prce Valid Until : </label>
+                        <input
+                            id="priceValid"
+                            type="date"
+                            name="priceValid"
+                            value={isSEOField.priceValid}
+                            onChange={handleMetaTag}
+                            className="h-8 px-2 rounded border text-para"
+                        />                 
                     </div>
                     
                     <button

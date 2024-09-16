@@ -9,6 +9,10 @@ const PackageSeoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  priceValid: {
+    type: Date,
+    required: true,
+  },
   canonicalUrl: {
     type: String,
     default: function() {

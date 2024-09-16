@@ -39,7 +39,8 @@ const handleLogout=async ()=>{
         { label: "Country-state-city", href: "/admin/website-function/country-state-city" },
         { label: "Website Schema", href: "/admin/website-function/website-schema" },
         { label: "Logo Management", href: "/admin/website-function/logo-management" },
-        { label: "Color Management", href: "/admin/website-function/color-management" }
+        { label: "Color Management", href: "/admin/website-function/color-management" },
+        { label: "Icon Management", href: "/admin/website-function/icon-management" }
       ]
     },
     {

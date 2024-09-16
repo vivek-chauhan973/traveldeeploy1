@@ -122,7 +122,7 @@ const Sidebar = () => {
                 <p className=' cursor-pointer hover:underline hover:font-semibold hover:text-primary'>Website Schema</p>
                 <p className=' cursor-pointer hover:underline hover:font-semibold hover:text-primary'>Logo Management</p>
                 <p className=' cursor-pointer hover:underline hover:font-semibold hover:text-primary'>Color Management</p>
-                
+                <p className=' cursor-pointer hover:underline hover:font-semibold hover:text-primary'>Icon Management</p>          
               </div>
             </div>
             <div>

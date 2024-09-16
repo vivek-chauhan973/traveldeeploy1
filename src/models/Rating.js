@@ -18,6 +18,10 @@ const RatingSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  author: {
+    type: String,
+    required: true,
+  },
 });
 
 const Rating = mongoose.models.Rating || mongoose.model('Rating', RatingSchema);

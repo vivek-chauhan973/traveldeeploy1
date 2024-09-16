@@ -118,18 +118,18 @@ export default function LogoManagement() {
   return (
     <AppProvider>
       <Layout>
-        <p className="text-[28px] font-semibold">Logo Management</p>
-        <div className="my-20 bg-white p-3 rounded-md">
-          <p className="text-[20px] font-semibold">Bizare Expenditure Main Website</p>
+        <p className="md:text-[28px] text-xl font-semibold">Logo Management</p>
+        <div className="md:my-10 my-7 bg-white px-5 py-4 rounded-md">
+          <p className="md:text-[20px] text-base font-semibold">Bizare Expenditure Main Website</p>
           <div>
-            <div className="flex my-10 items-center pl-10">
-              <input type="file" onChange={handleChange} />
+            <div className="flex md:flex-row flex-col md:gap-10 gap-5 md:my-10 my-5 items-center xl:pl-5">
+              <input type="file" className="mb-4" onChange={handleChange} />
               <div>
-                {preview && <Image className="w-36 shadow-md" src={preview} alt="Preview" width={150} height={200} />}
+                {preview && <Image className="md:w-36 w-auto h-auto shadow-md mb-4" src={preview} alt="Preview" width={150} height={200} />}
                 <div>
                   <p>Title</p>
                   <input
-                    className="border px-2"
+                    className="border px-2 py-0.5 mb-2 w-full md:w-auto rounded"
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -138,7 +138,7 @@ export default function LogoManagement() {
                 <div>
                   <p>Alt</p>
                   <input
-                    className="border px-2"
+                    className="border px-2 py-0.5 w-full md:w-auto rounded"
                     type="text"
                     value={alt}
                     onChange={(e) => setAlt(e.target.value)}
@@ -146,13 +146,11 @@ export default function LogoManagement() {
                 </div>
               </div>
             </div>
-            <div>
-              <button className="bg-[#0d6efd] text-white px-3 py-2" onClick={handleUpload}>
+            <div className="flex md:flex-row flex-col md:gap-5 gap-3">
+              <button className="bg-[#0d6efd] text-white px-3 py-2 w-full md:w-auto rounded-sm" onClick={handleUpload}>
                 {isUpdating ? 'Update Image' : 'Upload Image'}
               </button>
-            </div>
-            <div>
-              <button className="bg-red-600 text-white px-3 py-2" onClick={handleRemove}>
+              <button className="bg-red-600 text-white px-3 py-2 w-full md:w-auto rounded-sm" onClick={handleRemove}>
                 Remove
               </button>
             </div>

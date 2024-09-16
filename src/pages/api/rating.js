@@ -18,8 +18,8 @@ export default async function handler(req, res) {
     try {
       const body = req.body;
       // Upsert: Update if exists, otherwise insert
-      await Rating.updateOne({}, { $set: body }, { upsert: true });
-      res.status(200).json({ message: 'Data saved successfully' });
+      const data = await Rating.updateOne({}, { $set: body }, { upsert: true });
+      res.status(200).json({ message: 'Data saved successfully', data});
     } catch (error) {
       res.status(500).json({ error: 'Error saving data' });
     }
