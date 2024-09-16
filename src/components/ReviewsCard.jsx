@@ -94,17 +94,17 @@ const Carousel = () => {
   return (
     <div className="bg-cyan-950">
       <div className="carousel-container relative container-wrapper ">
-        <div className="text-center pt-10 pb-5">
-          <h3 className="text-xl leading-8 font-medium text-white">
-            Bizare Expenditure tour reviews
+        <div className="text-center py-7">
+          <h3 className="xl:text-2xl text-xl leading-8 font-medium text-white">
+            Bizare Xpedition<sup className="md:text-sm text-xs mr-1">TM</sup>Reviews
           </h3>
-          <p className="text-xs leading-8 font-semibold text-white">
-            {" "}
-            What are you waiting for? Chalo Bag Bharo Nikal Pado!
+          <p className="xl:text-sm text-xs leading-8 font-medium text-white">
+          
+            Let{"'"}s go, pack up, and hit the road!
           </p>
         </div>
         <div className="carousel gap-5 pb-10" ref={carouselRef}>
-          {data.map((item, index) => (
+          {data.slice().reverse().map((item, index) => (
             <div key={index} className="bg-white min-w-80 rounded-lg mb-4">
               <div className="flex justify-between items-center px-4 mt-4">
                 <div className="p-1 flex items-center gap-1">
