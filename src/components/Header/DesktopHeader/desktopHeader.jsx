@@ -5,7 +5,7 @@ function DesktopHeader() {
   return (
 
     <div className='flex flex-col gap-0  sticky top-0  z-40'>
-      <div className="bg-primary pt-[0.5px]  md:h-[23px]   h-5">
+      <div className="bg-gradient-to-r from-orange-500 to-red-500 pt-[0.5px]  md:h-[23px]   h-5">
         <div className="flex items-center  container-wrapper   justify-center gap-5">
           <p className=" capitalize pt-[2px] md:pt[0] text-white text-xxs md:text-xs">call us for free now</p>
           <div className="flex justify-center items-center gap-1    rounded-[17px] bg-navyblack text-white rounded-badge text-xxs md:text-xs px-4 md:py-0  md:mt-[1px]  mt-[2.5px]">

@@ -95,7 +95,7 @@ const Carousel = () => {
     <div className="bg-cyan-950">
       <div className="carousel-container relative container-wrapper ">
         <div className="text-center py-7">
-          <h3 className="xl:text-2xl text-xl leading-8 font-medium text-white">
+          <h3 className="xl:text-2xl text-xl leading-8 font-medium text-white xl:mb-2">
             Bizare Xpedition<sup className="md:text-sm text-xs mr-1">TM</sup>Reviews
           </h3>
           <p className="xl:text-sm text-xs leading-8 font-medium text-white">
@@ -203,7 +203,7 @@ const Carousel = () => {
         </div>
         <div className="bg-gradient-to-l from-white opacity-95 w-10 h-[60%] mt-20 -right-5 md:hidden absolute z-30 top-0"></div>
         <div className="hidden md:block absolute top-[70%] -translate-y-[60px] justify-between w-full">
-          <div className="justify-between flex pl-2">
+          <div className="justify-between flex">
             <button
               onClick={scrollPrev}
               className="rounded-full h-10 w-10 bg-black/50 hover:bg-black p-3 text-white "

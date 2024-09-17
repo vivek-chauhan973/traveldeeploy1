@@ -33,12 +33,12 @@ const ExtraWeightPopup = () => {
           </p>
         </div>
         <div className='py-6 md:py-8 mx-4 md:mx-6 flex gap-4 flex-col xl:flex-row justify-center items-center'>
-          <button className='capitalize w-full xl:w-auto bg-orange-400 rounded-full px-4 py-2 text-white hover:bg-orange-500'
+          <button className='capitalize w-full xl:w-auto bg-gradient-to-r from-orange-500 to-red-500 rounded-full px-4 py-2 text-white hover:bg-orange-500'
            onClick={() => window.open('https://wa.me/9873748806?text=Hello, I need assistance regarding my weight limit for the helicopter.')}
            >
             WhatsApp
           </button>
-          <button className='capitalize w-full xl:w-auto bg-orange-400 rounded-full px-4 py-2 text-white hover:bg-orange-500'
+          <button className='capitalize w-full xl:w-auto bg-gradient-to-r from-orange-500 to-red-500 rounded-full px-4 py-2 text-white hover:bg-orange-500'
           onClick={() => window.open('tel:9873748806')}
           >
             Call To Our Executive

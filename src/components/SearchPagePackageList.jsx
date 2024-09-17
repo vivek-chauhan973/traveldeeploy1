@@ -12,24 +12,24 @@ const fetchPackages = async (locationId) => {
   console.log("api public tour=package---", locationId)
   return data?.packages;
 };
-const filteredData = async (id, cat, min, max,minDay,maxDay) => {
+const filteredData = async (id, cat, min, max, minDay, maxDay) => {
   const response = await fetch(`/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}&minDay=${minDay}&maxDay=${maxDay}`)
   const data = await response.json();
-  console.log("filter data is here --->:: ",data);
+  console.log("filter data is here --->:: ", data);
   return data;
 }
-const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
+const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   const router = useRouter();
 
   const pathnames = router.asPath.split("/").filter((x) => x);
   const [packages, setPackages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6); 
+  const [itemsPerPage] = useState(6);
   const [filterPackage, setFilterPackage] = useState(null);
   const [filterData1, setFilterData1] = useState([]);
   const { filterApi } = useAppContext();
   useEffect(() => {
-    filteredData(filterApi?.locationId, filterApi?.catagoryId, filterApi?.minPrice, filterApi?.maxPrice,filterApi?.duration?.[0],filterApi?.duration?.[1]).then(res => setFilterPackage(res?.packages))
+    filteredData(filterApi?.locationId, filterApi?.catagoryId, filterApi?.minPrice, filterApi?.maxPrice, filterApi?.duration?.[0], filterApi?.duration?.[1]).then(res => setFilterPackage(res?.packages))
 
   }, [filterApi])
 
@@ -49,24 +49,24 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
     if (locationId) {
       fetchData();
     }
-  }, [locationId, currentPage, itemsPerPage,clearAll]);
-  useEffect(()=>{
+  }, [locationId, currentPage, itemsPerPage, clearAll]);
+  useEffect(() => {
     setFilterData1(packages)
-  },[packages])
+  }, [packages])
   useEffect(() => {
     if (filterPackage?.length > 0) {
-      if(clearAll===false){
+      if (clearAll === false) {
         setFilterData1(filterPackage || [])
 
       }
-     
+
     }
-    
+
   }, [filterData1, locationId, currentPage, filterApi, filterPackage])
 
-  console.log("packages is here ::: ",packages)
-  for(let item of packages){
-    if(maxDay<item?.days){
+  console.log("packages is here ::: ", packages)
+  for (let item of packages) {
+    if (maxDay < item?.days) {
       setMaxDay(item?.days)
     }
   }
@@ -87,7 +87,7 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
 
 
 
-// console.log("filter api here ::::: ",filterApi)
+  // console.log("filter api here ::::: ",filterApi)
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     const windowHeight = window.innerHeight;
@@ -105,10 +105,10 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
     <div>
       {currentItems?.map((packageData, i) => {
         return (
-          
+
           <div key={i} className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
             <div className="md:pl-5 flex items-center">
-              <Image 
+              <Image
                 width={500}
                 height={500}
                 className="h-[220px] mx-5 md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
@@ -121,15 +121,15 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
               />
             </div>
             <div className="absolute top-3">
-              { (packageData?.addguest === "fixedDeparture") &&
+              {(packageData?.addguest === "fixedDeparture") &&
                 <div className="rounded-r-sm px-2 bg-black"> {/* bg-gradient-to-r from-cyan-500 to-blue-500 */}
                   <p className="py-1 text-sm text-white">
-                  
+
                     {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 1)) && "Group Departure"}
                     {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 2)) && "Charture"}
                   </p>
                 </div>
-          
+
               }
             </div>
             <div className="mx-6 md:m-0 mt-2">
@@ -151,30 +151,26 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
                         clipRule="evenodd"
                       ></path>
                     </svg>
-                    5.0
+                    {packageData.packageRating}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-5 my-4">
                   <p className="text-[11px] flex gap-1 items-center">
                     <span>
-                      <Image width={100} height={100}
+                      <Image
+                        width={100}
+                        height={100}
                         className="w-3"
                         src="https://cdn.iconscout.com/icon/free/png-512/free-calendar-1439790-1214120.png?f=webp&w=256"
                         alt=""
                       />
                     </span>
-                    {packageData?.days}Days / {packageData?.days-1}Nights
+                    {packageData?.days > 1 && (
+                      <>{packageData?.days - 1} Night{packageData?.days - 1 > 1 ? "s" : ""} / </>
+                    )}
+                    {packageData?.days} Day{packageData?.days > 1 ? "s" : ""}
                   </p>
-                  {/* <p className="text-[11px] flex gap-1 items-center">
-                    <span>
-                      <Image width={100} height={100}
-                        className="w-3"
-                        src="https://www.svgrepo.com/show/229132/internet.svg"
-                        alt=""
-                      />
-                    </span>
-                    {packageData?.days?.length} Days
-                  </p> */}
+
                   <p className="text-[11px] flex gap-1 items-center">
                     <span>
                       <Image width={100} height={100}
@@ -255,9 +251,9 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
               <div>
                 <div className="text-right">
                   <p className="text-[16px] leading-snug text-green-700 font-semibold uppercase">
-                  {((packageData?.addguest === "addGuest") && "Awesome Price")}
-                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
-                  {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}
+                    {((packageData?.addguest === "addGuest") && "Awesome Price")}
+                    {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
+                    {((packageData?.addguest === "fixedDeparture") && (packageData?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}
                   </p>
                   <div className="flex justify-end items-baseline gap-2 md:block">
                     <p className="text-[12px] mt-1">Starts From</p>
@@ -273,15 +269,15 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
               <div className="flex flex-cols">
                 <Link
                   href={"/package/" + packageData.pageUrl}
-                  className="mt-3 block w-full select-none rounded-lg bg-orange-400 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
+                  className="mt-3 block w-full select-none rounded-lg bg-gradient-to-r from-orange-500 to-red-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
                   type="button"
                 >
                   View details
                 </Link>
               </div>
-            </div>          
+            </div>
           </div>)
-        
+
       })}
 
       <div className="flex justify-end my-5 list-none">
@@ -299,8 +295,9 @@ const SearchPagePackageList = ({locationId,setMaxDay,maxDay,clearAll}) => {
           innerClass="pagination"
         />
       </div>
-    
+
     </div>
-  );};
+  );
+};
 
 export default SearchPagePackageList;

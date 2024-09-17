@@ -408,7 +408,7 @@ export default function CustomiseTour({ children }) {
                                 </div>
                             </div>
                             <div>
-                                <div className=' w-36 flex items-center gap-2 justify-end bg-primary text-white py-2 px-4 m-auto rounded-full'>
+                                <div className=' w-36 flex items-center gap-2 justify-end bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 px-4 m-auto rounded-full'>
                                     <button type="submit" className=''>Book Now</button>
                                     <FontAwesomeIcon icon={faArrowRight} className='font1' />
                                 </div>
@@ -416,7 +416,6 @@ export default function CustomiseTour({ children }) {
 
 
                         </form>
-                        {/* <button type="submit" onClick={() => setConfirmation(!openConfirmation)} className=''>Book Now</button> */}
                     </Box>
                     :
                     <Box sx={style}>
@@ -477,7 +476,7 @@ export default function CustomiseTour({ children }) {
                                 </div>
                                 <p className="font-semibold">Aditional Information: <span className="font-normal">Deluxe</span></p>
                             </div>
-                            <div onClick={() => setbookingConfirmed(!bookingConfirmed)} className='flex items-center gap-2 justify-center mt-5 bg-primary text-white py-2 px-4 m-auto rounded-full'>
+                            <div onClick={() => setbookingConfirmed(!bookingConfirmed)} className='flex items-center gap-2 justify-center mt-5 bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 px-4 m-auto rounded-full'>
                                 <button className=''>Book Now</button>
                             </div>
                         </div>

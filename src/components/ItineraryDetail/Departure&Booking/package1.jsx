@@ -403,8 +403,8 @@ export default function Package1() {
       {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
         <div className="my-7 md:p-0 px-4">
           <div className="text-center mb-4">
-            <p className="md:text-[22px] text-[20px] mb-2 capitalize">
-              {addPackage?.name}{" "}Frequently Asked Questions
+            <p className="md:text-[22px] text-[20px] mb-2 capitalize font-semibold">
+              Frequently Asked Questions (FAQs) <span className="lowercase">for</span> {addPackage?.name}{" Tour Package"}
             </p>
             <p className="text-para md:text-base">
               We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
@@ -472,8 +472,8 @@ export default function Package1() {
                 <p
                   onClick={fixedDepartureButtonEnaibleAndDisable ? handleClickPopup : null}
                   className={` ${fixedDepartureButtonEnaibleAndDisable
-                    ? "bg-primary cursor-pointer"
-                    : "bg-orange-200"
+                    ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
+                    : "bg-gradient-to-r from-orange-200 to-red-200"
                     } px-5 py-2 rounded-md text-white text-center text-para`}
                 >
                   <span className="disabled:opacity-75">{buttonGuest}</span>
@@ -483,8 +483,8 @@ export default function Package1() {
                 <button
                   onClick={handleSubmit}
                   className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                    ? "bg-primary"
-                    : " bg-orange-200"
+                    ? "bg-gradient-to-r from-orange-500 to-red-500"
+                    : " bg-gradient-to-r from-orange-200 to-red-200"
                     }  text-center text-para`}
                 >
                   Book Now

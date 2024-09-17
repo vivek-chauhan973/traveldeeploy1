@@ -121,7 +121,7 @@ export default function SearchPage() {
         <div className="border-t border">
           <div className="w-full md:w-3/4 m-auto px-2 pb-5">
             <div className="text-center mt-5 mb-10">
-              <p className="md:text-[22px] text-[20px] mb-2 capitalize">{state?.split("-")?.join(" ")} Frequently Asked Questions</p>
+              <p className="md:text-[22px] text-[20px] font-semibold mb-2 capitalize">Frequently Asked Questions (FAQs) <span className='lowercase'>for</span> {state?.split("-")?.join(" ")} {" Tour Packages"}</p>
               <p className="text-para md:text-base">
                 We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
               </p>

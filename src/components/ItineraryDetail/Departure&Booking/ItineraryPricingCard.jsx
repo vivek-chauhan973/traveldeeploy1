@@ -182,25 +182,6 @@ const ItineraryPricingCard = () => {
                 Customise
               </button>
             </CustomiseTour>
-
-            {/* {
-              <Addguest
-                guestPrice={guestPrice}
-                setInputData={setInputData}
-                inputData={inputData}
-                setCloseBtn={setCloseBtn}
-                addPackage={addPackage}
-              >
-                <button
-                  className={` ${fixedDepartureButtonEnaibleAndDisable ? " cursor-pointer bg-gradient-to-r from-orange-500 to-red-500 " : "bg-gradient-to-r from-orange-200 to-red-200 "
-                    } px-5 py-2 rounded-md text-white text-center text-para`}
-                  onClick={handleBookNowClick}
-                >
-                  {closeBtn ? "Book now" : "Add Guest & room"}
-                </button>
-              </Addguest>
-            } */}
-
             <button
               className={` ${fixedDepartureButtonEnaibleAndDisable ? " cursor-pointer bg-gradient-to-r from-orange-500 to-red-500 " : "bg-gradient-to-r from-orange-200 to-red-200 "
                 } px-5 py-2 rounded-md text-white text-center text-para`}

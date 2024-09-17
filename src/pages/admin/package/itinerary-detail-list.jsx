@@ -3,7 +3,6 @@ import Layout from "@/components/admin/Layout";
 import Pagination from "react-js-pagination";
 import Link from "next/link";
 import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
-
 import dynamic from 'next/dynamic';
 
 const IoIosSearch = dynamic(() => import('react-icons/io').then(mod => mod.IoIosSearch));
@@ -69,7 +68,8 @@ const YourComponent = () => {
     const totalItemsCount = filteredItineraries.length;
     const totalNumberOfPages = Math.ceil(totalItemsCount / itemsPerPage);
     const currentItems = filteredItineraries.slice(indexOfFirstItem, indexOfLastItem);
-
+    console.log("Rakesh2", currentItems);
+    
     return (
         <AppProvider>
         <Layout>
@@ -109,10 +109,12 @@ const YourComponent = () => {
                         <thead>
                             <tr className="border rounded">
                                 <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Image</th>
+                                <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Pckage ID</th>
                                 <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Name</th>
                                 <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Price</th>
+                                <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Rating</th>
                                 <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Status</th>
-                                <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Edit & Remove</th>
+                                <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">Edit & Remove1</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,8 +132,10 @@ const YourComponent = () => {
                                             }}
                                         />
                                     </td>
+                                    <td className="py-4 pl-4 border-x capitalize">{itinerary.PackageIdGenerate}</td>
                                     <td className="py-4 pl-4 border-x capitalize">{itinerary.name}</td>
                                     <td className="py-4 pl-4 border-x">Rs {itinerary.price}</td>
+                                    <td className="py-4 pl-4 border-x">{itinerary.packageRating}</td>
                                     <td className="py-4 pl-4 border-x">{itinerary.status}</td>
                                     <td className="justify-center flex gap-2 items-center my-auto py-3">
                                         <Link href={"./itinerary/" + itinerary?._id + "?type=edit"}>

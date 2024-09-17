@@ -363,8 +363,8 @@ const ItinaryFixedDepartureCard = () => {
                 <button
                   onClick={fixedDepartureButtonEnaibleAndDisable ? handleSubmit:null}
                   className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                      ? "bg-primary"
-                      : "bg-orange-200"
+                      ? "bg-gradient-to-r from-orange-500 to-red-500"
+                      : "bg-gradient-to-r from-orange-200 to-red-200"
                     } text-center text-para`}
                 >
                   Book now
