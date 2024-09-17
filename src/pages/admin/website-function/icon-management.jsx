@@ -135,8 +135,8 @@ export default function IconManagement() {
           </div>
           <div className="mt-10">
   {imageData?.map((item) => (
-    <div key={item?._id} className="flex flex-col md:flex-row gap-5 items-center md:items-start mb-5">
-      <div>
+    <div key={item?._id} className="flex flex-col md:flex-row gap-10 items-center md:items-start mb-5">
+      <div className="flex items-center justify-center">
       <Image
         className="w-36 h-auto shadow-md"
         src={item?.path}
@@ -145,9 +145,8 @@ export default function IconManagement() {
         height={200}
       />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-center">
         <p className="text-lg font-semibold">{item?.title}</p>
-        
       </div>
       <div>
       <button
