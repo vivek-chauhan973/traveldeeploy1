@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function ImageUploading({ itinerary, setImageDot }) {
   const [files, setFiles] = useState([]);
@@ -12,6 +12,8 @@ export default function ImageUploading({ itinerary, setImageDot }) {
   const [hasFetchedImages, setHasFetchedImages] = useState(false);
   const [existingImagesCount, setExistingImagesCount] = useState(0);
   const [hasChanges, setHasChanges] = useState(false);
+  const [imageData, setImageData] = useState([]);
+  const [selectedIcons, setSelectedIcons] = useState([]);
 
   // Function to fetch existing images
   // console.log("files lengths :: :: ",files.length)
@@ -28,27 +30,38 @@ export default function ImageUploading({ itinerary, setImageDot }) {
         setAlts(images.map((image) => image.alt));
         setExistingImagesCount(images.length);
         setIsUpdating(true);
-
-
-
-
       }
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   }, [itinerary]);
+
+  //fetch images
+  async function fetchImage() {
+    try {
+      const res = await fetch("/api/icon/icon1");
+      const data = await res.json();
+      setImageData(data?.data || []);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
+  }
+  useEffect(() => {
+    fetchImage();
+  }, [itinerary]);
+
   useEffect(() => {
     setPreviews(itinerary?.uploads || []);
-  }, [itinerary])
+  }, [itinerary]);
   useEffect(() => {
     if (previews.length >= 4) {
-      setHasFetchedImages(true)
+      setHasFetchedImages(true);
       setImageDot(true);
     }
     //  if(files.length>=4){
     //   setHasFetchedImages(true)
     //  }
-  }, [previews])
+  }, [previews]);
   useEffect(() => {
     fetchImages();
   }, [itinerary, fetchImages]);
@@ -76,6 +89,8 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     setHasChanges(true);
   };
 
+  // console.log("Images Data is here ",imageData);
+
   // Function to handle alt text change
   const handleAltChange = (e, index) => {
     const newAlts = [...alts];
@@ -83,7 +98,6 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     setAlts(newAlts);
     setHasChanges(true);
   };
-
 
   const handleUpload = async () => {
     const hasFilesToUpload = files.filter((file) => file !== null).length > 0;
@@ -112,7 +126,6 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     });
 
     try {
-
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`, {
         method: "POST",
         body: formData,
@@ -131,7 +144,10 @@ export default function ImageUploading({ itinerary, setImageDot }) {
         alert(`Files ${isUpdating ? "update" : "upload"} failed`);
       }
     } catch (error) {
-      console.error(`Error ${isUpdating ? "updating" : "uploading"} files:`, error);
+      console.error(
+        `Error ${isUpdating ? "updating" : "uploading"} files:`,
+        error
+      );
       alert(`Files ${isUpdating ? "update" : "upload"} failed`);
     }
   };
@@ -150,13 +166,48 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     }
   };
 
+  const handleChangeIcon = (item) => {
+    const obj = { name: item?.title, icon: item?.path };
+    // Check if the icon is already selected
+    const exists = selectedIcons.find((icon) => icon.name === obj.name);
+
+    let newIcons;
+    if (exists) {
+      // If it's already selected, remove it
+      newIcons = selectedIcons.filter((icon) => icon.name !== obj.name);
+    } else {
+      // Otherwise, add the new icon
+      newIcons = [...selectedIcons, obj];
+    }
+
+    // Update the state with the new array of selected icons
+    setSelectedIcons(newIcons);
+  };
+
+  const handleSaveIcon = async () => {
+    try {
+      const res = await fetch(`/api/package/icon/${itinerary?._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(selectedIcons),
+      });
+    } catch (error) {
+      console.log("something went wrong");
+    }
+  };
+
   return (
     <>
       <div className="grid xl:grid-cols-2 bg-white p-5 rounded-md">
         <div className="my-5 ">
           <div className="">
             {previews.map((preview, index) => (
-              <div key={index} className="flex flex-col md:flex-row pb-3 mb-5 items-center xl:pl-10 space-y-4 md:space-y-0 border-b-2 border-gray-50">
+              <div
+                key={index}
+                className="flex flex-col md:flex-row pb-3 mb-5 items-center xl:pl-10 space-y-4 md:space-y-0 border-b-2 border-gray-50"
+              >
                 <input
                   type="file"
                   onChange={(e) => handleChange(e, index)}
@@ -195,7 +246,11 @@ export default function ImageUploading({ itinerary, setImageDot }) {
             ))}
             {files.length < 4 && (
               <button
-                className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${hasFetchedImages ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
+                className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${
+                  hasFetchedImages
+                    ? "disabled:opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
                 onClick={addNewImageSection}
                 disabled={hasFetchedImages}
               >
@@ -212,7 +267,11 @@ export default function ImageUploading({ itinerary, setImageDot }) {
             )}
             <div className="mt-4">
               <button
-                className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${!hasChanges && !isUpdating ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
+                className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${
+                  !hasChanges && !isUpdating
+                    ? "disabled:opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
                 onClick={handleUpload}
                 disabled={!hasChanges && !isUpdating}
               >
@@ -223,11 +282,32 @@ export default function ImageUploading({ itinerary, setImageDot }) {
         </div>
         <div className="my-5 border-t xl:border-t-0 xl:border-l xl:px-5 px-2 xl:py-0 py-5">
           <p className="text-base font-semibold">Select Icon</p>
-          <div className="m-5">
-            <input id="checked" type="checkbox" value="flight" className="h-4 w-4 accent-black mr-3 " />
-            <label htmlFor="checked"  className="text-base">Flight</label>
-          </div>
-          <button className="px-5 py-1 bg-navyblack text-white rounded-full xl:ml-5 ">Save</button>
+          {imageData?.map((item) => {
+            const isChecked = selectedIcons.some(
+              (icon) => icon.name === item?.title
+            );
+            return (
+              <div className="m-5" key={item?.title}>
+                <input
+                  id={`checked-${item?.title}`}
+                  type="checkbox"
+                  onChange={() => handleChangeIcon(item)}
+                  className="h-4 w-4 accent-black mr-3"
+                  checked={isChecked}
+                />
+                <label htmlFor={`checked-${item?.title}`} className="text-base">
+                  {item?.title}
+                </label>
+              </div>
+            );
+          })}
+
+          <button
+            onClick={handleSaveIcon}
+            className="px-5 py-1 bg-navyblack text-white rounded-full xl:ml-5 "
+          >
+            Save
+          </button>
         </div>
       </div>
     </>

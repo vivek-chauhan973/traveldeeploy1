@@ -83,6 +83,10 @@ const packageSchema = new Schema({
      type:mongoose.Schema.Types.ObjectId,
       ref:"PackageDeparture"
     },
+    icons:{
+      type:mongoose.Schema.Types.ObjectId,
+       ref:"SelectedIcon"
+     },
     tourinfo:tourInfoSchema,
     badges: {
       type: [String],

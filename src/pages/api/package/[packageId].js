@@ -35,7 +35,7 @@ import { NextApiRequest, NextApiResponse } from "next";
                 updatedPackage = await Package.findById(packageId).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
                 .populate('tourinfo.tourExclusion')
                 .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
-                .populate('tourinfo.tourNeedToKonow');
+                .populate('tourinfo.tourNeedToKonow').populate("icons");
                 const associateState = await State.findById(updatedPackage.location?.state);
                 const associateCountry = await Country.findById(associateState?.country);
                 const highlightDetails = await PackageHighlight.findOne({ package: updatedPackage._id }, 'highlights');

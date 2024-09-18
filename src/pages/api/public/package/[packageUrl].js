@@ -25,7 +25,7 @@ const packagePublicPackageUrl = async (req, res) => {
       .populate('tourinfo.tourExclusion')
       .populate('tourinfo.tourPayment') 
       .populate('tourinfo.tourCancelationPolicy')
-      .populate('tourinfo.tourNeedToKonow');
+      .populate('tourinfo.tourNeedToKonow').populate("icons");
 
     if (!packageDetails) {
       return res.status(404).json({ message: 'Package not found.' });

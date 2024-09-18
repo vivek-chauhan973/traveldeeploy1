@@ -73,6 +73,9 @@ export default function Package1() {
     showPopup,
     submitButtonOfPricingCalculation,
   } = useAppContext();
+
+  console.log("addPackage is here with icon ----> ",addPackage)
+
   const [images, setImages] = useState(null);
   const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
   useEffect(() => {
