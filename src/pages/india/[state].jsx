@@ -29,7 +29,7 @@ const fetchLocation = async (state) => {
 export default function SearchPage() {
   const router = useRouter();
   const state = router.query.state?.replace("-tour-packages", "");
-  console.log("state is here :: ", state);
+  // console.log("state is here :: ", state);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
@@ -98,6 +98,7 @@ export default function SearchPage() {
   if (loading) {
     return <PromoBanner />;
   }
+
 
   return (
     <AppProvider>

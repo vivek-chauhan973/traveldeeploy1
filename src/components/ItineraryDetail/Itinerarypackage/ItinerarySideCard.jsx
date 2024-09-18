@@ -4,6 +4,9 @@ import Image from "next/image";
 
 
  const ItinerarySideCard=()=>{
+ 
+    
+
     return(
     <>
         <div className="relative  flex-shrink-0 max-w-[18rem] mt-5 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md border xl:ml-[80px] ml-[20px] xl:block hidden">

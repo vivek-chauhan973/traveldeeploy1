@@ -24,6 +24,7 @@ export const AppProvider = ({ children }) => {
   const [contactAdmin, setContactAdimn] = useState(false);
   const [submitButtonOfPricingCalculation,setSubmitButtonOfPricingCalculation]=useState(false);
   const [fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable]=useState(false);
+  const [highLightedPackage,setHighLightedPackage]=useState([]);
 // set final price to show fixed departure popup
 
 const [fixedDeparturePopupPrice,setFixedDeparturePopupPrice]=useState(0);
@@ -116,7 +117,7 @@ const [showPopup1, setShowPopup1] = useState(false);
 
 
   // select person selected in group departure
-
+// console.log("hsdfsdb",highLightedPackage)
   const [groupDeparturePerson,setGroupDeparturePerson]=useState(0);
   const contextFun = {
     initialData,
@@ -156,7 +157,8 @@ const [showPopup1, setShowPopup1] = useState(false);
     showPopup, setShowPopup,
     showPopup1, setShowPopup1,
     fixedDeparturePopupPrice,setFixedDeparturePopupPrice,
-    groupDeparturePerson,setGroupDeparturePerson
+    groupDeparturePerson,setGroupDeparturePerson,
+    highLightedPackage,setHighLightedPackage
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>

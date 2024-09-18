@@ -9,13 +9,13 @@ import Category from "@/pages/admin/package/category";
 const fetchPackages = async (locationId) => {
   const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
   const data = await response.json();
-  console.log("api public tour=package---", locationId)
+  // console.log("api public tour=package---", locationId)
   return data?.packages;
 };
 const filteredData = async (id, cat, min, max, minDay, maxDay) => {
   const response = await fetch(`/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}&minDay=${minDay}&maxDay=${maxDay}`)
   const data = await response.json();
-  console.log("filter data is here --->:: ", data);
+  // console.log("filter data is here --->:: ", data);
   return data;
 }
 const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
@@ -27,7 +27,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   const [itemsPerPage] = useState(6);
   const [filterPackage, setFilterPackage] = useState(null);
   const [filterData1, setFilterData1] = useState([]);
-  const { filterApi } = useAppContext();
+  const { filterApi,setHighLightedPackage } = useAppContext();
   useEffect(() => {
     filteredData(filterApi?.locationId, filterApi?.catagoryId, filterApi?.minPrice, filterApi?.maxPrice, filterApi?.duration?.[0], filterApi?.duration?.[1]).then(res => setFilterPackage(res?.packages))
 
@@ -42,6 +42,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
           itemsPerPage
         );
         setPackages(packagesData);
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -52,6 +53,8 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   }, [locationId, currentPage, itemsPerPage, clearAll]);
   useEffect(() => {
     setFilterData1(packages)
+    // console.log("packages 12334678",packages)
+    setHighLightedPackage(packages||[]);
   }, [packages])
   useEffect(() => {
     if (filterPackage?.length > 0) {
@@ -63,11 +66,11 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
     }
 
   }, [filterData1, locationId, currentPage, filterApi, filterPackage])
-
-  console.log("packages is here ::: ", packages)
-  for (let item of packages) {
-    if (maxDay < item?.days) {
-      setMaxDay(item?.days)
+  if(packages?.length > 0){
+    for (let item of packages) {
+      if (maxDay < item?.days) {
+        setMaxDay(item?.days)
+      }
     }
   }
 
@@ -78,14 +81,6 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   // const grandTotal = this.diskHike < 0 ? priceWithMarkup - discountAmount : priceWithMarkup + discountAmount;
   // const gstAmount = (grandTotal * this.gst) / 100;
   // return grandTotal + gstAmount;
-
-
-
-
-
-
-
-
 
   // console.log("filter api here ::::: ",filterApi)
   const handlePageChange = (pageNumber) => {
@@ -104,6 +99,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   return (
     <div>
       {currentItems?.map((packageData, i) => {
+        // console.log("packageData",packageData?.icons?.iconData)
         return (
 
           <div key={i} className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
@@ -191,7 +187,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
                 </div>
               </div>
               <div className="flex gap-3 mt-3 md:gap-4 justify-between md:justify-normal max-w-[350px] mb-3">
-                <div className="flex flex-col items-center">
+                {/* <div className="flex flex-col items-center">
                   <Image width={100} height={100}
                     className="w-4"
                     src="https://www.svgrepo.com/show/13776/building.svg"
@@ -243,7 +239,17 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
                     alt=""
                   />
                   <p className="text-[10px] text-neutral-600">Visa</p>
-                </div>
+                </div> */}
+
+                {packageData?.icons?.iconData?.map((item,i)=><div key={i} className="flex flex-col items-center">
+                  <Image width={150} height={150}
+                    className="w-8"
+                    src={item?.icon||"https://www.svgrepo.com/show/13776/building.svg"}
+                    alt={item?.name||"png"}
+                  />
+                  <p className="text-[10px] text-neutral-600">{item?.name}</p>
+                </div>)}
+                
               </div>
             </div>
 

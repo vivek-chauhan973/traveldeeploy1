@@ -43,6 +43,7 @@ console.log("query is here --------------------------------------->>>>>---------
         const packages = await Package.find({ $and: query })
             .populate('location')
             .populate('category')
+            .populate('icons')
             .exec();
 // Return JSON response with packages and cities
         return res.status(200).json({ packages, cities });

@@ -2,6 +2,10 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import dynamic from 'next/dynamic'
+
+const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
+
 export default function IconManagement() {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -64,7 +68,7 @@ export default function IconManagement() {
         setIsUpdating(false);
         setSelectedImageId(null);
         alert(`File uploaded successfully`);
-        fetchImage(); 
+        fetchImage();
       } else {
         alert(`File upload failed`);
       }
@@ -98,7 +102,7 @@ export default function IconManagement() {
   return (
     <AppProvider>
       <Layout>
-        <p className="md:text-[28px] text-xl font-semibold">Logo Management</p>
+        <p className="md:text-[28px] text-xl font-semibold">Icon Management</p>
         <div className="md:my-10 my-7 bg-white px-5 py-4 rounded-md">
           <p className="md:text-[20px] text-base font-semibold">
             Bizare Expenditure Main Website
@@ -146,33 +150,41 @@ export default function IconManagement() {
             </div>
           </div>
           <div className="mt-10">
-            {imageData?.map((item) => (
-              <div
-                key={item?._id}
-                className="flex flex-col md:flex-row gap-10 items-center md:items-start mb-5"
-              >
-                <div className="flex items-center justify-center">
-                  <Image
-                    className="w-36 h-auto shadow-md"
-                    src={item?.path}
-                    alt="Preview"
-                    width={150}
-                    height={200}
-                  />
-                </div>
-                <div className="flex items-center justify-center">
-                  <p className="text-lg font-semibold">{item?.title}</p>
-                </div>
-                <div>
-                  <button
-                    className="bg-red-600 flex items-center justify-center text-white px-3 py-2 rounded-sm hover:bg-red-700 transition-all"
-                    onClick={() => handleRemove(item?._id)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
+            <table className="w-full border-collapse border border-gray-300 text-center text-para">
+              <thead >
+                <tr className="border-b bg-black text-white">
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Icon</th>
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Name</th>
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Action</th>
+                </tr>
+              </thead>
+              <tbody className="bg-gray-100">
+                {imageData?.map((item) => (
+                  <tr key={item?._id} className="border-b">
+                    <td className="flex justify-center items-center  border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                      <Image
+                        className=" shadow-md"
+                        src={item?.path}
+                        alt="Preview"
+                        width={32}
+                        height={32}
+                      />
+                    </td>
+                    <td className=" border-l border-r px-2 py-2 capitalize overflow-hidden border-gray-300">
+                      <p className="text-lg font-semibold capitalize">{item?.title}</p>
+                    </td>
+                    <td className="flex justify-center items-center  border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                      <MdDeleteForever
+                        onClick={() => handleRemove(item?._id)}
+                        size={36}
+                        className="hover:text-red-500 cursor-pointer"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
           </div>
         </div>
       </Layout>
