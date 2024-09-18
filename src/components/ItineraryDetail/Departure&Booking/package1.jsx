@@ -53,8 +53,8 @@ import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from "@/components/Faq/Faq1";
-const getAllPackags=async ()=>{
-  return await(await fetch("/api/package/get-packages")).json()
+const getAllPackags = async () => {
+  return await (await fetch("/api/package/get-packages")).json()
 }
 
 export default function Package1() {
@@ -76,13 +76,13 @@ export default function Package1() {
     setShowPopup,
     showPopup,
     submitButtonOfPricingCalculation,
-  
+
   } = useAppContext();
 
 
   const [images, setImages] = useState(null);
-  const [allPackages,setAllPackages]=useState([]);
-  const [highlightedPackage1,setHighLightedPackage1]=useState();
+  const [allPackages, setAllPackages] = useState([]);
+  const [highlightedPackage1, setHighLightedPackage1] = useState();
   const [fixedDeparturePopupOpen, setFixedDeparturePopupOpen] = useState(false);
   useEffect(() => {
     setImages(addPackage?.uploads);
@@ -109,9 +109,9 @@ export default function Package1() {
       setButtonGuest("Book Now");
     }
   }, [closeBtn]);
-  useEffect(()=>{
-    getAllPackags().then(res=>setAllPackages(res?.packages||[]))
-  },[])
+  useEffect(() => {
+    getAllPackags().then(res => setAllPackages(res?.packages || []))
+  }, [])
   const handleClickPopup = () => {
     if (closeBtn) {
       setShowPopup(true);
@@ -121,14 +121,14 @@ export default function Package1() {
     }
 
   }
-useEffect(()=>{
-  const dataPackage=allPackages?.filter(item=>item?.highlightedPackage===addPackage?.highlightedPackage);
- 
-  setHighLightedPackage1(dataPackage)
-},[allPackages,addPackage])
+  useEffect(() => {
+    const dataPackage = allPackages?.filter(item => item?.highlightedPackage === addPackage?.highlightedPackage);
 
-console.log("highlitedPackages1------> ",highlightedPackage1?.[0]);   
-  
+    setHighLightedPackage1(dataPackage)
+  }, [allPackages, addPackage])
+
+  console.log("highlitedPackages1------> ", highlightedPackage1?.[0]);
+
   return (
     <div>
       {showPopup && <FixedDeparturePopup />}
@@ -160,10 +160,10 @@ console.log("highlitedPackages1------> ",highlightedPackage1?.[0]);
         <div className="container-wrapper mb-4">
           <div className="mb-[20px] pt-[40px]">
             <h1 className="text-lg font-medium text-graytext">
-              Select departure city, dates & add guest to book your tour
+              Choose your departure city, dates, and add guests to secure your tour.
             </h1>
             <p className="italic  text-sm">
-              As seats fill, prices increase! So book today!
+              Hurry, as seats fill up, prices rise! Book now!
             </p>
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
@@ -405,7 +405,7 @@ console.log("highlitedPackages1------> ",highlightedPackage1?.[0]);
                 </div>
               </div>
               {/* card is here */}
-              <ItinerarySideCard />
+              <ItinerarySideCard  highlightedPackage1={highlightedPackage1?.[0]}/>
             </div>
           </div>
         </div>
