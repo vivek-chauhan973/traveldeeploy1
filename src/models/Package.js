@@ -128,7 +128,11 @@ const packageSchema = new Schema({
     ,PackageIdGenerate:{
       type:String,
       required:true
-    }
+    },
+    highlightedPackage:{
+      type:String,
+      required:true
+    },
   },
   {
     timestamps: true,

@@ -152,75 +152,84 @@ export default function ImageUploading({ itinerary, setImageDot }) {
 
   return (
     <>
-      <div className="my-5  bg-white p-5 rounded-md">
-        <div className="">
-          {previews.map((preview, index) => (
-            <div key={index} className="flex flex-col md:flex-row pb-3 mb-5 items-center md:pl-10 space-y-4 md:space-y-0 border-b-2 border-gray-50">
-              <input
-                type="file"
-                onChange={(e) => handleChange(e, index)}
-                className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-black/20 file:text-black/50 hover:file:bg-black/75 hover:file:text-white cursor-pointer w-full md:w-auto"
-              />
-              <div className="mx-4 w-full md:w-auto">
-                {preview && (
-                  <Image
-                    className="w-full md:w-36 shadow-md"
-                    src={preview}
-                    alt="Preview"
-                    width="220"
-                    height="120"
-                  />
-                )}
-                <div className="mt-2">
-                  <p>Title</p>
-                  <input
-                    className="border px-2 py-1 rounded-lg w-full md:w-auto"
-                    type="text"
-                    value={titles[index] || ""}
-                    onChange={(e) => handleTitleChange(e, index)}
-                  />
-                </div>
-                <div className="mt-2">
-                  <p>Alt</p>
-                  <input
-                    className="border px-2 py-1 rounded-lg w-full md:w-auto"
-                    type="text"
-                    value={alts[index] || ""}
-                    onChange={(e) => handleAltChange(e, index)}
-                  />
+      <div className="grid xl:grid-cols-2 bg-white p-5 rounded-md">
+        <div className="my-5 ">
+          <div className="">
+            {previews.map((preview, index) => (
+              <div key={index} className="flex flex-col md:flex-row pb-3 mb-5 items-center xl:pl-10 space-y-4 md:space-y-0 border-b-2 border-gray-50">
+                <input
+                  type="file"
+                  onChange={(e) => handleChange(e, index)}
+                  className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-black/20 file:text-black/50 hover:file:bg-black/75 hover:file:text-white cursor-pointer w-full md:w-auto"
+                />
+                <div className="mx-4 w-full md:w-auto">
+                  {preview && (
+                    <Image
+                      className="w-full md:w-36 shadow-md"
+                      src={preview}
+                      alt="Preview"
+                      width="220"
+                      height="120"
+                    />
+                  )}
+                  <div className="mt-2">
+                    <p>Title</p>
+                    <input
+                      className="border px-2 py-1 rounded-lg w-full md:w-36"
+                      type="text"
+                      value={titles[index] || ""}
+                      onChange={(e) => handleTitleChange(e, index)}
+                    />
+                  </div>
+                  <div className="mt-2">
+                    <p>Alt</p>
+                    <input
+                      className="border px-2 py-1 rounded-lg w-full md:w-36"
+                      type="text"
+                      value={alts[index] || ""}
+                      onChange={(e) => handleAltChange(e, index)}
+                    />
+                  </div>
                 </div>
               </div>
+            ))}
+            {files.length < 4 && (
+              <button
+                className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${hasFetchedImages ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
+                onClick={addNewImageSection}
+                disabled={hasFetchedImages}
+              >
+                Add New Image
+              </button>
+            )}
+            {files.length >= 4 && (
+              <button
+                className="bg-gray-300 text-gray-600 px-3 py-2 rounded-[17px] w-full md:w-auto cursor-not-allowed"
+                disabled
+              >
+                Maximum 4 images uploaded
+              </button>
+            )}
+            <div className="mt-4">
+              <button
+                className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${!hasChanges && !isUpdating ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
+                onClick={handleUpload}
+                disabled={!hasChanges && !isUpdating}
+              >
+                {isUpdating ? "Update Images" : "Upload Images"}
+              </button>
             </div>
-          ))}
-          {files.length < 4 && (
-            <button
-              className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${hasFetchedImages ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
-              onClick={addNewImageSection}
-              disabled={hasFetchedImages}
-            >
-              Add New Image
-            </button>
-          )}
-          {files.length >= 4 && (
-            <button
-              className="bg-gray-300 text-gray-600 px-3 py-2 rounded-[17px] w-full md:w-auto cursor-not-allowed"
-              disabled
-            >
-              Maximum 4 images uploaded
-            </button>
-          )}
-          <div className="mt-4">
-            <button
-              className={`bg-[#2A2C41] text-white px-3 py-2 rounded-[17px] w-full md:w-auto ${!hasChanges && !isUpdating ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
-              onClick={handleUpload}
-              disabled={!hasChanges && !isUpdating}
-            >
-              {isUpdating ? "Update Images" : "Upload Images"}
-            </button>
           </div>
         </div>
+        <div className="my-5 border-t xl:border-t-0 xl:border-l xl:px-5 px-2 xl:py-0 py-5">
+          <p className="text-base font-semibold">Select Icon</p>
+          <div className="m-5">
+            <input id="checked" type="checkbox" value="flight" className="h-4 w-4 accent-black mr-3 " />
+            <label htmlFor="checked"  className="text-base">Flight</label>
+          </div>
+          <button className="px-5 py-1 bg-navyblack text-white rounded-full xl:ml-5 ">Save</button>
+        </div>
       </div>
-
     </>
   );
 }

@@ -59,6 +59,8 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [selectedState, setSelesctedState] = useState('');
     const [PackageIdGenerate, setPackageIdGenerate] = useState("");
     const [packageRating, setPackageRating] = useState('');
+    const [highlightedPackage, setHighlightedPackage] = useState('');
+
     useEffect(() => {
 
         const fetchCountry = async () => {
@@ -222,7 +224,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setSelesctedState(itinerary?.state);
         setPackageRating(itinerary?.packageRating || "");
         setPackageIdGenerate(itinerary?.PackageIdGenerate || "")
-
+        setHighlightedPackage(itinerary?.highlightedPackage || "")
         if (!itinerary) {
             setCityPopup(true);
             // console.log("countryId",itinerary?.associateCountry?._id)
@@ -272,7 +274,8 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         selectedState,
                         selectedCountry,
                         packageRating,
-                        PackageIdGenerate
+                        PackageIdGenerate,
+                        highlightedPackage
                     })
                 });
                 const data = await res.json();
@@ -339,7 +342,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                             <label htmlFor="packageRating" className=" font-semibold xl:w-32 md:w-40 text-para">Package Rating :</label>
                             <select name="packageRating" id="packageRating" className='border  rounded-md h-8 sm:w-full w-auto px-2 focus:border-primary outline-none text-para'
                                 onChange={(e) => {
-                                    setPackageRating(e.target.value); 
+                                    setPackageRating(e.target.value);
                                 }}>
                                 <option value="" disabled>Select Package Rating</option>
                                 <option value="3.5">3.5</option>
@@ -350,6 +353,12 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                                 <option value="4.8">4.8</option>
                                 <option value="5.0">5.0</option>
                             </select>
+                        </div>
+                        <div className=" sm:flex items-center mb-4">
+                            <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Highlighted Package :</label>
+                            <input  className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                value={highlightedPackage}
+                                onChange={(e) => setHighlightedPackage(e.target.value)} placeholder="Enter Highlighted package ID" />
                         </div>
                         <div className=" border-b-2 pb-4">
                             <div className="">
