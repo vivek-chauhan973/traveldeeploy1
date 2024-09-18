@@ -9,7 +9,7 @@ import Category from "@/pages/admin/package/category";
 const fetchPackages = async (locationId) => {
   const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
   const data = await response.json();
-  // console.log("api public tour=package---", locationId)
+  
   return data?.packages;
 };
 const filteredData = async (id, cat, min, max, minDay, maxDay) => {
@@ -41,6 +41,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
           currentPage,
           itemsPerPage
         );
+        console.log("api public tour=package---", packagesData)
         setPackages(packagesData);
         
       } catch (error) {

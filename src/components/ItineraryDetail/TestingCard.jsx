@@ -72,7 +72,7 @@ const TestingCard = ({ addPackage }) => {
               Similar Tour Packages
             </h2>
             <h2 className="md:text-md text-slate-600 text-sm italic">
-              Lorem ipsum dolor sit amet consectetur adipisicing.
+              Explore other exciting options for your next adventure!
             </h2>
           </div>
 

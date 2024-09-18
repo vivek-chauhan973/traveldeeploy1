@@ -1,5 +1,6 @@
 import City from "@/models/City";
 import Package from "@/models/Package"; // Import your Category model
+import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePublicTour= async (req, res) => {

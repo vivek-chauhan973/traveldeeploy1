@@ -17,7 +17,7 @@ const ItineraryPaymentTerms = () => {
           Payment Terms
         </p>
         <p className="md:text-md text-para italic text-slate-600">
-          Things to consider before the trip!
+          Important factors to consider before your trip!
         </p>
         <p
           className="py-3 pl-4 text-para payment-margin"

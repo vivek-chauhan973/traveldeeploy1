@@ -61,8 +61,8 @@ const DepartureSection = ({ addPackage }) => {
           <div>
             <div>
 
-              {fixedDepartureButtonEnaibleAndDisable ? "" : <h4 className="font-semibold text-base p-3 text-graytext">
-                1. SELECT DEPARTURE CITY & DATE
+              {fixedDepartureButtonEnaibleAndDisable ? "" : <h4 className="font-semibold text-base p-3 text-graytext uppercase">
+                1. Choose your departure city and date
               </h4>}
             </div>
             <hr />
@@ -310,8 +310,8 @@ const DepartureSection = ({ addPackage }) => {
         <div className="hidden lg:flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
           <div>
             <div>
-              <h4 className="font-semibold text-base p-3 text-graytext">
-                1. SELECT DEPARTURE CITY & DATE
+              <h4 className="font-semibold text-base p-3 text-graytext uppercase">
+                1. Choose your departure city and date
               </h4>
             </div>
             <hr />
