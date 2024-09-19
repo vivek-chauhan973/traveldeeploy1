@@ -14,7 +14,9 @@ const ItinerarySideCard = ({ highlightedPackage1 }) => {
             <div className="relative  flex-shrink-0 max-w-[18rem] mt-5 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md border xl:ml-[80px] ml-[20px] xl:block hidden">
                 <div
                     className="relative mx-4 mt-4 overflow-hidden text-white  rounded-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
-                    <Image src="https://Images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+                    <Image
+                        // src="https://Images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+                        src={highlightedPackage1?.uploads?.[0] || "https://Images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"}
                         alt="ui/ux review check"
                         width={500}
                         height={500}
@@ -43,13 +45,17 @@ const ItinerarySideCard = ({ highlightedPackage1 }) => {
                     </div>
 
                     <div>
-                        <p dangerouslySetInnerHTML={{ __html: highlightedPackage1?.about}} className='text-para line-clamp-2'></p>
+                        <p dangerouslySetInnerHTML={{ __html: highlightedPackage1?.about }} className='text-para line-clamp-2'></p>
                     </div>
                     <div className="flex justify-end mt-3">
                         <div className="text-right">
-                            <p className="text-[14px] leading-5 text-green-600 font-semibold">SUPER DEAL PRICE</p>
+                            <p className="text-[14px] leading-5 text-green-600 font-semibold">
+                                {((highlightedPackage1?.addguest === "addGuest") && "Awesome Price")}
+                                {((highlightedPackage1?.addguest === "fixedDeparture") && (highlightedPackage1?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
+                                {((highlightedPackage1?.addguest === "fixedDeparture") && (highlightedPackage1?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}
+                            </p>
                             <p className="text-xs leading-4 ">Starts From <span className="text-lg text-black font-medium">₹
-                            {(highlightedPackage1?.price)?.toLocaleString()}</span></p>
+                                {(highlightedPackage1?.price)?.toLocaleString()}</span></p>
                             {/* <p className="text-[10px] leading-5">per person on twin sharing</p> */}
                             <p className="text-para leading-7 font-medium underline text-blue">from ₹ 19,423/months</p>
                         </div>
@@ -58,7 +64,7 @@ const ItinerarySideCard = ({ highlightedPackage1 }) => {
                 <div className="p-6 pt-3">
                     <button
                         className="text-white bg-gradient-to-r from-orange-500 to-red-500  w-full py-3 rounded-md font-semibold text-base "
-                        type="button" onClick={()=>{}}>
+                        type="button" onClick={() => { }}>
                         View details
                     </button>
                 </div>

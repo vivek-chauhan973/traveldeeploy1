@@ -122,7 +122,7 @@ export default function Package1() {
 
   }
   useEffect(() => {
-    const dataPackage = allPackages?.filter(item => item?.highlightedPackage === addPackage?.highlightedPackage);
+    const dataPackage = allPackages?.filter(item => item?.PackageIdGenerate === addPackage?.highlightedPackage);
 
     setHighLightedPackage1(dataPackage)
   }, [allPackages, addPackage])
