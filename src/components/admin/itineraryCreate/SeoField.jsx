@@ -166,7 +166,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                     </div>
                     {/* Prce Valid Until */}
                     <div className="flex flex-col mb-2">
-                        <label className="text-para font-semibold" htmlFor="priceValid">Prce Valid Until : </label>
+                        <label className="text-para font-semibold" htmlFor="priceValid">Price Valid Until : </label>
                         <input
                             id="priceValid"
                             type="date"

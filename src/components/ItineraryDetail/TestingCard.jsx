@@ -115,16 +115,16 @@ const TestingCard = ({ addPackage }) => {
                     </div>
                     <div className="flex justify-between mt-3 md:mt-5">
                       <div>
-                        {/* <div className="hidden md:flex">
+                        <div className="hidden md:flex">
                           <div className="z-30">
                             <p className="rounded-full bg-white w-[30px] h-[30px] text-center border-2 border-x-primary">
                               ₹
                             </p>
                           </div>
-                          <div className="bg-indigo-200 p-1 px-3 mx-[-10px] rounded-sm">
+                          {/* <div className="bg-indigo-200 p-1 px-3 mx-[-10px] rounded-sm">
                             <p className="text-indigo-800 items-center mt-1 flex text-[10px] font-semibold">Quick Quote</p>
-                          </div>
-                        </div> */}
+                          </div> */}
+                        </div>
                       </div>
                       <div className="text-right">
                         <p className="text-sm leading-5 text-green-700 font-bold">                    
