@@ -8,7 +8,7 @@ const selectedIconApi=async (req,res)=>{
     try {
 
         const data=await SelectedIcon.findOne({package:iconId});
-        console.log("req.body ",req.body)
+        // console.log("req.body ",req.body)
         if(!data){
             const data1=await SelectedIcon.create({iconData:req.body,package:iconId});
            

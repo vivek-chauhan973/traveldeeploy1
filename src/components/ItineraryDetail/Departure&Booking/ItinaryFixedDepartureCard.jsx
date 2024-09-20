@@ -256,7 +256,7 @@ const ItinaryFixedDepartureCard = () => {
                   : null}{" "}
               </p>
               <p className="">
-                ₹ {(calculatedPrizeOfGst * limitKey)?.toLocaleString()}
+                ₹ {fixedDepartureButtonEnaibleAndDisable?(calculatedPrizeOfGst * limitKey)?.toLocaleString():"0"}
               </p>
             </div>
           </div>
@@ -322,7 +322,7 @@ const ItinaryFixedDepartureCard = () => {
             <div className="grid grid-cols-2 gap-1">
               <p className="font-semibold">Grand Total</p>
               <p className="font-semibold text-graytext">
-                ₹ {grandTotal?.toLocaleString()}
+                ₹ {fixedDepartureButtonEnaibleAndDisable?grandTotal?.toLocaleString():"0"}
               </p>
             </div>
           </div>
