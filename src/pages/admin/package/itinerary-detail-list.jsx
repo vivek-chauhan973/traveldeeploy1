@@ -62,14 +62,13 @@ const YourComponent = () => {
 
     // Filter items based on search query
     let filteredItineraries = itineraries?.filter((itinerary) =>
-        itinerary?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+        itinerary?.customId?.includes(searchQuery)
     );
 
     const totalItemsCount = filteredItineraries.length;
     const totalNumberOfPages = Math.ceil(totalItemsCount / itemsPerPage);
     const currentItems = filteredItineraries.slice(indexOfFirstItem, indexOfLastItem);
-    console.log("Rakesh2", currentItems);
-    
+    // console.log("Rakesh2", currentItems);
     return (
         <AppProvider>
         <Layout>
@@ -132,11 +131,11 @@ const YourComponent = () => {
                                             }}
                                         />
                                     </td>
-                                    <td className="py-4 pl-4 border-x capitalize">{itinerary.PackageIdGenerate}</td>
-                                    <td className="py-4 pl-4 border-x capitalize">{itinerary.name}</td>
-                                    <td className="py-4 pl-4 border-x">Rs {itinerary.price}</td>
-                                    <td className="py-4 pl-4 border-x">{itinerary.packageRating}</td>
-                                    <td className="py-4 pl-4 border-x">{itinerary.status}</td>
+                                    <td className="py-4 pl-4 border-x capitalize">{itinerary?.customId}</td>
+                                    <td className="py-4 pl-4 border-x capitalize">{itinerary?.name}</td>
+                                    <td className="py-4 pl-4 border-x">Rs {itinerary?.price}</td>
+                                    <td className="py-4 pl-4 border-x">{itinerary?.packageRating}</td>
+                                    <td className="py-4 pl-4 border-x">{itinerary?.status}</td>
                                     <td className="justify-center flex gap-2 items-center my-auto py-3">
                                         <Link href={"./itinerary/" + itinerary?._id + "?type=edit"}>
                                             <FaEdit size={20} className="mt-1 hover:text-red-500 cursor-pointer" />
