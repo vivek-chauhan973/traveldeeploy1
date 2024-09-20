@@ -62,7 +62,7 @@ const YourComponent = () => {
 
     // Filter items based on search query
     let filteredItineraries = itineraries?.filter((itinerary) =>
-        itinerary?.customId?.includes(searchQuery)
+        itinerary?.customId?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     const totalItemsCount = filteredItineraries.length;
