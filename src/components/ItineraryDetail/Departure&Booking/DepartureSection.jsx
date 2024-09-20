@@ -307,7 +307,7 @@ const DepartureSection = ({ addPackage }) => {
             </div>
           </div>
         </div>
-        <div className="hidden lg:flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
+        <div className="hidden xl:flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
           <div>
             <div>
               <h4 className="font-semibold text-base p-3 text-graytext uppercase">

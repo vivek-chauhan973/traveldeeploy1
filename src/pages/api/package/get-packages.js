@@ -6,7 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
         const packages = await Package.find().populate({path:"location"}).populate({path:"country"}).populate({path:"state"}).populate('tourinfo.tourInclusion')
         .populate('tourinfo.tourExclusion')
         .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
-        .populate('tourinfo.tourNeedToKonow').populate("fixedDeparturePrices").populate("icons")
+        .populate('tourinfo.tourNeedToKonow').populate("fixedDeparturePrices")
        .lean();
         return res.status(200).json({ packages });
     } catch (error) {

@@ -117,19 +117,22 @@ const useMyCustomHook = () => {
     console.log("result111", result);
 
     if (addPackage?.addguest === "fixedDeparture") {
-      fixedDepartureData?.map(item => {
+      const data=fixedDepartureData?.filter(item => {
         const date = new Date(item?.Date);
         const day = date.getDate();
         const month = date.toLocaleString('default', { month: 'short' }); 
         const formattedDate = `${day}-${month}`;
        item.date1=formattedDate;
-       return item;
+       const date1=new Date();
+       if(date>=date1){
+        return item;
+       }
+       
       })
 
-      result.push(fixedDepartureData)
+      result.push(data)
 
     }
-    // console.log("result ----> ", result)
     return [result];
   }, [priceHike1, fixedDepartureData]);
 

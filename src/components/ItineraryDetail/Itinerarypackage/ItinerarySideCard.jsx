@@ -4,7 +4,7 @@ import Image from "next/image";
 
 
 const ItinerarySideCard = ({ highlightedPackage1 }) => {
-    console.log("Rakesh Side card", highlightedPackage1);
+    // console.log("Rakesh Side card", highlightedPackage1);
 
 
 

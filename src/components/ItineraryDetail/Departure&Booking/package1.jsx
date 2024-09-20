@@ -128,7 +128,7 @@ export default function Package1() {
     setHighLightedPackage1(dataPackage)
   }, [allPackages, addPackage])
 
-  console.log("highlitedPackages1------> ", highlightedPackage1?.[0]);
+  // console.log("highlitedPackages1------> ", highlightedPackage1?.[0]);
 
   const handleSendItinerary = () => {
     const url =

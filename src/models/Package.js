@@ -12,7 +12,18 @@ import "@/models/package/PackageCategory";
 import "@/models/package/PackagePrice";
 import "@/models/package/PriceHike";
 import "@/models/package/PackageDeparture";
+import Counter from "./Counter";
 
+async function getNextSequenceValueWithPrefix(sequenceName, prefix = 'BXP', padding = 3) {
+  const sequenceDocument = await Counter.findOneAndUpdate(
+    { _id: sequenceName },
+    { $inc: { sequence_value: 1 } }, // Increment the sequence value
+    { new: true, upsert: true } // Return the updated document or insert if it doesn't exist
+  );
+  
+  const paddedSequence = String(sequenceDocument.sequence_value).padStart(padding, '0');
+  return `${prefix}${paddedSequence}`; // Combine prefix and sequence
+}
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -116,6 +127,7 @@ const packageSchema = new Schema({
       ref: "Country",
       required: true,
     },
+    customId: { type: String, unique: true },
     tableData:[{}],
     tableColumn:[String],
     state:{
@@ -126,10 +138,6 @@ const packageSchema = new Schema({
     about: { type: String, trim: true },
     dayWiseInformation: { type: String, trim: true },
     packageRating:{
-      type:String,
-      required:true
-    }
-    ,PackageIdGenerate:{
       type:String,
       required:true
     },
@@ -174,6 +182,9 @@ packageSchema.virtual("pageUrl").get(function () {
 packageSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("name")) {
     this.url = this.name.toLowerCase().replace(/\s+/g, "-");
+  }
+  if (this.isNew) {
+    this.customId = await getNextSequenceValueWithPrefix('users', 'BXP'); // Generate ID like BXP001
   }
   try {
     await this.validate();

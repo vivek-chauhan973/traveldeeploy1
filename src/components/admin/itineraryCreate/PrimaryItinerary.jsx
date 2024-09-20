@@ -4,7 +4,6 @@ import MultipleSelectChip from "./Select";
 import MultipleSelectCheckmarks from "./CheckMarkSelect";
 import { useRouter } from "next/router";
 import { useAppContext } from "../context/Package/AddGuest";
-import { customAlphabet } from 'nanoid';
 const fetchCountries = async () => {
     try {
         const res = await fetch('/api/location?type=country', { method: 'GET' });
@@ -57,7 +56,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
     const [dayWiseFaq, setDayWiseFaq] = useState([]);
     const [selectedCountry, setSelesctedCountry] = useState('');
     const [selectedState, setSelesctedState] = useState('');
-    const [PackageIdGenerate, setPackageIdGenerate] = useState("");
+    // const [PackageIdGenerate, setPackageIdGenerate] = useState("");
     const [packageRating, setPackageRating] = useState('');
     const [highlightedPackage, setHighlightedPackage] = useState('');
 
@@ -223,7 +222,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setSelesctedCountry(itinerary?.country);
         setSelesctedState(itinerary?.state);
         setPackageRating(itinerary?.packageRating || "");
-        setPackageIdGenerate(itinerary?.PackageIdGenerate || "")
+        // setPackageIdGenerate(itinerary?.PackageIdGenerate || "")
         setHighlightedPackage(itinerary?.highlightedPackage || "")
         if (!itinerary) {
             setCityPopup(true);
@@ -274,7 +273,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         selectedState,
                         selectedCountry,
                         packageRating,
-                        PackageIdGenerate,
+                        // PackageIdGenerate,
                         highlightedPackage
                     })
                 });
@@ -290,16 +289,13 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             }
         }
     };
-
-    const handleGenUniqueKey = () => {
-        const nanoid = customAlphabet('1234567890', 4);
-        const fourDigitNumber = nanoid();
-        const key = "BXP" + fourDigitNumber;
-
-        setPackageIdGenerate(key);
-
-    }
-    console.log("Rakesh Rikki ", packageRating);
+const [generateNum,setGenerateNum]=useState(1);
+    // const handleGenUniqueKey = () => {
+    //     const key = "BXP" + generateNum;
+    //     setPackageIdGenerate(key);
+    //     setGenerateNum(generateNum+1);
+    // }
+    // console.log("Rakesh Rikki ", packageRating);
     return (
         <>
             <div className="bg-white p-4 rounded-md">
@@ -311,12 +307,12 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                                 <input type="text" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => setPriority(e.target.value)} placeholder="Enter Priority " defaultValue={priority} />
                             </div>
-                            <div className=" sm:flex items-center mb-4">
+                            {/* <div className=" sm:flex items-center mb-4">
                                 <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Pckage ID :</label>
                                 <input type="text" className='  border md:w-60 w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     disabled placeholder="Package Id " value={PackageIdGenerate} />
-                                <button className="bg-navyblack hover:bg-black text-white rounded px-4 py-1 md:ml-10 md:mt-0 mt-5" onClick={handleGenUniqueKey}>Genrate ID</button>
-                            </div>
+                                {PackageIdGenerate===""&&<button className="bg-navyblack hover:bg-black text-white rounded px-4 py-1 md:ml-10 md:mt-0 mt-5" onClick={handleGenUniqueKey}>Genrate ID</button>}
+                            </div> */}
                             <div className=" sm:flex items-center">
                                 <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Title:</label>
                                 <input ref={packageTitleRef} className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
