@@ -122,8 +122,10 @@ export default function Package1() {
     }
 
   }
+
   useEffect(() => {
-    const dataPackage = allPackages?.filter(item => item?.PackageIdGenerate === addPackage?.highlightedPackage);
+    
+    const dataPackage = allPackages?.filter(item => item?.customId === addPackage?.highlightedPackage);
 
     setHighLightedPackage1(dataPackage)
   }, [allPackages, addPackage])
@@ -131,10 +133,10 @@ export default function Package1() {
   // console.log("highlitedPackages1------> ", highlightedPackage1?.[0]);
 
   const handleSendItinerary = () => {
-    const url =
+    const whatsAppUrl =
       `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4N+and+5D+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
 
-    window.location.href = url;
+    window.location.href = whatsAppUrl;
   };
   const [showSharePopup, setShowSharePopup] = useState(false);
   const handleSharePopup = () => {
@@ -143,7 +145,18 @@ export default function Package1() {
   const handleEmailRedirect = () => {
     window.location.href = 'mailto:?subject=Your Itinerary&body=Here is your itinerary...';
   };
-
+  const handleTwitter = () => {
+    window.open('https://twitter.com', '_blank')
+  }
+  const handleInstagram = () => {
+    window.open('https://instagram.com', '_blank')
+  }
+  const handleLinkedIn = () => {
+    window.open('https://linkedin.com', '_blank')
+  }
+  const handleFacebook = () => {
+    window.open('https://facebook.com', '_blank')
+  }
   return (
     <div>
       {showPopup && <FixedDeparturePopup />}
@@ -414,13 +427,13 @@ export default function Package1() {
                   <p className="text-[12px] cursor-pointer">Share Itinerary</p>
                   {showSharePopup && (
                     <div className="absolute top-14 left-32 z-[999] bg-slate-50 shadow-md p-4 rounded-md flex justify-center items-center gap-5">
-                      <FontAwesomeIcon icon={faTwitter} className="font1 cursor-pointer" onClick={() => window.open('https://twitter.com', '_blank')} />
+                      <FontAwesomeIcon icon={faTwitter} className="font1 cursor-pointer" onClick={handleTwitter} />
 
-                      <FontAwesomeIcon icon={faFacebook} className="font1 cursor-pointer" onClick={() => window.open('https://facebook.com', '_blank')} />
+                      <FontAwesomeIcon icon={faFacebook} className="font1 cursor-pointer" onClick={handleFacebook} />
 
-                      <FontAwesomeIcon icon={faInstagram} className="font1 cursor-pointer" onClick={() => window.open('https://instagram.com', '_blank')} />
+                      <FontAwesomeIcon icon={faInstagram} className="font1 cursor-pointer" onClick={handleInstagram} />
 
-                      <FontAwesomeIcon icon={faLinkedin} className="font1 cursor-pointer" onClick={() => window.open('https://linkedin.com', '_blank')} />
+                      <FontAwesomeIcon icon={faLinkedin} className="font1 cursor-pointer" onClick={handleLinkedIn} />
 
                     </div>
                   )}

@@ -1,10 +1,11 @@
 import "../../../app/globals.css";
 import Image from "next/image";
+import Link from "next/link";
 
 
 
 const ItinerarySideCard = ({ highlightedPackage1 }) => {
-    // console.log("Rakesh Side card", highlightedPackage1);
+    console.log("Rakesh Side card", highlightedPackage1);
 
 
 
@@ -62,11 +63,13 @@ const ItinerarySideCard = ({ highlightedPackage1 }) => {
                     </div>
                 </div>
                 <div className="p-6 pt-3">
-                    <button
-                        className="text-white bg-gradient-to-r from-orange-500 to-red-500  w-full py-3 rounded-md font-semibold text-base "
-                        type="button" onClick={() => { }}>
+                    <Link
+                        href={"/package/" + highlightedPackage1?.url}
+                        className="mt-3 block w-full select-none rounded-lg bg-gradient-to-r from-orange-500 to-red-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
+                        type="button"
+                    >
                         View details
-                    </button>
+                    </Link>
                 </div>
             </div>
         </>

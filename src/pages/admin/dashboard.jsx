@@ -93,7 +93,8 @@ export default function AdminDashboard() {
                         </div>
                     </div>
                     {/* Review Form */}
-                    <div className="border-l-2 border-teal-700 p-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
+                    <h2 className="text-md font-semibold mt-5 leading-8">Review Form</h2>
+                    <div className="border-l-2 border-teal-700 p-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md">
                         <ReviewForm />
                     </div>
 

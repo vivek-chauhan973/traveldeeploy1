@@ -1,21 +1,31 @@
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from "react";
-import { MdDeleteForever } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import DeletePop from "../iternaryPopup/DeletePop";
-export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
+
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
+const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
+
+export default function PackageFaq({ itinerary, setActiveTab, setFaqDot }) {
   // console.log("itinerary : ",itinerary);
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(
     []
   );
-  const [deletePopup,setDeletePopu]=useState(false);
+  const [deletePopup, setDeletePopu] = useState(false);
+  const [editorHtml, setEditorHtml] = useState("");
+
   useEffect(() => {
     if (itinerary) {
-        setItineraryDayWiseDataArray( itinerary?.titles?.days|| []);
-        if( itinerary?.titles?.days){
-          setFaqDot(true);
-        }
+      setItineraryDayWiseDataArray(itinerary?.titles?.days || []);
+      if (itinerary?.titles?.days) {
+        setFaqDot(true);
+      }
     }
-}, [itinerary]);
+  }, [itinerary]);
   const [itineraryDayWise, setItineraryDayWise] = useState({
     title: "",
     information: "",
@@ -29,6 +39,28 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const modules = {
+    toolbar: [
+      [{ header: "1" }, { header: "2" }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link"],
+    ],
+  };
+  const handleEditorChange = (html) => {
+    setEditorHtml(html);
+    setItineraryDayWise((prevState) => ({
+      ...prevState,
+      information: html,
+    }));
+   
   };
 
   const addItem = () => {
@@ -45,12 +77,14 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
       setItineraryDayWiseDataArray((prev) => [...prev, itineraryDayWise]);
     }
     setItineraryDayWise({ title: "", information: "" });
+    setEditorHtml("");
     setItineraryValidate("");
   };
 
   const editItem = (index) => {
     setEditingIndex(index);
     setItineraryDayWise(itineraryDayWiseDataArray[index]);
+    setEditorHtml(itineraryDayWiseDataArray[index].information);
   };
 
   // written by code
@@ -74,7 +108,7 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
         },
         body: JSON.stringify({ days: itineraryDayWiseDataArray }),
       });
-      if(response.ok){
+      if (response.ok) {
         setFaqDot(true)
         setActiveTab("Tab11");
       }
@@ -110,7 +144,7 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                 </div>
               </div>
               <div className="mt-5">
-                <div className="w-full">
+                {/* <div className="w-full">
                   <textarea
                     className="rounded h-48 resize-none border px-3 py-2 w-full"
                     placeholder="Enter Your Answer"
@@ -118,15 +152,25 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                     value={itineraryDayWise.information}
                     onChange={handleChange}
                   ></textarea>
-                </div>
-                <div className="pt-3">
+                </div> */}
+                <div className="w-full">
+                    <QuillNoSSRWrapper
+                      className="rounded h-48"
+                      theme="snow"
+                      value={editorHtml}
+                      placeholder="Enter Your Answer"
+                      onChange={handleEditorChange}
+                      modules={modules}
+                    />
+                  </div>
+                <div className="pt-12">
                   <button
                     onClick={addItem}
-                    className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1`}
+                    className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1 cursor-pointer`}
                   >
                     {editingIndex !== null ? "Update" : "Add"}
                   </button>
-                  
+
                 </div>
               </div>
 
@@ -143,17 +187,18 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
                             {item?.title}
                           </p>
                         </div>
-                        <div className="flex gap-2">
-                          <FaEdit
+                        <div className="flex gap-3">
+                          <FontAwesomeIcon
+                            icon={faEdit}                      
+                            className="font1 cursor-pointer hover:text-primary"
                             onClick={() => editItem(index)}
-                            size={16}
-                            className="mt-1 hover:text-primary cursor-pointer"
                           />
-                          {(editingIndex !== index && deletePopup)?
-                           <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={removeItem}/>:<MdDeleteForever
+                          {(editingIndex !== index && deletePopup) ?
+                            <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={removeItem} /> :
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              className="font1 cursor-pointer hover:text-red-500"
                               onClick={() => setDeletePopu(true)}
-                              size={16}
-                              className="mt-1 hover:text-red-500 cursor-pointer"
                             />
                           }
                         </div>
@@ -169,7 +214,7 @@ export default function PackageFaq({ itinerary,setActiveTab, setFaqDot }) {
               </div>
             </div>
             <button onClick={ItineraryFeqPost} className="w-full rounded py-2 bg-black text-white">
-                Save
+              Save
             </button>
           </div>
         </div>

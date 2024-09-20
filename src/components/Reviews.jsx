@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ReviewForm = () => {
   const [formData, setFormData] = useState({
@@ -126,155 +128,154 @@ const ReviewForm = () => {
   };
 
   return (
-      <div>
-        <Head>
-          <title>Review Form</title>
-        </Head>
-        {/* <div className="border-l-2 border-teal-700 p-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5"> */}
-          <div className=" p-4 rounded mb-2">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Title */}
-              <div className="sm:flex items-center mb-2">
-                <label htmlFor="title" className="font-semibold w-28 text-para">
-                  Title:
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
-                  placeholder="Enter Title"
-                />
-                {validationErrors.title && (
-                  <span className="text-xs text-red-700">{validationErrors.title}</span>
-                )}
-              </div>
-
-              {/* Information */}
-              <div className="sm:flex items-center mb-2">
-                <label htmlFor="information" className="font-semibold w-28 text-para">
-                  Information:
-                </label>
-                <textarea
-                  id="information"
-                  name="information"
-                  value={formData.information}
-                  onChange={handleChange}
-                  className="border w-full rounded-md px-2 py-1 focus:border-primary outline-none text-para"
-                  placeholder="Enter Information"
-                />
-                {validationErrors.information && (
-                  <span className="text-xs text-red-700">{validationErrors.information}</span>
-                )}
-              </div>
-
-              {/* Rating */}
-              <div className="sm:flex items-center mb-2">
-                <label htmlFor="rating" className="font-semibold w-28 text-para">
-                  Rating:
-                </label>
-                <input
-                  type="number"
-                  id="rating"
-                  name="rating"
-                  value={formData.rating}
-                  onChange={handleChange}
-                  className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
-                  placeholder="Enter Rating"
-                />
-                {validationErrors.rating && (
-                  <span className="text-xs text-red-700">{validationErrors.rating}</span>
-                )}
-              </div>
-
-              {/* Name */}
-              <div className="sm:flex items-center mb-2">
-                <label htmlFor="name" className="font-semibold w-28 text-para">
-                  Name:
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
-                  placeholder="Enter Name"
-                />
-                {validationErrors.name && (
-                  <span className="text-xs text-red-700">{validationErrors.name}</span>
-                )}
-              </div>
-
-              {/* Select Date */}
-              <div className="sm:flex items-center mb-2">
-                <label htmlFor="selectDate" className="font-semibold w-28 text-para">
-                  Select Date:
-                </label>
-                <input
-                  type="date"
-                  id="selectDate"
-                  name="selectDate"
-                  value={formData.selectDate}
-                  onChange={handleChange}
-                  className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
-                />
-                {validationErrors.selectDate && (
-                  <span className="text-xs text-red-700">{validationErrors.selectDate}</span>
-                )}
-              </div>
-
-              <div className='flex justify-end items-center'>
-                <button type="submit" className="px-2 py-1.5 text-sm bg-primary text-white rounded-md">
-                  {editingId ? 'Update Review' : 'Add Review'}
-                </button>
-              </div>
-            </form>
-          </div>
-          {/* Reviews Table */}
-          <div className="bg-white rounded p-4">
-            <h2 className="text-lg font-semibold">Reviews</h2>
-            <div className="mt-2 overflow-scroll">
-              <table className="w-full border rounded">
-                <thead>
-                  <tr>
-                    <th className="border-b p-2 text-left">Title</th>
-                    <th className="border-b p-2 text-left">Rating</th>
-                    <th className="border-b p-2 text-left">Name</th>
-                    <th className="border-b p-2 text-left"></th>
-                    {/* <th className="border-b p-2 text-left"></th> */}
-                  </tr>
-                </thead>
-                <tbody>
-                  {reviews.map((review) => (
-                    <tr key={review._id} className="border-b">
-                      <td className="p-2">{review.title}</td>
-                      <td className="py-2 pl-5 pr-2">{review.rating}</td>
-                      <td className="p-2">{review.name}</td>
-                      <td className="p-2">
-                        <div className="flex justify-end items-center gap-3">
-                          <button onClick={() => handleEdit(review._id)}
-                            className="text-sm px-3 py-1 bg-yellow-400 text-white rounded-md"
-                          >
-                            Edit
-                          </button>
-                          <button onClick={() => handleDelete(review._id)}
-                            className="text-sm px-2 py-1 bg-red-600 text-white rounded-md"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+    <div>
+      <Head>
+        <title>Review Form</title>
+      </Head>
+      {/* <div className="border-l-2 border-teal-700 p-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5"> */}
+      <div className=" p-4 rounded">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Title */}
+          <div className="sm:flex items-center mb-2">
+            <label htmlFor="title" className="font-semibold w-28 text-para">
+              Title:
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
+              placeholder="Enter Title"
+            />
+            {validationErrors.title && (
+              <span className="text-xs text-red-700">{validationErrors.title}</span>
+            )}
           </div>
 
+          {/* Information */}
+          <div className="sm:flex items-center mb-2">
+            <label htmlFor="information" className="font-semibold w-28 text-para">
+              Information:
+            </label>
+            <textarea
+              id="information"
+              name="information"
+              value={formData.information}
+              onChange={handleChange}
+              className="border w-full rounded-md px-2 py-1 focus:border-primary outline-none text-para"
+              placeholder="Enter Information"
+            />
+            {validationErrors.information && (
+              <span className="text-xs text-red-700">{validationErrors.information}</span>
+            )}
+          </div>
+
+          {/* Rating */}
+          <div className="sm:flex items-center mb-2">
+            <label htmlFor="rating" className="font-semibold w-28 text-para">
+              Rating:
+            </label>
+            <input
+              type="number"
+              id="rating"
+              name="rating"
+              value={formData.rating}
+              onChange={handleChange}
+              className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
+              placeholder="Enter Rating"
+            />
+            {validationErrors.rating && (
+              <span className="text-xs text-red-700">{validationErrors.rating}</span>
+            )}
+          </div>
+
+          {/* Name */}
+          <div className="sm:flex items-center mb-2">
+            <label htmlFor="name" className="font-semibold w-28 text-para">
+              Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
+              placeholder="Enter Name"
+            />
+            {validationErrors.name && (
+              <span className="text-xs text-red-700">{validationErrors.name}</span>
+            )}
+          </div>
+
+          {/* Select Date */}
+          <div className="sm:flex items-center mb-2">
+            <label htmlFor="selectDate" className="font-semibold w-28 text-para">
+              Select Date:
+            </label>
+            <input
+              type="date"
+              id="selectDate"
+              name="selectDate"
+              value={formData.selectDate}
+              onChange={handleChange}
+              className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
+            />
+            {validationErrors.selectDate && (
+              <span className="text-xs text-red-700">{validationErrors.selectDate}</span>
+            )}
+          </div>
+
+          <div className='flex justify-end items-center'>
+            <button type="submit" className="px-2 py-1.5 text-sm bg-primary text-white rounded-md">
+              {editingId ? 'Update Review' : 'Add Review'}
+            </button>
+          </div>
+        </form>
       </div>
+      {/* Reviews Table */}
+      <div className=" px-4 pb-4">
+        <h2 className="text-base font-semibold">Reviews</h2>
+        <div className="overflow-scroll bg-white rounded px-4 py-2">
+          <table className="w-full border rounded">
+            <thead>
+              <tr className='border-b'>
+                <th className=" p-2 text-left">Title</th>
+                <th className=" p-2 text-left">Rating</th>
+                <th className=" p-2 text-left">Name</th>
+                <th className=" p-2 text-left"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {reviews.map((review) => (
+                <tr key={review._id} className="border-b">
+                  <td className="p-2 text-nowrap">{review.title}</td>
+                  <td className="py-2 pl-5 pr-2">{review.rating}</td>
+                  <td className="p-2 capitalize text-nowrap">{review.name}</td>
+                  <td className="p-2">
+                    <div className="flex justify-end items-center gap-3">
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        className="font1 cursor-pointer"
+                        onClick={() => handleEdit(review._id)}
+                      />
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="font1 cursor-pointer"
+                        onClick={() => handleDelete(review._id)}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
   );
 };
 

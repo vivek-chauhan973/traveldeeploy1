@@ -9,6 +9,8 @@ import {
   SaveIcon,
   CancelIcon
 } from "@/components/icons/index"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faCirclePlus, faFloppyDisk, faSave } from "@fortawesome/free-solid-svg-icons";
 
 import DeletePop from "../iternaryPopup/DeletePop";
 
@@ -75,7 +77,7 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
   const saveHighlight = (index) => {
     itinerary.highlights[index].edit = false;
   }
- 
+
   const addSubmitHighlight = async () => {
     try {
       const res = await fetch('/api/package/info/' + (itinerary ? itinerary.id : itineraryInfo.id), {
@@ -120,10 +122,10 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
             <span className="text-xs text-red-700 capitalize">{aboutValidate}</span>
           </div>
         ) : (
-          <div className="flex items-center gap-5">
+          <div className="flex  gap-5">
             <div dangerouslySetInnerHTML={{ __html: aboutEditorHtml }}></div>
             <div className="w-20">
-              <EditIcon onClick={() => setIsEditingAbout(true)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
+              <FontAwesomeIcon icon={faEdit} className=" cursor-pointer hover:text-primary" onClick={() => setIsEditingAbout(true)} />
             </div>
           </div>
         )}
@@ -135,14 +137,14 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
             <input onChange={(e) => handleChangeData(e.target.value)} value={inputHighlight} className='w-full border rounded-md h-8 px-2 text-para grow focus:border-primary outline-none'
               type="text" placeholder="Enter A Highlight" />
             {highlightEdit.edit ? (
-              <CancelIcon onClick={addHighlight} size={35} className='cursor-pointer hover:text-primary' />
+              <FontAwesomeIcon icon={faFloppyDisk} className="font1 cursor-pointer hover:text-primary" onClick={addHighlight} />
             ) : (
-              <div onClick={addHighlight}>
-                <AddCircleIcon  size={35} className='cursor-pointer hover:text-primary' />
+              <div >
+                <FontAwesomeIcon icon={faCirclePlus} className="font1 cursor-pointer hover:text-primary" onClick={addHighlight} />
               </div>
             )}
           </div>
-          <div className="border h-48 w-full overflow-y-auto py-2 rounded-md mt-2">
+          <div className="border h-56 w-full overflow-y-auto py-2 rounded-md mt-2">
             {itinerary?.highlights?.map((item, index) => (
               <div key={index} className='flex justify-between even:bg-slate-50 md:px-5 px-2'>
                 {item.edit ? (
@@ -155,13 +157,16 @@ export default function HighlightAbout({ setActiveTab, itinerary, itineraryInfo,
                 ) : (
                   <p className='capitalize flex gap-2 leading-8'><span>{index + 1}.</span>{item.text}</p>
                 )}
-                <div className='flex gap-2'>
+                <div className='md:flex gap-3 mt-3 '>
                   {item.edit ? (
-                    <SaveIcon onClick={() => saveHighlight(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
+                    <FontAwesomeIcon icon={faSave} className="font1 cursor-pointer hover:text-primary" onClick={() => saveHighlight(index)} />
                   ) : (
                     <>
-                      <EditIcon onClick={() => toggleEditHighlight(index)} size={24} className='mt-1 hover:text-primary cursor-pointer' />
-                      {deletePopup ? <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={handleRemoveHighlight} /> : <DeleteIcon onClick={() => setDeletePopu(true)} size={20} className='mt-1 hover:text-red-500 cursor-pointer' />}
+                      <FontAwesomeIcon icon={faEdit} className=" cursor-pointer hover:text-primary" onClick={() => toggleEditHighlight(index)} />
+                      {deletePopup ?
+                        <DeletePop setDeletePopup={setDeletePopu} index={index} handleRemoveHighlight={handleRemoveHighlight} /> :
+                        <FontAwesomeIcon icon={faTrash} className=" cursor-pointer hover:text-primary" onClick={() => setDeletePopu(true)} />
+                      }
                     </>
                   )}
                 </div>

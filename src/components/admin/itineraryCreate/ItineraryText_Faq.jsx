@@ -202,7 +202,7 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                       modules={modules}
                     />
                   </div>
-                  <div className="md:pt-12 pt-24">
+                  <div className="md:pt-12 ">
                     <button
                       onClick={addItem}
                       className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1`}

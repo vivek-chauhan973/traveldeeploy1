@@ -36,9 +36,9 @@ const Faq1 = ({ data }) => {
                                 )}
                             </div>
                         </div>
-                        <div className={`overflow-hidden transition-max-height duration-700 ease-in-out ${openIndex === i ? 'max-h-screen' : 'max-h-0'}`}>
-                            <div className="py-4 xl:px-10 px-5 md:text-base text-sm">
-                                {item.information}
+                        <div className={`overflow-hidden transition-max-height duration-700 ease-in-out ${openIndex === i ? 'max-h-auto' : 'max-h-0'}`}>
+                            <div className=" md:text-base text-sm " >
+                                <p dangerouslySetInnerHTML={{ __html: item.information }} className='about-margin py-4 xl:px-10 px-5 '></p>
                             </div>
                         </div>
                     </div>
