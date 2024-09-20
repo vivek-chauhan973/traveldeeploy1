@@ -53,7 +53,7 @@ const apiRoute = async (req, res) => {
           filename: file.filename,
           path: `/uploads/package/details/${file.filename}`,
         }));
-        console.log("filesfhbjfsfssjfhbasjh121312y3432y4",files);
+        console.log("filesfhbjfsfssjfhbasjh121312y3432y4",req.files);
         // Update or insert files into database
         await PackageImage.findOneAndUpdate(
           { packageId },

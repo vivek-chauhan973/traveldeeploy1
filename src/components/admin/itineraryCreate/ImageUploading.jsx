@@ -15,6 +15,7 @@ export default function ImageUploading({ itinerary, setImageDot }) {
   const [imageData, setImageData] = useState([]);
   const [selectedIcons, setSelectedIcons] = useState([]);
 
+  
   // Function to fetch existing images
   // console.log("files lengths :: :: ",files.length)
   const fetchImages = useCallback(async () => {
@@ -24,11 +25,13 @@ export default function ImageUploading({ itinerary, setImageDot }) {
       const data = await res.json();
       if (data.data.length > 0) {
         const images = data.data;
+       
         // console.log("data is here ::: ",images)
         setSelectedImageIds(images.map((image) => image._id));
         setTitles(images.map((image) => image.title));
         setAlts(images.map((image) => image.alt));
         setExistingImagesCount(images.length);
+        setFiles(images?.[0]?.$each);
         setIsUpdating(true);
       }
     } catch (error) {
@@ -41,6 +44,7 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     try {
       const res = await fetch("/api/icon/icon1");
       const data = await res.json();
+      // console.log("images data is here of itineary ----> ",data);
       setImageData(data?.data || []);
     } catch (error) {
       console.error("Error fetching image:", error);
@@ -70,7 +74,6 @@ export default function ImageUploading({ itinerary, setImageDot }) {
   const handleChange = (e, index) => {
     const newFiles = [...files];
     newFiles[index] = e.target.files[0];
-
     setFiles(newFiles);
     const newPreviews = [...previews];
     const newPreviews1 = [...previews1];
@@ -80,6 +83,7 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     setPreviews(newPreviews);
     setHasChanges(true);
   };
+  // console.log("images data is here of itineary ----> ",files);
 
   // Function to handle title change
   const handleTitleChange = (e, index) => {

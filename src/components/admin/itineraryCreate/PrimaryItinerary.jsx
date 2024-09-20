@@ -73,7 +73,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
 
 
     // Images here 
-
+// console.log("itineary is here ---> ",itinerary)
 
     useEffect(() => {
         if (itinerary) {

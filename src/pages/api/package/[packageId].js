@@ -7,8 +7,8 @@ import PackageFaqWise from "@/models/package/PackageFaq";
 import PackageHighlight from "@/models/package/PackageHighlight";
 import PackagePrice from "@/models/package/PackagePrice";
 import Inclusion from "@/models/package/TourInfo/Inclusion";//inclusion code is here
+import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
 import { NextApiRequest, NextApiResponse } from "next";
-
 // find By Id And Update
  const packageIds= async (req, res) => {
     try {
