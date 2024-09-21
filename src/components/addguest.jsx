@@ -454,13 +454,13 @@ if(inputData.adult ==="" ){
   }, [selectedDataOfCar])
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
-      <div className="bg-white ">
+      <div className="bg-white">
         {addPackage?.prices?.addguest === "addGuest" && (
           <form className="w-full" action="">
             <div className="relative">
               <div className="sticky top-0 shadow-md z-[5]">
                 <div
-                  className=" absolute md:top-3 top-1 md:right-3 right-2 cursor-pointer hover:scale-105 "
+                  className="absolute md:top-3 top-1 md:right-3 right-2 cursor-pointer hover:scale-105 "
                   size={28}
                 >
                   <FontAwesomeIcon
@@ -480,7 +480,7 @@ if(inputData.adult ==="" ){
                 </div>
                 <hr />
               </div>
-              <div className="overflow-y-auto md:px-12 px-2 ">
+              <div className="md:px-12 px-2 overflow-y-scroll max-h-[500px]">
                 <div className="flex items-center md:gap-10 mt-5 md:w-96 w-60 justify-between">
                   <label htmlFor="Adultsdropdown" className="my-2">
                     <div className="flex gap-3 items-center">

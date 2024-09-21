@@ -148,8 +148,8 @@ const Carousel = () => {
           ))}
 
           {isOpen && selectedItem && (
-            <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-50">
-              <div className="relative bg-white x rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="relative bg-white rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
                 <div className="pr-3 pt-1 flex justify-end items-center ">
                   <button className="cursor-pointer  " onClick={handleClose}>
                     <FontAwesomeIcon

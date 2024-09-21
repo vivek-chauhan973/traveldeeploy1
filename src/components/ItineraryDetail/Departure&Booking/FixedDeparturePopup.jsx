@@ -99,7 +99,7 @@ const FixedDeparturePopup = () => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
         <div className="flex justify-center items-center h-screen">
           <div className="overflow-hidden max-w-lg md:max-w-2xl mx-auto">
             <div className="flex">

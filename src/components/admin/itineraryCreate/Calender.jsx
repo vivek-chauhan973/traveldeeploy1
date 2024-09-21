@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const fetchPriceHikeData=async(itinerary)=>{
+const fetchPriceHikeData = async (itinerary) => {
   return await (await fetch(`/api/package/price-hike?packageId=${itinerary?._id}`)).json()
 }
 
@@ -14,9 +16,9 @@ const Calendar = ({ itinerary, setActiveTab }) => {
   const [calenderArr, setCalenderArr] = useState([]);
   const [editIndex, setEditIndex] = useState(null); // To track which item is being edited
 
-  useEffect(()=>{
-    fetchPriceHikeData(itinerary).then(res=>{setCalenderArr(res?.response?.priceHiKe||[]);});
-  },[itinerary])
+  useEffect(() => {
+    fetchPriceHikeData(itinerary).then(res => { setCalenderArr(res?.response?.priceHiKe || []); });
+  }, [itinerary])
 
   const handleSubmitNext = async (e) => {
     e.preventDefault();
@@ -45,8 +47,8 @@ const Calendar = ({ itinerary, setActiveTab }) => {
   const handleAddData = () => {
     const data = { startDate, endDate, priceIncrease, isActive, svg };
     if ([startDate, endDate, priceIncrease].some((item) => item === "")) {
-        return alert("Some fields are missing");
-      }
+      return alert("Some fields are missing");
+    }
     if (editIndex !== null) {
       // Editing an existing item
       const updatedArr = calenderArr.map((item, index) =>
@@ -81,17 +83,17 @@ const Calendar = ({ itinerary, setActiveTab }) => {
     const updatedArr = calenderArr.filter((_, i) => i !== index);
     setCalenderArr(updatedArr);
   };
-// console.log("calender array --> ",calenderArr)
+  // console.log("calender array --> ",calenderArr)
   return (
     <>
       <div className="bg-white rounded p-3">
         <div>
           <p className="font-semibold text-base mb-2">Calendar</p>
         </div>
-        <div className="border p-4 rounded mb-2 overflow-scroll">
+        <div className="border p-4 rounded mb-5">
           <div className="sm:flex items-center md:mb-4 mb-2">
-            <label htmlFor="startDate" className="font-semibold w-32 text-para">
-              Start Date:
+            <label htmlFor="startDate" className="font-semibold w-36 text-para">
+              Start Date :
             </label>
             <input
               type="date"
@@ -103,8 +105,8 @@ const Calendar = ({ itinerary, setActiveTab }) => {
             />
           </div>
           <div className="sm:flex items-center md:mb-4 mb-2">
-            <label htmlFor="endDate" className="font-semibold w-32 text-para">
-              End Date:
+            <label htmlFor="endDate" className="font-semibold w-36 text-para">
+              End Date :
             </label>
             <input
               type="date"
@@ -118,15 +120,15 @@ const Calendar = ({ itinerary, setActiveTab }) => {
           <div className="sm:flex items-center mb-2">
             <div className="flex items-center justify-center gap-6">
               <div className="flex items-center mb-2">
-                <label htmlFor="price" className="font-semibold w-32 text-para">
-                  Price Hike %:
+                <label htmlFor="price" className="font-semibold w-36 text-para">
+                  Price Hike % :
                 </label>
                 <input
                   type="number"
                   id="price"
                   value={priceIncrease}
                   onChange={(e) => setPriceIncrease(e.target.value)}
-                  className="border w-full rounded-md h-8 ml-7 px-2 focus:border-primary outline-none text-para"
+                  className="border w-full rounded-md h-8 ml-9 px-2 focus:border-primary outline-none text-para"
                   placeholder="Enter Price"
                 />
               </div>
@@ -142,8 +144,8 @@ const Calendar = ({ itinerary, setActiveTab }) => {
             </div>
           </div>
           <div className="sm:flex items-center">
-            <label htmlFor="svg" className="font-semibold w-32 text-para">
-              SVG Icon:
+            <label htmlFor="svg" className="font-semibold w-36 text-para">
+              SVG Icon :
             </label>
             <select
               id="svg"
@@ -161,45 +163,59 @@ const Calendar = ({ itinerary, setActiveTab }) => {
           </div>
           <button
             onClick={handleAddData}
-            className="w-1/12 rounded py-2 mt-8 bg-black text-white"
+            className="w-1/12 rounded py-1.5 mt-8 bg-black text-white"
           >
             {editIndex !== null ? "Update" : "Add"}
           </button>
-        </div>
-        <div>
-         {calenderArr.length!==0&&<div className="grid grid-cols-5 bg-black my-4 rounded-sm">
-            <p className="text-white px-2 py-3">Start Date</p>
-            <p className="text-white px-2 py-3">End Date</p>
-            <p className="text-white px-2 py-3">Price Hike</p>
-            <p className="text-white px-2 py-3">SVG</p>
-            <p className="text-white px-2 py-3">Action</p>
-          </div>}
-          {calenderArr.map((item, i) => (
-            <div key={i} className="grid grid-cols-5 my-4">
-              <p className="px-2 py-3">{item.startDate}</p>
-              <p className="px-2 py-3">{item.endDate}</p>
-              <p className="px-2 py-3">{item.priceIncrease}</p>
-              <p className="px-2 py-3">{item.svg}</p>
-              <div className="flex gap-5 flex-wrap">
-                <button
-                  onClick={() => handleEdit(i)}
-                  className="bg-blue-400 px-4 py-1 rounded-sm text-white"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(i)}
-                  className="bg-red-500 px-4 py-1 rounded-sm text-white"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+        </div>       
+        <div >
+          {calenderArr.length !== 0 &&
+            <table className="w-full border-collapse border border-gray-300 text-center text-para">
+              <thead >
+                <tr className="border-b bg-black text-white">
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Start Date</th>
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">End Date</th>
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Price Hike</th>
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">SVG</th>
+                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Action</th>
+                </tr>
+              </thead>
+              <tbody className="bg-gray-100">
+                {calenderArr.map((item, i) => (
+                  <tr key={i} className="border-b">
+                    <td className="border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                      <p className=" font-medium">{item?.startDate}</p>
+                    </td>
+                    <td className="border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                      <p className=" font-medium">{item?.endDate}</p>
+                    </td>
+                    <td className="border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                      <p className=" font-medium">{item?.priceIncrease}</p>
+                    </td>
+                    <td className=" border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                    <p className="">{item?.svg}</p>
+                    </td>
+                    <td className="flex justify-center items-center gap-4 border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        className="font1 cursor-pointer hover:text-primary"
+                        onClick={() => handleEdit(i)}
+                      />
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="font1 cursor-pointer hover:text-primary"
+                        onClick={() => handleDelete(i)}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          }
         </div>
         <button
           onClick={handleSubmitNext}
-          className="w-full rounded py-2 bg-black text-white"
+          className="w-full rounded py-2 mt-4 bg-black text-white"
         >
           Save
         </button>

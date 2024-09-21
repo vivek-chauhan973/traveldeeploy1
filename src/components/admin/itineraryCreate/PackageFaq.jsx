@@ -144,15 +144,6 @@ export default function PackageFaq({ itinerary, setActiveTab, setFaqDot }) {
                 </div>
               </div>
               <div className="mt-5">
-                {/* <div className="w-full">
-                  <textarea
-                    className="rounded h-48 resize-none border px-3 py-2 w-full"
-                    placeholder="Enter Your Answer"
-                    name="information"
-                    value={itineraryDayWise.information}
-                    onChange={handleChange}
-                  ></textarea>
-                </div> */}
                 <div className="w-full">
                     <QuillNoSSRWrapper
                       className="rounded h-48"

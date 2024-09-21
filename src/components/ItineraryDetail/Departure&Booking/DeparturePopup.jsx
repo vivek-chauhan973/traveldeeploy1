@@ -59,7 +59,7 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
         <div className="pr-2 pt-1 flex justify-end items-center mt-1">
           <FontAwesomeIcon
             icon={faXmark}
-            className="h-7 w-7  hover:bg-gray-100  rounded-full cursor-pointer p-1.5"
+            className="h-5 w-5  hover:bg-gray-100  rounded-full cursor-pointer p-1"
             onClick={handlePopupClose}
           />
         </div>
@@ -95,10 +95,14 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
           </div>
           <div className="flex justify-center mt-4 mb-5">
             <button
-              onClick={handleSubmit}
-              className="  bg-yellow-300 hover:bg-yellow-600 text-black font-normal py-2 px-4 rounded-md"
+              onClick={handleSubmit}          
+              className={`${ handleCity
+                ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
+                : "bg-gradient-to-r from-orange-300 to-red-300"
+              } text-black font-normal py-2 px-4 rounded-md cursor-not-allowed`}
+              disabled={!handleCity}
             >
-              {handleCity ? "Proceed" : "Select Departure"}
+              {handleCity ? " Proceed " : "Select Departure"}
             </button>
           </div>
         </div>
