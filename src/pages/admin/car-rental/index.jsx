@@ -288,15 +288,18 @@ export default function CarPackage() {
                       <option className="" value="">
                         Choose a car
                       </option>
-                      {carsList?.data?.map((car, i) => (
+                      {carsList?.data?.map((car, i) =>{
+
+                        console.log("car is iterable ---> ",car);
+                        return (
                         <option
                           className=""
                           key={i}
                           value={JSON.stringify(car)}
                         >
-                          {car.name}
+                          {car.vehicleType}
                         </option>
-                      ))}
+                      )})}
                     </select>
                   </div>
                   <div className="flex gap-2 items-center">

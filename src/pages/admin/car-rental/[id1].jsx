@@ -90,7 +90,9 @@ export default function CarPackage() {
   };
 // console.log("data",data)
   useEffect(()=>{
-    fetchPackageDataById(id1).then(res=>setdata(res?.data))
+    if(id1){
+      fetchPackageDataById(id1).then(res=>{setdata(res?.data);console.log("fetch data is here -----> ",res?.data)})
+    }
   },[id1,handleUpdate])
   useEffect(() => {
     const fetchCountry = async () => {
@@ -136,6 +138,7 @@ export default function CarPackage() {
     fetchStates(data?.[0]?.location?.state?.country?._id).then(res=>setStates(res||[]))
     fetchCities(data?.[0]?.location?.state?._id).then(res=>setCities(res||[]))
   },[data,handleUpdate])
+
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }],
@@ -228,11 +231,9 @@ export default function CarPackage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // if (!validateForm()) {
     //     return;
     // }
-
     const newPackage = {
       packageId,
       title,
@@ -316,7 +317,7 @@ useEffect(()=>{
                       onChange={(e) => {setCarImageSetWithOnchange(true);setSelectedCar(e.target.value)} }
                       defaultValue={data?.[0]?.id?._id}
                     >
-                      <option className="" value="">
+                      <option disabled>
                        {data?data?.[0]?.id?.name:" Choose a car"}
                       </option>
                       {carsList?.data?.map((car, i) => (
@@ -325,7 +326,7 @@ useEffect(()=>{
                           key={i}
                           value={JSON.stringify(car)}
                         >
-                          {car.name}
+                          {car.vehicleType}
                         </option>
                       ))}
                     </select>

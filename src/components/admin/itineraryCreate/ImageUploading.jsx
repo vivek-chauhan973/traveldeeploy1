@@ -17,7 +17,7 @@ export default function ImageUploading({ itinerary, setImageDot }) {
 
   
   // Function to fetch existing images
-  // console.log("files lengths :: :: ",files.length)
+  
   const fetchImages = useCallback(async () => {
     try {
       const res = await fetch(`/api/package/image-upload/${itinerary?._id}`);
@@ -25,8 +25,6 @@ export default function ImageUploading({ itinerary, setImageDot }) {
       const data = await res.json();
       if (data.data.length > 0) {
         const images = data.data;
-       
-        // console.log("data is here ::: ",images)
         setSelectedImageIds(images.map((image) => image._id));
         setTitles(images.map((image) => image.title));
         setAlts(images.map((image) => image.alt));
@@ -39,12 +37,10 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     }
   }, [itinerary]);
 
-  //fetch images
-  async function fetchImage() {
+  const fetchImage=async()=> {
     try {
       const res = await fetch("/api/icon/icon1");
       const data = await res.json();
-      // console.log("images data is here of itineary ----> ",data);
       setImageData(data?.data || []);
     } catch (error) {
       console.error("Error fetching image:", error);
@@ -70,32 +66,59 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     fetchImages();
   }, [itinerary, fetchImages]);
 
-  // Function to handle file input change
-  const handleChange = (e, index) => {
-    const newFiles = [...files];
-    newFiles[index] = e.target.files[0];
-    setFiles(newFiles);
-    const newPreviews = [...previews];
-    const newPreviews1 = [...previews1];
-    newPreviews[index] = URL.createObjectURL(e.target.files[0]);
-    newPreviews1[index] = URL.createObjectURL(e.target.files[0]);
-    setPreviews1(newPreviews1);
-    setPreviews(newPreviews);
-    setHasChanges(true);
-  };
-  // console.log("images data is here of itineary ----> ",files);
+  //handle Image size resultion 
 
-  // Function to handle title change
+  const validateImageResolution = (file) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        const { width, height } = img;
+        console.log("with--> ",width);
+        console.log("height----> ",height);
+        if (width == 50 && height == 50) {
+          resolve();
+        } else {
+          reject(new Error('Image resolution must be at least 1920x1080'));
+        }
+      };
+      img.onerror = () => reject(new Error('Invalid image file'));
+    });
+  };
+
+
+  // Function to handle file input change
+
+  const handleChange = async(e, index) => {
+    const newFiles = [...files];
+    const file=e.target.files[0]
+    newFiles[index]=file ;
+    if (file) {
+      try {
+        await validateImageResolution(file);
+        setErrorMessage(''); 
+        setFiles(newFiles);
+        const newPreviews = [...previews];
+        const newPreviews1 = [...previews1];
+        newPreviews[index] = URL.createObjectURL(e.target.files[0]);
+        newPreviews1[index] = URL.createObjectURL(e.target.files[0]);
+        setPreviews1(newPreviews1);
+        setPreviews(newPreviews);
+        setHasChanges(true);// Clear error message if validation passes
+        // Proceed with file upload
+      } catch (error) {
+        setErrorMessage(error.message);
+        alert("size must be within provided resolution")// Show error message if validation fails
+      }
+    }
+  
+  };
   const handleTitleChange = (e, index) => {
     const newTitles = [...titles];
     newTitles[index] = e.target.value;
     setTitles(newTitles);
     setHasChanges(true);
   };
-
-  // console.log("Images Data is here ",imageData);
-
-  // Function to handle alt text change
   const handleAltChange = (e, index) => {
     const newAlts = [...alts];
     newAlts[index] = e.target.value;
@@ -116,7 +139,6 @@ export default function ImageUploading({ itinerary, setImageDot }) {
       alert("Please select at least 3 files to upload.");
       return;
     }
-    //  setPreviews(previews1);
     const formData = new FormData();
     files.forEach((file, index) => {
       if (file) {
@@ -158,7 +180,6 @@ export default function ImageUploading({ itinerary, setImageDot }) {
 
   // Function to add new image section
   const addNewImageSection = () => {
-    // console.log("hi bro kaise ho !!!!!!!!!!!!!!!!!!!!!!! ")
     if (files.length < 4) {
       setFiles([...files, null]);
       setPreviews([...previews, null]);
@@ -169,25 +190,17 @@ export default function ImageUploading({ itinerary, setImageDot }) {
       alert("Maximum 4 images can be uploaded.");
     }
   };
-
   const handleChangeIcon = (item) => {
     const obj = { name: item?.title, icon: item?.path };
-    // Check if the icon is already selected
     const exists = selectedIcons.find((icon) => icon.name === obj.name);
-
     let newIcons;
     if (exists) {
-      // If it's already selected, remove it
       newIcons = selectedIcons.filter((icon) => icon.name !== obj.name);
     } else {
-      // Otherwise, add the new icon
       newIcons = [...selectedIcons, obj];
     }
-
-    // Update the state with the new array of selected icons
     setSelectedIcons(newIcons);
   };
-
   const handleSaveIcon = async () => {
     try {
       const res = await fetch(`/api/package/icon/${itinerary?._id}`, {
@@ -197,11 +210,11 @@ export default function ImageUploading({ itinerary, setImageDot }) {
         },
         body: JSON.stringify(selectedIcons),
       });
+      alert("Icon succefully saved ");
     } catch (error) {
       console.log("something went wrong");
     }
   };
-
   return (
     <>
       <div className="grid xl:grid-cols-2 bg-white p-5 rounded-md">
@@ -305,7 +318,6 @@ export default function ImageUploading({ itinerary, setImageDot }) {
               </div>
             );
           })}
-
           <button
             onClick={handleSaveIcon}
             className="px-5 py-1 bg-navyblack text-white rounded-full xl:ml-5 "
