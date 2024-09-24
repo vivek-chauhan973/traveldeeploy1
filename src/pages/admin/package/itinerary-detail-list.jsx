@@ -4,25 +4,8 @@ import Pagination from "react-js-pagination";
 import Link from "next/link";
 import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
 import dynamic from "next/dynamic";
-
-// const IoIosSearch = dynamic(() => import('react-icons/io').then(mod => mod.IoIosSearch));
-const FaEdit = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaEdit)
-);
-const MdDeleteForever = dynamic(() =>
-  import("react-icons/md").then((mod) => mod.MdDeleteForever)
-);
-// const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuPackagePlus));
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCube,
-  faArrowRightLong,
-  faMagnifyingGlass,
-  faEdit,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-// const HiOutlineArrowNarrowRight = dynamic(() => import('react-icons/hi').then(mod => mod.HiOutlineArrowNarrowRight));
-
+import {faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
 
@@ -103,7 +86,7 @@ const YourComponent = () => {
                 <p className="text-[24px] text-black">Package List</p>
                 <FontAwesomeIcon
                   icon={faArrowRightLong}
-                  className=" text-teal-700 text-2xl"
+                  className=" text-teal-700 text-xl"
                 />
               </div>
               <label className="relative block">
