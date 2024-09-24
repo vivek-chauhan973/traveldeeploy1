@@ -1,19 +1,16 @@
-import dynamic from "next/dynamic";
-const MdOutlineAddCircle = dynamic(() =>
-  import("react-icons/md").then((mod) => mod.MdOutlineAddCircle)
-);
-const MdDeleteForever = dynamic(() =>
-  import("react-icons/md").then((mod) => mod.MdDeleteForever)
-);
-const LiaUserEditSolid = dynamic(() =>
-  import("react-icons/lia").then((mod) => mod.LiaUserEditSolid)
-);
-
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import dynamic from "next/dynamic";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCirclePlus,
+  faEdit,
+  faFloppyDisk,
+  faTrash,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 // Dynamic import for Quill.js
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -141,7 +138,7 @@ const PackageTerm = () => {
             <label className="pb-2 font-semibold">
               Package Terms and Condition
             </label>
-            <div className="flex items-center md:gap-5 gap-1">
+            <div className="flex items-center md:gap-3 gap-1">
               <input
                 className="border rounded-md h-8 px-2 grow focus:border-primary outline-none"
                 type="text"
@@ -154,10 +151,11 @@ const PackageTerm = () => {
                 }
                 placeholder="Enter Group Name"
               />
-              <button type="button" onClick={handleSave}>
-                <MdOutlineAddCircle
-                  size={35}
-                  className="cursor-pointer hover:text-primary"
+              <button type="button">
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  onClick={handleSave}
+                  className="text-xl hover:text-primary cursor-pointer"
                 />
               </button>
             </div>
@@ -171,30 +169,30 @@ const PackageTerm = () => {
                 <p className="capitalize leading-8">
                   {index + 1}. {group.groupName}
                 </p>
-                <div className="flex gap-2">
-                  {isEditing && editGroupId === group._id ? (
-                    <MdDeleteForever
-                      size={24}
-                      className="mt-1 opacity-50 cursor-not-allowed"
+                <div className="flex gap-3 md:pr-3">
+                  {isEditing && editGroupId === group._id ? (               
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      className="md:font1 text-para opacity-50 cursor-not-allowed"
                     />
-                  ) : (
-                    <MdDeleteForever
+                  ) : (                 
+                    <FontAwesomeIcon
+                      icon={faTrash}
                       onClick={() => toggleModal(group._id)}
-                      size={24}
-                      className="mt-1 hover:text-red-500 cursor-pointer"
+                      className="md:font1 text-para hover:text-primary cursor-pointer"
                     />
                   )}
-                  <LiaUserEditSolid
-                    onClick={() => handleEdit(group._id)}
-                    size={24}
-                    className={`mt-1 ${
-                      isEditing
-                        ? editGroupId === group._id
-                          ? "text-gray-500 cursor-not-allowed"
-                          : "hover:text-red-500 cursor-pointer"
-                        : ""
-                    }`}
-                  />
+                  <FontAwesomeIcon
+                      icon={faEdit}
+                      onClick={() => handleEdit(group._id)}
+                      className={`md:font1 text-para ${
+                        isEditing
+                          ? editGroupId === group._id
+                            ? "text-gray-500 cursor-not-allowed"
+                            : "hover:text-primary cursor-pointer"
+                          : ""
+                      }`}
+                    />
                 </div>
               </div>
             ))}

@@ -709,7 +709,8 @@
 // }
 
 import React, { useState, useEffect } from "react";
-import { DeleteIcon, EditIcon } from "@/components/icons/index";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import DeletePop from "../iternaryPopup/DeletePop";
 
 export default function FlightBookingForm({
@@ -971,7 +972,7 @@ export default function FlightBookingForm({
               </div>
               <div className="mt-3 flex gap-3 flex-col">
                 <div className="md:flex items-center gap-4">
-                  <div className="font-medium">Flight No. :</div>
+                  <div className="font-medium">Flight No :</div>
                   <div>
                     <input
                       type="text"
@@ -1009,7 +1010,7 @@ export default function FlightBookingForm({
               <div className="md:flex items-center gap-3">
                 <button
                   type="submit"
-                  className="mt-4 md:w-auto w-full rounded px-4 py-2 bg-blue-500 text-white"
+                  className="mt-4 md:w-auto w-full rounded px-4 py-2 bg-navyblack text-white"
                 >
                   {editingIndex !== null ? "Update Booking" : "Add Booking"}
                 </button>
@@ -1028,16 +1029,24 @@ export default function FlightBookingForm({
               {flightBookingList.map((booking, index) => (
                 <li key={index} className="p-3 flex justify-between">
                   <div>
-                    <p className="text-para font-medium">From: {booking.start.to}</p>
-                    <p className="text-para font-medium">To: {booking.end.to}</p>
+                    <p className="md:text-para text-sm">
+                      To : <span className="font-semibold">{booking.start.to}</span>
+                    </p>
+                    <p className="md:text-para text-sm">
+                      From : <span className="font-semibold">{booking.end.to}</span>
+                    </p>
                   </div>
                   <div className="flex justify-center items-center gap-3">
-                    <button onClick={() => editFlightBooking(index)}>
-                      <EditIcon size={20}/>
-                    </button>
-                    <button onClick={() => setDeletePopu(true)}>
-                      <DeleteIcon size={16}/>
-                    </button>
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      onClick={() => editFlightBooking(index)}
+                      className="md:font1 hover:text-primary cursor-pointer"
+                    />
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => setDeletePopu(true)}
+                      className=" md:font1 hover:text-primary cursor-pointer"
+                    />
                   </div>
                 </li>
               ))}

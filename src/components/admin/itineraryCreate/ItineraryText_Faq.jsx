@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import "../../../app/globals.css";
-import dynamic from 'next/dynamic';
-
-// Dynamically import icons
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
-
+import dynamic from "next/dynamic";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import DeletePop from "../iternaryPopup/DeletePop";
 
@@ -15,12 +12,15 @@ const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   loading: () => <p>Loading...</p>,
 });
 
-export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryDot }) {
-
+export default function ItineraryText_Faq({
+  setActiveTab,
+  itinerary,
+  setItenaryDot,
+}) {
   const [itineraryText, setItineraryText] = useState(
     itinerary?.dayWiseInformation || " "
   );
-  const [deletePopup,setDeletePopu]=useState(false);
+  const [deletePopup, setDeletePopu] = useState(false);
   const [itineraryValidate, setItineraryValidate] = useState(null);
   const [editorHtml, setEditorHtml] = useState("");
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] =
@@ -60,18 +60,16 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
       ...prevState,
       information: html,
     }));
-   
   };
 
   useEffect(() => {
     if (itinerary) {
       setItineraryText(itinerary.dayWiseInformation || "");
       setItineraryDayWiseDataArray(itinerary.days || []);
-  
-  if( itinerary?.dayWiseInformation)
-  {
-    setItenaryDot(true);
-  }
+
+      if (itinerary?.dayWiseInformation) {
+        setItenaryDot(true);
+      }
     }
   }, [itinerary]);
 
@@ -94,7 +92,10 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
       setItineraryDayWiseDataArray(updatedArray);
       setEditingIndex(null);
     } else {
-      setItineraryDayWiseDataArray((prev) => [...(prev||[]), itineraryDayWise]);
+      setItineraryDayWiseDataArray((prev) => [
+        ...(prev || []),
+        itineraryDayWise,
+      ]);
     }
     setItineraryDayWise({ title: "", information: "" });
     setEditorHtml("");
@@ -120,16 +121,20 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
       return;
     }
     try {
-      const res = await fetch('/api/package/' + (itinerary ? `day-wise/${itinerary?._id}` : 'add-package'), {      
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          days: itineraryDayWiseDataArray,
-          information: itineraryText,
-        }),
-      });
+      const res = await fetch(
+        "/api/package/" +
+          (itinerary ? `day-wise/${itinerary?._id}` : "add-package"),
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            days: itineraryDayWiseDataArray,
+            information: itineraryText,
+          }),
+        }
+      );
       if (res.ok) {
         setActiveTab("Tab5");
         setItenaryDot(true);
@@ -225,10 +230,10 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                             </p>
                           </div>
                           <div className="flex gap-2">
-                            <FaEdit
+                            <FontAwesomeIcon
+                              icon={faEdit}
                               onClick={() => editItem(index)}
-                              size={16}
-                              className="mt-1 hover:text-primary cursor-pointer"
+                              className="font1 hover:text-primary cursor-pointer"
                             />
                             {editingIndex !== index && deletePopup ? (
                               <DeletePop
@@ -237,10 +242,10 @@ export default function ItineraryText_Faq({ setActiveTab, itinerary, setItenaryD
                                 handleRemoveHighlight={removeItem}
                               />
                             ) : (
-                              <MdDeleteForever
+                              <FontAwesomeIcon
+                                icon={faTrash}
                                 onClick={() => setDeletePopu(true)}
-                                size={16}
-                                className="mt-1 hover:text-red-500 cursor-pointer"
+                                className="font1 hover:text-primary cursor-pointer"
                               />
                             )}
                           </div>

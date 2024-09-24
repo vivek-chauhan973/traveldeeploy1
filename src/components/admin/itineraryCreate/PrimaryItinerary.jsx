@@ -384,7 +384,7 @@ const [generateNum,setGenerateNum]=useState(1);
                                         ))}
                                     </select>)}
                                     {(!itinerary && countries) && (<select id="packageLocation" className=' md:w-[130px] w-full md:ml-4 pl-2 rounded-md outline-none border-black border h-7 text-para' onChange={(e) => { handleSelectCountry1(e.target.value); setSelesctedCountry(e.target.value) }}>
-                                        <option value="">select country</option>
+                                        <option value="">Select country</option>
                                         {countries?.map(country => (
                                             <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
                                         ))}

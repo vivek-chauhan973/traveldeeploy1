@@ -46,7 +46,7 @@ const ItineraryTourDetails = () => {
                                 <p className='text-sm font-semibold text-graytext'>Departure & Arrival</p>
                             </div>
 
-                            {addPackage?.flights?.flights?.map((item, i) => <div key={i} className='flex'>
+                            {addPackage?.flights?.flights?.map((item, i) => <div key={i} className='flex mb-3 mt-3'>
                                 <div className='grow'>
                                     <p className='text-base font-semibold text-graytext'>{item?.start?.to}</p>
                                     <p className='text-sm  '>{item?.start?.time}</p>

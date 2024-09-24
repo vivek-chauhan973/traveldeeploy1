@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../../app/globals.css";
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
-import {
-  DeleteIcon,
-  AddCircleIcon,
-  EditIcon,
-  SaveIcon,
-  CancelIcon
-} from "@/components/icons/index"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faCirclePlus, faFloppyDisk, faSave } from "@fortawesome/free-solid-svg-icons";
 

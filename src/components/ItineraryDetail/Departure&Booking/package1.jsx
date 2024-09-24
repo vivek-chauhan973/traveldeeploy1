@@ -48,15 +48,20 @@ const FixedDeparturePopup = dynamic(() =>
 );
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-import { faTwitter, faFacebook, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import {
+  faTwitter,
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from "@/components/Faq/Faq1";
 const getAllPackags = async () => {
-  return await (await fetch("/api/package/get-packages")).json()
-}
+  return await (await fetch("/api/package/get-packages")).json();
+};
 
 export default function Package1() {
   const {
@@ -77,9 +82,7 @@ export default function Package1() {
     setShowPopup,
     showPopup,
     submitButtonOfPricingCalculation,
-
   } = useAppContext();
-
 
   const [images, setImages] = useState(null);
   const [allPackages, setAllPackages] = useState([]);
@@ -111,35 +114,38 @@ export default function Package1() {
     }
   }, [closeBtn]);
   useEffect(() => {
-    getAllPackags().then(res => setAllPackages(res?.packages || []))
-  }, [])
+    getAllPackags().then((res) => setAllPackages(res?.packages || []));
+  }, []);
   const handleClickPopup = () => {
     if (closeBtn) {
       setShowPopup(true);
     }
     if (!closeBtn) {
-      setShowPopup1(true)
+      setShowPopup1(true);
     }
-
-  }
+  };
 
   useEffect(() => {
+    const dataPackage = allPackages?.filter(
+      (item) => item?.customId === addPackage?.highlightedPackage
+    );
 
-    const dataPackage = allPackages?.filter(item => item?.customId === addPackage?.highlightedPackage);
-
-    setHighLightedPackage1(dataPackage)
-  }, [allPackages, addPackage])
+    setHighLightedPackage1(dataPackage);
+  }, [allPackages, addPackage]);
 
   // console.log("highlitedPackages1------> ", highlightedPackage1?.[0]);
 
   const handleSendItinerary = () => {
-    const whatsAppUrl =
-      `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4N+and+5D+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
-
+    const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
     window.location.href = whatsAppUrl;
   };
   const handleEmailRedirect = () => {
-    window.location.href = 'mailto:?subject=Your Itinerary&body=Here is your itinerary...';
+    // window.location.href = 'mailto:?subject=Your Itinerary&body=Here is your itinerary...';
+    const currentUrl = window.location.href; // Get the current URL
+    const subject = encodeURIComponent("I have Itinerary related some query?");
+    const body = encodeURIComponent(`Here is this itinerary: ${currentUrl}`);
+
+    window.location.href = `mailto:rakeshspm2323@gmail.com?subject=${subject}&body=${body}`;
   };
   const [showSharePopup, setShowSharePopup] = useState(false);
 
@@ -151,26 +157,40 @@ export default function Package1() {
   };
 
   const handleTwitter = () => {
-    window.open('https://twitter.com', '_blank')
-  }
+    const currentUrl = encodeURIComponent(window.location.href);
+    window.open(`https://twitter.com/intent/tweet?url=${currentUrl}`, "_blank");
+  };
   const handleInstagram = () => {
-    window.open('https://instagram.com', '_blank')
-  }
+    alert("Instagram does not support direct URL sharing.");
+  };
   const handleLinkedIn = () => {
-    window.open('https://linkedin.com', '_blank')
-  }
+    // const currentUrl = encodeURIComponent(window.location.href);
+    window.open(
+      // `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`,
+      `https://www.linkedin.com/sharing/share-offsite/?url=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
+      "_blank"
+    );
+  };
   const handleFacebook = () => {
-    window.open('https://facebook.com', '_blank')
-  }
+    const currentUrl = encodeURIComponent(window.location.href);
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+      "_blank"
+    );
+  };
   return (
     <div>
       {showPopup && <FixedDeparturePopup />}
-      {showPopup1 && <Addguest guestPrice={guestPrice}
-        inputData={inputData}
-        setInputData={setInputData}
-        setCloseBtn={setCloseBtn}
-        addPackage={addPackage}
-        setShowPopup1={setShowPopup1} />}
+      {showPopup1 && (
+        <Addguest
+          guestPrice={guestPrice}
+          inputData={inputData}
+          setInputData={setInputData}
+          setCloseBtn={setCloseBtn}
+          addPackage={addPackage}
+          setShowPopup1={setShowPopup1}
+        />
+      )}
       <div className="w-full ">
         <DesktopHeader />
       </div>
@@ -193,7 +213,8 @@ export default function Package1() {
         <div className="container-wrapper mb-4">
           <div className="mb-[20px] pt-[40px]">
             <h1 className="text-lg font-medium text-graytext">
-              Choose your departure city, dates, and add guests to secure your tour.
+              Choose your departure city, dates, and add guests to secure your
+              tour.
             </h1>
             <p className="italic  text-sm">
               Hurry, as seats fill up, prices rise! Book now!
@@ -222,8 +243,7 @@ export default function Package1() {
                   <ItineraryPricingCard />
                 )}
                 {addPackage?.prices?.departure1 === "fixedDeparture" && (
-                  <ItinaryFixedDepartureCard
-                  />
+                  <ItinaryFixedDepartureCard />
                 )}
               </div>
             </div>
@@ -357,53 +377,66 @@ export default function Package1() {
               </h2>
               <ol className="text-para ml-6 pt-3">
                 <li>
-                  <span className="font-semibold">Minimize Plastic Use : </span> Bring a reusable water bottle, shopping
-                  bag, and utensils to reduce the need for single-use plastics.
-                  Many destinations have water refill stations and eco-friendly
-                  stores.
+                  <span className="font-semibold">Minimize Plastic Use : </span>{" "}
+                  Bring a reusable water bottle, shopping bag, and utensils to
+                  reduce the need for single-use plastics. Many destinations
+                  have water refill stations and eco-friendly stores.
                 </li>
                 <li>
-                  <span className="font-semibold">Support Local and Sustainable Businesses : </span> Eat at local
-                  restaurants, buy souvenirs from local artisans, and choose
-                  tour operators that prioritize sustainable practices and
-                  support the local community.
+                  <span className="font-semibold">
+                    Support Local and Sustainable Businesses :{" "}
+                  </span>{" "}
+                  Eat at local restaurants, buy souvenirs from local artisans,
+                  and choose tour operators that prioritize sustainable
+                  practices and support the local community.
                 </li>
                 <li>
-                  <span className="font-semibold">Respect Wildlife and Natural Habitats : </span> Avoid disturbing
-                  wildlife or their natural habitats. Stick to designated paths
-                  and observe animals from a distance without feeding or
-                  touching them.
+                  <span className="font-semibold">
+                    Respect Wildlife and Natural Habitats :{" "}
+                  </span>{" "}
+                  Avoid disturbing wildlife or their natural habitats. Stick to
+                  designated paths and observe animals from a distance without
+                  feeding or touching them.
                 </li>
                 <li>
-                  <span className="font-semibold">Dispose of Waste Properly : </span> Follow local guidelines for
-                  recycling and waste disposal. If facilities aren&apos;t
-                  available, carry your waste with you until you can dispose of
-                  it responsibly.
+                  <span className="font-semibold">
+                    Dispose of Waste Properly :{" "}
+                  </span>{" "}
+                  Follow local guidelines for recycling and waste disposal. If
+                  facilities aren&apos;t available, carry your waste with you
+                  until you can dispose of it responsibly.
                 </li>
                 <li>
-                  <span className="font-semibold">Educate Yourself and Others : </span> Learn about the local
-                  environment, culture, and customs. Respect local practices and
-                  traditions, and share your knowledge about responsible travel
-                  with others.
+                  <span className="font-semibold">
+                    Educate Yourself and Others :{" "}
+                  </span>{" "}
+                  Learn about the local environment, culture, and customs.
+                  Respect local practices and traditions, and share your
+                  knowledge about responsible travel with others.
                 </li>
                 <li>
-                  <span className="font-semibold">Choose Sustainable Activities : </span> Engage in eco-friendly
-                  activities such as hiking, snorkeling, or visiting national
-                  parks. Avoid activities that exploit animals or damage the
-                  environment.
+                  <span className="font-semibold">
+                    Choose Sustainable Activities :{" "}
+                  </span>{" "}
+                  Engage in eco-friendly activities such as hiking, snorkeling,
+                  or visiting national parks. Avoid activities that exploit
+                  animals or damage the environment.
                 </li>
                 <li>
-                  <span className="font-semibold">Leave No Trace : </span> Follow the principle of &quot;Leave No
-                  Trace,&quot; which means leaving natural areas as you found
-                  them. Pack out all trash, avoid picking plants, and refrain
-                  from carving or writing on rocks or trees.
+                  <span className="font-semibold">Leave No Trace : </span>{" "}
+                  Follow the principle of &quot;Leave No Trace,&quot; which
+                  means leaving natural areas as you found them. Pack out all
+                  trash, avoid picking plants, and refrain from carving or
+                  writing on rocks or trees.
                 </li>
                 <li>
-                  <span className="font-semibold">Plant Trees Whenever Possible : </span> Participate in local
-                  tree-planting initiatives or plant trees in your own
-                  community. Trees absorb carbon dioxide, provide oxygen, and
-                  help support biodiversity, making them vital for a healthy
-                  environment.
+                  <span className="font-semibold">
+                    Plant Trees Whenever Possible :{" "}
+                  </span>{" "}
+                  Participate in local tree-planting initiatives or plant trees
+                  in your own community. Trees absorb carbon dioxide, provide
+                  oxygen, and help support biodiversity, making them vital for a
+                  healthy environment.
                 </li>
               </ol>
             </div>
@@ -425,7 +458,12 @@ export default function Package1() {
                       <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
                     </svg>
                   </span>
-                  <p onClick={handleSendItinerary} className="text-[12px] cursor-pointer">Send Itinerary</p>
+                  <p
+                    onClick={handleSendItinerary}
+                    className="text-[12px] cursor-pointer"
+                  >
+                    Send Itinerary
+                  </p>
                 </div>
                 <div
                   className="border-l h-full items-center flex flex-col p-2 text-center"
@@ -438,7 +476,7 @@ export default function Package1() {
                   />
                   <p className="text-[12px] cursor-pointer">Share Itinerary</p>
                   {showSharePopup && (
-                    <div className="absolute top-12 left-32 z-[9999] bg-slate-50 shadow-md p-5 rounded-md flex justify-center items-center gap-5">
+                    <div className="absolute top-12 left-32 z-[9999] bg-slate-100 shadow-md p-7 rounded-md flex justify-center items-center gap-7">
                       <FontAwesomeIcon
                         icon={faTwitter}
                         className="font1 cursor-pointer hover:text-primary"
@@ -464,13 +502,24 @@ export default function Package1() {
                 </div>
 
                 <div className="border-l h-full items-center flex flex-col p-2 text-center">
-                  <FontAwesomeIcon icon={faEnvelope} className="font1 cursor-pointer hover:text-primary" onClick={handleEmailRedirect} />
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="font1 cursor-pointer hover:text-primary"
+                    onClick={handleEmailRedirect}
+                  />
 
-                  <p className="text-[12px] cursor-pointer" onClick={handleEmailRedirect}>Email Itinerary</p>
+                  <p
+                    className="text-[12px] cursor-pointer"
+                    onClick={handleEmailRedirect}
+                  >
+                    Email Itinerary
+                  </p>
                 </div>
               </div>
               {/* card is here */}
-              <ItinerarySideCard highlightedPackage1={highlightedPackage1?.[0]} />
+              <ItinerarySideCard
+                highlightedPackage1={highlightedPackage1?.[0]}
+              />
             </div>
           </div>
         </div>
@@ -489,10 +538,13 @@ export default function Package1() {
         <div className="my-7 md:p-0 px-4">
           <div className="text-center mb-4">
             <p className="md:text-[22px] text-[20px] mb-2 capitalize font-semibold">
-              Frequently Asked Questions (FAQs) <span className="lowercase">for</span> {addPackage?.name}{" Tour Package"}
+              Frequently Asked Questions (FAQs){" "}
+              <span className="lowercase">for</span> {addPackage?.name}
+              {" Tour Package"}
             </p>
             <p className="text-para md:text-base">
-              We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
+              We help you prepare for your trip and ensure an effortless and
+              enjoyable travel experience.
             </p>
           </div>
           {/* <Faq1 data={addPackage?.faqs?.days} /> */}
@@ -516,8 +568,9 @@ export default function Package1() {
                 best deal price
               </p>
               <div
-                className={`${addPackage?.prices?.diskHike < 0 ? "flex" : "hidden"
-                  } gap-1 items-end`}
+                className={`${
+                  addPackage?.prices?.diskHike < 0 ? "flex" : "hidden"
+                } gap-1 items-end`}
               >
                 <p className="text-sm line-through">
                   ₹{addPackage?.prices?.withoutDiscount}
@@ -533,8 +586,8 @@ export default function Package1() {
                     ₹
                     {Math.floor(
                       (submitButtonOfPricingCalculation && guestPrice / 2) ||
-                      price2 ||
-                      addPackage?.price
+                        price2 ||
+                        addPackage?.price
                     ).toLocaleString()}
                   </span>
                 )}
@@ -551,15 +604,18 @@ export default function Package1() {
             </div>
 
             <div className="flex-col align-middle my-auto pl-2 gap-2 py-2">
-
               {addPackage?.prices?.addguest === "addGuest" && (
-
                 <p
-                  onClick={fixedDepartureButtonEnaibleAndDisable ? handleClickPopup : null}
-                  className={` ${fixedDepartureButtonEnaibleAndDisable
-                    ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
-                    : "bg-gradient-to-r from-orange-200 to-red-200"
-                    } px-5 py-2 rounded-md text-white text-center text-para`}
+                  onClick={
+                    fixedDepartureButtonEnaibleAndDisable
+                      ? handleClickPopup
+                      : null
+                  }
+                  className={` ${
+                    fixedDepartureButtonEnaibleAndDisable
+                      ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
+                      : "bg-gradient-to-r from-orange-200 to-red-200"
+                  } px-5 py-2 rounded-md text-white text-center text-para`}
                 >
                   <span className="disabled:opacity-75">{buttonGuest}</span>
                 </p>
@@ -567,18 +623,16 @@ export default function Package1() {
               {addPackage?.prices?.departure1 === "fixedDeparture" && (
                 <button
                   onClick={handleSubmit}
-                  className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                    ? "bg-gradient-to-r from-orange-500 to-red-500"
-                    : " bg-gradient-to-r from-orange-200 to-red-200"
-                    }  text-center text-white text-para`}
+                  className={`border px-5 py-1 rounded-md ${
+                    fixedDepartureButtonEnaibleAndDisable
+                      ? "bg-gradient-to-r from-orange-500 to-red-500"
+                      : " bg-gradient-to-r from-orange-200 to-red-200"
+                  }  text-center text-white text-para`}
                 >
                   Book Now
                 </button>
               )}
-              {showPopup && (
-                <FixedDeparturePopup
-                />
-              )}
+              {showPopup && <FixedDeparturePopup />}
               {
                 <CustomiseTour>
                   <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">
