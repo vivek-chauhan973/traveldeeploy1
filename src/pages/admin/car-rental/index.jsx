@@ -1,529 +1,435 @@
-import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import "../../../app/globals.css";
-import Layout from "../../../components/admin/Layout";
-import { MdOutlineAddCircle, MdDeleteForever } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
-import { BiSolidCarMechanic } from "react-icons/bi";
+import Layout from "@/components/admin/Layout"
+import { useEffect, useState } from "react";
+import dynamic from 'next/dynamic';
+
+const MdOutlineAddCircle = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineAddCircle));
+const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
+const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
+const IoIosSave = dynamic(() => import('react-icons/io').then(mod => mod.IoIosSave));
+const MdCancel = dynamic(() => import('react-icons/md').then(mod => mod.MdCancel));
+import ItineraryTour from "@/components/admin/itineraryMaster/ItineraryTour";
+import { LuPackagePlus } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import "react-quill/dist/quill.snow.css";
-import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-import Image from "next/image";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Gst from "@/components/admin/dashboard/Gst";
+import TermsAndCondition from "@/components/admin/itineraryMaster/TermsAndCondition";
 
-// Dynamic import for Quill.js as it needs to be loaded on the client-side
-const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
-const fetchCountries = async () => {
-  try {
-    const res = await fetch("/api/location/carindex?type=car-country", { method: "GET" });
-    const data = await res.json();
-    return data.result;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-};
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCube, faArrowRightLong, faEdit, faCirclePlus, faTrash, faCancel, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const fetchStates = async (countryId) => {
-  try {
-    const res = await fetch("/api/location/carindex?type=car-state&countryId=" + countryId, {
-      method: "GET",
-    });
-    const data = await res.json();
-    return data.result;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-};
 
-const fetchCities = async (stateId) => {
-  try {
-    const res = await fetch("/api/location/carindex?type=car-city&stateId=" + stateId, {
-      method: "GET",
-    });
-    const data = await res.json();
-    return data.result;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-};
+export default function Category() {
 
-export default function CarPackage() {
-  // State variables for the Quill editors and validation
-  const [countries, setCountries] = useState();
-  const [states, setStates] = useState();
-  const [cities, setCities] = useState();
-  const [car, setCar] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState();
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [descriptionValidate, setDescriptionValidate] = useState("");
-  const [inclusion, setInclusion] = useState("");
-  const [inclusionValidate, setInclusionValidate] = useState("");
-  const [exclusion, setExclusion] = useState("");
-  const [exclusionValidate, setExclusionValidate] = useState("");
-  const [readBeforeBook, setReadBeforeBook] = useState("");
-  const [readBeforeBookValidate, setReadBeforeBookValidate] = useState("");
-  const [carsList, setCarsList] = useState([]);
-  const [isSelectedCar, setSelectedCar] = useState("");
-  const [cityPopup, setCityPopup] = useState(false);
-  const [locationValidate, setLocationValidate] = useState();
-  var packageId = isSelectedCar ? JSON.parse(isSelectedCar)._id : null;
-  const [mapCode, setMapCode] = useState(null);
-  useEffect(() => {
-    const fetchCountry = async () => {
-      const fetchedCountries = await fetchCountries();
-      setCountries(fetchedCountries);
+    const [isBadge, setBadge] = useState({
+        badge: ""
+    })
+
+    // badges List Data
+    const [badgesListData, setBadgesListData] = useState()
+
+    // console.log("badage list data show is here", badgesListData)
+
+    const isHandleBadge = (e) => {
+        const { name, value } = e.target
+
+        setBadge((prev) => {
+            return { ...prev, [name]: value }
+        })
+    }
+
+    const isSubmitBadge = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await fetch('/api/package-setting/add-badge', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(isBadge),
+            });
+
+            fetchBadges()
+
+
+        } catch (error) {
+            console.error('Error during form submission:', error);
+        }
+    }
+
+    // get method
+    const fetchBadges = async () => {
+        try {
+            const badgeList = await fetch('/api/package-setting/get-badges')
+            const badges = await badgeList.json()
+            // console.log("badeges is here", badges)
+            setBadgesListData(badges.PackageBadges.reverse())
+
+        } catch (err) {
+            console.log(err);
+            return [];
+        }
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedBadges = await fetchBadges();
+
+        };
+        fetchData()
+    }, [])
+
+
+
+    // category Section making
+    const [isCategory, setCategory] = useState({
+        category: ""
+    })
+
+    const [categoryListData, setcategoryListData] = useState();
+
+    const isHandleCategory = (e) => {
+        const { name, value } = e.target
+        setCategory((prev) => {
+            return { ...prev, [name]: value }
+        })
+        // console.log("my category show here", isCategory)
+    }
+
+    const isSubmitCategory = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await fetch('/api/package-setting/category/add-category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(isCategory),
+            });
+            fetchCategories()
+
+        } catch (error) {
+            console.error('Error during form submission:', error);
+        }
+    }
+
+
+
+    const fetchCategories = async () => {
+        try {
+            const categoriesList = await fetch('/api/package-setting/category/get-categories')
+            const categories = await categoriesList.json()
+            // console.log("categories is here", categories)
+            setcategoryListData(categories.data.reverse())
+
+
+        } catch (err) {
+            console.log(err);
+            return [];
+        }
+    }
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedCategories = await fetchCategories();
+
+        };
+        fetchData()
+    }, [])
+
+    const [editBadgeId, setEditBadgeId] = useState(null)
+    const [editBadgeValue, setEditBadgeValue] = useState('')
+
+    const toggleEditBadge = (badage_id) => {
+        setEditBadgeId(badage_id == editBadgeId ? null : badage_id)
+        setEditBadgeValue('')
+        // console.log("badge value show is here", editBadgeValue)
+    }
+
+    const saveEditBadge = async (badge_id) => {
+        try {
+            const response = await fetch('/api/package-setting/edit-badge', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ badge_id, badge: editBadgeValue }),
+            });
+
+            toggleEditBadge(badge_id)
+            const fetchedBadge = await fetchBadges();
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    fetchCountry();
-  }, []);
-  const handleSelectCountry = (value) => {
-    const fetchState = async () => {
-      const fetchedStates = await fetchStates(value);
-      setStates(fetchedStates);
+    const handleDeleteBadge = async (badgeId) => {
+        try {
+            // const userConfirmed = confirm('Are you sure?');
+
+            // if (!userConfirmed) {
+            //     return;
+            // }
+            const response = await fetch(`/api/package-setting/delete-badge`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ badgeId })
+            });
+            // console.log("badge id show for delete", badgeId)
+            if (response.ok) {
+                const fetchedBadge = await fetchBadges();
+
+            } else {
+                console.error('Failed to delete badge');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+        toast.success("Success Notification !", {
+            position: "top-center"
+        });
+    }
+
+    const handleDeleteCategory = async (categoryId) => {
+        try {
+            const userConfirmed = confirm('Are you sure?');
+
+            if (!userConfirmed) {
+                return;
+            }
+            const response = await fetch(`/api/package-setting/category/delete-category`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ categoryId })
+            });
+            if (response.ok) {
+                const fetchedCategories = await fetchCategories();
+            } else {
+                console.error('Failed to delete category');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+    const saveEditCategory = async (category_id) => {
+        try {
+            const response = await fetch('/api/package-setting/category/edit-category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ category_id, category: editCategoryValue }),
+            });
+            ("Value is show is here", category_id, editCategoryValue)
+            toggleEditCategory(category_id)
+            const fetchedCategories = await fetchCategories();
+            //   setcategoryListData(fetchedCategories);
+        } catch (error) {
+            console.log(error);
+        }
     };
-    fetchState();
-  };
-  const handleSelectState = (value) => {
-    const fetchCity = async () => {
-      const fetchedCities = await fetchCities(value);
-      setCities(fetchedCities);
-    };
-    fetchCity();
-  };
-  const handleLocation = (location) => {
-    setSelectedLocation(location);
-    if (!location) {
-      setLocationValidate("Location is required");
-    } else {
-      setLocationValidate("");
-    }
-  };
+    const [editCategoryValue, setEditCategoryValue] = useState('')
+    const [editCategoryId, seteditCategoryId] = useState(null)
 
-  const handleChange = (e) => {
-    setMapCode(e.target.value);
-    // console.log("new value :: ",e.target.value);
-  };
-  // console.log("new value :: ",mapCode);
-  // console.log("package id", packageId);
 
-  const [map, setMap] = useState("");
-  // console.log("Car List :::: ",carsList);
-
-  const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link"],
-    ],
-  };
-
-  const validateDescription = (value) => {
-    setDescription(value);
-    if (!value) {
-      setDescriptionValidate("Description is required");
-    } else {
-      setDescriptionValidate("");
-    }
-  };
-
-  const validateInclusion = (value) => {
-    setInclusion(value);
-    if (!value) {
-      setInclusionValidate("Inclusion is required");
-    } else {
-      setInclusionValidate("");
-    }
-  };
-
-  const validateExclusion = (value) => {
-    setExclusion(value);
-    if (!value) {
-      setExclusionValidate("Exclusion is required");
-    } else {
-      setExclusionValidate("");
-    }
-  };
-
-  const validateReadBeforeBook = (value) => {
-    setReadBeforeBook(value);
-    if (!value) {
-      setReadBeforeBookValidate("Read Before You Book is required");
-    } else {
-      setReadBeforeBookValidate("");
-    }
-  };
-
-  const validateForm = () => {
-    let valid = true;
-
-    if (!car) {
-      valid = false;
+    const toggleEditCategory = (category_id) => {
+        seteditCategoryId(category_id == editCategoryId ? null : category_id);
+        setEditCategoryValue('')
     }
 
-    if (!title) {
-      valid = false;
-    }
 
-    if (!price || isNaN(price) || parseFloat(price) <= 0) {
-      valid = false;
-    }
-
-    if (!description) {
-      setDescriptionValidate("Description is required");
-      valid = false;
-    }
-
-    if (!inclusion) {
-      setInclusionValidate("Inclusion is required");
-      valid = false;
-    }
-
-    if (!exclusion) {
-      setExclusionValidate("Exclusion is required");
-      valid = false;
-    }
-
-    if (!readBeforeBook) {
-      setReadBeforeBookValidate("Read Before You Book is required");
-      valid = false;
-    }
-
-    return valid;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // if (!validateForm()) {
-    //     return;
-    // }
-    // console.log("selected Location : ", selectedLocation);
-    const newPackage = {
-      packageId,
-      title,
-      price: parseFloat(price),
-      description,
-      inclusion,
-      exclusion,
-      readBeforeBook,
-      mapCode,
-      location: selectedLocation,
-    };
-    console.log("car Package data:::", newPackage);
-    await fetch("/api/cars/carpackages/carpackages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPackage),
-    });
-
-    setCar("");
-    setTitle("");
-    setPrice("");
-    setDescription("");
-    setInclusion("");
-    setExclusion("");
-    setReadBeforeBook("");
-    setMapCode("");
-  };
-
-  // Fetch API car list
-  useEffect(() => {
-    fetchCars();
-  }, []);
-
-  const fetchCars = async () => {
-    try {
-      const response = await fetch("/api/cars/carapi");
-      const data = await response.json();
-      setCarsList(data);
-    } catch (error) {
-      console.error("Error fetching cars:", error);
-    }
-  };
-
-  return (
-    <AppProvider>
-      <Layout>
-        <div>
-          <div className="flex items-center gap-5 text-primary pb-3">
-            <BiSolidCarMechanic size={28} className="font-semibold" />
-            <p className="text-[24px] text-black">Car Package</p>
-            <HiOutlineArrowNarrowRight size={24} className=" text-teal-700" />
-          </div>
-          <div className="mt-10">
-            <form onSubmit={handleSubmit}>
-              <div className="bg-white p-4 grid grid-cols-1 md:grid-cols-2 gap-5 items-center h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                <div className="flex flex-col gap-3">
-                  <div className="flex gap-2 items-center">
-                    <div className="w-36">
-                      <label
-                        htmlFor="cars"
-                        className="text-para font-semibold w-32"
-                      >
-                        Choose a car:
-                      </label>
-                    </div>
-                    <select
-                      name="cars"
-                      id="cars"
-                      className="border outline-[0.5px] flex justify-items-center"
-                      onChange={(e) => setSelectedCar(e.target.value)}
-                    >
-                      <option className="" value="">
-                        Choose a car
-                      </option>
-                      {carsList?.data?.map((car, i) =>{
-
-                        console.log("car is iterable ---> ",car);
-                        return (
-                        <option
-                          className=""
-                          key={i}
-                          value={JSON.stringify(car)}
-                        >
-                          {car.vehicleType}
-                        </option>
-                      )})}
-                    </select>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <div className="w-36">
-                      <label className="text-para font-semibold" htmlFor="">
-                        Package Title
-                      </label>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <input
-                      type="text"
-                      className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
-                      onChange={(e) => setTitle(e.target.value)}
-                      value={title}
-                    />
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <div className=" w-36">
-                      <label className="text-para font-semibold" htmlFor="">
-                        Car Price
-                      </label>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <input
-                      type="text"
-                      className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
-                      onChange={(e) => setPrice(e.target.value)}
-                      value={price}
-                    />
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <div className=" w-36">
-                      <label className="text-para font-semibold" htmlFor="">
-                        location :
-                      </label>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <div className="flex gap-2 items-center flex-wrap">
-                      {countries && (
-                        <select
-                          id="packageLocation"
-                          className=" w-[130px] ml-4 pl-2 rounded-md outline-none border-black border h-6 text-para"
-                          onChange={(e) => handleSelectCountry(e.target.value)}
-                        >
-                          <option value="">select Country</option>
-                          {countries?.map((country) => (
-                            <option
-                              key={country._id}
-                              className="border-none bg-slate-100 text-black"
-                              value={country._id}
-                            >
-                              {country.name}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-
-                      {states && (
-                        <select
-                          onChange={(e) => handleSelectState(e.target.value)}
-                          className="w-[130px] ml-4 px-2 rounded-md outline-none border-black border h-6 text-para"
-                        >
-                          <option value="">Select state</option>
-                          {states?.map((state) => (
-                            <option
-                              key={state._id}
-                              className="border-none bg-slate-100 text-black"
-                              value={state._id}
-                            >
-                              {state.name}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-
-                      {cities && (
-                        <select
-                          onChange={(e) => handleLocation(e.target.value)}
-                          id="packageLocation"
-                          className="w-[130px] ml-4 rounded-md outline-none border-black px-2 border h-6 text-para"
-                        >
-                          <option value="">Select city</option>
-                          {cities?.map((city) => (
-                            <option
-                              key={city._id}
-                              className="border-none bg-slate-100 text-black"
-                              value={city._id}
-                            >
-                              {city.name}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-slate-100 w-full h-full rounded-md flex justify-center">
-                  {isSelectedCar && (
-                    <Image
-                      src={JSON.parse(isSelectedCar)?.imageDetails[0].url}
-                      width={100}
-                      height={100}
-                      alt="Car Image"
-                    />
-                  )}
-                  {!isSelectedCar && (
-                    <p className="self-center text-[28px] font-semibold text-[#dad8d8]">
-                      Choose A Car
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                <p className="text-para font-semibold pb-1">Description</p>
-                <div className="bg-white">
-                  <QuillNoSSRWrapper
-                    className="rounded h-32"
-                    theme="snow"
-                    value={description}
-                    onChange={validateDescription}
-                    modules={modules}
-                  />
-                  <div>
-                    <span className="text-xs text-red-700 capitalize">
-                      {descriptionValidate}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 bg-white p-2  shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                <p className="text-para font-semibold pb-1">Google Map</p>
-                <div className="bg-white">
-                  <div className="grid grid-cols-2 gap-5 items-center">
+    return (
+        <>
+            <AppProvider>
+                <Layout>
                     <div>
-                      <textarea
-                        value={mapCode}
-                        onChange={handleChange}
-                        className="p-2 w-full h-80 resize-none rounded-md"
-                      ></textarea>
-                      <div className="flex justify-between px-3">
-                        <span className="text-xs">
-                          Confirm you Enter width=100% & height=100%
-                        </span>
-                      </div>
+                        <Gst />
                     </div>
                     <div>
-                      <p className="font-semibold text-xs">
-                        Google Map show is here
-                      </p>
-                      <div
-                        className="border-black border w-full h-72 rounded-md overflow-hidden"
-                        dangerouslySetInnerHTML={{ __html: mapCode }}
-                      ></div>
+                        <TermsAndCondition />
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mb-5 shadow-sm">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                    <p className="font-semibold text-para">Inclusion</p>
-                    <div className="bg-white">
-                      <QuillNoSSRWrapper
-                        className="rounded h-32"
-                        theme="snow"
-                        value={inclusion}
-                        onChange={validateInclusion}
-                        modules={modules}
-                      />
-                      <div>
-                        <span className="text-xs text-red-700 capitalize">
-                          {inclusionValidate}
-                        </span>
-                      </div>
+
+                    {/* <SmartTabel/> */}
+                    {/* <DynamicTable/> */}
+                    <div>
+                        <div className="flex items-center gap-5 text-primary py-5">
+                            <FontAwesomeIcon icon={faCube} className="text-2xl" />
+                            <p className="md:text-[28px] text-xl text-black">Package Master</p>
+                            <FontAwesomeIcon
+                                icon={faArrowRightLong}
+                                className=" text-teal-700 text-xl"
+                            />
+                        </div>
+                        <div className=" grid  grid-cols-1 md:grid-cols-2 gap-5 rounded">
+                            <div className='shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600'>
+                                <form onSubmit={isSubmitBadge} className='flex items-end justify-between gap-3'>
+                                    <div className='grow flex flex-col  '>
+                                        <label htmlFor="" className="mb-2 pl-2 text-para font-semibold">Badges</label>
+                                        <input
+                                            onChange={isHandleBadge}
+                                            className=' border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none'
+                                            type="text" name="badge"
+
+                                            placeholder="Enter Your Itinerary FAQ Details" />
+                                    </div>
+                                    <button type="submit">
+                                        <FontAwesomeIcon
+                                            icon={faCirclePlus}
+                                            className="text-xl hover:text-primary cursor-pointer mb-1"
+                                        />
+                                    </button>
+
+                                </form>
+                                {/* data is here show */}
+
+
+                                {/* trial code */}
+
+
+                                <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
+                                    <div>
+                                        {badgesListData?.map((item, index) => (
+                                            <div key={item._id} className="even:bg-slate-50">
+                                                <div className='flex justify-between  px-1'>
+                                                    <p className='capitalize truncate hover:text-clip flex gap-2 leading-8 text-[14px]'>
+                                                        <span>{index + 1} </span>
+                                                        {editBadgeId === item._id ? (
+                                                            <input
+                                                                className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
+                                                                defaultValue={item.badge}
+                                                                onChange={(e) => setEditBadgeValue(e.target.value)}
+                                                            />
+                                                        ) : item.badge}
+                                                    </p>
+                                                    <div className='flex gap-2 basis-1/3'>
+                                                        {editBadgeId === item._id ? (
+                                                            <span className="flex gap-2">
+                                                                <FontAwesomeIcon
+                                                                    icon={faXmark}
+                                                                    onClick={() => toggleEditBadge(item._id)}
+                                                                    className="mt-1 font1 hover:text-primary cursor-pointer"
+                                                                />
+                                                                {editBadgeValue &&
+                                                                    <FontAwesomeIcon
+                                                                        icon={faSave}
+                                                                        onClick={() => saveEditBadge(item._id)}
+                                                                        className="mt-1 hover:text-primary cursor-pointer"
+                                                                    />
+                                                                }
+                                                            </span>
+                                                        ) : (
+                                                            <FontAwesomeIcon
+                                                                icon={faEdit}
+                                                                onClick={() => toggleEditBadge(item._id)}
+                                                                className="mt-1 hover:text-primary cursor-pointer"
+                                                            />
+                                                        )}
+                                                        {!editBadgeValue &&
+                                                            <FontAwesomeIcon
+                                                                icon={faTrash}
+                                                                onClick={() => handleDeleteBadge(item._id)}
+                                                                className="mt-1 hover:text-primary cursor-pointer"
+                                                            />
+                                                        }
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            {/* category section */}
+                            <div className=' p-4 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600'>
+                                <form onSubmit={isSubmitCategory} className='flex items-end justify-between gap-3'>
+                                    <div className='grow flex flex-col  '>
+                                        <label htmlFor="" className="pb-2 font-semibold text-para">Category</label>
+                                        <input
+                                            onChange={isHandleCategory}
+                                            className=' border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none'
+                                            type="text" name="category"
+                                            placeholder="Enter Your Itinerary FAQ Details" />
+                                    </div>
+                                    <button type="submit">
+                                        <FontAwesomeIcon
+                                            icon={faCirclePlus}
+                                            className="text-xl hover:text-primary cursor-pointer mb-1"
+                                        />
+                                    </button>
+                                </form>
+                                {/* data is here show */}
+                                {/* <hr className='my-3' /> */}
+                                <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
+                                    <div>
+                                        {categoryListData?.map((item, index) => (
+                                            <div key={item._id} className="even:bg-slate-50">
+                                                <div className='flex justify-between  px-1'>
+                                                    <p className='capitalize flex gap-2 leading-8 text-[14px]'>
+                                                        <span>{index + 1} </span>
+                                                        {editCategoryId === item._id ? (
+                                                            <input
+                                                                className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
+                                                                defaultValue={item.category}
+                                                                onChange={(e) => setEditCategoryValue(e.target.value)}
+                                                            />
+                                                        ) : item.category}
+                                                    </p>
+                                                    <div className='flex gap-2 basis-1/3'>
+                                                        {editCategoryId === item._id ? (
+                                                            <span className="flex gap-2 px-2">
+                                                                <FontAwesomeIcon
+                                                                    icon={faXmark}
+                                                                    onClick={() => toggleEditCategory(item._id)}
+                                                                    className="mt-1 font1 hover:text-primary cursor-pointer"
+                                                                />
+                                                                {editCategoryValue &&
+                                                                    <FontAwesomeIcon
+                                                                        icon={faSave}
+                                                                        onClick={() => saveEditCategory(item._id)}
+                                                                        className="mt-1 hover:text-primary cursor-pointer"
+                                                                    />
+                                                                }
+
+                                                            </span>
+                                                        ) : (
+                                                            <FontAwesomeIcon
+                                                                icon={faEdit}
+                                                                onClick={() => toggleEditCategory(item._id)}
+                                                                className="mt-1 hover:text-primary cursor-pointer"
+                                                            />
+                                                        )}
+                                                        {!editCategoryValue &&
+                                                            <FontAwesomeIcon
+                                                                icon={faTrash}
+                                                                onClick={() => handleDeleteCategory(item._id)}
+                                                                className="mt-1 hover:text-primary cursor-pointer"
+                                                            />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-5">
+                            <ItineraryTour />
+                        </div>
                     </div>
-                  </div>
-                  <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                    <p className="font-semibold text-para">Exclusion</p>
-                    <div className="bg-white">
-                      <QuillNoSSRWrapper
-                        className="rounded h-32"
-                        theme="snow"
-                        value={exclusion}
-                        onChange={validateExclusion}
-                        modules={modules}
-                      />
-                      <div>
-                        <span className="text-xs text-red-700 capitalize">
-                          {exclusionValidate}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 bg-white p-2 h-[214px] shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] rounded-md border-l-2 border-teal-600">
-                <p className="text-para font-semibold">Read Before You Book</p>
-                <div className="bg-white">
-                  <QuillNoSSRWrapper
-                    className="rounded h-32"
-                    theme="snow"
-                    value={readBeforeBook}
-                    onChange={validateReadBeforeBook}
-                    modules={modules}
-                  />
-                  <div>
-                    <span className="text-xs text-red-700 capitalize">
-                      {readBeforeBookValidate}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="py-5">
-                <button
-                  type="submit"
-                  className="bg-black w-full rounded-md py-2 text-white"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </Layout>
-    </AppProvider>
-  );
+                </Layout>
+            </AppProvider>
+        </>
+    )
 }
