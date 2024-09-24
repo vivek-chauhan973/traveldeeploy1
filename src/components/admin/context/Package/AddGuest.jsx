@@ -40,6 +40,7 @@ const [showPopup1, setShowPopup1] = useState(false);
     adult:0,
     child: 0,
     infant: 0,
+    infant1:0,
     singleRoom: 0,
     twinRoom: 0,
     tripleRoom: 0,

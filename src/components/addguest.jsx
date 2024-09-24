@@ -29,7 +29,9 @@ const Addguest = ({
   setShowPopup1
 }) => {
   const date = new Date();
-  const { showAddguest, setSubmitButtonOfPricingCalculation,initialData, setGuestPrice, departureSectionData } =
+  const date2 = new Date();
+  const date3 = new Date(date2)
+  const { showAddguest, setSubmitButtonOfPricingCalculation, initialData, setGuestPrice, departureSectionData } =
     useAppContext() ?? { showAddguest: false };
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState("");
@@ -56,11 +58,17 @@ const Addguest = ({
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
     .toISOString()
     .split("T")[0];
-  const childMinDate = new Date(date.setFullYear(date.getFullYear() - 6))
-    .toISOString()
-    .split("T")[0];
+    // const infantMinDate1 = new Date(date1.setFullYear(date1.getFullYear() - 5))
+    // .toISOString()
+    // .split("T")[0];
+    // const infantMinDate2= new Date(date1.setFullYear(date1.getFullYear() +2))
+    // .toISOString()
+    // .split("T")[0];
 
-  const [open, setOpen] = useState(false);
+    // console.log("infantMinDate1 -->",infantMinDate1)
+    // console.log("infantMinDate2 -->",infantMinDate2)
+
+    const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     if (showAddguest) {
@@ -71,17 +79,17 @@ const Addguest = ({
   };
   const [close1, setClose1] = useState(false);
   const handleClose = () => {
-    
+
     setOpen(false);
     setClose1(!close1);
 
   };
-  useEffect(()=>{
-    if(!open){
+  useEffect(() => {
+    if (!open) {
       setInputData(initialData);
     }
-    
-  },[open])
+
+  }, [open])
 
   const handleChange = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
@@ -106,6 +114,8 @@ const Addguest = ({
       setInputData((prevData) => ({ ...prevData, child: 0, infant: 0 }));
     }
   };
+  
+
   // here fetch all cars
   useEffect(() => {
     fetchCarAllCars().then((res) => setCars(res?.data || []));
@@ -121,9 +131,9 @@ const Addguest = ({
     // const isAnyChildDateEmpty = Array.from(childDateInputs).some(
     //   (input) => input.value === ""
     // );
-if(inputData.adult ==="" ){
-  return alert("Please choose adult first");
-}
+    if (inputData.adult === "") {
+      return alert("Please choose adult first");
+    }
     // if (isAnyChildDateEmpty) {
     //   return alert("Please fill in the date for each child.");
     // }
@@ -338,15 +348,15 @@ if(inputData.adult ==="" ){
           tripleSharingRoom * inputData?.tripleRoom * (days - 1) +
           quadSharingRoom * inputData?.quardRoom * (days - 1) + misc * (days);
 
-          if(inputData?.singleRoom>0||inputData?.twinRoom>0||inputData?.tripleRoom>0||inputData?.quardRoom>0){
-            setGuestPrice(calculatedPrice);
-            setFinal(calculatedPrice);
-          }
-       
+        if (inputData?.singleRoom > 0 || inputData?.twinRoom > 0 || inputData?.tripleRoom > 0 || inputData?.quardRoom > 0) {
+          setGuestPrice(calculatedPrice);
+          setFinal(calculatedPrice);
+        }
+
       }
     }
   }, [inputData, addPackage]);
-  
+
   useEffect(() => {
     const {
       markup,
@@ -380,7 +390,7 @@ if(inputData.adult ==="" ){
     const filteredData3 = cars?.filter(item => item?.vehicleType !== filteredData?.vehicleType && item?.seatingCapacity === filteredData?.seatingCapacity);
     if (filteredData3?.length !== 0) {
       filteredData3.forEach(item => {
-        newarr.push(item); 
+        newarr.push(item);
         cars.pop(item);
       })
     }
@@ -452,6 +462,24 @@ if(inputData.adult ==="" ){
   useEffect(() => {
     console.log("selectedCarOf Price ", selectedDataOfCar)
   }, [selectedDataOfCar])
+  const [minDate, setMinDate] = useState('');
+  const [maxDate, setMaxDate] = useState('');
+
+  useEffect(() => {
+    const date1 = new Date();
+    
+    // Calculate max date (1 year from current date)
+    const max = new Date(date1);
+    max.setFullYear(date1.getFullYear());
+    const maxFormatted = max.toISOString().split('T')[0];
+    setMaxDate(maxFormatted);
+
+    // Calculate min date (5 years before current date)
+    const min = new Date(date1);
+    min.setFullYear(date1.getFullYear()-2);
+    const minFormatted = min.toISOString().split('T')[0];
+    setMinDate(minFormatted);
+  }, [minDate,maxDate]);
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
       <div className="bg-white">
@@ -563,14 +591,16 @@ if(inputData.adult ==="" ){
                           className="text-para"
                           htmlFor={`childDate${index}`}
                         >
-                          Child {index + 1}
+                         Child {index + 1}
                         </label>
                         <input
                           id={`childDate${index}`}
                           className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
                           type="date"
-                          max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
-                          min={childMinDate}
+
+                          max={new Date(date.setFullYear(date.getFullYear())).toISOString().split("T")[0]}// Set max attribute to current date
+
+                          min={new Date(date.setFullYear(date.getFullYear() - 6)).toISOString().split("T")[0]}
                           onChange={(e) => handleDateChange(e, index)}
                         />
 
@@ -638,8 +668,9 @@ if(inputData.adult ==="" ){
                           id={`Childdropdown2${index}`}
                           className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
                           type="date"
-                          max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
-                          min={infantMinDate}
+                          // max={new Date().toISOString().split("T")[0]}
+                          max={maxDate}
+                          min={minDate}
                           onChange={(e) => handleDateChange1(e, index)}
                         />
 
@@ -674,10 +705,13 @@ if(inputData.adult ==="" ){
 
                     <div className="w-14">
                       <select
-                        name="infant"
-                        value={""}
+                        name="infant1"
+                        value={inputData?.infant1}
                         id="infantdropdown"
-                        className="border w-full py-1 rounded-md opacity-50"
+                        className={`border w-full py-1 rounded-md ${inputData?.infant1 === 0 &&
+                          inputData?.adult === 0 &&
+                          "opacity-50"}`}
+                          onChange={handleChange1}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
@@ -689,7 +723,7 @@ if(inputData.adult ==="" ){
                     </div>
                   </div>
                   {/* Infant date is here */}
-                  {[...Array(inputData?.infant)].map((_, index) => (
+                  {[...Array(inputData?.infant1)].map((_, index) => (
                     <div key={index} className="md:ml-5 pt-2 ">
                       <div className="md:border-l-4 border-l-2 border-red-400 md:pl-5 pl-2 flex flex-col md:flex-row mditems-center md:gap-3 gap-1 my-1">
                         <label
@@ -703,7 +737,7 @@ if(inputData.adult ==="" ){
                           className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
                           type="date"
                           max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
-                          min={infantMinDate}
+                          min={new Date(date3.setFullYear(date2.getFullYear()-6)).toISOString().split("T")[0]}
                           onChange={(e) => handleDateChange1(e, index)}
                         />
                         <span className="text-red-400 text-xs font-medium">
