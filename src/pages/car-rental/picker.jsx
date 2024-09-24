@@ -1,89 +1,178 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { GiByzantinTemple } from "react-icons/gi";
 import { MdMosque } from "react-icons/md";
 import { LiaMosqueSolid } from "react-icons/lia";
-import DateTimePickerValue from '@/components/car-rental/DateTimePicker';
-import dayjs from 'dayjs';
+import DateTimePickerValue from "@/components/car-rental/DateTimePicker";
+import dayjs from "dayjs";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Picker = () => {
-    const [activeItem, setActiveItem] = useState(null);
-    const [activeTab, setActiveTab] = useState('Tab1');
-    const [isShowDateTimePicker, setShowDateTimePicker] = useState(false);
-    const [localData, setLocalData] = useState({ location: '', pickupDate: null, vehicle: '' });
-    const [outstationData, setOutstationData] = useState({ location: '', pickupDate: null, vehicle: '' });
-    const [errors, setErrors] = useState({});
-    const [isOpen, setIsOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState(null);
+  const [activeTab, setActiveTab] = useState("Tab1");
+  const [isShowDateTimePicker, setShowDateTimePicker] = useState(false);
+  const [localData, setLocalData] = useState({
+    location: "",
+    pickupDate: null,
+    vehicle: "",
+  });
+  const [outstationData, setOutstationData] = useState({
+    location: "",
+    pickupDate: null,
+    vehicle: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
 
-    const togglePopup = () => {
-        setIsOpen(!isOpen);
-    };
-    const toggleItem = (item) => {
-        setActiveItem(activeItem === item ? null : item);
-    };
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+  const toggleItem = (item) => {
+    setActiveItem(activeItem === item ? null : item);
+  };
 
-    const handleLocationSelect = (location) => {
-        if (activeTab === 'Tab1') {
-            setLocalData({ ...localData, location });
-        } else {
-            setOutstationData({ ...outstationData, location });
-        }
-        setActiveItem(null);  // Close the dropdown after selecting
-    };
+  const handleLocationSelect = (location) => {
+    if (activeTab === "Tab1") {
+      setLocalData({ ...localData, location });
+    } else {
+      setOutstationData({ ...outstationData, location });
+    }
+    setActiveItem(null); // Close the dropdown after selecting
+  };
 
-    const handleDateTimeSelect = (date) => {
-        if (activeTab === 'Tab1') {
-            setLocalData({ ...localData, pickupDate: date });
-        } else {
-            setOutstationData({ ...outstationData, pickupDate: date });
-        }
-    };
+  const handleDateTimeSelect = (date) => {
+    if (activeTab === "Tab1") {
+      setLocalData({ ...localData, pickupDate: date });
+    } else {
+      setOutstationData({ ...outstationData, pickupDate: date });
+    }
+  };
 
-    const handleVehicleSelect = (vehicle) => {
-        if (activeTab === 'Tab1') {
-            setLocalData({ ...localData, vehicle });
-        } else {
-            setOutstationData({ ...outstationData, vehicle });
-        }
-        setActiveItem(null);  // Close the dropdown after selecting
-    };
+  const handleVehicleSelect = (vehicle) => {
+    if (activeTab === "Tab1") {
+      setLocalData({ ...localData, vehicle });
+    } else {
+      setOutstationData({ ...outstationData, vehicle });
+    }
+    setActiveItem(null); // Close the dropdown after selecting
+  };
 
-    const validateForm = () => {
-        let newErrors = {};
-        const data = activeTab === 'Tab1' ? localData : outstationData;
+  const validateForm = () => {
+    let newErrors = {};
+    const data = activeTab === "Tab1" ? localData : outstationData;
 
-        if (!data.location) newErrors.location = 'Location is required';
-        if (!data.pickupDate) newErrors.pickupDate = 'Pick Up Date is required';
+    if (!data.location) newErrors.location = "Location is required";
+    if (!data.pickupDate) newErrors.pickupDate = "Pick Up Date is required";
 
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    const handleSearch = () => {
-        if (validateForm()) {
-            if (activeTab === 'Tab1') {
-                // console.log('Local Data:', localData);
-            } else {
-                // console.log('Outstation Data:', outstationData);
-            }
-        }
-    };
+  const handleSearch = () => {
+    if (validateForm()) {
+      if (activeTab === "Tab1") {
+        // console.log('Local Data:', localData);
+      } else {
+        // console.log('Outstation Data:', outstationData);
+      }
+    }
+  };
 
-    return (
-        <div>
-            <div className='flex items-center'>
-                <div onClick={() => setActiveTab('Tab1')} className={`p-3 ${activeTab === 'Tab1' ? 'bg-primary/80 text-white' : 'bg-primary/20 text-primary/80'} rounded-tl-lg cursor-pointer`}>
-                    <p className='text-para px-8'>Local</p>
+  return (
+    <div>
+      <div className="flex items-center">
+        <div
+          onClick={() => setActiveTab("Tab1")}
+          className={`p-3 ${
+            activeTab === "Tab1"
+              ? "bg-primary/80 text-white"
+              : "bg-primary/20 text-primary/80"
+          } rounded-tl-lg cursor-pointer`}
+        >
+          <p className="text-para px-8">Local</p>
+        </div>
+        <div
+          onClick={() => setActiveTab("Tab2")}
+          className={`p-3 ${
+            activeTab === "Tab2"
+              ? "bg-primary/80 text-white"
+              : "bg-primary/20 text-primary/80"
+          } rounded-tr-lg cursor-pointer`}
+        >
+          <p className="text-para px-8">OutStation</p>
+        </div>
+      </div>
+      {/* Main container of the tab functionality */}
+      <div className="w-full bg-white rounded-b-md rounded-tr-md py-3">
+        <div className={`${activeTab === "Tab1" ? "block" : "hidden"}`}>
+          <div className="flex gap-10 px-4">
+            <div className=" flex gap-3 ml-3">
+              <div className="py-2">
+                <p>Select the Vihicle</p>
+                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="px-2 py-3"
+                  />
+                  <input
+                    type="text"
+                    className=" outline-none w-36 text-start py-2"
+                  />
                 </div>
-                <div onClick={() => setActiveTab('Tab2')} className={`p-3 ${activeTab === 'Tab2' ? 'bg-primary/80 text-white' : 'bg-primary/20 text-primary/80'} rounded-tr-lg cursor-pointer`}>
-                    <p className='text-para px-8'>OutStation</p>
-                </div>
+              </div>
+              <div className="py-2">
+                <p>No. of Person</p>
+                <input
+                  type="text"
+                  className="px-1 outline-none text-start py-2 w-32 border-2 my-1 rounded-lg"
+                />
+              </div>
+              <div className="py-2">
+                <p>Pickup Location</p>
+                <input
+                  type="text"
+                  className="px-1 w-36 outline-none text-start py-2 border-2 my-1 rounded-lg"
+                />
+              </div>
+              <div className="py-2">
+                <p>Pickup Point</p>
+                <input
+                  type="text"
+                  className=" px-1 w-36 outline-none text-start py-2 border-2 my-1 rounded-lg"
+                />
+              </div>
             </div>
-            {/* Main container of the tab functionality */}
-            <div className='w-full bg-white rounded-b-md rounded-tr-md py-3'>
-                <div className={`${activeTab === 'Tab1' ? 'block' : 'hidden'}`}>
-                    <div className='flex  items-center pr-4 '>
+            <div className="flex gap-3">
+              <div className="py-2 ">
+                <p className="font-semibold">Select Date | Time</p>
+                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                  <input
+                    type="date"
+                    className=" outline-none mx-1  text-start py-1 border-r-2"
+                  />
+                  <input type="time" className="mt-1 outline-none py-1 " />
+                </div>
+              </div>
+              <div className="py-2">
+                <p className="font-semibold">Choose Plan</p>
+                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                  <input
+                    type="text"
+                    className="px-1 outline-none w-36 text-start py-2"
+                  />
+                </div>
+              </div>
+              <div className="my-8">
+                <button className="bg-primary/80 text-white  px-4 py-2 my-1 rounded-lg">
+                  Show Cars
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* <div className='flex  items-center pr-4 '>
                         <div className='flex gap-8 p-4 items-center w-full h-20'>
                             <div onClick={() => toggleItem('location')} className={`${activeItem === 'location' ? 'border-2' : 'border-none'} p-2 rounded cursor-pointer`}>
                                 <div className='flex justify-between items-center gap-4'>
@@ -121,50 +210,169 @@ const Picker = () => {
                         <div onClick={togglePopup}>
                             <button onClick={handleSearch} className='font-semibold flex hover:animate-pulse items-center gap-1 text-white text-sm bg-black px-5 py-3 rounded-full'>Book <span ><FaArrowRightLong /></span></button>
                         </div>
-                    </div>
+                    </div> */}
+        </div>
+        <div className={`${activeTab === "Tab2" ? "block" : "hidden"}`}>
+        <div className="flex gap-10 px-4">
+            <div className=" flex gap-3 ml-3">
+              <div className="py-2">
+                <p>Select the Vihicle</p>
+                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="px-2 py-3"
+                  />
+                  <input
+                    type="text"
+                    className=" outline-none w-36 text-start py-2"
+                  />
                 </div>
-                <div className={`${activeTab === 'Tab2' ? 'block' : 'hidden'}`}>
-                    <div className='flex  items-center pr-4 '>
-                        <div className='flex gap-8 p-4 items-center w-full h-20'>
-                            <div onClick={() => toggleItem('location')} className={`${activeItem === 'location' ? 'border-2' : 'border-none'} p-2 rounded cursor-pointer`}>
-                                <div className='flex justify-between items-center gap-4'>
-                                    <p className='font-semibold text-lg'>Location</p>
-                                    <IoIosArrowUp className={`${activeItem === 'location' ? 'rotate-180' : 'rotate-0'} transition ease-in delay-150`} size={16} />
-                                </div>
-                                <div>
-                                    <span className='font-light text-slate-600 text-para'>{outstationData.location || 'Select Location'}</span>
-                                    {errors.location && <p className='text-red-500 text-xs'>{errors.location}</p>}
-                                </div>
-                            </div>
-                            <div onClick={() => setShowDateTimePicker(!isShowDateTimePicker)}>
-                                <div onClick={() => toggleItem('pickup')} className={`${activeItem === 'pickup' ? 'border-2' : 'border-none'} p-2 rounded cursor-pointer`}>
-                                    <div className='flex justify-between items-center gap-4'>
-                                        <p className='font-semibold text-lg'>Pick Up Date</p>
-                                        <IoIosArrowUp className={`${activeItem === 'pickup' ? 'rotate-180' : 'rotate-0'} transition ease-in delay-150`} size={16} />
-                                    </div>
-                                    <div>
-                                        <p className='font-light text-slate-600 text-para'>{outstationData.pickupDate ? dayjs(outstationData.pickupDate).format('DD-MMM-YYYY') : 'Select Date'}</p>
-                                        {errors.pickupDate && <p className='text-red-500 text-xs'>{errors.pickupDate}</p>}
-                                    </div>
-                                </div>
-                            </div>
-                            <div onClick={() => toggleItem('vehicle')} className={`${activeItem === 'vehicle' ? 'border-2' : 'border-none'} p-2 rounded cursor-pointer`}>
-                                <div className='flex justify-between items-center gap-4'>
-                                    <p className='font-semibold text-lg'>Vehicle Selection</p>
-                                    <IoIosArrowUp className={`${activeItem === 'vehicle' ? 'rotate-180' : 'rotate-0'} transition ease-in delay-150`} size={16} />
-                                </div>
-                                <div>
-                                    <span className='font-light text-slate-600 text-para'>{outstationData.vehicle || 'Select Vehicle'}</span>
-                                    {errors.vehicle && <p className='text-red-500 text-xs'>{errors.vehicle}</p>}
-                                </div>
-                            </div>
-                        </div>
-                        <button onClick={handleSearch} className='font-semibold flex hover:animate-pulse items-center gap-1 text-white text-sm bg-black px-5 py-3 rounded-full'>Book <span ><FaArrowRightLong /></span></button>
-                    </div>
-                </div>
+              </div>
+              <div className="py-2">
+                <p>No. of Person</p>
+                <input
+                  type="text"
+                  className="px-1 outline-none text-start py-2 w-32 border-2 my-1 rounded-lg"
+                />
+              </div>
+              <div className="py-2">
+                <p>Pickup Location</p>
+                <input
+                  type="text"
+                  className="px-1 w-36 outline-none text-start py-2 border-2 my-1 rounded-lg"
+                />
+              </div>
+              <div className="py-2">
+                <p>Pickup Point</p>
+                <input
+                  type="text"
+                  className=" px-1 w-36 outline-none text-start py-2 border-2 my-1 rounded-lg"
+                />
+              </div>
             </div>
-            {/* Dropdown Menus */}
-            <div className='mt-2'>
+            <div className="flex gap-3">
+              <div className="py-2 ">
+                <p className="font-semibold">Pick-up date</p>
+                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                  <input
+                    type="date"
+                    className=" outline-none mx-1  text-start py-1 border-r-2"
+                  />
+                  <input type="time" className="mt-1 outline-none py-1 " />
+                </div>
+              </div>
+              <div className="py-2 ">
+                <p className="font-semibold">Return date</p>
+                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                  <input
+                    type="date"
+                    className=" outline-none mx-1  text-start py-1 border-r-2"
+                  />
+                  <input type="time" className="mt-1 outline-none py-1 " />
+                </div>
+              </div>
+              <div className="my-8">
+                <button className="bg-primary/80 text-white  px-4 py-2  my-1 rounded-lg">
+                  Show Cars
+                </button>
+              </div>
+            </div>
+          </div>
+          {/* <div className="flex  items-center pr-4 ">
+            <div className="flex gap-8 p-4 items-center w-full h-20">
+              <div
+                onClick={() => toggleItem("location")}
+                className={`${
+                  activeItem === "location" ? "border-2" : "border-none"
+                } p-2 rounded cursor-pointer`}
+              >
+                <div className="flex justify-between items-center gap-4">
+                  <p className="font-semibold text-lg">Location</p>
+                  <IoIosArrowUp
+                    className={`${
+                      activeItem === "location" ? "rotate-180" : "rotate-0"
+                    } transition ease-in delay-150`}
+                    size={16}
+                  />
+                </div>
+                <div>
+                  <span className="font-light text-slate-600 text-para">
+                    {outstationData.location || "Select Location"}
+                  </span>
+                  {errors.location && (
+                    <p className="text-red-500 text-xs">{errors.location}</p>
+                  )}
+                </div>
+              </div>
+              <div onClick={() => setShowDateTimePicker(!isShowDateTimePicker)}>
+                <div
+                  onClick={() => toggleItem("pickup")}
+                  className={`${
+                    activeItem === "pickup" ? "border-2" : "border-none"
+                  } p-2 rounded cursor-pointer`}
+                >
+                  <div className="flex justify-between items-center gap-4">
+                    <p className="font-semibold text-lg">Pick Up Date</p>
+                    <IoIosArrowUp
+                      className={`${
+                        activeItem === "pickup" ? "rotate-180" : "rotate-0"
+                      } transition ease-in delay-150`}
+                      size={16}
+                    />
+                  </div>
+                  <div>
+                    <p className="font-light text-slate-600 text-para">
+                      {outstationData.pickupDate
+                        ? dayjs(outstationData.pickupDate).format("DD-MMM-YYYY")
+                        : "Select Date"}
+                    </p>
+                    {errors.pickupDate && (
+                      <p className="text-red-500 text-xs">
+                        {errors.pickupDate}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div
+                onClick={() => toggleItem("vehicle")}
+                className={`${
+                  activeItem === "vehicle" ? "border-2" : "border-none"
+                } p-2 rounded cursor-pointer`}
+              >
+                <div className="flex justify-between items-center gap-4">
+                  <p className="font-semibold text-lg">Vehicle Selection</p>
+                  <IoIosArrowUp
+                    className={`${
+                      activeItem === "vehicle" ? "rotate-180" : "rotate-0"
+                    } transition ease-in delay-150`}
+                    size={16}
+                  />
+                </div>
+                <div>
+                  <span className="font-light text-slate-600 text-para">
+                    {outstationData.vehicle || "Select Vehicle"}
+                  </span>
+                  {errors.vehicle && (
+                    <p className="text-red-500 text-xs">{errors.vehicle}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={handleSearch}
+              className="font-semibold flex hover:animate-pulse items-center gap-1 text-white text-sm bg-black px-5 py-3 rounded-full"
+            >
+              Book{" "}
+              <span>
+                <FaArrowRightLong />
+              </span>
+            </button>
+          </div> */}
+        </div>
+      </div>
+      {/* Dropdown Menus */}
+      {/* <div className='mt-2'>
                 <div className={`${activeItem === 'location' ? 'block' : 'hidden'} px-5 border bg-white rounded-lg py-2`}>
                     <div>
                         <p className='font-semibold text-sm text-primary border-b'>Popular Cities</p>
@@ -210,18 +418,18 @@ const Picker = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            {/* toggle pop up show  */}
-            {isOpen && (
+            </div> */}
+      {/* toggle pop up show  */}
+      {/* {isOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300">
                     <div className="bg-white p-8 rounded-lg relative opacity-100 transition-opacity duration-300">
                         <span className="absolute top-0 right-0 cursor-pointer" onClick={togglePopup}>&times;</span>
                         <p>Popup Content Goes Here</p>
                     </div>
                 </div>
-            )}
-        </div>
-    );
+            )} */}
+    </div>
+  );
 };
 
 export default Picker;
