@@ -69,12 +69,6 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary, itineraryInfo, setItinerar
     // Images here 
 // console.log("itineary is here ---> ",itinerary)
 
-    useEffect(() => {
-        if (itinerary) {
-            fetchImages(itinerary).then(res => setImageDetails(res));
-        }
-
-    }, [itinerary])
     const [file, setFile] = useState();
     function handleChange(e) {
         setFile(URL.createObjectURL(e.target.files[0]));
@@ -276,7 +270,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary, itineraryInfo, setItinerar
                     setActiveTab("Tab2");
                 }
                 // setItineraryInfo(data?.packageBasic);
-                router.push('/admin/car-rental/package/itinerary/' + data?.packageBasic.id);
+                router.push('/admin/car-rental/itinerary/' + data?.packageBasic.id);
 
             } catch (error) {
                 console.log(error);

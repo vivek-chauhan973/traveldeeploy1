@@ -7,17 +7,14 @@ const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.M
 const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
 const IoIosSave = dynamic(() => import('react-icons/io').then(mod => mod.IoIosSave));
 const MdCancel = dynamic(() => import('react-icons/md').then(mod => mod.MdCancel));
-import ItineraryTour from "@/components/admin/itineraryMaster/ItineraryTour";
-import { LuPackagePlus } from "react-icons/lu";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Gst from "@/components/admin/dashboard/Gst";
-import TermsAndCondition from "@/components/admin/itineraryMaster/TermsAndCondition";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong, faEdit, faCirclePlus, faTrash, faCancel, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
+import CarItineraryTour from "@/components/admin/itineraryMaster/CarItineraryTour";
+import CarTermsAndCondition from "@/components/admin/itineraryMaster/Car/CarTermsAndCondition copy";
+import CarGst from "@/components/admin/dashboard/CarGst";
 
 
 export default function Category() {
@@ -42,7 +39,7 @@ export default function Category() {
     const isSubmitBadge = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('/api/package-setting/add-badge', {
+            const response = await fetch('/api/cars/package-setting/add-badge', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +58,7 @@ export default function Category() {
     // get method
     const fetchBadges = async () => {
         try {
-            const badgeList = await fetch('/api/package-setting/get-badges')
+            const badgeList = await fetch('/api/cars/package-setting/get-badges')
             const badges = await badgeList.json()
             // console.log("badeges is here", badges)
             setBadgesListData(badges.PackageBadges.reverse())
@@ -100,7 +97,7 @@ export default function Category() {
     const isSubmitCategory = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('/api/package-setting/category/add-category', {
+            const response = await fetch('/api/cars/package-setting/category/add-category', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,9 +115,9 @@ export default function Category() {
 
     const fetchCategories = async () => {
         try {
-            const categoriesList = await fetch('/api/package-setting/category/get-categories')
+            const categoriesList = await fetch('/api/cars/package-setting/category/get-categories')
             const categories = await categoriesList.json()
-            // console.log("categories is here", categories)
+            console.log("categories is here", categories)
             setcategoryListData(categories.data.reverse())
 
 
@@ -150,7 +147,7 @@ export default function Category() {
 
     const saveEditBadge = async (badge_id) => {
         try {
-            const response = await fetch('/api/package-setting/edit-badge', {
+            const response = await fetch('/api/cars/package-setting/edit-badge', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -172,7 +169,7 @@ export default function Category() {
             // if (!userConfirmed) {
             //     return;
             // }
-            const response = await fetch(`/api/package-setting/delete-badge`, {
+            const response = await fetch(`/api/cars/package-setting/delete-badge`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -201,7 +198,7 @@ export default function Category() {
             if (!userConfirmed) {
                 return;
             }
-            const response = await fetch(`/api/package-setting/category/delete-category`, {
+            const response = await fetch(`/api/cars/package-setting/category/delete-category`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -221,7 +218,7 @@ export default function Category() {
 
     const saveEditCategory = async (category_id) => {
         try {
-            const response = await fetch('/api/package-setting/category/edit-category', {
+            const response = await fetch('/api/cars/package-setting/category/edit-category', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -251,10 +248,10 @@ export default function Category() {
             <AppProvider>
                 <Layout>
                     <div>
-                        <Gst />
+                        <CarGst/>
                     </div>
                     <div>
-                        <TermsAndCondition />
+                        <CarTermsAndCondition />
                     </div>
 
                     {/* <SmartTabel/> */}
@@ -425,7 +422,7 @@ export default function Category() {
                             </div>
                         </div>
                         <div className="mt-5">
-                            <ItineraryTour />
+                            <CarItineraryTour />
                         </div>
                     </div>
                 </Layout>

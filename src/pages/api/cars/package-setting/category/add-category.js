@@ -1,5 +1,5 @@
 
-import PackageMasterCategory from "@/models/package/PackageCategory";
+import CarPackageMasterCategory from "@/models/car-package/package/PackageCategory";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageSettingCategoryAdd= async (req, res) => {
     try {
@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from "next";
         }
 
         const { category } = req.body
-        const Packagecategory = await PackageMasterCategory.create({
+        const Packagecategory = await CarPackageMasterCategory.create({
             category
         })
         return res.status(201).json({

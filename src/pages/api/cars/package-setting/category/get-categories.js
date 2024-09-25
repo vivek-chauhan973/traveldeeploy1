@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
  const packageSettingCategoryGet= async (req, res) => {
     try {
-        const packageCategories = await CarPackageMasterCategory.find();
+        const packageCategories = await CarPackageMasterCategory.find({});
 
         return res.status(200).json({
             message: 'Categories found successfully',

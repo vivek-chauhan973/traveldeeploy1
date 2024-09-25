@@ -39,7 +39,7 @@ const YourComponent = () => {
     // Handle delete logic...
   };
 
-  console.log("current items", itineraries);
+  // console.log("current items", itineraries);
   const deleteItem = (id) => {
     const newPackages = itineraries.filter((item) => item._id !== id);
     setItineraries(newPackages);
@@ -66,7 +66,7 @@ const YourComponent = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-  console.log("Rakesh2", currentItems);
+  // console.log("Rakesh2", currentItems);
   return (
     <AppProvider>
       <Layout>
@@ -172,7 +172,7 @@ const YourComponent = () => {
                     <td className="text-center border-x">{itinerary.status}</td>
                     <td className="py-4 flex justify-center items-center gap-3">
                       <Link
-                        href={"./itinerary/" + itinerary?._id + "?type=edit"}
+                        href={"/admin/car-rental/itinerary/" + itinerary?._id + "?type=edit"}
                       >
                         <FontAwesomeIcon
                           icon={faEdit}

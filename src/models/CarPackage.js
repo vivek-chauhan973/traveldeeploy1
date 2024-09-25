@@ -1,17 +1,17 @@
 
 import mongoose, { Schema } from "mongoose";
-import "@/models/package/TourInfo/Inclusion";
-import "@/models/package/TourInfo/Exclusion";
-import "@/models/package/TourInfo/Cancellation";
-import "@/models/package/TourInfo/NeedToKnow";
-import "@/models/package/TourInfo/PaymentTerm";
+import "@/models/car-package/package/TourInfo/Inclusion";
+import "@/models/car-package/package/TourInfo/Exclusion";
+import "@/models/car-package/package/TourInfo/Cancellation";
+import "@/models/car-package/package/TourInfo/NeedToKnow";
+import "@/models/car-package/package/TourInfo/PaymentTerm";
 import "@/models/City";
 import "@/models/Country";
 import "@/models/State";
-import "@/models/package/PackageCategory";
-import "@/models/package/PackagePrice";
-import "@/models/package/PriceHike";
-import "@/models/package/PackageDeparture";
+import "@/models/car-package/package/PackageCategory";
+import "@/models/car-package/package/PackagePrice";
+import "@/models/car-package/package/PriceHike";
+import "@/models/car-package/package/PackageDeparture";
 import Counter from "./Counter";
 
 async function getNextSequenceValueWithPrefix(sequenceName, prefix = 'BXP', padding = 3) {
@@ -171,10 +171,6 @@ packageSchema.virtual('displayPrice').get(function () {
   }
   return 0; // Return a default value if addguestPrices is not defined
 });
-packageSchema.virtual('alksdfjjkashdfjkashdfkas').get(function () {
-  return this.days
-  
-});
 
 packageSchema.virtual("pageUrl").get(function () {
   return `${this.url}-tour-package`;
@@ -201,7 +197,7 @@ packageSchema.pre("findOneAndUpdate", function (next) {
   next();
 });
 
-const Package =
-  mongoose.models.Package || mongoose.model("Package", packageSchema);
+const CarPackage =
+  mongoose.models.CarPackage || mongoose.model("CarPackage", packageSchema);
 
-export default Package;
+export default CarPackage;
