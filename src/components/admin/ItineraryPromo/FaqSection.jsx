@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-
-export default function FaqSection({ onChange,faqData }) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+export default function FaqSection({ onChange, faqData }) {
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(null);
   const [itineraryDayWise, setItineraryDayWise] = useState({
     title: "",
     information: "",
   });
   // console.log("faqData111111111111111111:",faqData)
-  useEffect(()=>{
-    setItineraryDayWiseDataArray(faqData ||[])
-  },[faqData])
-  
+  useEffect(() => {
+    setItineraryDayWiseDataArray(faqData || [])
+  }, [faqData])
+
   const [editingIndex, setEditingIndex] = useState(null);
   const [itineraryValidate, setItineraryValidate] = useState("");
 
   useEffect(() => {
-   
+
     onChange(itineraryDayWiseDataArray);
   }, [itineraryDayWiseDataArray, onChange]);
 
@@ -95,7 +96,7 @@ export default function FaqSection({ onChange,faqData }) {
                 <div className="pt-12">
                   <button
                     onClick={addItem}
-                    className={`bg-navyblack text-white rounded px-10 py-1`}
+                    className={`bg-navyblack text-white rounded md:w-auto px-10 w-full py-1`}
                   >
                     {editingIndex !== null ? "Update" : "Add"}
                   </button>
@@ -107,24 +108,30 @@ export default function FaqSection({ onChange,faqData }) {
                 <div>
                   {itineraryDayWiseDataArray?.map((item, index) => (
                     <div key={index}>
-                      <div className="flex justify-between even:bg-slate-50 px-1">
+                      <div className="flex justify-between even:bg-slate-50 ">
                         <div>
-                          <p className="capitalize flex gap-2">
-                            <span>Day {index + 1}. </span>
+                          <p className="capitalize flex gap-2 mb-2 md:text-[15px] text-sm ">
+                            <span className="text-nowrap">Day {index + 1}. </span>
                             {item.title}
                           </p>
-                        </div>
-                        <div className="flex gap-2">
-                          <FaEdit
+                        </div>                      
+                        <div className='flex gap-2'>
+                          <FontAwesomeIcon
+                            icon={faEdit}
                             onClick={() => editItem(index)}
-                            size={20}
-                            className="mt-1 hover:text-primary cursor-pointer"
+                            // className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-primary cursor-pointer') : ''}`}
+                            className="mt-1  hover:text-primary cursor-pointer"
                           />
-                          {editingIndex !== index && (
-                            <MdDeleteForever
+                          {(editingIndex == index) ? (
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              className="mt-1 opacity-50 cursor-not-allowed"
+                            />
+                          ) : (
+                            <FontAwesomeIcon
+                              icon={faTrash}
                               onClick={() => removeItem(index)}
-                              size={24}
-                              className="mt-1 hover:text-red-500 cursor-pointer"
+                              className="mt-1  hover:text-primary cursor-pointer"
                             />
                           )}
                         </div>

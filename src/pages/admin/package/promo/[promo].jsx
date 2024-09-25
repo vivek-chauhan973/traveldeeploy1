@@ -3,95 +3,90 @@ import Layout from "@/components/admin/Layout";
 import { useEffect, useRef, useState } from "react";
 import FaqSection from "@/components/admin/ItineraryPromo/FaqSection";
 import Editor from "@/components/admin/ItineraryPromo/Editor";
-import dynamic from 'next/dynamic';
-
-// Dynamically import icons
-const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuPackagePlus));
-const HiOutlineArrowNarrowRight = dynamic(() => import('react-icons/hi').then(mod => mod.HiOutlineArrowNarrowRight));
-
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image';
 import Index from "@/components/dy/Index";
 import SeoPopupField from "@/components/dy/SeoPopupField";
 import { useRouter } from "next/router";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCube, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 export default function PromoManage() {
-    const router=useRouter();
-    
-    const {promo}=router?.query;
+    const router = useRouter();
+
+    const { promo } = router?.query;
     // console.log("router is here : ",router);
     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
-    const [catoryorstate,setCatoryorstate]=useState(false);
-    const [selectCatagoryOrState,setSelectCatagoryOrState]=useState("");
+    const [catoryorstate, setCatoryorstate] = useState(false);
+    const [selectCatagoryOrState, setSelectCatagoryOrState] = useState("");
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState(null);
-    const [seofieldpopup,setSeofieldpopup]=useState(false);
+    const [seofieldpopup, setSeofieldpopup] = useState(false);
     const [alt, setAlt] = useState(null);
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
-     const [image1,setImage1]=useState(null);
-     const [selectedItem,setSelectedItem]=useState("");
-     const [seoData,setSeoData]=useState({});
-     const [tableData,setTableData]=useState([]);
-     const [tableColumn,setTableColumn]=useState([]);
-     useEffect(()=>{
-        setSelectedLocation(promo||"")
-    },[promo])
-    
+    const [image1, setImage1] = useState(null);
+    const [selectedItem, setSelectedItem] = useState("");
+    const [seoData, setSeoData] = useState({});
+    const [tableData, setTableData] = useState([]);
+    const [tableColumn, setTableColumn] = useState([]);
+    useEffect(() => {
+        setSelectedLocation(promo || "")
+    }, [promo])
+
     useEffect(() => {
         const getPromoData = async () => {
             try {
                 const res = await fetch(`/api/public/package-state/${selectedLocation}`);
                 const data = await res.json();
-                
+
                 return data;
             } catch (error) {
                 console.error("Error fetching promo text", error);
             }
         };
 
-       
-            getPromoData().then(res => setPromoTxt(res?.data));
 
-        
-    }, [ selectedLocation]);
+        getPromoData().then(res => setPromoTxt(res?.data));
+
+
+    }, [selectedLocation]);
     const handleChange = (e) => {
         const data = e.target.files[0];
         setImage1(data)
-    if (data) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setFile(e.target.result);
-      };
-      reader.readAsDataURL(data);
-    }
+        if (data) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setFile(e.target.result);
+            };
+            reader.readAsDataURL(data);
+        }
     };
-    
+
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
         setFile(promoTxt?.image || "");
         setTableData(promoTxt?.tableData || []);
-        setSeoData(promoTxt?.seoField|| {});
-        setTableColumn(promoTxt?.tableColumn|| []);
-        setEditorContent(promoTxt?.description||"<p></p>");
-        setSelectCatagoryOrState(promoTxt?.selectType||"")
-        setSelectedItem(promoTxt?.selectedItem||"");
+        setSeoData(promoTxt?.seoField || {});
+        setTableColumn(promoTxt?.tableColumn || []);
+        setEditorContent(promoTxt?.description || "<p></p>");
+        setSelectCatagoryOrState(promoTxt?.selectType || "")
+        setSelectedItem(promoTxt?.selectedItem || "");
     }, [promoTxt])
-   
-    useEffect(()=>{
+
+    useEffect(() => {
         setFile(image1)
-    },[image1])
+    }, [image1])
 
     const handleSelectChange = async (e) => {
-      const selectedData=(e.target.value)?.split(",");
-    //   console.log("selectedData",selectedData);
-      setSelectedLocation(selectedData?.[1]);
-      setSelectedItem(selectedData?.[0])
-       
+        const selectedData = (e.target.value)?.split(",");
+        //   console.log("selectedData",selectedData);
+        setSelectedLocation(selectedData?.[1]);
+        setSelectedItem(selectedData?.[0])
+
     };
 
     const handleFaqChange = (faqs) => {
@@ -106,7 +101,7 @@ export default function PromoManage() {
     // console.log("your selected catory is : ",selectCatagoryOrState)
     // console.log("data of seofield",tableData)
     const handleSubmit = async (e) => {
-        if(selectedLocation.length===0){
+        if (selectedLocation.length === 0) {
             return alert("select state or category or state");
         }
         const formData = new FormData();
@@ -118,8 +113,8 @@ export default function PromoManage() {
         formData.append('tableData', JSON.stringify(tableData));
         formData.append('seoData', JSON.stringify(seoData));
         formData.append('tableColumn', JSON.stringify(tableColumn));
-        formData.append('selectType',selectCatagoryOrState);
-        formData.append("selectedItem",selectedItem);
+        formData.append('selectType', selectCatagoryOrState);
+        formData.append("selectedItem", selectedItem);
         try {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
@@ -132,7 +127,7 @@ export default function PromoManage() {
 
             const data = await response.json();
             console.log('Success:', data);
-          // Reset form fields after successful submission
+            // Reset form fields after successful submission
             /* setFile(null);
             setTitle("");
             setAlt("");
@@ -145,40 +140,44 @@ export default function PromoManage() {
         } catch (error) {
             console.error('Error:', error);
         }
+        alert("Add SuccessFully")
     };
-// console.log("table data :: ",tableData)
+    // console.log("table data :: ",tableData)
     return (
         <AppProvider>
             <Layout>
-                <div>    
+                <div>
                     <div className="flex items-center gap-5 text-primary pb-3">
-                        <LuPackagePlus size={24} className="font-semibold" />
+                        <FontAwesomeIcon icon={faCube} className="text-2xl" />
                         <p className="text-[28px] text-black">Promo Manage</p>
-                        <HiOutlineArrowNarrowRight size={28} className="text-teal-700" />
+                        <FontAwesomeIcon
+                            icon={faArrowRightLong}
+                            className=" text-teal-700 text-xl"
+                        />
                     </div>
                     <div>
                         <div className="flex justify-between mx-1">
                             <div className="flex items-center gap-2 mb-4">
                                 <label htmlFor="cityBages" className="font-semibold text-md">Select :</label>
-                                <select  className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
+                                <select className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
                                 >
-                                    <option value="">{selectCatagoryOrState}</option>    
+                                    <option value="" >{selectCatagoryOrState}</option>
                                 </select>
                                 <select
                                     id="packageCategory"
                                     className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
-                                    onChange={(e)=>{handleSelectChange(e);}}
-                                    
+                                    onChange={(e) => { handleSelectChange(e); }}
+
                                 >
-                                    {selectCatagoryOrState==="category"&&<option disabled selected>{selectedItem}</option>}
-                                    {selectCatagoryOrState==="state"&&<option disabled selected>{selectedItem}</option>}
-                                    {selectCatagoryOrState==="country"&&<option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState === "category" && <option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState === "state" && <option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState === "country" && <option disabled selected>{selectedItem}</option>}
                                 </select>
                             </div>
                             <div>
-                                <button className=" bg-green-200 py-1 px-2 rounded-md hover:bg-green-500" onClick={()=>setSeofieldpopup(true)}>Add Seo field</button>
+                                <button className=" bg-green-200 py-1 px-2 rounded-md hover:bg-green-500" onClick={() => setSeofieldpopup(true)}>Add Seo field</button>
                             </div>
-                            {seofieldpopup&&<SeoPopupField setSeofieldpopup={setSeofieldpopup} selectedItem={selectedItem} setSeoData={setSeoData} seoData={seoData}/>}
+                            {seofieldpopup && <SeoPopupField setSeofieldpopup={setSeofieldpopup} selectedItem={selectedItem} setSeoData={setSeoData} seoData={seoData} />}
                         </div>
 
                         <div>
@@ -186,10 +185,10 @@ export default function PromoManage() {
                                 <div>
                                     <p className="text-[15px] font-semibold">Package Image Upload</p>
                                 </div>
-                                <div className="py-10 border border-slate-500/45 px-2 rounded">
+                                <div className="p-7  border border-slate-500/45 rounded">
                                     <div className="w-2/3">
-                                        {file && <Image className="w-20 shadow-md" width="123" height="150" src={file} alt="Preview" />}
-                                        
+                                        {file && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file} alt="Preview" />}
+
                                     </div>
                                     <div>
                                         <input
@@ -204,10 +203,10 @@ export default function PromoManage() {
                                                 hover:file:bg-black/75 hover:file:text-white cursor-pointer"
                                         />
                                     </div>
-                                    <div>
+                                    <div className="my-3">
                                         <p>Title</p>
                                         <input
-                                            className="border px-2"
+                                            className="border px-2 rounded-sm"
                                             type="text"
                                             value={title}
                                             onChange={(e) => setTitle(e.target.value)}
@@ -216,7 +215,7 @@ export default function PromoManage() {
                                     <div>
                                         <p>Alt</p>
                                         <input
-                                            className="border px-2"
+                                            className="border px-2 rounded-sm"
                                             type="text"
                                             value={alt}
                                             onChange={(e) => setAlt(e.target.value)}
@@ -225,7 +224,7 @@ export default function PromoManage() {
                                 </div>
                             </div>
 
-                            <div className="bg-white rounded p-4 mt-5">
+                            <div className="bg-white rounded p-5 mt-5">
                                 <div>
                                     <p className="text-[15px] font-semibold">Promo Text</p>
                                     {/* <p>{promoTxt?.message}</p> Adjusted to render a specific property */}
@@ -236,20 +235,18 @@ export default function PromoManage() {
                             </div>
                         </div>
                         <div className="mt-2">
-                            <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn}/>
+                            <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn} />
                         </div>
 
                         <div className="rounded p-4 bg-white mt-5">
                             <div className="text-[15px] font-semibold">
-                                <p>Faq Section</p>
+                                <p>FAQ Section</p>
                             </div>
                             <div>
                                 <FaqSection onChange={handleFaqChange} faqData={promoTxt?.faq} />
                             </div>
                         </div>
-                        <div className="flex">
-                            <button onClick={handleSubmit} className="grow bg-black font-semibold text-white py-3 my-5 m-8 rounded">ADD</button>
-                        </div>
+                        <button onClick={handleSubmit} className="grow w-full bg-black font-semibold text-white py-3 mt-5 rounded">ADD</button>
                     </div>
                 </div>
             </Layout>

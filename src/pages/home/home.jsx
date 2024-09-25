@@ -301,7 +301,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="md:pb-6 pb-5">
+      <div className="">
         <ReviewsCard />
       </div>
       {/* 

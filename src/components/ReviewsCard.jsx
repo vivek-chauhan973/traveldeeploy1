@@ -92,13 +92,13 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="bg-cyan-950">
+    <div className=" bg-[#E7E7E7]"> {/* bg-cyan-950 */}
       <div className="carousel-container relative container-wrapper ">
         <div className="text-center py-7">
-          <h3 className="xl:text-2xl text-xl leading-8 font-medium text-white xl:mb-2">
+          <h3 className="xl:text-2xl text-xl leading-8 font-medium  xl:mb-2">
             Bizare Xpedition<sup className="md:text-sm text-xs mr-1">TM</sup>Reviews
           </h3>
-          <p className="xl:text-sm text-xs leading-8 font-medium text-white">
+          <p className="xl:text-sm text-xs leading-8 font-medium">
           
             Let{"'"}s go, pack up, and hit the road!
           </p>

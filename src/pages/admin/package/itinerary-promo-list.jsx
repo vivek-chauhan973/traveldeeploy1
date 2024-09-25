@@ -3,27 +3,11 @@ import Layout from "@/components/admin/Layout";
 import Pagination from "react-js-pagination";
 import Link from "next/link";
 import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
-
 import dynamic from "next/dynamic";
-
-const IoIosSearch = dynamic(() =>
-  import("react-icons/io").then((mod) => mod.IoIosSearch)
-);
-const FaEdit = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaEdit)
-);
-const MdDeleteForever = dynamic(() =>
-  import("react-icons/md").then((mod) => mod.MdDeleteForever)
-);
-const LuPackagePlus = dynamic(() =>
-  import("react-icons/lu").then((mod) => mod.LuPackagePlus)
-);
-const HiOutlineArrowNarrowRight = dynamic(() =>
-  import("react-icons/hi").then((mod) => mod.HiOutlineArrowNarrowRight)
-);
-
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const YourComponent = () => {
   const [itineraries, setItineraries] = useState([]);
@@ -32,40 +16,41 @@ const YourComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectType, setSelectType] = useState("all");
- 
+
 
   // code for promo list
 
-  const fetchPromoList=async ()=>{
-    const response=await fetch(`/api/public/package-state/fetchpromocat?selectType=${selectType}`);
-    const data=await response.json();
+  const fetchPromoList = async () => {
+    const response = await fetch(`/api/public/package-state/fetchpromocat?selectType=${selectType}`);
+    const data = await response.json();
     return data;
   }
-  useEffect(()=>{
-    fetchPromoList().then(res=>{
-      setItineraries(res?.responseData||[])});
-  },[selectType])
+  useEffect(() => {
+    fetchPromoList().then(res => {
+      setItineraries(res?.responseData || [])
+    });
+  }, [selectType])
   const handleDelete = () => {
     setIsModalOpen(false);
   };
 
- 
+
   const deleteItem = async (id) => {
-    const deleted=confirm("Do you want to delete promo item");
-    if(deleted){
+    const deleted = confirm("Do you want to delete promo item");
+    if (deleted) {
       try {
         const response = await fetch(`/api/public/package-state/${id}`, {
-          method: 'DELETE',   
-      });
+          method: 'DELETE',
+        });
       } catch (error) {
-        
+
         console.log("data can't deleted,something went wrong")
       }
-      
+
       const newPackages = itineraries.filter((item) => item._id !== id);
       setItineraries(newPackages);
     }
-    
+
   };
 
   const handlePageChange = (pageNumber) => {
@@ -89,7 +74,6 @@ const YourComponent = () => {
       <Layout>
         <div>
           <DeleteModal
-           
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             onDelete={handleDelete}
@@ -100,29 +84,32 @@ const YourComponent = () => {
             <div className="flex justify-between items-center pb-5">
               <div className="flex flex-col pb-3">
                 <div className="flex items-center gap-5 text-primary pb-3">
-                  <LuPackagePlus size={28} className="font-semibold" />
+                  <FontAwesomeIcon icon={faCube} className="text-2xl" />
                   <p className="text-[24px] text-black">Package Promo List</p>
-                  <HiOutlineArrowNarrowRight
-                    size={28}
-                    className=" text-teal-700"
+                  <FontAwesomeIcon
+                    icon={faArrowRightLong}
+                    className=" text-teal-700 text-xl"
                   />
                 </div>
                 <div className="flex gap-3">
-                  <p className="">Select type: </p>
-                  <select className="ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
-                  onChange={(e)=>setSelectType(e.target.value)}
+                  <p className="">Select Type : </p>
+                  <select className="ml-2 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                    onChange={(e) => setSelectType(e.target.value)}
                   >
-                    <option value="">select </option>
-                    <option value="category">category wise</option>
-                    <option value="state">state wise</option>
-                    <option value="country">country wise</option>
+                    <option value="">Select </option>
+                    <option value="category">Category wise</option>
+                    <option value="state">State wise</option>
+                    <option value="country">Country wise</option>
                   </select>
                 </div>
               </div>
               <label className="relative block">
                 <span className="sr-only">Search</span>
                 <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                  <IoIosSearch className="text-slate-400" size={16} />
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="text-slate-400 text-sm"
+                  />
                 </span>
                 <input
                   className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 h-8 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:outline sm:text-sm"
@@ -155,7 +142,7 @@ const YourComponent = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentItems.length===0&&<tr className="text-center">
+                {currentItems.length === 0 && <tr className="text-center">
                   <td colSpan={5} className="text-lg  my-5">No records exist</td></tr>}
                 {currentItems?.map((itinerary) => (
                   <tr className="border-b" key={itinerary.id}>
@@ -172,25 +159,25 @@ const YourComponent = () => {
                         height="1280"
                       />
                     </td>
-                    <td className="py-4 pl-4 border-x capitalize">
+                    <td className="py-4 text-center border-x capitalize">
                       {itinerary.selectType}
                     </td>
-                    <td className="py-4 pl-4 border-x capitalize">
+                    <td className="py-4 text-center border-x capitalize">
                       {itinerary.selectedItem}
                     </td>
-                    
-                    <td className="py-4 pl-4 border-x">{0}</td>
-                    <td className="justify-center flex gap-2 items-center my-auto py-3">
-                    <Link href={"./promo/"+itinerary.relatedId+"?type=edit"}>
-                    <FaEdit className=" cursor-pointer hover:text-blue-500 text-xl mt-1"
-                    
-                    />
-                    </Link>
-                      <MdDeleteForever
-                        onClick={() => deleteItem(itinerary._id)}
-                        size={24}
-                        className="mt-1 hover:text-red-500 cursor-pointer"
-                      />
+
+                    <td className="py-4 text-center border-x">{0}</td>
+                    <td className="py-4 flex justify-center items-center gap-3">
+                      <Link href={"./promo/" + itinerary.relatedId + "?type=edit"}>
+                        <FontAwesomeIcon
+                          icon={faEdit}
+                          className="mt-1 font1 hover:text-primary cursor-pointer"
+                        />
+                      </Link>
+                      <FontAwesomeIcon
+                          icon={faTrash} onClick={() => deleteItem(itinerary._id)}
+                          className="font1 hover:text-primary cursor-pointer"
+                        />
                     </td>
                   </tr>
                 ))}

@@ -42,7 +42,7 @@ const Editor = ({onChange,editorData }) => {
         <div>
             <div className='w-full'>
                 <QuillNoSSRWrapper
-                    className='rounded h-60 mb-10'
+                    className='rounded h-60 mb-14'
                     theme="snow"
                     formats={formats}
                     value={editorHtml}
