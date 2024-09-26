@@ -132,7 +132,7 @@ const YourComponent = () => {
                     Status
                   </th>
                   <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
-                    Edit & Remove1
+                    Edit & Remove
                   </th>
                 </tr>
               </thead>

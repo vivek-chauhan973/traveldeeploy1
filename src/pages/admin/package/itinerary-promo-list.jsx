@@ -93,10 +93,10 @@ const YourComponent = () => {
                 </div>
                 <div className="flex gap-3">
                   <p className="">Select Type : </p>
-                  <select className="ml-2 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                  <select className="ml-2 h-7 w-32 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                     onChange={(e) => setSelectType(e.target.value)}
                   >
-                    <option value="">Select </option>
+                    <option value="">Select</option>v
                     <option value="category">Category wise</option>
                     <option value="state">State wise</option>
                     <option value="country">Country wise</option>
@@ -142,8 +142,11 @@ const YourComponent = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentItems.length === 0 && <tr className="text-center">
-                  <td colSpan={5} className="text-lg  my-5">No records exist</td></tr>}
+                {currentItems.length === 0 &&
+                  <tr className="text-center">
+                    <td colSpan={5} className="text-lg  my-5">No records exist</td>
+                  </tr>
+                }
                 {currentItems?.map((itinerary) => (
                   <tr className="border-b" key={itinerary.id}>
                     <td className="py-2 pl-4 w-52">
@@ -175,9 +178,9 @@ const YourComponent = () => {
                         />
                       </Link>
                       <FontAwesomeIcon
-                          icon={faTrash} onClick={() => deleteItem(itinerary._id)}
-                          className="font1 hover:text-primary cursor-pointer"
-                        />
+                        icon={faTrash} onClick={() => deleteItem(itinerary._id)}
+                        className="font1 hover:text-primary cursor-pointer"
+                      />
                     </td>
                   </tr>
                 ))}

@@ -147,48 +147,59 @@ export default function PromoManage() {
         <AppProvider>
             <Layout>
                 <div>
-                    <div className="flex items-center gap-5 text-primary pb-3">
+                    <div className="flex items-center gap-5 text-primary pb-5">
                         <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                        <p className="text-[28px] text-black">Promo Manage</p>
+                        <p className="md:text-[28px] text-xl text-black">Promo Manage</p>
                         <FontAwesomeIcon
                             icon={faArrowRightLong}
                             className=" text-teal-700 text-xl"
                         />
                     </div>
                     <div>
-                        <div className="flex justify-between mx-1">
-                            <div className="flex items-center gap-2 mb-4">
-                                <label htmlFor="cityBages" className="font-semibold text-md">Select :</label>
-                                <select className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
+                        <div className="flex flex-col ">
+                            <div className="flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
+                                <label htmlFor="cityBages"
+                                    className="font-semibold text-para md:text-base">
+                                    Select :
+                                </label>
+                                <select
+                                    className="mt-1 md:ml-2 h-7  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                                 >
                                     <option value="" >{selectCatagoryOrState}</option>
                                 </select>
                                 <select
                                     id="packageCategory"
-                                    className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
+                                    className="mt-1 md:ml-2  h-7 md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                                     onChange={(e) => { handleSelectChange(e); }}
-
                                 >
                                     {selectCatagoryOrState === "category" && <option disabled selected>{selectedItem}</option>}
                                     {selectCatagoryOrState === "state" && <option disabled selected>{selectedItem}</option>}
                                     {selectCatagoryOrState === "country" && <option disabled selected>{selectedItem}</option>}
                                 </select>
+                                <button
+                                    className="mt-1 md:ml-2  bg-green-300 py-1 px-5 rounded-md hover:bg-green-500"
+                                    onClick={() => setSeofieldpopup(true)}
+                                >
+                                    Add Seo field
+                                </button>
                             </div>
-                            <div>
-                                <button className=" bg-green-200 py-1 px-2 rounded-md hover:bg-green-500" onClick={() => setSeofieldpopup(true)}>Add Seo field</button>
-                            </div>
-                            {seofieldpopup && <SeoPopupField setSeofieldpopup={setSeofieldpopup} selectedItem={selectedItem} setSeoData={setSeoData} seoData={seoData} />}
+                            <div></div>
+                            {seofieldpopup &&
+                                <SeoPopupField
+                                    setSeofieldpopup={setSeofieldpopup}
+                                    selectedItem={selectedItem}
+                                    setSeoData={setSeoData}
+                                    seoData={seoData}
+                                />}
                         </div>
-
                         <div>
                             <div className="bg-white rounded p-4">
                                 <div>
                                     <p className="text-[15px] font-semibold">Package Image Upload</p>
                                 </div>
-                                <div className="p-7  border border-slate-500/45 rounded">
+                                <div className="p-7 border border-slate-500/45 rounded">
                                     <div className="w-2/3">
                                         {file && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file} alt="Preview" />}
-
                                     </div>
                                     <div>
                                         <input
@@ -223,7 +234,6 @@ export default function PromoManage() {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="bg-white rounded p-5 mt-5">
                                 <div>
                                     <p className="text-[15px] font-semibold">Promo Text</p>
@@ -237,7 +247,6 @@ export default function PromoManage() {
                         <div className="mt-2">
                             <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn} />
                         </div>
-
                         <div className="rounded p-4 bg-white mt-5">
                             <div className="text-[15px] font-semibold">
                                 <p>FAQ Section</p>

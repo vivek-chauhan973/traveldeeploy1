@@ -62,7 +62,7 @@ const DepartureSection = ({ addPackage }) => {
             <div>
 
               {fixedDepartureButtonEnaibleAndDisable ? "" : <h4 className="font-semibold text-base p-3 text-graytext uppercase">
-                1. Choose your departure city and date
+                1. Choose your departure date and city
               </h4>}
             </div>
             <hr />
@@ -311,7 +311,7 @@ const DepartureSection = ({ addPackage }) => {
           <div>
             <div>
               <h4 className="font-semibold text-base p-3 text-graytext uppercase">
-                1. Choose your departure city and date
+                1. Choose your departure date and city
               </h4>
             </div>
             <hr />

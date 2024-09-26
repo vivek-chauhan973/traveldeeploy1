@@ -288,7 +288,7 @@ export default function Footer() {
                                 <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
                                     <div className="flex flex-col gap-y-5">
                                         <div className="flex flex-col space-y-2 ">
-                                            <h2 className="footer-head font-semibold text-base">Char Dham Yatra 2024</h2>
+                                            <h2 className="font-semibold text-base">Char Dham Yatra 2024</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Complete Chardham Yatra</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Do Dham Yatra</a>
@@ -298,7 +298,7 @@ export default function Footer() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col space-y-2 ">
-                                            <h2 className="footer-head font-semibold text-base">Char Dham Yatra 2024</h2>
+                                            <h2 className="font-semibold text-base">Char Dham Yatra 2024</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Complete Chardham Yatra</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Do Dham Yatra</a>
@@ -312,7 +312,7 @@ export default function Footer() {
                                     </div>
                                     <div className="flex flex-col gap-y-5">
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Adventure</h2>
+                                            <h2 className="font-semibold text-base">Adventure</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Rafting Package</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Kanatal Uttarakhand Package</a>
@@ -324,7 +324,7 @@ export default function Footer() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Adventure</h2>
+                                            <h2 className="font-semibold text-base">Adventure</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Rafting Package</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Kanatal Uttarakhand Package</a>
@@ -336,7 +336,7 @@ export default function Footer() {
                                     </div>
                                     <div className="flex flex-col gap-y-5">
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Hill Station</h2>
+                                            <h2 className="font-semibold text-base">Hill Station</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
@@ -349,7 +349,7 @@ export default function Footer() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Hill Station</h2>
+                                            <h2 className=" font-semibold text-base">Hill Station</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Rishikesh Auli Package</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Mussoorie Holiday Packages</a>
@@ -361,7 +361,7 @@ export default function Footer() {
                                     </div>
                                     <div className="flex flex-col gap-y-5">
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
+                                            <h2 className=" font-semibold text-base">Experiential Travel</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Shimla Honeymoon Tour</a>
@@ -370,7 +370,7 @@ export default function Footer() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
+                                            <h2 className=" font-semibold text-base">Experiential Travel</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Shimla Honeymoon Tour</a>
@@ -386,7 +386,7 @@ export default function Footer() {
                                     </div>
                                     <div className="flex flex-col gap-y-5">
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
+                                            <h2 className=" font-semibold text-base">Experiential Travel</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Shimla Honeymoon Tour</a>
@@ -395,7 +395,7 @@ export default function Footer() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col space-y-2">
-                                            <h2 className="footer-head font-semibold text-base">Experiential Travel</h2>
+                                            <h2 className=" font-semibold text-base">Experiential Travel</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
                                                 <a rel="noopener noreferrer" href="#" className="footer-content">Spiti Valley Tour</a>
@@ -416,35 +416,35 @@ export default function Footer() {
                                     <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4 py-5 border-t-1 border-slate-300 ">
                                         <div>
                                             <div className="flex flex-col space-y-2 ">
-                                                <h2 className="footer-head font-semibold text-base">Company</h2>
+                                                <h2 className=" font-semibold text-base">Company</h2>
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">About Us</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Contact Us</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Careers</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Blog</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">About Us</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Contact Us</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Careers</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Blog</a>
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div>
                                             <div className="flex flex-col space-y-2">
-                                                <h2 className="footer-head font-semibold text-base">Help</h2>
+                                                <h2 className="font-semibold text-base">Help</h2>
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">FAQs</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Cancellations & Returns</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Dark Mode</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">FAQs</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Cancellations & Returns</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Dark Mode</a>
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div>
                                             <div className="flex flex-col space-y-2">
-                                                <h2 className="footer-head font-semibold text-base">Customization</h2>
+                                                <h2 className="font-semibold text-base">Customization</h2>
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Configuration</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Theme Configuration</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Breakpoints</a>
-                                                    <a rel="noopener noreferrer" href="#" className="footer-head">Customizing Colors</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Configuration</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Theme Configuration</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Breakpoints</a>
+                                                    <a rel="noopener noreferrer" href="#" className="footer-content2">Customizing Colors</a>
 
                                                 </div>
                                             </div>
@@ -528,43 +528,40 @@ export default function Footer() {
                                             </a>
                                         </div>
                                     </div>
-                                    <div className="flex xl:flex-row flex-col items-center justify-between gap-5 py-2">
+                                    <hr className="container-wrapper"  />
+                                    <div className="flex md:flex-row flex-col items-center justify-between md:gap-0 gap-2 py-1">
                                         <div className="flex">
                                             <span className="dark:text-gray-400 md:text-sm text-xs">© Copyright 1986. All Rights Reserved. | Country India</span>
                                             <Image width={5} height={5} src="/assets/India.png"
-                                                className="h-7 w-7 object-cover md:block hidden"
+                                                className="h-6 w-6 object-cover md:block hidden"
                                                 alt=""
                                             />
                                         </div>
-                                        <div className="flex justify-center items-center gap-5">
-                                          <Image width={5} height={5} src="/assets/Location.png"
+                                        <div className="flex justify-center items-center gap-2">
+                                          <Image width={5} height={5} src="/assets/Affiliation 1.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
-                                            <Image width={5} height={5} src="/assets/Trademarks.png"
+                                            <Image width={5} height={5} src="/assets/Affiliation 2.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
-                                            <Image width={5} height={5} src="/assets/Uttarakhand Tourism.png"
+                                            <Image width={5} height={5} src="/assets/Affiliation 3.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
-                                          <Image width={5} height={5} src="/assets/Location.png"
+                                          <Image width={5} height={5} src="/assets/Affiliation 4.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
-                                            <Image width={5} height={5} src="/assets/Trademarks.png"
+                                            <Image width={5} height={5} src="/assets/Affiliation 5.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
-                                            <Image width={5} height={5} src="/assets/Uttarakhand Tourism.png"
+                                            <Image width={5} height={5} src="/assets/Affiliation 6.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
-                                            {/* <Image width={5} height={5} src="/assets/Tourism.png"
-                                                className="h-16 w-[500px] object-cover"
-                                                alt=""
-                                            /> */}
                                         </div>
                                     </div>
                                 </div>

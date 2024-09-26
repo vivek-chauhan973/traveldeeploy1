@@ -2,72 +2,62 @@ import Layout from "@/components/admin/Layout";
 import { useEffect, useRef, useState } from "react";
 import FaqSection from "@/components/admin/ItineraryPromo/FaqSection";
 import Editor from "@/components/admin/ItineraryPromo/Editor";
-import dynamic from 'next/dynamic';
-
-// Dynamically import icons
-const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuPackagePlus));
-const HiOutlineArrowNarrowRight = dynamic(() => import('react-icons/hi').then(mod => mod.HiOutlineArrowNarrowRight));
-
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image';
 import Index from "@/components/dy/Index";
 import SeoPopupField from "@/components/dy/SeoPopupField";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCube, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 export default function PromoManage() {
     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
-    const [catoryorstate,setCatoryorstate]=useState(false);
-    const [selectCatagoryOrState,setSelectCatagoryOrState]=useState("");
+    const [catoryorstate, setCatoryorstate] = useState(false);
+    const [selectCatagoryOrState, setSelectCatagoryOrState] = useState("");
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState(null);
-    const [seofieldpopup,setSeofieldpopup]=useState(false);
+    const [seofieldpopup, setSeofieldpopup] = useState(false);
     const [alt, setAlt] = useState(null);
     const [statePackages, setStatePackages] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
-     const [image1,setImage1]=useState(null);
-     const [selectedItem,setSelectedItem]=useState("");
-     const [seoData,setSeoData]=useState({});
-     const [tableData,setTableData]=useState([]);
-     const [tableColumn,setTableColumn]=useState([]);
+    const [image1, setImage1] = useState(null);
+    const [selectedItem, setSelectedItem] = useState("");
+    const [seoData, setSeoData] = useState({});
+    const [tableData, setTableData] = useState([]);
+    const [tableColumn, setTableColumn] = useState([]);
     useEffect(() => {
-        if(selectCatagoryOrState==="state"){
-        const fetchData = async () => {
-           
-            try {
-                const response = await fetch('/api/public/states');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+        if (selectCatagoryOrState === "state") {
+            const fetchData = async () => {
+
+                try {
+                    const response = await fetch('/api/public/states');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    // console.log("categories is here : ",data)
+                    setStatePackages(data?.states);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
                 }
-                const data = await response.json();
-                // console.log("categories is here : ",data)
-                setStatePackages(data?.states);
-            } catch (error) {
-                console.error('Error fetching data:', error);
             }
+            fetchData();
         }
-    
-        
-
-        fetchData();}
-        if(selectCatagoryOrState==="category"){
-        const fetchCatogories=async ()=>{
-           try {
-           
-                const categoriesList = await fetch('/api/package-setting/category/get-categories');
-            const categories = await categoriesList.json();
-            setStatePackages(categories?.data);
-            
-            
-
-           } catch (error) {
-            console.error('Error fetching data:', error);
-           }
+        if (selectCatagoryOrState === "category") {
+            const fetchCatogories = async () => {
+                try {
+                    const categoriesList = await fetch('/api/package-setting/category/get-categories');
+                    const categories = await categoriesList.json();
+                    setStatePackages(categories?.data);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+            fetchCatogories();
         }
-        fetchCatogories();}
-        if(selectCatagoryOrState==="country"){
+        if (selectCatagoryOrState === "country") {
             const fetchCountries = async () => {
                 try {
                     const res = await fetch('/api/location?type=country', { method: 'GET' });
@@ -103,35 +93,34 @@ export default function PromoManage() {
     const handleChange = (e) => {
         const data = e.target.files[0];
         setImage1(data)
-    if (data) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setFile(e.target.result);
-      };
-      reader.readAsDataURL(data);
-    }
+        if (data) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setFile(e.target.result);
+            };
+            reader.readAsDataURL(data);
+        }
     };
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
         setFile(promoTxt?.image || "");
         setTableData(promoTxt?.tableData || []);
-        setSeoData(promoTxt?.seoField|| {});
-        setTableColumn(promoTxt?.tableColumn|| []);
-        setEditorContent(promoTxt?.description||"<p></p>");
+        setSeoData(promoTxt?.seoField || {});
+        setTableColumn(promoTxt?.tableColumn || []);
+        setEditorContent(promoTxt?.description || "<p></p>");
     }, [promoTxt])
-    console.log("promotext",promoTxt)
-    useEffect(()=>{
+    console.log("promotext", promoTxt)
+    useEffect(() => {
         setFile(image1)
-    },[image1])
-console.log("columns is here ",tableColumn)
+    }, [image1])
+    console.log("columns is here ", tableColumn)
     // console.log("selected Item ::",selectedItem)
     const handleSelectChange = async (e) => {
-      const selectedData=(e.target.value)?.split(",");
-    //   console.log("selectedData",selectedData);
-      setSelectedLocation(selectedData?.[1]);
-      setSelectedItem(selectedData?.[0])
-       
+        const selectedData = (e.target.value)?.split(",");
+        //   console.log("selectedData",selectedData);
+        setSelectedLocation(selectedData?.[1]);
+        setSelectedItem(selectedData?.[0])
     };
 
     const handleFaqChange = (faqs) => {
@@ -146,7 +135,7 @@ console.log("columns is here ",tableColumn)
     // console.log("your selected catory is : ",selectCatagoryOrState)
     // console.log("data of seofield",tableData)
     const handleSubmit = async (e) => {
-        if(selectedLocation.length===0){
+        if (selectedLocation.length === 0) {
             return alert("select state or category or state");
         }
         const formData = new FormData();
@@ -158,9 +147,9 @@ console.log("columns is here ",tableColumn)
         formData.append('tableData', JSON.stringify(tableData));
         formData.append('seoData', JSON.stringify(seoData));
         formData.append('tableColumn', JSON.stringify(tableColumn));
-        formData.append('selectType',selectCatagoryOrState);
-        formData.append("selectedItem",selectedItem);
-        console.log("content",editorContent)
+        formData.append('selectType', selectCatagoryOrState);
+        formData.append("selectedItem", selectedItem);
+        console.log("content", editorContent)
         try {
             const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
                 method: 'POST',
@@ -173,7 +162,7 @@ console.log("columns is here ",tableColumn)
 
             const data = await response.json();
             console.log('Success:', data);
-          // Reset form fields after successful submission
+            // Reset form fields after successful submission
             setFile(null);
             setTitle("");
             setAlt("");
@@ -187,84 +176,125 @@ console.log("columns is here ",tableColumn)
             console.error('Error:', error);
         }
     };
-// console.log("table data :: ",tableData)
+    // console.log("table data :: ",tableData)
     return (
         <AppProvider>
             <Layout>
                 <div>
-                    
-                    <div className="flex items-center gap-5 text-primary pb-3">
-                        <LuPackagePlus size={24} className="font-semibold" />
-                        <p className="text-[28px] text-black">Promo Manage</p>
-                        <HiOutlineArrowNarrowRight size={28} className="text-teal-700" />
+                    <div className="flex items-center md:gap-5 gap-3 text-primary pb-5">
+                        <FontAwesomeIcon icon={faCube} className="text-2xl" />
+                        <p className="md:text-[28px] text-xl text-black">Promo Management</p>
+                        <FontAwesomeIcon
+                            icon={faArrowRightLong}
+                            className=" text-teal-700 text-xl"
+                        />
                     </div>
                     <div>
-                        <div className="flex justify-between mx-1">
-                            <div className="flex items-center gap-2 mb-4">
-                                <label htmlFor="cityBages" className="font-semibold text-md">Select :</label>
-                                <select  className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
-                                onChange={(e)=>{setCatoryorstate(true);setSelectCatagoryOrState(e.target.value)}}>
-                                    <option value="">select one</option>
-                                    <option value="category">category</option>
-                                    <option value="state">state</option>
-                                    <option value="country">country</option>
-                                </select>
-                                {catoryorstate&&<select
-                                    id="packageCategory"
-                                    className='ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para'
-                                    onChange={(e)=>{handleSelectChange(e);}}
-                                    
+                        <div className="flex flex-col mx-1 ">
+                            <div className="flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
+                                <label htmlFor="cityBages" 
+                                    className="font-semibold text-para md:text-base">
+                                    Select :
+                                </label>
+                                <select
+                                    className="mt-1 md:ml-2 h-7  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                                    onChange={(e) => {
+                                        setCatoryorstate(true);
+                                        setSelectCatagoryOrState(e.target.value);
+                                    }}
                                 >
-                                    {selectCatagoryOrState==="category"&&<option disabled selected>Select category</option>}
-                                    {selectCatagoryOrState==="state"&&<option disabled selected>Select state</option>}
-                                    {selectCatagoryOrState==="country"&&<option disabled selected>Select country</option>}
-                                    {selectCatagoryOrState==="country"&&statePackages.map((state, i) => (
-                                        <option
-                                            key={i}
-                                            className='border-none bg-slate-50 text-black'
-                                            value={`${state.name},${state._id}`}
-                                            data-pageurl={state.url}
-                                        >
-                                            {state.name}
-                                        </option>
-                                    ))}
-                                    {selectCatagoryOrState==="state"&&statePackages.map((state, i) => (
-                                        <option
-                                            key={i}
-                                            className='border-none bg-slate-50 text-black'
-                                            value={`${state.name},${state._id}`}
-                                            data-pageurl={state.url}
-                                        >
-                                            {state.name}
-                                        </option>
-                                    ))}
-                                    {selectCatagoryOrState==="category"&&statePackages.map((state, i) => (
-                                        <option
-                                            key={i}
-                                            className='border-none bg-slate-50 text-black'
-                                            value={`${state.category},${state._id}`}
-                                            // data-pageurl={state.url}
-                                        >
-                                            {state.category}
-                                        </option>
-                                    ))}
-                                </select>}
-                            </div>
-                            <div>
-                                <button className=" bg-green-200 py-1 px-2 rounded-md hover:bg-green-500" onClick={()=>setSeofieldpopup(true)}>Add Seo field</button>
-                            </div>
-                            {seofieldpopup&&<SeoPopupField setSeofieldpopup={setSeofieldpopup} selectedItem={selectedItem} setSeoData={setSeoData} seoData={seoData}/>}
-                        </div>
+                                    <option value="">Select One</option>
+                                    <option value="category">Category</option>
+                                    <option value="state">State</option>
+                                    <option value="country">Country</option>
+                                </select>
+                                {catoryorstate && (
+                                    <select
+                                        id="packageCategory"
+                                        className="mt-1 md:ml-2  h-7 md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                                        onChange={(e) => {
+                                            handleSelectChange(e);
+                                        }}
+                                    >
+                                        {selectCatagoryOrState === "category" && (
+                                            <option disabled selected>
+                                                Select category
+                                            </option>
+                                        )}
+                                        {selectCatagoryOrState === "state" && (
+                                            <option disabled selected>
+                                                Select state
+                                            </option>
+                                        )}
+                                        {selectCatagoryOrState === "country" && (
+                                            <option disabled selected>
+                                                Select country
+                                            </option>
+                                        )}
 
+                                        {/* Conditionally render options based on selected category/state/country */}
+                                        {selectCatagoryOrState === "country" &&
+                                            statePackages.map((state, i) => (
+                                                <option
+                                                    key={i}
+                                                    className="border-none bg-slate-50 text-black capitalize"
+                                                    value={`${state.name},${state._id}`}
+                                                    data-pageurl={state.url}
+                                                >
+                                                    {state.name}
+                                                </option>
+                                            ))}
+
+                                        {selectCatagoryOrState === "state" &&
+                                            statePackages.map((state, i) => (
+                                                <option
+                                                    key={i}
+                                                    className="border-none bg-slate-50 text-black capitalize"
+                                                    value={`${state.name},${state._id}`}
+                                                    data-pageurl={state.url}
+                                                >
+                                                    {state.name}
+                                                </option>
+                                            ))}
+
+                                        {selectCatagoryOrState === "category" &&
+                                            statePackages.map((state, i) => (
+                                                <option
+                                                    key={i}
+                                                    className="border-none bg-slate-50 text-black capitalize"
+                                                    value={`${state.category},${state._id}`}
+                                                >
+                                                    {state.category}
+                                                </option>
+                                            ))}
+                                    </select>
+                                )}
+                                <button
+                                    className="mt-1 md:ml-2  bg-green-300 py-1 px-5 rounded-md hover:bg-green-500"
+                                    onClick={() => setSeofieldpopup(true)}
+                                >
+                                    Add Seo field
+                                </button>
+                            </div>
+                            <div></div>
+                            {seofieldpopup && (
+                                <SeoPopupField
+                                    setSeofieldpopup={setSeofieldpopup}
+                                    selectedItem={selectedItem}
+                                    setSeoData={setSeoData}
+                                    seoData={seoData}
+                                />
+                            )}
+                        </div>
                         <div>
                             <div className="bg-white rounded p-4">
                                 <div>
                                     <p className="text-[15px] font-semibold">Package Image Upload</p>
                                 </div>
-                                <div className="py-10 border border-slate-500/45 px-2 rounded">
+                                <div className="p-7 border border-slate-500/45 rounded">
                                     <div className="w-2/3">
-                                        {file && <Image className="w-20 shadow-md" width="123" height="150" src={file} alt="Preview" />}
-                                        
+                                        {file && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file} alt="Preview" />}
+
                                     </div>
                                     <div>
                                         <input
@@ -279,10 +309,10 @@ console.log("columns is here ",tableColumn)
                                                 hover:file:bg-black/75 hover:file:text-white cursor-pointer"
                                         />
                                     </div>
-                                    <div>
+                                    <div className="my-3">
                                         <p>Title</p>
                                         <input
-                                            className="border px-2"
+                                            className="border px-2 rounded-sm"
                                             type="text"
                                             value={title}
                                             onChange={(e) => setTitle(e.target.value)}
@@ -291,7 +321,7 @@ console.log("columns is here ",tableColumn)
                                     <div>
                                         <p>Alt</p>
                                         <input
-                                            className="border px-2"
+                                            className="border px-2 rounded-sm"
                                             type="text"
                                             value={alt}
                                             onChange={(e) => setAlt(e.target.value)}
@@ -299,8 +329,7 @@ console.log("columns is here ",tableColumn)
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="bg-white rounded p-4 mt-5">
+                            <div className="bg-white rounded p-5 mt-5">
                                 <div>
                                     <p className="text-[15px] font-semibold">Promo Text</p>
                                     {/* <p>{promoTxt?.message}</p> Adjusted to render a specific property */}
@@ -311,9 +340,8 @@ console.log("columns is here ",tableColumn)
                             </div>
                         </div>
                         <div className="mt-2">
-                            <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn}/>
+                            <Index setTableData={setTableData} tableData={tableData} setTableColumn={setTableColumn} tableColumn={tableColumn} />
                         </div>
-
                         <div className="rounded p-4 bg-white mt-5">
                             <div className="text-[15px] font-semibold">
                                 <p>Faq Section</p>
@@ -322,9 +350,7 @@ console.log("columns is here ",tableColumn)
                                 <FaqSection onChange={handleFaqChange} faqData={promoTxt?.faq} />
                             </div>
                         </div>
-                        <div className="flex">
-                            <button onClick={handleSubmit} className="grow bg-black font-semibold text-white py-3 my-5 m-8 rounded">ADD</button>
-                        </div>
+                        <button onClick={handleSubmit} className=" w-full bg-black font-semibold text-white py-3 mt-5 rounded">ADD</button>
                     </div>
                 </div>
             </Layout>
