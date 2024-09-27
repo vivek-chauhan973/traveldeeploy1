@@ -34,7 +34,7 @@ export default function SearchPage() {
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [maxDay, setMaxDay] = useState(0);
+  const [maxDay, setMaxDay] = useState(50);
   const [minDay, setMinDay] = useState(0);
   const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);

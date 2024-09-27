@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
-const MAX = 99100;
-const MIN = 0;
+const MAX = 200000;
+const MIN = 10000;
 const marks = [
     {
         value: MIN,
@@ -33,7 +33,7 @@ const fetchCatagory = async () => {
 export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourDuration, setMaxDay, setMinDay, setClearAll }) {
     const { setCatagoryId } = useAppContext()
     const { setMinPrice, setMaxPrice, setDuration } = useAppContext();
-    const [priceRange, setPriceRange] = useState([0, 9900]);
+    const [priceRange, setPriceRange] = useState([10000, 200000]);
 
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
@@ -90,8 +90,8 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
         setDuration(tourDuration)
     }, [filter])
     const handleClearAll = () => {
-        setPriceRange([0, 9900]);
-        setTourDuration([0, 6]);
+        setPriceRange([10000, 200000]);
+        setTourDuration([0, 50]);
         setDepartureCity([]);
         setClearAll(true)
         // onClearFilters();
@@ -107,7 +107,7 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
         <>
             <div>
                 <div className="bg-white rounded-md sticky top-2">
-                    <div className="md:p-5 p-2  ">                        
+                    <div className="md:p-5 p-2">
                         <div className="flex justify-between md:pb-2 pb-1">
                             <h3 className="md:text-[16px] text-[14px] font-medium">Package Prices</h3>
                             <p className="text-[12px] underline text-blue-800 cursor-pointer" onClick={handleClearAll}>Clear All</p>
@@ -130,14 +130,29 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                                         <p className='md:text-para text-[12px]'>{priceRange[0]} - {priceRange[1]} Packages</p>
                                     </Box>
                                 </Box>
-
                             </div>
-
                         </div>
-
+                        <div className="md:text-para text-sm font-light">
+                            <div className="flex gap-3 my-3">
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
+                                    ₹10,000 - ₹30,000
+                                </button>
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
+                                    ₹30,000 - ₹80,000
+                                </button>
+                            </div>
+                            <div className="flex gap-3">
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
+                                    ₹80,000 - ₹1.5L
+                                </button>
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
+                                    ₹1.5L & above
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        <div className="border-t md:p-3 p-2 py-0">
+                        <div className="border-t md:px-5 py-3 p-2">
                             <div>
                                 <h3 className="md:text-[16px] text-[14px] font-medium my-2">Tour Duration</h3>
                             </div>
@@ -145,11 +160,16 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                                 <Slider
                                     getAriaLabel={() => 'Tour duration range'}
                                     value={tourDuration}
-                                    onChange={(_, newValue) => { setMaxDay(newValue[1]); setMinDay(newValue[0]); setTourDuration(newValue) }}
+                                    onChange={(_, newValue) => {
+                                        setMaxDay(newValue[1]);
+                                        setMinDay(newValue[0]);
+                                        setTourDuration(newValue)
+                                    }}
                                     valueLabelDisplay="auto"
                                     getAriaValueText={valuetext}
                                     sx={{ color: "#2A2C41" }}
                                     min={0}
+                                    max={50}
                                 />
                             </Box>
                             <div>
@@ -158,41 +178,26 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                                     <p className="md:text-[14px] text-[12px]">Max <span>{tourDuration?.[1]} days</span></p>
                                 </div>
                             </div>
-
-                        </div>
-                        <div className="border-b md:mt-0 mt-1"></div>
-                        {/* <div className="px-5 md:py-2 py-1">
-                            <p className="md:text-[16px] text-[14px] font-medium md:my-2 my-1">Departure City</p>
-                        </div>
-                        <div>
-                            <div className="flex items-center gap-2 px-5 pb-2 py-2 ">
-                                <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                    id="city1" name="bangalore" value="Banglore" onChange={(e) => handleCheckboxChange(e, setDepartureCity)} />
-                                <label htmlFor="city1" className="cursor-pointer label-text md:text-[14px] text-[12px]"> Banglore</label>
+                            <div className="md:text-para text-sm font-light">
+                                <div className="flex gap-3 my-3">
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
+                                        3 - 7 days
+                                    </button>
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
+                                        7 - 15 days
+                                    </button>
+                                </div>
+                                <div className="flex gap-3">
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
+                                        15 - 27 days
+                                    </button>
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
+                                        27 - 50 dyas
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div className="flex items-center gap-2 px-5 pb-2 py-2">
-                                <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                    id="city2" name="delhi" value="Delhi" onChange={(e) => handleCheckboxChange(e, setDepartureCity)} />
-                                <label htmlFor="city2" className="cursor-pointer label-text md:text-[14px] text-[12px]">Delhi</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex items-center gap-2 px-5 pb-2 py-2">
-                                <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                    id="city3" name="noida" value="Noida" onChange={(e) => handleCheckboxChange(e, setDepartureCity)} />
-                                <label htmlFor="city3" className="cursor-pointer label-text md:text-[14px] text-[12px]"> Noida</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex items-center gap-2 px-5 pb-2 py-2">
-                                <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                    id="city4" name="indore" value="Indore" onChange={(e) => handleCheckboxChange(e, setDepartureCity)} />
-                                <label htmlFor="city4" className="cursor-pointer label-text md:text-[14px] text-[12px]"> Indore</label>
-                            </div>
-                        </div> 
-                        <div className="border-b md:mt-5 mt-2"></div>*/}
+                        <div className="border-b md:mt-2 mt-1"></div>
                         <div className="pr-5 py-2">
                             <h3 className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</h3>
                             <div>
@@ -202,7 +207,6 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                                     <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
                                         {item?.category}</label>
                                 </div>)}
-
                             </div>
                         </div>
                     </div>
@@ -214,3 +218,4 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
         </>
     )
 }
+
