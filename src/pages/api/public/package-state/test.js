@@ -1,5 +1,5 @@
-import PackageState from "@/models/package/PackageState";
-import Package from "@/models/Package"
+import PackageState from '@/models/package/PackageState';
+import CarPackage from "@/models/CarPackage"
 import { NextApiRequest, NextApiResponse } from "next";
 
 const packagePublicPackageStateTest= async (req, res) => {
@@ -8,7 +8,7 @@ const packagePublicPackageStateTest= async (req, res) => {
         const packageStates = await PackageState.find({ state: locationId }).populate('state').exec();
         // console.log("packgeStates in test",packageStates)
         const packageStatesIds = packageStates.map(city => city._id);
-        const packages = await Package.find({ location: { $in: packageStatesIds } })
+        const packages = await CarPackage.find({ location: { $in: packageStatesIds } })
 
         return res.status(200).json({ packages, packageStatesIds });
     } catch (error) {

@@ -82,24 +82,19 @@ export default function PromoManage() {
     }, [image1])
 
     const handleSelectChange = async (e) => {
-        const selectedData = (e.target.value)?.split(",");
-        //   console.log("selectedData",selectedData);
-        setSelectedLocation(selectedData?.[1]);
-        setSelectedItem(selectedData?.[0])
-
+      const selectedData=(e.target.value)?.split(",");
+      setSelectedLocation(selectedData?.[1]);
+      setSelectedItem(selectedData?.[0])
+       
     };
 
     const handleFaqChange = (faqs) => {
         setFaqData(faqs);
     };
-    // console.log("selected location ::",selectedLocation)
     const handleEditorChange = (content) => {
 
-        // console.log("content",content)
         setEditorContent(content);
     };
-    // console.log("your selected catory is : ",selectCatagoryOrState)
-    // console.log("data of seofield",tableData)
     const handleSubmit = async (e) => {
         if (selectedLocation.length === 0) {
             return alert("select state or category or state");

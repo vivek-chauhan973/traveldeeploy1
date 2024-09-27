@@ -72,11 +72,12 @@ const handleLogout=async ()=>{
       label: "Car Rental",
       icon: () => <FontAwesomeIcon icon={faCar} />,
       subMenu: [
-        { label: "Create", href: "/admin/car-rental/create" },
-        { label: "Package Master", href: "/admin/car-rental" },
-        { label: "Package List", href: "/admin/car-rental/package-list" },
+        { label: " Car Package Master", href: "/admin/car-rental" },
+        { label: "Add Vehicle", href: "/admin/car-rental/create" },
+        { label: "Add Car Itinerary", href: "/admin/car-rental/car-itinerary" },
+        { label: " Car Package List", href: "/admin/car-rental/package-list" },
+        { label: "Car Promo List", href: "/admin/car-rental/car-promo-list" },
         { label: "Car Promo Management", href: "/admin/car-rental/promo-management" },
-        { label: "country-state-city", href: "/admin/car-rental/country-state-city" },
       ]
     },
     {

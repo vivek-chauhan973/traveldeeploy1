@@ -66,7 +66,7 @@ const YourComponent = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-  console.log("Rakesh2", currentItems);
+  // console.log("Rakesh2", currentItems);
   return (
     <AppProvider>
       <Layout>
@@ -162,8 +162,8 @@ const YourComponent = () => {
                     <td className="py-4 text-center border-x capitalize">
                       {itinerary.name}
                     </td>
-                    <td className="py-4 text-center border-x capitalize">
-                      {itinerary.category}
+                    <td className="py-4 flex flex-wrap gap-2 border-x capitalize">
+                      {itinerary.category?.map(item1=><p key={item1?._id} className="px-2">{item1?.category}</p>)}
                     </td>
                     <td className="text-center border-x">Rs {itinerary.price}</td>
                     <td className="py-4 text-center border-x">
