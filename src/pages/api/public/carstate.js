@@ -1,10 +1,11 @@
 
-import CarState from "@/models/CarState";
+
+import State from "@/models/State";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePublicState=async (req, res) => {
     try {
-        const states = await CarState.find()
+        const states = await State.find()
         
         return res.status(200).json({ states });
     } catch (error) {

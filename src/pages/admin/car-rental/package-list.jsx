@@ -23,6 +23,7 @@ const YourComponent = () => {
       try {
         const response = await fetch("/api/cars/package/get-packages");
         const data = await response.json();
+        console.log("all packages list is here ---> ",data);
         setItineraries(data.packages || []); // Provide a default empty array if data.packages is undefined
       } catch (error) {
         console.error("Error fetching itinerary data:", error);
@@ -162,8 +163,8 @@ const YourComponent = () => {
                     <td className="py-4 text-center border-x capitalize">
                       {itinerary.name}
                     </td>
-                    <td className="py-4 text-center border-x capitalize">
-                      {itinerary.category}
+                    <td className="py-4 text-center flex flex-wrap border-x capitalize">
+                      {itinerary.category?.map((item,i)=><p key={i} className="px-2">{item?.category}</p>)}
                     </td>
                     <td className="text-center border-x">Rs {itinerary.price}</td>
                     <td className="py-4 text-center border-x">

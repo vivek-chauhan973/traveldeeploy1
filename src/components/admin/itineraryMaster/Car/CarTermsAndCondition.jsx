@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import CarPackageTerm from './CarPackageTerm'
 import CarGroupDepartureTerm from './CarGroupDepartureTerm'
-import CarChartureTerm from './CarChartureTerm'
-
 const CarTermsAndCondition = () => {
     // tab editor content change
     const [activeTab, setActiveTab] = useState('Tab2')
@@ -16,20 +14,15 @@ const CarTermsAndCondition = () => {
                 <p className='text-para font-semibold'>Terms and Conditions</p>
                 <div className="border   rounded p-2">
                     <div className="flex gap-2 text-[12px] py-5 flex-wrap">
-                        <button onClick={() => handleTabClick('Tab1')} className={`border ${activeTab === "Tab1" ? "bg-black text-white" : "border-navyblack text-navyblack"}  rounded-badge px-3 py-1`}>Package</button>
-                        <button onClick={() => handleTabClick('Tab2')} className={`border ${activeTab === "Tab2" ? "bg-black text-white" : "border-navyblack text-navyblack"}  rounded-badge px-3 py-1`}>GroupDeparture</button>
-                        <button onClick={() => handleTabClick('Tab3')} className={`border ${activeTab === 'Tab3' ? "bg-black text-white" : "border-navyblack text-navyblack"}  rounded-badge px-3 py-1`}>Charter</button>    
+                        <button onClick={() => handleTabClick('Tab1')} className={`border ${activeTab === "Tab1" ? "bg-black text-white" : "border-navyblack text-navyblack"}  rounded-badge px-3 py-1`}>Car Package</button>
+                        <button onClick={() => handleTabClick('Tab2')} className={`border ${activeTab === "Tab2" ? "bg-black text-white" : "border-navyblack text-navyblack"}  rounded-badge px-3 py-1`}>Rent a Car</button> 
                     </div>
                     <div className={` ${activeTab === 'Tab1' ? 'block' : 'hidden'}`}>
                         <CarPackageTerm />
                     </div>
                     <div className={` ${activeTab === 'Tab2' ? 'block' : 'hidden'}`}>
                         <CarGroupDepartureTerm />
-                    </div>
-                    <div className={` ${activeTab === 'Tab3' ? 'block' : 'hidden'}`}>
-                        <CarChartureTerm />
-                    </div>
-                   
+                    </div>   
                 </div>
             </div>
         </>

@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong, faEdit, faCirclePlus, faTrash, faCancel, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
 import CarItineraryTour from "@/components/admin/itineraryMaster/CarItineraryTour";
-import CarTermsAndCondition from "@/components/admin/itineraryMaster/Car/CarTermsAndCondition copy";
+import CarTermsAndCondition from "@/components/admin/itineraryMaster/Car/CarTermsAndCondition";
 import CarGst from "@/components/admin/dashboard/CarGst";
 
 

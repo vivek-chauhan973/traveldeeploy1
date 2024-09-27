@@ -14,12 +14,9 @@ import Image from 'next/image';
 import Index from "@/components/dy/Index";
 import SeoPopupField from "@/components/dy/SeoPopupField";
 import { useRouter } from "next/router";
-
-
 export default function PromoManage() {
-    const router=useRouter();
-    
-    const {promo}=router?.query;
+    const router=useRouter();  
+    const {id1}=router?.query;
     // console.log("router is here : ",router);
     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
@@ -38,15 +35,16 @@ export default function PromoManage() {
      const [tableData,setTableData]=useState([]);
      const [tableColumn,setTableColumn]=useState([]);
      useEffect(()=>{
-        setSelectedLocation(promo||"")
-    },[promo])
+      if(id1){
+        setSelectedLocation(id1||"")
+      }
+    },[id1])
     
     useEffect(() => {
         const getPromoData = async () => {
             try {
-                const res = await fetch(`/api/public/package-state/${selectedLocation}`);
+                const res = await fetch(`/api/public/package-state/carpromo/${selectedLocation}`);
                 const data = await res.json();
-                
                 return data;
             } catch (error) {
                 console.error("Error fetching promo text", error);
@@ -54,9 +52,7 @@ export default function PromoManage() {
         };
 
        
-            getPromoData().then(res => setPromoTxt(res?.data));
-
-        
+            getPromoData().then(res => setPromoTxt(res?.data));   
     }, [ selectedLocation]);
     const handleChange = (e) => {
         const data = e.target.files[0];
@@ -68,8 +64,7 @@ export default function PromoManage() {
       };
       reader.readAsDataURL(data);
     }
-    };
-    
+    }; 
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
@@ -81,7 +76,6 @@ export default function PromoManage() {
         setSelectCatagoryOrState(promoTxt?.selectType||"")
         setSelectedItem(promoTxt?.selectedItem||"");
     }, [promoTxt])
-   
     useEffect(()=>{
         setFile(image1)
     },[image1])
@@ -92,7 +86,6 @@ export default function PromoManage() {
       setSelectedItem(selectedData?.[0])
        
     };
-
     const handleFaqChange = (faqs) => {
         setFaqData(faqs);
     };
@@ -116,7 +109,7 @@ export default function PromoManage() {
         formData.append('selectType',selectCatagoryOrState);
         formData.append("selectedItem",selectedItem);
         try {
-            const response = await fetch(`/api/public/package-state/${selectedLocation}`, {
+            const response = await fetch(`/api/public/package-state/carpromo/${selectedLocation}`, {
                 method: 'POST',
                 body: formData,
             });

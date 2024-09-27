@@ -1,13 +1,12 @@
-import PackageState from '@/models/package/PackageState';
-import connectToDatabase from '@/utils/db';
+import CarPackageState from "@/models/car-package/package/PackageState";
 const fetchpromocat=async (req,res)=>{
-connectToDatabase().then(res=>console.log("mongoDB successfully connected"));
+    // console.log("req12329u92y4732y7843593484984y5934y",req.query)
    const {selectType}= req?.query;
 
    if(selectType==="all"||selectType===""){
       
     try {
-        const responseData=await PackageState.find({});
+        const responseData=await CarPackageState.find({});
         if(!responseData){
             res.status(404).json({message:"promo data is not found"});
         }
@@ -19,7 +18,8 @@ connectToDatabase().then(res=>console.log("mongoDB successfully connected"));
    }
    else{
     try {
-        const responseData=await PackageState.find({selectType});
+        const responseData=await CarPackageState.find({selectType});
+        // console.log("responseData",responseData);
         if(!responseData){
             res.status(404).json({message:"promo data is not found"});
         }

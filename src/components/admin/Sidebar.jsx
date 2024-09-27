@@ -76,8 +76,8 @@ const handleLogout=async ()=>{
         { label: "Add Vehicle", href: "/admin/car-rental/create" },
         { label: "Add Car Itinerary", href: "/admin/car-rental/car-itinerary" },
         { label: " Car Package List", href: "/admin/car-rental/package-list" },
+        { label: "Car Promo List", href: "/admin/car-rental/car-promo-list" },
         { label: "Car Promo Management", href: "/admin/car-rental/promo-management" },
-        { label: "country-state-city", href: "/admin/car-rental/country-state-city" },
       ]
     },
     {

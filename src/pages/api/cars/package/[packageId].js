@@ -8,7 +8,6 @@ import CarCountry from "@/models/CarCountry";
 import CarPackageHighlight from "@/models/car-package/package/PackageHighlight";
 import CarPackageDayWise from "@/models/car-package/package/PackageDayWise";
 import CarPackageFaqWise from "@/models/car-package/package/PackageFaq";
-import CarPackagePrice from "@/models/car-package/package/PackagePrice";
 import CarInclusion from "@/models/car-package/package/TourInfo/Inclusion";
 import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
 // find By Id And Update
@@ -25,16 +24,15 @@ import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
                     selectedCountry,packageRating, highlightedPackage} = req.body;
                 const startcity1=startcity.split(",");
                 const images=uploads?.data?.map(item=>item?.path)
-                // console.log("startcity 134346387453465347534",badges);
                 updatedPackage = await CarPackage.findByIdAndUpdate(packageId, {priority, name, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState,packageRating,highlightedPackage }, { new: true });
-
+           
                 if (!updatedPackage) {
                     return res.status(404).json({ message: 'Package not found' });
                 }
                 break;
 
             default:
-                updatedPackage = await Package.findById(packageId).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
+                updatedPackage = await CarPackage.findById(packageId).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
                 .populate('tourinfo.tourExclusion')
                 .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
                 .populate('tourinfo.tourNeedToKonow').populate("icons");
@@ -43,7 +41,6 @@ import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
                 const highlightDetails = await CarPackageHighlight.findOne({ package: updatedPackage._id }, 'highlights');
                 const dayDetails = await CarPackageDayWise.findOne({ package: updatedPackage._id }, 'days');
                 const faqs = await CarPackageFaqWise.findOne({ package: updatedPackage._id }, 'days');
-                const priceDetails = await CarPackagePrice.findOne({ package: updatedPackage._id });
                 const inclusionDetails = await CarInclusion.findOne({ package: updatedPackage._id });
                 const priceDeparture = await CarPackageDeparture.findOne({ package: updatedPackage._id });
                 //inclusion code is here
@@ -51,7 +48,7 @@ import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
                 updatedPackage._doc.highlights = highlightDetails ? highlightDetails.highlights : [];
                 updatedPackage._doc.days = dayDetails ? dayDetails.days : [];
                 updatedPackage._doc.titles = faqs ;
-                updatedPackage._doc.prices = priceDetails||priceDeparture;
+                updatedPackage._doc.prices =priceDeparture;
                 updatedPackage._doc.inclusion = inclusionDetails; //inclusion code is here
                 updatedPackage._doc.associateState = associateState;
                 updatedPackage._doc.associateCountry = associateCountry;

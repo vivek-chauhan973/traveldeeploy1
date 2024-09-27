@@ -151,7 +151,7 @@ const Layout = ({ children }) => {
               </div>
             ) : (
               <div className="pt-2 z-30">{children}</div>
-            )}
+            )} 
           </div>
         </div>
       </div>

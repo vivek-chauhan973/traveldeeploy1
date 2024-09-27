@@ -9,13 +9,12 @@ import "@/models/City";
 import "@/models/Country";
 import "@/models/State";
 import "@/models/car-package/package/PackageCategory";
-import "@/models/car-package/package/PackagePrice";
 import "@/models/car-package/package/PriceHike";
 import "@/models/car-package/package/PackageDeparture";
-import Counter from "./Counter";
+import CarCounter from "./CarCounter";
 
-async function getNextSequenceValueWithPrefix(sequenceName, prefix = 'BXP', padding = 3) {
-  const sequenceDocument = await Counter.findOneAndUpdate(
+async function getNextSequenceValueWithPrefix(sequenceName, prefix = 'BXC', padding = 3) {
+  const sequenceDocument = await CarCounter.findOneAndUpdate(
     { _id: sequenceName },
     { $inc: { sequence_value: 1 } }, // Increment the sequence value
     { new: true, upsert: true } // Return the updated document or insert if it doesn't exist
@@ -32,23 +31,23 @@ mongoose
   const tourInfoSchema=new mongoose.Schema({
     tourInclusion:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:"Inclusion"
+      ref:"CarInclusion"
     },
     tourExclusion:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:"Exclusion"
+      ref:"CarExclusion"
     },
     tourCancelationPolicy:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:"Cancellation"
+      ref:"CarCancellation"
     },
     tourNeedToKonow:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:"NeedToKnow"
+      ref:"CarNeedToKnow"
     },
     tourPayment:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:"PaymentTerm"
+      ref:"CarPaymentTerm"
     },
   })
 const packageSchema = new Schema({
@@ -78,25 +77,21 @@ const packageSchema = new Schema({
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "PackageMasterCategory",
+        ref: "CarPackageMasterCategory",
         required: true,
       },
     ],
     priceHike:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:"PriceHike"
-    },
-    addguestPrices:{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:"PackagePrice"
+      ref:"CarPriceHike"
     },
     fixedDeparturePrices:{
      type:mongoose.Schema.Types.ObjectId,
-      ref:"PackageDeparture"
+      ref:"CarPackageDeparture"
     },
     icons:{
       type:mongoose.Schema.Types.ObjectId,
-       ref:"SelectedIcon"
+       ref:"CarSelectedIcon"
      },
     tourinfo:tourInfoSchema,
     badges: {
@@ -107,12 +102,6 @@ const packageSchema = new Schema({
       type: Number,
     },
     uploads: [String],
-    addguest: {
-      type: String,
-    },
-    fixedfixeddepartureweightedprice: {
-      type: Number,
-    },
     startcity: {
       type: [String],
       default: [],
@@ -152,25 +141,8 @@ const packageSchema = new Schema({
   }
 );
 
-packageSchema.pre(/^find/, function (next) {
-  this.populate("addguestPrices");
-  next();
-});
 // Virtual field to calculate display price based on addguestPrices
-packageSchema.virtual('displayPrice').get(function () {
-  if (this.addguestPrices) {
-    const basePrice = this.addguestPrices.twinSharingRoom + (this.addguestPrices.misc * (this.days || 0));
-    const markupAmount = (basePrice * this.addguestPrices.markup) / 100;
-    const priceWithMarkup = basePrice + markupAmount;
-    const discountAmount = (priceWithMarkup * Math.abs(this.addguestPrices.diskHike)) / 100;
-    const grandTotal = this.addguestPrices.diskHike < 0
-      ? priceWithMarkup - discountAmount
-      : priceWithMarkup + discountAmount;
-    const gstAmount = (grandTotal * this.addguestPrices.gst) / 100;
-    return (grandTotal + gstAmount) / 2;
-  }
-  return 0; // Return a default value if addguestPrices is not defined
-});
+
 
 packageSchema.virtual("pageUrl").get(function () {
   return `${this.url}-tour-package`;
@@ -180,7 +152,7 @@ packageSchema.pre("save", async function (next) {
     this.url = this.name.toLowerCase().replace(/\s+/g, "-");
   }
   if (this.isNew) {
-    this.customId = await getNextSequenceValueWithPrefix('users', 'BXP'); // Generate ID like BXP001
+    this.customId = await getNextSequenceValueWithPrefix('users', 'BXC'); // Generate ID like BXP001
   }
   try {
     await this.validate();
@@ -197,7 +169,7 @@ packageSchema.pre("findOneAndUpdate", function (next) {
   next();
 });
 
-const CarPackage =
-  mongoose.models.CarPackage || mongoose.model("CarPackage", packageSchema);
+const CarPackage1 =
+  mongoose.models.CarPackage1 || mongoose.model("CarPackage1", packageSchema);
 
-export default CarPackage;
+export default CarPackage1;

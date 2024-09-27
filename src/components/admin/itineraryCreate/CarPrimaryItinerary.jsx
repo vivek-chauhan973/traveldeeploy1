@@ -37,9 +37,13 @@ const fetchCities = async (stateId) => {
         return [];
     }
 };
-const CarPrimaryItinerary= ({setActiveTab, itinerary, itineraryInfo, setItineraryInfo, setBasicDot })=> {
+
+const fetchCars=async ()=>{
+    const response = await fetch('/api/cars/carapi');
+    return await response.json();
+}
+const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
     const router = useRouter();
-    const { pricingManagement } = useAppContext();
     const [priority, setPriority] = useState("0");
     const [countries, setCountries] = useState();
     const [states, setStates] = useState();
@@ -50,9 +54,9 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary, itineraryInfo, setItinerar
     const [dayWiseFaq, setDayWiseFaq] = useState([]);
     const [selectedCountry, setSelesctedCountry] = useState('');
     const [selectedState, setSelesctedState] = useState('');
-    // const [PackageIdGenerate, setPackageIdGenerate] = useState("");
     const [packageRating, setPackageRating] = useState('');
     const [highlightedPackage, setHighlightedPackage] = useState('');
+    const [allCars,setAllCars]=useState([]);
 
     useEffect(() => {
 
@@ -64,10 +68,10 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary, itineraryInfo, setItinerar
 
         fetchCountry();
     }, []);
-
-
-    // Images here 
-// console.log("itineary is here ---> ",itinerary)
+  
+  useEffect(()=>{
+    fetchCars().then(res=>{console.log("res all cars is here ---> ",res?.data);setAllCars(res?.data||[])})
+  },[])
 
     const [file, setFile] = useState();
     function handleChange(e) {
@@ -112,7 +116,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary, itineraryInfo, setItinerar
             const categories = await categoriesList.json();
             setPackageCategories(categories.data);
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             return [];
         }
     };
@@ -277,13 +281,6 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary, itineraryInfo, setItinerar
             }
         }
     };
-const [generateNum,setGenerateNum]=useState(1);
-    // const handleGenUniqueKey = () => {
-    //     const key = "BXP" + generateNum;
-    //     setPackageIdGenerate(key);
-    //     setGenerateNum(generateNum+1);
-    // }
-    // console.log("Rakesh Rikki ", packageRating);
     return (
         <>
             <div className="bg-white p-4 rounded-md">
@@ -301,10 +298,19 @@ const [generateNum,setGenerateNum]=useState(1);
                                     disabled placeholder="Package Id " value={PackageIdGenerate} />
                                 {PackageIdGenerate===""&&<button className="bg-navyblack hover:bg-black text-white rounded px-4 py-1 md:ml-10 md:mt-0 mt-5" onClick={handleGenUniqueKey}>Genrate ID</button>}
                             </div> */}
-                            <div className=" sm:flex items-center">
+                            {/* <div className=" sm:flex items-center">
                                 <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Title:</label>
                                 <input ref={packageTitleRef} className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => handlePackageTitle(e.target.value)} placeholder="Enter package name" defaultValue={itinerary?.name} />
+                            </div> */}
+                            <div className=" sm:flex items-center">
+                                <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Title:</label>
+                                <select className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
+                                    onChange={(e) => handlePackageTitle(e.target.value)}>
+                                <option value="">{itinerary?packageTitleName:"Select Car Title"}</option>
+                                {allCars?.map((item,i)=><option key={i} value={item?.vehicleType}>{item?.vehicleType}</option>)}
+
+                                </select>
                             </div>
                             <div className="pl-10">
                                 <span className="text-xs text-red-700 capitalize pl-5">{validateValue}</span>
@@ -328,7 +334,7 @@ const [generateNum,setGenerateNum]=useState(1);
                                 onChange={(e) => {
                                     setPackageRating(e.target.value);
                                 }}>
-                                <option value="" disabled>Select Package Rating</option>
+                                <option value="">{itinerary?packageRating:"Select Package Rating"}</option>
                                 <option value="3.5">3.5</option>
                                 <option value="3.8">3.8</option>
                                 <option value="4.0">4.0</option>
@@ -366,7 +372,7 @@ const [generateNum,setGenerateNum]=useState(1);
                                 <div className="flex gap-4 items-center flex-wrap">
                                     {(itinerary && (countries)) && (<select id="packageLocation" className=' md:w-[130px] w-full md:ml-4 pl-2 rounded-md outline-none border-black border h-7 text-para' onChange={(e) => { handleSelectCountry(e.target.value); setSelesctedCountry(e.target.value) }} defaultValue={itinerary?.location?.state?.country?._id}>
                                         <option value="">
-                                            {itinerary ? itinerary?.associateCountry?.name : "select Country"}</option>
+                                            {itinerary ? selectedCountry?.name : "select Country"}</option>
                                         {countries?.map(country => (
                                             <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
                                         ))}
@@ -378,7 +384,7 @@ const [generateNum,setGenerateNum]=useState(1);
                                         ))}
                                     </select>)}
                                     {(itinerary && (states || cityPopup)) && (<select onChange={(e) => { handleSelectState(e.target.value); setSelesctedState(e.target.value) }} className=' md:w-[130px] w-full md:ml-4 px-2 rounded-md outline-none border-black border h-7 text-para' defaultValue={itinerary?.location?.state?._id}>
-                                        <option value="">{itinerary ? itinerary?.associateState?.name : "select Country"}</option>
+                                        <option value="">{itinerary ? selectedState?.name : "select Country"}</option>
                                         {states?.map(state => (
                                             <option key={state._id} className='border-none bg-slate-100 text-black' value={state._id}>{state.name}</option>
                                         ))}

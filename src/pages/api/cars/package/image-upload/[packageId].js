@@ -7,7 +7,7 @@ import CarPackage from "../../../../../models/CarPackage";
 import CarPackageImage from '@/models/car-package/package/ImageUploading';
 
 
-const uploadDirectory = './public/uploads/package/details'; // Updated upload directory
+const uploadDirectory = './public/uploads/cars/carpackage'; // Updated upload directory
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -52,9 +52,9 @@ const apiRoute = async (req, res) => {
           title: titles[index] || '',
           alt: alts[index] || '',
           filename: file.filename,
-          path: `/uploads/package/details/${file.filename}`,
+          path: `/uploads/cars/carpackage/${file.filename}`,
         }));
-        console.log("filesfhbjfsfssjfhbasjh121312y3432y4",req.files);
+        // console.log("filesfhbjfsfssjfhbasjh121312y3432y4",req.files);
         // Update or insert files into database
         await CarPackageImage.findOneAndUpdate(
           { packageId },

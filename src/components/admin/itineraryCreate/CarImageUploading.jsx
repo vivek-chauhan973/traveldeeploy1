@@ -68,23 +68,23 @@ const CarImageUploading =({ itinerary, setImageDot }) =>{
 
   //handle Image size resultion 
 
-  const validateImageResolution = (file) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
-      img.onload = () => {
-        const { width, height } = img;
-        // console.log("with--> ",width);
-        // console.log("height----> ",height);
-        if (width == 50 && height == 50) {
-          resolve();
-        } else {
-          reject(new Error('Image resolution must be at least 1920x1080'));
-        }
-      };
-      img.onerror = () => reject(new Error('Invalid image file'));
-    });
-  };
+  // const validateImageResolution = (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const img = new Image();
+  //     img.src = URL.createObjectURL(file);
+  //     img.onload = () => {
+  //       const { width, height } = img;
+  //       // console.log("with--> ",width);
+  //       // console.log("height----> ",height);
+  //       if (width == 50 && height == 50) {
+  //         resolve();
+  //       } else {
+  //         reject(new Error('Image resolution must be at least 1920x1080'));
+  //       }
+  //     };
+  //     img.onerror = () => reject(new Error('Invalid image file'));
+  //   });
+  // };
 
 
   // Function to handle file input change
@@ -95,8 +95,7 @@ const CarImageUploading =({ itinerary, setImageDot }) =>{
     newFiles[index]=file ;
     if (file) {
       try {
-        await validateImageResolution(file);
-        setErrorMessage(''); 
+        // await validateImageResolution(file);
         setFiles(newFiles);
         const newPreviews = [...previews];
         const newPreviews1 = [...previews1];
@@ -107,7 +106,6 @@ const CarImageUploading =({ itinerary, setImageDot }) =>{
         setHasChanges(true);// Clear error message if validation passes
         // Proceed with file upload
       } catch (error) {
-        setErrorMessage(error.message);
         alert("size must be within provided resolution")// Show error message if validation fails
       }
     }
@@ -297,7 +295,7 @@ const CarImageUploading =({ itinerary, setImageDot }) =>{
             </div>
           </div>
         </div>
-        <div className="my-5 border-t xl:border-t-0 xl:border-l xl:px-5 px-2 xl:py-0 py-5">
+        {/* <div className="my-5 border-t xl:border-t-0 xl:border-l xl:px-5 px-2 xl:py-0 py-5">
           <p className="text-base font-semibold">Select Icon</p>
           {imageData?.map((item) => {
             const isChecked = selectedIcons.some(
@@ -324,7 +322,7 @@ const CarImageUploading =({ itinerary, setImageDot }) =>{
           >
             Save
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );

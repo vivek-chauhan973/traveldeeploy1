@@ -55,7 +55,7 @@ const CarTourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
     }, [itinerary]);
 
     useEffect(() => {
-        fData().then(res => setSelectedTourInfo(res));
+        fData().then(res => {setSelectedTourInfo(res),console.log("res ---> ",res)});
     }, [fData]);
 
     // Fetch data using the custom hook
@@ -105,6 +105,8 @@ const CarTourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
         setSelectedFunction(selectedItem);
     };
 
+    console.log("itineary tour info---- > ",selectedTourInfo?.cancellation?.groupName)
+
     return (
         <div className="bg-white rounded p-3 my-5">
             <div>
@@ -120,7 +122,7 @@ const CarTourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
                             value={selectedInclusion?.groupName || ""}
                             onChange={(e) => handleSelectChange(setSelectedInclusion, tourInclusion, e)}
                         >
-                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.inclusion?.groupName : "Select an option"}</option>
+                            <option value="" disabled>{selectedTourInfo?.inclusion?.groupName || "Select an option"}</option>
                             {tourInclusion.map((item) => (
                                 <option key={item.id} value={item.groupName}>{item.groupName}</option>
                             ))}
@@ -134,7 +136,7 @@ const CarTourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
                             value={selectedExclusion?.groupName || ""}
                             onChange={(e) => handleSelectChange(setSelectedExclusion, tourExclusion, e)}
                         >
-                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.exclusion?.groupName : "Select an option"}</option>
+                            <option value="" disabled>{selectedTourInfo?.exclusion?.groupName ||"Select an option"}</option>
                             {tourExclusion.map((item) => (
                                 <option key={item.id} value={item.groupName}>{item.groupName}</option>
                             ))}
@@ -148,7 +150,7 @@ const CarTourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
                             value={selectedCancellation?.groupName || ""}
                             onChange={(e) => handleSelectChange(setSelectedCancellation, tourCancellation, e)}
                         >
-                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.cancellation?.groupName : "Select an option"}</option>
+                            <option value="" disabled>{selectedTourInfo?.cancellation?.groupName || "Select an option"}</option>
                             {tourCancellation.map((item) => (
                                 <option key={item.id} value={item.groupName}>{item.groupName}</option>
                             ))}
@@ -162,7 +164,7 @@ const CarTourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
                             value={selectedPaymentTerm?.groupName || ""}
                             onChange={(e) => handleSelectChange(setSelectedPaymentTerm, paymentTerm, e)}
                         >
-                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.paymentTerm?.groupName : "Select an option"}</option>
+                            <option value="" disabled>{ selectedTourInfo?.paymentTerm?.groupName || "Select an option"}</option>
                             {paymentTerm.map((item) => (
                                 <option key={item.id} value={item.groupName}>{item.groupName}</option>
                             ))}
@@ -176,7 +178,7 @@ const CarTourInformation = ({ itinerary, setActiveTab, setTourDot }) => {
                             value={selectedNeedToKnow?.groupName || ""}
                             onChange={(e) => handleSelectChange(setSelectedNeedToKnow, needToKnow, e)}
                         >
-                            <option value="" disabled>{selectedTourInfo ? selectedTourInfo?.needToKnow?.groupName : "Select an option"}</option>
+                            <option value="" disabled>{ selectedTourInfo?.needToKnow?.groupName ||"Select an option"}</option>
                             {needToKnow.map((item) => (
                                 <option key={item.id} value={item.groupName}>{item.groupName}</option>
                             ))}
