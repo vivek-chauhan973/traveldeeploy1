@@ -15,6 +15,7 @@ import { faCube, faArrowRightLong, faEdit, faCirclePlus, faTrash, faCancel, faSa
 import CarItineraryTour from "@/components/admin/itineraryMaster/CarItineraryTour";
 import CarTermsAndCondition from "@/components/admin/itineraryMaster/Car/CarTermsAndCondition";
 import CarGst from "@/components/admin/dashboard/CarGst";
+import CarTime from "@/components/admin/itineraryMaster/Car/CarTime";
 
 
 export default function Category() {
@@ -249,6 +250,9 @@ export default function Category() {
                 <Layout>
                     <div>
                         <CarGst/>
+                    </div>
+                    <div>
+                        <CarTime/>
                     </div>
                     <div>
                         <CarTermsAndCondition />
