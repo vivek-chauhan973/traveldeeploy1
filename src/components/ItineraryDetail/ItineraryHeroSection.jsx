@@ -176,8 +176,8 @@ const ItineraryHeroSection = ({
                     <button
                       key={index}
                       className={`rounded-full py-1 px-2 ${index === 0
-                          ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize"
-                          : "bg-navyblack"
+                        ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize"
+                        : "bg-navyblack"
                         }`}
                     >
                       {badge}
@@ -264,8 +264,8 @@ const ItineraryHeroSection = ({
                   <p
                     onClick={fixedDepartureButtonEnaibleAndDisable ? handleClickPopup : null}
                     className={` ${fixedDepartureButtonEnaibleAndDisable
-                        ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
-                        : "bg-gradient-to-r from-orange-200 to-red-200"
+                      ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
+                      : "bg-gradient-to-r from-orange-200 to-red-200"
                       } px-5 py-2 rounded-md text-white text-center text-para`}
                   >
                     <span>
@@ -278,8 +278,8 @@ const ItineraryHeroSection = ({
                   <button
                     onClick={handleSubmit}
                     className={`border px-5 py-2 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                        ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
-                        : "bg-gradient-to-r from-orange-200 to-red-200"
+                      ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
+                      : "bg-gradient-to-r from-orange-200 to-red-200"
                       } text-center text-white text-para`}
                   >
                     Book now

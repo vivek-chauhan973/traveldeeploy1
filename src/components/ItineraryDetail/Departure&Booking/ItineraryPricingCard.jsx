@@ -70,9 +70,7 @@ const ItineraryPricingCard = () => {
           <div className="flex justify-between mb-2">
             <h5 className="text-md font-semibold text-graytext">Booking Summary</h5>
             <div>
-
               <FontAwesomeIcon icon={faPenToSquare} className='font1 cursor-pointer' onClick={handleEdit} />
-
             </div>
           </div>
           <hr />
