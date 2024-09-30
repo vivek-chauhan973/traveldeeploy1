@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import LimitedTime from './LimitedTime'
+import FlexibleTime from './FlexibleTime'
 
 const CarTime = () => {
     // tab editor content change
@@ -17,10 +19,10 @@ const CarTime = () => {
                         <button onClick={() => handleTabClick('Tab2')} className={`border ${activeTab === "Tab2" ? "bg-black text-white" : "border-navyblack text-navyblack"}  rounded-badge px-3 py-1`}>Flexible Time</button> 
                     </div>
                     <div className={` ${activeTab === 'Tab1' ? 'block' : 'hidden'}`}>
-                        <p>Limited Time</p>
+                       <LimitedTime/>
                     </div>
                     <div className={` ${activeTab === 'Tab2' ? 'block' : 'hidden'}`}>
-                        <p>Flexible Time</p>
+                       <FlexibleTime/>
                     </div>   
                 </div>
             </div>
