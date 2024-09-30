@@ -56,6 +56,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
     const [selectedState, setSelesctedState] = useState('');
     const [packageRating, setPackageRating] = useState('');
     const [highlightedPackage, setHighlightedPackage] = useState('');
+    const [selectedVicle, setSelectedVicle] = useState('');
     const [allCars,setAllCars]=useState([]);
 
     useEffect(() => {
@@ -207,6 +208,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
         handleSelectCountry(itinerary?.associateCountry?._id);
         handleSelectState(itinerary?.associateState?._id);
         setPriority((itinerary?.priority) || "0");
+        setSelectedVicle(itinerary?.selectedVicle||"")
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
@@ -254,6 +256,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
                         name: packageTitleName,
                         price: displayPrice,
                         category: selectedCategories,
+                        selectedVicle,
                         status: 0,
                         location: selectedLocation,
                         badges: selectedBadges,
@@ -298,16 +301,16 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
                                     disabled placeholder="Package Id " value={PackageIdGenerate} />
                                 {PackageIdGenerate===""&&<button className="bg-navyblack hover:bg-black text-white rounded px-4 py-1 md:ml-10 md:mt-0 mt-5" onClick={handleGenUniqueKey}>Genrate ID</button>}
                             </div> */}
-                            {/* <div className=" sm:flex items-center">
+                            <div className=" sm:flex items-center">
                                 <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Title:</label>
                                 <input ref={packageTitleRef} className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => handlePackageTitle(e.target.value)} placeholder="Enter package name" defaultValue={itinerary?.name} />
-                            </div> */}
-                            <div className=" sm:flex items-center">
-                                <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Title:</label>
+                            </div>
+                            <div className=" sm:flex items-center mt-4">
+                                <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Select Vehicle:</label>
                                 <select className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
-                                    onChange={(e) => handlePackageTitle(e.target.value)}>
-                                <option value="">{itinerary?packageTitleName:"Select Car Title"}</option>
+                                    onChange={(e) => setSelectedVicle(e.target.value)}>
+                                <option value="">{selectedVicle||"Select Car Title"}</option>
                                 {allCars?.map((item,i)=><option key={i} value={item?.vehicleType}>{item?.vehicleType}</option>)}
 
                                 </select>

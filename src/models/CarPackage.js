@@ -60,6 +60,10 @@ const packageSchema = new Schema({
       required: true,
       trim: true,
     },
+    selectedVicle: {
+      type: String,
+      required: true,
+    },
     price: {
       type: Number,
       required: true,
@@ -142,7 +146,6 @@ const packageSchema = new Schema({
 );
 
 // Virtual field to calculate display price based on addguestPrices
-
 
 packageSchema.virtual("pageUrl").get(function () {
   return `${this.url}-tour-package`;

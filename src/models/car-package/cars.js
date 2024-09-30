@@ -9,6 +9,10 @@ const CarSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Capacity is required'],
   },
+  bags: {
+    type: Number,
+    required: [true, 'Capacity is required'],
+  },
   ac: {
     type: Number,
     required: [true, 'AC type is required'],

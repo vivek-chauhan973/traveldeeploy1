@@ -13,6 +13,7 @@ export default function AddCar() {
     misc: '',
     capacity: '',
     ac: '',
+    bags:'',
     seatingCapacity: '',
     vehicleType: '',
     dailyLimit: '',
@@ -102,6 +103,7 @@ export default function AddCar() {
         setForm({
           misc: '',
           capacity: '',
+          bags:'',
           ac: '',
           seatingCapacity: '',
           vehicleType: '',
@@ -128,6 +130,7 @@ export default function AddCar() {
       misc: car.misc,
       capacity: car.capacity,
       ac: car.ac,
+      bags:car.bags,
       seatingCapacity: car.seatingCapacity,
       vehicleType: car.vehicleType,
       dailyLimit: car.dailyLimit,
@@ -215,6 +218,7 @@ export default function AddCar() {
                 {[
                   { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Innova", "Crysta","Tempo 12S","Tempo 14S"] },
                   { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
+                  { label: "Large Bags", name: "bags", type: "number" },
                   { label: "Daily Limit KM's", name: "dailyLimit", type: "number" },
                   { label: "Base Fare/Per Day", name: "capacity", type: "number" },
                   { label: "Base price for KM KM's", name: "rate", type: "number" },
@@ -273,6 +277,7 @@ export default function AddCar() {
                 <tr>
                   <th className="border-b px-4 py-2 text-left">Vehicle Selection</th>
                   <th className="border-b px-4 py-2 text-left">Seating Capacity</th>
+                  <th className="border-b px-4 py-2 text-left">Large Bags</th>
                   <th className="border-b px-4 py-2 text-left">Daily Limit KMs</th>
                   <th className="border-b px-4 py-2 text-left">Base Fare/Per Day</th>
                   <th className="border-b px-4 py-2 text-left">Base price for KMs</th>
@@ -289,6 +294,7 @@ export default function AddCar() {
                   <tr key={car._id}>
                     <td className="border-b px-4 py-2">{car.vehicleType}</td>
                     <td className="border-b px-4 py-2">{car.seatingCapacity}</td>
+                    <td className="border-b px-4 py-2">{car.bags}</td>
                     <td className="border-b px-4 py-2">{car.dailyLimit}</td>
                     <td className="border-b px-4 py-2">{car.capacity}</td>
                     <td className="border-b px-4 py-2">{car.rate}</td>

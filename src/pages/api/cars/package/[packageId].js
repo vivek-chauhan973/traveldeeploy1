@@ -21,11 +21,11 @@ import State from "@/models/State";
         let updatedPackage
         switch (req.method) {
             case 'PUT':
-                const {priority, name, price, status, location,category,badges ,startcity,uploads, selectedState,
+                const {priority,selectedVicle, name, price, status, location,category,badges ,startcity,uploads, selectedState,
                     selectedCountry,packageRating, highlightedPackage} = req.body;
                 const startcity1=startcity.split(",");
                 const images=uploads?.data?.map(item=>item?.path)
-                updatedPackage = await CarPackage.findByIdAndUpdate(packageId, {priority, name, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState,packageRating,highlightedPackage }, { new: true });
+                updatedPackage = await CarPackage.findByIdAndUpdate(packageId, {priority, name,selectedVicle, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState,packageRating,highlightedPackage }, { new: true });
            
                 if (!updatedPackage) {
                     return res.status(404).json({ message: 'Package not found' });

@@ -51,7 +51,7 @@ function handlePost(req, res) {
       return res.status(500).json({ success: false, error: 'Error uploading files' });
     }
     try {
-      const { misc, capacity, ac, seatingCapacity, vehicleType, dailyLimit, rate, outStationBasePrice, perKmRate, markup, imageDetails } = req.body;
+      const { misc, capacity,bags, ac, seatingCapacity, vehicleType, dailyLimit, rate, outStationBasePrice, perKmRate, markup, imageDetails } = req.body;
       
 
       // Process image details
@@ -64,7 +64,8 @@ function handlePost(req, res) {
       const car = await Car.create({ 
         misc, 
         capacity, 
-        ac, 
+        ac,
+        bags, 
         seatingCapacity, 
         vehicleType, 
         dailyLimit, 
@@ -90,7 +91,7 @@ function handlePut(req, res) {
     }
     try {
       const { id } = req.query;
-      const { name, capacity, ac, seatingCapacity, vehicleType, dailyLimit, rate, outStationBasePrice, perKmRate, markup, imageDetails } = req.body;
+      const { name, capacity,bags, ac, seatingCapacity, vehicleType, dailyLimit, rate, outStationBasePrice, perKmRate, markup, imageDetails } = req.body;
       // Process image details
       const processedImageDetails = imageDetails.map((img, index) => ({
         url: req.files[index] ? `/uploads/cars/${req.files[index].filename}` : img.url,
@@ -104,6 +105,7 @@ function handlePut(req, res) {
         name,
         capacity,
         ac,
+        bags,
         seatingCapacity,
         vehicleType,
         dailyLimit,
