@@ -97,8 +97,8 @@ const DeparturePopup = ({ setShowPopup, addPackage }) => {
             <button
               onClick={handleSubmit}          
               className={`${ handleCity
-                ? "bg-gradient-to-r from-orange-400 to-red-500 cursor-pointer"
-                : "bg-gradient-to-r from-orange-300 to-red-300"
+                ? "bg-gradient-to-r from-orange-400 to-red-500 cursor-pointer text-white"
+                : "bg-gradient-to-r from-orange-300 to-red-400 text-white"
               } text-black font-normal py-2 px-4 rounded-md cursor-not-allowed`}
               disabled={!handleCity}
             >

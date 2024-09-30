@@ -3,13 +3,14 @@
 import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
 import CarPackage from "../../../../models/CarPackage";
 import { NextApiRequest, NextApiResponse } from "next";
-import CarState from "@/models/CarState";
-import CarCountry from "@/models/CarCountry";
 import CarPackageHighlight from "@/models/car-package/package/PackageHighlight";
 import CarPackageDayWise from "@/models/car-package/package/PackageDayWise";
 import CarPackageFaqWise from "@/models/car-package/package/PackageFaq";
 import CarInclusion from "@/models/car-package/package/TourInfo/Inclusion";
 import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
+import Country from "@/models/Country";
+import State from "@/models/State";
+
 // find By Id And Update
  const packageIds= async (req, res) => {
     try {
@@ -36,8 +37,8 @@ import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
                 .populate('tourinfo.tourExclusion')
                 .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
                 .populate('tourinfo.tourNeedToKonow').populate("icons");
-                const associateState = await CarState.findById(updatedPackage.location?.state);
-                const associateCountry = await CarCountry.findById(associateState?.country);
+                const associateState = await State.findById(updatedPackage.location?.state);
+                const associateCountry = await Country.findById(associateState?.country);
                 const highlightDetails = await CarPackageHighlight.findOne({ package: updatedPackage._id }, 'highlights');
                 const dayDetails = await CarPackageDayWise.findOne({ package: updatedPackage._id }, 'days');
                 const faqs = await CarPackageFaqWise.findOne({ package: updatedPackage._id }, 'days');

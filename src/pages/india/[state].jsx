@@ -35,7 +35,7 @@ export default function SearchPage() {
   const [promoData, setPromoData] = useState({});
   const [loading, setLoading] = useState(true);
   const [maxDay, setMaxDay] = useState(50);
-  const [minDay, setMinDay] = useState(0);
+  const [minDay, setMinDay] = useState(1);
   const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);

@@ -9,7 +9,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 const MAX = 200000;
-const MIN = 10000;
+const MIN = 5000;
 const marks = [
     {
         value: MIN,
@@ -33,7 +33,7 @@ const fetchCatagory = async () => {
 export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourDuration, setMaxDay, setMinDay, setClearAll }) {
     const { setCatagoryId } = useAppContext()
     const { setMinPrice, setMaxPrice, setDuration } = useAppContext();
-    const [priceRange, setPriceRange] = useState([10000, 200000]);
+    const [priceRange, setPriceRange] = useState([5000, 200000]);
 
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
@@ -90,8 +90,8 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
         setDuration(tourDuration)
     }, [filter])
     const handleClearAll = () => {
-        setPriceRange([10000, 200000]);
-        setTourDuration([0, 50]);
+        setPriceRange([5000, 200000]);
+        setTourDuration([1, 50]);
         setDepartureCity([]);
         setClearAll(true)
         // onClearFilters();
@@ -127,26 +127,26 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                                         sx={{ color: "#2A2C41" }}
                                     />
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <p className='md:text-para text-[12px]'>{priceRange[0]} - {priceRange[1]} Packages</p>
+                                        <p className='md:text-para text-[12px]'>₹{priceRange[0]?.toLocaleString()} - ₹{priceRange[1]?.toLocaleString()} Prices</p>
                                     </Box>
                                 </Box>
                             </div>
                         </div>
                         <div className="md:text-para text-sm font-light">
                             <div className="flex gap-3 my-3">
-                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
-                                    ₹10,000 - ₹30,000
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ">
+                                    ₹5,000 - ₹30,000
                                 </button>
-                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
-                                    ₹30,000 - ₹80,000
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ">
+                                    ₹30,000 - ₹50,000
                                 </button>
                             </div>
                             <div className="flex gap-3">
-                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
-                                    ₹80,000 - ₹1.5L
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ">
+                                    ₹50,000 - ₹1.2L
                                 </button>
-                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full ">
-                                    ₹1.5L & above
+                                <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ">
+                                    ₹1.2L & above
                                 </button>
                             </div>
                         </div>
@@ -180,18 +180,18 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                             </div>
                             <div className="md:text-para text-sm font-light">
                                 <div className="flex gap-3 my-3">
-                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
-                                        3 - 7 days
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full">
+                                        1 - 3 days
                                     </button>
-                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
-                                        7 - 15 days
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full">
+                                        3 - 15 days
                                     </button>
                                 </div>
                                 <div className="flex gap-3">
-                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full">
                                         15 - 27 days
                                     </button>
-                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-500 rounded-full">
+                                    <button className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full">
                                         27 - 50 dyas
                                     </button>
                                 </div>
@@ -210,8 +210,8 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-center mt-2 ">
-                        <button onClick={handleSubmit} className="bg-black text-white px-4 py-1.5 text-xs rounded-md mb-3 block">Apply Filters</button>
+                    <div className="flex justify-center mt-2 xl:hidden">
+                        <button onClick={handleSubmit} className="bg-black text-white px-4 py-1.5 text-xs rounded-md mb-3">Apply Filters</button>
                     </div>
                 </div>
             </div>
