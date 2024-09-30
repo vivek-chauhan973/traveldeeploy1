@@ -1,5 +1,5 @@
 
-import CarChartureTerms from "@/models/car-package/package/TermsCondition/ChartureTerms";
+import CarLimitedTime from "@/models/car-package/package/TermsCondition/LimitedTime";
 import { NextApiRequest, NextApiResponse } from "next";
   const packageTourinfoCanAdd= async (req, res) => {
     try {
@@ -7,9 +7,9 @@ import { NextApiRequest, NextApiResponse } from "next";
             return res.status(405).json({ message: 'Method Not Allowed' });
         }
 
-        const { groupName,description} = req.body
-        const CancellationGroupData = await CarChartureTerms.create({
-            groupName,description
+        const { groupName} = req.body
+        const CancellationGroupData = await CarLimitedTime.create({
+            groupName
         })
         return res.status(201).json({
             message: 'created Cancellation group',

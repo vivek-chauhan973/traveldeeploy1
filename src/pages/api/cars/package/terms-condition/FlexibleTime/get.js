@@ -1,10 +1,10 @@
 
-import CarChartureTerms from "@/models/car-package/package/TermsCondition/ChartureTerms";
+import CarFlexibleTime from "@/models/car-package/package/TermsCondition/FlexibleTime";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinfoCanGet= async (req, res) => {
     try {
-        const CancellationGroupData = await CarChartureTerms.find();
+        const CancellationGroupData = await CarFlexibleTime.find();
 
         return res.status(200).json({
             message: 'Cancellation find Successful',

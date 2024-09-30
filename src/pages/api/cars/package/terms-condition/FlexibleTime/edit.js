@@ -1,5 +1,4 @@
-
-import CarChartureTerms from "@/models/car-package/package/TermsCondition/ChartureTerms";
+import CarFlexibleTime from "@/models/car-package/package/TermsCondition/FlexibleTime";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageTourinfoCanEdit= async (req, res) => {
     try {
@@ -7,12 +6,12 @@ import { NextApiRequest, NextApiResponse } from "next";
             return res.status(405).json({ message: 'Method Not Allowed' });
         }
 
-        const { group_id, groupName, description } = req.body;
+        const { group_id, groupName} = req.body;
 
         // Find the Cancellation group by ID and update it
-        const CancellationGroupData = await CarChartureTerms.findByIdAndUpdate(
+        const CancellationGroupData = await CarFlexibleTime.findByIdAndUpdate(
             group_id,
-            { groupName, description },
+            { groupName},
             { new: true } // Return the updated document
         );
 

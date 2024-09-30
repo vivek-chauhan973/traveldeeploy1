@@ -1,5 +1,4 @@
-
-import CarChartureTerms from "@/models/car-package/package/TermsCondition/ChartureTerms";
+import CarFlexibleTime from "@/models/car-package/package/TermsCondition/FlexibleTime";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinfoCanDelete= async (req, res) => {
@@ -8,7 +7,7 @@ import { NextApiRequest, NextApiResponse } from "next";
             return res.status(405).json({ message: 'Method Not Allowed' });
         }
         const { group_id } = req.body; 
-        await CarChartureTerms.findByIdAndDelete(group_id)
+        await CarFlexibleTime.findByIdAndDelete(group_id)
         return res.status(200).json({ message: 'Cancellation deleted',group_id });
     } catch (error) {
         console.error('Error handling API request:', error);
