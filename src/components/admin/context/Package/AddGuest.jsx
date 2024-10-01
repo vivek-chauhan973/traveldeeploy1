@@ -103,22 +103,11 @@ const [showPopup1, setShowPopup1] = useState(false);
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-  // console.log("price2------> ",price2)
-// useEffect(()=>{
-//   if(addPackage?.addguest==="fixedDeparture"&&fixedDepartureButtonEnaibleAndDisable){
-//     setPrice1(parseInt(departureSectionData?.price))
-    
-//  }
-//  setPrice1(parseInt(departureSectionData?.price))
-// },[departureSectionData])
 
-  // console.log("finalDataOfBookingByUsingMethodFixedDeparture237246722",price1)
-  // console.log("setSubmitButtonOfPricingCalculation sfshdfjbfd" ,submitButtonOfPricingCalculation)
-  //  console.log("showAddguest -------> ",fixedDepartureData1)
+  //here are all logics and state related car-rental package
 
+ 
 
-  // select person selected in group departure
-// console.log("hsdfsdb",highLightedPackage)
   const [groupDeparturePerson,setGroupDeparturePerson]=useState(0);
   const contextFun = {
     initialData,
@@ -159,7 +148,7 @@ const [showPopup1, setShowPopup1] = useState(false);
     showPopup1, setShowPopup1,
     fixedDeparturePopupPrice,setFixedDeparturePopupPrice,
     groupDeparturePerson,setGroupDeparturePerson,
-    highLightedPackage,setHighLightedPackage
+    highLightedPackage,setHighLightedPackage,
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>
