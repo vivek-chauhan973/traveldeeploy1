@@ -12,6 +12,10 @@ import {faTwitter, faFacebook, faInstagram,faLinkedin,} from "@fortawesome/free-
 import CarItineraryFaq from "@/components/car-rental/CarItineraryFaq";
 import CarItinerarymap from "@/components/car-rental/CarItineraryMap";
 import CarItineraryPaymentTerms from "@/components/car-rental/CarItineraryPaymentterms";
+import CarItinerarySideCard from "@/components/car-rental/CarItinerarySideCard";
+import CarReviewsCard from "@/components/car-rental/CarReviewsCard";
+import CarDetailFaq from "@/components/car-rental/carDetailFaq";
+import BottomLink from "@/components/ItineraryDetail/BottomLink";
 
 export default function CarDetail () {
 
@@ -429,7 +433,7 @@ export default function CarDetail () {
                                         </div>
                                     </div>
                                     {/* card is here */}
-                                    {/* <ItinerarySideCard/> */}
+                                    <CarItinerarySideCard/>
                                 </div>
                             </div>
                         </div>
@@ -437,7 +441,7 @@ export default function CarDetail () {
 
                     {/* Car reviewsCard */}
                     <div className="my-7">
-                        {/* <ReviewsCard /> */}
+                        <CarReviewsCard/>
                     </div>
 
                     {/* Similar Car package */}
@@ -451,18 +455,18 @@ export default function CarDetail () {
                             <p className="md:text-[22px] text-[20px] mb-2 capitalize font-semibold">
                                 Frequently Asked Questions (FAQs){" "}
                                 <span className="lowercase">for</span> Chardham
-                                {" Tour Package"}
+                                {" Tour Package"} From Car
                             </p>
                             <p className="text-para md:text-base">
                                 We help you prepare for your trip and ensure an effortless and
                                 enjoyable travel experience.
                             </p>
                         </div>
-                        {/* <Faq1/> */}
+                        <CarDetailFaq/>
                     </div>
 
                     {/* bottom link is here*/}
-                    {/* <BottomLink/> */}
+                    <BottomLink/>
                 </div>
             </>
         )

@@ -1,4 +1,6 @@
 import "../../../src/app/globals.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 
 const CardDetailPricingCard = () => {
 
@@ -12,11 +14,10 @@ const CardDetailPricingCard = () => {
                                 Booking Summary
                             </h5>
                             <div>
-                                {/* <FontAwesomeIcon
+                                <FontAwesomeIcon
                                 icon={faPenToSquare}
                                 className="font1 cursor-pointer"
-                                /> */}
-                                Edit
+                                />
                             </div>
                         </div>
                         <hr />
