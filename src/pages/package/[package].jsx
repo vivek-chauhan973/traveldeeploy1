@@ -1,5 +1,6 @@
 import "../../app/globals.css";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+import TimeOf from "@/components/car-rental/TimeOf";
 import Package1 from "@/components/ItineraryDetail/Departure&Booking/package1";
 // import FAQSchema from "@/components/seo/FAQSchema";
 // import Head from "next/head";

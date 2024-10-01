@@ -15,10 +15,8 @@ import CarItineraryPaymentTerms from "@/components/car-rental/CarItineraryPaymen
 import CarItinerarySideCard from "@/components/car-rental/CarItinerarySideCard";
 import CarReviewsCard from "@/components/car-rental/CarReviewsCard";
 import CarDetailFaq from "@/components/car-rental/carDetailFaq";
-import BottomLink from "@/components/ItineraryDetail/BottomLink";
-
+import BottomLink from "@/components/ItineraryDetail/BottomLink"
 export default function CarDetail () {
-
     const handleSendItinerary = () => {
         const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
         window.location.href = whatsAppUrl;
@@ -28,18 +26,15 @@ export default function CarDetail () {
         const currentUrl = window.location.href; // Get the current URL
         const subject = encodeURIComponent("I have Itinerary related some query?");
         const body = encodeURIComponent(`Here is this itinerary: ${currentUrl}`);
-
         window.location.href = `mailto:rakeshspm2323@gmail.com?subject=${subject}&body=${body}`;
     };
     const [showSharePopup, setShowSharePopup] = useState(false);
-
     const handleMouseEnter = () => {
         setShowSharePopup(true);
     };
     const handleMouseLeave = () => {
         setShowSharePopup(false);
     };
-
     const handleTwitter = () => {
         const currentUrl = encodeURIComponent(window.location.href);
         window.open(`https://twitter.com/intent/tweet?url=${currentUrl}`, "_blank");
@@ -90,7 +85,6 @@ export default function CarDetail () {
                                 </p>
                             </div>
                         </div>
-
                         <div className="w-full h-20 bg-[#FF6600] flex flex-col justify-center items-center">
                             <h1 className="font-bold uppercase">Do not rent a Car Rent The Car.</h1>
                         </div>
@@ -438,17 +432,14 @@ export default function CarDetail () {
                             </div>
                         </div>
                     </div>
-
                     {/* Car reviewsCard */}
                     <div className="my-7">
                         <CarReviewsCard/>
                     </div>
-
                     {/* Similar Car package */}
                     <div className=" mt-12 pb-6">
                         {/* <TestingCard/> */}
                     </div>
-
                     {/* FAQ section --- when data is not available then all content will hide */}
                     <div className="my-7 md:p-0 px-4">
                         <div className="text-center mb-4">
@@ -464,7 +455,6 @@ export default function CarDetail () {
                         </div>
                         <CarDetailFaq/>
                     </div>
-
                     {/* bottom link is here*/}
                     <BottomLink/>
                 </div>
