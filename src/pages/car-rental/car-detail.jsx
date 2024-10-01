@@ -88,7 +88,7 @@ export default function CarDetail () {
                         </div>
 
                         <div className="w-full h-20 bg-[#FF6600] flex flex-col justify-center items-center">
-                            <h1 className="font-bold uppercase">Don't rent a Car Rent The Car.</h1>
+                            <h1 className="font-bold uppercase">Do not rent a Car Rent The Car.</h1>
                         </div>
                         <div className="container-wrapper">
                             <div className="flex justify-between">
