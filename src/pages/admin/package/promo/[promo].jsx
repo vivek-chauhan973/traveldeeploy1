@@ -33,8 +33,15 @@ export default function PromoManage() {
     const [tableData, setTableData] = useState([]);
     const [tableColumn, setTableColumn] = useState([]);
     useEffect(() => {
-        setSelectedLocation(promo || "")
-    }, [promo])
+        if(promo){
+            setSelectedLocation(promo || "")
+        }
+       
+    }, [
+        
+
+        
+    ])
 
     useEffect(() => {
         const getPromoData = async () => {

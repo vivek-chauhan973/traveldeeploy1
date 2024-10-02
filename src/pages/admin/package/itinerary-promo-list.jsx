@@ -171,12 +171,18 @@ const YourComponent = () => {
 
                     <td className="py-4 text-center border-x">{0}</td>
                     <td className="py-4 flex justify-center items-center gap-3">
-                      <Link href={"./promo/" + itinerary.relatedId + "?type=edit"}>
+                      {/* <Link href={"./promo/" + itinerary.relatedId + "?type=edit"}>
                         <FontAwesomeIcon
                           icon={faEdit}
                           className="mt-1 font1 hover:text-primary cursor-pointer"
                         />
-                      </Link>
+                      </Link> */}
+                      <a href={"./promo/" + itinerary.relatedId + "?type=edit"}>
+                        <FontAwesomeIcon
+                          icon={faEdit}
+                          className="mt-1 font1 hover:text-primary cursor-pointer"
+                        />
+                      </a>
                       <FontAwesomeIcon
                         icon={faTrash} onClick={() => deleteItem(itinerary._id)}
                         className="font1 hover:text-primary cursor-pointer"
