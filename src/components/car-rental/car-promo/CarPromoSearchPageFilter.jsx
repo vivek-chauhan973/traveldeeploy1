@@ -3,7 +3,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { useState} from "react";
-const MAX = 200000;
+const MAX = 20000;
 const MIN = 5000;
 const marks = [
     {
@@ -21,10 +21,8 @@ const marks = [
 function valuetext(value) {
     return `${value}°C`;
 }
-
 const CarPromoSearchPageFilter=()=> {
-
-    const [priceRange, setPriceRange] = useState([5000, 200000]);
+    const [priceRange, setPriceRange] = useState([5000, 20000]);
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
     const [filter, setFilter] = useState(false);
@@ -53,7 +51,7 @@ const CarPromoSearchPageFilter=()=> {
                                         sx={{ color: "#2A2C41" }}
                                     />
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <p className='md:text-para text-[12px]'> ₹{priceRange[0]?.toLocaleString()} - ₹{priceRange[1]?.toLocaleString()} Prices</p>
+                                        <p className='md:text-para text-[12px]'> ₹ {priceRange[0]?.toLocaleString()} - ₹{priceRange[1]?.toLocaleString()} Prices</p>
                                     </Box>
                                 </Box>
                             </div>

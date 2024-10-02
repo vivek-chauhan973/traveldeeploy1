@@ -1,10 +1,10 @@
 import Header3 from './DesktopHeaderPages/Header3';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function DesktopHeader({setCarSelectionPopup}) {
+function DesktopHeader() {
   return (
 
-    <div className='flex flex-col gap-0  sticky top-0  z-40' onClick={()=>setCarSelectionPopup(false)}>
+    <div className='flex flex-col gap-0  sticky top-0  z-40'>
       <div className="bg-primary pt-[0.5px]  md:h-[23px]   h-5">
         <div className="flex items-center  container-wrapper   justify-center gap-5">
           <p className=" capitalize pt-[2px] md:pt[0] text-white text-xxs md:text-xs">call us for free now</p>

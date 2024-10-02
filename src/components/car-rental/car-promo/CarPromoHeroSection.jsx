@@ -5,13 +5,14 @@ import dynamic from "next/dynamic";
 const IoMdArrowDropdown = dynamic(() =>
   import("react-icons/io").then((mod) => mod.IoMdArrowDropdown)
 );
+
 // Function to strip HTML tags
+
 const stripHtmlTags = (html) => {
     const div = document.createElement("div");
     div.innerHTML = html;
     return div.textContent || div.innerText || "";
   };
-
 const CarPromoHeroSection = () => {
     const [show, setShow] = useState(false);
     const [active, setActive] = useState(true);
