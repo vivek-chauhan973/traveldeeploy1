@@ -21,11 +21,14 @@ const marks = [
 function valuetext(value) {
     return `${value}°C`;
 }
+
 const CarPromoSearchPageFilter=()=> {
-    const [priceRange, setPriceRange] = useState([5000, 20000]);
+
+    const [priceRange, setPriceRange] = useState([5000, 200000]);
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
     const [filter, setFilter] = useState(false);
+
     return (
         <>
             <div>
@@ -50,7 +53,7 @@ const CarPromoSearchPageFilter=()=> {
                                         sx={{ color: "#2A2C41" }}
                                     />
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <p className='md:text-para text-[12px]'>₹{priceRange[0]?.toLocaleString()} - ₹{priceRange[1]?.toLocaleString()} Prices</p>
+                                        <p className='md:text-para text-[12px]'> ₹{priceRange[0]?.toLocaleString()} - ₹{priceRange[1]?.toLocaleString()} Prices</p>
                                     </Box>
                                 </Box>
                             </div>
@@ -93,7 +96,7 @@ const CarPromoSearchPageFilter=()=> {
                             <div>
                                 <div className="flex justify-between md:mb-2 mb-2">
                                     <p className="md:text-[14px] text-[12px]">Min <span> 0 days</span></p>
-                                    <p className="md:text-[14px] text-[12px]">Max <span> 10 days</span></p>
+                                    <p className="md:text-[14px] text-[12px]">Max <span> 50 days</span></p>
                                 </div>
                             </div>
                             <div className="md:text-para text-sm font-light">
@@ -123,7 +126,8 @@ const CarPromoSearchPageFilter=()=> {
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
                                         id="category1" name={item?.category} value={item?._id} onChange={(e) => setCatagoryId(e.target.value)} />
                                     <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-                                        {item?.category}</label>
+                                        {item?.category}
+                                    </label>
                                 </div>)}
                             </div>
                         </div>

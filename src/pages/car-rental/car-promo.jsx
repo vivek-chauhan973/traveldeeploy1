@@ -2,6 +2,10 @@ import CarPromoHeroSection from "@/components/car-rental/car-promo/CarPromoHeroS
 import "../../app/globals.css";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import CraPromoFaq from "@/components/car-rental/car-promo/CarPromoFaq";
+import BottomLink from "@/components/ItineraryDetail/BottomLink";
+import CarPromoSearchPageFilter from "@/components/car-rental/car-promo/CarPromoSearchPageFilter";
+import SearchCarPagePackageList from "@/components/car-rental/car-promo/SearchCarPackageList";
 
 export default function CarPromo() {
 
@@ -13,15 +17,15 @@ export default function CarPromo() {
                 <Breadcrumbs />
                 <CarPromoHeroSection />
                 {/* <SearchHeaderWpr /> */}
-                <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
-                    <div className='relative'>
-                        <div className='hidden xl:block'>
-                            {/* <SearchPageFilter /> */}
-                        </div>
-                    </div>
+                <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[2fr,320px] gap-5 relative">
                     <div>
                         <div>
-                            {/* <SearchPagePackageList/> */}
+                            <SearchCarPagePackageList/>
+                        </div>
+                    </div>
+                    <div className='relative'>
+                        <div className='hidden xl:block'>
+                            <CarPromoSearchPageFilter/>
                         </div>
                     </div>
                 </div>
@@ -35,11 +39,11 @@ export default function CarPromo() {
                                 We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
                             </p>
                         </div>
-                        {/* <Faq1/> */}
+                        <CraPromoFaq/>
                     </div>
                 </div>
                 <div className="border-t border">
-                    {/* <BottomLink /> */}
+                    <BottomLink/>
                 </div>
             </div>
         </>

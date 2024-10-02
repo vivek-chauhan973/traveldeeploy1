@@ -75,19 +75,19 @@ export default function CarDetail() {
                 <div>
                     <CarDetailHeroSection />
                     <div className="w-full h-20 bg-[#FF6600] flex flex-col justify-center items-center mb-3">
-                        <h1 className="font-bold uppercase">Do not rent a Car Rent The Car.</h1>
+                        <h1 className="font-bold capitalize">Chardham Yatra From Innova Crysta</h1>
                     </div>
                     <div className="container-wrapper">
                         <div className="flex justify-between">
                             <div>
-                                <h2 className=" text-lg md:text-xl font-semibold capitalize my-2">
-                                    Chardham Tour package from Sedan
+                                <h2 className=" text-lg md:text-lg font-semibold capitalize my-2">
+                                    Vehicle Type : Innova Crysta
                                 </h2>
                                 <button
                                     className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white">
                                     badge
                                 </button>
-                                <p className="md:text-md text-[16px] my-2">Start & City : New Delhi</p>
+                                <p className="md:text-md text-[16px] my-2">Ex City : New Delhi</p>
                             </div>
                             <div className="flex gap-5">
                                 <div className="text-right flex flex-col items-end justify-center ">

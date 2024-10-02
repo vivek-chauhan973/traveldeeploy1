@@ -1,15 +1,34 @@
 import Image from "next/image";
-
+import "../../../app/globals.css";
+import {useState} from "react";
+import dynamic from "next/dynamic";
+const IoMdArrowDropdown = dynamic(() =>
+  import("react-icons/io").then((mod) => mod.IoMdArrowDropdown)
+);
+// Function to strip HTML tags
+const stripHtmlTags = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return div.textContent || div.innerText || "";
+  };
 
 const CarPromoHeroSection = () => {
- 
+    const [show, setShow] = useState(false);
+    const [active, setActive] = useState(true);
 
+    const handleToggle = () => {
+        setShow(!show);
+      };
+    
+      const fade = () => {
+        setActive(!active);
+      };
   return (
     <div className="mb-6">
       <div className="relative w-full h-80 md:h-96 lg:h-[28rem] overflow-hidden">
           <Image
             className=" top-0 left-0 w-full h-full object-cover object-center"
-            src=""
+            src="/assets/car-rental banner.jpg"
             alt=""
             width={100}
             height={100}
@@ -23,20 +42,24 @@ const CarPromoHeroSection = () => {
         <div className="grid md:grid-cols-[1.8fr,1.2fr] ">
           <div className="text-wrap">
             <h4 className="md:text-xl text-md font-medium mb-2 capitalize">{"Car Promo"}</h4>
-            <div 
-            // className={`text-para  ${show ? "" : "line-clamp-3"}`}
-            >
+            <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
               <div className="about-margin" 
             //   dangerouslySetInnerHTML={{ __html: promoData?.description }} 
               >
-
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Facilis quae optio enim repudiandae quibusdam laboriosam voluptatum quas culpa, 
+                voluptates, debitis animi voluptas quisquam adipisci recusandae id dolorum? Sapiente distinctio molestias fugiat minus, 
+                nulla soluta at! Dolorem quisquam assumenda error harum corporis adipisci deserunt. Laborum, facilis! Odit, cumque dignissimos. 
+                Sed est ullam nam necessitatibus eveniet, consequatur obcaecati molestias delectus temporibus ab dolorem. 
+                Amet, quod dolores natus fugiat nisi nostrum omnis cum quam debitis. 
+                Officiis, pariatur? Praesentium officia, ab voluptatibus optio alias quisquam!
               </div>
             </div>
           </div>
-          {/* <div className=''>
+          <div className=''>
             {show && (
               <>
-                {priorityPackage && priorityPackage.length > 0 ? (
+                {/* {priorityPackage && priorityPackage.length > 0 ? ( */}
                   <div className="table-container w-full m-auto mt-4">
                     <table className="w-full border-collapse border text-center text-para">
                       <thead>
@@ -56,58 +79,63 @@ const CarPromoHeroSection = () => {
                         </tr>
                       </thead>
                       <tbody className="bg-white">
-                        {priorityPackage.map((item, index) => (
-                          <tr key={index}>
+                        {/* {priorityPackage.map((item, index) => ( */}
+                          <tr 
+                        //   key={index}
+                          >
                             <td className="border-t border-l text-left border-r px-2 py-2 border-b capitalize">
-                              {item.name}
+                              {/* {item.name} */}
+                              Chardham From Sedan
                             </td>
                             <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
-                              {item.days}
+                              {/* {item.days} */}
+                              3
                             </td>
                             <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
-                              ₹{item?.price.toLocaleString()}
+                              ₹ 4,000
+                              {/* {item?.price.toLocaleString()} */}
                             </td>
                             <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
-                              <a
+                              {/* <a
                                 href={"/package/" + item.pageUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-800 hover:underline md:block hidden"
-                              >
+                              > */}
                                 View Details
-                              </a>
-                              <a
+                              {/* </a> */}
+                              {/* <a
                                 href={"/package/" + item.pageUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-800 hover:underline md:hidden block"
                               >
                                 View
-                              </a>
+                              </a> */}
                             </td>
                           </tr>
-                        ))}
+                        {/* ))} */}
                       </tbody>
                     </table>
                   </div>
-                ) : null}
+                {/* ) : null} */}
               </>
             )}
-          </div> */}
+          </div>
         </div>
         <div className="flex justify-end items-center mt-2">
           <div className="inline-flex items-center justify-center md:px-2 px-1.5 md:py-1 py-0.5 bg-navyblack rounded shadow-sm text-white cursor-pointer">
-            <button className="text-xs  flex-shrink-0">
-              {/* {show ? "Read less" : "Read more"} */}
-              Read more
+            <button className="text-xs  flex-shrink-0"
+             onClick={handleToggle}>
+              {show ? "Read less" : "Read more"}
             </button>
-            {/* <span className="flex items-center justify-center">
+            <span className="flex items-center justify-center">
               <IoMdArrowDropdown
                 className={`transition-transform text-xs ${show ? "rotate-180" : ""
                   }`}
                 onClick={handleToggle}
               />
-            </span> */}
+            </span>
           </div>
         </div>
       </div>

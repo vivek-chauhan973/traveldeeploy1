@@ -91,7 +91,7 @@ const CarReviewsCard = () => {
             <div className="carousel-container relative container-wrapper ">
                 <div className="text-center py-7">
                     <h3 className="xl:text-2xl text-xl leading-8 font-medium  xl:mb-2">
-                        Bizare Xpedition<sup className="md:text-sm text-xs mr-1">TM</sup> Car Reviews
+                        BizareXpedition<sup className="md:text-sm text-xs mr-1">TM</sup> Car Reviews
                     </h3>
                     <p className="xl:text-sm text-xs leading-8 font-medium">
 
