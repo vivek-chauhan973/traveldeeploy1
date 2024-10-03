@@ -88,7 +88,7 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
                               {item.days}
                             </td>
                             <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
-                              ₹{item?.price.toLocaleString()}
+                              {item?.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                             </td>
                             <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
                               <a

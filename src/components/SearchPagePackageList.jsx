@@ -96,7 +96,8 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   // Function to calculate price details
-
+  console.log("packageData", currentItems);
+  
   return (
     <div>
       {currentItems?.map((packageData, i) => {
@@ -265,7 +266,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
                   <div className="flex justify-end items-baseline gap-2 md:block">
                     <p className="text-[12px] mt-1">Starts From</p>
                     <p className="text-[22px] font-medium">
-                      ₹{packageData?.price.toLocaleString()}
+                      {packageData?.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </p>
                   </div>
                   <p className="text-[10px] leading-snug">

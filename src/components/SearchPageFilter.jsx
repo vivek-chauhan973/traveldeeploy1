@@ -127,7 +127,10 @@ export default function SearchPageFilter({ onApplyFilter, setTourDuration, tourD
                                         sx={{ color: "#2A2C41" }}
                                     />
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <p className='md:text-para text-[12px]'>₹{priceRange[0]?.toLocaleString()} - ₹{priceRange[1]?.toLocaleString()} Prices</p>
+                                        <p className='md:text-para text-[12px]'>
+                                            {priceRange[0]?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} -{" "}
+                                            {priceRange[1]?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} Prices
+                                        </p>
                                     </Box>
                                 </Box>
                             </div>

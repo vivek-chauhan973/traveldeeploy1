@@ -2,18 +2,18 @@ import Link from "next/link";
 import Pagination from "react-js-pagination";
 import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faSuitcase, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const SearchCarPagePackageList = () => {
 
     return (
         <div>
             <div className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
-                <div className="md:pl-5 flex items-center">
+                <div className="md:pl-5 flex items-center md:w-[35%]">
                     <Image
                         width={500}
                         height={500}
-                        className="h-[220px] mx-5 md:m-0 w-full md:p-0 md:w-[440px] md:h-full rounded-md overflow-hidden object-cover"
+                        className="h-[220px] mx-5 md:m-0 w-full md:p-0 md:h-full rounded-md overflow-hidden object-cover"
                         src='/logo.png'
                         alt="ui/ux review check"
                         onError={(e) => {
@@ -29,11 +29,11 @@ const SearchCarPagePackageList = () => {
                         </p>
                     </div>
                 </div>
-                <div className="mx-6 md:m-0 mt-2">
+                <div className="mx-6 md:m-0 mt-2 md:w-[35%] mb-3">
                     <div>
-                        <div className="flex items-center justify-between mb-1">
-                            <h5 className="block font-sans text-[18px] capitalize font-semibold antialiased text-black">
-                                Title
+                        <div className="flex items-center justify-between mb-1 md:max-h-14">
+                            <h5 className="block font-sans text-[18px] leading-6 capitalize font-semibold antialiased text-black">
+                                Chardham Yatra From Haridwar
                             </h5>
                             <p className="px-5 hidden md:flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
                                 <svg
@@ -71,11 +71,14 @@ const SearchCarPagePackageList = () => {
                             </p>
 
                             <p className="text-[11px] flex gap-1 items-center">
-                                <FontAwesomeIcon icon={faUser} className="w-3 h-3"/> {" "} 4
+                                <FontAwesomeIcon icon={faUser} className="w-3 h-3" /> {" "} 4
+                            </p>
+                            <p className="text-[11px] flex gap-1 items-center">
+                                <FontAwesomeIcon icon={faSuitcase} className="w-3 h-3" /> {" "} 2
                             </p>
                         </div>
 
-                        <div className="line-clamp-2 w-60">
+                        <div className="md:line-clamp-3 line-clamp-2 ">
                             <p
                                 // dangerouslySetInnerHTML={{ __html: packageData.about }}
                                 className="block text-[12px] font-normal text-gray-800"
@@ -87,84 +90,83 @@ const SearchCarPagePackageList = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="flex gap-3 mt-3 md:gap-4 justify-between md:justify-normal max-w-[350px] mb-3">
-                        {/* <div className="flex flex-col items-center">
-                                    <Image width={100} height={100}
-                                        className="w-4"
-                                        src="https://www.svgrepo.com/show/13776/building.svg"
-                                        alt=""
-                                    />
-                                    <p className="text-[10px] text-neutral-600">Hotel</p>
-                                </div>
+                    {/* <div className="flex gap-3 mt-3 md:gap-4 justify-between md:justify-normal max-w-[350px] mb-3">
+                        <div className="flex flex-col items-center">
+                            <Image width={100} height={100}
+                                className="w-4"
+                                src="https://www.svgrepo.com/show/13776/building.svg"
+                                alt=""
+                            />
+                            <p className="text-[10px] text-neutral-600">Hotel</p>
+                        </div>
 
-                                <div className="flex flex-col items-center">
-                                    <Image width={100} height={100}
-                                        className="w-4"
-                                        src="https://www.svgrepo.com/show/6379/french-fries-on-container.svg"
-                                        alt=""
-                                    />
-                                    <p className="text-[10px] text-neutral-600">Meals</p>
-                                </div>
+                        <div className="flex flex-col items-center">
+                            <Image width={100} height={100}
+                                className="w-4"
+                                src="https://www.svgrepo.com/show/6379/french-fries-on-container.svg"
+                                alt=""
+                            />
+                            <p className="text-[10px] text-neutral-600">Meals</p>
+                        </div>
 
-                                <div className="flex flex-col items-center">
-                                    <Image width={100} height={100}
-                                        className="w-4"
-                                        src="https://www.svgrepo.com/show/447874/transport.svg"
-                                        alt=""
-                                    />
-                                    <p className="text-[10px] text-neutral-600">Transport</p>
-                                </div>
+                        <div className="flex flex-col items-center">
+                            <Image width={100} height={100}
+                                className="w-4"
+                                src="https://www.svgrepo.com/show/447874/transport.svg"
+                                alt=""
+                            />
+                            <p className="text-[10px] text-neutral-600">Transport</p>
+                        </div>
 
-                                <div className="flex flex-col items-center">
-                                    <Image width={100} height={100}
-                                        className="w-4"
-                                        src="https://www.svgrepo.com/show/438545/flight.svg"
-                                        alt=""
-                                    />
-                                    <p className="text-[10px] text-neutral-600">Flight</p>
-                                </div>
+                        <div className="flex flex-col items-center">
+                            <Image width={100} height={100}
+                                className="w-4"
+                                src="https://www.svgrepo.com/show/438545/flight.svg"
+                                alt=""
+                            />
+                            <p className="text-[10px] text-neutral-600">Flight</p>
+                        </div>
 
-                                <div className="flex flex-col items-center">
-                                    <Image width={100} height={100}
-                                        className="w-4"
-                                        src="https://www.svgrepo.com/show/533057/camera-alt-1.svg"
-                                        alt=""
-                                    />
-                                    <p className="text-[10px] text-neutral-600">Sightseeing</p>
-                                </div>
+                        <div className="flex flex-col items-center">
+                            <Image width={100} height={100}
+                                className="w-4"
+                                src="https://www.svgrepo.com/show/533057/camera-alt-1.svg"
+                                alt=""
+                            />
+                            <p className="text-[10px] text-neutral-600">Sightseeing</p>
+                        </div>
 
-                                <div className="flex flex-col items-center">
-                                    <Image width={100} height={100}
-                                        className="w-4"
-                                        src="https://www.svgrepo.com/show/394547/visa.svg"
-                                        alt=""
-                                    />
-                                    <p className="text-[10px] text-neutral-600">Visa</p>
-                                </div> */}
+                        <div className="flex flex-col items-center">
+                            <Image width={100} height={100}
+                                className="w-4"
+                                src="https://www.svgrepo.com/show/394547/visa.svg"
+                                alt=""
+                            />
+                            <p className="text-[10px] text-neutral-600">Visa</p>
+                        </div>
 
-                        {/* {packageData?.icons?.iconData?.map((item, i) => <div key={i} className="flex flex-col items-center">
+                        {packageData?.icons?.iconData?.map((item, i) => <div key={i} className="flex flex-col items-center">
                             <Image width={150} height={150}
                                 className="w-8"
                                 src={item?.icon || "https://www.svgrepo.com/show/13776/building.svg"}
                                 alt={item?.name || "png"}
                             />
                             <p className="text-[10px] text-neutral-600">{item?.name}</p>
-                        </div>)} */}
+                        </div>)}
 
-                    </div>
+                    </div> */}
                 </div>
-
-                <div className="md:w-[420px] m-auto md:m-0 md:border-l justify-center px-5 flex flex-col">
+                <div className="md:w-[30%] m-auto md:m-0 md:border-l justify-center px-5 flex flex-col">
                     <div>
-                        <div className="text-right">
+                        <div className="text-center">
                             <p className="text-[16px] leading-snug text-green-700 font-semibold uppercase">
                                 Best Deal Price
                             </p>
-                            <div className="flex justify-end items-baseline gap-2 md:block">
+                            <div className="flex justify-center items-baseline gap-2 md:block">
                                 {/* <p className="text-[12px] mt-1">Starts From</p> */}
                                 <p className="text-[22px] font-medium">
-                                    ₹ 20,000
-                                    {/* {packageData?.price.toLocaleString()} */}
+                                    {/* {price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
+                                    ₹3,00,000
                                 </p>
                             </div>
                             <p className="text-para font-medium leading-snug">
@@ -181,24 +183,23 @@ const SearchCarPagePackageList = () => {
                         >
                             View details
                         </Link>
-
                     </div>
                 </div>
             </div>
-            
+
             <div className="flex justify-end my-5 list-none">
                 <Pagination
-                    // activePage={currentPage}
-                    // itemsCountPerPage={itemsPerPage}
-                    // totalItemsCount={packages?.length}
-                    // onChange={handlePageChange}
-                    // itemClass="pagination-item"
-                    // linkClass="pagination-link"
-                    // prevPageText="Previous"
-                    // nextPageText="Next"
-                    // firstPageText="1"
-                    // lastPageText={`...${totalPages}`}
-                    // innerClass="pagination"
+                // activePage={currentPage}
+                // itemsCountPerPage={itemsPerPage}
+                // totalItemsCount={packages?.length}
+                // onChange={handlePageChange}
+                // itemClass="pagination-item"
+                // linkClass="pagination-link"
+                // prevPageText="Previous"
+                // nextPageText="Next"
+                // firstPageText="1"
+                // lastPageText={`...${totalPages}`}
+                // innerClass="pagination"
                 />
             </div>
 

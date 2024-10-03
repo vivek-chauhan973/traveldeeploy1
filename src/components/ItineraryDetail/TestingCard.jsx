@@ -132,7 +132,9 @@ const TestingCard = ({ addPackage }) => {
                           {((item?.addguest === "fixedDeparture") && (item?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
                           {((item?.addguest === "fixedDeparture") && (item?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}                                     
                           </p> 
-                        <p className="text-xxs leading-5">Starts From <span className="text-md font-semibold">₹ {(item?.price).toLocaleString()}</span></p>
+                        <p className="text-xxs leading-5">Starts From <span className="text-md font-semibold">
+                          {(item?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span>
+                        </p>
                         <p className="text-sm leading-5 font-medium underline text-blue">from ₹ 19,423/months</p>
                       </div>
                     </div>

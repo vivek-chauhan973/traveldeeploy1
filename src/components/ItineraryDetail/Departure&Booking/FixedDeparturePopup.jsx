@@ -197,7 +197,9 @@ const FixedDeparturePopup = () => {
                     </div>}
                     <div className="grid grid-cols-2">
                       <p className="font-semibold">Grand Total</p>
-                      <p className="font-semibold text-graytext">₹ {fixedDeparturePopupPrice?.toLocaleString()}</p>
+                      <p className="font-semibold text-graytext">
+                        {fixedDeparturePopupPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      </p>
                     </div>
                   </div>
 

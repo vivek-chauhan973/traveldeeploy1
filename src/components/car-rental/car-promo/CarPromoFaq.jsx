@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const CraPromoFaq = () => {
+
     const data = [
         {
             title : "Rakesh Kumar Rikki",
@@ -26,10 +27,8 @@ const CraPromoFaq = () => {
         setOpenIndex(openIndex === i ? null : i);
     };
 
-
     return (
         <div className="w-full md:w-3/4 m-auto">
-
             <div className="w-full mx-auto mt-10">
                 {data?.map((item, i) => (
                     <div key={i} className="mb-3">
@@ -38,7 +37,6 @@ const CraPromoFaq = () => {
                             <div className='flex justify-start items-center w-[95%] h-full'>
                                 <p className="md:text-base text-sm capitalize font-semibold">{item.title}</p>
                             </div>
-
                             <div className='flex justify-center items-center w-[5%] h-full'>
                                 {openIndex === i ? (
                                     <FontAwesomeIcon
@@ -62,7 +60,6 @@ const CraPromoFaq = () => {
                         </div>
                     </div>
                 ))}
-
             </div>
         </div>
     );

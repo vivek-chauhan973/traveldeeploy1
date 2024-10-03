@@ -236,14 +236,18 @@ const ItinaryFixedDepartureCard = () => {
 
           <div className="grid grid-cols-2 gap-1">
             <p className="text-sm font-semibold">Price BreakUp</p>
-            <p className="text-md font-medium text-graytext">₹ {guestPrice?.toLocaleString()}</p>
+            <p className="text-md font-medium text-graytext">
+              {guestPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </p>
           </div>
           <hr className="border-dashed my-2 " />
           <div className="text-para  grid-cols-2 my-3 grid pr-1">
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
-              <p className="">₹ {(guestPrice * limitKey)?.toLocaleString()}</p>
+              <p className="">
+                {(guestPrice * limitKey)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              </p>
             </div>
           </div>
           <div className="text-para grid-cols-2 -mt-2 grid pr-1">
@@ -256,7 +260,7 @@ const ItinaryFixedDepartureCard = () => {
                   : null}{" "}
               </p>
               <p className="">
-                ₹ {fixedDepartureButtonEnaibleAndDisable?(calculatedPrizeOfGst * limitKey)?.toLocaleString():"0"}
+                {fixedDepartureButtonEnaibleAndDisable?(calculatedPrizeOfGst * limitKey)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }):"0"}
               </p>
             </div>
           </div>
@@ -322,7 +326,7 @@ const ItinaryFixedDepartureCard = () => {
             <div className="grid grid-cols-2 gap-1">
               <p className="font-semibold">Grand Total</p>
               <p className="font-semibold text-graytext">
-                ₹ {fixedDepartureButtonEnaibleAndDisable?grandTotal?.toLocaleString():"0"}
+                {fixedDepartureButtonEnaibleAndDisable?grandTotal?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }):"0"}
               </p>
             </div>
           </div>

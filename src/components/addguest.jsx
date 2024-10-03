@@ -502,7 +502,8 @@ const Addguest = ({
                     add guest & Choose from{ }
                   </p>
                   <div>
-                    <p className="text-xl font-semibold"> ₹ {guestPrice ? (guestPrice).toLocaleString() : "--"}</p>
+                    <p className="text-xl font-semibold"> 
+                      {guestPrice ? (guestPrice).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "₹ --"}</p>
                     <p className="text-xxs">per person on twin sharing</p>
                   </div>
                 </div>
@@ -957,8 +958,12 @@ const Addguest = ({
                       </div>
                       <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
                         {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
-                        {(item?.capacity - selectedDataOfCar) > 0 && <p>₹ +{(item?.capacity - selectedDataOfCar).toLocaleString()}</p>}
-                        {(item?.capacity - selectedDataOfCar) < 0 && <p>₹ {(item?.capacity - selectedDataOfCar).toLocaleString()}</p>}
+                        {(item?.capacity - selectedDataOfCar) > 0 && <p>
+                          +{(item?.capacity - selectedDataOfCar).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                        </p>}
+                        {(item?.capacity - selectedDataOfCar) < 0 && <p>
+                          {(item?.capacity - selectedDataOfCar).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                        </p>}
                       </div>
                     </div>
                   </div>)}

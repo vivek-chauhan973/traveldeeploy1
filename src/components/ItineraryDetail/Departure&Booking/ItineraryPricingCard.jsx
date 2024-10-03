@@ -124,7 +124,9 @@ const ItineraryPricingCard = () => {
               <p className="text-sm ">Basic Price</p>
             </div>
             <div className="">
-              <p className="text-lg font-medium text-graytext text-center"> ₹{Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString()}</p>
+              <p className="text-lg font-medium text-graytext text-center">
+                {Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              </p>
               <p className="text-xxs">per person on twin sharing</p>
             </div>
           </div>
@@ -133,14 +135,18 @@ const ItineraryPricingCard = () => {
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
-              <p className=""> ₹{Math.floor((((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2)) || addPackage?.price).toLocaleString()}</p>
+              <p className="">
+                {Math.floor((((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2)) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              </p>
             </div>
           </div>
           <div className="text-para grid grid-cols-2 mt-3">
             <div></div>
             <div className="grid grid-cols-2">
               <p>GST {gst} % </p>
-              <p className="">₹ {(calculatedPrizeOfGst).toLocaleString()}</p>
+              <p className="">
+                {(calculatedPrizeOfGst).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              </p>
             </div>
           </div>
           <hr className="border-dashed my-2" />
@@ -148,7 +154,9 @@ const ItineraryPricingCard = () => {
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p className="font-semibold">Grand Total</p>
-              <p className="font-semibold text-graytext">₹ {(grandTotal).toLocaleString()}</p>
+              <p className="font-semibold text-graytext">
+                {(grandTotal).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              </p>
             </div>
           </div>
           {closeBtn && (

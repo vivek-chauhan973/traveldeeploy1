@@ -55,8 +55,9 @@ const ItinerarySideCard = ({ highlightedPackage1 }) => {
                                 {((highlightedPackage1?.addguest === "fixedDeparture") && (highlightedPackage1?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
                                 {((highlightedPackage1?.addguest === "fixedDeparture") && (highlightedPackage1?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}
                             </p>
-                            <p className="text-xs leading-4 ">Starts From <span className="text-lg text-black font-medium">₹
-                                {(highlightedPackage1?.price)?.toLocaleString()}</span></p>
+                            <p className="text-xs leading-4 ">Starts From <span className="text-lg text-black font-medium">
+                                {(highlightedPackage1?.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span>
+                            </p>
                             {/* <p className="text-[10px] leading-5">per person on twin sharing</p> */}
                             <p className="text-para leading-7 font-medium underline text-blue">from ₹ 19,423/months</p>
                         </div>

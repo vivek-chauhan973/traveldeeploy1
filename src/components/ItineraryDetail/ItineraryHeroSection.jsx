@@ -244,7 +244,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     with GST include {" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString()}
+                      {Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </p>
                 )}
@@ -252,7 +252,7 @@ const ItineraryHeroSection = ({
                   <p className="text-sm leading-5">
                     Starts From{" "}
                     <span className="text-lg text-graytext font-medium">
-                      ₹{(guestPrice || addPackage.price)?.toLocaleString()}
+                      {(guestPrice || addPackage.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </p>
                 )}

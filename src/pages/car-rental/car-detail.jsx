@@ -17,6 +17,7 @@ import CarItinerarySideCard from "@/components/car-rental/CarItinerarySideCard";
 import CarReviewsCard from "@/components/car-rental/CarReviewsCard";
 import CarDetailFaq from "@/components/car-rental/carDetailFaq";
 import BottomLink from "@/components/ItineraryDetail/BottomLink";
+import CarItineraryTourDetails from "@/components/car-rental/car-detail/CarItineraryTourDetails";
 
 export default function CarDetail() {
 
@@ -176,7 +177,7 @@ export default function CarDetail() {
                             </div>
                             <div>
                                 <ScrollLink
-                                    to="TourInformationSection"
+                                    to="TourDetailsSection"
                                     spy={true}
                                     smooth={true}
                                     offset={-70}
@@ -189,7 +190,7 @@ export default function CarDetail() {
                             </div>
                             <div>
                                 <ScrollLink
-                                    to="NeedToKnowSection"
+                                    to="TourDetailsSection"
                                     spy={true}
                                     smooth={true}
                                     offset={-70}
@@ -216,7 +217,7 @@ export default function CarDetail() {
                             </div>
                             <div>
                                 <ScrollLink
-                                    to="UpgradesSection"
+                                    to="Policy&TermsSection"
                                     spy={true}
                                     smooth={true}
                                     offset={-70}
@@ -260,7 +261,7 @@ export default function CarDetail() {
                                 <CarItinerarymap />
                             </div>
                             {/* <!- Tour Details is here --> */}
-                            {/* <ItineraryTourDetails /> */}
+                            <CarItineraryTourDetails/>
 
                             {/* Privacy policy Terms */}
                             <div id="Policy&TermsSection" className="pt-7">

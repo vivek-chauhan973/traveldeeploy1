@@ -133,7 +133,7 @@ const DepartureSection = ({ addPackage }) => {
                                     {dayOfMonth}
                                   </p>
                                   <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                    ₹ <p>{item?.price?.toLocaleString()}</p>
+                                    <p>{item?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                                   </div>
                                 </div>
                               </div>
@@ -182,7 +182,7 @@ const DepartureSection = ({ addPackage }) => {
                                     {item?.date1}
                                     </p>
                                     <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                      ₹ <p>{item?.Price?.toLocaleString()}</p>
+                                      <p>{item?.Price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                                     </div>
                                   </div>
                                 </div>
@@ -231,7 +231,7 @@ const DepartureSection = ({ addPackage }) => {
                                     {item?.date1}
                                     </p>
                                     <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                      ₹ <p>{item?.Price?.toLocaleString()}</p>
+                                      <p>{item?.Price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                                     </div>
                                     <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
                                       <p>Ava -</p>
@@ -382,7 +382,7 @@ const DepartureSection = ({ addPackage }) => {
                                     {dayOfMonth}
                                   </p>
                                   <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                    ₹ <p>{item?.price?.toLocaleString()}</p>
+                                    <p>{item?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                                   </div>
                                 </div>
                               </div>
@@ -427,7 +427,7 @@ const DepartureSection = ({ addPackage }) => {
                                     {item?.date1}
                                   </p>
                                   <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                    ₹ <p>{item?.Price?.toLocaleString()}</p>
+                                    <p>{item?.Price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                                   </div>
                                 </div>
                               </div>
@@ -472,7 +472,7 @@ const DepartureSection = ({ addPackage }) => {
                                     {item?.date1}
                                   </p>
                                   <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                    ₹ <p>{item?.Price?.toLocaleString()}</p>
+                                    <p>{item?.Price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                                   </div>
                                   <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
                                     <p>Avai -</p>

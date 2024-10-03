@@ -582,21 +582,19 @@ export default function Package1() {
               <p className="text-sm leading-5">
                 Starts From{" "}
                 {addPackage?.addguest === "addGuest" && (
-                  <span className="text-lg text-graytext font-medium">
-                    ₹
+                  <span className="text-lg text-graytext font-medium">                    
                     {Math.floor(
                       (submitButtonOfPricingCalculation && guestPrice / 2) ||
                         price2 ||
                         addPackage?.price
-                    ).toLocaleString()}
+                    ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                   </span>
                 )}
                 {addPackage?.addguest === "fixedDeparture" && (
                   <span className="text-lg text-graytext font-medium">
-                    ₹
                     {Math.floor(
                       guestPrice || addPackage?.price
-                    ).toLocaleString()}
+                    ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                   </span>
                 )}
               </p>
