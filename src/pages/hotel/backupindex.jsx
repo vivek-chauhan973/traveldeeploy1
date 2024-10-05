@@ -9,11 +9,6 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdLocationPin } from "react-icons/md";
-
-
-
-
-
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (

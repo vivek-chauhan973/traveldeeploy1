@@ -3,10 +3,10 @@ import path from 'path';
 import fs from 'fs';
 import PackageState from '@/models/package/PackageState';
 
-const uploadDirectory = path.join(process.cwd(), 'public/uploads');
+const uploadDirectory = path.join(process.cwd(), 'public/uploads/packagestate');
 
 // Ensure upload directory exists
-const packageStateUploadDir = path.join(uploadDirectory, 'packagestate');
+const packageStateUploadDir = path.join(uploadDirectory, 'poster');
 if (!fs.existsSync(packageStateUploadDir)) {
     fs.mkdirSync(packageStateUploadDir, { recursive: true });
 }
@@ -24,16 +24,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-export const config = {
-    api: {
-        bodyParser: false, // Disable default bodyParser to handle FormData
-    },
-};
 
-const handler = async (req, res) => {
+
+const posterHandler = async (req, res) => {
     const { method } = req;
     const { id } = req.query;
-
+console.log("id ------------>  ",id)
     switch (method) {
         case 'GET':
             try {
@@ -46,15 +42,6 @@ const handler = async (req, res) => {
                 res.status(400).json({ success: false, message: error.message });
             }
             break;
-        case "DELETE":
-            try {
-                const packageState = await PackageState.findOneAndDelete({_id: id });
-
-                return res.status(204).json({message:"data deleted succcessfully"});
-            } catch (error) {
-                res.status(400).json({ success: false, message: error.message });
-            }    
-            break;
         case 'POST':
             upload.single('file')(req, res, async (err) => {
                 if (err instanceof multer.MulterError) {
@@ -64,25 +51,17 @@ const handler = async (req, res) => {
                 }
                 // console.log("req body 4554545545",req)
                 try {
-                    const { title, alt, faqData, editorContent,tableData,seoData,tableColumn ,selectType,selectedItem} = req.body;
+                    const { posterTitle, psterAlt} = req.body;
                     const file = req.file;
-                    //  console.log("req body 4554545545",req)
+                     console.log("req body 4554545545",file)
                     let updateData = {
-                        title,
-                        alt,
-                        description: editorContent,
-                        faq: JSON.parse(faqData).map(faq => ({ title: faq.title, information: faq.information })),
-                        relatedTo: 'State',
-                        tableData:JSON.parse(tableData),
-                        seoField:JSON.parse(seoData),
-                        tableColumn:JSON.parse(tableColumn),
+                        posterTitle,
+                        psterAlt,
                         relatedId: id,
-                        selectType:selectType,
-                        selectedItem:selectedItem,
-                        image: file ? `/uploads/packagestate/${file.filename}` : undefined,
+                        posterPath: file ? `/uploads/packagestate/poster/${file.filename}` : undefined,
                     };
 
-                    if (!updateData.image) delete updateData.image;
+                    if (!updateData.posterPath) delete updateData.posterPath;
 
                     let updatedPackageState = await PackageState.findOneAndUpdate(
                         { relatedId: id },
@@ -92,26 +71,31 @@ const handler = async (req, res) => {
 
                     if (file) {
                         const existingPackageState = await PackageState.findOne({ relatedId: id });
-                        if (existingPackageState && existingPackageState.image) {
-                            const filePath = path.join(uploadDirectory, path.basename(existingPackageState.image));
+                        if (existingPackageState && existingPackageState.posterPath) {
+                            const filePath = path.join(uploadDirectory, path.basename(existingPackageState.posterPath));
                             if (fs.existsSync(filePath)) {
                                 fs.unlinkSync(filePath);
                             }
                         }
                     }
 
-                    res.status(200).json({ success: true, data: updatedPackageState });
+                    return res.status(200).json({ success: true, data: updatedPackageState });
                 } catch (error) {
                     // console.log("hi")
-                    res.status(400).json({ success: false, message: error.message });
+                   return  res.status(400).json({ success: false, message: error.message });
                 }
             });
             break;
 
         default:
-            res.status(400).json({ success: false, message: 'Invalid request method' });
+           return  res.status(400).json({ success: false, message: 'Invalid request method' });
             break;
     }
 };
 
-export default handler;
+export default posterHandler;
+export const config = {
+    api: {
+        bodyParser: false, // Disable default bodyParser to handle FormData
+    },
+};
