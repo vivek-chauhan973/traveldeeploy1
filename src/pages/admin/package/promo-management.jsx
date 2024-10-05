@@ -116,10 +116,14 @@ export default function PromoManage() {
             reader.readAsDataURL(data);
         }
     };
+    console.log("promo text is here-----> ",promoTxt)
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
         setFile(promoTxt?.image || "");
+        setPosterAlt(promoTxt?.posterAlt || "")
+        setPosterTitle(promoTxt?.posterTitle||"")
+        setFile1(promoTxt?.posterPath || "");
         setTableData(promoTxt?.tableData || []);
         setSeoData(promoTxt?.seoField || {});
         setTableColumn(promoTxt?.tableColumn || []);
