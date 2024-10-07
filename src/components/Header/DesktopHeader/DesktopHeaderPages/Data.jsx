@@ -1,6 +1,5 @@
 import Holiday from "./Holiday"
 import Show from "./Show"
-import CarHire from './CarHire'
 import Contact from "./Contact";
 import Deals from "./Deals";
 import SpacialityTour from "./SpacialityTour";
@@ -70,9 +69,7 @@ const header=[
 },
 {
   name:"Car Hire",
-  element:CarHire,
-  href:'#',
-   icon:<FontAwesomeIcon icon={faCar}  className='font'  />
+  icon:<FontAwesomeIcon icon={faCar}  className='font'  />
 },
 {
   name:"Spaciality Tour",
