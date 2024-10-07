@@ -2,11 +2,14 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 
 export default function Banner() {
   const [file, setFile] = useState(null);
   // const [preview, setPreview] = useState(null);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedImageId, setSelectedImageId] = useState(null);
 
@@ -19,6 +22,7 @@ export default function Banner() {
         const image = data.data[0];
         setSelectedImageId(image._id);
         setTitle(image.title);
+        setDescription(image.description);
         // setPreview(image.path);
         setIsUpdating(true);
       }
@@ -56,7 +60,7 @@ export default function Banner() {
       formData.append("file", file);
       formData.append("title", title);
     }
-   
+
     if (selectedImageId) {
       formData.append("id", selectedImageId);
     }
@@ -73,6 +77,7 @@ export default function Banner() {
         setFile(null);
         // setPreview(null);
         setTitle("");
+        setDescription("");
         setIsUpdating(false);
         setSelectedImageId(null);
         fetchImage(); // Fetch updated image
@@ -106,6 +111,7 @@ export default function Banner() {
         setFile(null);
         // setPreview(null);
         setTitle("");
+        setDescription("")
         setIsUpdating(false);
         setSelectedImageId(null);
         fetchImage(); // Fetch updated image list
@@ -118,52 +124,67 @@ export default function Banner() {
     }
   }
   // console.log("preview the image", preview);
-
+  
   return (
     <AppProvider>
       <Layout>
-        <p className="md:text-[28px] text-xl font-semibold">
-          Banner Video Management
-        </p>
-        <div className="md:my-10 my-7 bg-white px-5 py-4 rounded-md">
-          <p className="md:text-[20px] text-base font-semibold">
-            Bizare Expenditure Main Website
+        <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
+          <FontAwesomeIcon icon={faCube} className="text-2xl" />
+          <p className="md:text-[28px] text-xl text-black">Banner Video Management</p>
+          <FontAwesomeIcon
+            icon={faArrowRightLong}
+            className=" text-teal-700 text-xl"
+          />
+        </div>
+        <div className="bg-white px-5 py-4 rounded-md">
+          <p className="md:text-lg text-base font-semibold">
+            BizareXpendition Main Website
           </p>
           <div>
-            <div className="flex md:flex-row flex-col md:gap-10 gap-5 md:my-10 my-5 items-center xl:pl-5">
+            <div className="flex md:flex-row flex-col md:gap-10 gap-5 my-7 items-center xl:pl-5">
               <div className=" flex flex-1">
-              <input type="file" className="mb-4" onChange={handleChange} />
-              {/* <div>
-                {preview && (
-                  <Image
-                    className="md:w-36 w-auto h-auto shadow-md mb-4"
-                    src={preview}
-                    alt="Preview"
-                    width={150}
-                    height={200}
-                  />
-                )}
-              </div> */}
+                <input type="file" className="mb-4 ml-3" onChange={handleChange} />
+                {/* <div>
+                  {preview && (
+                    <Image
+                      className="md:w-36 w-auto h-auto shadow-md mb-4"
+                      src={preview}
+                      alt="Preview"
+                      width={150}
+                      height={200}
+                    />
+                  )}
+                </div> */}
               </div>
               <div className="flex-1">
-                <h3 className="my-2 font-bold">Title</h3>
-              <input
-                className="border px-2 py-0.5 mb-2 w-full md:w-auto rounded"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+                <div>
+                  <h3 className=" font-semibold">Title</h3>
+                  <input
+                    className="py-0.5 mb-2 w-full md:w-auto border rounded h-8 px-2 focus:border-primary outline-none"
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <h3 className=" mt-3 font-semibold">Description</h3>
+                  <input
+                    className="py-0.5 mb-2 w-full md:w-auto border rounded h-8 px-2 focus:border-primary outline-none"
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
               </div>
+
             </div>
             <div className="flex md:flex-row flex-col md:gap-5 gap-3">
-              <button
-                className="bg-[#0d6efd] text-white px-3 py-2 w-full md:w-auto rounded-sm"
+              <button className="bg-[#0d6efd] text-white px-3 py-2 w-full md:w-auto rounded"
                 onClick={handleUpload}
               >
                 {isUpdating ? "Update Image" : "Upload Image"}
               </button>
-              <button
-                className="bg-red-600 text-white px-3 py-2 w-full md:w-auto rounded-sm"
+              <button className="bg-red-600 text-white px-3 py-2 w-full md:w-auto rounded"
                 onClick={handleRemove}
               >
                 Remove

@@ -134,7 +134,7 @@ export default function Home() {
               numquam vitae, earum doloremque. Nam! Indulge in the vibrant
               celebrations of Holi with our premier Holi Packages of 2024 near
               to Delhi, tailored to offer an unforgettable experience in some of
-              India’s most iconic destinations. Whether you’re drawn to the
+              India most iconic destinations. Whether you are drawn to the
               spiritual aura of Rishikesh, the
             </h1>
             <button className="ml-2 mt-3 hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5 rounded-full">

@@ -6,11 +6,10 @@ export default function Manage() {
   return (
     <AppProvider>
       <Layout>
-          <div className="grid grid-cols-2 justify-between ">
-            <Searchable/>
-            <div className="grid"></div>
-          </div> 
+        <div>
+          <Searchable />
+        </div>
       </Layout>
-    </AppProvider>
+    </AppProvider >
   );
 }

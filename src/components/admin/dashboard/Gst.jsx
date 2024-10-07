@@ -4,7 +4,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowRightLong,
   faCirclePlus,
+  faCube,
   faEdit,
   faFloppyDisk,
   faTrash,
@@ -64,8 +66,14 @@ export default function Gst() {
 
   return (
     <div>
-      <div className="flex items-center gap-5 text-primary pb-3">
-        <p className="text-[28px] text-black">GST Management</p>
+      <div className="flex items-center gap-5 text-primary pb-3 mb-5">
+        {/* <p className="text-[28px] text-black">GST Management</p> */}
+        <FontAwesomeIcon icon={faCube} className="text-2xl" />
+        <p className="md:text-[28px] text-xl text-black">GST Management</p>
+        <FontAwesomeIcon
+          icon={faArrowRightLong}
+          className=" text-teal-700 text-xl"
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 rounded">
         <div className="shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600">
