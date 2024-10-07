@@ -48,7 +48,7 @@ const handleLogout=async ()=>{
       icon: () => <FontAwesomeIcon icon={faHome} />,
      
       subMenu: [
-        { label: "Banner", href: "#" },
+        { label: "Banner", href: "/admin/home/banner" },
         { label: "Other Management", href: "/admin/home/manage" }
       ]
     },

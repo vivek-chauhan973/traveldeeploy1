@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser, faArrowAltCircleRight, faHome, faCompass, faDownload, falocation } from '@fortawesome/free-solid-svg-icons';
+import Link from "next/link";
 
 
 const Header3 = () => {
@@ -111,13 +112,15 @@ const Header3 = () => {
       </div>
       <div className="border-b shadow-sm py-1 bg-white hidden xl:block">
         <ul className="container-wrapper     flex items-end gap-x-10 text-para">
-          <li className="capitalize flex items-center gap-1  cursor-pointer hover:text-primary">
+          <li  className="capitalize flex items-center gap-1  cursor-pointer hover:text-primary">
+          <Link href='/'>
 
             <FontAwesomeIcon icon={faHome} className='font' />
 
             <span>
               Home
             </span>
+          </Link>
           </li>
 
           {header?.map((item, i) => (
@@ -127,9 +130,13 @@ const Header3 = () => {
             >
               {/* <span className="">{item.icon}</span> */}
               {item.icon}
-              <spam><FlyoutLink href={item.href} FlyoutContent={item.element}>
+              <spam>
+              {item?.name==='Car Hire'&&<Link href='/car-rental'>car hire</Link>}
+
+              {item?.name!=='Car Hire'&&  <FlyoutLink href={item.href} FlyoutContent={item.element}>
                 {item.name}
-              </FlyoutLink></spam>
+              </FlyoutLink>}
+              </spam>
 
             </li>
           ))}

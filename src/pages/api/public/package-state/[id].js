@@ -3,17 +3,17 @@ import path from 'path';
 import fs from 'fs';
 import PackageState from '@/models/package/PackageState';
 
-const uploadDirectory = path.join(process.cwd(), 'public/uploads');
+const uploadDirectory = path.join(process.cwd(), 'public/uploads/packagestate');
 
 // Ensure upload directory exists
-const packageStateUploadDir = path.join(uploadDirectory, 'packagestate');
-if (!fs.existsSync(packageStateUploadDir)) {
-    fs.mkdirSync(packageStateUploadDir, { recursive: true });
+// const packageStateUploadDir = path.join(uploadDirectory, '');
+if (!fs.existsSync(uploadDirectory)) {
+    fs.mkdirSync(uploadDirectory, { recursive: true });
 }
- console.log("packageStateUploadDi",packageStateUploadDir);
+//  console.log("packageStateUploadDi",packageStateUploadDir);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, packageStateUploadDir);
+        cb(null, uploadDirectory);
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
@@ -83,13 +83,6 @@ const handler = async (req, res) => {
                     };
 
                     if (!updateData.image) delete updateData.image;
-
-                    let updatedPackageState = await PackageState.findOneAndUpdate(
-                        { relatedId: id },
-                        updateData,
-                        { new: true, upsert: true }
-                    );
-
                     if (file) {
                         const existingPackageState = await PackageState.findOne({ relatedId: id });
                         if (existingPackageState && existingPackageState.image) {
@@ -99,6 +92,14 @@ const handler = async (req, res) => {
                             }
                         }
                     }
+
+                    let updatedPackageState = await PackageState.findOneAndUpdate(
+                        { relatedId: id },
+                        updateData,
+                        { new: true, upsert: true }
+                    );
+
+                   
 
                     res.status(200).json({ success: true, data: updatedPackageState });
                 } catch (error) {

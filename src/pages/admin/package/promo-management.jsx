@@ -15,14 +15,18 @@ export default function PromoManage() {
     const [catoryorstate, setCatoryorstate] = useState(false);
     const [selectCatagoryOrState, setSelectCatagoryOrState] = useState("");
     const [file, setFile] = useState(null);
+    const [file1, setFile1] = useState(null);
     const [title, setTitle] = useState(null);
+    const [posterTitle, setPosterTitle] = useState(null);
     const [seofieldpopup, setSeofieldpopup] = useState(false);
     const [alt, setAlt] = useState(null);
+    const [posterAlt, setPosterAlt] = useState(null);
     const [statePackages, setStatePackages] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
     const [image1, setImage1] = useState(null);
+    const [posterImage1, setPosterImage1] = useState(null);
     const [selectedItem, setSelectedItem] = useState("");
     const [seoData, setSeoData] = useState({});
     const [tableData, setTableData] = useState([]);
@@ -101,24 +105,35 @@ export default function PromoManage() {
             reader.readAsDataURL(data);
         }
     };
+    const handleChange1 = (e) => {
+        const data = e.target.files[0];
+        setPosterImage1(data)
+        if (data) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setFile1(e.target.result);
+            };
+            reader.readAsDataURL(data);
+        }
+    };
+    console.log("promo text is here-----> ",promoTxt)
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
         setFile(promoTxt?.image || "");
+        setPosterAlt(promoTxt?.posterAlt || "")
+        setPosterTitle(promoTxt?.posterTitle||"")
+        setFile1(promoTxt?.posterPath || "");
         setTableData(promoTxt?.tableData || []);
         setSeoData(promoTxt?.seoField || {});
         setTableColumn(promoTxt?.tableColumn || []);
         setEditorContent(promoTxt?.description || "<p></p>");
     }, [promoTxt])
-    console.log("promotext", promoTxt)
     useEffect(() => {
         setFile(image1)
     }, [image1])
-    console.log("columns is here ", tableColumn)
-    // console.log("selected Item ::",selectedItem)
     const handleSelectChange = async (e) => {
         const selectedData = (e.target.value)?.split(",");
-        //   console.log("selectedData",selectedData);
         setSelectedLocation(selectedData?.[1]);
         setSelectedItem(selectedData?.[0])
     };
@@ -126,14 +141,9 @@ export default function PromoManage() {
     const handleFaqChange = (faqs) => {
         setFaqData(faqs);
     };
-    // console.log("selected location ::",selectedLocation)
     const handleEditorChange = (content) => {
-
-        // console.log("content",content)
         setEditorContent(content);
     };
-    // console.log("your selected catory is : ",selectCatagoryOrState)
-    // console.log("data of seofield",tableData)
     const handleSubmit = async (e) => {
         if (selectedLocation.length === 0) {
             return alert("select state or category or state");
@@ -161,8 +171,6 @@ export default function PromoManage() {
             }
 
             const data = await response.json();
-            console.log('Success:', data);
-            // Reset form fields after successful submission
             setFile(null);
             setTitle("");
             setAlt("");
@@ -176,7 +184,35 @@ export default function PromoManage() {
             console.error('Error:', error);
         }
     };
-    // console.log("table data :: ",tableData)
+
+    // poster logic is here
+
+    const handlePosterUpload=async ()=>{
+        const formData1 = new FormData();
+        formData1.append('file', posterImage1);
+        formData1.append('posterTitle', posterTitle);
+        formData1.append('posterAlt', posterAlt);
+
+        try {
+            const response = await fetch(`/api/public/package-state/poster?id=${selectedLocation}`, {
+                method: 'POST',
+                body: formData1,
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add promo');
+            }
+
+            const data = await response.json();
+            setFile1(null);
+            setPosterTitle("");
+            setPosterAlt("");
+           
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     return (
         <AppProvider>
             <Layout>
@@ -291,7 +327,8 @@ export default function PromoManage() {
                                 <div>
                                     <p className="text-[15px] font-semibold">Package Image Upload</p>
                                 </div>
-                                <div className="p-7 border border-slate-500/45 rounded">
+                                <div className=" flex">
+                                <div className="p-7 flex-1 border border-slate-500/45 rounded">
                                     <div className="w-2/3">
                                         {file && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file} alt="Preview" />}
 
@@ -328,6 +365,46 @@ export default function PromoManage() {
                                         />
                                     </div>
                                 </div>
+                                <div className="p-7 mx-5 flex-1 border border-slate-500/45 rounded">
+                                    <div className="w-2/3">
+                                        {file1 && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file1} alt="Preview" />}
+
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="file"
+                                            onChange={handleChange1}
+                                            // value={file}
+                                            ref={ref}
+                                            className="file:mr-4 file:py-2 file:px-4
+                                                file:rounded-full file:border-0
+                                                file:text-sm file:font-semibold
+                                                file:bg-black/20 file:text-black/50
+                                                hover:file:bg-black/75 hover:file:text-white cursor-pointer"
+                                        />
+                                    </div>
+                                    <div className="my-3">
+                                        <p>Title</p>
+                                        <input
+                                            className="border px-2 rounded-sm"
+                                            type="text"
+                                            value={posterTitle}
+                                            onChange={(e) => setPosterTitle(e.target.value)}
+                                        />
+                                    </div>
+                                    <div>
+                                        <p>Alt</p>
+                                        <input
+                                            className="border px-2 rounded-sm"
+                                            type="text"
+                                            value={posterAlt}
+                                            onChange={(e) => setPosterAlt(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="my-3"><button onClick={handlePosterUpload} className=" bg-orange-500 px-2 mx-3 py-1 rounded-lg">upload</button></div>
+                                </div>
+                                </div>
+                                
                             </div>
                             <div className="bg-white rounded p-5 mt-5">
                                 <div>
