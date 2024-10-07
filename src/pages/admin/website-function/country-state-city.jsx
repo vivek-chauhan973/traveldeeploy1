@@ -1,14 +1,7 @@
-
-import {
-  DeleteIcon,
-  AddCircleIcon,
-  EditIcon,
-  SaveIcon,
-  CancelIcon
-} from "@/components/icons/index"
-import Layout from "@/components/admin/Layout";
-
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong, faCirclePlus, faCube, faEdit, faFloppyDisk, faTrash, faXmark, } from "@fortawesome/free-solid-svg-icons";
+import Layout from "@/components/admin/Layout";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 
 const fetchCountries = async () => {
@@ -286,29 +279,37 @@ export default function CountryStateCity() {
     <AppProvider>
       <Layout>
         <div>
-          <div>
-            <p className='font-semibold text-[28px] mb-10'>New Country Add</p>
+          <div className="flex items-center gap-5 text-primary xl:mb-10 mb-7 xl:mt-5">
+            <FontAwesomeIcon icon={faCube} className="text-2xl" />
+            <p className="md:text-[28px] text-xl text-black">Add New Country</p>
+            <FontAwesomeIcon
+              icon={faArrowRightLong}
+              className=" text-teal-700 text-xl"
+            />
           </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-            <div className='border p-4 rounded-md bg-white'>
-              <div className='flex items-center justify-between'>
+          <div className='grid grid-cols-1 xl:grid-cols-2 gap-3'>
+            <div className='border md:px-4 py-4 px-2 rounded-md bg-white'>
+              <div className='flex items-center justify-between gap-1'>
                 <div className='flex items-center'>
-                  <label htmlFor="country">Country:</label>
+                  <label htmlFor="country">Country :</label>
                   <input className=' border ml-2 rounded-md h-8 px-2 focus:border-primary outline-none'
                     value={country}
                     onChange={handleCountryInputChange} />
                 </div>
-                <button onClick={handleAddCountry} disabled={!country}>
-                  <AddCircleIcon size={90}/>
-                </button>
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  onClick={handleAddCountry}
+                  disabled={!country}
+                  className="text-xl hover:text-primary cursor-pointer mb-1"
+                />
               </div>
               {/* data is here show */}
               <hr className='my-3' />
               <ul>
                 {countries?.map(countryData => (
-                  <li key={countryData._id} className='flex justify-between even:bg-slate-50 px-5'>
+                  <li key={countryData._id} className='flex justify-between even:bg-slate-50 md:px-5 px-3'>
                     <input
-                      type="radio"
+                      type="radio" className="accent-navyblack"
                       checked={selectedCountry === countryData._id}
                       onChange={() => handleCountrySelect(countryData._id)}
                       value={countryData._id} />
@@ -326,68 +327,67 @@ export default function CountryStateCity() {
                       {editCountryId === countryData._id ? (
                         <span className="flex gap-2 px-2">
                           {editCountryValue &&
-
-                            <div className='mt-1 hover:text-red-500 cursor-pointer'
-                              onClick={() => saveEditCountry(countryData._id)} v>
-                              <SaveIcon
-                                size={24}
-
-                              />
-                            </div>
+                            <FontAwesomeIcon
+                              icon={faFloppyDisk}
+                              onClick={() => saveEditCountry(countryData._id)}
+                              className="font1 mt-1 hover:text-primary cursor-pointer"
+                            />
                           }
-                          <div className='mt-1 hover:text-red-500 cursor-pointer'
-                            onClick={() => toggleEditCountry(countryData._id)}>
-                            <CancelIcon
-                              size={24} />
-                          </div>
-
+                          <FontAwesomeIcon
+                            icon={faXmark}
+                            onClick={() => toggleEditCountry(countryData._id)}
+                            className="font1 mt-1 hover:text-primary cursor-pointer"
+                          />
                         </span>
                       ) : (
-                        <div className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => toggleEditCountry(countryData._id)}>
-
-                          <EditIcon
-                            size={20}
-
-
-                          />
-                        </div>
+                        <FontAwesomeIcon
+                          icon={faEdit}
+                          onClick={() => toggleEditCountry(countryData._id)}
+                          className="font1 mt-1 hover:text-primary cursor-pointer"
+                        />
                       )}
-                      <div className='mt-1 hover:text-red-500 cursor-pointer'
-                        onClick={() => handleDeleteCountry(countryData._id)}>
-                        <DeleteIcon size={24} />
-                      </div>
-
+                      {!editCountryValue &&
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          onClick={() => handleDeleteCountry(countryData._id)}
+                          className="mt-1 font1 hover:text-primary cursor-pointer"
+                        />
+                      }
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className='border p-4 rounded-md bg-white' hidden={!selectedCountry}>
+            <div className='border md:px-4 py-4 px-3 rounded-md bg-white' hidden={!selectedCountry}>
               <div>
                 <div className='flex items-center justify-between'>
                   <div className='flex items-center'>
-                    <label htmlFor="state">State:</label>
+                    <label htmlFor="state">State :</label>
                     <input className=' border ml-2 rounded-md h-8 px-2 focus:border-primary outline-none'
                       value={state} onChange={handleStateInputChange} />
                   </div>
-                  <button onClick={handleAddState} disabled={!state}>
-                    <AddCircleIcon size={35} />
-                  </button>
+                  <FontAwesomeIcon
+                    icon={faCirclePlus}
+                    onClick={handleAddState}
+                    disabled={!state}
+                    className="text-xl hover:text-primary cursor-pointer mb-1"
+                  />
                 </div>
               </div>
               {/* data is here show */}
               <hr className='my-3' />
               <div>
-                {states?.map(state => (<div className='flex justify-between even:bg-slate-50 px-5' key={state._id}>
+                {states?.map(state => (<div className='flex justify-between even:bg-slate-50 md:px-5 px-3' key={state._id}>
                   <p className='capitalize flex gap-2 leading-8'>
                     <span>
-                      <input type="radio" value={state._id}
+                      <input type="radio" className="accent-navyblack"
+                        value={state._id}
                         onChange={() => handleStateSelect(state._id)}
                         checked={selectedState === state._id} />
                     </span>
                     {editStateId === state._id ? (
                       <input
-                        className='border ml-2 rounded-md h-8 px-2 focus:border-primary outline-none'
+                        className='border rounded-md h-8 px-2 focus:border-primary outline-none'
                         defaultValue={state.name}
                         onChange={(e) => setEditStateValue(e.target.value)}
                       />
@@ -397,64 +397,55 @@ export default function CountryStateCity() {
                     {editStateId === state._id ? (
                       <span className="flex gap-2 px-2">
                         {editStateValue &&
-
-                          <div className='mt-1 hover:text-red-500 cursor-pointer'
-                            onClick={() => saveEditState(state._id)}>
-                            <SaveIcon
-                              size={24}
-
-                            />
-                          </div>
-
-                        }
-                        <div className='mt-1 hover:text-red-500 cursor-pointer'
-                          onClick={() => toggleEditState(state._id)}>
-                          <CancelIcon
-                            size={24}
-
+                          <FontAwesomeIcon
+                            icon={faFloppyDisk}
+                            onClick={() => saveEditState(state._id)}
+                            className="font1 mt-1 hover:text-primary cursor-pointer"
                           />
-                        </div>
-
+                        }
+                        <FontAwesomeIcon
+                          icon={faXmark}
+                          onClick={() => toggleEditState(state._id)}
+                          className="font1 mt-1 hover:text-primary cursor-pointer"
+                        />
                       </span>
                     ) : (
-                      <div className='mt-1 hover:text-red-500 cursor-pointer'
-                        onClick={() => toggleEditState(state._id)}>
-                        <EditIcon
-                          size={20}
-
-                        />
-                      </div>
-
-                    )}
-                    <div className='mt-1 hover:text-red-500 cursor-pointer'
-                      onClick={() => handleDeleteState(state._id)}>
-                      <DeleteIcon
-                        size={24}
-
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        onClick={() => toggleEditState(state._id)}
+                        className="font1 mt-1 hover:text-primary cursor-pointer"
                       />
-                    </div>
-
+                    )}
+                    {!editStateValue &&
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        onClick={() => handleDeleteState(state._id)}
+                        className="mt-1 font1 hover:text-primary cursor-pointer"
+                      />
+                    }
                   </div>
                 </div>))}
               </div>
             </div>
-            <div className='border p-4 rounded-md bg-white' hidden={!selectedState}>
+            <div className='border md:px-4 py-4 px-3 rounded-md bg-white' hidden={!selectedState}>
               <div>
                 <div className='flex items-center justify-between'>
                   <div className='flex items-center'>
-                    <label htmlFor="city">City:</label>
+                    <label htmlFor="city">City :</label>
                     <input onChange={handleCityInputChange} value={city} className=' border ml-2 rounded-md h-8 px-2 focus:border-primary outline-none'
                       name="city" />
                   </div>
-                  <button onClick={handleAddCity}>
-                    <AddCircleIcon size={35} className='cursor-pointer hover:text-primary' />
-                  </button>
+                  <FontAwesomeIcon
+                    icon={faCirclePlus}
+                    onClick={handleAddCity}
+                    className="text-xl hover:text-primary cursor-pointer mb-1"
+                  />
                 </div>
               </div>
               {/* data is here show */}
               <hr className='my-3' />
               <div>
-                {cities?.map(city => (<div className='flex justify-between even:bg-slate-50 px-5' key={city._id}>
+                {cities?.map(city => (<div className='flex justify-between even:bg-slate-50 md:px-5 px-3' key={city._id}>
                   <p className='capitalize flex gap-2 leading-8'>
                     {/* {city.name} */}
                     {editCityId === city._id ? (
@@ -470,28 +461,32 @@ export default function CountryStateCity() {
                     {editCityId === city._id ? (
                       <span className="flex gap-2 px-2">
                         {editCityValue &&
-                          <div className='mt-1 hover:text-red-500 cursor-pointer'
-                            onClick={() => saveEditCity(city._id)}>
-                            <SaveIcon
-                              size={24}
-                            />
-                          </div>
+                          <FontAwesomeIcon
+                            icon={faFloppyDisk}
+                            onClick={() => saveEditCity(city._id)}
+                            className="font1 mt-1 hover:text-primary cursor-pointer"
+                          />
                         }
-                        <div className='mt-1 hover:text-red-500 cursor-pointer'
-                          onClick={() => toggleEditCity(city._id)}>
-                             <CancelIcon
-                          size={24}
+                        <FontAwesomeIcon
+                          icon={faXmark}
+                          onClick={() => toggleEditCity(city._id)}
+                          className="font1 mt-1 hover:text-primary cursor-pointer"
                         />
-                          </div>
                       </span>
                     ) : (
-                      <div onClick={() => toggleEditCity(city._id)} className='mt-1 hover:text-red-500 cursor-pointer'>
-                           <EditIcon size={20}  />
-                      </div>
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        onClick={() => toggleEditCity(city._id)}
+                        className="font1 mt-1 hover:text-primary cursor-pointer"
+                      />
                     )}
-                    <div onClick={() => handleDeleteCity(city._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer'>
-                    <DeleteIcon  />
-                    </div>
+                    {!editCityValue &&
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        onClick={() => handleDeleteCity(city._id)}
+                        className="mt-1 font1 hover:text-primary cursor-pointer"
+                      />
+                    }
                   </div>
                 </div>))}
               </div>
@@ -503,3 +498,7 @@ export default function CountryStateCity() {
     </AppProvider>
   )
 }
+
+
+
+// ====================================================changes===================================================

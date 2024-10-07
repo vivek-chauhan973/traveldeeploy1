@@ -11,10 +11,6 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-const MdOutlineAddCircle = dynamic(() =>
-  import("react-icons/md").then((mod) => mod.MdOutlineAddCircle)
-);
-
 export default function Gst() {
   const [gstRate, setGstRate] = useState("");
   const [gstList, setGstList] = useState([]);

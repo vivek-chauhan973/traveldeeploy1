@@ -2,6 +2,8 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import { useState, useEffect } from "react";
 import Image from 'next/image';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 
 export default function LogoManagement() {
   const [file, setFile] = useState(null);
@@ -113,12 +115,19 @@ export default function LogoManagement() {
       alert('Failed to remove image');
     }
   }
-  console.log("preview the image",preview)
+  console.log("preview the image", preview)
 
   return (
     <AppProvider>
       <Layout>
-        <p className="md:text-[28px] text-xl font-semibold">Logo Management</p>
+        <div className="flex items-center gap-5 text-primary xl:mt-5 mb-7 ">
+          <FontAwesomeIcon icon={faCube} className="text-2xl" />
+          <p className="md:text-[28px] text-xl text-black">Logo Management</p>
+          <FontAwesomeIcon
+            icon={faArrowRightLong}
+            className=" text-teal-700 text-xl"
+          />
+        </div>
         <div className="md:my-10 my-7 bg-white px-5 py-4 rounded-md">
           <p className="md:text-[20px] text-base font-semibold">Bizare Expenditure Main Website</p>
           <div>
@@ -147,10 +156,10 @@ export default function LogoManagement() {
               </div>
             </div>
             <div className="flex md:flex-row flex-col md:gap-5 gap-3">
-              <button className="bg-[#0d6efd] text-white px-3 py-2 w-full md:w-auto rounded-sm" onClick={handleUpload}>
+              <button className="bg-[#0d6efd] text-white px-3 py-2 w-full md:w-auto rounded" onClick={handleUpload}>
                 {isUpdating ? 'Update Image' : 'Upload Image'}
               </button>
-              <button className="bg-red-600 text-white px-3 py-2 w-full md:w-auto rounded-sm" onClick={handleRemove}>
+              <button className="bg-red-600 text-white px-3 py-2 w-full md:w-auto rounded" onClick={handleRemove}>
                 Remove
               </button>
             </div>

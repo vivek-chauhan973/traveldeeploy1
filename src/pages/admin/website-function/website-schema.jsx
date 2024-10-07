@@ -1,13 +1,8 @@
 import Layout from "@/components/admin/Layout";
-// import { MdDeleteForever } from "react-icons/md";
-// import { FaEdit } from "react-icons/fa";
-import dynamic from 'next/dynamic';
-
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
-
 import { useEffect, useState } from "react";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong, faCube, faEdit, faFloppyDisk, faTrash, faXmark, } from "@fortawesome/free-solid-svg-icons";
 
 export default function WebsiteSchema() {
     const [isName, setName] = useState({
@@ -137,57 +132,70 @@ export default function WebsiteSchema() {
 
     return (
         <AppProvider>
-        <Layout>
-            <div>
-                <p className="text-[28px] font-semibold mb-20">Website Schema Define</p>
-            </div>
-            <div className="block md:flex gap-5 ">
-                <div className="w-full md:w-2/4">
-                    <form onSubmit={HandleSchemaSubmit} className="flex flex-col gap-5 mb-10 md:mb-0 ">
-                        <div className="flex flex-col">
-                            <label htmlFor="inputName">Schema Name</label>
-                            <input
-                                onChange={isHandleSchemaName}
-                                value={isName.schemaName}
-                                name="schemaName"
-                                className={`grow h-10 rounded-md outline-none px-2 ${errors.schemaName ? 'border-red-500' : ''}`}
-                                type="text"
-                                id="inputName"
-                            />
-                            {errors.schemaName && <p className="text-red-500 text-sm">This field is required</p>}
+            <Layout>
+                <div className="flex items-center gap-5 text-primary xl:mt-5 mb-7 ">
+                    <FontAwesomeIcon icon={faCube} className="text-2xl" />
+                    <p className="md:text-[28px] text-lg text-black">Website Schema Define</p>
+                    <FontAwesomeIcon
+                        icon={faArrowRightLong}
+                        className=" text-teal-700 text-xl"
+                    />
+                </div>
+                <div className="block md:flex gap-5 ">
+                    <div className="w-full md:w-2/4">
+                        <form onSubmit={HandleSchemaSubmit} className="flex flex-col gap-5 mb-10 md:mb-0 ">
+                            <div className="flex flex-col">
+                                <label htmlFor="inputName" className="text-para font-normal">Schema Name</label>
+                                <input
+                                    onChange={isHandleSchemaName}
+                                    value={isName.schemaName}
+                                    name="schemaName"
+                                    className={`border grow h-10 rounded-md outline-none px-2 ${errors.schemaName ? 'border-red-500' : ''}`}
+                                    type="text"
+                                    id="inputName"
+                                />
+                                {errors.schemaName && <p className="text-red-500 text-sm">This field is required</p>}
+                            </div>
+                            <div>
+                                <label htmlFor="w3review" className="text-para font-normal">Enter Your Schema Codes</label>
+                                <textarea
+                                    onChange={isHandleSchemaName}
+                                    value={isName.schemaCode}
+                                    name="schemaCode"
+                                    className={`p-2 border rounded-md outline-none grow w-full ${errors.schemaCode ? 'border-red-500' : ''}`}
+                                    rows={12}
+                                />
+                                {errors.schemaCode && <p className="text-red-500 text-sm">This field is required</p>}
+                            </div>
+                            <button className="bg-navyblack py-2 text-white rounded-md">{editId ? 'Update Schema' : 'Export Schema'}</button>
+                        </form>
+                    </div>
+                    <div className="rounded-md grow border p-3 mt-5 bg-white w-full md:w-2/4 min-h-90">
+                        <div className="border-b py-2">
+                            <p className="font-semibold">Schema List ({schemaData.length})</p>
                         </div>
                         <div>
-                            <label htmlFor="w3review">Enter Your Schema Codes</label>
-                            <textarea
-                                onChange={isHandleSchemaName}
-                                value={isName.schemaCode}
-                                name="schemaCode"
-                                className={`p-2 rounded-md outline-none grow w-full ${errors.schemaCode ? 'border-red-500' : ''}`}
-                                rows={12}
-                            />
-                            {errors.schemaCode && <p className="text-red-500 text-sm">This field is required</p>}
-                        </div>
-                        <button className="bg-navyblack py-2 text-white rounded-md">{editId ? 'Update Schema' : 'Export Schema'}</button>
-                    </form>
-                </div>
-                <div className="rounded-md grow border p-2 bg-white w-full md:w-2/4 min-h-90">
-                    <div className="border-b py-2">
-                        <p className="font-semibold">Schema List ({schemaData.length})</p>
-                    </div>
-                    <div className="overflow-y-scroll">
-                        {schemaData.map((item, index) => (
-                            <div key={item._id} className="flex justify-between p-2 even:bg-slate-100">
-                                <p>{item.schemaName}</p>
-                                <div className="flex items-center">
-                                    <FaEdit onClick={() => schemaEdit(item)} size={20} className="cursor-pointer" />
-                                    <MdDeleteForever onClick={() => schemaDelete(item._id)} className="cursor-pointer" size={24} />
+                            {schemaData.map((item, index) => (
+                                <div key={item._id} className="flex justify-between p-2 even:bg-slate-100 mt-1">
+                                    <p>{item.schemaName}</p>
+                                    <div className="flex items-center gap-2">
+                                        <FontAwesomeIcon
+                                            icon={faEdit}
+                                            onClick={() => schemaEdit(item)}
+                                            className="font1 mt-1 hover:text-primary cursor-pointer"
+                                        />
+                                        <FontAwesomeIcon
+                                            icon={faTrash}
+                                            onClick={() => schemaDelete(item._id)}
+                                            className="font1 mt-1 hover:text-primary cursor-pointer"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Layout>
+            </Layout>
         </AppProvider>
     );
 }

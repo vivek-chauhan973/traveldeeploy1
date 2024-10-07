@@ -2,9 +2,8 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import dynamic from 'next/dynamic'
-
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong, faCube, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function IconManagement() {
   const [file, setFile] = useState(null);
@@ -102,13 +101,21 @@ export default function IconManagement() {
   return (
     <AppProvider>
       <Layout>
-        <p className="md:text-[28px] text-xl font-semibold">Icon Management</p>
+        {/* <p className="md:text-[28px] text-xl font-semibold">Icon Management</p> */}
+        <div className="flex items-center gap-5 text-primary xl:mb-10 mb-7 xl:mt-5">
+          <FontAwesomeIcon icon={faCube} className="text-2xl" />
+          <p className="md:text-[28px] text-xl text-black">Icon Management</p>
+          <FontAwesomeIcon
+            icon={faArrowRightLong}
+            className=" text-teal-700 text-xl"
+          />
+        </div>
         <div className="md:my-10 my-7 bg-white px-5 py-4 rounded-md">
           <p className="md:text-[20px] text-base font-semibold">
             Bizare Expenditure Main Website
           </p>
           <div>
-            <div className="flex md:flex-row flex-col md:gap-10 gap-5 md:my-10 my-5 items-center xl:pl-5">
+            <div className="flex md:flex-row flex-col md:gap-10 gap-5 md:my-10 my-5  items-center xl:pl-5 ">
               <input type="file" className="mb-4" onChange={handleChange} />
               <div>
                 {preview && (
@@ -123,7 +130,7 @@ export default function IconManagement() {
                 <div>
                   <p>Name of Icon</p>
                   <input
-                    className="border px-2 py-0.5 mb-2 w-full md:w-auto rounded"
+                    className="border px-2 py-0.5 mb-2 w-full md:w-auto rounded focus:border-primary outline-none"
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -132,7 +139,7 @@ export default function IconManagement() {
                 <div>
                   <p>Alt</p>
                   <input
-                    className="border px-2 py-0.5 w-full md:w-auto rounded"
+                    className="border px-2 py-0.5 w-full md:w-auto rounded focus:border-primary outline-none"
                     type="text"
                     value={alt}
                     onChange={(e) => setAlt(e.target.value)}
@@ -142,7 +149,7 @@ export default function IconManagement() {
             </div>
             <div className="flex md:flex-row flex-col md:gap-5 gap-3">
               <button
-                className="bg-[#0d6efd] text-white px-3 py-2 w-full md:w-auto rounded-sm"
+                className="bg-navyblack text-white px-3 py-2 w-full md:w-auto rounded"
                 onClick={handleUpload}
               >
                 Upload Image
@@ -161,7 +168,7 @@ export default function IconManagement() {
               <tbody className="bg-gray-100">
                 {imageData?.map((item) => (
                   <tr key={item?._id} className="border-b">
-                    <td className="flex justify-center items-center  border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                    <td className="flex justify-center items-center px-2 py-2 overflow-hidden border-gray-300">
                       <Image
                         className=" shadow-md"
                         src={item?.path}
@@ -170,14 +177,14 @@ export default function IconManagement() {
                         height={32}
                       />
                     </td>
-                    <td className=" border-l border-r px-2 py-2 capitalize overflow-hidden border-gray-300">
-                      <p className="text-lg font-semibold capitalize">{item?.title}</p>
+                    <td className="border-l border-r px-2 py-2 capitalize overflow-hidden border-gray-300">
+                      <p className="text-para font-semibold capitalize">{item?.title}</p>
                     </td>
-                    <td className="flex justify-center items-center  border-l border-r px-2 py-2 overflow-hidden border-gray-300">
-                      <MdDeleteForever
+                    <td className="  px-2 py-2 overflow-hidden border-gray-300">
+                      <FontAwesomeIcon
+                        icon={faTrash}
                         onClick={() => handleRemove(item?._id)}
-                        size={36}
-                        className="hover:text-red-500 cursor-pointer"
+                        className="font1 hover:text-primary cursor-pointer"
                       />
                     </td>
                   </tr>
