@@ -76,19 +76,6 @@ const header=[
   element:SpacialityTour,
   href:'#',
    icon:<FontAwesomeIcon icon={faDiamond}  className='font'  />
-},
-{
-  name:"Deals",
-  element:Deals,
-  href:'#',
-   icon: <FontAwesomeIcon icon={faHandshakeSimple}  className='font'  />
-},
-{
-  name:"Contact Us",
-  element:Contact,
-  href:'#',
-   icon:<FontAwesomeIcon icon={  faAddressBook}  className='font'  />
- 
 }]
 
 // console.log(header)

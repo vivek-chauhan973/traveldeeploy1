@@ -7,7 +7,7 @@ import Header2 from "../../MobileHeader";
 import Image from 'next/image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faUser, faArrowAltCircleRight, faHome, faCompass, faDownload, falocation } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUser, faArrowAltCircleRight, faHome,faAddressBook,faHandshakeSimple } from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
 
 
