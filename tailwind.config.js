@@ -7,6 +7,7 @@ const config = {
     "./src/app/**/*.{js,jsx,mdx}",
   ],
   theme: {
+    
     fontSize: {
       xxs: ["11px", "16px"],
       xs: ["12px", "18px"],
@@ -49,7 +50,7 @@ const config = {
         navyblacklite: "#ceced6",
         graytext: "#212221",
       },
-    },
+    }
   },
   plugins: [
     function ({ addUtilities }) {
