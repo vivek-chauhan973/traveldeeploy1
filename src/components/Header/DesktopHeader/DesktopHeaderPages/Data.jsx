@@ -69,7 +69,13 @@ const header=[
   name:"Spaciality Tour",
   element:SpacialityTour,
    icon:<FontAwesomeIcon icon={faDiamond}  className='font'  />
-}]
+},
+{
+  name:"Car Hire",
+  element:SpacialityTour,
+   icon:<FontAwesomeIcon icon={faCar}  className='font'  />
+},
+]
 
 // console.log(header)
 export {data1,stateData,header}
