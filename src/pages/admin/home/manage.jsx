@@ -11,10 +11,7 @@ export default function Manage() {
       <Layout>
         <div className=" flex flex-col">
           <Searchable />
-          <div>
           <Searchable1/>
-          
-          </div>
         </div>
       </Layout>
     </AppProvider >

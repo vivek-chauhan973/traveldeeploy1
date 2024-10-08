@@ -39,6 +39,15 @@ const Searchable1 = () => {
     category5: [],
   })
 
+  const [formData, setFormData] = useState({
+    title: '',
+    subtitle: '',
+    description: ''
+  });
+
+   // State to control form visibility and button enablement
+   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+   const [isPayloadButtonEnabled, setIsPayloadButtonEnabled] = useState(false);
 
   const maxSelections = 1; // Maximum number of options that can be selected for each category
   const filteredOptions = options[selectedCategory].filter(option => {
@@ -108,6 +117,7 @@ const Searchable1 = () => {
     const payload = {
       category: selectedCategory,
       selectedOptions: selectedOptions[selectedCategory],
+      formData 
     };
     try {
       const data = await fetch("/api/home/homefooter", {
@@ -124,14 +134,39 @@ const Searchable1 = () => {
     } catch (error) {
       alert("something went wrong");
     }
+    console.log("Rikki Payload", payload);
+
+  };
+
+  // Handler for title,desc,subtitle field changes
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+   // Handle form submission
+   const handleSubmitForm = () => {
+    if (formData.title && formData.subtitle && formData.description) {
+      // Hide the form after submission and enable "Send Payload" button
+      setIsFormSubmitted(true);
+      setIsPayloadButtonEnabled(true);
+    }
   };
 
   return (
     <div className=''>
-      <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
+      <div className="flex items-center gap-5 text-primary my-10">
+        <FontAwesomeIcon icon={faCube} className="text-2xl" />
         <p className="md:text-[28px] text-xl text-black">Selected One Promotion Package</p>
+        <FontAwesomeIcon
+          icon={faArrowRightLong}
+          className=" text-teal-700 text-xl"
+        />
       </div>
-      <div className=" w-full grid xl:grid-cols-2 grid-cols-1">
+      <div className=" w-full grid xl:grid-cols-2 grid-cols-1 gap-5">
         <div className='bg-white shadow-lg rounded-lg p-5'>
           <div>
             <h3 className=" font-semibold mb-1">Select Category</h3>
@@ -200,11 +235,54 @@ const Searchable1 = () => {
           )}
           <button
             onClick={handlePayloadSend}
-            className="mt-4 bg-navyblack text-white px-4 py-2 rounded md:w-auto w-full"
+            className={`mt-4 bg-navyblack text-white px-4 py-2 rounded md:w-auto w-full ${isPayloadButtonEnabled ? '' : 'opacity-50 cursor-not-allowed'}`}
+            disabled={!isPayloadButtonEnabled}
           >
-            Send Payload
+            Send Payload . . .
           </button>
         </div>
+        {selectedOptions[selectedCategory].length > 0 && !isFormSubmitted && (
+          <div className='bg-white shadow-lg rounded-lg p-5'>
+            <div>
+              <label htmlFor='subtitle' className=" font-semibold mb-1">Sub Title</label>
+              <input
+                id='subtitle'
+                type="text"
+                name="subtitle"
+                placeholder="Enter Your Sub Title"
+                value={formData.subtitle}
+                onChange={handleFormChange}
+                className="p-2 mb-4 w-full border rounded-md h-10 px-2 focus:border-primary outline-none"
+              />
+              <label htmlFor='title' className=" font-semibold mb-1">Title</label>
+              <input
+                id='title'
+                type="text"
+                name="title"
+                placeholder="Enter Your Title"
+                value={formData.title}
+                onChange={handleFormChange}
+                className="p-2 mb-4 w-full border rounded-md h-10 px-2 focus:border-primary outline-none"
+              />
+              <label htmlFor='description' className=" font-semibold mb-1">Description</label>
+              <input
+                id='description'
+                type="text"
+                name="description"
+                placeholder="Enter Your Description"
+                value={formData.description}
+                onChange={handleFormChange}
+                className="p-2 mb-4 w-full border rounded-md  px-2 h-12 focus:border-primary outline-none"
+              />
+              <button
+                onClick={handleSubmitForm}
+                className="mt-4 bg-navyblack text-white px-4 py-2 rounded md:w-auto w-full"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

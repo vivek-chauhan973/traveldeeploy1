@@ -95,6 +95,8 @@ import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import State from "@/components/Home/Cards/State";
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
+import Promises from "@/components/Home/Cards/Promises";
+import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
 
 // import Booking from "@/components/profile/bookings";
 
@@ -280,7 +282,7 @@ export default function Home() {
               numquam vitae, earum doloremque. Nam! Indulge in the vibrant
               celebrations of Holi with our premier Holi Packages of 2024 near
               to Delhi, tailored to offer an unforgettable experience in some of
-              India’s most iconic destinations. Whether you’re drawn to the
+              India most iconic destinations. Whether you are drawn to the
               spiritual aura of Rishikesh, the
             </h1>
 
@@ -334,59 +336,42 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="md:mt-9  mt-4  bg-slate-100">
-        <div className="container-wrapper text-xl md:text-[22px] font-medium text-center pb-7">
-          <p>Lorem, ipsum dolor.</p>
-          <p className="md:text-md text-para font-normal">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
-            cupiditate nobis minus?
-          </p>
-        </div>
+      <div className="">
         <Card4 />
       </div>
-
       {/* Card Kuoni copy */}
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
         <div className=" md:mt-4 mt-4">
           <ArrowSection />
         </div>
       </div>
-
       {/* state code start  */}
-      <State />
-
-      {/*  start code end */}
-      <div></div>
-
-      <div className="pb-5 -mt-1  md:pb-6">
-        {/* rounded card */}
-        <div className="container-wrapper md:text-[25px] text-xl font-medium text-center pb-2 md:pb-7">
-          <p>Lorem, ipsum dolor.</p>
-          <p className="md:text-md text-para font-normal">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
-            cupiditate nobis minus?
-          </p>
-        </div>
-        <div className="container-wrapper  grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-3">
-          {/* card multiple */}
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
-          <Card2 />
+      <div>
+        <State />
+      </div>
+      {/* Our Promise */}
+      <div>
+        <Promises />
+      </div>
+      {/* Country card  */}
+      <div>
+        <Card2 />
+      </div>
+      <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
+        <div className=" md:mt-4 mt-4">
+          <CarArrowSection />
         </div>
       </div>
-
-      <div className="">
+      <div className="w-full h-96 flex justify-center items-center text-2xl">
+        Travel Guide
+      </div>
+      <div className="w-full h-96 flex justify-center items-center text-2xl border-t">
+        Blog
+      </div>
+      <div>
         <ReviewsCard />
       </div>
       {/* 
-
             <div className="py-14  bg-slate-200 mb:6 md:mb-10">
                 <div className="container-wrapper md:text-[25px] text-xl font-medium text-center pb-10">
                     <p>Lorem, ipsum dolor.</p>

@@ -41,21 +41,20 @@ const Cardwork = () => {
           onClick={prevSlide}
           className="z-10 cursor-pointer absolute left-5 top-2/4 -translate-y-1/2 text-white"
         />
-        <div className="relative flex justify-center items-center overflow-hidden w-full h-72 rounded-lg">
+        <div className="relative flex justify-center items-center overflow-hidden w-full h-96 rounded-lg">
           {data.slides.map((item, index) => (
-            <div 
+            <div
               key={index}
-              className={` md:h-full w-full h-56  absolute transition-transform transform ${
-                index === startIndex ? "translate-x-0" : "translate-x-full"
-              }`}
+              className={` md:h-full w-full h-56  absolute transition-transform transform ${index === startIndex ? "translate-x-0" : "translate-x-full"
+                }`}
             >
               <Image
                 src={item.src}
                 alt={item.alt}
                 className=" object-cover"
-             layout='fill'
-                
-                />
+                layout='fill'
+
+              />
             </div>
           ))}
         </div>
