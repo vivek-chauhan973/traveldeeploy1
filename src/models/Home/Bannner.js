@@ -9,6 +9,10 @@ const bannerSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    description:{
+         type:String,
+         required:true
+    },
     videoPath:{
         type:String,
         required:true

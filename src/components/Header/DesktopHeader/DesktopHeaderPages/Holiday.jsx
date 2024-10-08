@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   FunIcon,
   LoveIcon,
@@ -10,8 +11,21 @@ import {
   WinIcon,
   CatIcon
 } from "@/components/icons/index"
-
+const fetchCategory= async()=>{
+  const res=await fetch("/api/homefooter");
+  return await res.json();
+}
 const Holiday = () => {
+
+const [catogories,setCatagories]=useState([]);
+useEffect(()=>{
+  fetchCategory().then(res=>{;setCatagories(res?.data||[])});
+},[])
+
+
+const data=catogories?.filter(item=>item.category==="category3");
+console.log("catories is here",data?.[0]?.options)
+
   return (
     <div className="flex w-[700px] ml-60 h-auto bg-gray-100 mt-4 justify-around rounded-[15px]">
       <div>
@@ -19,35 +33,57 @@ const Holiday = () => {
           <span>
             <Tree1Icon />
           </span>
-
+           
           THEMED EXPERINCE -Find your reason!
         </h4>
         <div className=" gap-y-4 flex flex-col mt-2">
+        <Link href={'/holidays/'+data?.[0]?.options?.[1].category+'tour-packages'}>
           <p className="flex items-center gap-3">
+            
             <span>
               <FunIcon />
             </span>
-            Family fun
+            {data?.[0]?.options?.[1].category}
+           
+            {/* Family fun */}
           </p>
+          </Link>
+          <Link href={'/holidays/'+data?.[0]?.options?.[2].category+'tour-packages'}>
           <p className="flex items-center gap-3">
+          
             <span>
               <LoveIcon />
             </span>
-            Romantic Holiday
+          
+            {data?.[0]?.options?.[2].category}
+            {/* Romantic Holiday */}
+           
           </p>
+          </Link>
+          <Link href={'/holidays/'+data?.[0]?.options?.[3].category+'tour-packages'}>
           <p className="flex items-center gap-3">
+          
             <span>
               <CatIcon />
             </span>
-            City Breakes
+            {data?.[0]?.options?.[3].category}
+           
+            {/* City Breakes */}
           </p>
+          </Link>
+          <Link href={'/holidays/'+data?.[0]?.options?.[0].category+'-tour-packages'}>
           <p className="flex items-center gap-3 ">
+        
             <span>
               <TreeIcon />
             </span>
-            gateway
+            {data?.[0]?.options?.[0].category}
+            
+            {/* gateway */}
           </p>
+          </Link>
           <p className="flex items-center gap-3 ">
+            
             <span>
               <FlagIcon />
             </span>

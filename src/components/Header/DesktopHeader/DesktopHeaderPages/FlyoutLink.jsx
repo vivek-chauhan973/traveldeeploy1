@@ -12,7 +12,7 @@ const FlyoutLink = ({ children, href, FlyoutContent }) => {
       onMouseLeave={() => setOpen(false)}
       className="relative w-fit h-fit"
     >
-      <a href={href} className="relative text-black">
+      <p className="relative text-black">
         {children}
         <span
           style={{
@@ -20,7 +20,7 @@ const FlyoutLink = ({ children, href, FlyoutContent }) => {
           }}
           className="absolute -bottom-2 -left-2 -right-2 h-[3px] origin-left scale-x-0 rounded-full bg-navyblack transition-transform duration-300 ease-out"
         />
-      </a>
+      </p>
       <AnimatePresence >
         {showFlyout && (
           <motion.div

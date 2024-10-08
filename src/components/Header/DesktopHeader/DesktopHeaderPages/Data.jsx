@@ -59,22 +59,15 @@ const header=[
   {
   name:"Destination",
   element:Show,
-  href:'#',
   icon:  <FontAwesomeIcon icon={faCompass}  className='font'  />
 },{
   name:"Holiday",
   element:Holiday,
-  href:'#' ,
   icon:<FontAwesomeIcon icon={faCake}  className='font'  />
-},
-{
-  name:"Car Hire",
-  icon:<FontAwesomeIcon icon={faCar}  className='font'  />
 },
 {
   name:"Spaciality Tour",
   element:SpacialityTour,
-  href:'#',
    icon:<FontAwesomeIcon icon={faDiamond}  className='font'  />
 }]
 

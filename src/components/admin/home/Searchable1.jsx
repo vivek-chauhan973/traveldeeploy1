@@ -20,7 +20,7 @@ const fetchAllData = async () => {
 const fetchAllPackageData = async () => {
   return await (await fetch("/api/package/get-packages")).json();
 }
-const Searchable = () => {
+const Searchable1 = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('category1');
   const [selectedOptions, setSelectedOptions] = useState({
@@ -40,7 +40,7 @@ const Searchable = () => {
   })
 
 
-  const maxSelections = 12; // Maximum number of options that can be selected for each category
+  const maxSelections = 1; // Maximum number of options that can be selected for each category
   const filteredOptions = options[selectedCategory].filter(option => {
     if (selectedCategory === "category3") {
       return option?.category?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -110,7 +110,7 @@ const Searchable = () => {
       selectedOptions: selectedOptions[selectedCategory],
     };
     try {
-      const data = await fetch("/api/homefooter", {
+      const data = await fetch("/api/home/homefooter", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -129,12 +129,7 @@ const Searchable = () => {
   return (
     <div className=''>
       <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
-        <FontAwesomeIcon icon={faCube} className="text-2xl" />
-        <p className="md:text-[28px] text-xl text-black">Selected Package</p>
-        <FontAwesomeIcon
-          icon={faArrowRightLong}
-          className=" text-teal-700 text-xl"
-        />
+        <p className="md:text-[28px] text-xl text-black">Selected One Promotion Package</p>
       </div>
       <div className=" w-full grid xl:grid-cols-2 grid-cols-1">
         <div className='bg-white shadow-lg rounded-lg p-5'>
@@ -215,4 +210,4 @@ const Searchable = () => {
   );
 };
 
-export default Searchable;
+export default Searchable1;
