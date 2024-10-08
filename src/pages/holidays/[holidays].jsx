@@ -19,12 +19,16 @@ const fetchPromoManagementData = async (stateId) => {
   return data;
 };
 
-const fetchLocation = async (state) => {
-  if (!state) return {};
-  const response = await fetch(`/api/public/${state}`, { method: 'GET' });
+const fetchCategory=async (category)=>{
+  const res=await fetch(`/api/public/category?category=${category}`);
+  return await res.json();
+}
+const fetchCategoryPackages = async (locationId) => {
+  const response = await fetch(`/api/public/category/${locationId}`);
   const data = await response.json();
   return data;
 };
+
 
 export default function SearchPage() {
   const router = useRouter();
@@ -39,25 +43,14 @@ export default function SearchPage() {
   const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
+  const [packages,setPackages]=useState([]);
+  // console.log("selected location ",selectedLocation)
 
-  useEffect(() => {
-    const fetchPackages = async () => {
-      try {
-        const response = await fetch(`/api/public/priority-package?locationId=${selectedLocation?._id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch packages');
-        }
-        const data = await response.json();
-        setPriorityPackage(data?.packages);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      }
-    };
-
-    if (selectedLocation) {
-      fetchPackages();
+  useEffect(()=>{
+    if(selectedLocation){
+    fetchCategoryPackages(selectedLocation?._id).then(res=>{setPackages(res?.packages);console.log("packages---->",res?.packages)});
     }
-  }, [selectedLocation]);
+  },[selectedLocation])
   useEffect(() => {
     setTourDuration([minDay, maxDay]);
   }, [maxDay, minDay]);
@@ -66,12 +59,12 @@ export default function SearchPage() {
     const fetchData = async () => {
       try {
         if (state) {
-          const selectedLocationData = await fetchLocation(state);
+          const selectedLocationData = await fetchCategory(state);
           if (!selectedLocationData) {
             router.replace('/404'); // Redirect to 404 if location data is not found
             return;
           }
-          setSelectedLocation(selectedLocationData);
+          setSelectedLocation(selectedLocationData?.category);
         } else {
           setSelectedLocation(null);
         }
@@ -85,7 +78,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     if (selectedLocation?._id) {
-      fetchPromoManagementData(selectedLocation._id).then(res => setPromoData(res?.data || {}));
+      fetchPromoManagementData(selectedLocation?._id).then(res => setPromoData(res?.data || {}));
     } else {
       setPromoData({});
     }
@@ -115,7 +108,7 @@ export default function SearchPage() {
           </div>
           <div>
             <div>
-              {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll} />}
+              {selectedPriceRange && <SearchPagePackageList locationId={packages} priceRange={packages} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll} />}
             </div>
           </div>
         </div>

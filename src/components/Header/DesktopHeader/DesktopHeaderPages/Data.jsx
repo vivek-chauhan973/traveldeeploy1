@@ -1,12 +1,8 @@
 import Holiday from "./Holiday"
 import Show from "./Show"
-import Contact from "./Contact";
-import Deals from "./Deals";
 import SpacialityTour from "./SpacialityTour";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass ,  faCake,faCar,faDiamond,faAddressBook ,faHandshakeSimple} from '@fortawesome/free-solid-svg-icons';
-
-
+import { faCompass ,  faCake,faCar,faDiamond} from '@fortawesome/free-solid-svg-icons';
 const data1=[{
   state:"Himachal Pradesh",
   cities:['Chandratal','Dalhouse','Kaza','Manali','shimla'],

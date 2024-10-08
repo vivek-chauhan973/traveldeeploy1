@@ -6,12 +6,6 @@ import Image from 'next/image'
 import { useAppContext } from "./admin/context/Package/AddGuest";
 import Category from "@/pages/admin/package/category";
 
-const fetchPackages = async (locationId) => {
-  const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
-  const data = await response.json();
-  
-  return data?.packages;
-};
 const filteredData = async (id, cat, min, max, minDay, maxDay) => {
   const response = await fetch(`/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}&minDay=${minDay}&maxDay=${maxDay}`)
   const data = await response.json();
@@ -20,7 +14,6 @@ const filteredData = async (id, cat, min, max, minDay, maxDay) => {
 }
 const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   const router = useRouter();
-
   const pathnames = router.asPath.split("/").filter((x) => x);
   const [packages, setPackages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,23 +27,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   }, [filterApi])
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const packagesData = await fetchPackages(
-          locationId,
-          currentPage,
-          itemsPerPage
-        );
-        console.log("api public tour=package---", packagesData)
-        setPackages(packagesData);
-        
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    if (locationId) {
-      fetchData();
-    }
+    setPackages(locationId);
   }, [locationId, currentPage, itemsPerPage, clearAll]);
   useEffect(() => {
     setFilterData1(packages)
@@ -75,15 +52,6 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
     }
   }
 
-  // const basePrice = this.twinSharingRoom + (this.misc * days);
-  // const markupAmount = (basePrice * this.markup) / 100;
-  // const priceWithMarkup = basePrice + markupAmount;
-  // const discountAmount = (priceWithMarkup * Math.abs(this.diskHike)) / 100;
-  // const grandTotal = this.diskHike < 0 ? priceWithMarkup - discountAmount : priceWithMarkup + discountAmount;
-  // const gstAmount = (grandTotal * this.gst) / 100;
-  // return grandTotal + gstAmount;
-
-  // console.log("filter api here ::::: ",filterApi)
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     const windowHeight = window.innerHeight;
@@ -96,7 +64,7 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   const totalItems = filterData1?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   // Function to calculate price details
-  console.log("packageData", currentItems);
+  console.log("packageData", locationId);
   
   return (
     <div>

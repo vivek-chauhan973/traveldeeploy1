@@ -16,7 +16,7 @@ const HorizontalCard = ({ item }) => {
   }, [item])
   console.log("res123 ------> ", item)
   return (
-    <Link href={`/india/${item?.pageUrl}`}>
+    <a href={`/india/${item?.pageUrl}`}>
       <div className="shadow-lg w-[320px] border gap-5 m-2 flex items-center rounded-md shrink-0">
         <div className=" h-full">
           {/* <Image className=" object-cover rounded-md" width={100} height={100}
@@ -32,7 +32,7 @@ const HorizontalCard = ({ item }) => {
           <p className="text-[10px]">{packageList?.length} tours</p>
         </div>
       </div>
-    </Link>
+    </a>
   )
 }
 

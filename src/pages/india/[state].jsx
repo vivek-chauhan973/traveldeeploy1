@@ -25,11 +25,15 @@ const fetchLocation = async (state) => {
   const data = await response.json();
   return data;
 };
+const fetchPackages = async (locationId) => {
+  const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
+  const data = await response.json();
+  return data?.packages;
+};
 
 export default function SearchPage() {
   const router = useRouter();
   const state = router.query.state?.replace("-tour-packages", "");
-  // console.log("state is here :: ", state);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
@@ -39,6 +43,7 @@ export default function SearchPage() {
   const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
+  const [packages,setPackages]=useState([]);
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -58,6 +63,12 @@ export default function SearchPage() {
       fetchPackages();
     }
   }, [selectedLocation]);
+
+useEffect(()=>{
+  fetchPackages(selectedLocation?._id).then(res=>{setPackages(res);console.log("packages---->",res)});
+},[selectedLocation])
+
+
   useEffect(() => {
     setTourDuration([minDay, maxDay]);
   }, [maxDay, minDay]);
@@ -98,7 +109,7 @@ export default function SearchPage() {
   if (loading) {
     return <PromoBanner />;
   }
-
+// console.log("packages is here --> ",packages)
 
   return (
     <AppProvider>
@@ -115,7 +126,7 @@ export default function SearchPage() {
           </div>
           <div>
             <div>
-              {selectedPriceRange && <SearchPagePackageList locationId={selectedLocation?.id} priceRange={selectedPriceRange} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll} />}
+              {selectedPriceRange && <SearchPagePackageList locationId={packages} priceRange={selectedPriceRange} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll} />}
             </div>
           </div>
         </div>

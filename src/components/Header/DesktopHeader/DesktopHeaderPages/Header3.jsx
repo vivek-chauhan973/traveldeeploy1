@@ -117,7 +117,7 @@ const Header3 = () => {
 
             <FontAwesomeIcon icon={faHome} className='font' />
 
-            <span>
+            <span >
               Home
             </span>
           </Link>
