@@ -30,7 +30,7 @@ const fetchCategoryPackages = async (locationId) => {
 };
 
 
-export default function SearchPage() {
+const SearchPage=()=> {
   const router = useRouter();
   const state = router.query.holidays?.replace("-tour-packages", "");
   console.log("state is here :: ", state);
@@ -130,3 +130,4 @@ export default function SearchPage() {
     </AppProvider>
   );
 }
+export default SearchPage;

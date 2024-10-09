@@ -85,7 +85,7 @@ const ArrowSection = () => {
         <div className="carousel gap-5" ref={carouselRef}>
           {data?.length > 0 && data.map((items, i) => {
             return (
-              <div className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden">
+              <div key={i} className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden">
                 <Image
                   className="relative object-cover"
                   layout="fill"
