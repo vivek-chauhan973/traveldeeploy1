@@ -4,6 +4,7 @@ import State from "@/models/State";
 import Car from "@/models/car-package/cars";
 import Package from "@/models/Package";
 import HomeOnePackageSelected from "@/models/Home/HomeOnePackageSelected";
+import City from "@/models/City";
 
 const homeFooterApi=async (req,res)=>{
   const {category,selectedOptions,formData}=req.body;
@@ -57,6 +58,7 @@ const homeFooterApi=async (req,res)=>{
         if(item.category==="category5"){
           return Package.findById(id).exec();
         }
+        
       }));
     
     return {

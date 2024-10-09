@@ -3,6 +3,7 @@ import PackageMasterCategory from "@/models/package/PackageCategory";
 import State from "@/models/State";
 import Car from "@/models/car-package/cars";
 import Package from "@/models/Package";
+import City from "@/models/City";
 
 const homeFooterApi=async (req,res)=>{
   const {category,selectedOptions}=req.body;
@@ -48,6 +49,9 @@ const homeFooterApi=async (req,res)=>{
         }
         if(item.category==="category5"){
           return Package.findById(id).exec();
+        }
+        if(item.category==="category6"){
+          return City.findById(id).exec();
         }
       }));
     
