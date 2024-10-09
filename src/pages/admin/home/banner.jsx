@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
+import CarouselBanner from "./CarouselBanner";
 
 export default function Banner() {
   const [file, setFile] = useState(null);
@@ -192,6 +193,9 @@ export default function Banner() {
               </button>
             </div>
           </div>
+        </div>
+        <div className="mt-5">
+          <CarouselBanner/>
         </div>
       </Layout>
     </AppProvider>
