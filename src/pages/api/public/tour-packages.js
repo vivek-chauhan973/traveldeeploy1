@@ -9,9 +9,14 @@ import { NextApiRequest, NextApiResponse } from "next";
         const cities = await City.find({ state: locationId }).populate('state').exec();
         const cityIds = cities.map(city => city._id);
         // Fetch packages and populate category details
-        const packages = await Package.find({ location: { $in: cityIds } })
+        let packages = await Package.find({ location: { $in: cityIds } })
             .populate('category').populate("icons") // Populate category details
             .exec();
+         if(packages?.length===0){
+            packages=await Package.find({ location:locationId })
+            return res.status(200).json({ packages});
+         }
+            console.log("packages is here -------> ",packages)
         return res.status(200).json({ packages, cities });
     } catch (error) {
         console.error('Error handling API request:', error);
@@ -20,10 +25,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 }
 export default  packagePublicTour
  
-
-
-
-
 // ihivgofjv
 
 // import { NextApiRequest, NextApiResponse } from "next";

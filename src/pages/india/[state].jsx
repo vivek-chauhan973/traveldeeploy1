@@ -109,7 +109,7 @@ useEffect(()=>{
   if (loading) {
     return <PromoBanner />;
   }
-// console.log("packages is here --> ",packages)
+console.log("packages is here --> ",packages)
 
   return (
     <AppProvider>
