@@ -67,6 +67,20 @@ export default function PromoManage() {
                     const res = await fetch('/api/location?type=country', { method: 'GET' });
                     const data = await res.json();
                     setStatePackages(data?.result);
+                    console.log("all countries is here",data);
+                } catch (err) {
+                    console.log(err);
+                    return [];
+                }
+            };
+            fetchCountries();
+        }
+        if (selectCatagoryOrState === "city") {
+            const fetchCountries = async () => {
+                try {
+                    const res = await fetch('/api/location/city');
+                    const data = await res.json();
+                    setStatePackages(data?.result);
                     // console.log("all countries is here",data);
                 } catch (err) {
                     console.log(err);
@@ -89,7 +103,7 @@ export default function PromoManage() {
             }
         };
 
-        if (statePackages.length > 0) {
+        if (statePackages?.length > 0) {
             getPromoData().then(res => setPromoTxt(res?.data));
 
         }
@@ -241,8 +255,9 @@ export default function PromoManage() {
                                 >
                                     <option value="">Select One</option>
                                     <option value="category">Category</option>
-                                    <option value="state">State</option>
+                                    <option value="city">City</option>
                                     <option value="country">Country</option>
+                                    <option value="state">State</option>   
                                 </select>
                                 {catoryorstate && (
                                     <select
@@ -267,10 +282,15 @@ export default function PromoManage() {
                                                 Select country
                                             </option>
                                         )}
+                                        {selectCatagoryOrState === "city" && (
+                                            <option disabled selected>
+                                                Select city
+                                            </option>
+                                        )}
 
                                         {/* Conditionally render options based on selected category/state/country */}
                                         {selectCatagoryOrState === "country" &&
-                                            statePackages.map((state, i) => (
+                                            statePackages?.map((state, i) => (
                                                 <option
                                                     key={i}
                                                     className="border-none bg-slate-50 text-black capitalize"
@@ -282,7 +302,7 @@ export default function PromoManage() {
                                             ))}
 
                                         {selectCatagoryOrState === "state" &&
-                                            statePackages.map((state, i) => (
+                                            statePackages?.map((state, i) => (
                                                 <option
                                                     key={i}
                                                     className="border-none bg-slate-50 text-black capitalize"
@@ -294,7 +314,7 @@ export default function PromoManage() {
                                             ))}
 
                                         {selectCatagoryOrState === "category" &&
-                                            statePackages.map((state, i) => (
+                                            statePackages?.map((state, i) => (
                                                 <option
                                                     key={i}
                                                     className="border-none bg-slate-50 text-black capitalize"
@@ -303,6 +323,19 @@ export default function PromoManage() {
                                                     {state.category}
                                                 </option>
                                             ))}
+                                            
+                                            {selectCatagoryOrState === "city" &&
+                                            statePackages?.map((state, i) => (
+                                                <option
+                                                    key={i}
+                                                    className="border-none bg-slate-50 text-black capitalize"
+                                                    value={`${state.name},${state._id}`}
+                                                    data-pageurl={state.url}
+                                                >
+                                                    {state.name}
+                                                </option>
+                                            ))}
+                                            
                                     </select>
                                 )}
                                 <button

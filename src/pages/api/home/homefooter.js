@@ -6,7 +6,10 @@ import Package from "@/models/Package";
 import HomeOnePackageSelected from "@/models/Home/HomeOnePackageSelected";
 
 const homeFooterApi=async (req,res)=>{
-  const {category,selectedOptions}=req.body;
+  const {category,selectedOptions,formData}=req.body;
+  const {title,
+    subtitle,
+    description}=formData;
  
   if(req.method==="POST"){
     if(category==="" || selectedOptions?.length===0){
@@ -15,13 +18,17 @@ const homeFooterApi=async (req,res)=>{
     try {
       const data=await HomeOnePackageSelected.findOne({category});
       if(data){
-          const res1=await HomeOnePackageSelected.findOneAndReplace({category},{category,options:selectedOptions});
+          const res1=await HomeOnePackageSelected.findOneAndReplace({category},{category,options:selectedOptions,title,
+            subtitle,
+            description});
           if(!res1){
                return res.status(303).json({message:"data can't be replaced"});
           }
           return res.status(200).json({message:"data  replaced successfully ",res1});
       }
-      const response=await HomeOnePackageSelected.create({category,options:selectedOptions});
+      const response=await HomeOnePackageSelected.create({category,options:selectedOptions,title,
+        subtitle,
+        description});
       if(!response){
           return res.status(302).json({message:"something went wrong"})
       }

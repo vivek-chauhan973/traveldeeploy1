@@ -4,7 +4,19 @@ const HomeOnePackageSelectedSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    options:[mongoose.Schema.Types.ObjectId]
+    options:[mongoose.Schema.Types.ObjectId],
+    title:{
+        type:String,
+        required:true
+    },
+    subtitle:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    }
 },{timestamps:true});
 const HomeOnePackageSelected=mongoose.models.HomeOnePackageSelected||mongoose.model("HomeOnePackageSelected",HomeOnePackageSelectedSchema);
 export default HomeOnePackageSelected;

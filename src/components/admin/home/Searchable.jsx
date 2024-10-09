@@ -14,6 +14,10 @@ const fetchCategory = async () => {
 const fetchCars = async () => {
   return await (await fetch("/api/cars/get")).json();
 }
+const fetchCities=async ()=>{
+  const res = await fetch('/api/location/city');
+  return await res.json();
+}
 const fetchAllData = async () => {
   return await (await fetch("/api/homefooter")).json();
 }
@@ -29,6 +33,7 @@ const Searchable = () => {
     category3: [],
     category4: [],
     category5: [],
+    category6: [],
   });
   const [printValue, setPrintValue] = useState(0);
   const [options, setOptions] = useState({
@@ -37,6 +42,7 @@ const Searchable = () => {
     category3: [],
     category4: [],
     category5: [],
+    category6: [],
   })
 
 
@@ -72,6 +78,12 @@ const Searchable = () => {
       setOptions((prevOptions) => ({
         ...prevOptions,
         category5: res.packages
+      }));
+    })
+    fetchCities().then(res => {
+      setOptions((prevOptions) => ({
+        ...prevOptions,
+        category6: res.result
       }));
     })
 
@@ -150,6 +162,7 @@ const Searchable = () => {
               <option value="category3">Section 3</option>
               <option value="category4">Section 4</option>
               <option value="category5">Section 5</option>
+              <option value="category6">Popular Cities</option>
             </select>
           </div>
           <div>
@@ -177,6 +190,14 @@ const Searchable = () => {
                     className="mr-2 accent-navyblack"
                   />
                   {(selectedCategory === "category1" || selectedCategory === "category2" || selectedCategory === "category4" || selectedCategory === "category5") && <span className={
+                    selectedOptions[selectedCategory].length >= maxSelections &&
+                      !selectedOptions[selectedCategory].includes(option)
+                      ? "text-gray-400 cursor-not-allowed"
+                      : ""
+                  }>
+                    {option.name}
+                  </span>}
+                  {(selectedCategory === "category6") && <span className={
                     selectedOptions[selectedCategory].length >= maxSelections &&
                       !selectedOptions[selectedCategory].includes(option)
                       ? "text-gray-400 cursor-not-allowed"
