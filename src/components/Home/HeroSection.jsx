@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+const fetchBanner=async ()=>{
+  const res = await fetch("/api/home");
+  return await res.json();
+}
 const HeroSection = () => {
+
+  const [banner,setBanner]=useState();
+  const [video,setVideo]=useState("");
+  useEffect(()=>{
+    fetchBanner().then(res=>{setBanner(res?.data||[]);setVideo(res?.data?.[0]?.videoPath||"")})
+  },[])
+  console.log("res of banner ---- >",banner?.[0]?.videoPath)
+
   return (
     <div>
       <div className="relative md:h-[84vh] h-[65vh] flex items-center justify-center">
-        <video autoPlay muted loop
+        {banner?.[0]?.videoPath &&<video autoPlay muted loop
           className="absolute  inset-0 z-0 w-full h-full object-cover"
           >
-          <source src="/video.mp4" type="video/mp4" />
-        </video>
+          <source src={video} type="video/mp4" />
+        </video>}
         <div className="absolute inset-0 z-1 bg-black opacity-10"></div>
         <div className="z-20 text-white text-center relative  xl:w-[50vw] w-[80vw]">
           <h1 className="md:text-[32px] text-2xl leading-normal font-semibold md:font-semibold uppercase ">
-            Travel is the only thing you buy that makes you richer
+            {banner?.[0]?.title}
           </h1>
-          <p className="mt-3">Additional text or content can go here.</p>
+          <p className="mt-3">{banner?.[0]?.description}
+          </p>
         </div>
         {/* <!-- scroll arrow sign --> */}
         <div className="absolute bottom-0 md:bottom-10 z-30 animate-bounce items-center flex flex-col">
