@@ -1,4 +1,3 @@
-import category from '@/pages/admin/blog/category';
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +22,10 @@ const fetchAllData = async () => {
 }
 const fetchAllPackageData = async () => {
   return await (await fetch("/api/package/get-packages")).json();
+}
+const fetchAllCarPackagesData=async ()=>{
+  const response = await fetch("/api/cars/package/get-packages");
+  return await response.json();
 }
 const Searchable = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -68,10 +71,11 @@ const Searchable = () => {
         category3: res?.data
       }));
     })
-    fetchCars().then(res => {
+    fetchAllCarPackagesData().then(res=>console.log("res of car packages is here -----> ",res))
+    fetchAllCarPackagesData().then(res => {
       setOptions((prevOptions) => ({
         ...prevOptions,
-        category4: res?.data
+        category4: res?.packages
       }));
     })
     fetchAllPackageData().then(res => {
