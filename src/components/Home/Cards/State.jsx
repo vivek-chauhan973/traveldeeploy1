@@ -22,9 +22,13 @@ const State = () => {
     return (
         <div>
             <div className="my-1 mt-6 md:mt-10 ">
-                <div className="container-wrapper text-xl font-medium md:text-[25px] text-center">
-                    <p>Lorem, ipsum dolor.</p>
-                    <p className="md:text-md text-para font-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo cupiditate nobis minus?</p>
+                <div className="container-wrapper  text-center">
+                    <p className='md:text-[25px] text-xl font-medium mb-1'>
+                        Immerse Yourself in Trending Destinations
+                    </p>
+                    <p className="md:text-md text-para font-normal">
+                        Delve into the most popular destinatins and create unforgettable memories.
+                    </p>
                 </div>
                 <div className="container-wrapper grid grid-cols-5 gap-3 overflow-hidden">
                     <div className="flex md:flex-col md:mt-14 gap-2 py-5">

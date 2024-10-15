@@ -99,6 +99,15 @@ import Promises from "@/components/Home/Cards/Promises";
 import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
 
 // import Booking from "@/components/profile/bookings";
+const fetchAllSingleSction =async ()=>{
+  const res=await fetch("/api/home/homefooter");
+  return await res.json();
+}
+const fetchAllMultiSction =async ()=>{
+  const res=await fetch("/api/homefooter");
+  return await res.json();
+}
+
 
 const fetchState = async () => {
   const response = await fetch("/api/public/states");
@@ -112,8 +121,10 @@ export default function Home() {
   };
   useEffect(() => {
     fetchState().then((res) => setStates(res?.states || []));
+    fetchAllMultiSction().then(res=>console.log("res--of all packages -----> ",res))
+    fetchAllSingleSction().then(res=>console.log("res--of single all packages -----> ",res))
   }, []);
-  // console.log("res---->  ",states)
+  console.log("res---->  ",states)
   return (
     <>
       <DesktopHeader />
@@ -173,7 +184,7 @@ export default function Home() {
             </div>
           </div>
         ))}
-        <div className="relative mb-2 group">
+        {/* <div className="relative mb-2 group">
           <Image
             className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
             src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -217,7 +228,7 @@ export default function Home() {
           >
             Rajasthan
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* image and text */}
@@ -234,7 +245,7 @@ export default function Home() {
               numquam vitae, earum doloremque. Nam! Indulge in the vibrant
               celebrations of Holi with our premier Holi Packages of 2024 near
               to Delhi, tailored to offer an unforgettable experience in some of
-              India’s most iconic destinations. Whether you’re drawn to the
+              Indias most iconic destinations. Whether you are drawn to the
               spiritual aura of Rishikesh, the
             </h1>
             <div className=" mt-4 flex md:justify-between gap-3  ">
@@ -298,7 +309,6 @@ export default function Home() {
         </div>
       </div>
       {/* image */}
-
       {/* <div className=" container-wrapper md:grid md:grid-cols-2  justify-around items-center mt-5 md:mb-16 md:mt-8 gap-1">
                 <div className="relative mb-3">
                     <Image height={450} width={450} className=" md:ml-16 object-cover rounded-md  transition-transform duration-300 transform hover:scale-110 " src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
@@ -308,31 +318,22 @@ export default function Home() {
                     <Image height={450} width={450}  className=" object-cover rounded-md transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
             {/* md:h-72 md:w-[550px] h-56 w-full */}
       {/* </div>
-
             </div>  */}
-
       {/* weekend package */}
       <Cardwork />
 
       {/* horizontal card */}
       <div className="">
-        <div className="container-wrapper  md:mt-8">
-          <p className="text-center mt-1 md:font-semibold  text-xl font-medium md:text-[25px]">
-            Plan an unforgettable trip from your city
+        <div className="container-wrapper  text-center pt-5 pb-2">
+          <p className='md:text-[25px] text-xl font-medium mb-1'>
+          Your Next Remarkable Adventure Awaits
           </p>
         </div>
-
         {/* very small horizontal card */}
         <div className="container-wrapper justify-center  flex flex-wrap">
-          {/* each small horizontal card */}
           {states?.map((item, i) => (
             <HorizontalCard key={i} item={item} />
           ))}
-          <HorizontalCard />
-          <HorizontalCard />
-          <HorizontalCard />
-          <HorizontalCard />
-          {/* each small horizontal card */}
         </div>
       </div>
 

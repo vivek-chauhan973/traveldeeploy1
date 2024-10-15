@@ -14,7 +14,8 @@ const HorizontalCard = ({ item }) => {
   useEffect(() => {
     fetchAllPackagesAccordingToStateId(item?._id).then(res => setPackageList(res?.packages))
   }, [item])
-  console.log("res123 ------> ", item)
+  // console.log("res123 ------> ", packageList) 
+  
   return (
     <a href={`/india/${item?.pageUrl}`}>
       <div className="shadow-lg w-[320px] border gap-5 m-2 flex items-center rounded-md shrink-0">

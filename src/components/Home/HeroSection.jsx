@@ -11,6 +11,8 @@ const HeroSection = () => {
     fetchBanner().then(res=>{setBanner(res?.data||[]);setVideo(res?.data?.[0]?.videoPath||"")})
   },[])
   // console.log("res of banner ---- >",banner?.[0]?.videoPath)
+  // console.log("banner",banner);
+  
   return (
     <div>
       <div className="relative md:h-[84vh] h-[65vh] flex items-center justify-center">

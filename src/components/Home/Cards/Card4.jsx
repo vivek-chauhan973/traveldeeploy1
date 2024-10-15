@@ -96,11 +96,12 @@ const Card4 = () => {
     return (
         <div className="md:mt-9 mt-4 bg-slate-100 ">
             {card4Data?.length > 0 &&
-                <div className="container-wrapper text-xl md:text-[22px] font-medium text-center py-7">
-                    <p>Lorem, ipsum dolor.</p>
+                <div className="container-wrapper  text-center py-7">
+                    <p className='md:text-[25px] text-xl font-medium mb-1'>
+                        Handpicked Highlights for Your Perfect Tour Package
+                    </p>
                     <p className="md:text-md text-para font-normal">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
-                        cupiditate nobis minus?
+                        Discovered expertly curated travel package tailored to offer you unforgettable experiences.
                     </p>
                 </div>
             }

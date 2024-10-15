@@ -57,11 +57,12 @@ const Card2 = () => {
     return (
         <div className="py-5 md:py-6">
             {countryData?.length > 0 &&
-                <div className="container-wrapper md:text-[25px] text-xl font-medium text-center pb-2 md:pb-10">
-                    <p>Lorem, ipsum dolor.</p>
+                <div className="container-wrapper  text-center pb-5 md:pb-10">
+                    <p className='md:text-[25px] text-xl font-medium mb-1'>
+                        Start Your journey
+                    </p>
                     <p className="md:text-md text-para font-normal">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
-                        cupiditate nobis minus?
+                        A perdonalized adventure that begins with one steps towards unforgettable experiences.
                     </p>
                 </div>
             }
