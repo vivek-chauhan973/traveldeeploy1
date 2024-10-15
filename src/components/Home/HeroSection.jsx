@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 const fetchBanner=async ()=>{
   const res = await fetch("/api/home");
   return await res.json();
@@ -11,15 +10,14 @@ const HeroSection = () => {
   useEffect(()=>{
     fetchBanner().then(res=>{setBanner(res?.data||[]);setVideo(res?.data?.[0]?.videoPath||"")})
   },[])
-  console.log("res of banner ---- >",banner?.[0]?.videoPath)
-
+  // console.log("res of banner ---- >",banner?.[0]?.videoPath)
   return (
     <div>
       <div className="relative md:h-[84vh] h-[65vh] flex items-center justify-center">
         {banner?.[0]?.videoPath &&<video autoPlay muted loop
           className="absolute  inset-0 z-0 w-full h-full object-cover"
           >
-          <source src={video} type="video/mp4" />
+          <source src="/video.mp4" type="video/mp4" />
         </video>}
         <div className="absolute inset-0 z-1 bg-black opacity-10"></div>
         <div className="z-20 text-white text-center relative  xl:w-[50vw] w-[80vw]">
