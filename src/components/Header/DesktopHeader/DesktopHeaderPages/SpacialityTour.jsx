@@ -17,7 +17,7 @@ useEffect(()=>{
   fetchPopularCities().then(res=>{;setPopularCatagories(res?.data||[])});
 },[])
 const data=popularCatogories?.filter(item=>item.category==="category6");
-console.log("catories is here",data?.[0]?.options);
+// console.log("catories is here",data?.[0]?.options);
 const partSize = Math.floor(categories.length / 3);
 // Split the array into three parts
 const part1 = categories.slice(0, partSize);

@@ -3,7 +3,7 @@ import { data1, stateData } from "./Data";
 const Show = () => {
   const [change, setChange] = useState(0);
   // data1.map(item=>console.log(item.state));
-  console.log(stateData);
+  // console.log(stateData);
   return (
     <div className=" flex w-[1000px] ml-[340px] h-full bg-gray-100  mt-3 rounded-[15px]">
       <div className="mt-2 text-sm  font-bold w-1/4 rounded-[15px] gap-x-6 bg-white ">

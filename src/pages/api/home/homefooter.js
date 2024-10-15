@@ -8,15 +8,14 @@ import City from "@/models/City";
 
 const homeFooterApi=async (req,res)=>{
   const {category,selectedOptions,formData}=req.body;
-  const {title,
-    subtitle,
-    description}=formData;
- 
   if(req.method==="POST"){
     if(category==="" || selectedOptions?.length===0){
       return res.status(301).json({message:"category and selectedoptions both are required"});
     }
     try {
+      const {title,
+        subtitle,
+        description}=formData;
       const data=await HomeOnePackageSelected.findOne({category});
       if(data){
           const res1=await HomeOnePackageSelected.findOneAndReplace({category},{category,options:selectedOptions,title,
