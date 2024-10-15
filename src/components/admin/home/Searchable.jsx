@@ -13,7 +13,7 @@ const fetchCategory = async () => {
 const fetchCars = async () => {
   return await (await fetch("/api/cars/get")).json();
 }
-const fetchCities=async ()=>{
+const fetchCities = async () => {
   const res = await fetch('/api/location/city');
   return await res.json();
 }
@@ -23,9 +23,14 @@ const fetchAllData = async () => {
 const fetchAllPackageData = async () => {
   return await (await fetch("/api/package/get-packages")).json();
 }
-const fetchAllCarPackagesData=async ()=>{
+const fetchAllCarPackagesData = async () => {
   const response = await fetch("/api/cars/package/get-packages");
   return await response.json();
+}
+const fetchPromoList = async () => {
+  const response = await fetch(`/api/public/package-state/fetchpromocat?selectType=state`);
+  const data = await response.json();
+  return data;
 }
 const Searchable = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -54,15 +59,18 @@ const Searchable = () => {
     if (selectedCategory === "category3") {
       return option?.category?.toLowerCase().includes(searchQuery.toLowerCase())
     }
+    else if(selectedCategory === "category1"||selectedCategory === "category2"){
+      return option?.selectedItem?.toLowerCase().includes(searchQuery.toLowerCase())
+    }
     return option?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   }
   );
   useEffect(() => {
-    fetchStates().then(res => {
+    fetchPromoList().then(res => {
       setOptions((prevOptions) => ({
         ...prevOptions,
-        category1: res?.states,
-        category2: res?.states
+        category1: res?.responseData,
+        category2: res?.responseData
       }));
     })
     fetchCategory().then(res => {
@@ -71,7 +79,7 @@ const Searchable = () => {
         category3: res?.data
       }));
     })
-    fetchAllCarPackagesData().then(res=>console.log("res of car packages is here -----> ",res))
+    fetchAllCarPackagesData().then(res => console.log("res of car packages is here -----> ", res))
     fetchAllCarPackagesData().then(res => {
       setOptions((prevOptions) => ({
         ...prevOptions,
@@ -92,6 +100,16 @@ const Searchable = () => {
     })
 
   }, [])
+
+  // useEffect(()=>{
+  //   fetchPromoList().then(res => {
+  //     console.log("fetchPromoList response",res?.responseData);
+  //   }
+  //   ).catch(error => {
+  //     console.log("Something is error");
+  //   }
+  //   )
+  // }, [])
   const handleCheckboxChange = (option) => {
     // console.log("selected option is here ---->  ",option);
     // setPrintValue(printValue+1);
@@ -141,6 +159,8 @@ const Searchable = () => {
       alert("something went wrong");
     }
   };
+
+console.log("option",filteredOptions);
 
   return (
     <div className=''>
@@ -193,7 +213,15 @@ const Searchable = () => {
                     }
                     className="mr-2 accent-navyblack"
                   />
-                  {(selectedCategory === "category1" || selectedCategory === "category2" || selectedCategory === "category4" || selectedCategory === "category5") && <span className={
+                  {(selectedCategory === "category1" || selectedCategory === "category2" ) && <span className={
+                    selectedOptions[selectedCategory].length >= maxSelections &&
+                      !selectedOptions[selectedCategory].includes(option)
+                      ? "text-gray-400 cursor-not-allowed"
+                      : ""
+                  }>
+                    {option?.selectedItem}
+                  </span>}
+                  {( selectedCategory === "category4" || selectedCategory === "category5") && <span className={
                     selectedOptions[selectedCategory].length >= maxSelections &&
                       !selectedOptions[selectedCategory].includes(option)
                       ? "text-gray-400 cursor-not-allowed"

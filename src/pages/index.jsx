@@ -99,12 +99,12 @@ import Promises from "@/components/Home/Cards/Promises";
 import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
 
 // import Booking from "@/components/profile/bookings";
-const fetchAllSingleSction =async ()=>{
-  const res=await fetch("/api/home/homefooter");
+const fetchAllSingleSction = async () => {
+  const res = await fetch("/api/home/homefooter");
   return await res.json();
 }
-const fetchAllMultiSction =async ()=>{
-  const res=await fetch("/api/homefooter");
+const fetchAllMultiSction = async () => {
+  const res = await fetch("/api/homefooter");
   return await res.json();
 }
 
@@ -116,15 +116,27 @@ const fetchState = async () => {
 
 export default function Home() {
   const [states, setStates] = useState([]);
+  const [homePackages, SetHomePackages] = useState([]);
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
   useEffect(() => {
-    fetchState().then((res) => setStates(res?.states || []));
-    fetchAllMultiSction().then(res=>console.log("res--of all packages -----> ",res))
-    fetchAllSingleSction().then(res=>console.log("res--of single all packages -----> ",res))
+    // fetchState().then((res) => setStates(res?.states || []));
+    fetchAllMultiSction().then(res => {
+      console.log("res--of all packages -----> ", res?.data);
+      SetHomePackages(res?.data)
+    })
+    fetchAllSingleSction().then(res => console.log("res--of single all packages -----> ", res))
   }, []);
-  console.log("res---->  ",states)
+
+  useEffect(() => {
+    const data = homePackages?.filter(item => item.category === "category1");
+    console.log("data of home packages", data?.[0]?.options)
+    setStates(data?.[0]?.options || [])
+  }, [homePackages]);
+
+  console.log("States", homePackages);
+
   return (
     <>
       <DesktopHeader />
@@ -270,7 +282,7 @@ export default function Home() {
       </div>
 
       {/*  */}
-      <div className="container-wrapper md:pb-10  ">
+      <div className="container-wrapper md:pb-10 pb-5">
         <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
           <div className="">
             <Image
@@ -308,27 +320,20 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* image */}
-      {/* <div className=" container-wrapper md:grid md:grid-cols-2  justify-around items-center mt-5 md:mb-16 md:mt-8 gap-1">
-                <div className="relative mb-3">
-                    <Image height={450} width={450} className=" md:ml-16 object-cover rounded-md  transition-transform duration-300 transform hover:scale-110 " src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-
-                </div>
-                <div className="relative ">
-                    <Image height={450} width={450}  className=" object-cover rounded-md transition-transform duration-300 transform hover:scale-110" src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-            {/* md:h-72 md:w-[550px] h-56 w-full */}
-      {/* </div>
-            </div>  */}
-      {/* weekend package */}
-      <Cardwork />
+      {/* Carousel Banner Images */}
+      <div className="md:pb-10 pb-5">
+        <Cardwork />
+      </div>
 
       {/* horizontal card */}
       <div className="">
-        <div className="container-wrapper  text-center pt-5 pb-2">
-          <p className='md:text-[25px] text-xl font-medium mb-1'>
-          Your Next Remarkable Adventure Awaits
-          </p>
-        </div>
+        {states.length > 0 &&
+          <div className="container-wrapper text-center pb-2">
+            <p className='md:text-[25px] text-xl font-medium mb-1'>
+              Your Next Remarkable Adventure Awaits
+            </p>
+          </div>
+        }
         {/* very small horizontal card */}
         <div className="container-wrapper justify-center  flex flex-wrap">
           {states?.map((item, i) => (
@@ -348,7 +353,7 @@ export default function Home() {
       </div>
       {/* state code start  */}
       <div>
-        <State />
+        <State /> 
       </div>
       {/* Our Promise */}
       <div>

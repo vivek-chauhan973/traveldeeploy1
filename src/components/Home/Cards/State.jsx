@@ -31,18 +31,18 @@ const State = () => {
                     </p>
                 </div>
                 <div className="container-wrapper grid grid-cols-5 gap-3 overflow-hidden">
-                    <div className="flex md:flex-col md:mt-14 gap-2 py-5">
+                    <div className="flex xl:flex-col md:mt-14 gap-2 py-5 xl:col-auto col-span-5 xl:overflow-x-hidden overflow-x-scroll">
                         {data?.states?.map((title) => (
                             <div key={title._id}>
-                                <div className='overflow-x-hidden'>
-                                    <button className="cursor-pointer capitalize shadow-md bg-gradient-to-r from-orange-500 to-red-500 w-40 text-white md:text-[16px] md:py-2 py-1 px-[30px] rounded-md">
+                                <div className=''>
+                                    <button className="cursor-pointer capitalize shadow-md bg-gradient-to-r from-orange-500 to-red-500 xl:w-52 w-40 text-white md:text-[16px] text-para md:py-2 py-1.5 px-4 rounded-md">
                                         {title.name}
                                     </button>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="relative col-span-4 w-full overflow-auto">
+                    <div className="relative xl:col-span-4 col-span-5 w-full overflow-auto">
                         <div className="flex gap-4 ">
                             <Card3 />
                         </div>
