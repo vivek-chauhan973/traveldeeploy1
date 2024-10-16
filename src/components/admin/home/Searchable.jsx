@@ -32,6 +32,11 @@ const fetchPromoList = async () => {
   const data = await response.json();
   return data;
 }
+const fetchPromoListCity = async () => {
+  const response = await fetch(`/api/public/package-state/fetchpromocat?selectType=city`);
+  const data = await response.json();
+  return data;
+}
 const Searchable = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('category1');
@@ -69,7 +74,12 @@ const Searchable = () => {
     fetchPromoList().then(res => {
       setOptions((prevOptions) => ({
         ...prevOptions,
-        category1: res?.responseData,
+        category1: res?.responseData
+      }));
+    })
+    fetchPromoListCity().then(res => {
+      setOptions((prevOptions) => ({
+        ...prevOptions,
         category2: res?.responseData
       }));
     })
@@ -101,21 +111,17 @@ const Searchable = () => {
 
   }, [])
 
-  // useEffect(()=>{
-  //   fetchPromoList().then(res => {
-  //     console.log("fetchPromoList response",res?.responseData);
-  //   }
-  //   ).catch(error => {
-  //     console.log("Something is error");
-  //   }
-  //   )
-  // }, [])
+  useEffect(()=>{
+    fetchPromoListCity().then(res => {
+      console.log("fetchPromoListCity response",res?.responseData);
+    }
+    ).catch(error => {
+      console.log("Something is error");
+    }
+    )
+  }, [])
   const handleCheckboxChange = (option) => {
-    // console.log("selected option is here ---->  ",option);
-    // setPrintValue(printValue+1);
-    // if(printValue%2===0){
-    //   console.log("print value is change according to checkbox change and unchanged ------->  ",printValue)
-    // }
+    
 
     if (selectedOptions[selectedCategory].includes(option)) {
       // Uncheck if already selected

@@ -7,6 +7,11 @@ const fetchStates = async () => {
   const response = await fetch("/api/public/states");
   return await response.json();
 }
+const fetchPromoList = async () => {
+  const response = await fetch(`/api/public/package-state/fetchpromocat?selectType=state`);
+  const data = await response.json();
+  return data;
+}
 const fetchCategory = async () => {
   const response = await fetch("/api/package-setting/category/get-categories");
   return await response.json();

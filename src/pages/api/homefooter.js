@@ -1,6 +1,5 @@
 import HomeFooter from "@/models/Home";
 import PackageMasterCategory from "@/models/package/PackageCategory";
-import State from "@/models/State";
 import Car from "@/models/car-package/cars";
 import Package from "@/models/Package";
 import City from "@/models/City";
