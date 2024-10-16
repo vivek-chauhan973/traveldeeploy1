@@ -117,8 +117,12 @@ const fetchState = async () => {
 export default function Home() {
   const [states, setStates] = useState([]);
   const [homePackages, SetHomePackages] = useState([]);
+  const [homeSinglePackages, setSingleHomePackages] = useState([]);
   const [packages, setPackages] = useState([]);
   const [cityPackages, setCityPackages] = useState([])
+  const [category1,setCategory1]=useState([]);
+  const [category2,setCategory2]=useState([]);
+  const [category3,setCategory3]=useState([]);
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
@@ -128,7 +132,7 @@ export default function Home() {
       console.log("res--of all packages -----> ", res?.data);
       SetHomePackages(res?.data)
     })
-    fetchAllSingleSction().then(res => console.log("res--of single all packages -----> ", res))
+    fetchAllSingleSction().then(res => {console.log("res--of single all packages -----> ", res);setSingleHomePackages(res?.data)})
   }, []);
 
   useEffect(() => {
@@ -143,8 +147,20 @@ export default function Home() {
     setCityPackages(data2?.[0]?.options || [])
 
   }, [homePackages]);
+  useEffect(() => {
+    const data = homeSinglePackages?.filter(item => item.category === "category1");
+    // console.log("data of home packages", data?.[0]?.options)
+    setCategory1(data);
+    const data1 = homeSinglePackages?.filter(item => item.category === "category5");
+    // console.log("data of packages", data1)
+    setCategory2(data1);
+    const data2 = homeSinglePackages?.filter(item => item.category === "category2");
+    // console.log("data of packages", data1)
+    setCategory3(data2)
 
-  // console.log("States", homePackages);
+  }, [homeSinglePackages]);
+
+  console.log("States", category1?.[0]?.options?.[0]);
   // console.log("packages", packages);
   // console.log("cityPackages", cityPackages);
 
@@ -162,17 +178,11 @@ export default function Home() {
         <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
           <div className=" md:shrink-0">
             <p className=" text-amber-600   font-semibold mt-2">
-              Holi Celebration Packages for 2024
+             {category1?.[0]?.subtitle}
             </p>
-            <h1 className=" md:text-[25px] text-xl  font-medium">Holi Tour</h1>
+            <h1 className=" md:text-[25px] text-xl  font-medium">{category1?.[0]?.title}</h1>
             <h1 className="md:text-[16px] text-para line-clamp-3">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Adipisci, eligendi sed hic provident enim, rerum tempore aliquam
-              numquam vitae, earum doloremque. Nam! Indulge in the vibrant
-              celebrations of Holi with our premier Holi Packages of 2024 near
-              to Delhi, tailored to offer an unforgettable experience in some of
-              India most iconic destinations. Whether you are drawn to the
-              spiritual aura of Rishikesh, the
+             {category1?.[0]?.description}
             </h1>
             <button className="ml-2 mt-3 hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5 rounded-full">
               Know more
@@ -180,10 +190,10 @@ export default function Home() {
           </div>
           <div className=" md:ml-28 ">
             <Image
-              width={450}
-              height={450}
-              className="   object-cover rounded-[17px]"
-              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              width={400}
+              height={200}
+              className="object-cover rounded-[17px]"
+              src={category1?.[0]?.options?.[0]?.posterPath?category1?.[0]?.options?.[0]?.posterPath:"https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt=""
             />
           </div>
@@ -214,26 +224,20 @@ export default function Home() {
       <div className="container-wrapper md:py-10 py-4">
         <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
           <div className="">
-            <p className=" text-amber-600  font-semibold mt-2">Indiafe</p>
+            <p className=" text-amber-600  font-semibold mt-2">{category3?.[0]?.subtitle}</p>
             <h1 className="md:text-[25px] text-xl font-medium">
-              HEAVENLY HIMALAYS
+            {category3?.[0]?.title}
             </h1>
             <h1 className="md:text-[16px] text-para line-clamp-3 ">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Adipisci, eligendi sed hic provident enim, rerum tempore aliquam
-              numquam vitae, earum doloremque. Nam! Indulge in the vibrant
-              celebrations of Holi with our premier Holi Packages of 2024 near
-              to Delhi, tailored to offer an unforgettable experience in some of
-              Indias most iconic destinations. Whether you are drawn to the
-              spiritual aura of Rishikesh, the
+            {category3?.[0]?.description}
             </h1>
             <div className=" mt-4 flex md:justify-between gap-3  ">
               <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
-                Kerala
+                Know more
               </button>
-              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
+              {/* <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
                 Himalay
-              </button>
+              </button> */}
             </div>
           </div>
           <div className=" md:ml-28 ">
@@ -241,8 +245,7 @@ export default function Home() {
               width={450}
               height={450}
               className="object-cover rounded-[17px]"
-              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
+              src={category3?.[0]?.options?.[0]?.posterPath}
             />
           </div>
         </div>
@@ -256,33 +259,27 @@ export default function Home() {
               width={450}
               height={450}
               className=" object-cover rounded-[17px]"
-              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={category2?.[0]?.options?.[0]?.uploads?.[0]}
               alt=""
             />
           </div>
 
           <div className="">
-            <p className=" text-amber-600  font-semibold mt-2">Indiafe</p>
+            <p className=" text-amber-600  font-semibold mt-2">{category2?.[0]?.subtitle}</p>
             <h1 className="md:text-[25px] text-xl font-medium">
-              HEAVENLY HIMALAYS
+            {category2?.[0]?.title}
             </h1>
             <h1 className="md:text-[16px] text-para line-clamp-3 ">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Adipisci, eligendi sed hic provident enim, rerum tempore aliquam
-              numquam vitae, earum doloremque. Nam! Indulge in the vibrant
-              celebrations of Holi with our premier Holi Packages of 2024 near
-              to Delhi, tailored to offer an unforgettable experience in some of
-              India most iconic destinations. Whether you are drawn to the
-              spiritual aura of Rishikesh, the
+            {category2?.[0]?.description}
             </h1>
 
             <div className=" mt-4  flex md:justify-between gap-3  ">
               <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
                 Know more
               </button>
-              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
+              {/* <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
                 Know more
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
