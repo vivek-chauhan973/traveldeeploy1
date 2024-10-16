@@ -97,6 +97,7 @@ import { useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
 import Promises from "@/components/Home/Cards/Promises";
 import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
+import StateCard from "@/components/Home/Cards/StateCard";
 
 // import Booking from "@/components/profile/bookings";
 const fetchAllSingleSction = async () => {
@@ -120,9 +121,9 @@ export default function Home() {
   const [homeSinglePackages, setSingleHomePackages] = useState([]);
   const [packages, setPackages] = useState([]);
   const [cityPackages, setCityPackages] = useState([])
-  const [category1,setCategory1]=useState([]);
-  const [category2,setCategory2]=useState([]);
-  const [category3,setCategory3]=useState([]);
+  const [category1, setCategory1] = useState([]);
+  const [category2, setCategory2] = useState([]);
+  const [category3, setCategory3] = useState([]);
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
@@ -132,7 +133,7 @@ export default function Home() {
       console.log("res--of all packages -----> ", res?.data);
       SetHomePackages(res?.data)
     })
-    fetchAllSingleSction().then(res => {console.log("res--of single all packages -----> ", res);setSingleHomePackages(res?.data)})
+    fetchAllSingleSction().then(res => { console.log("res--of single all packages -----> ", res); setSingleHomePackages(res?.data) })
   }, []);
 
   useEffect(() => {
@@ -178,13 +179,13 @@ export default function Home() {
         <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
           <div className=" md:shrink-0">
             <p className=" text-amber-600   font-semibold mt-2">
-             {category1?.[0]?.subtitle}
+              {category1?.[0]?.subtitle}
             </p>
             <h1 className=" md:text-[25px] text-xl  font-medium">{category1?.[0]?.title}</h1>
             <h1 className="md:text-[16px] text-para line-clamp-3">
-             {category1?.[0]?.description}
+              {category1?.[0]?.description}
             </h1>
-            <button className="ml-2 mt-3 hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5 rounded-full">
+            <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
               Know more
             </button>
           </div>
@@ -193,14 +194,15 @@ export default function Home() {
               width={400}
               height={200}
               className="object-cover rounded-[17px]"
-              src={category1?.[0]?.options?.[0]?.posterPath?category1?.[0]?.options?.[0]?.posterPath:"https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              src={category1?.[0]?.options?.[0]?.posterPath ? category1?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt=""
             />
           </div>
         </div>
       </div>
-      {/* Four image */}
-      <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
+
+      {/* Four carousel all state card*/}
+      {/* <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
         {states?.map((item, i) => (
           <div key={i} className="relative mb-2 group">
             <Image
@@ -218,68 +220,62 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </div> */}
+      {/* Four carousel all state card*/}
+      <div>
+        <StateCard states={states} />
       </div>
 
-      {/* image and text */}
-      <div className="container-wrapper md:py-10 py-4">
-        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
-          <div className="">
-            <p className=" text-amber-600  font-semibold mt-2">{category3?.[0]?.subtitle}</p>
-            <h1 className="md:text-[25px] text-xl font-medium">
-            {category3?.[0]?.title}
+      {/* second image and text */}
+      <div className="container-wrapper  md:py-11 py-5">
+        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
+          <div className=" md:shrink-0">
+            <p className=" text-amber-600 font-semibold mt-2">
+              {category3?.[0]?.subtitle}
+            </p>
+            <h1 className=" md:text-[25px] text-xl  font-medium">{category3?.[0]?.title}</h1>
+            <h1 className="md:text-[16px] text-para line-clamp-3">
+              {category3?.[0]?.description}
             </h1>
-            <h1 className="md:text-[16px] text-para line-clamp-3 ">
-            {category3?.[0]?.description}
-            </h1>
-            <div className=" mt-4 flex md:justify-between gap-3  ">
-              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
-                Know more
-              </button>
-              {/* <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
-                Himalay
-              </button> */}
-            </div>
+            <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+              Know more
+            </button>
           </div>
           <div className=" md:ml-28 ">
             <Image
-              width={450}
-              height={450}
+              width={400}
+              height={200}
               className="object-cover rounded-[17px]"
-              src={category3?.[0]?.options?.[0]?.posterPath}
+              src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              alt=""
             />
           </div>
         </div>
       </div>
-
-      {/*  */}
+      {/* third first image and text */}
       <div className="container-wrapper md:pb-10 pb-5">
         <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
           <div className="">
             <Image
               width={450}
               height={450}
-              className=" object-cover rounded-[17px]"
+              className="object-cover rounded-[17px]"
               src={category2?.[0]?.options?.[0]?.uploads?.[0]}
               alt=""
             />
           </div>
-
           <div className="">
             <p className=" text-amber-600  font-semibold mt-2">{category2?.[0]?.subtitle}</p>
             <h1 className="md:text-[25px] text-xl font-medium">
-            {category2?.[0]?.title}
+              {category2?.[0]?.title}
             </h1>
             <h1 className="md:text-[16px] text-para line-clamp-3 ">
-            {category2?.[0]?.description}
+              {category2?.[0]?.description}
             </h1>
-
             <div className=" mt-4  flex md:justify-between gap-3  ">
-              <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
+              <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                 Know more
               </button>
-              {/* <button className="  hover:bg-[#fb2056] shadow-md bg-amber-600 text-white py-2 md:px-[50px] px-5   rounded-full">
-                Know more
-              </button> */}
             </div>
           </div>
         </div>
@@ -307,7 +303,7 @@ export default function Home() {
       </div>
 
       <div>
-        <Card4 packages={packages}/>
+        <Card4 packages={packages} />
       </div>
       {/* Card Kuoni copy */}
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
@@ -317,7 +313,7 @@ export default function Home() {
       </div>
       {/* state code start  */}
       <div>
-        <State /> 
+        <State />
       </div>
       {/* Our Promise */}
       <div>
