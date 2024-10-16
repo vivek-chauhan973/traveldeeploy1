@@ -5,6 +5,7 @@ import Car from "@/models/car-package/cars";
 import Package from "@/models/Package";
 import HomeOnePackageSelected from "@/models/Home/HomeOnePackageSelected";
 import City from "@/models/City";
+import PackageState from "@/models/package/PackageState";
 
 const homeFooterApi=async (req,res)=>{
   const {category,selectedOptions,formData}=req.body;
@@ -43,10 +44,10 @@ const homeFooterApi=async (req,res)=>{
       const populatedResponse=await Promise.all(response?.map(async (item,i)=>{
         const options = await Promise.all(item.options.map(async (id) => {
         if(item.category==="category1"){
-          return State.findById(id).exec();
+          return PackageState.findById(id).exec();
         }
         if(item.category==="category2"){
-          return State.findById(id).exec();
+          return PackageState.findById(id).exec();
         }
         if(item.category==="category3"){
           return PackageMasterCategory.findById(id).exec();

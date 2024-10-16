@@ -111,15 +111,7 @@ const Searchable = () => {
 
   }, [])
 
-  useEffect(()=>{
-    fetchPromoListCity().then(res => {
-      console.log("fetchPromoListCity response",res?.responseData);
-    }
-    ).catch(error => {
-      console.log("Something is error");
-    }
-    )
-  }, [])
+
   const handleCheckboxChange = (option) => {
     
 

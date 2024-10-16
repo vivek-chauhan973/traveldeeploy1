@@ -3,12 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 
-const fetchStates = async () => {
-  const response = await fetch("/api/public/states");
-  return await response.json();
-}
-const fetchPromoList = async () => {
-  const response = await fetch(`/api/public/package-state/fetchpromocat?selectType=state`);
+const fetchPromoListCategory = async () => {
+  const response = await fetch(`/api/public/package-state/fetchpromocat?selectType=category`);
   const data = await response.json();
   return data;
 }
@@ -49,7 +45,15 @@ const Searchable1 = () => {
     subtitle: '',
     description: ''
   });
-
+  useEffect(()=>{
+    fetchPromoListCategory().then(res => {
+      console.log("fetchPromoListCity response",res?.responseData);
+    }
+    ).catch(error => {
+      console.log("Something is error");
+    }
+    )
+  }, [])
    // State to control form visibility and button enablement
    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
    const [isPayloadButtonEnabled, setIsPayloadButtonEnabled] = useState(false);
@@ -59,15 +63,18 @@ const Searchable1 = () => {
     if (selectedCategory === "category3") {
       return option?.category?.toLowerCase().includes(searchQuery.toLowerCase())
     }
+    else if(selectedCategory === "category1"||selectedCategory === "category2"){
+      return option?.selectedItem?.toLowerCase().includes(searchQuery.toLowerCase())
+    }
     return option?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   }
   );
   useEffect(() => {
-    fetchStates().then(res => {
+    fetchPromoListCategory().then(res => {
       setOptions((prevOptions) => ({
         ...prevOptions,
-        category1: res?.states,
-        category2: res?.states
+        category1: res?.responseData,
+        category2: res?.responseData
       }));
     })
     fetchCategory().then(res => {
@@ -211,7 +218,15 @@ const Searchable1 = () => {
                     }
                     className="mr-2 accent-navyblack"
                   />
-                  {(selectedCategory === "category1" || selectedCategory === "category2" || selectedCategory === "category4" || selectedCategory === "category5") && <span className={
+                   {(selectedCategory === "category1" || selectedCategory === "category2" ) && <span className={
+                    selectedOptions[selectedCategory].length >= maxSelections &&
+                      !selectedOptions[selectedCategory].includes(option)
+                      ? "text-gray-400 cursor-not-allowed"
+                      : ""
+                  }>
+                    {option?.selectedItem}
+                  </span>}
+                  {( selectedCategory === "category4" || selectedCategory === "category5") && <span className={
                     selectedOptions[selectedCategory].length >= maxSelections &&
                       !selectedOptions[selectedCategory].includes(option)
                       ? "text-gray-400 cursor-not-allowed"
