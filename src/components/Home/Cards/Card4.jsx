@@ -3,65 +3,11 @@ import React, { useRef, useEffect } from 'react';
 import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
-const Card4 = () => {
+const Card4 = ({ packages }) => {
 
-    const card4Data = [
-        {
-            img: "https://plus.unsplash.com/premium_photo-1663127576306-9d9de0a47318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            title: "Treasures of Anatolia",
-            desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                    officiis non, hic quod magni id eligendi tempore quia dolores sed, voluptas perspiciatis aliquam
-                    accusantium rem ex nesciunt excepturi qui placeat?`,
-            days: "12",
-            disc: "40%",
-        },
-        {
-            img: "https://plus.unsplash.com/premium_photo-1663127576306-9d9de0a47318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            title: "Treasures of Anatolia",
-            desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                    officiis non, hic quod magni id eligendi tempore quia dolores sed, voluptas perspiciatis aliquam
-                    accusantium rem ex nesciunt excepturi qui placeat?`,
-            days: "11",
-            disc: "30%",
-        },
-        {
-            img: "https://plus.unsplash.com/premium_photo-1663127576306-9d9de0a47318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            title: "Treasures of Anatolia",
-            desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                    officiis non, hic quod magni id eligendi tempore quia dolores sed, voluptas perspiciatis aliquam
-                    accusantium rem ex nesciunt excepturi qui placeat?`,
-            days: "8",
-            disc: "40%",
-        },
-        {
-            img: "https://plus.unsplash.com/premium_photo-1663127576306-9d9de0a47318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            title: "Treasures of Anatolia",
-            desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                    officiis non, hic quod magni id eligendi tempore quia dolores sed, voluptas perspiciatis aliquam
-                    accusantium rem ex nesciunt excepturi qui placeat?`,
-            days: "13",
-            disc: "50%",
-        },
-        {
-            img: "https://plus.unsplash.com/premium_photo-1663127576306-9d9de0a47318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            title: "Treasures of Anatolia",
-            desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                    officiis non, hic quod magni id eligendi tempore quia dolores sed, voluptas perspiciatis aliquam
-                    accusantium rem ex nesciunt excepturi qui placeat?`,
-            days: "15",
-            disc: "40%",
-        },
-        {
-            img: "https://plus.unsplash.com/premium_photo-1663127576306-9d9de0a47318?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            title: "Treasures of Anatolia",
-            desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-                    officiis non, hic quod magni id eligendi tempore quia dolores sed, voluptas perspiciatis aliquam
-                    accusantium rem ex nesciunt excepturi qui placeat?`,
-            days: "5",
-            disc: "30%",
-        },
-    ]
+    // console.log("packages ", packages);
     const carouselRef = useRef(null);
 
     const scrollNext = () => {
@@ -95,7 +41,7 @@ const Card4 = () => {
 
     return (
         <div className="md:mt-9 mt-4 bg-slate-100 ">
-            {card4Data?.length > 0 &&
+            {packages?.length > 0 &&
                 <div className="container-wrapper  text-center py-7">
                     <p className='md:text-[25px] text-xl font-medium mb-1'>
                         Handpicked Highlights for Your Perfect Tour Package
@@ -107,30 +53,45 @@ const Card4 = () => {
             }
             <div className="carousel-container relative container-wrapper ">
                 <div className="carousel gap-5" ref={carouselRef}>
-                    {card4Data?.length > 0 && card4Data?.map((items, i) => {
+                    {packages?.length > 0 && packages?.map((items, i) => {
+                        // console.log("item ----> ", items?.uploads)
                         return (
                             <div key={i} className="carousel-item w-60 md:w-80 mb-11  rounded-md">
                                 <div className="shadow-md  rounded-lg overflow-hidden">
                                     <div className="relative">
                                         <div className=" w-full h-52">
-                                            <Image className=" relative  object-cover " layout="fill"
-                                                src={items.img}
-                                                alt=""
-                                            />
+                                            {items?.uploads&&<Image className=" relative  object-cover " layout="fill"
+                                                src={items?.uploads?.[0]}
+                                                alt="images"
+                                            />}
                                         </div>
-                                        <div className="flex gap-4 absolute bottom-0 z-20 px-2">
-                                            {/* <p className="font-semibold text-md text-white ">Turkey</p> */}
-                                            <p className="font-semibold text-md text-white">{items.days} Days</p>
+                                        <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 pt-4 pb-1 px-2">
+                                            <div className='flex gap-4'>
+                                                <p className="font-semibold text-md text-white ">{items?.startcity}</p>
+                                                <p className="font-semibold text-md text-white">{items?.days} Days</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className=" flex flex-col gap-3 px-3 py-3 bg-white">
-                                        <p className="text-lg font-semibold">{items.title}</p>
-                                        <p className="text-para line-clamp-3">{items.desc}</p>
+                                        <div className="w-full md:h-7 h-8">
+                                            <p className="md:text-lg text-base font-semibold">{items?.name}</p>
+                                        </div>
+                                        <p dangerouslySetInnerHTML={{ __html: items?.about }}
+                                            className="text-para line-clamp-3"></p>
                                         <div>
-                                            <p className=" line-through text-sm">Rs. 1,199</p>
-                                            <div className="flex gap-5 items-center">
-                                                <p className="text-md font-semibold">Rs. 599</p>
-                                                <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">-{items.disc}</button>
+                                            {/* <p className=" line-through text-sm">{items.price}</p> */}
+                                            <div className="flex gap-5 items-center justify-between pr-4">
+                                                <p className="text-lg font-semibold">
+                                                    {items?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                </p>
+                                                {/* <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
+                                                    -{items.disc}
+                                                </button> */}
+                                                <Link href={items?.pageUrl}>
+                                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
+                                                        Know More
+                                                    </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -140,8 +101,8 @@ const Card4 = () => {
                     })}
                     {/* end is here code */}
                 </div>
-                {card4Data?.length > 0 &&
-                    <div className=" hidden md:block absolute top-2/4 -translate-y-[60px] justify-between w-full">
+                {packages?.length > 0 &&
+                    <div className=" hidden md:block absolute top-2/4 -translate-y-[80px] justify-between w-full">
                         <div className=' justify-between flex pl-2 '>
                             <FontAwesomeIcon
                                 icon={faChevronRight} onClick={scrollPrev}

@@ -117,6 +117,8 @@ const fetchState = async () => {
 export default function Home() {
   const [states, setStates] = useState([]);
   const [homePackages, SetHomePackages] = useState([]);
+  const [packages, setPackages] = useState([]);
+  const [cityPackages, setCityPackages] = useState([])
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
@@ -131,11 +133,21 @@ export default function Home() {
 
   useEffect(() => {
     const data = homePackages?.filter(item => item.category === "category1");
-    console.log("data of home packages", data?.[0]?.options)
-    setStates(data?.[0]?.options || [])
+    // console.log("data of home packages", data?.[0]?.options)
+    setStates(data?.[0]?.options || []);
+    const data1 = homePackages?.filter(item => item.category === "category5");
+    // console.log("data of packages", data1)
+    setPackages(data1?.[0]?.options || []);
+    const data2 = homePackages?.filter(item => item.category === "category2");
+    // console.log("data of packages", data1)
+    setCityPackages(data2?.[0]?.options || [])
+
   }, [homePackages]);
 
-  console.log("States", homePackages);
+  // console.log("States", homePackages);
+  // console.log("packages", packages);
+  console.log("cityPackages", cityPackages);
+
 
   return (
     <>
@@ -327,7 +339,7 @@ export default function Home() {
 
       {/* horizontal card */}
       <div className="">
-        {states.length > 0 &&
+        {cityPackages.length > 0 &&
           <div className="container-wrapper text-center pb-2">
             <p className='md:text-[25px] text-xl font-medium mb-1'>
               Your Next Remarkable Adventure Awaits
@@ -336,14 +348,14 @@ export default function Home() {
         }
         {/* very small horizontal card */}
         <div className="container-wrapper justify-center  flex flex-wrap">
-          {states?.map((item, i) => (
+          {cityPackages?.map((item, i) => (
             <HorizontalCard key={i} item={item} />
           ))}
         </div>
       </div>
 
-      <div className="">
-        <Card4 />
+      <div>
+        <Card4 packages={packages}/>
       </div>
       {/* Card Kuoni copy */}
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">

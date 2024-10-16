@@ -10,26 +10,26 @@ const fetchAllPackagesAccordingToStateId = async (locationId) => {
   return await response.json();
 }
 const HorizontalCard = ({ item }) => {
+  console.log("items=>=========",item)
   const [packageList, setPackageList] = useState([]);
   useEffect(() => {
-    fetchAllPackagesAccordingToStateId(item?._id).then(res => setPackageList(res?.packages))
+    fetchAllPackagesAccordingToStateId(item?.relatedId).then(res => setPackageList(res?.packages))
   }, [item])
   // console.log("res123 ------> ", packageList) 
+  // console.log("resID ------> ", item?.relatedId) 
+
   
   return (
     <a href={`/india/${item?.pageUrl}`}>
-      <div className="shadow-lg w-[320px] border gap-5 m-2 flex items-center rounded-md shrink-0">
-        <div className=" h-full">
-          {/* <Image className=" object-cover rounded-md" width={100} height={100}
-            src="https://plus.unsplash.com/premium_photo-1706896001583-08b5ba33e3be?q=80&w=1338&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="" /> */}
-          <Image className="object-cover rounded-l" width={110} height={100}
-            src="https://images.unsplash.com/photo-1496644256288-2bb0a65f32f6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      <div className="shadow-lg w-[320px] h-24 border gap-5 m-2 flex items-center rounded-md shrink-0">
+        <div className="h-full">
+          <Image className="object-cover rounded-l h-full" width={110} height={110}
+            src={item?.posterPath}
             alt="" />
         </div>
         <div>
           <p className="text-[12px]">Tour Package from</p>
-          <p className="text-[16px] font-semibold">{item?.name}</p>
+          <p className="text-[16px] font-semibold">{item?.selectedItem}</p>
           <p className="text-[10px]">{packageList?.length} tours</p>
         </div>
       </div>
