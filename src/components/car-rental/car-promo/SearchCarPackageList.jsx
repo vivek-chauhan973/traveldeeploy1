@@ -3,9 +3,16 @@ import Pagination from "react-js-pagination";
 import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSuitcase, faUser } from "@fortawesome/free-solid-svg-icons";
-
+import { useEffect, useState } from "react";
+const fetchCarPackages=async ()=>{
+    const response = await fetch("/api/cars/package/get-packages");
+    return await response.json();
+}
 const SearchCarPagePackageList = () => {
-
+const [carPackages,setCarPackages]=useState([]);
+useEffect(()=>{
+    fetchCarPackages().then(res=>console.log("all car packages s here ---> ",res)) 
+},[])
     return (
         <div>
             <div className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
