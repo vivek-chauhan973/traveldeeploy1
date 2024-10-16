@@ -146,7 +146,7 @@ export default function Home() {
 
   // console.log("States", homePackages);
   // console.log("packages", packages);
-  console.log("cityPackages", cityPackages);
+  // console.log("cityPackages", cityPackages);
 
 
   return (
@@ -195,7 +195,7 @@ export default function Home() {
           <div key={i} className="relative mb-2 group">
             <Image
               className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-              src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={item?.posterPath}
               alt=""
               width={300} //256 in phone
               height={288} // 160
@@ -204,55 +204,10 @@ export default function Home() {
               style={boxShadowStyle}
               className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
             >
-              {item.name}
+              {item?.selectedItem}
             </div>
           </div>
         ))}
-        {/* <div className="relative mb-2 group">
-          <Image
-            className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-            width={300} //256 in phone
-            height={288} // 160
-          />
-          <div
-            style={boxShadowStyle}
-            className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-          >
-            Kerala
-          </div>
-        </div>
-        <div className="relative mb-2 group">
-          <Image
-            className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-            width={300} //256 in phone
-            height={288} // 160
-          />
-          <div
-            style={boxShadowStyle}
-            className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-          >
-            Uttarakhand
-          </div>
-        </div>
-        <div className="relative mb-2 group">
-          <Image
-            className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-            width={300} //256 in phone
-            height={288} // 160
-          />
-          <div
-            style={boxShadowStyle}
-            className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-          >
-            Rajasthan
-          </div>
-        </div> */}
       </div>
 
       {/* image and text */}
@@ -475,150 +430,3 @@ export default function Home() {
   );
 }
 
-// <div className="grid grid-cols-1  md:px-16  md:grid-cols-2 lg:grid-cols-4 gap-5">
-//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
-//     <div className=" py-4 px-4 ">
-//       <img
-//         className="w-full rounded-md "
-//         src="/image/ab.webp"
-//         alt="Sample Image"
-//       />
-//     </div>
-//     <div className="px-6 text-center   py-2 ">
-//       <div className=" font-semibold  text-md ">Card Title</div>
-//       <p className="text-gray-700  text-base">Web Developer.....</p>
-//     </div>
-//     <div className="px-6 text-center pt-3 pb-3">
-//       <span className="inline-block  rounded-[100%]  p-1 bg-blue-500 text-sm font-semibold text-white mr-2">
-//       <FaTwitter  size={20}/>
-
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag2
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-//         #tag3
-//       </span>
-//     </div>
-//   </div>
-//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
-//     <div className="  py-4 px-4 ">
-//       <img
-//         className="w-full rounded-md"
-//         src="/image/ab.webp"
-//         alt="Sample Image"
-//       />
-//     </div>
-//     <div className="px-6 text-center py-2 ">
-//       <div className=" font-semibold text-md ">Card Title</div>
-//       <p className="text-gray-700 text-base">Web Developer.....</p>
-//     </div>
-//     <div className="px-6 text-center pt-3 pb-3">
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag1
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag2
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-//         #tag3
-//       </span>
-//     </div>
-//   </div>
-//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
-//     <div className="  py-4 px-4 ">
-//       <img
-//         className="w-full rounded-md"
-//         src="/image/ab.webp"
-//         alt="Sample Image"
-//       />
-//     </div>
-//     <div className="px-6 text-center py-2 ">
-//       <div className=" font-semibold text-md ">Card Title</div>
-//       <p className="text-gray-700 text-base">Web Developer.....</p>
-//     </div>
-//     <div className="px-6 text-center pt-3 pb-3">
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag1
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag2
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-//         #tag3
-//       </span>
-//     </div>
-//   </div>
-//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
-//     <div className="  py-4 px-4 ">
-//       <img
-//         className="w-full rounded-md"
-//         src="/image/ab.webp"
-//         alt="Sample Image"
-//       />
-//     </div>
-//     <div className="px-6 text-center py-2 ">
-//       <div className=" font-semibold text-md ">Card Title</div>
-//       <p className="text-gray-700 text-base">Web Developer.....</p>
-//     </div>
-//     <div className="px-6 text-center pt-3 pb-3">
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag1
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag2
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-//         #tag3
-//       </span>
-//     </div>
-//   </div>
-//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
-//     <div className="  py-4 px-4 ">
-//       <img
-//         className="w-full rounded-md"
-//         src="/image/ab.webp"
-//         alt="Sample Image"
-//       />
-//     </div>
-//     <div className="px-6 text-center py-2 ">
-//       <div className=" font-semibold text-md ">Card Title</div>
-//       <p className="text-gray-700 text-base">Web Developer.....</p>
-//     </div>
-//     <div className="px-6 pt-3 pb-3">
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag1
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag2
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-//         #tag3
-//       </span>
-//     </div>
-//   </div>
-//   <div className="max-w-72 max-h-96 border rounded overflow-hidden shadow-lg">
-//     <div className="  py-4 px-4 ">
-//       <img
-//         className="w-full rounded-md"
-//         src="/image/ab.webp"
-//         alt="Sample Image"
-//       />
-//     </div>
-//     <div className="px-6 text-center py-2 ">
-//       <div className=" font-semibold text-md ">Card Title</div>
-//       <p className="text-gray-700 text-base">Web Developer.....</p>
-//     </div>
-//     <div className="px-6 pt-3 pb-3">
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag1
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-//         #tag2
-//       </span>
-//       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-//         #tag3
-//       </span>
-//     </div>
-//   </div>
-// </div>

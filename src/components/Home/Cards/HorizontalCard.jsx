@@ -10,7 +10,7 @@ const fetchAllPackagesAccordingToStateId = async (locationId) => {
   return await response.json();
 }
 const HorizontalCard = ({ item }) => {
-  console.log("items=>=========",item)
+  // console.log("items=>=========",item)
   const [packageList, setPackageList] = useState([]);
   useEffect(() => {
     fetchAllPackagesAccordingToStateId(item?.relatedId).then(res => setPackageList(res?.packages))
