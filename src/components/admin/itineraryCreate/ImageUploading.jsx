@@ -68,23 +68,23 @@ export default function ImageUploading({ itinerary, setImageDot }) {
 
   //handle Image size resultion 
 
-  const validateImageResolution = (file) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
-      img.onload = () => {
-        const { width, height } = img;
-        console.log("with--> ",width);
-        console.log("height----> ",height);
-        if (width == 50 && height == 50) {
-          resolve();
-        } else {
-          reject(new Error('Image resolution must be at least 1920x1080'));
-        }
-      };
-      img.onerror = () => reject(new Error('Invalid image file'));
-    });
-  };
+  // const validateImageResolution = (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const img = new Image();
+  //     img.src = URL.createObjectURL(file);
+  //     img.onload = () => {
+  //       const { width, height } = img;
+  //       console.log("with--> ",width);
+  //       console.log("height----> ",height);
+  //       if (width == 50 && height == 50) {
+  //         resolve();
+  //       } else {
+  //         reject(new Error('Image resolution must be at least 1920x1080'));
+  //       }
+  //     };
+  //     img.onerror = () => reject(new Error('Invalid image file'));
+  //   });
+  // };
 
 
   // Function to handle file input change
@@ -93,10 +93,9 @@ export default function ImageUploading({ itinerary, setImageDot }) {
     const newFiles = [...files];
     const file=e.target.files[0]
     newFiles[index]=file ;
-    if (file) {
-      try {
-        await validateImageResolution(file);
-        setErrorMessage(''); 
+   
+      
+        // await validateImageResolution(file); 
         setFiles(newFiles);
         const newPreviews = [...previews];
         const newPreviews1 = [...previews1];
@@ -106,11 +105,8 @@ export default function ImageUploading({ itinerary, setImageDot }) {
         setPreviews(newPreviews);
         setHasChanges(true);// Clear error message if validation passes
         // Proceed with file upload
-      } catch (error) {
-        setErrorMessage(error.message);
-        alert("size must be within provided resolution")// Show error message if validation fails
-      }
-    }
+     
+    
   
   };
   const handleTitleChange = (e, index) => {
