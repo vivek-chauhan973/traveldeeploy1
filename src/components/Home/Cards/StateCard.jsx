@@ -1,6 +1,7 @@
 import "../../../app/globals.css";
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image'
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -45,9 +46,11 @@ const StateCard = ({ states }) => {
             <div className="carousel-container relative container-wrapper ">
                 <div className="carousel gap-5" ref={carouselRef}>
                     {states?.length > 0 && states?.map((items, i) => {
+                        const data=items?.selectedItem?.toLowerCase()?.split(" ")?.join("-");
                         return (
                             <div key={i} className="carousel-item md:w-[280px] w-64 mb-11  rounded-[17px]">
                                 <div className="shadow-md  rounded-[17px] overflow-hidden">
+                                    <Link href={"/india/"+data+"-tour-packages"}>
                                     <div className="relative">
                                         <div className=" w-full h-64">
                                             <Image className=" relative  object-cover rounded-[17px]" layout="fill"
@@ -61,7 +64,8 @@ const StateCard = ({ states }) => {
                                                 {items?.selectedItem}
                                             </div>
                                         </div>
-                                    </div>                                 
+                                    </div> 
+                                    </Link>                                
                                 </div>
                             </div>
                         )

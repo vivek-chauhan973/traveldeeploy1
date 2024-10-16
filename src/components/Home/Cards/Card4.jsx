@@ -39,6 +39,7 @@ const Card4 = ({ packages }) => {
         };
     }, []);
 
+    // console.log("packages here ---> ",packages)
     return (
         <div className="md:mt-9 mt-4 bg-slate-100 ">
             {packages?.length > 0 &&
@@ -87,7 +88,7 @@ const Card4 = ({ packages }) => {
                                                 {/* <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
                                                     -{items.disc}
                                                 </button> */}
-                                                <Link href={items?.pageUrl}>
+                                                <Link href={"/package/"+items?.pageUrl}>
                                                     <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
                                                         Know More
                                                     </button>

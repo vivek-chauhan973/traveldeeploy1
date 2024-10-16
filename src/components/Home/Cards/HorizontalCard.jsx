@@ -16,11 +16,11 @@ const HorizontalCard = ({ item }) => {
     fetchAllPackagesAccordingToStateId(item?.relatedId).then(res => setPackageList(res?.packages))
   }, [item])
   // console.log("res123 ------> ", packageList) 
-  // console.log("resID ------> ", item?.relatedId) 
+  // console.log("resID ------> ", item?.selectedItem?.toLowerCase()?.split(" ")?.join("-")) 
 
-  
+  const data=item?.selectedItem?.toLowerCase()?.split(" ")?.join("-");
   return (
-    <a href={`/india/${item?.pageUrl}`}>
+    <a href={`/india/${data}-tour-packages`}>
       <div className="shadow-lg w-[320px] h-24 border gap-5 m-2 flex items-center rounded-md shrink-0">
         <div className="h-full">
           <Image className="object-cover rounded-l h-full" width={110} height={110}

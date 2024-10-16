@@ -81,9 +81,7 @@
 
 import Image from "next/image";
 import '../app/globals.css'
-// import Card1 from "@/components/Home/Cards/Card1";
 import Card2 from "@/components/Home/Cards/Card2";
-// import Card3 from "@/components/Home/Cards/Card3";
 import HeroSection from "@/components/Home/HeroSection";
 import HorizontalCard from "@/components/Home/Cards/HorizontalCard";
 import Card4 from "@/components/Home/Cards/Card4";
@@ -94,12 +92,10 @@ import ArrowSection from "@/components/Home/Cards/ArrowSection";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import State from "@/components/Home/Cards/State";
 import { useEffect, useState } from "react";
-import Loading from "@/components/Loading/Loading";
 import Promises from "@/components/Home/Cards/Promises";
 import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
 import StateCard from "@/components/Home/Cards/StateCard";
-
-// import Booking from "@/components/profile/bookings";
+import Link from "next/link";
 const fetchAllSingleSction = async () => {
   const res = await fetch("/api/home/homefooter");
   return await res.json();
@@ -128,7 +124,6 @@ export default function Home() {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
   useEffect(() => {
-    // fetchState().then((res) => setStates(res?.states || []));
     fetchAllMultiSction().then(res => {
       console.log("res--of all packages -----> ", res?.data);
       SetHomePackages(res?.data)
@@ -138,43 +133,27 @@ export default function Home() {
 
   useEffect(() => {
     const data = homePackages?.filter(item => item.category === "category1");
-    // console.log("data of home packages", data?.[0]?.options)
     setStates(data?.[0]?.options || []);
     const data1 = homePackages?.filter(item => item.category === "category5");
-    // console.log("data of packages", data1)
     setPackages(data1?.[0]?.options || []);
     const data2 = homePackages?.filter(item => item.category === "category2");
-    // console.log("data of packages", data1)
     setCityPackages(data2?.[0]?.options || [])
 
   }, [homePackages]);
   useEffect(() => {
     const data = homeSinglePackages?.filter(item => item.category === "category1");
-    // console.log("data of home packages", data?.[0]?.options)
     setCategory1(data);
     const data1 = homeSinglePackages?.filter(item => item.category === "category5");
-    // console.log("data of packages", data1)
     setCategory2(data1);
     const data2 = homeSinglePackages?.filter(item => item.category === "category2");
-    // console.log("data of packages", data1)
     setCategory3(data2)
 
   }, [homeSinglePackages]);
-
-  console.log("States", category1?.[0]?.options?.[0]);
-  // console.log("packages", packages);
-  // console.log("cityPackages", cityPackages);
-
 
   return (
     <>
       <DesktopHeader />
       <HeroSection />
-      {/* <Loading/> */}
-      {/* <Bookings/> */}
-      {/* <Tostify/> */}
-      {/* <AdminReview/> */}
-
       <div className="container-wrapper  md:py-11 py-5">
         <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
           <div className=" md:shrink-0">
@@ -185,11 +164,14 @@ export default function Home() {
             <h1 className="md:text-[16px] text-para line-clamp-3">
               {category1?.[0]?.description}
             </h1>
+            <Link href={`/speciality-tours/`+category1?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
             <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
               Know more
             </button>
+            </Link>
           </div>
-          <div className=" md:ml-28 ">
+          <div className=" md:ml-28">
+          <Link href={`/speciality-tours/`+category1?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
             <Image
               width={400}
               height={200}
@@ -197,10 +179,10 @@ export default function Home() {
               src={category1?.[0]?.options?.[0]?.posterPath ? category1?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt=""
             />
+            </Link>
           </div>
         </div>
       </div>
-
       {/* Four carousel all state card*/}
       {/* <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
         {states?.map((item, i) => (
@@ -237,11 +219,14 @@ export default function Home() {
             <h1 className="md:text-[16px] text-para line-clamp-3">
               {category3?.[0]?.description}
             </h1>
+            <Link href={`/speciality-tours/`+category3?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
             <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
               Know more
             </button>
+            </Link>
           </div>
           <div className=" md:ml-28 ">
+          <Link href={`/speciality-tours/`+category3?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
             <Image
               width={400}
               height={200}
@@ -249,6 +234,7 @@ export default function Home() {
               src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt=""
             />
+            </Link>
           </div>
         </div>
       </div>
@@ -256,6 +242,7 @@ export default function Home() {
       <div className="container-wrapper md:pb-10 pb-5">
         <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
           <div className="">
+          <Link href={"/package/"+category2?.[0]?.options?.[0]?.pageUrl}>
             <Image
               width={450}
               height={450}
@@ -263,6 +250,7 @@ export default function Home() {
               src={category2?.[0]?.options?.[0]?.uploads?.[0]}
               alt=""
             />
+            </Link>
           </div>
           <div className="">
             <p className=" text-amber-600  font-semibold mt-2">{category2?.[0]?.subtitle}</p>
@@ -273,9 +261,11 @@ export default function Home() {
               {category2?.[0]?.description}
             </h1>
             <div className=" mt-4  flex md:justify-between gap-3  ">
+              <Link href={"/package/"+category2?.[0]?.options?.[0]?.pageUrl}>
               <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                 Know more
               </button>
+              </Link>
             </div>
           </div>
         </div>
