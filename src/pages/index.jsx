@@ -184,26 +184,6 @@ export default function Home() {
         </div>
       </div>
       {/* Four carousel all state card*/}
-      {/* <div className="container-wrapper grid md:grid grid-cols-2 gap-4 mt-2  lg:grid-cols-4">
-        {states?.map((item, i) => (
-          <div key={i} className="relative mb-2 group">
-            <Image
-              className="md:h-64 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-              src={item?.posterPath}
-              alt=""
-              width={300} //256 in phone
-              height={288} // 160
-            />
-            <div
-              style={boxShadowStyle}
-              className="absolute top-0 left-0 md:h-64 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-            >
-              {item?.selectedItem}
-            </div>
-          </div>
-        ))}
-      </div> */}
-      {/* Four carousel all state card*/}
       <div>
         <StateCard states={states} />
       </div>
@@ -230,7 +210,7 @@ export default function Home() {
             <Image
               width={400}
               height={200}
-              className="object-cover rounded-[17px]"
+              className="object-cover rounded-[17px] w-[500px] h-[265px]"
               src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt=""
             />
@@ -271,7 +251,7 @@ export default function Home() {
         </div>
       </div>
       {/* Carousel Banner Images */}
-      <div className="md:pb-10 pb-5">
+      <div className="md:pb-10 pb-5 xl:mx-16 md:mx-3">
         <Cardwork />
       </div>
 
@@ -311,7 +291,7 @@ export default function Home() {
       </div>
       {/* Country card  */}
       <div>
-        <Card2 />
+        {/* <Card2 /> */}
       </div>
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
         <div className=" md:mt-4 mt-4">

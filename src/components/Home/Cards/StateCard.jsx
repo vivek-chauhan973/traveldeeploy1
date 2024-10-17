@@ -74,7 +74,7 @@ const StateCard = ({ states }) => {
                 </div>
                 {states?.length > 0 &&
                     <div className=" hidden md:block absolute top-2/4 -translate-y-[40px] justify-between w-full">
-                        <div className=' justify-between flex pl-2 '>
+                        <div className=' justify-between flex px-2'>
                             <FontAwesomeIcon
                                 icon={faChevronRight} onClick={scrollPrev}
                                 className="h-5 w-5 p-2 rounded-full  bg-black/50 hover:bg-black text-white rotate-180"
