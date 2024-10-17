@@ -69,19 +69,21 @@ const Card3 = ({ statePackage }) => {
   }, []);
   return (
     <>
-      <div className="carousel-container w-full mt-5 relative py-8 ">
+      <div className="carousel-container w-full xl:mt-10 md:mt-12 mt-0 relative md:pb-8">
         <div className="carousel gap-5" ref={carouselRef}>
           {/* start is here code  */}
           {statePackage?.length > 0 &&
             statePackage?.map((data, i) => {
+              console.log("Rakesh data of state", data);
+
               return (
                 <div
                   key={i}
-                  className="relative   flex-shrink-0 max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg my-2"
+                  className=" border relative flex-shrink-0 max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg my-2"
                 >
-                  <div className=" mx-4 mt-4    overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                  <div className="mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
                     <Image
-                      className=""
+                      className="max-h-[10rem] object-cover"
                       width={300}
                       height={100}
                       // layout="fill"
@@ -103,8 +105,10 @@ const Card3 = ({ statePackage }) => {
                     </div>
                     <div className="items-center mt-2">
                       <div className="text-right">
-                        <p className="text-[14px] leading-5 text-cyan-400 font-semibold">
-                          SUPER DEAL PRICE
+                        <p className="text-base leading-snug text-green-700 font-semibold">
+                          {((data?.addguest === "addGuest") && "Awesome Price")}
+                          {((data?.addguest === "fixedDeparture") && (data?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
+                          {((data?.addguest === "fixedDeparture") && (data?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}
                         </p>
                         <p className="text-[12px] leading-5">
                           Starts From{" "}
@@ -124,13 +128,13 @@ const Card3 = ({ statePackage }) => {
                     </div>
                   </div>
                   <div className="p-4 pt-0">
-                    <Link href={"/package/"+data?.pageUrl}>
-                    <button
-                      className="block w-full bg-navyblack py-3 rounded-md text-white"
-                      type="button"
-                    >
-                      View details
-                    </button>
+                    <Link href={"/package/" + data?.pageUrl}>
+                      <button
+                        className="block w-full bg-navyblack py-3 rounded-md text-white"
+                        type="button"
+                      >
+                        View details
+                      </button>
                     </Link>
                   </div>
                 </div>
@@ -138,7 +142,7 @@ const Card3 = ({ statePackage }) => {
             })}
           {/* end is here code */}
         </div>
-        <div className=" hidden md:block relative -top-[470px]  -translate-y-[60px] justify-between w-full">
+        <div className=" hidden md:block relative -top-[445px]  -translate-y-[60px] justify-between w-full">
           <div className=" absolute right-8 gap-3  flex pl-2 ">
             <FontAwesomeIcon
               icon={faChevronRight}

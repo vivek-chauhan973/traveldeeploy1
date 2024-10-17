@@ -175,7 +175,7 @@ export default function Home() {
             <Image
               width={400}
               height={200}
-              className="object-cover rounded-[17px]"
+              className="object-cover rounded-[17px] w-[500px] h-[265px]"
               src={category1?.[0]?.options?.[0]?.posterPath ? category1?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt=""
             />
@@ -208,9 +208,9 @@ export default function Home() {
           <div className=" md:ml-28 ">
           <Link href={`/speciality-tours/`+category3?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
             <Image
+              className="object-cover rounded-[17px] w-[500px] h-[265px]"
               width={400}
               height={200}
-              className="object-cover rounded-[17px] w-[500px] h-[265px]"
               src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
               alt=""
             />
@@ -224,9 +224,9 @@ export default function Home() {
           <div className="">
           <Link href={"/package/"+category2?.[0]?.options?.[0]?.pageUrl}>
             <Image
+              className="object-cover rounded-[17px] w-[420px] h-[265px]"
               width={450}
               height={450}
-              className="object-cover rounded-[17px]"
               src={category2?.[0]?.options?.[0]?.uploads?.[0]}
               alt=""
             />
