@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Card3 from './Card3'
-
+const fetchPackages = async (locationId) => {
+    const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
+    const data = await response.json();
+    return data?.packages;
+  };
 const State = () => {
 
     const [data, setData] = useState(null);
+    const [statePackage,setStatePackage]=useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -19,6 +24,16 @@ const State = () => {
         fetchData();
     }, []);
 
+    useEffect(()=>{
+     fetchPackages(data?.states?.[0]?._id).then(res=>{setStatePackage(res||[])})
+    },[data])
+    const handleStatePackages=async (id)=>{
+      const stateData=  await fetchPackages(id)
+      setStatePackage(stateData||[]);
+      
+    }
+    useEffect(()=>{},[statePackage])
+    console.log("data",statePackage)
     return (
         <div>
             <div className="my-1 mt-6 md:mt-10 ">
@@ -35,7 +50,7 @@ const State = () => {
                         {data?.states?.map((title) => (
                             <div key={title._id}>
                                 <div className=''>
-                                    <button className="cursor-pointer capitalize shadow-md bg-gradient-to-r from-orange-500 to-red-500 xl:w-52 w-40 text-white md:text-[16px] text-para md:py-2 py-1.5 px-4 rounded-md">
+                                    <button onClick={()=>handleStatePackages(title._id)} className="cursor-pointer capitalize shadow-md bg-gradient-to-r from-orange-500 to-red-500 xl:w-52 w-40 text-white md:text-[16px] text-para md:py-2 py-1.5 px-4 rounded-md">
                                         {title.name}
                                     </button>
                                 </div>
@@ -44,7 +59,7 @@ const State = () => {
                     </div>
                     <div className="relative xl:col-span-4 col-span-5 w-full overflow-auto">
                         <div className="flex gap-4 ">
-                            <Card3 />
+                            <Card3 statePackage={statePackage}/>
                         </div>
                         <div className=" bg-gradient-to-l from-white opacity-100 w-10 h-full right-0 absolute z-30 top-0"></div>
                     </div>
