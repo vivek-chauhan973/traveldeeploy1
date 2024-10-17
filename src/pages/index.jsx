@@ -224,7 +224,7 @@ export default function Home() {
           <div className="">
           <Link href={"/package/"+category2?.[0]?.options?.[0]?.pageUrl}>
             <Image
-              className="object-cover rounded-[17px] w-[420px] h-[265px]"
+              className=" object-cover rounded-[17px] w-[420px] h-[265px]"
               width={450}
               height={450}
               src={category2?.[0]?.options?.[0]?.uploads?.[0]}

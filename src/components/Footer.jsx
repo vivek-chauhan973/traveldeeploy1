@@ -6,9 +6,39 @@ import { HiBuildingOffice2 } from "react-icons/hi2";
 import { FiPhoneCall } from "react-icons/fi";
 import Image from 'next/image'
 import { MdMailOutline } from "react-icons/md";
+import { useEffect, useState } from "react";
 
+const fetchCatagories=async ()=>{
+    const categoriesList = await fetch('/api/package-setting/category/get-categories');
+    return await categoriesList.json();
+}
+const fetchCategoryPackages = async (locationId) => {
+    const response = await fetch(`/api/public/category/${locationId}`);
+    const data = await response.json();
+    return data;
+  };
 
 export default function Footer() {
+const [categoryArray,setCategoryArray]=useState([]);
+let data1;
+const processCategories = async () => {
+    try {
+      const categories = await fetchCatagories(); 
+      for (let item of categories?.data) {
+        const result = await fetchCategoryPackages(item._id);
+        const data={category:item?.category,result:result?.packages}
+        data1=data;
+        categoryArray.push(data);
+        setCategoryArray([categoryArray])
+      }
+    } catch (error) {
+      console.error("Error processing categories or packages: ", error);
+    }
+  };
+  useEffect(()=>{
+    processCategories();
+  },[])
+  console.log("Fetched packages1: ", categoryArray); 
     return (
         <>
             <div>
