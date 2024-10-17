@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const Card3 = ({ statePackage }) => {
   // const stateCardData = [
@@ -123,12 +124,14 @@ const Card3 = ({ statePackage }) => {
                     </div>
                   </div>
                   <div className="p-4 pt-0">
+                    <Link href={"/package/"+data?.pageUrl}>
                     <button
                       className="block w-full bg-navyblack py-3 rounded-md text-white"
                       type="button"
                     >
                       View details
                     </button>
+                    </Link>
                   </div>
                 </div>
               );
