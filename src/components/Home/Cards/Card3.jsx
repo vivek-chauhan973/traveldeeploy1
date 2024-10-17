@@ -7,28 +7,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 const Card3 = ({ statePackage }) => {
-  // const stateCardData = [
-  //   {
-  //     img: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80",
-  //     title: "Wooden House, Florida",
-  //     description: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls."
-  //   },
-  //   {
-  //     img: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80",
-  //     title: "Wooden House, Florida",
-  //     description: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls."
-  //   },
-  //   {
-  //     img: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80",
-  //     title: "Wooden House, Florida",
-  //     description: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls."
-  //   },
-  //   {
-  //     img: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80",
-  //     title: "Wooden House, Florida",
-  //     description: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls."
-  //   },
-  // ]
+
   const carouselRef = useRef(null);
 
   const scrollNext = () => {
@@ -69,7 +48,7 @@ const Card3 = ({ statePackage }) => {
   }, []);
   return (
     <>
-      <div className="carousel-container w-full xl:mt-10 md:mt-12 mt-0 relative md:pb-8">
+      <div className="carousel-container w-full xl:mt-10 md:mt-12 mt-0 relative md:py-8">
         <div className="carousel gap-5" ref={carouselRef}>
           {/* start is here code  */}
           {statePackage?.length > 0 &&
@@ -83,7 +62,7 @@ const Card3 = ({ statePackage }) => {
                 >
                   <div className="mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
                     <Image
-                      className="max-h-[10rem] object-cover"
+                      className="h-[10rem] object-cover"
                       width={300}
                       height={100}
                       // layout="fill"
@@ -142,7 +121,7 @@ const Card3 = ({ statePackage }) => {
             })}
           {/* end is here code */}
         </div>
-        <div className=" hidden md:block relative -top-[445px]  -translate-y-[60px] justify-between w-full">
+        <div className=" hidden md:block relative -top-[450px]  -translate-y-[60px] justify-between w-full">
           <div className=" absolute right-8 gap-3  flex pl-2 ">
             <FontAwesomeIcon
               icon={faChevronRight}

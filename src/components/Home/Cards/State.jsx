@@ -46,7 +46,7 @@ const State = () => {
                     </p>
                 </div>
                 <div className="container-wrapper grid grid-cols-5 gap-3 overflow-hidden">
-                    <div className="flex xl:flex-col md:mt-7 gap-2 py-5 xl:col-auto col-span-5 xl:overflow-x-hidden overflow-x-scroll">
+                    <div className="flex xl:flex-col md:mt-10 gap-2 py-5 xl:col-auto col-span-5 xl:overflow-x-hidden overflow-x-scroll">
                         {data?.states?.map((title) => (
                             <div key={title._id}>
                                 <div className=''>

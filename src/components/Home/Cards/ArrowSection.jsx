@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+
 const fetchPromoListCategory = async () => {
   const response = await fetch(
     `/api/public/package-state/fetchpromocat?selectType=category`
@@ -21,28 +22,7 @@ const ArrowSection = () => {
       setPromoCategory(res?.responseData);
     });
   }, []);
-  const data = [
-    {
-      img: "https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Self Drive",
-      desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Atque aperiam exercitationem aliquid!",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Self Drive",
-      desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Atque aperiam exercitationem aliquid!",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Self Drive",
-      desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Atque aperiam exercitationem aliquid!",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1627640268913-91cfd4675b65?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Self Drive",
-      desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Atque aperiam exercitationem aliquid!",
-    },
-  ];
+
   const carouselRef = useRef(null);
 
   const scrollNext = () => {
@@ -84,10 +64,10 @@ const ArrowSection = () => {
 
   return (
     <div className=" md:grid md:grid-cols-[450px,auto] ">
-      {data?.length > 0 && (
+      {promoCategory?.length > 0 && (
         <div className="max-w-[450px] px-5 items-center  pt-5 md:pt-20">
           <p className="md:text-[25px] text-[22px] -mt-5 font-medium text-center flex flex-wrap">
-            Looking for a specific style for holiday
+            Looking for a specific style for holiday2
           </p>
           <p className="text-para pt-3 line-clamp-2 mb-4 text-center">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
@@ -127,14 +107,14 @@ const ArrowSection = () => {
                       "-tour-packages"
                     }
                   >
-                    <div className="absolute bottom-0 px-5 py-2">
-                      <p className="text-xl text-white">{items.title}</p>
-                      <div className=" line-clamp-2 text-para text-white rounded-md">
+                    <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 p-4">
+                      <div className=''>
+                        <p className="text-xl font-semibold text-white">{items.title}</p>
                         <p
                           dangerouslySetInnerHTML={{
                             __html: items?.description,
                           }}
-                          className="text-para line-clamp-3"
+                          className="text-para line-clamp-2"
                         ></p>
                       </div>
                     </div>

@@ -32,6 +32,7 @@ export default function PromoManage() {
     const [file, setFile] = useState(null);
     const [file1, setFile1] = useState(null);
     const [title, setTitle] = useState(null);
+    const [posterImage1, setPosterImage1] = useState(null);
     const [posterTitle, setPosterTitle] = useState(null);
     const [posterAlt, setPosterAlt] = useState(null);
     const [seofieldpopup, setSeofieldpopup] = useState(false);
