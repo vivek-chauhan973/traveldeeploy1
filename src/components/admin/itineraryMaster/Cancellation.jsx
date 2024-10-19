@@ -112,7 +112,6 @@ const Cancellation = () => {
     return (
         <div >
             <div className="md:flex gap-5">
-
                 <div className=" grow border rounded p-4 h-72">
                     <div className='flex flex-col'>
                         <label className="pb-2 font-semibold">Tour Cancellation</label>
@@ -182,27 +181,23 @@ const Cancellation = () => {
             <div className={`${isEditing ? "block" : 'hidden'} col-span-2 mt-16 md:mt-8`}>
                 <button onClick={handleSave} className=" w-full bg-black text-white p-2 mt-2">Save Information</button>
             </div>
-            {isOpen &&
-
-                (
-                    <div className="fixed inset-0 flex items-center justify-center z-50">
-                        <div className="absolute inset-0 bg-black opacity-50"></div>
-                        <div className="bg-white p-8 rounded-[20px]  shadow-lg z-50">
-                            <h2 className="text-xl font-semibold  text-center justify-center mb-3">Delete policy</h2>
-                            <p className="text-center justify-center ">Are you sure you want to delete this item</p>
-                            <div className="flex justify-center mt-4">
-                                <button onClick={() => toggleModal(null)} className="mr-5 bg-gray-500 hover:bg-gray-700 text-white font-normal py-3 px-8 rounded-[25px] ">
-                                    Cancel
-                                </button>
-                                <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-normal py-3 px-8 rounded-[25px] ">
-                                    Delete
-                                </button>
-
-                            </div>
+            {isOpen && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                    <div className="bg-white p-8 rounded-[20px]  shadow-lg z-50">
+                        <h2 className="text-xl font-semibold  text-center justify-center mb-3">Delete policy</h2>
+                        <p className="text-center justify-center ">Are you sure you want to delete this item</p>
+                        <div className="flex justify-center mt-4">
+                            <button onClick={() => toggleModal(null)} className="mr-5 bg-gray-500 hover:bg-gray-700 text-white font-normal py-3 px-8 rounded-[25px] ">
+                                Cancel
+                            </button>
+                            <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-normal py-3 px-8 rounded-[25px] ">
+                                Delete
+                            </button>
                         </div>
                     </div>
-
-                )}
+                </div>
+            )}
             <ToastContainer />
         </div>
     );

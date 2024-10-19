@@ -1,15 +1,10 @@
 import dynamic from 'next/dynamic';
-const MdOutlineAddCircle = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineAddCircle));
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const LiaUserEditSolid = dynamic(() => import('react-icons/lia').then(mod => mod.LiaUserEditSolid));
-
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 // Dynamic import for Quill.js
 const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
@@ -64,9 +59,9 @@ const CarTourInclusion = () => {
             } catch (error) {
                 console.error('Error deleting group:', error);
             }
-          
+
         }
-       
+
         toast.success("Deleted successfully !")
     };
 
@@ -118,11 +113,10 @@ const CarTourInclusion = () => {
     return (
         <div >
             <div className="md:flex gap-5">
-
                 <div className=" grow border rounded p-4 h-72">
                     <div className='flex flex-col'>
                         <label className="pb-2 font-semibold">Tour Inclusion</label>
-                        <div className="flex items-center gap-5">
+                        <div className="flex items-center gap-2">
                             <input
                                 className='border rounded-md h-8 px-2 grow focus:border-primary outline-none'
                                 type="text"
@@ -130,29 +124,43 @@ const CarTourInclusion = () => {
                                 onChange={(e) => setInclusionGroup({ ...inclusionGroup, groupName: e.target.value })}
                                 placeholder="Enter Group Name"
                             />
-                            <button type="button" onClick={handleSave}>
-                                <MdOutlineAddCircle size={35} className='cursor-pointer hover:text-primary' />
+                            <button type="button" >
+                                <FontAwesomeIcon
+                                    icon={faCirclePlus}
+                                    onClick={handleSave}
+                                    className="mb-1 text-xl hover:text-primary cursor-pointer"
+                                />
                             </button>
                         </div>
                     </div>
-                    <div className="py-2 px-4 h-48 overflow-y-auto">
+                    <div className="py-3  h-48 overflow-y-auto">
                         {groupsData.map((group, index) => (
-                            <div key={group._id} className="flex justify-between items-center gap-10 even:bg-slate-100 hover:bg-slate-300 cursor-pointer">
+                            <div key={group._id} className="flex justify-between items-center px-2 even:bg-slate-100 hover:bg-slate-300 cursor-pointer">
                                 <p className='capitalize leading-8'>{index + 1}. {group.groupName}</p>
                                 <div className='flex gap-2'>
                                     {(isEditing && editGroupId === group._id) ? (
-                                        <MdDeleteForever size={24} className='mt-1 opacity-50 cursor-not-allowed' />
+                                        <FontAwesomeIcon
+                                            icon={faTrash}
+                                            className="mt-1 opacity-50 cursor-not-allowed"
+                                        />
                                     ) : (
-                                        <MdDeleteForever onClick={() => toggleModal(group._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                        <FontAwesomeIcon
+                                            icon={faTrash}
+                                            oonClick={() => toggleModal(group._id)}
+                                            className="mt-1  hover:text-primary cursor-pointer"
+                                        />
                                     )}
-                                    <LiaUserEditSolid onClick={() => handleEdit(group._id)} size={24} className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-red-500 cursor-pointer') : ''}`} />
+                                    <FontAwesomeIcon
+                                        icon={faEdit}
+                                        onClick={() => handleEdit(group._id)}
+                                        className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-primary cursor-pointer') : ''}`}
+                                    />
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className="grow mt-2 md:mt-0">
-
                     {isEditing && (
                         <div>
                             {/* Display the currently selected group name */}
@@ -164,7 +172,7 @@ const CarTourInclusion = () => {
                                     value={inclusionGroup.description}
                                     onChange={(html) => setInclusionGroup({ ...inclusionGroup, description: html })}
                                     modules={modules}
-                                />  
+                                />
                             </div>
                         </div>
                     )}
@@ -173,7 +181,6 @@ const CarTourInclusion = () => {
             <div className={`${isEditing ? "block" : 'hidden'} col-span-2 mt-16 md:mt-8`}>
                 <button onClick={handleSave} className=" w-full bg-black text-white p-2 mt-2">Save Information</button>
             </div>
-
             <div>
                 {isOpen && (
                     <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -191,12 +198,10 @@ const CarTourInclusion = () => {
 
                             </div>
                         </div>
-
                     </div>
                 )}
-                
             </div>
-            <ToastContainer autoClose={5000}/>
+            <ToastContainer autoClose={5000} />
         </div>
     );
 };

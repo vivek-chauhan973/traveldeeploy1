@@ -4,7 +4,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowRightLong,
   faCirclePlus,
+  faCube,
   faEdit,
   faFloppyDisk,
   faTrash,
@@ -15,7 +17,7 @@ const MdOutlineAddCircle = dynamic(() =>
   import("react-icons/md").then((mod) => mod.MdOutlineAddCircle)
 );
 
-const CarGst=()=> {
+const CarGst = () => {
   const [gstRate, setGstRate] = useState("");
   const [gstList, setGstList] = useState([]);
   const [editGstId, setEditGstId] = useState(null);
@@ -68,8 +70,13 @@ const CarGst=()=> {
 
   return (
     <div>
-      <div className="flex items-center gap-5 text-primary pb-3">
-        <p className="text-[28px] text-black">GST Management</p>
+      <div className="flex items-center gap-5 text-primary pb-3 mb-5">
+        <FontAwesomeIcon icon={faCube} className="text-2xl" />
+        <p className="md:text-[28px] text-xl text-black">GST Management</p>
+        <FontAwesomeIcon
+          icon={faArrowRightLong}
+          className=" text-teal-700 text-xl"
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 rounded">
         <div className="shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600">
@@ -119,12 +126,12 @@ const CarGst=()=> {
                         <FontAwesomeIcon
                           icon={faFloppyDisk}
                           onClick={() => handleEdit(item._id)}
-                          className="font1 mt-1 hover:text-primary cursor-pointer"
+                          className=" mt-1 hover:text-primary cursor-pointer"
                         />
                         <FontAwesomeIcon
                           icon={faXmark}
                           onClick={() => setEditGstId(null)}
-                          className="font1 mt-1 hover:text-primary cursor-pointer"
+                          className=" mt-1 hover:text-primary cursor-pointer"
                         />
                       </>
                     ) : (
@@ -135,12 +142,12 @@ const CarGst=()=> {
                             setEditGstId(item._id);
                             setEditGstValue(item.gstRate);
                           }}
-                          className="font1 mt-1 hover:text-primary cursor-pointer"
+                          className="mt-1 hover:text-primary cursor-pointer"
                         />
                         <FontAwesomeIcon
                           icon={faTrash}
                           onClick={() => handleDelete(item._id)}
-                          className="mt-1 font1 hover:text-primary cursor-pointer"
+                          className="mt-1 hover:text-primary cursor-pointer"
                         />
                       </>
                     )}

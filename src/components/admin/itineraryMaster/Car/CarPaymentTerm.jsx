@@ -1,13 +1,10 @@
 import dynamic from 'next/dynamic';
-const MdOutlineAddCircle = dynamic(() => import('react-icons/md').then(mod => mod.MdOutlineAddCircle));
-const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
-const LiaUserEditSolid = dynamic(() => import('react-icons/lia').then(mod => mod.LiaUserEditSolid));
-
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 // Dynamic import for Quill.js
 const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
@@ -15,7 +12,7 @@ const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
     loading: () => <p>Loading...</p>,
 });
 
-const CarPaymentTerm = () => {
+const CarPaymentTermComponent = () => {
     const [PaymentTermGroup, setPaymentTermGroup] = useState({ groupName: "", description: "" });
     const [groupsData, setGroupsData] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +27,7 @@ const CarPaymentTerm = () => {
 
     const fetchGroups = async () => {
         try {
-            const response = await fetch('/api/cars/package/tour-info/payment-term/get');
+            const response = await fetch('/api/package/tour-info/payment-term/get');
             const result = await response.json();
             setGroupsData(result.PaymentTermGroupData.reverse());
         } catch (error) {
@@ -46,7 +43,7 @@ const CarPaymentTerm = () => {
     const handleDelete = async () => {
         if (deleteGroupId) {
             try {
-                const response = await fetch('/api/cars/package/tour-info/payment-term/delete', {
+                const response = await fetch('/api/package/tour-info/payment-term/delete', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ group_id: deleteGroupId })
@@ -62,8 +59,8 @@ const CarPaymentTerm = () => {
                 console.error('Error deleting group:', error);
             }
         }
-        toast.success("deleted Successfully",{
-            position:"top-center"
+        toast.success("deleted Successfully", {
+            position: "top-center"
         })
     };
 
@@ -77,8 +74,8 @@ const CarPaymentTerm = () => {
 
     const handleSave = async () => {
         const url = isEditing
-            ? '/api/cars/package/tour-info/payment-term/edit'
-            : '/api/cars/package/tour-info/payment-term/add';
+            ? '/api/package/tour-info/payment-term/edit'
+            : '/api/package/tour-info/payment-term/add';
         const payload = isEditing
             ? { group_id: editGroupId, ...PaymentTermGroup }
             : PaymentTermGroup;
@@ -115,11 +112,10 @@ const CarPaymentTerm = () => {
     return (
         <div >
             <div className="md:flex gap-5">
-
                 <div className=" grow border rounded p-4 h-72">
                     <div className='flex flex-col'>
-                        <label className="pb-2 font-semibold">Tour PaymentTerm</label>
-                        <div className="flex items-center gap-5">
+                        <label className="pb-2 font-semibold">Tour Payment Term</label>
+                        <div className="flex items-center gap-2">
                             <input
                                 className='border rounded-md h-8 px-2 grow focus:border-primary outline-none'
                                 type="text"
@@ -127,32 +123,46 @@ const CarPaymentTerm = () => {
                                 onChange={(e) => setPaymentTermGroup({ ...PaymentTermGroup, groupName: e.target.value })}
                                 placeholder="Enter Group Name"
                             />
-                            <button type="button" onClick={handleSave}>
-                                <MdOutlineAddCircle size={35} className='cursor-pointer hover:text-primary' />
+                            <button type="button">
+                                <FontAwesomeIcon
+                                    icon={faCirclePlus}
+                                    onClick={handleSave}
+                                    className="mb-1 text-xl hover:text-primary cursor-pointer"
+                                />
                             </button>
                         </div>
                     </div>
-                    <div className="py-2 px-4 h-48 overflow-y-auto">
+                    <div className="py-3 h-48 overflow-y-auto">
                         {groupsData.map((group, index) => (
-                            <div key={group._id} className="flex justify-between items-center gap-10 even:bg-slate-100 hover:bg-slate-300 cursor-pointer">
+                            <div key={group._id} className="flex justify-between items-center px-2 even:bg-slate-100 hover:bg-slate-300 cursor-pointer">
                                 <p className='capitalize leading-8'>{index + 1}. {group.groupName}</p>
                                 <div className='flex gap-2'>
                                     {(isEditing && editGroupId === group._id) ? (
-                                        <MdDeleteForever size={24} className='mt-1 opacity-50 cursor-not-allowed' />
+                                        <FontAwesomeIcon
+                                            icon={faTrash}
+                                            className="mt-1 opacity-50 cursor-not-allowed"
+                                        />
                                     ) : (
-                                        <MdDeleteForever onClick={() => toggleModal(group._id)} size={24} className='mt-1 hover:text-red-500 cursor-pointer' />
+                                        <FontAwesomeIcon
+                                            icon={faTrash}
+                                            onClick={() => toggleModal(group._id)}
+                                            className="mt-1  hover:text-primary cursor-pointer"
+                                        />
                                     )}
-                                    <LiaUserEditSolid onClick={() => handleEdit(group._id)} size={24} className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-red-500 cursor-pointer') : ''}`} />
+                                    <FontAwesomeIcon
+                                        icon={faEdit}
+                                        onClick={() => handleEdit(group._id)}
+                                        className={`mt-1 ${isEditing ? (editGroupId === group._id ? 'text-gray-500 cursor-not-allowed' : 'hover:text-primary cursor-pointer') : ''}`}
+                                    />
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className="grow mt-2 md:mt-0">
-                    
                     {isEditing && (
                         <div>
-                        {/* Display the currently selected group name */}
+                            {/* Display the currently selected group name */}
                             <p className="font-semibold">Group : {selectedGroupName}</p>
                             <div className='w-full  h-[225px]'>
                                 <QuillNoSSRWrapper
@@ -167,30 +177,29 @@ const CarPaymentTerm = () => {
                     )}
                 </div>
             </div>
-            <div className={`${isEditing? "block":'hidden'} col-span-2 mt-16 md:mt-8`}>
+            <div className={`${isEditing ? "block" : 'hidden'} col-span-2 mt-16 md:mt-8`}>
                 <button onClick={handleSave} className=" w-full bg-black text-white p-2 mt-2">Save Information</button>
             </div>
             {isOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div className="absolute inset-0 bg-black opacity-50"></div>
-                <div className="bg-white p-8 rounded-[20px]  shadow-lg z-50">
-                    <h2 className="text-xl font-semibold  text-center justify-center mb-3">Delete payment    Term</h2>
-                    <p className="text-center justify-center ">Are you sure you want to delete this item</p>
-                    <div className="flex justify-center mt-4">
-                        <button onClick={() => toggleModal(null)} className="mr-5 bg-gray-500 hover:bg-gray-700 text-white font-normal py-3 px-8 rounded-[25px] ">
-                            Cancel
-                        </button>
-                        <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-normal py-3 px-8 rounded-[25px] ">
-                            Delete
-                        </button>
-                    </div>  
+                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                    <div className="bg-white p-8 rounded-[20px]  shadow-lg z-50">
+                        <h2 className="text-xl font-semibold  text-center justify-center mb-3">Delete payment    Term</h2>
+                        <p className="text-center justify-center ">Are you sure you want to delete this item</p>
+                        <div className="flex justify-center mt-4">
+                            <button onClick={() => toggleModal(null)} className="mr-5 bg-gray-500 hover:bg-gray-700 text-white font-normal py-3 px-8 rounded-[25px] ">
+                                Cancel
+                            </button>
+                            <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-normal py-3 px-8 rounded-[25px] ">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
             )}
-            <ToastContainer/>
+            <ToastContainer />
         </div>
     );
 };
 
-export default CarPaymentTerm;
+export default CarPaymentTermComponent;

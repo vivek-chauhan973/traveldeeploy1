@@ -19,7 +19,6 @@ import TermsAndCondition from "@/components/admin/itineraryMaster/TermsAndCondit
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong, faEdit, faCirclePlus, faTrash, faCancel, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-
 export default function Category() {
 
     const [isBadge, setBadge] = useState({
@@ -49,10 +48,7 @@ export default function Category() {
                 },
                 body: JSON.stringify(isBadge),
             });
-
             fetchBadges()
-
-
         } catch (error) {
             console.error('Error during form submission:', error);
         }
@@ -79,8 +75,6 @@ export default function Category() {
         };
         fetchData()
     }, [])
-
-
 
     // category Section making
     const [isCategory, setCategory] = useState({
@@ -114,8 +108,6 @@ export default function Category() {
         }
     }
 
-
-
     const fetchCategories = async () => {
         try {
             const categoriesList = await fetch('/api/package-setting/category/get-categories')
@@ -129,7 +121,6 @@ export default function Category() {
             return [];
         }
     }
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -218,7 +209,6 @@ export default function Category() {
         }
     }
 
-
     const saveEditCategory = async (category_id) => {
         try {
             const response = await fetch('/api/package-setting/category/edit-category', {
@@ -239,12 +229,10 @@ export default function Category() {
     const [editCategoryValue, setEditCategoryValue] = useState('')
     const [editCategoryId, seteditCategoryId] = useState(null)
 
-
     const toggleEditCategory = (category_id) => {
         seteditCategoryId(category_id == editCategoryId ? null : category_id);
         setEditCategoryValue('')
     }
-
 
     return (
         <>
@@ -255,7 +243,7 @@ export default function Category() {
                     <div>
                         <div className="flex items-center gap-5 text-primary py-5">
                             <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                            <p className="md:text-[28px] text-xl text-black">Package Master</p>
+                            <p className="md:text-[28px] text-xl text-black">Indaia Package Master</p>
                             <FontAwesomeIcon
                                 icon={faArrowRightLong}
                                 className=" text-teal-700 text-xl"
@@ -279,7 +267,6 @@ export default function Category() {
                                             className="text-xl hover:text-primary cursor-pointer mb-1"
                                         />
                                     </button>
-
                                 </form>
                                 {/* data is here show */}
                                 {/* trial code */}
@@ -418,7 +405,7 @@ export default function Category() {
                         <div className="mt-10">
                             <Gst />
                         </div>
-                        
+
                     </div>
                 </Layout>
             </AppProvider>

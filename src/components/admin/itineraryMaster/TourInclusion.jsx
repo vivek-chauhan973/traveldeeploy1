@@ -6,8 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-
-
 // Dynamic import for Quill.js
 const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
     ssr: false,
@@ -115,7 +113,6 @@ const TourInclusion = () => {
     return (
         <div >
             <div className="md:flex gap-5">
-
                 <div className=" grow border rounded p-4 h-72">
                     <div className='flex flex-col'>
                         <label className="pb-2 font-semibold">Tour Inclusion</label>
@@ -164,7 +161,6 @@ const TourInclusion = () => {
                     </div>
                 </div>
                 <div className="grow mt-2 md:mt-0">
-
                     {isEditing && (
                         <div>
                             {/* Display the currently selected group name */}
@@ -185,7 +181,6 @@ const TourInclusion = () => {
             <div className={`${isEditing ? "block" : 'hidden'} col-span-2 mt-16 md:mt-8`}>
                 <button onClick={handleSave} className=" w-full bg-black text-white p-2 mt-2">Save Information</button>
             </div>
-
             <div>
                 {isOpen && (
                     <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -203,10 +198,8 @@ const TourInclusion = () => {
 
                             </div>
                         </div>
-
                     </div>
                 )}
-
             </div>
             <ToastContainer autoClose={5000} />
         </div>

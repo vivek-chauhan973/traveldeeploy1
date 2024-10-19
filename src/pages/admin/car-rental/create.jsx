@@ -7,7 +7,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import Image from 'next/image';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong, faCube, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong, faCube, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function AddCar() {
   const [cars, setCars] = useState([]);
@@ -224,7 +224,7 @@ export default function AddCar() {
                   { label: "Large Bags", name: "bags", type: "number" },
                   { label: "Daily Limit KM's", name: "dailyLimit", type: "number" },
                   { label: "Base Fare/Per Day", name: "capacity", type: "number" },
-                  { label: "Base price for KM KM's", name: "rate", type: "number" },
+                  { label: "Base price for KM's", name: "rate", type: "number" },
                   { label: "Out Station Base Price for KM", name: "outStationBasePrice", type: "number" },
                   { label: "Per KM Rate", name: "perKmRate", type: "number" },
                   { label: "Markup", name: "markup", type: "number" },
@@ -273,46 +273,96 @@ export default function AddCar() {
           </form>
         </div>
         <div>
-          <h2 className="text-xl font-bold mt-8 mb-4">Car List</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-300">
+          <h2 className="text-xl font-medium mt-5 mb-2 ml-2">Car List</h2>
+          <div className="table-container w-full m-auto overflow-x-auto">
+            <table className="w-full border-collapse border text-center text-para">
               <thead>
-                <tr>
-                  <th className="border-b px-4 py-2 text-left">Vehicle Selection</th>
-                  <th className="border-b px-4 py-2 text-left">Seating Capacity</th>
-                  <th className="border-b px-4 py-2 text-left">Large Bags</th>
-                  <th className="border-b px-4 py-2 text-left">Daily Limit KMs</th>
-                  <th className="border-b px-4 py-2 text-left">Base Fare/Per Day</th>
-                  <th className="border-b px-4 py-2 text-left">Base price for KMs</th>
-                  <th className="border-b px-4 py-2 text-left">Out Station Base Price for KM</th>
-                  <th className="border-b px-4 py-2 text-left">Per KM Rate</th>
-                  <th className="border-b px-4 py-2 text-left">Markup</th>
-                  <th className="border-b px-4 py-2 text-left">AC Charge per Day</th>
-                  <th className="border-b px-4 py-2 text-left">Misc</th>
-                  <th className="border-b px-4 py-2 text-left">Actions</th>
+                <tr className="border-b bg-black text-white">
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r">
+                    Vehicle Selection
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold  border-r ">
+                    Seating Capacity
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    Large Bags
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r border-b">
+                    Daily Limit
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r">
+                    Base Fare/Per Day
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    Base price
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r">
+                    Out Station
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    Rate
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    Markup
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    AC Charge
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    Misc
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    Actions
+                  </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-white">
                 {cars?.map((car) => (
                   <tr key={car._id}>
-                    <td className="border-b px-4 py-2">{car.vehicleType}</td>
-                    <td className="border-b px-4 py-2">{car.seatingCapacity}</td>
-                    <td className="border-b px-4 py-2">{car.bags}</td>
-                    <td className="border-b px-4 py-2">{car.dailyLimit}</td>
-                    <td className="border-b px-4 py-2">{car.capacity}</td>
-                    <td className="border-b px-4 py-2">{car.rate}</td>
-                    <td className="border-b px-4 py-2">{car.outStationBasePrice}</td>
-                    <td className="border-b px-4 py-2">{car.perKmRate}</td>
-                    <td className="border-b px-4 py-2">{car.markup}</td>
-                    <td className="border-b px-4 py-2">{car.ac}</td>
-                    <td className="border-b px-4 py-2">{car.misc}</td>
-                    <td className="border-b px-4 py-2 flex space-x-2">
-                      <button onClick={() => handleEdit(car)} className="text-blue-500 hover:text-blue-600">
-                        <FaEdit />
-                      </button>
-                      <button onClick={() => handleDelete(car._id)} className="text-red-500 hover:text-red-600">
-                        <MdDeleteForever />
-                      </button>
+                    <td className="border-t border-l text-left border-r px-2 py-2 border-b">
+                      {car.vehicleType}
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b">
+                      {car.seatingCapacity}
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b font-semibold">
+                      {car.bags}  
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b">
+                      {car.dailyLimit}
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b">
+                      {car?.capacity?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b">
+                      {car?.rate?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b font-semibold">
+                      {car?.outStationBasePrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                      {car?.perKmRate?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                      {car?.markup?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                      {car?.ac?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
+                      {car?.misc?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        className="cursor-pointer"
+                        onClick={() => handleEdit(car)}
+                      />
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="cursor-pointer ml-2"
+                        onClick={() => handleDelete(car._id)}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -320,45 +370,9 @@ export default function AddCar() {
             </table>
           </div>
         </div>
-        {/* <div className=" px-4 pb-4">
-          <h2 className="text-base font-semibold">Reviews</h2>
-          <div className="overflow-scroll bg-white rounded px-4 py-2">
-            <table className="w-full border rounded">
-              <thead>
-                <tr className='border-b'>
-                  <th className=" p-2 text-left">Title</th>
-                  <th className=" p-2 text-left">Rating</th>
-                  <th className=" p-2 text-left">Name</th>
-                  <th className=" p-2 text-left"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {reviews.map((review) => (
-                  <tr key={review._id} className="border-b">
-                    <td className="p-2 text-nowrap">{review.title}</td>
-                    <td className="py-2 pl-5 pr-2">{review.rating}</td>
-                    <td className="p-2 capitalize text-nowrap">{review.name}</td>
-                    <td className="p-2">
-                      <div className="flex justify-end items-center gap-3">
-                        <FontAwesomeIcon
-                          icon={faEdit}
-                          className="font1 cursor-pointer"
-                          onClick={() => handleEdit(review._id)}
-                        />
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          className="font1 cursor-pointer"
-                          onClick={() => handleDelete(review._id)}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div> */}
       </Layout>
     </AppProvider>
   );
 }
+
+

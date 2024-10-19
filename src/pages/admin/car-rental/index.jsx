@@ -248,22 +248,12 @@ export default function Category() {
         <>
             <AppProvider>
                 <Layout>
-                    <div>
-                        <CarGst/>
-                    </div>
-                    <div>
-                        <CarTime/>
-                    </div>
-                    <div>
-                        <CarTermsAndCondition />
-                    </div>
-
                     {/* <SmartTabel/> */}
                     {/* <DynamicTable/> */}
                     <div>
                         <div className="flex items-center gap-5 text-primary py-5">
                             <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                            <p className="md:text-[28px] text-xl text-black">Package Master</p>
+                            <p className="md:text-[28px] text-xl text-black">Car Package Master</p>
                             <FontAwesomeIcon
                                 icon={faArrowRightLong}
                                 className=" text-teal-700 text-xl"
@@ -279,7 +269,7 @@ export default function Category() {
                                             className=' border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none'
                                             type="text" name="badge"
 
-                                            placeholder="Enter Your Itinerary FAQ Details" />
+                                            placeholder="Enter Your Badges" />
                                     </div>
                                     <button type="submit">
                                         <FontAwesomeIcon
@@ -287,14 +277,9 @@ export default function Category() {
                                             className="text-xl hover:text-primary cursor-pointer mb-1"
                                         />
                                     </button>
-
                                 </form>
                                 {/* data is here show */}
-
-
                                 {/* trial code */}
-
-
                                 <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
                                     <div>
                                         {badgesListData?.map((item, index) => (
@@ -341,15 +326,11 @@ export default function Category() {
                                                             />
                                                         }
                                                     </div>
-
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
-
                                 </div>
-
-
                             </div>
                             {/* category section */}
                             <div className=' p-4 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600'>
@@ -360,7 +341,7 @@ export default function Category() {
                                             onChange={isHandleCategory}
                                             className=' border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none'
                                             type="text" name="category"
-                                            placeholder="Enter Your Itinerary FAQ Details" />
+                                            placeholder="Enter Your Category" />
                                     </div>
                                     <button type="submit">
                                         <FontAwesomeIcon
@@ -425,8 +406,17 @@ export default function Category() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-5">
+                        <div className="my-5">
                             <CarItineraryTour />
+                        </div>
+                        <div>
+                            <CarTermsAndCondition />
+                        </div>
+                        <div className="mt-5 mb-10">
+                            <CarTime />
+                        </div>
+                        <div>
+                            <CarGst />
                         </div>
                     </div>
                 </Layout>

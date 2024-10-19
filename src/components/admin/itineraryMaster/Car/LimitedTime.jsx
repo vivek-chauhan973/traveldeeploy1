@@ -147,7 +147,7 @@ const LimitedTime = () => {
                     groupName: e.target.value,
                   })
                 }
-                placeholder="Enter Group Name"
+                placeholder="Enter Limited Time"
               />
               <button type="button">
                 <FontAwesomeIcon
@@ -162,12 +162,12 @@ const LimitedTime = () => {
             {groupsData.map((group, index) => (
               <div
                 key={group._id}
-                className="flex justify-between items-center md:gap-10 gap-5 even:bg-slate-100 hover:bg-slate-300 cursor-pointer"
+                className="flex justify-between items-center px-2 even:bg-slate-100 hover:bg-slate-300 cursor-pointer"
               >
                 <p className="capitalize leading-8">
                   {index + 1}. {group.groupName}
                 </p>
-                <div className="flex gap-3 md:pr-3">
+                <div className="flex gap-3">
                   {isEditing && editGroupId === group._id ? (               
                     <FontAwesomeIcon
                       icon={faTrash}

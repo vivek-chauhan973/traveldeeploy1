@@ -55,7 +55,6 @@ const TourExclusion = () => {
                     fetchGroups();
                     setIsOpen(false);
 
-
                 } else {
                     console.error('Failed to delete group');
                 }
@@ -117,7 +116,6 @@ const TourExclusion = () => {
     return (
         <div >
             <div className="md:flex gap-5">
-
                 <div className=" grow border rounded p-4 h-72">
                     <div className='flex flex-col'>
                         <label className="pb-2 font-semibold">Tour Exclusion</label>
@@ -166,7 +164,6 @@ const TourExclusion = () => {
                     </div>
                 </div>
                 <div className="grow mt-2 md:mt-0">
-
                     {isEditing && (
                         <div>
                             {/* Display the currently selected group name */}
@@ -188,8 +185,6 @@ const TourExclusion = () => {
                 <button onClick={handleSave} className=" w-full bg-black text-white p-2 mt-2">Save Information</button>
             </div>
             {isOpen && (
-
-
                 <div className="fixed inset-0 flex items-center justify-center z-50">
                     <div className="absolute inset-0 bg-black opacity-50"></div>
                     <div className="bg-white p-8 rounded-[20px]  shadow-lg z-50">
@@ -202,12 +197,9 @@ const TourExclusion = () => {
                             <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-normal py-3 px-8 rounded-[25px] ">
                                 Delete
                             </button>
-
                         </div>
                     </div>
                 </div>
-
-
             )}
             <ToastContainer />
         </div>

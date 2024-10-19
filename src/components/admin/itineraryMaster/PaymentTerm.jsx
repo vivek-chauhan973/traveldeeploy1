@@ -112,7 +112,6 @@ const PaymentTermComponent = () => {
     return (
         <div >
             <div className="md:flex gap-5">
-
                 <div className=" grow border rounded p-4 h-72">
                     <div className='flex flex-col'>
                         <label className="pb-2 font-semibold">Tour Payment Term</label>
@@ -161,7 +160,6 @@ const PaymentTermComponent = () => {
                     </div>
                 </div>
                 <div className="grow mt-2 md:mt-0">
-
                     {isEditing && (
                         <div>
                             {/* Display the currently selected group name */}
@@ -198,7 +196,6 @@ const PaymentTermComponent = () => {
                         </div>
                     </div>
                 </div>
-
             )}
             <ToastContainer />
         </div>

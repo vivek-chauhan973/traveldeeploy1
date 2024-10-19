@@ -5,7 +5,6 @@ import Cancellation from './Cancellation'
 import PaymentTerm from './PaymentTerm'
 import NeedToKnow from './NeedToKnow'
 
-
 const ItineraryTour = () => {
     // tab editor content change
     const [activeTab, setActiveTab] = useState('Tab2')
