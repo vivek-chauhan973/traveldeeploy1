@@ -25,7 +25,7 @@ const Holiday = () => {
           {data?.[0]?.options?.map((item, i) =>
             <a
               key={i} className='text-para font-semibold mb-2'
-              href={'/holidays/' + item.category + '-tour-packages'}
+              href={'/speciality-tours/' + item.category + '-tour-packages'}
             >
                 {item.category}
             </a>

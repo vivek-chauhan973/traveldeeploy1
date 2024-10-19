@@ -21,19 +21,19 @@ const fetchPromoManagementData = async (stateId) => {
 
 const fetchLocation = async (state) => {
   if (!state) return {};
-  const response = await fetch(`/api/public/${state}`, { method: 'GET' });
+  const response = await fetch(`/api/public/india?locationUrl=${state}`, { method: 'GET' });
   const data = await response.json();
   return data;
 };
 const fetchPackages = async (locationId) => {
-  const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
+  const response = await fetch(`/api/public/country-tourPackages?locationId=${locationId}`);
   const data = await response.json();
   return data?.packages;
 };
 
 export default function India() {
   const router = useRouter();
-  const state = router.query.state?.replace("-tour-packages", "");
+  const state = router?.query?.india;
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
@@ -77,7 +77,7 @@ useEffect(()=>{
     const fetchData = async () => {
       try {
         if (state) {
-          const selectedLocationData = await fetchLocation(state);
+          const selectedLocationData = await fetchLocation("india");
           if (!selectedLocationData) {
             router.replace('/404'); // Redirect to 404 if location data is not found
             return;
@@ -109,7 +109,8 @@ useEffect(()=>{
   if (loading) {
     return <PromoBanner />;
   }
-console.log("packages is here --> ",packages)
+// console.log("packages is here --> ",packages)
+console.log("router---> ",router)
 
   return (
     <AppProvider>

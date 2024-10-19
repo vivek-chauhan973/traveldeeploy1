@@ -59,6 +59,7 @@ import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from "@/components/Faq/Faq1";
+import PackageBreadcrums from "@/components/PackageBreadcrums";
 const getAllPackags = async () => {
   return await (await fetch("/api/package/get-packages")).json();
 };
@@ -197,7 +198,7 @@ export default function Package1() {
 
       {/* <Caraousel /> */}
       <div>
-        <Breadcrumbs />
+        <PackageBreadcrums addPackage={addPackage} />
         <ItineraryHeroSection
           addPackage={addPackage}
           closeBtn={closeBtn}
