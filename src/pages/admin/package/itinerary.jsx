@@ -13,7 +13,7 @@ export default function Itinerary() {
     return (
         <AppProvider>
             <Layout>
-                <h3 className="text-lg">Add Itinerary</h3>
+                <h3 className="text-lg font-medium">Add Itinerary</h3>
                 <div className="border-b border-slate-300 mb-5">
                     <div className="flex gap-2 text-[14px] pt-5 pb-2 flex-wrap">
                         <button onClick={() => handleTabClick('Tab1')} className={`${activeTab === "Tab1" ? "border-b-2 scale-105 border-black text-black" : "border-black text-slate-400"}  px-3 py-1`}>Basic info</button>

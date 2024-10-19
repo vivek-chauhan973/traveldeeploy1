@@ -243,13 +243,13 @@ export default function Category() {
                     <div>
                         <div className="flex items-center gap-5 text-primary py-5">
                             <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                            <p className="md:text-[28px] text-xl text-black">Indaia Package Master</p>
+                            <p className="md:text-[28px] text-xl text-black">Package Master</p>
                             <FontAwesomeIcon
                                 icon={faArrowRightLong}
                                 className=" text-teal-700 text-xl"
                             />
                         </div>
-                        <div className=" grid  grid-cols-1 md:grid-cols-2 gap-5 rounded">
+                        <div className=" grid  grid-cols-1 xl:grid-cols-2 gap-5 rounded">
                             <div className='shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600'>
                                 <form onSubmit={isSubmitBadge} className='flex items-end justify-between gap-3'>
                                     <div className='grow flex flex-col  '>
@@ -285,19 +285,26 @@ export default function Category() {
                                                             />
                                                         ) : item.badge}
                                                     </p>
-                                                    <div className='flex gap-2 basis-1/3'>
+                                                    <div className='flex gap-2'>
+                                                        {!editBadgeValue &&
+                                                            <FontAwesomeIcon
+                                                                icon={faTrash}
+                                                                onClick={() => handleDeleteBadge(item._id)}
+                                                                className="mt-2 hover:text-primary cursor-pointer"
+                                                            />
+                                                        }
                                                         {editBadgeId === item._id ? (
                                                             <span className="flex gap-2">
                                                                 <FontAwesomeIcon
                                                                     icon={faXmark}
                                                                     onClick={() => toggleEditBadge(item._id)}
-                                                                    className="mt-1 font1 hover:text-primary cursor-pointer"
+                                                                    className="mt-2 font1 hover:text-primary cursor-pointer"
                                                                 />
                                                                 {editBadgeValue &&
                                                                     <FontAwesomeIcon
                                                                         icon={faSave}
                                                                         onClick={() => saveEditBadge(item._id)}
-                                                                        className="mt-1 hover:text-primary cursor-pointer"
+                                                                        className="mt-2 hover:text-primary cursor-pointer"
                                                                     />
                                                                 }
                                                             </span>
@@ -305,16 +312,9 @@ export default function Category() {
                                                             <FontAwesomeIcon
                                                                 icon={faEdit}
                                                                 onClick={() => toggleEditBadge(item._id)}
-                                                                className="mt-1 hover:text-primary cursor-pointer"
+                                                                className="mt-2 hover:text-primary cursor-pointer"
                                                             />
                                                         )}
-                                                        {!editBadgeValue &&
-                                                            <FontAwesomeIcon
-                                                                icon={faTrash}
-                                                                onClick={() => handleDeleteBadge(item._id)}
-                                                                className="mt-1 hover:text-primary cursor-pointer"
-                                                            />
-                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -357,37 +357,36 @@ export default function Category() {
                                                             />
                                                         ) : item.category}
                                                     </p>
-                                                    <div className='flex gap-2 basis-1/3'>
+                                                    <div className='flex gap-2'>
+                                                        {!editCategoryValue &&
+                                                            <FontAwesomeIcon
+                                                                icon={faTrash}
+                                                                onClick={() => handleDeleteCategory(item._id)}
+                                                                className="mt-2 hover:text-primary cursor-pointer"
+                                                            />
+                                                        }
                                                         {editCategoryId === item._id ? (
                                                             <span className="flex gap-2 px-2">
                                                                 <FontAwesomeIcon
                                                                     icon={faXmark}
                                                                     onClick={() => toggleEditCategory(item._id)}
-                                                                    className="mt-1 font1 hover:text-primary cursor-pointer"
+                                                                    className="mt-2 font1 hover:text-primary cursor-pointer"
                                                                 />
                                                                 {editCategoryValue &&
                                                                     <FontAwesomeIcon
                                                                         icon={faSave}
                                                                         onClick={() => saveEditCategory(item._id)}
-                                                                        className="mt-1 hover:text-primary cursor-pointer"
+                                                                        className="mt-2 hover:text-primary cursor-pointer"
                                                                     />
                                                                 }
-
                                                             </span>
                                                         ) : (
                                                             <FontAwesomeIcon
                                                                 icon={faEdit}
                                                                 onClick={() => toggleEditCategory(item._id)}
-                                                                className="mt-1 hover:text-primary cursor-pointer"
+                                                                className="mt-2 hover:text-primary cursor-pointer"
                                                             />
                                                         )}
-                                                        {!editCategoryValue &&
-                                                            <FontAwesomeIcon
-                                                                icon={faTrash}
-                                                                onClick={() => handleDeleteCategory(item._id)}
-                                                                className="mt-1 hover:text-primary cursor-pointer"
-                                                            />
-                                                        }
                                                     </div>
                                                 </div>
                                             </div>

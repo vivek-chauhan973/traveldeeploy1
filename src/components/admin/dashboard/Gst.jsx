@@ -74,7 +74,7 @@ export default function Gst() {
           className=" text-teal-700 text-xl"
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 rounded">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 rounded">
         <div className="shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600">
           <form
             onSubmit={handleSubmit}
@@ -99,7 +99,6 @@ export default function Gst() {
               />
             </button>
           </form>
-
           <div className="text-[15px] border p-2 h-60 overflow-y-auto rounded mt-3">
             {gstList.map((item) => (
               <div key={item._id} className="even:bg-slate-50">
@@ -116,34 +115,34 @@ export default function Gst() {
                       item.gstRate
                     )}
                   </p>
-                  <div className="flex gap-2 basis-1/3">
+                  <div className="flex gap-2">
                     {editGstId === item._id ? (
                       <>
                         <FontAwesomeIcon
                           icon={faFloppyDisk}
                           onClick={() => handleEdit(item._id)}
-                          className="font1 mt-1 hover:text-primary cursor-pointer"
+                          className="mt-2 hover:text-primary cursor-pointer"
                         />
                         <FontAwesomeIcon
                           icon={faXmark}
                           onClick={() => setEditGstId(null)}
-                          className="font1 mt-1 hover:text-primary cursor-pointer"
+                          className="mt-2 hover:text-primary cursor-pointer"
                         />
                       </>
                     ) : (
                       <>
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          onClick={() => handleDelete(item._id)}
+                          className="mt-2 hover:text-primary cursor-pointer"
+                        />
                         <FontAwesomeIcon
                           icon={faEdit}
                           onClick={() => {
                             setEditGstId(item._id);
                             setEditGstValue(item.gstRate);
                           }}
-                          className="font1 mt-1 hover:text-primary cursor-pointer"
-                        />
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          onClick={() => handleDelete(item._id)}
-                          className="mt-1 font1 hover:text-primary cursor-pointer"
+                          className="mt-2 hover:text-primary cursor-pointer"
                         />
                       </>
                     )}
