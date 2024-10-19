@@ -101,7 +101,6 @@ export default function IconManagement() {
   return (
     <AppProvider>
       <Layout>
-        {/* <p className="md:text-[28px] text-xl font-semibold">Icon Management</p> */}
         <div className="flex items-center gap-5 text-primary xl:mb-10 mb-7 xl:mt-5">
           <FontAwesomeIcon icon={faCube} className="text-2xl" />
           <p className="md:text-[28px] text-xl text-black">Icon Management</p>

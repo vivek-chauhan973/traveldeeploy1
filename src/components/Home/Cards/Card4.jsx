@@ -67,9 +67,9 @@ const Card4 = ({ packages }) => {
                                             />}
                                         </div>
                                         <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 pt-4 pb-1 px-2">
-                                            <div className='flex gap-4'>
-                                                <p className="font-semibold text-md text-white ">{items?.startcity}</p>
-                                                <p className="font-semibold text-md text-white">{items?.days} Days</p>
+                                            <div className='flex gap-3'>
+                                                <p className="font-semibold md:text-base text-sm text-white ">Started From {items?.startcity}</p>
+                                                <p className="font-semibold md:text-base text-sm text-white">{items?.days} Days</p>
                                             </div>
                                         </div>
                                     </div>
@@ -80,14 +80,10 @@ const Card4 = ({ packages }) => {
                                         <p dangerouslySetInnerHTML={{ __html: items?.about }}
                                             className="text-para line-clamp-3"></p>
                                         <div>
-                                            {/* <p className=" line-through text-sm">{items.price}</p> */}
                                             <div className="flex gap-5 items-center justify-between pr-4">
                                                 <p className="text-lg font-semibold">
                                                     {items?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
-                                                {/* <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
-                                                    -{items.disc}
-                                                </button> */}
                                                 <Link href={"/package/"+items?.pageUrl}>
                                                     <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
                                                         Know More

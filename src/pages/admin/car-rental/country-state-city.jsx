@@ -314,7 +314,6 @@ export default function FetchCars() {
                       onChange={() => handleCountrySelect(countryData._id)}
                       value={countryData._id} />
                     <p className='leading-8 basis-1/2'>
-
                       {editCountryId === countryData._id ? (
                         <input
                           className='border ml-2 rounded-md h-8 px-2 focus:border-primary outline-none'
@@ -327,12 +326,10 @@ export default function FetchCars() {
                       {editCountryId === countryData._id ? (
                         <span className="flex gap-2 px-2">
                           {editCountryValue &&
-
                             <div className='mt-1 hover:text-red-500 cursor-pointer'
                               onClick={() => saveEditCountry(countryData._id)} v>
                               <SaveIcon
                                 size={24}
-
                               />
                             </div>
                           }
@@ -341,15 +338,11 @@ export default function FetchCars() {
                             <CancelIcon
                               size={24} />
                           </div>
-
                         </span>
                       ) : (
                         <div className='mt-1 hover:text-red-500 cursor-pointer' onClick={() => toggleEditCountry(countryData._id)}>
-
                           <EditIcon
                             size={20}
-
-
                           />
                         </div>
                       )}
@@ -357,7 +350,6 @@ export default function FetchCars() {
                         onClick={() => handleDeleteCountry(countryData._id)}>
                         <DeleteIcon size={24} />
                       </div>
-
                     </div>
                   </li>
                 ))}
@@ -398,43 +390,34 @@ export default function FetchCars() {
                     {editStateId === state._id ? (
                       <span className="flex gap-2 px-2">
                         {editStateValue &&
-
                           <div className='mt-1 hover:text-red-500 cursor-pointer'
                             onClick={() => saveEditState(state._id)}>
                             <SaveIcon
                               size={24}
-
                             />
                           </div>
-
                         }
                         <div className='mt-1 hover:text-red-500 cursor-pointer'
                           onClick={() => toggleEditState(state._id)}>
                           <CancelIcon
                             size={24}
-
                           />
                         </div>
-
                       </span>
                     ) : (
                       <div className='mt-1 hover:text-red-500 cursor-pointer'
                         onClick={() => toggleEditState(state._id)}>
                         <EditIcon
                           size={20}
-
                         />
                       </div>
-
                     )}
                     <div className='mt-1 hover:text-red-500 cursor-pointer'
                       onClick={() => handleDeleteState(state._id)}>
                       <DeleteIcon
                         size={24}
-
                       />
                     </div>
-
                   </div>
                 </div>))}
               </div>
@@ -466,7 +449,6 @@ export default function FetchCars() {
                       />
                     ) : city.name}
                   </p>
-
                   <div className='flex gap-2'>
                     {editCityId === city._id ? (
                       <span className="flex gap-2 px-2">
@@ -499,7 +481,6 @@ export default function FetchCars() {
             </div>
           </div>
         </div>
-
       </Layout>
     </AppProvider>
   )

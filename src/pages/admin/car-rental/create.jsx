@@ -6,6 +6,8 @@ import { BiSolidCarMechanic } from "react-icons/bi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import Image from 'next/image';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong, faCube, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function AddCar() {
   const [cars, setCars] = useState([]);
@@ -13,7 +15,7 @@ export default function AddCar() {
     misc: '',
     capacity: '',
     ac: '',
-    bags:'',
+    bags: '',
     seatingCapacity: '',
     vehicleType: '',
     dailyLimit: '',
@@ -87,7 +89,7 @@ export default function AddCar() {
 
   const sendFormData = async (formData) => {
     try {
-      
+
       const method = editMode ? 'PUT' : 'POST';
       const url = editMode ? `/api/cars/carapi?id=${editId}` : '/api/cars/carapi';
 
@@ -103,7 +105,7 @@ export default function AddCar() {
         setForm({
           misc: '',
           capacity: '',
-          bags:'',
+          bags: '',
           ac: '',
           seatingCapacity: '',
           vehicleType: '',
@@ -130,7 +132,7 @@ export default function AddCar() {
       misc: car.misc,
       capacity: car.capacity,
       ac: car.ac,
-      bags:car.bags,
+      bags: car.bags,
       seatingCapacity: car.seatingCapacity,
       vehicleType: car.vehicleType,
       dailyLimit: car.dailyLimit,
@@ -165,21 +167,22 @@ export default function AddCar() {
   return (
     <AppProvider>
       <Layout>
-        <div>
-          <div className="flex items-center gap-5 text-primary pb-3">
-            <BiSolidCarMechanic size={28} className="font-semibold" />
-            <p className="text-[24px] text-black">Add Car</p>
-            <HiOutlineArrowNarrowRight size={24} className="text-teal-700" />
-          </div>
+        <div className="flex items-center gap-5 text-primary xl:mb-10 mb-7 xl:mt-5">
+          <FontAwesomeIcon icon={faCube} className="text-2xl" />
+          <p className="md:text-[28px] text-xl text-black">Add Vehicle</p>
+          <FontAwesomeIcon
+            icon={faArrowRightLong}
+            className=" text-teal-700 text-xl"
+          />
         </div>
-        <div className="bg-white rounded-md shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-2">
+        <div className="bg-white rounded-md shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-5">
           <form onSubmit={handleSubmit}>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 items-center grid-cols-reverse'>
-              <div className="w-full bg-white p-8 border rounded">
+            <div className='grid grid-cols-1 xl:grid-cols-2 gap-5 items-center grid-cols-reverse'>
+              <div className="w-full p-5 h-full border bg-white rounded mt-1">
                 <div className="bg-slate-200 h-56 w-full rounded">
-                    {form.imageDetails[0]?.url && (
-                      <img src={form.imageDetails[0]?.url} alt={form.imageDetails[0]?.alt || "Car Image"} className="h-full w-full object-cover" />
-                    )}
+                  {form.imageDetails[0]?.url && (
+                    <img src={form.imageDetails[0]?.url} alt={form.imageDetails[0]?.alt || "Car Image"} className="h-full w-full object-cover" />
+                  )}
                 </div>
                 <div className="mt-4">
                   <input
@@ -189,15 +192,15 @@ export default function AddCar() {
                     className='file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100'
                   />
                 </div>
-                <div className="w-40">
-                  <div>
+                <div className="md:w-40 w-full">
+                  <div className='my-2'>
                     <label className="text-para font-semibold">Title</label>
                     <input
                       type='text'
                       name="title"
                       value={form.imageDetails[0]?.title || ''}
                       onChange={(e) => setForm((prev) => ({ ...prev, imageDetails: [{ ...prev.imageDetails[0], title: e.target.value }] }))}
-                      className="border rounded-md h-6 px-2 text-para grow focus:border-black font-sans outline-none"
+                      className="border px-2 py-0.5 w-full md:w-auto rounded focus:border-primary outline-none "
                       required
                     />
                   </div>
@@ -208,15 +211,15 @@ export default function AddCar() {
                       name="alt"
                       value={form.imageDetails[0]?.alt || ''}
                       onChange={(e) => setForm((prev) => ({ ...prev, imageDetails: [{ ...prev.imageDetails[0], alt: e.target.value }] }))}
-                      className="border rounded-md h-6 px-2 text-para grow focus:border-black font-sans outline-none"
+                      className="border px-2 py-0.5 w-full md:w-auto rounded focus:border-primary outline-none"
                       required
                     />
                   </div>
                 </div>
               </div>
-              <div className="border p-2 rounded">
+              <div className="border py-6 px-3 rounded">
                 {[
-                  { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Innova", "Crysta","Tempo 12S","Tempo 14S"] },
+                  { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Innova", "Crysta", "Tempo 12S", "Tempo 14S"] },
                   { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
                   { label: "Large Bags", name: "bags", type: "number" },
                   { label: "Daily Limit KM's", name: "dailyLimit", type: "number" },
@@ -225,16 +228,16 @@ export default function AddCar() {
                   { label: "Out Station Base Price for KM", name: "outStationBasePrice", type: "number" },
                   { label: "Per KM Rate", name: "perKmRate", type: "number" },
                   { label: "Markup", name: "markup", type: "number" },
-                  { label: "AC Charge per Day", name: "ac",type:"number"},
+                  { label: "AC Charge per Day", name: "ac", type: "number" },
                   { label: "Misc", name: "misc", type: "number" },
                 ].map((field) => (
-                  <div key={field.name} className="mt-2 flex items-center pb-2">
+                  <div key={field.name} className="mt-2 flex md:flex-row flex-col md:items-center pb-2">
                     <div className="w-40">
-                      <label className="text-para font-semibold" htmlFor={field.name}>{field.label}:</label>
+                      <label className="text-para font-semibold" htmlFor={field.name}>{field.label} :</label>
                     </div>
                     {field.type === "select" ? (
                       <select
-                        className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
+                        className="border md:w-auto w-full rounded-md h-8 px-2 font-sans text-para grow focus:border-primary outline-none"
                         name={field.name}
                         value={form[field.name]}
                         onChange={handleInputChange}
@@ -247,7 +250,7 @@ export default function AddCar() {
                       </select>
                     ) : (
                       <input
-                        className="border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none"
+                        className='border rounded-md h-8 px-2 font-sans text-para grow focus:border-primary outline-none'
                         type={field.type}
                         name={field.name}
                         value={form[field.name]}
@@ -259,10 +262,10 @@ export default function AddCar() {
                 ))}
               </div>
             </div>
-            <div className="flex justify-end mt-4">
+            <div className="flex md:justify-end mt-4">
               <button
                 type="submit"
-                className="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-600 transition duration-200"
+                className="bg-navyblack md:w-auto w-full text-white rounded py-2 px-4"
               >
                 {editMode ? 'Update Car' : 'Add Car'}
               </button>
@@ -317,6 +320,44 @@ export default function AddCar() {
             </table>
           </div>
         </div>
+        {/* <div className=" px-4 pb-4">
+          <h2 className="text-base font-semibold">Reviews</h2>
+          <div className="overflow-scroll bg-white rounded px-4 py-2">
+            <table className="w-full border rounded">
+              <thead>
+                <tr className='border-b'>
+                  <th className=" p-2 text-left">Title</th>
+                  <th className=" p-2 text-left">Rating</th>
+                  <th className=" p-2 text-left">Name</th>
+                  <th className=" p-2 text-left"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {reviews.map((review) => (
+                  <tr key={review._id} className="border-b">
+                    <td className="p-2 text-nowrap">{review.title}</td>
+                    <td className="py-2 pl-5 pr-2">{review.rating}</td>
+                    <td className="p-2 capitalize text-nowrap">{review.name}</td>
+                    <td className="p-2">
+                      <div className="flex justify-end items-center gap-3">
+                        <FontAwesomeIcon
+                          icon={faEdit}
+                          className="font1 cursor-pointer"
+                          onClick={() => handleEdit(review._id)}
+                        />
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          className="font1 cursor-pointer"
+                          onClick={() => handleDelete(review._id)}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div> */}
       </Layout>
     </AppProvider>
   );

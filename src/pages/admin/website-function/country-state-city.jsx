@@ -456,7 +456,6 @@ export default function CountryStateCity() {
                       />
                     ) : city.name}
                   </p>
-
                   <div className='flex gap-2'>
                     {editCityId === city._id ? (
                       <span className="flex gap-2 px-2">
@@ -493,7 +492,6 @@ export default function CountryStateCity() {
             </div>
           </div>
         </div>
-
       </Layout>
     </AppProvider>
   )
