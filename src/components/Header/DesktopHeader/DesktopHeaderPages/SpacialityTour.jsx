@@ -29,7 +29,7 @@ const SpacialityTour = () => {
   const papularPart1 = data?.[0]?.options?.slice(0, partSize);
   const papularPart2 = data?.[0]?.options?.slice(partSize, partSize * 2);
   const papularPart3 = data?.[0]?.options?.slice(partSize * 2);
-  console.log("categories-----> ", categories);
+  // console.log("categories-----> ", categories);
   return (
     <div className="flex flex-col min-w-[700px] h-full rounded-b-lg bg-gray-100 mt-3" >
       <div className='ml-10 mt-7 h-36 object-contain'>

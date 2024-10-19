@@ -33,7 +33,7 @@ const State = () => {
       
     }
     useEffect(()=>{},[statePackage])
-    console.log("data",statePackage)
+    // console.log("data",statePackage)
     return (
         <div>
             <div className="my-1 mt-6 md:mt-10 ">

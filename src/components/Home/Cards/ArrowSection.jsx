@@ -18,7 +18,7 @@ const ArrowSection = () => {
 
   useEffect(() => {
     fetchPromoListCategory().then((res) => {
-      console.log("res category-----> ", res?.responseData);
+      // console.log("res category-----> ", res?.responseData);
       setPromoCategory(res?.responseData);
     });
   }, []);

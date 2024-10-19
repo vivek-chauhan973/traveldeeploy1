@@ -18,12 +18,12 @@ const CarArrowSection = () => {
 
   useEffect(() => {
     fetchPromoListCategory().then((res) => {
-      console.log("res category-----> ", res?.responseData);
+      // console.log("res category-----> ", res?.responseData);
       setPromoCarCategory(res?.responseData);
     });
   }, []);
 
-  console.log("promoCarCategory =======> ", promoCarCategory);
+  // console.log("promoCarCategory =======> ", promoCarCategory);
   
   const carouselRef = useRef(null);
 

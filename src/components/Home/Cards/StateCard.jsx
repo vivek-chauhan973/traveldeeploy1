@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const StateCard = ({ states }) => {
-    console.log("Four Card states", states);
+    // console.log("Four Card states", states);
 
     const carouselRef = useRef(null);
 

@@ -81,7 +81,6 @@
 
 import Image from "next/image";
 import '../app/globals.css'
-import Card2 from "@/components/Home/Cards/Card2";
 import HeroSection from "@/components/Home/HeroSection";
 import HorizontalCard from "@/components/Home/Cards/HorizontalCard";
 import Card4 from "@/components/Home/Cards/Card4";
@@ -104,8 +103,6 @@ const fetchAllMultiSction = async () => {
   const res = await fetch("/api/homefooter");
   return await res.json();
 }
-
-
 const fetchState = async () => {
   const response = await fetch("/api/public/states");
   return await response.json();
@@ -125,10 +122,9 @@ export default function Home() {
   };
   useEffect(() => {
     fetchAllMultiSction().then(res => {
-      console.log("res--of all packages -----> ", res?.data);
       SetHomePackages(res?.data)
     })
-    fetchAllSingleSction().then(res => { console.log("res--of single all packages -----> ", res); setSingleHomePackages(res?.data) })
+    fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
   }, []);
 
   useEffect(() => {

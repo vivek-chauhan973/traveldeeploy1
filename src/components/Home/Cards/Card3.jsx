@@ -53,7 +53,7 @@ const Card3 = ({ statePackage }) => {
           {/* start is here code  */}
           {statePackage?.length > 0 &&
             statePackage?.map((data, i) => {
-              console.log("Rakesh data of state", data);
+              // console.log("Rakesh data of state", data);
 
               return (
                 <div
