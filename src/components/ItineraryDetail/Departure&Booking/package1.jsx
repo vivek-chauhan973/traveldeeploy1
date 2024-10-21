@@ -125,17 +125,12 @@ export default function Package1() {
       setShowPopup1(true);
     }
   };
-
   useEffect(() => {
     const dataPackage = allPackages?.filter(
-      (item) => item?.customId === addPackage?.highlightedPackage
+      (item) => item?.customId===addPackage?.highlightedPackage
     );
-
     setHighLightedPackage1(dataPackage);
   }, [allPackages, addPackage]);
-
-  // console.log("highlitedPackages1------> ", highlightedPackage1?.[0]);
-
   const handleSendItinerary = () => {
     const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
     window.location.href = whatsAppUrl;
@@ -501,7 +496,6 @@ export default function Package1() {
                     </div>
                   )}
                 </div>
-
                 <div className="border-l h-full items-center flex flex-col p-2 text-center">
                   <FontAwesomeIcon
                     icon={faEnvelope}
