@@ -52,7 +52,7 @@ const Card3 = ({ statePackage }) => {
         <div className="carousel gap-5" ref={carouselRef}>
           {/* start is here code  */}
           {statePackage?.length > 0 &&
-            statePackage?.map((data, i) => {
+            statePackage?.slice(0,6).map((data, i) => {
               // console.log("Rakesh data of state", data);
 
               return (
