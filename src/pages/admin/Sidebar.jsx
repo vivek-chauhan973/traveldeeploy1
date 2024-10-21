@@ -132,6 +132,7 @@ const Sidebar = () => {
               </div>
               <div className={`pl-4 my-2 py-2 text-para bg-slate-50 rounded-md text-black ${isHomePage ? "block" : "hidden"}`}>
                 <p className=' cursor-pointer hover:underline hover:font-semibold hover:text-primary'>Banner</p>
+                <p className=' cursor-pointer hover:underline hover:font-semibold hover:text-primary'>Header/Destinations</p>
                 <p className=' cursor-pointer hover:underline hover:font-semibold hover:text-primary'>Other Management</p>
               </div>
             </div>

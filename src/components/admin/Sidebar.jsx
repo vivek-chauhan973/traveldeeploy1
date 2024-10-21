@@ -49,6 +49,7 @@ const handleLogout=async ()=>{
      
       subMenu: [
         { label: "Banner", href: "/admin/home/banner" },
+        { label: "Header/Destinations", href: "/admin/home/destinations" },
         { label: "Other Management", href: "/admin/home/manage" }
       ]
     },
