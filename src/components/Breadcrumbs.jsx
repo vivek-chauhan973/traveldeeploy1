@@ -23,9 +23,9 @@ const Breadcrumbs = () => {
                                 {isLast ? (
                                     <span className="font-semibold text-gray-900 ">{name?.replace("-tour-packages", " ")?.replace("-"," ")} Tour Packages</span>
                                 ) : (
-                                    <Link href={routeTo} className="hover:underline">
+                                    <a href={routeTo} className="hover:underline">
                                         {name.replace("-", " ")}
-                                    </Link>
+                                    </a>
                                 )}
                             </li>
                         );

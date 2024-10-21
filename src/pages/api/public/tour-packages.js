@@ -16,7 +16,7 @@ import { NextApiRequest, NextApiResponse } from "next";
             packages=await Package.find({ location:locationId })
             return res.status(200).json({ packages});
          }
-            console.log("packages is here -------> ",packages)
+            // console.log("packages is here -------> ",packages)
         return res.status(200).json({ packages, cities });
     } catch (error) {
         console.error('Error handling API request:', error);

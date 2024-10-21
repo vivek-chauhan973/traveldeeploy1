@@ -554,7 +554,7 @@ export default function Package1() {
       ) : null}
 
       {/* bottom link */}
-      <BottomLink locationId={addPackage?.state} addPackage={addPackage} />
+      {/* <BottomLink locationId={addPackage?.state} addPackage={addPackage} /> */}
       <div className=" flex xl:hidden z-30  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">

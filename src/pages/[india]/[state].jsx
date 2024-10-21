@@ -109,7 +109,7 @@ useEffect(()=>{
   if (loading) {
     return <PromoBanner />;
   }
-console.log("packages is here --> ",packages)
+console.log("packages is here --> ",priorityPackage)
 
   return (
     <AppProvider>
@@ -141,9 +141,9 @@ console.log("packages is here --> ",packages)
             <Faq1 data={promoData.faq} />
           </div>
         </div>
-        <div className="border-t border">
+        {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
-        </div>
+        </div> */}
       </div>
     </AppProvider>
   );

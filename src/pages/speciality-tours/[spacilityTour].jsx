@@ -54,6 +54,25 @@ const SpacilityTour=()=> {
   useEffect(() => {
     setTourDuration([minDay, maxDay]);
   }, [maxDay, minDay]);
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const response = await fetch(`/api/public/priority/category?id=${selectedLocation?._id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch packages');
+        }
+        const data = await response.json();
+        setPriorityPackage(data?.packages);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    };
+    if(selectedLocation){
+      fetchPackages();
+    }
+      
+    
+  }, [selectedLocation]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,9 +142,9 @@ const SpacilityTour=()=> {
             <Faq1 data={promoData.faq} />
           </div>
         </div>
-        <div className="border-t border">
+        {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
-        </div>
+        </div> */}
       </div>
     </AppProvider>
   );

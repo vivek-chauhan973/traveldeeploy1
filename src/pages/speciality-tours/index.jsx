@@ -11,30 +11,19 @@ import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Ske
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
-
-const fetchPromoManagementData = async (stateId) => {
-  if (!stateId) return {};
-  const response = await fetch(`/api/public/package-state/${stateId}`);
+import mongoose from 'mongoose';
+const fetchPromoManagementData = async () => {
+  const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
+  const response = await fetch(`/api/public/package-state/spacialitypromo?id=${objectId}`);
   const data = await response.json();
   return data;
 };
 
-const fetchLocation = async (state) => {
-  if (!state) return {};
-  const response = await fetch(`/api/public/${state}`, { method: 'GET' });
-  const data = await response.json();
-  return data;
-};
-const fetchPackages = async (locationId) => {
-  const response = await fetch(`/api/public/tour-packages?locationId=${locationId}`);
-  const data = await response.json();
-  return data?.packages;
-};
-
-export default function SpecialTour() {
-  const router = useRouter();
-  const state = router.query.state?.replace("-tour-packages", "");
-  const [selectedLocation, setSelectedLocation] = useState(null);
+const fetchAllPackages=async ()=>{
+  const res=await fetch("/api/findAllPackages");
+   return await res.json();
+}
+export default function India() {
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -44,11 +33,20 @@ export default function SpecialTour() {
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
   const [packages,setPackages]=useState([]);
+  const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
+const selectedLocation={};
+selectedLocation._id=objectId;
+  useEffect(() => {
+    setTourDuration([minDay, maxDay]);
+  }, [maxDay, minDay]);
 
+  useEffect(() => {
+      fetchPromoManagementData().then(res => setPromoData(res?.data || {}));
+  }, []);
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await fetch(`/api/public/priority-package?locationId=${selectedLocation?._id}`);
+        const response = await fetch(`/api/public/priority`);
         if (!response.ok) {
           throw new Error('Failed to fetch packages');
         }
@@ -58,58 +56,25 @@ export default function SpecialTour() {
         console.error('Error fetching data:', err);
       }
     };
-
-    if (selectedLocation) {
       fetchPackages();
-    }
-  }, [selectedLocation]);
+    
+  }, []);
 
-useEffect(()=>{
-  fetchPackages(selectedLocation?._id).then(res=>{setPackages(res);console.log("packages---->",res)});
-},[selectedLocation])
-
-
-  useEffect(() => {
-    setTourDuration([minDay, maxDay]);
-  }, [maxDay, minDay]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (state) {
-          const selectedLocationData = await fetchLocation(state);
-          if (!selectedLocationData) {
-            router.replace('/404'); // Redirect to 404 if location data is not found
-            return;
-          }
-          setSelectedLocation(selectedLocationData);
-        } else {
-          setSelectedLocation(null);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, [state, router]);
-
-  useEffect(() => {
-    if (selectedLocation?._id) {
-      fetchPromoManagementData(selectedLocation._id).then(res => setPromoData(res?.data || {}));
-    } else {
-      setPromoData({});
-    }
-  }, [selectedLocation]);
+  useEffect(()=>{
+    fetchAllPackages().then(res=>{console.log("res----> ",res?.packages);setPackages(res?.packages||[])});
+  },[promoData])
 
   const handleApplyFilter = (priceRange) => {
     setSelectedPriceRange(priceRange);
   };
-
+useEffect(()=>{
+  setLoading(false)
+},[promoData])
   if (loading) {
     return <PromoBanner />;
   }
-console.log("packages is here --> ",packages)
+// console.log("packages is here --> ",packages)
+console.log("router---> ",promoData)
 
   return (
     <AppProvider>
@@ -133,7 +98,7 @@ console.log("packages is here --> ",packages)
         <div className="border-t border">
           <div className="w-full md:w-3/4 m-auto px-2 pb-5">
             <div className="text-center mt-5 mb-10">
-              <p className="md:text-[22px] text-[20px] font-semibold mb-2 capitalize">Frequently Asked Questions (FAQs) <span className='lowercase'>for</span> {state?.split("-")?.join(" ")} {" Tour Packages"}</p>
+              <p className="md:text-[22px] text-[20px] font-semibold mb-2 capitalize">Frequently Asked Questions (FAQs) <span className='lowercase'>for</span> Speciality {" Tour Packages"}</p>
               <p className="text-para md:text-base">
                 We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
               </p>
@@ -141,9 +106,9 @@ console.log("packages is here --> ",packages)
             <Faq1 data={promoData.faq} />
           </div>
         </div>
-        <div className="border-t border">
+        {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
-        </div>
+        </div> */}
       </div>
     </AppProvider>
   );

@@ -8,7 +8,7 @@ import Index from "@/components/dy/Index";
 import SeoPopupField from "@/components/dy/SeoPopupField";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
-
+import mongoose from "mongoose";
 export default function PromoManage() {
     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
@@ -93,8 +93,11 @@ export default function PromoManage() {
 
     useEffect(() => {
         const getPromoData = async () => {
+
             try {
-                const res = await fetch(`/api/public/package-state/${selectedLocation}`);
+                const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
+
+                const res = await fetch(`/api/public/package-state/${selectedLocation||objectId}`);
                 const data = await res.json();
                 // console.log("data", data);
                 return data;
@@ -130,7 +133,7 @@ export default function PromoManage() {
             reader.readAsDataURL(data);
         }
     };
-    console.log("promo text is here-----> ",promoTxt)
+    // console.log("promo text is here-----> ",promoTxt)
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
@@ -147,9 +150,17 @@ export default function PromoManage() {
         setFile(image1)
     }, [image1])
     const handleSelectChange = async (e) => {
-        const selectedData = (e.target.value)?.split(",");
+        if(e.target.value!=="spaciality"){
+            const selectedData = (e.target.value)?.split(",");
         setSelectedLocation(selectedData?.[1]);
         setSelectedItem(selectedData?.[0])
+        }
+        else{
+            const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
+            setSelectedLocation(objectId);
+            setSelectedItem(e.target.value)
+        }
+        
     };
 
     const handleFaqChange = (faqs) => {
@@ -159,9 +170,9 @@ export default function PromoManage() {
         setEditorContent(content);
     };
     const handleSubmit = async (e) => {
-        if (selectedLocation.length === 0) {
-            return alert("select state or category or state");
-        }
+        // if (selectedLocation.length === 0) {
+        //     return alert("select state or category or state");
+        // }
         const formData = new FormData();
         formData.append('file', image1);
         formData.append('title', title);
@@ -257,7 +268,8 @@ export default function PromoManage() {
                                     <option value="category">Category</option>
                                     <option value="city">City</option>
                                     <option value="country">Country</option>
-                                    <option value="state">State</option>   
+                                    <option value="state">State</option>
+                                    <option value="spaciality promo">Spaciality Promo</option>   
                                 </select>
                                 {catoryorstate && (
                                     <select
@@ -285,6 +297,11 @@ export default function PromoManage() {
                                         {selectCatagoryOrState === "city" && (
                                             <option disabled selected>
                                                 Select city
+                                            </option>
+                                        )}
+                                        {selectCatagoryOrState === "spaciality promo" && (
+                                            <option disabled selected>
+                                                Select spaciality promo
                                             </option>
                                         )}
 
@@ -335,6 +352,15 @@ export default function PromoManage() {
                                                     {state.name}
                                                 </option>
                                             ))}
+                                             {selectCatagoryOrState === "spaciality promo" &&
+                                            
+                                                <option
+                                                value='spaciality'
+                                                    className="border-none bg-slate-50 text-black capitalize"
+                                                >
+                                                    spaciality
+                                                </option>
+                                            }
                                             
                                     </select>
                                 )}

@@ -100,9 +100,16 @@ export default function PromoManage() {
     }, [image1])
 
     const handleSelectChange = async (e) => {
-      const selectedData=(e.target.value)?.split(",");
-      setSelectedLocation(selectedData?.[1]);
-      setSelectedItem(selectedData?.[0])
+        if(e.target.value!=="spaciality"){
+            const selectedData = (e.target.value)?.split(",");
+        setSelectedLocation(selectedData?.[1]);
+        setSelectedItem(selectedData?.[0])
+        }
+        else{
+            const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
+            setSelectedLocation(objectId);
+            setSelectedItem(e.target.value)
+        }
        
     };
 
@@ -212,6 +219,8 @@ export default function PromoManage() {
                                     {selectCatagoryOrState === "category" && <option disabled selected>{selectedItem}</option>}
                                     {selectCatagoryOrState === "state" && <option disabled selected>{selectedItem}</option>}
                                     {selectCatagoryOrState === "country" && <option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState === "spaciality promo" && <option disabled selected>{selectedItem}</option>}
+
                                 </select>
                                 <button
                                     className="mt-1 md:ml-2  bg-green-300 py-1 px-5 rounded-md hover:bg-green-500"

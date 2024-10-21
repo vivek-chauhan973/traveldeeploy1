@@ -11,14 +11,12 @@ import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Ske
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
-
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};
   const response = await fetch(`/api/public/package-state/${stateId}`);
   const data = await response.json();
   return data;
 };
-
 const fetchLocation = async (state) => {
   if (!state) return {};
   const response = await fetch(`/api/public/india?locationUrl=${state}`, { method: 'GET' });
@@ -48,7 +46,7 @@ export default function India() {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await fetch(`/api/public/priority-package?locationId=${selectedLocation?._id}`);
+        const response = await fetch(`/api/public/priority?id=${selectedLocation?._id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch packages');
         }
@@ -65,7 +63,7 @@ export default function India() {
   }, [selectedLocation]);
 
 useEffect(()=>{
-  fetchPackages(selectedLocation?._id).then(res=>{setPackages(res);console.log("packages---->",res)});
+  fetchPackages(selectedLocation?._id).then(res=>{setPackages(res)});
 },[selectedLocation])
 
 
@@ -109,8 +107,8 @@ useEffect(()=>{
   if (loading) {
     return <PromoBanner />;
   }
-// console.log("packages is here --> ",packages)
-console.log("router---> ",router)
+console.log("packages is here --> ",selectedLocation)
+// console.log("router---> ",router)
 
   return (
     <AppProvider>
@@ -142,9 +140,9 @@ console.log("router---> ",router)
             <Faq1 data={promoData.faq} />
           </div>
         </div>
-        <div className="border-t border">
+        {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
-        </div>
+        </div> */}
       </div>
     </AppProvider>
   );
