@@ -6,5 +6,5 @@ const headerDestinationHeader=new mongoose.Schema({
     },
     options:[mongoose.Schema.Types.ObjectId]
 },{timestamps:true});
-const DestinationHeader=mongoose.models.DestinationHeader||mongoose.model("DestinationHeader",DestinationHeader);
+const DestinationHeader=mongoose.models.DestinationHeader||mongoose.model("DestinationHeader",headerDestinationHeader);
 export default DestinationHeader;

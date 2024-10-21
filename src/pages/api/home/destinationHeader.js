@@ -8,28 +8,21 @@ import PackageState from "@/models/package/PackageState";
 import DestinationHeader from "@/models/Home/DestinationHeader";
 
 const destinationHeader=async (req,res)=>{
-  const {category,selectedOptions,formData}=req.body;
+  const {category,selectedOptions}=req.body;
   if(req.method==="POST"){
     if(category==="" || selectedOptions?.length===0){
       return res.status(301).json({message:"category and selectedoptions both are required"});
     }
     try {
-      const {title,
-        subtitle,
-        description}=formData;
       const data=await DestinationHeader.findOne({category});
       if(data){
-          const res1=await DestinationHeader.findOneAndReplace({category},{category,options:selectedOptions,title,
-            subtitle,
-            description});
+          const res1=await DestinationHeader.findOneAndReplace({category},{category,options:selectedOptions});
           if(!res1){
                return res.status(303).json({message:"data can't be replaced"});
           }
           return res.status(200).json({message:"data  replaced successfully ",res1});
       }
-      const response=await DestinationHeader.create({category,options:selectedOptions,title,
-        subtitle,
-        description});
+      const response=await DestinationHeader.create({category,options:selectedOptions});
       if(!response){
           return res.status(302).json({message:"something went wrong"})
       }
@@ -44,20 +37,20 @@ const destinationHeader=async (req,res)=>{
       const populatedResponse=await Promise.all(response?.map(async (item,i)=>{
         const options = await Promise.all(item.options.map(async (id) => {
         if(item.category==="category1"){
-          return PackageState.findById(id).exec();
+          return State.findById(id).exec();
         }
-        if(item.category==="category2"){
-          return PackageState.findById(id).exec();
-        }
-        if(item.category==="category3"){
-          return PackageMasterCategory.findById(id).exec();
-        }
-        if(item.category==="category4"){
-          return Car.findById(id).exec();
-        }
-        if(item.category==="category5"){
-          return Package.findById(id).exec();
-        }
+        // if(item.category==="category2"){
+        //   return PackageState.findById(id).exec();
+        // }
+        // if(item.category==="category3"){
+        //   return PackageMasterCategory.findById(id).exec();
+        // }
+        // if(item.category==="category4"){
+        //   return Car.findById(id).exec();
+        // }
+        // if(item.category==="category5"){
+        //   return Package.findById(id).exec();
+        // }
         
       }));
     
