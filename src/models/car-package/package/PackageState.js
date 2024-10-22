@@ -38,6 +38,15 @@ const packageStateSchema = new mongoose.Schema({
   type:String,
   required:true
  },
+ posterPath:{
+  type:String
+ },
+ posterTitle:{
+  type:String
+ },
+ posterAlt:{
+  type:String
+ },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

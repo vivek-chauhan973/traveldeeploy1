@@ -1,3 +1,4 @@
+
 import Layout from "@/components/admin/Layout";
 import { useEffect, useRef, useState } from "react";
 import FaqSection from "@/components/admin/ItineraryPromo/FaqSection";
@@ -6,9 +7,24 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image';
 import Index from "@/components/dy/Index";
 import SeoPopupField from "@/components/dy/SeoPopupField";
+import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+const getPromoData = async (selectedLocation) => {
+    try {
+        const res = await fetch(`/api/public/package-state/carpromo/${selectedLocation}`);
+        const data = await res.json();
+
+        return data;
+    } catch (error) {
+        console.error("Error fetching promo text", error);
+    }
+};
 export default function PromoManage() {
+    const router = useRouter();
+
+    const { promo } = router?.query;
+    // console.log("router is here : ",router);
     const ref = useRef(null);
     const [promoTxt, setPromoTxt] = useState(null);
     const [catoryorstate, setCatoryorstate] = useState(false);
@@ -16,97 +32,31 @@ export default function PromoManage() {
     const [file, setFile] = useState(null);
     const [file1, setFile1] = useState(null);
     const [title, setTitle] = useState(null);
+    const [posterImage1, setPosterImage1] = useState(null);
     const [posterTitle, setPosterTitle] = useState(null);
+    const [posterAlt, setPosterAlt] = useState(null);
     const [seofieldpopup, setSeofieldpopup] = useState(false);
     const [alt, setAlt] = useState(null);
-    const [posterAlt, setPosterAlt] = useState(null);
-    const [statePackages, setStatePackages] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState("");
     const [faqData, setFaqData] = useState(null);
     const [editorContent, setEditorContent] = useState("");
     const [image1, setImage1] = useState(null);
-    const [posterImage1, setPosterImage1] = useState(null);
     const [selectedItem, setSelectedItem] = useState("");
     const [seoData, setSeoData] = useState({});
     const [tableData, setTableData] = useState([]);
     const [tableColumn, setTableColumn] = useState([]);
     useEffect(() => {
-        if (selectCatagoryOrState === "state") {
-            const fetchData = async () => {
-
-                try {
-                    const response = await fetch('/api/public/states');
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    // console.log("categories is here : ",data)
-                    setStatePackages(data?.states);
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            }
-            fetchData();
+        if(promo){
+            setSelectedLocation(promo || "")
         }
-        if (selectCatagoryOrState === "category") {
-            const fetchCatogories = async () => {
-                try {
-                    const categoriesList = await fetch('/api/package-setting/category/get-categories');
-                    const categories = await categoriesList.json();
-                    setStatePackages(categories?.data);
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            }
-            fetchCatogories();
-        }
-        if (selectCatagoryOrState === "country") {
-            const fetchCountries = async () => {
-                try {
-                    const res = await fetch('/api/location?type=country', { method: 'GET' });
-                    const data = await res.json();
-                    setStatePackages(data?.result);
-                    console.log("all countries is here",data);
-                } catch (err) {
-                    console.log(err);
-                    return [];
-                }
-            };
-            fetchCountries();
-        }
-        if (selectCatagoryOrState === "city") {
-            const fetchCountries = async () => {
-                try {
-                    const res = await fetch('/api/location/city');
-                    const data = await res.json();
-                    setStatePackages(data?.result);
-                    // console.log("all countries is here",data);
-                } catch (err) {
-                    console.log(err);
-                    return [];
-                }
-            };
-            fetchCountries();
-        }
-    }, [selectCatagoryOrState]);
+       
+    }, [])
 
     useEffect(() => {
-        const getPromoData = async () => {
-            try {
-                const res = await fetch(`/api/public/package-state/carpromo/${selectedLocation}`);
-                const data = await res.json();
-                // console.log("data", data);
-                return data;
-            } catch (error) {
-                console.error("Error fetching promo text", error);
-            }
-        };
-
-        if (statePackages?.length > 0) {
-            getPromoData().then(res => setPromoTxt(res?.data));
-
+        if(promo){
+        getPromoData(promo).then(res => {setPromoTxt(res?.data);console.log("res------->",res)});
         }
-    }, [statePackages, selectedLocation]);
+    }, [promo]);
     const handleChange = (e) => {
         const data = e.target.files[0];
         setImage1(data)
@@ -129,7 +79,7 @@ export default function PromoManage() {
             reader.readAsDataURL(data);
         }
     };
-    // console.log("promo text is here-----> ",promoTxt)
+    console.log("promo txt is there -------> ",promoTxt)
     useEffect(() => {
         setTitle(promoTxt?.title || "");
         setAlt(promoTxt?.alt || "");
@@ -141,27 +91,33 @@ export default function PromoManage() {
         setSeoData(promoTxt?.seoField || {});
         setTableColumn(promoTxt?.tableColumn || []);
         setEditorContent(promoTxt?.description || "<p></p>");
+        setSelectCatagoryOrState(promoTxt?.selectType || "")
+        setSelectedItem(promoTxt?.selectedItem || "");
     }, [promoTxt])
+
     useEffect(() => {
         setFile(image1)
     }, [image1])
+
     const handleSelectChange = async (e) => {
-        const selectedData = (e.target.value)?.split(",");
+       
+            const selectedData = (e.target.value)?.split(",");
         setSelectedLocation(selectedData?.[1]);
-        setSelectedItem(selectedData?.[0])  
+        setSelectedItem(selectedData?.[0])
+        
+       
+       
     };
 
     const handleFaqChange = (faqs) => {
         setFaqData(faqs);
     };
     const handleEditorChange = (content) => {
+
         setEditorContent(content);
     };
-    console.log("selected location --- > ",selectedLocation)
     const handleSubmit = async (e) => {
-        // if (selectedLocation.length === 0) {
-        //     return alert("select state or category or state");
-        // }
+        
         const formData = new FormData();
         formData.append('file', image1);
         formData.append('title', title);
@@ -173,9 +129,8 @@ export default function PromoManage() {
         formData.append('tableColumn', JSON.stringify(tableColumn));
         formData.append('selectType', selectCatagoryOrState);
         formData.append("selectedItem", selectedItem);
-        console.log("content", editorContent)
         try {
-            const response = await fetch(`/api/public/package-state/carpromo/${selectedLocation}`, {
+            const response = await fetch(`/api/public/package-state/carpromo/${promo}`, {
                 method: 'POST',
                 body: formData,
             });
@@ -183,8 +138,11 @@ export default function PromoManage() {
             if (!response.ok) {
                 throw new Error('Failed to add promo');
             }
+
             const data = await response.json();
-            setFile(null);
+            console.log('Success:', data);
+            // Reset form fields after successful submission
+            /* setFile(null);
             setTitle("");
             setAlt("");
             setFaqData([]);
@@ -192,14 +150,12 @@ export default function PromoManage() {
             setSelectedLocation("");
             setSeoData({});
             setTableData([]);
-            setTableColumn([]);
+            setTableColumn([]);*/
         } catch (error) {
             console.error('Error:', error);
         }
+        alert("updated SuccessFully")
     };
-
-    // poster logic is here
-
     const handlePosterUpload=async ()=>{
         const formData1 = new FormData();
         formData1.append('file', posterImage1);
@@ -207,7 +163,7 @@ export default function PromoManage() {
         formData1.append('posterAlt', posterAlt);
 
         try {
-            const response = await fetch(`/api/public/package-state/carposter?id=${selectedLocation}`, {
+            const response = await fetch(`/api/public/package-state/carposter?id=${promo}`, {
                 method: 'POST',
                 body: formData1,
             });
@@ -225,119 +181,40 @@ export default function PromoManage() {
             console.error('Error:', error);
         }
     }
-
     return (
         <AppProvider>
             <Layout>
                 <div>
-                    <div className="flex items-center md:gap-5 gap-3 text-primary pb-5">
+                    <div className="flex items-center gap-5 text-primary pb-5">
                         <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                        <p className="md:text-[28px] text-xl text-black">Promo Management</p>
+                        <p className="md:text-[28px] text-xl text-black">Promo Manage</p>
                         <FontAwesomeIcon
                             icon={faArrowRightLong}
                             className=" text-teal-700 text-xl"
                         />
                     </div>
                     <div>
-                        <div className="flex flex-col mx-1 ">
+                        <div className="flex flex-col ">
                             <div className="flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
-                                <label htmlFor="cityBages" 
+                                <label htmlFor="cityBages"
                                     className="font-semibold text-para md:text-base">
                                     Select :
                                 </label>
                                 <select
                                     className="mt-1 md:ml-2 h-7  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
-                                    onChange={(e) => {
-                                        setCatoryorstate(true);
-                                        setSelectCatagoryOrState(e.target.value);
-                                    }}
                                 >
-                                    <option value="">Select One</option>
-                                    <option value="category">Category</option>
-                                    <option value="city">City</option>
-                                    <option value="country">Country</option>
-                                    <option value="state">State</option> 
+                                    <option value="" >{selectCatagoryOrState}</option>
                                 </select>
-                                {catoryorstate && (
-                                    <select
-                                        id="packageCategory"
-                                        className="mt-1 md:ml-2  h-7 md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
-                                        onChange={(e) => {
-                                            handleSelectChange(e);
-                                        }}
-                                    >
-                                        {selectCatagoryOrState === "category" && (
-                                            <option disabled selected>
-                                                Select category
-                                            </option>
-                                        )}
-                                        {selectCatagoryOrState === "state" && (
-                                            <option disabled selected>
-                                                Select state
-                                            </option>
-                                        )}
-                                        {selectCatagoryOrState === "country" && (
-                                            <option disabled selected>
-                                                Select country
-                                            </option>
-                                        )}
-                                        {selectCatagoryOrState === "city" && (
-                                            <option disabled selected>
-                                                Select city
-                                            </option>
-                                        )}
-                                        
-                                        {/* Conditionally render options based on selected category/state/country */}
-                                        {selectCatagoryOrState === "country" &&
-                                            statePackages?.map((state, i) => (
-                                                <option
-                                                    key={i}
-                                                    className="border-none bg-slate-50 text-black capitalize"
-                                                    value={`${state.name},${state._id}`}
-                                                    data-pageurl={state.url}
-                                                >
-                                                    {state.name}
-                                                </option>
-                                            ))}
+                                <select
+                                    id="packageCategory"
+                                    className="mt-1 md:ml-2  h-7 md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                                    onChange={(e) => { handleSelectChange(e); }}
+                                >
+                                    {selectCatagoryOrState === "category" && <option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState === "state" && <option disabled selected>{selectedItem}</option>}
+                                    {selectCatagoryOrState === "country" && <option disabled selected>{selectedItem}</option>}
 
-                                        {selectCatagoryOrState === "state" &&
-                                            statePackages?.map((state, i) => (
-                                                <option
-                                                    key={i}
-                                                    className="border-none bg-slate-50 text-black capitalize"
-                                                    value={`${state.name},${state._id}`}
-                                                    data-pageurl={state.url}
-                                                >
-                                                    {state.name}
-                                                </option>
-                                            ))}
-
-                                        {selectCatagoryOrState === "category" &&
-                                            statePackages?.map((state, i) => (
-                                                <option
-                                                    key={i}
-                                                    className="border-none bg-slate-50 text-black capitalize"
-                                                    value={`${state.category},${state._id}`}
-                                                >
-                                                    {state.category}
-                                                </option>
-                                            ))}
-                                            
-                                            {selectCatagoryOrState === "city" &&
-                                            statePackages?.map((state, i) => (
-                                                <option
-                                                    key={i}
-                                                    className="border-none bg-slate-50 text-black capitalize"
-                                                    value={`${state.name},${state._id}`}
-                                                    data-pageurl={state.url}
-                                                >
-                                                    {state.name}
-                                                </option>
-                                            ))}
-                                            
-                                            
-                                    </select>
-                                )}
+                                </select>
                                 <button
                                     className="mt-1 md:ml-2  bg-green-300 py-1 px-5 rounded-md hover:bg-green-500"
                                     onClick={() => setSeofieldpopup(true)}
@@ -346,14 +223,13 @@ export default function PromoManage() {
                                 </button>
                             </div>
                             <div></div>
-                            {seofieldpopup && (
+                            {seofieldpopup &&
                                 <SeoPopupField
                                     setSeofieldpopup={setSeofieldpopup}
                                     selectedItem={selectedItem}
                                     setSeoData={setSeoData}
                                     seoData={seoData}
-                                />
-                            )}
+                                />}
                         </div>
                         <div>
                             <div className="bg-white rounded p-4">
@@ -454,13 +330,13 @@ export default function PromoManage() {
                         </div>
                         <div className="rounded p-4 bg-white mt-5">
                             <div className="text-[15px] font-semibold">
-                                <p>Faq Section</p>
+                                <p>FAQ Section</p>
                             </div>
                             <div>
                                 <FaqSection onChange={handleFaqChange} faqData={promoTxt?.faq} />
                             </div>
                         </div>
-                        <button onClick={handleSubmit} className=" w-full bg-black font-semibold text-white py-3 mt-5 rounded">ADD</button>
+                        <button onClick={handleSubmit} className="grow w-full bg-black font-semibold text-white py-3 mt-5 rounded">ADD</button>
                     </div>
                 </div>
             </Layout>

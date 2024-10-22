@@ -73,6 +73,7 @@ const handleLogout=async ()=>{
       label: "Car Rental",
       icon: () => <FontAwesomeIcon icon={faCar} />,
       subMenu: [
+        { label: " Car Home", href: "/admin/car-rental/home" },
         { label: " Car Package Master", href: "/admin/car-rental" },
         { label: "Add Vehicle", href: "/admin/car-rental/create" },
         { label: "Add Car Itinerary", href: "/admin/car-rental/car-itinerary" },
