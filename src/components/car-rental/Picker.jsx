@@ -82,7 +82,10 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   return (
     <div>
       {/* Main container of the tab functionality */}
-      <div className="w-full bg-white rounded-lg pt-3 relative">
+      <div className="w-32 h-7 bg-gradient-to-r from-orange-500 to-red-500 text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
+          Rent a car
+      </div>
+      <div className="w-[840px] bg-white rounded-lg py-3 relative">
         <div className="flex items-center relative mb-2">
           <div
             onClick={() => setActiveTab("Tab1")}
@@ -106,10 +109,10 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
           </div>
         </div>
         <div className={`${activeTab === "Tab1" ? "block" : "hidden"}`}>
-          <div className="flex gap-10 px-4">
-            <div className=" flex gap-3 ml-3">
+          <div className="flex gap-5 px-4">
+            <div className="flex gap-3 ml-3">
               <div className="py-2">
-                <p>Select the Vihicle</p>
+                <p>Select the Vehicle</p>
                 <div
                   className=" border-2 flex gap-1 mt-1 rounded-lg"
                   onClick={() => setCarSelectionPopup(true)}
@@ -145,14 +148,13 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   />
                 </div>
               </div>
-              <div className="mt-8">
-                <button className="bg-primary/80 text-white  px-4 py-2 my-1 rounded-lg">
+              <div className="mt-8 ml-10">
+                <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
                   Show Cars
                 </button>
               </div>
             </div>
           </div>
-
           {/* <div className='flex  items-center pr-4 '>
                         <div className='flex gap-8 p-4 items-center w-full h-20'>
                             <div onClick={() => toggleItem('location')} className={`${activeItem === 'location' ? 'border-2' : 'border-none'} p-2 rounded cursor-pointer`}>
@@ -194,12 +196,12 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                     </div> */}
         </div>
         <div className={`${activeTab === "Tab2" ? "block" : "hidden"}`}>
-          <div className="flex gap-10 px-4">
+          <div className="flex gap-5 px-4">
             <div className=" flex gap-3 ml-3">
               <div className="py-2">
                 <p>Select the Vihicle</p>
                 <div
-                  className=" border-2 flex gap-1 my-1 rounded-lg"
+                  className="border-2 flex gap-1 my-1 rounded-lg"
                   onClick={() => setCarSelectionPopup(true)}
                 >
                   <FontAwesomeIcon
@@ -235,7 +237,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="mt-8">
-                <button className="bg-primary/80 text-white  px-4 py-2  my-1 rounded-lg">
+                <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
                   Show Cars
                 </button>
               </div>
