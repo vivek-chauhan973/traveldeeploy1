@@ -46,6 +46,8 @@ useEffect(()=>{
 },[cityId])
 
 // console.log('city id --->',cityId)
+console.log("cityPromoData",cityPromoData);
+
 
     return (
         <>
@@ -53,7 +55,7 @@ useEffect(()=>{
             <div className='bg-slate-100'>
                 <DesktopHeader />
                 <Breadcrumbs />
-                <CarPromoHeroSection />
+                <CarPromoHeroSection cityPromoData={cityPromoData}/>
                 {/* <SearchHeaderWpr /> */}
                 <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[2fr,320px] gap-5 relative">
                     <div>
@@ -71,13 +73,13 @@ useEffect(()=>{
                     <div className="w-full md:w-3/4 m-auto px-2 pb-5">
                         <div className="text-center mt-5 mb-10">
                             <p className="md:text-[22px] text-[20px] font-semibold mb-2 capitalize">
-                                Frequently Asked Questions (FAQs) <span className='lowercase'>for</span>
+                                Frequently Asked Questions (FAQs) <span className='lowercase'>for</span> {cityPromoData?.selectedItem}
                             </p>
                             <p className="text-para md:text-base">
                                 We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
                             </p>
                         </div>
-                        <CraPromoFaq/>
+                        <CraPromoFaq cityPromoData={cityPromoData}/>
                     </div>
                 </div>
                 <div className="border-t border">

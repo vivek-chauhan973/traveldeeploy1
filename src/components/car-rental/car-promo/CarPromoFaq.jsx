@@ -2,25 +2,8 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const CraPromoFaq = () => {
+const CraPromoFaq = ({ cityPromoData }) => {
 
-    const data = [
-        {
-            title : "Rakesh Kumar Rikki",
-            desc : `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Quod repudiandae tempora aut reiciendis veniam dolor assumenda omnis illo possimus quia.`
-        },
-        {
-            title : "Rakesh Kumar",
-            desc : `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Quod repudiandae tempora aut reiciendis veniam dolor assumenda omnis illo possimus quia.`
-        },
-        {
-            title : "Vivek Chauhan",
-            desc : `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Quod repudiandae tempora aut reiciendis veniam dolor assumenda omnis illo possimus quia.`
-        },
-    ]
     const [openIndex, setOpenIndex] = useState(null);
 
     const handleToggle = (i) => {
@@ -30,7 +13,7 @@ const CraPromoFaq = () => {
     return (
         <div className="w-full md:w-3/4 m-auto">
             <div className="w-full mx-auto mt-10">
-                {data?.map((item, i) => (
+                {cityPromoData?.faq?.map((item, i) => (
                     <div key={i} className="mb-3">
                         <div className="w-full h-12 flex justify-between items-center md:px-5 px-3 py-2 bg-[#f3f3f3] rounded-md hover:bg-gray-200 cursor-pointer"
                             onClick={() => handleToggle(i)}>
@@ -53,9 +36,9 @@ const CraPromoFaq = () => {
                         </div>
                         <div className={`overflow-hidden transition-max-height duration-700 ease-in-out ${openIndex === i ? 'max-h-auto' : 'max-h-0'}`}>
                             <div className=" md:text-base text-sm " >
-                                <p 
-                                // dangerouslySetInnerHTML={{ __html: item.information }} 
-                                className='about-margin py-4 xl:px-10 px-5 '>{item.desc}</p>
+                                <p
+                                    dangerouslySetInnerHTML={{ __html: item.information }}
+                                    className='about-margin py-4 xl:px-10 px-5 '></p>
                             </div>
                         </div>
                     </div>
