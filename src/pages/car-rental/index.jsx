@@ -9,6 +9,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Picker from "@/components/car-rental/Picker";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarSelectionPopup from "@/components/car-rental/CarSelectionPopup";
+import CarCities from "@/components/car-rental/CarCities";
+import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 
 const CarHireSection = ({ title, services }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -67,17 +69,57 @@ const FAQSection = ({ question, answer }) => {
 
 export default function App() {
     const carHireData = [
-        { title: "New Delhi Car Hire", services: ["Greater Noida Car Hire", "Noida Car Hire", "Gurgaon Car Hire"] },
-        { title: "Mumbai Car Hire", services: ["Navi Mumbai Car Hire", "Thane Car Hire"] },
-        { title: "Bangalore Car Hire", services: ["Whitefield Car Hire", "Indiranagar Car Hire"] },
-        // Add more states and services as needed
+        {
+            title: "New Delhi Car Hire",
+            services: ["Greater Noida Car Hire", "Noida Car Hire", "Gurgaon Car Hire"]
+        },
+        {
+            title: "Mumbai Car Hire",
+            services: ["Navi Mumbai Car Hire", "Thane Car Hire"]
+        },
+        {
+            title: "Bangalore Car Hire",
+            services: ["Whitefield Car Hire", "Indiranagar Car Hire"]
+        },
+        {
+            title: "New Delhi Car Hire",
+            services: ["Greater Noida Car Hire", "Noida Car Hire", "Gurgaon Car Hire"]
+        },
+        {
+            title: "Mumbai Car Hire",
+            services: ["Navi Mumbai Car Hire", "Thane Car Hire"]
+        },
+        {
+            title: "Bangalore Car Hire",
+            services: ["Whitefield Car Hire", "Indiranagar Car Hire"]
+        },
     ];
 
     const faqData = [
-        { question: "How to hire a car in New Delhi?", answer: "You can hire a car by contacting our support or booking online through our website." },
-        { question: "What documents are required?", answer: "You need a valid driving license, ID proof, and address proof to hire a car." },
-        { question: "What are the payment options?", answer: "We accept credit cards, debit cards, and UPI payments." },
-        // Add more FAQs as needed
+        {
+            question: "How to hire a car in New Delhi?",
+            answer: "You can hire a car by contacting our support or booking online through our website."
+        },
+        {
+            question: "What documents are required?",
+            answer: "You need a valid driving license, ID proof, and address proof to hire a car."
+        },
+        {
+            question: "What are the payment options?",
+            answer: "We accept credit cards, debit cards, and UPI payments."
+        },
+        {
+            question: "How to hire a car in New Delhi?",
+            answer: "You can hire a car by contacting our support or booking online through our website."
+        },
+        {
+            question: "What documents are required?",
+            answer: "You need a valid driving license, ID proof, and address proof to hire a car."
+        },
+        {
+            question: "What are the payment options?",
+            answer: "We accept credit cards, debit cards, and UPI payments."
+        },
     ];
 
     const [show, setShow] = useState(false)
@@ -85,13 +127,14 @@ export default function App() {
     const handleToggle = () => {
         setShow(!show);
     }
-    // Inner shadow Four image
+
     const boxShadowStyle = {
         boxShadow: 'inset 0px -50px 20px  rgba(0, 0, 0, 0.8)'
     };
-    const [carSelectionPopup, setCarSelectionPopup] = useState(false);
-    return (
 
+    const [carSelectionPopup, setCarSelectionPopup] = useState(false);
+
+    return (
         <AppProvider>
             <div >
                 {/* CarRentalHomeSkelton  */}
@@ -148,78 +191,13 @@ export default function App() {
                         </div>
                     </div>
                 </div>
-                {/* four Images */}
-                <div className="container-wrapper grid md:grid grid-cols-2 gap-4   lg:grid-cols-4 -z-10" onClick={() => setCarSelectionPopup(false)}>
-                    <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt=""
-                            width={300}  //256 in phone
-                            height={288} // 160
-                        />
-                        <div style={boxShadowStyle}
-                            className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                            Himacahl
-                        </div>
-                    </div>
-                    <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt=""
-                            width={300}  //256 in phone
-                            height={288} // 160
-                        />
-                        <div style={boxShadowStyle}
-                            className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                            Kerala
-                        </div>
-                    </div>
-                    <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt=""
-                            width={300}  //256 in phone
-                            height={288} // 160
-                        />
-                        <div style={boxShadowStyle}
-                            className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                            Uttarakhand
-                        </div>
-                    </div>
-                    <div className="relative mb-2 group">
-                        <Image className="md:h-72 h-44 md:w-[300px] w-full object-cover rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                            src="https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt=""
-                            width={300}  //256 in phone
-                            height={288} // 160
-                        />
-                        <div style={boxShadowStyle}
-                            className="absolute top-0 left-0 md:h-72 h-44 md:w-[300px] xl:w-[271px] w-full pb-5 text-white md:text-xl text-lg font-semibold flex justify-center items-end rounded-[17px] transition-transform duration-300 transform group-hover:scale-110"
-                        >
-                            Rajsthan
-                        </div>
-                    </div>
+                {/* CarCities are here */}
+                <div>
+                    <CarCities />
                 </div>
-                {/* complete images */}
-                <div className="container-wrapper py-10 " onClick={() => setCarSelectionPopup(false)}>
-                    <h1 className="text-center font-semibold md:text-lg text-base ">UTTARAKHAND TAXI SERVICE</h1>
-                    <div className="flex justify-between items-center">
-                        <h1 className="md:font-semibold font-medium md:text-[19px] text-lg py-5">Popular Car</h1>
-                        <button className="border border-navyblack rounded hover:bg-navyblack hover:text-white md:text-sm text-xs px-2 py-1">See All</button>
-                    </div>
-                    <div className="container-wrapper">
-                        <Carousel />
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <h1 className="md:font-semibold font-medium md:text-[19px] text-lg py-5">Recent Car</h1>
-                        <button className="border border-navyblack rounded hover:bg-navyblack hover:text-white md:text-sm text-xs px-2 py-1">See All</button>
-                    </div>
-                    <div className="container-wrapper">
-                        <Carousel />
-                    </div>
+                {/* Car Packages are here */}
+                <div>
+                    <CarPackageCarousel />
                 </div>
                 <div className="container-wrapper" onClick={() => setCarSelectionPopup(false)}>
                     <div className="py-5">

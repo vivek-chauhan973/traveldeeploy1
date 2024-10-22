@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../../../src/app/globals.css";
+import "../../../app/globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 

@@ -179,7 +179,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* Four carousel all state card*/}
+      {/* carousel all state card*/}
       <div>
         <StateCard states={states} />
       </div>
@@ -267,7 +267,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-
+      
       <div>
         <Card4 packages={packages} />
       </div>

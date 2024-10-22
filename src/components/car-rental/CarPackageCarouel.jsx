@@ -1,0 +1,163 @@
+import "../../../src/app/globals.css";
+import React, { useRef, useEffect } from 'react';
+import Image from 'next/image'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+
+const CarPackageCarousel = () => {
+    const carPackages = [
+        {
+            img: "https://unsplash.com/photos/a-close-up-of-a-table-with-a-white-table-cloth-ln7xlt2MFn4",
+            title: "Nagpur",
+            startCity: "delhi",
+            days: "2",
+            price: "3000",
+            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
+        },
+        {
+            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
+            title: "Nagpur",
+            startCity: "delhi",
+            days: "2",
+            price: "3000",
+            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
+        },
+        {
+            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
+            title: "Nagpur",
+            startCity: "delhi",
+            days: "2",
+            price: "3000",
+            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
+        },
+        {
+            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
+            title: "Nagpur",
+            startCity: "delhi",
+            days: "2",
+            price: "3000",
+            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
+        },
+        {
+            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
+            title: "Nagpur",
+            startCity: "delhi",
+            days: "2",
+            price: "3000",
+            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
+        },
+
+    ]
+    const carouselRef = useRef(null);
+
+    const scrollNext = () => {
+        if (carouselRef.current) {
+            carouselRef.current.scrollBy({ left: carouselRef.current.clientWidth, behavior: 'smooth' });
+        }
+    };
+
+    const scrollPrev = () => {
+        if (carouselRef.current) {
+            carouselRef.current.scrollBy({ left: -carouselRef.current.clientWidth, behavior: 'smooth' });
+        }
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                // Enable mouse scroll for small devices
+                carouselRef.current.style.overflowX = 'scroll';
+            } else {
+                // Disable mouse scroll for medium and larger devices
+                carouselRef.current.style.overflowX = 'hidden';
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initialize on mount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+
+    return (
+        <div className="md:mt-9 mt-4 bg-slate-100">
+            {carPackages?.length > 0 &&
+                <div className="container-wrapper  text-center py-7">
+                    <p className='md:text-[25px] text-xl font-medium mb-1'>
+                        Handpicked Highlights for Your Perfect Tour Package
+                    </p>
+                    <p className="md:text-md text-para font-normal">
+                        Discovered expertly curated travel package tailored to offer you unforgettable experiences.
+                    </p>
+                </div>
+            }
+            <div className="carousel-container relative container-wrapper ">
+                <div className="carousel gap-5" ref={carouselRef}>
+                    {carPackages?.length > 0 && carPackages?.map((items, i) => {
+                        return (
+                            <div key={i} className="carousel-item w-60 md:w-80 mb-11  rounded-md">
+                                <div className="shadow-md  rounded-lg overflow-hidden">
+                                    <div className="relative">
+                                        <div className=" w-full h-52">
+                                            {items?.uploads && <Image className=" relative  object-cover " layout="fill"
+                                                src={items?.img}
+                                                alt="images"
+                                            />}
+                                        </div>
+                                        <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 pt-4 pb-1 px-2">
+                                            <div className='flex gap-3'>
+                                                <p className="font-semibold md:text-base text-sm text-white ">Started From {items?.startCity}</p>
+                                                <p className="font-semibold md:text-base text-sm text-white">{items?.days} Days</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className=" flex flex-col gap-3 px-3 py-3 bg-white">
+                                        <div className="w-full md:h-7 h-8">
+                                            <p className="md:text-lg text-base font-semibold">{items?.title}</p>
+                                        </div>
+                                        <p
+                                            // dangerouslySetInnerHTML={{ __html: items?.about }}
+                                            className="text-para line-clamp-3">
+                                            {items?.desc}
+                                        </p>
+                                        <div>
+                                            <div className="flex gap-5 items-center justify-between pr-4">
+                                                <p className="text-lg font-semibold">
+                                                    {items?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                </p>
+                                                {/* <Link href={"/package/"+items?.pageUrl}> */}
+                                                <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
+                                                    Know More
+                                                </button>
+                                                {/* </Link> */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                    {/* end is here code */}
+                </div>
+                {carPackages?.length > 0 &&
+                    <div className=" hidden md:block absolute top-2/4 -translate-y-[80px] justify-between w-full">
+                        <div className=' justify-between flex pl-2 '>
+                            <FontAwesomeIcon
+                                icon={faChevronRight} onClick={scrollPrev}
+                                className="h-5 w-5 p-2 rounded-full  bg-black/50 hover:bg-black text-white rotate-180"
+                            />
+                            <FontAwesomeIcon
+                                icon={faChevronRight} onClick={scrollNext}
+                                className="h-5 w-5 p-2 rounded-full bg-black/50 hover:bg-black text-white"
+                            />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    );
+}
+
+export default CarPackageCarousel;

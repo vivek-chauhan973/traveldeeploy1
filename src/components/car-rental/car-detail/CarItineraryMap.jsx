@@ -1,5 +1,6 @@
 import Image from "next/image";
-import "../../../src/app/globals.css";
+import "../../../app/globals.css";
+
 // const fetchPackageImage=async (addPackage)=>{
 //     const res = await fetch(`/api/package/map/${addPackage?._id}`);
 //     const data = await res.json();

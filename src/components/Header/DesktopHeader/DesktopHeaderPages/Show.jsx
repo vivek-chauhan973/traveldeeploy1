@@ -48,7 +48,7 @@ const Show = () => {
           </div>
         </div>
         <div className="ml-4 px-4 pt-3 h-[400px] w-full">
-          <h4 className="font-semibold text-base mb-3">{changedState}</h4>
+          <h4 className="font-semibold text-base mb-3 text-[#595959]">{changedState}</h4>
           <div className="w-full h-full">
             <div className="grid grid-cols-4 gap-x-10">
               {cities.length > 0 && cities?.map((city, i) =>

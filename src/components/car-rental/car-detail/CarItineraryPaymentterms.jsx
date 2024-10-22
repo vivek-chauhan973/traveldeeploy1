@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "../../../src/app/globals.css";
+import "../../../app/globals.css";
+
 
 const CarItineraryPaymentTerms = () => {
     const [activeTab, setActiveTab] = useState("tab1");
