@@ -12,7 +12,7 @@ import "@/models/car-package/package/PackageCategory";
 import "@/models/car-package/package/PriceHike";
 import "@/models/car-package/package/PackageDeparture";
 import CarCounter from "./CarCounter";
-
+import "./car-package/cars";
 async function getNextSequenceValueWithPrefix(sequenceName, prefix = 'BXC', padding = 3) {
   const sequenceDocument = await CarCounter.findOneAndUpdate(
     { _id: sequenceName },
@@ -61,7 +61,8 @@ const packageSchema = new Schema({
       trim: true,
     },
     selectedVicle: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
       required: true,
     },
     price: {

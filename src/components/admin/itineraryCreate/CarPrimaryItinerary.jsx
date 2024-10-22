@@ -311,7 +311,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
                                 <select className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => setSelectedVicle(e.target.value)}>
                                 <option value="">{selectedVicle||"Select Car Title"}</option>
-                                {allCars?.map((item,i)=><option key={i} value={item?.vehicleType}>{item?.vehicleType}</option>)}
+                                {allCars?.map((item,i)=><option key={i} value={item?._id}>{item?.vehicleType}</option>)}
 
                                 </select>
                             </div>

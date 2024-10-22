@@ -6,7 +6,7 @@ const fetchPromoDataApi = async (req, res) => {
     if (!cityId) {
       return res.status(300).json({ message: "Id is required" });
     }
-    const data = await CarPackage1.find({ location: cityId });
+    const data = await CarPackage1.find({ location: cityId }).populate("selectedVicle");
 
     if (!data) {
       return res
