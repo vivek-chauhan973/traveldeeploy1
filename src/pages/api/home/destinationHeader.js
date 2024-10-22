@@ -1,12 +1,5 @@
-import HomeFooter from "@/models/Home";
-import PackageMasterCategory from "@/models/package/PackageCategory";
 import State from "@/models/State";
-import Car from "@/models/car-package/cars";
-import Package from "@/models/Package";
-import City from "@/models/City";
-import PackageState from "@/models/package/PackageState";
 import DestinationHeader from "@/models/Home/DestinationHeader";
-
 const destinationHeader=async (req,res)=>{
   const {category,selectedOptions}=req.body;
   if(req.method==="POST"){
@@ -39,18 +32,6 @@ const destinationHeader=async (req,res)=>{
         if(item.category==="category1"){
           return State.findById(id).exec();
         }
-        // if(item.category==="category2"){
-        //   return PackageState.findById(id).exec();
-        // }
-        // if(item.category==="category3"){
-        //   return PackageMasterCategory.findById(id).exec();
-        // }
-        // if(item.category==="category4"){
-        //   return Car.findById(id).exec();
-        // }
-        // if(item.category==="category5"){
-        //   return Package.findById(id).exec();
-        // }
         
       }));
     

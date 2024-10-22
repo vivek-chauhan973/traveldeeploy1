@@ -39,7 +39,6 @@ fetchHeaderCities(changedStateId).then(res=>{console.log('fetch state Cities her
                 key={i}
                 className="font-medium text-base px-5 hover:py-3 py-3 hover:bg-gray-100 hover:rounded-sm"
                 onMouseEnter={() => {setChangedState(item.name);setChangedStateId(item?._id)}}
-               
               >
                 {item.name}
               </h4>
