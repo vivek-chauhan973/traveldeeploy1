@@ -41,7 +41,7 @@ const CarCities = ({cityPromoData}) => {
     const boxShadowStyle = {
         boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
     };
-
+console.log("city promodata-----> ",cityPromoData)
     return (
         <div className="md:mt-9 mt-4">
             <div className="carousel-container relative container-wrapper ">
@@ -51,6 +51,7 @@ const CarCities = ({cityPromoData}) => {
                             <div key={i} className="carousel-item md:w-[280px] w-64 mb-11 rounded-[17px]">
                                 <div className="shadow-md  rounded-[17px] overflow-hidden">
                                     <div className="relative">
+                                        <a href={`/car-rental/${items?.selectedItem?.toLowerCase()}-car-hire`}>
                                         <div className=" w-full h-64">
                                             <Image className=" relative  object-cover rounded-[17px]" layout="fill"
                                                 src={items?.posterPath}
@@ -63,6 +64,7 @@ const CarCities = ({cityPromoData}) => {
                                                 {items?.selectedItem}
                                             </div>
                                         </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
