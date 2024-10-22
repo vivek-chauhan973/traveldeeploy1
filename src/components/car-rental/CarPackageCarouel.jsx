@@ -5,50 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-const CarPackageCarousel = () => {
-    const carPackages = [
-        {
-            img: "https://unsplash.com/photos/a-close-up-of-a-table-with-a-white-table-cloth-ln7xlt2MFn4",
-            title: "Nagpur",
-            startCity: "delhi",
-            days: "2",
-            price: "3000",
-            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
-        },
-        {
-            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
-            title: "Nagpur",
-            startCity: "delhi",
-            days: "2",
-            price: "3000",
-            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
-        },
-        {
-            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
-            title: "Nagpur",
-            startCity: "delhi",
-            days: "2",
-            price: "3000",
-            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
-        },
-        {
-            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
-            title: "Nagpur",
-            startCity: "delhi",
-            days: "2",
-            price: "3000",
-            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
-        },
-        {
-            img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.boardingschoolreview.com%2Fimg-academy-profile&psig=AOvVaw2kZ-x2IffCkH0h-LgDqmfw&ust=1729661425028000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC094qhoYkDFQAAAAAdAAAAABAE",
-            title: "Nagpur",
-            startCity: "delhi",
-            days: "2",
-            price: "3000",
-            desc: "Enter a freshly updated and thoughtfully furnished peaceful home surrounded by ancient trees, stone walls.Enter a freshly",
-        },
+const CarPackageCarousel = ({carPackageData}) => {
 
-    ]
     const carouselRef = useRef(null);
 
     const scrollNext = () => {
@@ -83,7 +41,7 @@ const CarPackageCarousel = () => {
 
     return (
         <div className="md:mt-9 mt-4 bg-slate-100">
-            {carPackages?.length > 0 &&
+            {carPackageData?.length > 0 &&
                 <div className="container-wrapper  text-center py-7">
                     <p className='md:text-[25px] text-xl font-medium mb-1'>
                         Handpicked Highlights for Your Perfect Tour Package
@@ -95,32 +53,33 @@ const CarPackageCarousel = () => {
             }
             <div className="carousel-container relative container-wrapper ">
                 <div className="carousel gap-5" ref={carouselRef}>
-                    {carPackages?.length > 0 && carPackages?.map((items, i) => {
+                    {carPackageData?.length > 0 && carPackageData?.map((items, i) => {
+
                         return (
                             <div key={i} className="carousel-item w-60 md:w-80 mb-11  rounded-md">
                                 <div className="shadow-md  rounded-lg overflow-hidden">
                                     <div className="relative">
                                         <div className=" w-full h-52">
                                             {items?.uploads && <Image className=" relative  object-cover " layout="fill"
-                                                src={items?.img}
+                                                src={items?.uploads?.[0]}
                                                 alt="images"
                                             />}
                                         </div>
                                         <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 pt-4 pb-1 px-2">
                                             <div className='flex gap-3'>
-                                                <p className="font-semibold md:text-base text-sm text-white ">Started From {items?.startCity}</p>
+                                                <p className="font-semibold md:text-base text-sm text-white ">Started From {items?.startcity?.[0]}</p>
                                                 <p className="font-semibold md:text-base text-sm text-white">{items?.days} Days</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div className=" flex flex-col gap-3 px-3 py-3 bg-white">
                                         <div className="w-full md:h-7 h-8">
-                                            <p className="md:text-lg text-base font-semibold">{items?.title}</p>
+                                            <p className="md:text-lg text-base font-semibold">{items?.name}</p>
                                         </div>
                                         <p
-                                            // dangerouslySetInnerHTML={{ __html: items?.about }}
+                                            dangerouslySetInnerHTML={{ __html: items?.about }}
                                             className="text-para line-clamp-3">
-                                            {items?.desc}
+                                           
                                         </p>
                                         <div>
                                             <div className="flex gap-5 items-center justify-between pr-4">
@@ -141,7 +100,7 @@ const CarPackageCarousel = () => {
                     })}
                     {/* end is here code */}
                 </div>
-                {carPackages?.length > 0 &&
+                {carPackageData?.length > 0 &&
                     <div className=" hidden md:block absolute top-2/4 -translate-y-[80px] justify-between w-full">
                         <div className=' justify-between flex pl-2 '>
                             <FontAwesomeIcon

@@ -173,7 +173,7 @@ export default function PromoManage() {
         formData.append('tableColumn', JSON.stringify(tableColumn));
         formData.append('selectType', selectCatagoryOrState);
         formData.append("selectedItem", selectedItem);
-        console.log("content", editorContent)
+        // console.log("content", editorContent)
         try {
             const response = await fetch(`/api/public/package-state/carpromo/${selectedLocation}`, {
                 method: 'POST',
@@ -197,9 +197,7 @@ export default function PromoManage() {
             console.error('Error:', error);
         }
     };
-
     // poster logic is here
-
     const handlePosterUpload=async ()=>{
         const formData1 = new FormData();
         formData1.append('file', posterImage1);
