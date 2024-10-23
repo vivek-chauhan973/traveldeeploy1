@@ -10,7 +10,6 @@ export default function Itinerary() {
     const handleTabClick = (tabname) => {
         setActiveTab(tabname)
     }
-
     return (
         <AppProvider>
             <Layout>
