@@ -2,7 +2,7 @@ import "../../../app/globals.css"
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 const MAX = 100000;
 const MIN = 5000;
 const marks = [
@@ -21,11 +21,27 @@ const marks = [
 function valuetext(value) {
     return `${value}°C`;
 }
+const fetchCategories = async () => {
+    try {
+        const categoriesList = await fetch('/api/cars/package-setting/category/get-categories')
+        const categories = await categoriesList.json();
+        return categories;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
 const CarPromoSearchPageFilter = () => {
     const [priceRange, setPriceRange] = useState([5000, 100000]);
     const [departureCity, setDepartureCity] = useState([]);
     const [packageCategory, setPackageCategory] = useState([]);
     const [filter, setFilter] = useState(false);
+
+    useEffect(()=>{
+        fetchCategories().then(res=>{
+            setPackageCategory(res?.data||[])
+        })
+    },[])
 
     return (
         <>
@@ -127,7 +143,7 @@ const CarPromoSearchPageFilter = () => {
                             <div>
                                 {packageCategory?.map(item => <div key={item._id} className="flex capitalize items-center gap-2 px-5 pb-2 py-2 ">
                                     <input className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack" type="checkbox"
-                                        id="category1" name={item?.category} value={item?._id} onChange={(e) => setCatagoryId(e.target.value)} />
+                                        id="category1" name={item?.category} value={item?._id} />
                                     <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
                                         {item?.category}
                                     </label>

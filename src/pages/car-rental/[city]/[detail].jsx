@@ -1,4 +1,4 @@
-import { useState, } from "react";
+import { useEffect, useState, } from "react";
 import "../../../app/globals.css";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import Image from 'next/image';
@@ -18,8 +18,33 @@ import CarReviewsCard from "@/components/car-rental/car-detail/CarReviewsCard";
 import CarDetailFaq from "@/components/car-rental/car-detail/CarDetailFaq";
 import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarItineraryTourDetails from "@/components/car-rental/car-detail/CarItineraryTourDetails";
+import { useRouter } from "next/router";
+import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+const fetchCarPackage = async (packageUrl) => {
+    // console.log("page url :: ",packageUrl)
+    const response = await fetch(`/api/cars/public/${packageUrl}`, {
+      method: "GET",
+    });
+    const data = await response.json();
+    // console.log("..............................",packageUrl)
+    return data;
+  };
 
 export default function CarDetail() {
+
+    const router = useRouter();
+    const { detail } = router.query
+    const package1 = detail?.replace("-tour-package", "")
+
+    const [carPackage,setCarPackage]=useState({})
+
+    // console.log("package1", package1);
+    useEffect(()=>{
+        if(package1){
+        fetchCarPackage(package1).then(res=> {setCarPackage(res||{})})
+        }
+      },[package1])
+      console.log("car Renatl response ==>",carPackage);
 
     const handleSendItinerary = () => {
         const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
@@ -66,7 +91,7 @@ export default function CarDetail() {
     }
 
     return (
-        <>
+        <AppProvider>
             {/* CarDetailSkeleton  */}
             <div>
                 {/* <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%"> */}
@@ -261,7 +286,7 @@ export default function CarDetail() {
                                 <CarItinerarymap />
                             </div>
                             {/* <!- Tour Details is here --> */}
-                            <CarItineraryTourDetails/>
+                            <CarItineraryTourDetails />
 
                             {/* Privacy policy Terms */}
                             <div id="Policy&TermsSection" className="pt-7">
@@ -447,8 +472,8 @@ export default function CarDetail() {
                 </div>
 
                 {/* bottom link is here*/}
-                <BottomLink />
+                {/* <BottomLink /> */}
             </div>
-        </>
+        </AppProvider>
     )
 };

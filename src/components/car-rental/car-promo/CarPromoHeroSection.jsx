@@ -14,6 +14,7 @@ const stripHtmlTags = (html) => {
   return div.textContent || div.innerText || "";
 };
 const CarPromoHeroSection = ({ cityPromoData }) => {
+  // console.log( "Herosection cityPromoData",cityPromoData );
 
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(true);

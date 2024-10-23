@@ -25,7 +25,7 @@ const fetchCarPackageList=async (cityId)=>{
 export default function CarPromo() {
 const router=useRouter();
 const city=router?.query?.city?.replace("-car-hire","")?.split(" ")?.join("-");
-console.log("citty",city)
+// console.log("citty",city)
 const [cityId,setCityId]=useState('');
 const [cityPromoData,setCityPromoData]=useState({});
 const [carPackageList,setCarPackageList]=useState([]);
@@ -46,8 +46,7 @@ useEffect(()=>{
 },[cityId])
 
 // console.log('city id --->',cityId)
-console.log("cityPromoData",cityPromoData);
-
+// console.log("cityPromoData",cityPromoData);
 
     return (
         <>
@@ -60,7 +59,7 @@ console.log("cityPromoData",cityPromoData);
                 <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[2fr,320px] gap-5 relative">
                     <div>
                         <div>
-                            <SearchCarPagePackageList/>
+                            <SearchCarPagePackageList carPackageList={carPackageList}/>
                         </div>
                     </div>
                     <div className='relative'>
@@ -82,9 +81,9 @@ console.log("cityPromoData",cityPromoData);
                         <CraPromoFaq cityPromoData={cityPromoData}/>
                     </div>
                 </div>
-                <div className="border-t border">
+                {/* <div className="border-t border">
                     <BottomLink/>
-                </div>
+                </div> */}
             </div>
         </>
     );

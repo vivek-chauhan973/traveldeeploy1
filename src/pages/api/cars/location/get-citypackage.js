@@ -6,7 +6,10 @@ const fetchPromoDataApi = async (req, res) => {
     if (!cityId) {
       return res.status(300).json({ message: "Id is required" });
     }
-    const data = await CarPackage1.find({ location: cityId }).populate("selectedVicle");
+    const data = await CarPackage1.find({ location: cityId }).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
+    .populate('tourinfo.tourExclusion')
+    .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
+    .populate('tourinfo.tourNeedToKonow').populate("icons").populate("selectedVicle");
 
     if (!data) {
       return res

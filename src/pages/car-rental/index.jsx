@@ -279,7 +279,7 @@ export default function App() {
         </div>
         {/* Static section are here */}
         <div className="container-wrapper">
-          <div className="flex flex-col md:flex-row justify-between items-center pb-12 pt-4">
+          <div className="flex flex-col md:flex-row justify-between items-center pb-12 pt-4 px-3">
             {/* Global Reach */}
             <div className="flex flex-col max-w-xs">
               <div className="flex items-center mb-2 gap-3">

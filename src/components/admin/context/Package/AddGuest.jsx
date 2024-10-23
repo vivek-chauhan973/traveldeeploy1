@@ -12,6 +12,15 @@ const fetchPackage = async (packageUrl) => {
   // console.log("..............................",packageUrl)
   return data;
 };
+const fetchCarPackage = async (packageUrl) => {
+  // console.log("page url :: ",packageUrl)
+  const response = await fetch(`/api/cars/public/${packageUrl}`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  // console.log("..............................",packageUrl)
+  return data;
+};
 
 export const AppProvider = ({ children }) => {
   const [closeBtn, setCloseBtn] = useState(false);
@@ -36,6 +45,8 @@ const [showPopup, setShowPopup] = useState(false);
 const [showPopup1, setShowPopup1] = useState(false);
 
   const router = useRouter();
+
+
   const initialData = {
     adult:0,
     child: 0,
@@ -65,6 +76,11 @@ const [showPopup1, setShowPopup1] = useState(false);
     fetchData();
   }, [packageUrl]);
 
+// Car retal package detail here
+const [addCarPackage, setAddCarPackage] = useState({});
+useEffect(()=>{
+  fetchCarPackage(router?.query?.detail?.replace("-tour-package","")).then(res=> {setAddCarPackage(res||{})})
+},[router?.query?.detail?.replace("-tour-package","")])
 
   const [toglePopup, setToglePopup] = useState(true);
   const [pricingManagement, setPricingManagement] = useState(null);
@@ -149,6 +165,7 @@ const [showPopup1, setShowPopup1] = useState(false);
     fixedDeparturePopupPrice,setFixedDeparturePopupPrice,
     groupDeparturePerson,setGroupDeparturePerson,
     highLightedPackage,setHighLightedPackage,
+    addCarPackage
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>
