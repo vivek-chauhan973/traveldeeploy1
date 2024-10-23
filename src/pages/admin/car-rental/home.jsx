@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 import Layout from '@/components/admin/Layout';
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
+import CarBanner from '@/components/car-rental/CarHome/Banner';
+import HeadingDesc from '@/components/car-rental/CarHome/HeadingDesc';
+import CarCarouselBanner from '@/components/car-rental/CarHome/CarCarouselBanner';
 
 const fetchCities = async () => {
-    const res = await fetch('/api/location/city');
-    return await res.json();
-  }
+  const res = await fetch('/api/location/city');
+  return await res.json();
+}
 
 const home = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,7 +34,7 @@ const home = () => {
         ...prevOptions,
         category1: res?.result,
       }));
-    //   console.log("res---> ",res)
+      //   console.log("res---> ",res)
     });
   }, []);
 
@@ -82,33 +85,33 @@ const home = () => {
   };
   // Don't render anything until the component has hydrated on the client
   if (!isClient) return null;
-//   console.log("options is here----> ",selectedOptions)
+  //   console.log("options is here----> ",selectedOptions)
   return (
     <AppProvider>
       <Layout>
         <div className=''>
           <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
             <FontAwesomeIcon icon={faCube} className="text-2xl" />
-            <p className="md:text-[28px] text-xl text-black"> Select Destination States </p>
+            <p className="md:text-[28px] text-xl text-black">Car Home Master</p>
             <FontAwesomeIcon
               icon={faArrowRightLong}
               className=" text-teal-700 text-xl"
             />
           </div>
-          <div className=" w-full grid xl:grid-cols-2 grid-cols-1">
+          <div className=" w-full grid xl:grid-cols-2 grid-cols-1 gap-5">
             <div className='bg-white shadow-lg rounded-lg p-5'>
               <div>
-                <h3 className=" font-semibold mb-1"> Select destinations states </h3>
+                <h3 className=" font-semibold mb-1"> Select Car City</h3>
                 <select
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                   className="mb-4 p-2 w-full border rounded-md h-10 px-2 focus:border-primary outline-none"
                 >
-                  <option value="category1"> Section 1 </option>
+                  <option value="category1">Section 1</option>
                 </select>
               </div>
               <div>
-                <h3 className=" font-semibold mb-1"> Search State Wise destination </h3>
+                <h3 className=" font-semibold mb-1">Search City</h3>
                 <input
                   type="text"
                   placeholder="Search..."
@@ -119,35 +122,36 @@ const home = () => {
               </div>
               <div className="max-h-64 overflow-y-auto">
                 {filteredOptions?.length > 0 ? (
-                  filteredOptions?.map((option, index) =>{
+                  filteredOptions?.map((option, index) => {
                     // console.log("option ---> ",option)
                     return (
 
-                    <label key={index} className="flex items-center mb-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={selectedOptions[selectedCategory].includes(option._id)}
-                        onChange={() => handleCheckboxChange(option?._id)}
-                        disabled={
-                          selectedOptions[selectedCategory].length >= maxSelections &&
-                          !selectedOptions[selectedCategory].includes(option._id)
-                        }
-                        className="mr-2 accent-navyblack"
-                      />
-                      {selectedCategory === "category1" && (
-                        <span
-                          className={
+                      <label key={index} className="flex items-center mb-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={selectedOptions[selectedCategory].includes(option._id)}
+                          onChange={() => handleCheckboxChange(option?._id)}
+                          disabled={
                             selectedOptions[selectedCategory].length >= maxSelections &&
-                            !selectedOptions[selectedCategory].includes(option)
-                              ? "text-gray-400 cursor-not-allowed"
-                              : ""
+                            !selectedOptions[selectedCategory].includes(option._id)
                           }
-                        >
-                          {option?.name}
-                        </span>
-                      )}
-                    </label>
-                  )})
+                          className="mr-2 accent-navyblack"
+                        />
+                        {selectedCategory === "category1" && (
+                          <span
+                            className={
+                              selectedOptions[selectedCategory].length >= maxSelections &&
+                                !selectedOptions[selectedCategory].includes(option)
+                                ? "text-gray-400 cursor-not-allowed"
+                                : ""
+                            }
+                          >
+                            {option?.name}
+                          </span>
+                        )}
+                      </label>
+                    )
+                  })
                 ) : (
                   <p className="text-gray-500">No options found.</p>
                 )}
@@ -164,7 +168,51 @@ const home = () => {
                 Send Payload
               </button>
             </div>
+            <div className='bg-white shadow-lg rounded-lg p-5'>
+              <h2 className="text-base font-semibold mb-4">Seo Field</h2>
+              <div>
+                <h3 className=" font-semibold">Title</h3>
+                <input
+                  className="py-0.5 mb-2 w-full border rounded h-8 px-2 focus:border-primary outline-none"
+                  type="text"
+                // value={title}
+                // onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="textarea" className="mt-3 font-semibold">Description</label>
+                <textarea name="" id="textarea"
+                  className="mt-1 w-full border rounded h-28 px-2 focus:border-primary outline-none"
+                  placeholder='Enter Description Here'
+                >
+                </textarea>
+              </div>
+              <div>
+                <h3 className=" font-semibold">Canonical URL</h3>
+                <input
+                  className="py-0.5 mb-2 w-full border rounded h-8 px-2 focus:border-primary outline-none"
+                  type="text"
+                // value={title}
+                // onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div>
+                <h3 className=" font-semibold">Keyword</h3>
+                <input
+                  className="py-0.5 mb-2 w-full border rounded h-8 px-2 focus:border-primary outline-none"
+                  type="text"
+                // value={title}
+                // onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div className='flex justify-end items-center'>
+                <button className='px-5 py-1.5 bg-navyblack text-white rounded-md mt-4'>Add</button>
+              </div>
+            </div>
           </div>
+          <CarBanner />
+          <CarCarouselBanner />
+          <HeadingDesc />
         </div>
       </Layout>
     </AppProvider>

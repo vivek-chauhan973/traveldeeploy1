@@ -1,6 +1,7 @@
 import "../../app/globals.css";
 import { useEffect, useState } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import { FaGlobe, FaCar, FaHandsHelping } from 'react-icons/fa';
 import Carousel from "@/components/car-rental/CarouselCard";
 import Image from "next/image";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
@@ -11,6 +12,7 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarSelectionPopup from "@/components/car-rental/CarSelectionPopup";
 import CarCities from "@/components/car-rental/CarCities";
 import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
+import CarCarousel from "@/components/car-rental/CarCarousel";
 const fetchPromoList = async () => {
   const response = await fetch(
     `/api/public/package-state/carpromo/fetchpromocat?selectType=city`
@@ -96,8 +98,8 @@ export default function App() {
 
     fetchItineraryData();
   }, []);
-  console.log("carPackageData",carPackageData);
-  
+  console.log("carPackageData", carPackageData);
+
   useEffect(() => {
     fetchPromoList().then((res) => {
       console.log("city promo data---> ", res?.responseData);
@@ -233,9 +235,8 @@ export default function App() {
                 Hello I am Heading
               </p>
               <p
-                className={`text-[15px] pt-4 ${
-                  show ? "" : "line-clamp-6 md:line-clamp-3"
-                }`}
+                className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
+                  }`}
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Voluptatum nulla soluta officia est facere, vel eius nam, et
@@ -262,9 +263,8 @@ export default function App() {
                 </button>
                 <span>
                   <IoMdArrowDropdown
-                    className={`transition-transform  ${
-                      show ? "rotate-180" : ""
-                    } `}
+                    className={`transition-transform  ${show ? "rotate-180" : ""
+                      } `}
                     onClick={handleToggle}
                   />
                 </span>
@@ -272,9 +272,42 @@ export default function App() {
             </div>
           </div>
         </div>
+
         {/* CarCities are here */}
         <div>
           <CarCities cityPromoData={cityPromoData} />
+        </div>
+        {/* Static section are here */}
+        <div className="container-wrapper">
+          <div className="flex flex-col md:flex-row justify-between items-center pb-12 pt-4">
+            {/* Global Reach */}
+            <div className="flex flex-col max-w-xs">
+              <div className="flex items-center mb-2 gap-3">
+                <FaGlobe className="text-2xl" />
+                <h3 className="text-md font-semibold">Global reach</h3>
+              </div>
+              <p className="text-[23px]  font-semibold">2,000+ SIXT stations in over 105 countries</p>
+            </div>
+            {/* Distinctive Fleet */}
+            <div className="flex flex-col max-w-xs">
+              <div className="flex items-center mb-2 gap-3">
+                <FaCar className="text-2xl" />
+                <h3 className="text-md font-semibold">Distinctive fleet</h3>
+              </div>
+              <p className="text-[23px]  font-semibold">From high-end convertibles to premium SUVs</p>
+            </div>
+            {/* Exceptional Service */}
+            <div className="flex flex-col max-w-xs">
+              <div className="flex items-center mb-2 gap-3">
+                <FaHandsHelping className="text-2xl" />
+                <h3 className="text-md font-semibold">Exceptional service</h3>
+              </div>
+              <p className="text-[23px] font-semibold">Stress-free, trustworthy, no hidden costs</p>
+            </div>
+          </div>
+        </div>
+        <div className="container-wrapper">
+          <CarCarousel />
         </div>
         {/* Car Packages are here */}
         <div>
