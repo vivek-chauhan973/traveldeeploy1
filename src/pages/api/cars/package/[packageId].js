@@ -10,7 +10,6 @@ import CarInclusion from "@/models/car-package/package/TourInfo/Inclusion";
 import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
 import Country from "@/models/Country";
 import State from "@/models/State";
-
 // find By Id And Update
  const packageIds= async (req, res) => {
     try {
@@ -36,7 +35,7 @@ import State from "@/models/State";
                 updatedPackage = await CarPackage.findById(packageId).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
                 .populate('tourinfo.tourExclusion')
                 .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
-                .populate('tourinfo.tourNeedToKonow').populate("icons");
+                .populate('tourinfo.tourNeedToKonow').populate("icons").populate("selectedVicle");
                 const associateState = await State.findById(updatedPackage.location?.state);
                 const associateCountry = await Country.findById(associateState?.country);
                 const highlightDetails = await CarPackageHighlight.findOne({ package: updatedPackage._id }, 'highlights');

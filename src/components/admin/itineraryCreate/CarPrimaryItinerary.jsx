@@ -208,7 +208,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
         handleSelectCountry(itinerary?.associateCountry?._id);
         handleSelectState(itinerary?.associateState?._id);
         setPriority((itinerary?.priority) || "0");
-        setSelectedVicle(itinerary?.selectedVicle||"")
+        setSelectedVicle(itinerary?.selectedVicle?.vehicleType||"")
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
@@ -233,6 +233,8 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
             console.log("")
         }
     }, [itinerary]);
+
+    console.log("itineary------> ",itinerary)
     const handleSaveBasic = async () => {
         handlePackageTitle(packageTitleName);
         handleDisplayPrice(displayPrice);
