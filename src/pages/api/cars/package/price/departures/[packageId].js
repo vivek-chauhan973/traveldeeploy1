@@ -1,5 +1,5 @@
 import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
-import CarPackage from "../../../../../../models/CarPackage";
+import CarPackage1 from "@/models/CarPackage";
 import dbConnect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 const packagePriceAddguestDepartureIds= async (req, res) => {
@@ -29,7 +29,7 @@ if(item?.Save>save){
         const response=await CarPackageDeparture.findOneAndReplace({package:packageId},{package:packageId,departureData:req.body},{new:true})
 
         if(response){
-          const updatedPackage = await CarPackage.updateOne(
+          const updatedPackage = await CarPackage1.updateOne(
             {_id:packageId},
             { $set: {highSave:save,fixedDeparturePrices:response?._id } },
             { new: true }
@@ -41,7 +41,7 @@ if(item?.Save>save){
        }
        const response1=await CarPackageDeparture.create({package:packageId,departureData:req.body});
        if(response1){
-        const updatedPackage = await CarPackage.updateOne(
+        const updatedPackage = await CarPackage1.updateOne(
           {_id:packageId},
           { $set: {highSave:save, fixedDeparturePrices:response1?._id } },
           { new: true }
