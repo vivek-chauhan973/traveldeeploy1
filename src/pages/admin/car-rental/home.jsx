@@ -6,11 +6,6 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarBanner from "@/components/car-rental/CarHome/Banner";
 import HeadingDesc from "@/components/car-rental/CarHome/HeadingDesc";
 import CarCarouselBanner from "@/components/car-rental/CarHome/CarCarouselBanner";
-
-const fetchCities = async () => {
-  const res = await fetch("/api/location/city");
-  return await res.json();
-};
 const fetchCarHomeData = async () => {
   const data = await fetch("/api/cars/carhome/seoData");
   return await data.json();
@@ -24,6 +19,13 @@ const fetchAllCarPackages=async ()=>{
     console.error("Error fetching itinerary data:", error);
   }
 }
+const fetchPromoList = async () => {
+  const response = await fetch(
+    `/api/public/package-state/carpromo/fetchpromocat?selectType=city`
+  );
+  const data = await response.json();
+  return data;
+};
 const home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("category1");
@@ -49,10 +51,10 @@ const home = () => {
   useEffect(() => {
     setIsClient(true); // Mark that the client has hydrated
 
-    fetchCities().then((res) => {
+    fetchPromoList().then((res) => {
       setOptions((prevOptions) => ({
         ...prevOptions,
-        category1: res?.result,
+        category1: res?.responseData,
       }));
       //   console.log("res---> ",res)
     });
@@ -62,7 +64,7 @@ const home = () => {
         category2: res?.packages,
       }));
     })
-
+    // fetchPromoList().then(res=>console.log("res====> car city promo ",res))
     fetchCarHomeData().then((res) => {
       setTitle(res?.data?.[0]?.title);
       setCanonicalUrl(res?.data?.[0]?.canonicalUrl);
@@ -73,6 +75,9 @@ const home = () => {
 
   const maxSelections = 15; // Maximum number of options that can be selected for each category
   const filteredOptions = options[selectedCategory]?.filter((option) => {
+    if(selectedCategory==="category1"){
+      return option?.selectedItem?.toLowerCase().includes(searchQuery.toLowerCase());
+    }
     return option?.name?.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
@@ -217,7 +222,8 @@ const home = () => {
                                 : ""
                             }
                           >
-                            {option?.name}
+                            {option?.selectedItem
+                            }
                           </span>
                         )}
                         {selectedCategory === "category2" && (
