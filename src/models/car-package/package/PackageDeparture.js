@@ -4,34 +4,19 @@ const departureSchema=new Schema({
     type: String,
     required: true,
   },
-  Price: {
-    type: Number,
-    required: true,
-  },
-  Start_drop_down: {
+  Hike: {
     type: Number
   },
-  End_drop_down: {
+  Save: {
     type: Number,
   },
   GST: {
     type: String,
   },
-  Weight: {
-    type: Number,
-  },
-  Avilability:{
-    type: Number,
-  }
-
 })
 const packageDepartureSchema = new Schema(
   {
    departureData:[departureSchema],
-    departure1:{
-      type:String,
-      required:true
-    },
     package: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Package",

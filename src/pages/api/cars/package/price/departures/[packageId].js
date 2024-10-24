@@ -2,18 +2,19 @@ import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
 import CarPackage from "../../../../../../models/CarPackage";
 import dbConnect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
- const packagePriceAddguestDepartureIds= async (req, res) => {
-  const { packageId } = req?.query;
-  const {departure1,data}=req.body;
-  const data1=data?.filter(item=>item.hasOwnProperty("Weight")==true);
-let Weight=1;
-if(data1?.length!==0){
-  Weight=2;
-}
-else{
-  Weight=1;
-}
+const packagePriceAddguestDepartureIds= async (req, res) => {
+const { packageId } = req?.query;
+console.log("req------------------> body==============> ",req.body)
 // console.log("data18345634278948790353879438673489 -->",departure1)
+
+let save=0;
+for(let item of req.body){
+if(item?.Save>save){
+  save=item?.Save;
+}
+}
+// console.log("saving---------------> ",save)
+
   await dbConnect();
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
@@ -25,12 +26,12 @@ else{
        const data1=await CarPackageDeparture.findOne({package:packageId});
        if(data1){
         
-        const response=await CarPackageDeparture.findOneAndReplace({package:packageId},{package:packageId,departure1:departure1,departureData:data},{new:true})
+        const response=await CarPackageDeparture.findOneAndReplace({package:packageId},{package:packageId,departureData:req.body},{new:true})
 
         if(response){
           const updatedPackage = await CarPackage.updateOne(
             {_id:packageId},
-            { $set: { addguest: departure1,fixedfixeddepartureweightedprice:Weight,fixedDeparturePrices:response?._id } },
+            { $set: {highSave:save,fixedDeparturePrices:response?._id } },
             { new: true }
           );
 
@@ -38,11 +39,11 @@ else{
         }
 
        }
-       const response1=await CarPackageDeparture.create({package:packageId,departure1:departure1,departureData:data});
+       const response1=await CarPackageDeparture.create({package:packageId,departureData:req.body});
        if(response1){
         const updatedPackage = await CarPackage.updateOne(
           {_id:packageId},
-          { $set: { addguest: departure1,fixedfixeddepartureweightedprice:Weight,fixedDeparturePrices:response1?._id } },
+          { $set: {highSave:save, fixedDeparturePrices:response1?._id } },
           { new: true }
         );
 

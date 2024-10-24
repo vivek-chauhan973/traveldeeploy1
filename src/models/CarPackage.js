@@ -116,6 +116,10 @@ const packageSchema = new Schema({
       ref: "City",
       required: true,
     },
+    highSave:{
+      type:String,
+    },
+
     country:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Country",

@@ -12,7 +12,6 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
   const [editingIndex, setEditingIndex] = useState(null);
   const [editFormData, setEditFormData] = useState({});
   const [fixedDeparture, setFixedDeparture] = useState(null);
-  const { pricingManagement } = useAppContext();
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -61,7 +60,7 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
     //  console.log("itinerary?.addguest---> ",itinerary?.addguest)
     setFixedDeparture(itinerary?.addguest);
   }, [itinerary]);
-  // console.log("itinary is here ------> ",data);
+  console.log("itinary is here ------> ",data);
   const handleSubmit = async () => {
     try {
       const res = await fetch("/api/cars/package/price/departures/" + itinerary.id, {
@@ -69,10 +68,9 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          departure1: fixedDeparture || pricingManagement,
-          data,
-        }),
+        body: JSON.stringify(
+          data
+        ),
       });
       setActiveTab("Tab10");
     } catch (error) {
@@ -106,11 +104,9 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
                 <thead>
                   <tr className="bg-navyblack text-white text-center">
                     <th className="p-2 border">Date</th>
-                    <th className="p-2 border">Price</th>
-                    <th className="p-2 border">Start</th>
-                    <th className="p-2 border">End</th>
-                    <th className="p-2 border">Weight</th>
-                    <th className="p-2 border">Availability</th>
+                    <th className="p-2 border">Hike %</th>
+                    <th className="p-2 border">Save %</th>
+                    <th className="p-2 border">GST %</th>
                     <th className="p-2 border">Actions</th>
                   </tr>
                 </thead>
@@ -130,7 +126,7 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
                           <td className="p-2 border">
                             <input
                               name="Price"
-                              value={editFormData.Price}
+                              value={editFormData.Hike}
                               onChange={handleInputChange}
                               className="p-1 border md:text-base text-sm rounded-md text-center"
                             />
@@ -138,7 +134,7 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
                           <td className="p-2 border">
                             <input
                               name="Start_drop_down"
-                              value={editFormData.Start_drop_down}
+                              value={editFormData.Save}
                               onChange={handleInputChange}
                               className="p-1 md:text-base text-sm border rounded-md text-center"
                             />
@@ -146,27 +142,12 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
                           <td className="p-2 border">
                             <input
                               name="End_drop_down"
-                              value={editFormData.End_drop_down}
+                              value={editFormData.GST}
                               onChange={handleInputChange}
                               className="p-1 md:text-base text-sm border rounded-md text-center"
                             />
                           </td>
-                          <td className="p-2 border">
-                            <input
-                              name="Weight"
-                              value={editFormData.Weight}
-                              onChange={handleInputChange}
-                              className="p-1 border md:text-base text-sm rounded-md text-center"
-                            />
-                          </td>
-                          <td className="p-2 border">
-                            <input
-                              name="Avilability"
-                              value={editFormData.Avilability}
-                              onChange={handleInputChange}
-                              className="p-1 border md:text-base text-sm rounded-md text-center"
-                            />
-                          </td>
+                         
                           <td className="p-2 border">
                             <FontAwesomeIcon
                               icon={faFloppyDisk}
@@ -178,16 +159,12 @@ const CarFixedDeparture = ({ itinerary, setActiveTab, setPriceManagementDot }) =
                       ) : (
                         <>
                           <td className="px-1 py-2 border">{item?.Date}</td>
-                          <td className="px-1 py-2 border">{item?.Price}</td>
+                          <td className="px-1 py-2 border">{item?.Hike}</td>
                           <td className="px-1 py-2 border">
-                            {item?.Start_drop_down}
+                            {item?.Save}
                           </td>
                           <td className="px-1 py-2 border">
-                            {item?.End_drop_down}
-                          </td>
-                          <td className="px-1 py-2 border">{item?.Weight}</td>
-                          <td className="px-1 py-2 border">
-                            {item?.Avilability}
+                            {item?.GST}
                           </td>
                           <td className="px-1 py-2 border">
                             <div className="flex justify-center gap-3">
