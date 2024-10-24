@@ -15,15 +15,26 @@ const fetchCarHomeData = async () => {
   const data = await fetch("/api/cars/carhome/seoData");
   return await data.json();
 };
+const fetchAllCarPackages=async ()=>{
+  try {
+    const response = await fetch("/api/cars/package/get-packages");
+    const data = await response.json();
+     return data;
+  } catch (error) {
+    console.error("Error fetching itinerary data:", error);
+  }
+}
 const home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("category1");
   const [selectedOptions, setSelectedOptions] = useState({
     category1: [],
+    category2: [],
   });
   const [printValue, setPrintValue] = useState(0);
   const [options, setOptions] = useState({
     category1: [],
+    category2: [],
   });
   //car home seo field here
 
@@ -45,9 +56,14 @@ const home = () => {
       }));
       //   console.log("res---> ",res)
     });
+    fetchAllCarPackages().then(res=>{
+      setOptions((prevOptions) => ({
+        ...prevOptions,
+        category2: res?.packages,
+      }));
+    })
 
     fetchCarHomeData().then((res) => {
-      console.log("res of seo data", res?.data?.[0]);
       setTitle(res?.data?.[0]?.title);
       setCanonicalUrl(res?.data?.[0]?.canonicalUrl);
       setDescription(res?.data?.[0]?.description);
@@ -110,7 +126,7 @@ const home = () => {
       return alert("each field is required !!!!");
     }
     const seoData = { title, canonicalUrl, description, keyword };
-    console.log("seo data -----> ", seoData);
+    // console.log("seo data -----> ", seoData);
     try {
       const data = await fetch("/api/cars/carhome/seoData", {
         method: "POST",
@@ -119,7 +135,7 @@ const home = () => {
         },
         body: JSON.stringify(seoData),
       });
-      console.log("seo data ----> ", data?.ok);
+      // console.log("seo data ----> ", data?.ok);
       if (data.ok) {
         alert("Data add succesfully");
       } else {
@@ -152,6 +168,7 @@ const home = () => {
                   className="mb-4 p-2 w-full border rounded-md h-10 px-2 focus:border-primary outline-none"
                 >
                   <option value="category1">Section 1</option>
+                  <option value="category2">Section 2</option>
                 </select>
               </div>
               <div>
@@ -189,6 +206,21 @@ const home = () => {
                           className="mr-2 accent-navyblack"
                         />
                         {selectedCategory === "category1" && (
+                          <span
+                            className={
+                              selectedOptions[selectedCategory].length >=
+                                maxSelections &&
+                              !selectedOptions[selectedCategory].includes(
+                                option
+                              )
+                                ? "text-gray-400 cursor-not-allowed"
+                                : ""
+                            }
+                          >
+                            {option?.name}
+                          </span>
+                        )}
+                        {selectedCategory === "category2" && (
                           <span
                             className={
                               selectedOptions[selectedCategory].length >=

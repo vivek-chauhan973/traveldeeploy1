@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 export default function CarBanner() {
     const [file, setFile] = useState(null);
-    // const [preview, setPreview] = useState(null);
+    const [preview, setPreview] = useState(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [isUpdating, setIsUpdating] = useState(false);
@@ -12,40 +12,35 @@ export default function CarBanner() {
     // Function to fetch existing image
     async function fetchImage() {
         try {
-            const res = await fetch("/api/home");
+            const res = await fetch("/api/cars/carhome/carbanner");
             const data = await res.json();
             if (data.data.length > 0) {
                 const image = data.data[0];
                 setSelectedImageId(image._id);
                 setTitle(image.title);
-                setDescription(image.description);
-                // setPreview(image.path);
+                setPreview(image?.path);
                 setIsUpdating(true);
             }
         } catch (error) {
             console.error("Error fetching image:", error);
         }
     }
-
     // Fetch existing image on component mount
     useEffect(() => {
         fetchImage();
     }, []);
-
     // Function to handle file input change
     function handleChange(e) {
         const selectedFile = e.target.files[0];
         setFile(selectedFile);
-        // setPreview(URL.createObjectURL(selectedFile));
+        setPreview(URL.createObjectURL(selectedFile));
     }
-
     // Function to handle image upload or update
     async function handleUpload() {
         if (!file && !isUpdating) {
             alert("Please select a file to upload.");
             return;
         }
-
         const formData = new FormData();
         if (!file && !title) {
             alert("Please upload file and  write title");
@@ -55,13 +50,12 @@ export default function CarBanner() {
         if (file && title) {
             formData.append("file", file);
             formData.append("title", title);
-            formData.append("description", description);
         }
         if (selectedImageId) {
             formData.append("id", selectedImageId);
         }
         try {
-            const res = await fetch("/api/home", {
+            const res = await fetch("/api/cars/carhome/carbanner", {
                 method: "POST",
                 body: formData,
             });
@@ -70,9 +64,8 @@ export default function CarBanner() {
                 alert(`File ${isUpdating ? "updated" : "uploaded"} successfully`);
                 // Optionally, reset form fields or update state after successful upload
                 setFile(null);
-                // setPreview(null);
+                setPreview(null);
                 setTitle("");
-                setDescription("");
                 setIsUpdating(false);
                 setSelectedImageId(null);
                 fetchImage(); // Fetch updated image
@@ -96,7 +89,7 @@ export default function CarBanner() {
         }
 
         try {
-            const res = await fetch(`/api/home?id=${selectedImageId}`, {
+            const res = await fetch(`/api/cars/carhome/carbanner?id=${selectedImageId}`, {
                 method: "DELETE",
             });
 
@@ -104,9 +97,8 @@ export default function CarBanner() {
                 alert("Video removed successfully");
                 // Reset state after successful removal
                 setFile(null);
-                // setPreview(null);
+                setPreview(null);
                 setTitle("");
-                setDescription("")
                 setIsUpdating(false);
                 setSelectedImageId(null);
                 fetchImage(); // Fetch updated image list
@@ -138,7 +130,7 @@ export default function CarBanner() {
                     <div className="flex md:flex-row flex-col md:gap-10 gap-5 my-7 items-center xl:pl-5">
                         <div className=" flex flex-1">
                             <input type="file" className="mb-4 ml-3" onChange={handleChange} />
-                            {/* <div>
+                            <div>
                   {preview && (
                     <Image
                       className="md:w-36 w-auto h-auto shadow-md mb-4"
@@ -148,7 +140,7 @@ export default function CarBanner() {
                       height={200}
                     />
                   )}
-                </div> */}
+                </div>
                     </div>
                         <div className="flex-1">
                             <div>

@@ -1,4 +1,5 @@
 import CarHome from "@/models/car-package/CarHome";
+import CarPackage1 from "@/models/CarPackage";
 import City from "@/models/City";
 const destinationHeader=async (req,res)=>{
   const {category,selectedOptions}=req.body;
@@ -31,6 +32,9 @@ const destinationHeader=async (req,res)=>{
         const options = await Promise.all(item.options.map(async (id) => {
         if(item.category==="category1"){
           return City.findById(id).exec();
+        }
+        if(item.category==="category2"){
+          return CarPackage1.findById(id).exec();
         }
         
       }));

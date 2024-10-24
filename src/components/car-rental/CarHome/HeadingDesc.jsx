@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
-
+const fetchHeading1=async ()=>{
+  const data = await fetch("/api/cars/carhome/heading1")
+  return await data.json();
+}
+const fetchHeading2=async ()=>{
+  const data = await fetch("/api/cars/carhome/heading2")
+  return await data.json();
+}
 const HeadingDesc = () => {
   const [heading1,setHeading1]=useState("");
   const [description1,setDescription1]=useState("");
   const [heading2,setHeading2]=useState("");
   const [description2,setDescription2]=useState("");
 
+  useEffect(()=>{
+    fetchHeading1().then(res=>{
+      setHeading1(res?.data?.[0]?.heading1||"")
+      setDescription1(res?.data?.[0]?.description1||"")
+    })
+    fetchHeading2().then(res=>{
+      setHeading2(res?.data?.[0]?.heading2||"")
+      setDescription2(res?.data?.[0]?.description2||"")
+    })
+  },[])
  const handleHeading1=async ()=>{
     if(!heading1 || !description1){
       return alert("Each fields are required")
