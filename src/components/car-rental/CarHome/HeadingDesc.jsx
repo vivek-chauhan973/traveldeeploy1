@@ -1,8 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 
 const HeadingDesc = () => {
+  const [heading1,setHeading1]=useState("");
+  const [description1,setDescription1]=useState("");
+  const [heading2,setHeading2]=useState("");
+  const [description2,setDescription2]=useState("");
+
+ const handleHeading1=async ()=>{
+    if(!heading1 || !description1){
+      return alert("Each fields are required")
+    }
+    const data1={heading1,description1};
+    try {
+      const data = await fetch("/api/cars/carhome/heading1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data1),
+      });
+      console.log("seo data ----> ", data?.ok);
+      if (data.ok) {
+        alert("Data add succesfully");
+      } else {
+        alert("Something went wrong");
+      }
+    } catch (error) {
+      console.log("something went wrong");
+    }
+ }
+ const handleHeading2=async ()=>{
+  if(!heading2 || !description2){
+    return alert("Each fields are required")
+  }
+  const data2={heading2,description2};
+  try {
+    const data = await fetch("/api/cars/carhome/heading2", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data2),
+    });
+    console.log("seo data ----> ", data?.ok);
+    if (data.ok) {
+      alert("Data add succesfully");
+    } else {
+      alert("Something went wrong");
+    }
+  } catch (error) {
+    console.log("something went wrong");
+  }
+  
+ }
   return (
     <>
       <div className="flex items-center gap-5 text-primary xl:mt-5 mb-5">
@@ -21,8 +73,8 @@ const HeadingDesc = () => {
             <input
               className="py-0.5 mb-2 w-full border rounded h-8 px-2 focus:border-primary outline-none"
               type="text"
-              // value={title}
-              // onChange={(e) => setTitle(e.target.value)}
+              value={heading1}
+              onChange={(e) => setHeading1(e.target.value)}
               placeholder="Enter Title Here"
             />
           </div>
@@ -35,9 +87,11 @@ const HeadingDesc = () => {
               id="textarea"
               className="mt-1 w-full border rounded h-44 px-2 focus:border-primary outline-none"
               placeholder="Enter Description Here"
+              value={description1}
+              onChange={(e) => setDescription1(e.target.value)}
             ></textarea>
             <div className="flex justify-end items-center">
-              <button className="px-5 py-1.5 bg-navyblack text-white rounded-md mt-4">
+              <button onClick={handleHeading1} className="px-5 py-1.5 bg-navyblack text-white rounded-md mt-4">
                 Add
               </button>
             </div>
@@ -50,8 +104,8 @@ const HeadingDesc = () => {
             <input
               className="py-0.5 mb-2 w-full border rounded h-8 px-2 focus:border-primary outline-none"
               type="text"
-              // value={title}
-              // onChange={(e) => setTitle(e.target.value)}
+              value={heading2}
+              onChange={(e) => setHeading2(e.target.value)}
               placeholder="Enter Title Here"
             />
           </div>
@@ -64,9 +118,11 @@ const HeadingDesc = () => {
               id="textarea2"
               className="mt-1 w-full border rounded h-44 px-2 focus:border-primary outline-none"
               placeholder="Enter Description Here"
+              value={description2}
+              onChange={(e) => setDescription2(e.target.value)}
             ></textarea>
             <div className="flex justify-end items-center">
-              <button className="px-5 py-1.5 bg-navyblack text-white rounded-md mt-4">
+              <button onClick={handleHeading2} className="px-5 py-1.5 bg-navyblack text-white rounded-md mt-4">
                 Add
               </button>
             </div>

@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-import Layout from "@/components/admin/Layout";
-
 export default function CarBanner() {
     const [file, setFile] = useState(null);
     // const [preview, setPreview] = useState(null);
@@ -12,7 +9,6 @@ export default function CarBanner() {
     const [description, setDescription] = useState("");
     const [isUpdating, setIsUpdating] = useState(false);
     const [selectedImageId, setSelectedImageId] = useState(null);
-
     // Function to fetch existing image
     async function fetchImage() {
         try {
@@ -61,11 +57,9 @@ export default function CarBanner() {
             formData.append("title", title);
             formData.append("description", description);
         }
-
         if (selectedImageId) {
             formData.append("id", selectedImageId);
         }
-
         try {
             const res = await fetch("/api/home", {
                 method: "POST",

@@ -2,12 +2,10 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from 'react';
-
 const fetchCrouselData=async ()=>{
-    const data=await fetch("/api/home/crousel");
+    const data=await fetch("/api/cars/carhome/carCrousel");
     return await data.json();
 }
-
 export default function CarouselBanner() {
     
     const [formData, setFormData] = useState({
@@ -53,7 +51,7 @@ export default function CarouselBanner() {
             form.append("description",formData.description);
             form.append("url",formData.url);
 
-            const data=await fetch('/api/home/crousel',{
+            const data=await fetch('/api/cars/carhome/carCrousel',{
                 method:"POST",
                 body:form
             });
@@ -108,7 +106,7 @@ export default function CarouselBanner() {
     const handleDelete = async (index) => {
         const updatedItems = crouselData.filter((item) => item?._id !== index); // Filter out the item to delete
         setCrouselData(updatedItems);
-      const data=await fetch(`/api/home/crousel?id=${index}`,{
+      const data=await fetch(`/api/cars/carhome/carCrousel?id=${index}`,{
         method:"DELETE"
       })
       if(data){
