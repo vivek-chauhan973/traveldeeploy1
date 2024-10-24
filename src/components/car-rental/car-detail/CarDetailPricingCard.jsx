@@ -1,8 +1,10 @@
 import "../../../app/globals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const CardDetailPricingCard = () => {
+const CardDetailPricingCard = ({ carPackage }) => {
+    const seatingCapacity = carPackage?.selectedVicle?.seatingCapacity || 0;
+    console.log("seatingCapacity", seatingCapacity);
 
     return (
         <>
@@ -15,15 +17,15 @@ const CardDetailPricingCard = () => {
                             </h5>
                             <div>
                                 <FontAwesomeIcon
-                                icon={faPenToSquare}
-                                className="font1 cursor-pointer"
+                                    icon={faPenToSquare}
+                                    className="font1 cursor-pointer"
                                 />
                             </div>
                         </div>
                         <hr />
                     </div>
                     <div className="">
-                        <div className="flex mb-2.5 mt-3 text-sm">
+                        <div className="flex my-3 text-sm">
                             <p className=" w-20">PickUp Loc : </p>
                             <p className="font-semibold text-graytext capitalize">Mumbai</p>
                         </div>
@@ -34,28 +36,29 @@ const CardDetailPricingCard = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3">
+                    <div className="flex xl:block xl:justify-center xl:items-center flex-col md:gap-3 my-3">
                         <div>
                             <div className="flex gap-4 justify-between items-center md:pr-5 pr-1">
                                 <label
                                     className="text-sm font-semibold cursor-pointer capitalize"
-                                    htmlFor="city"
+                                    htmlFor="travellers"
                                 >
                                     Number Of Travellers :{" "}
                                 </label>
                                 <select
                                     name="travellers"
                                     id="travellers"
-                                    className="border rounded w-1/2 pl-3 cursor-pointer"
+                                    className="border rounded w-1/2 pl-3 cursor-pointer focus:border-primary outline-none"
+                                    disabled={!seatingCapacity}  // Disable if seating capacity is 0 or not set
                                 >
                                     <option value="" className="cursor-pointer">
                                         Select Person
                                     </option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    {[...Array(seatingCapacity)].map((_, i) => (
+                                        <option key={i + 1} value={i + 1}>
+                                            {i + 1}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                             {/* {fixedDepCity ? null : ( */}
@@ -67,7 +70,9 @@ const CardDetailPricingCard = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-1">
                         <p className="text-sm font-semibold">Base Price</p>
-                        <p className="text-md font-medium text-graytext">₹ 20,000 </p>
+                        <p className="text-md font-medium text-graytext">
+                            {carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                        </p>
                     </div>
                     <hr className="border-dashed my-2 " />
                     <div className="text-para  grid-cols-2 my-3 grid pr-1">

@@ -39,13 +39,15 @@ const CarPromoHeroSection = ({ cityPromoData }) => {
           onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
         />
         <div className="box-Shadow-Style-Package  justify-end  gap-3  absolute z-10 w-full  py-5  bottom-0 ">
-          <h1 className="absolute uppercase font-bold xl:text-[38px] md:text-[32px] text-xl italic md:bottom-5 bottom-2 xl:right-16 md:right-5 right-4 text-white">{cityPromoData?.selectedItem} {"Car Promo"}</h1>
+          <h1 className="absolute uppercase font-bold xl:text-[38px] md:text-[32px] text-xl italic md:bottom-5 bottom-2 xl:right-16 md:right-5 right-4 text-white">
+            {cityPromoData?.selectedItem} {"Taxi Service"}
+          </h1>
         </div>
       </div>
       <div className="container-wrapper py-5 ">
         <div className="grid md:grid-cols-[1.8fr,1.2fr] ">
           <div className="text-wrap">
-            <h4 className="md:text-xl text-md font-medium mb-2 capitalize">{cityPromoData?.selectedItem} {"Car Promo"}</h4>
+            <h4 className="md:text-xl text-md font-medium mb-2 capitalize">{cityPromoData?.selectedItem} {"Taxi Service"}</h4>
             <div className={`text-para  ${show ? "" : "line-clamp-3"}`}>
               <p className="about-margin"
                 dangerouslySetInnerHTML={{ __html: cityPromoData?.description }}

@@ -3,7 +3,7 @@ import "../../../app/globals.css";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image'
 
-const CarItineraryTourDetails = () => {
+const CarItineraryTourDetails = ({ carPackage }) => {
     const [activeTab, setActiveTab] = useState("tab1");
     const handleTabClick = (tour_details) => {
         setActiveTab(tour_details);
@@ -29,20 +29,16 @@ const CarItineraryTourDetails = () => {
                     <div className={`py-4  pl-5 pr-4  ${activeTab === 'tab1' ? 'block' : 'hidden'}`}>
                         {
                             <p className="text-para marker:text-green-800 payment-margin"
-                                // dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.inclusion?.description }}
+                                dangerouslySetInnerHTML={{ __html: carPackage?.TourInformations?.inclusion?.description }}
                             >
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Voluptatibus suscipit exercitationem, consequuntur similique eligendi quia ab ad quidem inventore itaque.
                             </p>
                         }
                     </div>
                     <div className={` py-4  pl-5 pr-4 ${activeTab === 'tab2' ? 'block' : 'hidden'}`}>
                         {
-                            <p className="text-para marker:text-red-800 payment-margin" 
-                            // dangerouslySetInnerHTML={{ __html: addPackage?.TourInformations?.exclusion?.description }} 
+                            <p className="text-para marker:text-red-800 payment-margin"
+                                dangerouslySetInnerHTML={{ __html: carPackage?.TourInformations?.exclusion?.description }}
                             >
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Dolores quae minima consequatur quidem impedit perferendis consequuntur autem, dolore itaque corrupti.
                             </p>
                         }
                     </div>

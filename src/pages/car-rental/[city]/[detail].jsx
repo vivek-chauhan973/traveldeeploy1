@@ -23,12 +23,12 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 const fetchCarPackage = async (packageUrl) => {
     // console.log("page url :: ",packageUrl)
     const response = await fetch(`/api/cars/public/${packageUrl}`, {
-      method: "GET",
+        method: "GET",
     });
     const data = await response.json();
     // console.log("..............................",packageUrl)
     return data;
-  };
+};
 
 export default function CarDetail() {
 
@@ -36,15 +36,15 @@ export default function CarDetail() {
     const { detail } = router.query
     const package1 = detail?.replace("-tour-package", "")
 
-    const [carPackage,setCarPackage]=useState({})
+    const [carPackage, setCarPackage] = useState({})
 
     // console.log("package1", package1);
-    useEffect(()=>{
-        if(package1){
-        fetchCarPackage(package1).then(res=> {setCarPackage(res||{})})
+    useEffect(() => {
+        if (package1) {
+            fetchCarPackage(package1).then(res => { setCarPackage(res || {}) })
         }
-      },[package1])
-      console.log("car Renatl response ==>",carPackage);
+    }, [package1])
+    console.log("car Rental package detail response ---->", carPackage);
 
     const handleSendItinerary = () => {
         const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
@@ -101,19 +101,21 @@ export default function CarDetail() {
                 <div>
                     <CarDetailHeroSection />
                     <div className="w-full h-20 bg-[#FF6600] flex flex-col justify-center items-center mb-3">
-                        <h1 className="font-bold capitalize">Chardham Yatra From Innova Crysta</h1>
+                        <h1 className="font-bold capitalize">
+                            {carPackage?.name} from {carPackage?.selectedVicle?.vehicleType}
+                        </h1>
                     </div>
                     <div className="container-wrapper">
                         <div className="flex justify-between">
                             <div>
                                 <h2 className=" text-lg md:text-lg font-semibold capitalize my-2">
-                                    Vehicle Type : Innova Crysta
+                                    Vehicle Type : {carPackage?.selectedVicle?.vehicleType}
                                 </h2>
                                 <button
                                     className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white">
                                     badge
                                 </button>
-                                <p className="md:text-md text-[16px] my-2">Ex City : New Delhi</p>
+                                <p className="md:text-md text-[16px] my-2 capitalize">Ex City : {carPackage?.startcity}</p>
                             </div>
                             <div className="flex gap-5">
                                 <div className="text-right flex flex-col items-end justify-center ">
@@ -129,7 +131,7 @@ export default function CarDetail() {
                                     <p className="text-sm leading-5">
                                         with GST include {" "}
                                         <span className="text-lg text-graytext font-medium">
-                                            ₹
+                                            {carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                         </span>
                                     </p>
                                 </div>
@@ -162,9 +164,9 @@ export default function CarDetail() {
                         </div>
                         <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
                             {/* Calender, About & Highlight */}
-                            <CarDepartureSection />
+                            <CarDepartureSection carPackage={carPackage}/>
                             {/* Booking Summary */}
-                            <CardDetailPricingCard />
+                            <CardDetailPricingCard carPackage={carPackage}/>
                         </div>
                     </div>
                 </div>
@@ -270,27 +272,23 @@ export default function CarDetail() {
                             </div>
                             <div>
                                 <p className="text-para leading-relaxed  pb-5">
-                                    {/* {addPackage?.dayWiseInformation} */}
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Impedit voluptate, corporis unde corrupti dolores rem accusamus neque aliquam tempore deserunt cumque explicabo quae maxime non laudantium,
-                                    iusto sit quam temporibus harum fuga esse odit itaque? Dolor, sequi et.
-                                    Ab assumenda fuga consectetur ex nesciunt explicabo perspiciatis reprehenderit odio, debitis accusamus.
+                                    {carPackage?.dayWiseInformation}
                                 </p>
                             </div>
                             {/* Car Itinerary is here */}
                             <div className="mb-7">
-                                <CarItineraryFaq />
+                                <CarItineraryFaq carPackage={carPackage} />
                             </div>
                             {/* Itinerary map is here*/}
                             <div>
-                                <CarItinerarymap />
+                                <CarItinerarymap carPackage={carPackage} />
                             </div>
                             {/* <!- Tour Details is here --> */}
-                            <CarItineraryTourDetails />
+                            <CarItineraryTourDetails carPackage={carPackage} />
 
                             {/* Privacy policy Terms */}
                             <div id="Policy&TermsSection" className="pt-7">
-                                <CarItineraryPaymentTerms />
+                                <CarItineraryPaymentTerms carPackage={carPackage} />
                             </div>
                             {/* be responsible */}
                             <div className="pt-7">
@@ -447,7 +445,7 @@ export default function CarDetail() {
 
                 {/* Car reviewsCard */}
                 <div className="my-7">
-                    <CarReviewsCard />
+                    <CarReviewsCard carPackage={carPackage}/>
                 </div>
 
                 {/* Similar Car package */}
@@ -468,7 +466,7 @@ export default function CarDetail() {
                             enjoyable travel experience.
                         </p>
                     </div>
-                    <CarDetailFaq />
+                    <CarDetailFaq carPackage={carPackage} />
                 </div>
 
                 {/* bottom link is here*/}

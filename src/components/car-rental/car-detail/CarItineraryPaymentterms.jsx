@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../../../app/globals.css";
 
 
-const CarItineraryPaymentTerms = () => {
+const CarItineraryPaymentTerms = ({ carPackage }) => {
     const [activeTab, setActiveTab] = useState("tab1");
     const handleTabClick = (tour_details) => {
         setActiveTab(tour_details);
@@ -19,15 +19,12 @@ const CarItineraryPaymentTerms = () => {
                 </p>
                 <p
                     className="py-3 pl-4 text-para payment-margin"
-                //   dangerouslySetInnerHTML={{
-                //     __html: addPackage?.TourInformations?.paymentTerm?.description,
-                //   }}
+                  dangerouslySetInnerHTML={{
+                    __html: carPackage?.TourInformations?.paymentTerm?.description,
+                  }}
                 >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Impedit voluptate, corporis unde corrupti dolores rem accusamus neque aliquam tempore deserunt cumque.
                 </p>
             </div>
-
             <div>
                 <div id="TourDetailsSection">
                     <div className="flex justify-between mt-2  gap-2 border-b-2 border-navyblack">
@@ -58,16 +55,12 @@ const CarItineraryPaymentTerms = () => {
                             <div className="py-3">
                                 {
                                     <p
-                                    // className="text-para marker:text-green-800 payment payment-margin"
-                                    // dangerouslySetInnerHTML={{
-                                    //   __html:
-                                    //     addPackage?.TourInformations?.cancellation?.description,
-                                    // }}
+                                    className="text-para marker:text-green-800 payment payment-margin"
+                                    dangerouslySetInnerHTML={{
+                                      __html:
+                                        carPackage?.TourInformations?.cancellation?.description,
+                                    }}
                                     >
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Impedit voluptate, corporis unde corrupti dolores rem accusamus neque aliquam tempore deserunt cumque explicabo quae maxime non laudantium,
-                                        iusto sit quam temporibus harum fuga esse odit itaque? Dolor, sequi et.
-                                        Ab assumenda fuga consectetur ex nesciunt explicabo perspiciatis reprehenderit odio, debitis accusamus.
                                     </p>
                                 }
                             </div>
@@ -79,15 +72,11 @@ const CarItineraryPaymentTerms = () => {
                             {
                                 <p
                                     className="text-para marker:text-red-800 payment payment-margin"
-                                //   dangerouslySetInnerHTML={{
-                                //     __html:
-                                //       addPackage?.TourInformations?.needToKnow?.description,
-                                //   }}
+                                  dangerouslySetInnerHTML={{
+                                    __html:
+                                      carPackage?.TourInformations?.needToKnow?.description,
+                                  }}
                                 >
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Impedit voluptate, corporis unde corrupti dolores rem accusamus neque aliquam tempore deserunt cumque explicabo quae maxime non laudantium,
-                                    iusto sit quam temporibus harum fuga esse odit itaque? Dolor, sequi et.
-                                    Ab assumenda fuga consectetur ex nesciunt explicabo perspiciatis reprehenderit odio, debitis accusamus.
                                 </p>
                             }
                         </div>

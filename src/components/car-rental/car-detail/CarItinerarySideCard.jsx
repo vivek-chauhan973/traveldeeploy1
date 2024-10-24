@@ -4,7 +4,7 @@ import Link from "next/link";
 
 
 
-const CarItinerarySideCard = () => {
+const CarItinerarySideCard = ({carPackage}) => {
 
     return (
         <>

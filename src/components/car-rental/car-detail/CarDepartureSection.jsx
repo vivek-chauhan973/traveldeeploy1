@@ -1,6 +1,6 @@
 import "../../../app/globals.css";
 
-const CarDepartureSection = () => {
+const CarDepartureSection = ({ carPackage }) => {
 
     return (
         <>
@@ -36,8 +36,8 @@ const CarDepartureSection = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>                        
-                            </div>                                       
+                                </div>
+                            </div>
                             <hr />
                             <div className="ml-2 my-4">
                                 <h6 className="font-semibold text-md mb-3 text-graytext">
@@ -45,41 +45,40 @@ const CarDepartureSection = () => {
                                 </h6>
                                 <p
                                     className="xl:ml-3 ml-0 mr-2 about-margin text-para"
-                                // dangerouslySetInnerHTML={{ __html: addPackage?.about }}
-                                >About Text</p>
+                                    dangerouslySetInnerHTML={{ __html: carPackage?.about }}
+                                >
+                                </p>
                             </div>
                             <div className="md:mx-5 ">
                                 <div className="md:my-7 my-5 overflow-x-scroll">
                                     <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
                                         <thead>
                                             <tr className="border-b bg-black text-white">
-                                                {/* {columns.map((col, index) => ( */}
-                                                <th
-                                                    // key={index}
-                                                    className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider"
-                                                >
-                                                    {/* {col} */}
-                                                    ABC
-                                                </th>
-                                                {/* ))} */}
+                                                {carPackage?.tableColumn?.map((col, index) => (
+                                                    <th
+                                                        key={index}
+                                                        className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider"
+                                                    >
+                                                        {col}
+                                                    </th>
+                                                ))}
                                             </tr>
                                         </thead>
                                         <tbody className="bg-gray-100">
-                                            {/* {submittedData.map((row, rowIndex) => ( */}
-                                            <tr
-                                            // key={rowIndex}
-                                            >
-                                                {/* {columns.map((col, colIndex) => ( */}
-                                                <td
-                                                    // key={colIndex}
-                                                    className="   border-t border-l  border-r px-2 py-2   capitalize overflow-hidden border-gray-300  text-wrap"
+                                            {carPackage?.tableData?.map((row, rowIndex) => (
+                                                <tr
+                                                    key={rowIndex}
                                                 >
-                                                    {/* {row[col]} */}
-                                                    XYZ
-                                                </td>
-                                                {/* ))} */}
-                                            </tr>
-                                            {/* ))} */}
+                                                    {carPackage?.tableColumn?.map((col, colIndex) => (
+                                                        <td
+                                                            key={colIndex}
+                                                            className="   border-t border-l  border-r px-2 py-2   capitalize overflow-hidden border-gray-300  text-wrap"
+                                                        >
+                                                            {row[col]}
+                                                        </td>
+                                                    ))}
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
@@ -90,16 +89,15 @@ const CarDepartureSection = () => {
                                     Highlights
                                 </h6>
                                 <div>
-                                    {/* {addPackage?.highlights?.map((highlight) => ( */}
-                                    <ul
-                                        // key={highlight._id} 
-                                        className="ml-3">
-                                        <li className="xl:ml-5 ml-2 mr-2 text-para">
-                                            {/* {highlight.text} */}
-                                            highlighted Text
-                                        </li>
-                                    </ul>
-                                    {/* ))} */}
+                                    {carPackage?.highlights?.map((highlight) => (
+                                        <ul
+                                            key={highlight?._id}
+                                            className="ml-3">
+                                            <li className="xl:ml-5 ml-2 mr-2 text-para">
+                                                {highlight.text}
+                                            </li>
+                                        </ul>
+                                    ))}
                                 </div>
                             </div>
                         </div>

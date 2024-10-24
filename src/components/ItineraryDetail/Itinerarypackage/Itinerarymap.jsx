@@ -2,12 +2,13 @@ import Image from "next/image";
 import "../../../app/globals.css";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState } from "react";
+
 const fetchPackageImage=async (addPackage)=>{
     const res = await fetch(`/api/package/map/${addPackage?._id}`);
     const data = await res.json();
     return data;
-
 }
+
 const Itinerarymap= ()=>{
     const {addPackage}=useAppContext();
     const [map,setMap]=useState(null);

@@ -10,7 +10,7 @@ const GoogleMap = ({ setActiveTab, itinerary, setMapDot }) => {
     useEffect(() => {
         const fetchMapData = async () => {
             try {
-                const response = await fetch(`/api/package/map/${itinerary?._id}`);
+                const response = await fetch(`/api/cars/package/map/${itinerary?._id}`);
                 const mapData = await response.json();
                 setMapCode(mapData?.mapCode || `<iframe src="https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d1775308.9495838394!2d76.49413919267015!3d29.65015654236281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x390ce65f77cae949%3A0x7c768dbb3f78e57!2sBadarpur%2C%20New%20Delhi%2C%20Delhi!3m2!1d28.5102495!2d77.2985884!4m5!1s0x390d1d8ac24be307%3A0xa330ba8a64a3496!2sDeer%20Park%2C%20Hauz%20Khas%2C%20New%20Delhi%2C%20Delhi!3m2!1d28.5549523!2d77.1916497!4m5!1s0x390ce18b0710088f%3A0x99748c2a6daa196f!2sTresor%2C%20Saket%20-%20Apple%20Authorised%20Service%20Provider%2C%20Shop%20No.144%2C%20GF%2C%20South%20Court%20Mall%2C%20Saket%2C%20New%20Delhi%2C%20Delhi%20110017!3m2!1d28.528387199999997!2d77.22020309999999!4m5!1s0x390ce65f77cae949%3A0x7c768dbb3f78e57!2sBadarpur%2C%20New%20Delhi%2C%20Delhi!3m2!1d28.5102495!2d77.2985884!4m5!1s0x3908ed2ff38e31ef%3A0x7fdeebfe93c9add1!2sUttarkashi%2C%20Uttarakhand!3m2!1d30.726830699999997!2d78.4354042!4m5!1s0x3908bbff103db101%3A0x41b1a0ecb9af8513!2sBarkot%2C%20Uttarakhand%20249141!3m2!1d30.8096653!2d78.20916129999999!5e0!3m2!1sen!2sin!4v1713600662509!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`);
 
@@ -31,7 +31,7 @@ const GoogleMap = ({ setActiveTab, itinerary, setMapDot }) => {
 
     const handleSubmit = async () => {
         try {
-            const res = await fetch(`/api/package/map/${itinerary?._id}`, {
+            const res = await fetch(`/api/cars/package/map/${itinerary?._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
