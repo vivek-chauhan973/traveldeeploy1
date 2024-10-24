@@ -1,6 +1,11 @@
+import { useState } from "react";
 import "../../../app/globals.css";
+import CarDeparturePopup from "./CarDeparture & booking/CarDeparturePopup";
 
 const CarDepartureSection = ({ carPackage }) => {
+    const [showPopup, setShowPopup] = useState(false);
+    const data = carPackage?.prices?.departureData;
+    console.log("departureData", data);
 
     return (
         <>
@@ -14,27 +19,39 @@ const CarDepartureSection = ({ carPackage }) => {
                         </div>
                         <hr />
                         <div className="overflow-y-auto">
+                        {showPopup && (
+                            <CarDeparturePopup setShowPopup={setShowPopup}/>
+                        )}
                             {/* Display the current month's calendar */}
                             <div className=" ml-5">
                                 <div className="my-5">
                                     <div className="flex gap-3 flex-wrap">
-                                        <div className="cursor-pointer">
-                                            <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 rounded-md overflow-hidden">
-                                                <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
-                                                    SUN
-                                                </p>
-                                                <hr />
-                                                <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
-                                                    11
-                                                </p>
-                                                <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                                    ₹ 40,000
+                                        {data?.map((item, index) => {
+                                            const dateObj = new Date(item.Date);
+                                            const dayOfWeek = dateObj.toLocaleString(
+                                                "default",
+                                                { weekday: "short" }
+                                            );
+                                            return (
+                                                <div className="cursor-pointer" key={index}>
+                                                    <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 rounded-md overflow-hidden">
+                                                        <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
+                                                        {dayOfWeek}
+                                                        </p>
+                                                        <hr />
+                                                        <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
+                                                            {item?.Date}
+                                                        </p>
+                                                        <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
+                                                            {carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                        </div>
+                                                        <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
+                                                            {item?.Save > 0 && <p>Save {item?.Save}%</p>}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
-                                                    <p>Save 10%</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             </div>

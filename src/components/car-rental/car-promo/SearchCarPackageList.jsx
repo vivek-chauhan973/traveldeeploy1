@@ -26,13 +26,15 @@ const SearchCarPagePackageList = ({ carPackageList }) => {
                                 }}
                             />
                         </div>
-                        <div className="absolute top-3">
-                            <div className="rounded-r-sm px-2 bg-black"> {/* bg-gradient-to-r from-cyan-500 to-blue-500 */}
-                                <p className="py-1 text-sm text-white">
-                                    Save 10% 
-                                </p>
+                        {items?.highSave > 0 &&
+                            <div className="absolute top-3">
+                                <div className="rounded-r-sm px-2 bg-black"> {/* bg-gradient-to-r from-cyan-500 to-blue-500 */}
+                                    <p className="py-1 text-sm text-white">
+                                        Save {items?.highSave}%
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        }
                         <div className="mx-6 md:m-0 mt-2 md:w-[35%] mb-3">
                             <div>
                                 <div className="flex items-center justify-between mb-1.5 md:max-h-14">
@@ -109,7 +111,7 @@ const SearchCarPagePackageList = ({ carPackageList }) => {
                             </div>
                             <div className="flex flex-cols">
                                 <Link
-                                    href={ "/car-rental/"+ items.location.url+"/" + items.pageUrl}
+                                    href={"/car-rental/" + items.location.url + "/" + items.pageUrl}
                                     className="mt-3 block w-full select-none rounded-lg bg-gradient-to-r from-orange-500 to-red-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
                                     type="button"
                                 >
