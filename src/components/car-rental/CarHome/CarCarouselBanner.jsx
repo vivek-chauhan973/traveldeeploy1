@@ -2,13 +2,11 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from 'react';
-
 const fetchCrouselData=async ()=>{
-    const data=await fetch("/api/home/crousel");
+    const data=await fetch("/api/cars/carhome/carCrousel");
     return await data.json();
 }
-
-export default function CarCarouselBanner() {
+export default function CarouselBanner() {
     
     const [formData, setFormData] = useState({
         image: null,
@@ -53,7 +51,7 @@ export default function CarCarouselBanner() {
             form.append("description",formData.description);
             form.append("url",formData.url);
 
-            const data=await fetch('/api/home/crousel',{
+            const data=await fetch('/api/cars/carhome/carCrousel',{
                 method:"POST",
                 body:form
             });
@@ -108,7 +106,7 @@ export default function CarCarouselBanner() {
     const handleDelete = async (index) => {
         const updatedItems = crouselData.filter((item) => item?._id !== index); // Filter out the item to delete
         setCrouselData(updatedItems);
-      const data=await fetch(`/api/home/crousel?id=${index}`,{
+      const data=await fetch(`/api/cars/carhome/carCrousel?id=${index}`,{
         method:"DELETE"
       })
       if(data){
@@ -121,7 +119,7 @@ export default function CarCarouselBanner() {
         <>
             <div className="flex items-center gap-5 text-primary my-10">
                 <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                <p className="md:text-[28px] text-xl text-black">Car Carousel Banner Management</p>
+                <p className="md:text-[28px] text-xl text-black">Carousel Banner Management</p>
                 <FontAwesomeIcon
                     icon={faArrowRightLong}
                     className=" text-teal-700 text-xl"
@@ -131,7 +129,7 @@ export default function CarCarouselBanner() {
                 {/* Conditionally render the form and image section */}
                 <div className="grid md:grid-cols-2 border-b-2 border-gray-100">
                     <div>
-                        <p className="md:text-lg text-base font-semibold">Car Carousel Banner Image</p>
+                        <p className="md:text-lg text-base font-semibold">Carousel Banner Image</p>
                         <div className="py-5 xl:pl-10 md:pl-2">
                             <input
                                 type="file"
@@ -307,3 +305,4 @@ export default function CarCarouselBanner() {
         </>
     )
 }
+
