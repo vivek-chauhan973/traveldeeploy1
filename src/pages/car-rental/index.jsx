@@ -80,6 +80,30 @@ const FAQSection = ({ question, answer }) => {
   );
 };
 
+//all api is here --------------------------------> 
+
+const fetchAllSection=async ()=>{
+  const data=await fetch("/api/cars/carhome");
+  return await data.json();
+}
+const fetchCarBanner=async ()=>{
+  const data=await fetch("/api/cars/carhome/carbanner");
+  return await data.json();
+}
+const fetchHeading1=async ()=>{
+  const data=await fetch("/api/cars/carhome/heading1");
+  return await data.json();
+}
+const fetchHeading2=async ()=>{
+  const data=await fetch("/api/cars/carhome/heading2");
+  return await data.json();
+}
+const fetchCarousel=async ()=>{
+  const data=await fetch("/api/cars/carhome/carCrousel");
+  return await data.json();
+}
+
+
 export default function App() {
   const [cityPromoData, setCityPromoData] = useState([]);
   const [carPackageData, seCarPackageData] = useState([]);
@@ -89,20 +113,24 @@ export default function App() {
       try {
         const response = await fetch("/api/cars/package/get-packages");
         const data = await response.json();
-        console.log("all packages list is here ---> ", data);
         seCarPackageData(data.packages || []); // Provide a default empty array if data.packages is undefined
       } catch (error) {
-        console.error("Error fetching itinerary data:", error);
       }
     };
 
     fetchItineraryData();
+    fetchAllSection().then(res=>console.log("all section data is here ----> ",res))
+    fetchCarBanner().then(res=>console.log("all section fetchCarBanner data is here ----> ",res))
+    
+    fetchHeading1().then(res=>console.log("all section fetchHeading1 data is here ----> ",res))
+    fetchHeading2().then(res=>console.log("all section fetchHeading2 data is here ----> ",res))
+
+    fetchCarousel().then(res=>console.log("all section fetchCarousel data is here ----> ",res))
   }, []);
-  console.log("carPackageData", carPackageData);
+
 
   useEffect(() => {
     fetchPromoList().then((res) => {
-      console.log("city promo data---> ", res?.responseData);
       setCityPromoData(res?.responseData || []);
     });
   }, []);

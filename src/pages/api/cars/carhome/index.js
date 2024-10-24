@@ -1,4 +1,5 @@
 import CarHome from "@/models/car-package/CarHome";
+import CarPackageState from "@/models/car-package/package/PackageState";
 import CarPackage1 from "@/models/CarPackage";
 import City from "@/models/City";
 const destinationHeader=async (req,res)=>{
@@ -31,7 +32,7 @@ const destinationHeader=async (req,res)=>{
       const populatedResponse=await Promise.all(response?.map(async (item,i)=>{
         const options = await Promise.all(item.options.map(async (id) => {
         if(item.category==="category1"){
-          return City.findById(id).exec();
+          return CarPackageState.findById(id).exec();
         }
         if(item.category==="category2"){
           return CarPackage1.findById(id).exec();
