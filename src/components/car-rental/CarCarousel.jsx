@@ -4,23 +4,12 @@ import "../../../src/app/globals.css";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import Link from 'next/link';
 
-
-const fetchCrouselData = async () => {
-  const data = await fetch("/api/home/crousel");
-  return await data.json();
-}
-
-const CarCarousel = () => {
+const CarCarousel = ({carCarousel}) => {
 
   const [bannerData, setBannerData] = useState([])
   useEffect(() => {
-    fetchCrouselData().
-      then((res) => {
-        // console.log("res----->13 ", res?.data);
-        setBannerData(res?.data || [])
-      })
-      .catch(err => console.log("err------ > ", err))
-  }, [])
+setBannerData(carCarousel||[])
+  }, [carCarousel])
   // console.log("bannerData", bannerData);
 
   const [startIndex, setStartIndex] = useState(0);

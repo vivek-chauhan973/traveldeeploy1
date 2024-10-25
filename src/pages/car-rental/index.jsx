@@ -107,6 +107,11 @@ const fetchCarousel=async ()=>{
 export default function App() {
   const [cityPromoData, setCityPromoData] = useState([]);
   const [carPackageData, seCarPackageData] = useState([]);
+  const [carBanner,setCarBanner]=useState({});
+  const [carHeading1,setCarHeading1]=useState({});
+  const [carHeading2,setCarHeading2]=useState({});
+  const [carCarousel,setCarCarousel]=useState([]);
+  const [carAllSection,setCarAllSection]=useState([]);
   useEffect(() => {
     // Fetch itinerary data
     const fetchItineraryData = async () => {
@@ -119,13 +124,15 @@ export default function App() {
     };
 
     fetchItineraryData();
-    fetchAllSection().then(res=>console.log("all section data is here ----> ",res))
-    fetchCarBanner().then(res=>console.log("all section fetchCarBanner data is here ----> ",res))
+    fetchAllSection().then(res=>{
+      setCarAllSection(res?.data||[])
+    })
+    fetchCarBanner().then(res=>{setCarBanner(res?.data?.[0]||{})})
     
-    fetchHeading1().then(res=>console.log("all section fetchHeading1 data is here ----> ",res))
-    fetchHeading2().then(res=>console.log("all section fetchHeading2 data is here ----> ",res))
+    fetchHeading1().then(res=>{setCarHeading1(res?.data?.[0]||{})})
+    fetchHeading2().then(res=>{setCarHeading2(res?.data?.[0]||{})})
 
-    fetchCarousel().then(res=>console.log("all section fetchCarousel data is here ----> ",res))
+    fetchCarousel().then(res=>{setCarCarousel(res?.data||[])})
   }, []);
 
 
@@ -136,7 +143,60 @@ export default function App() {
   }, []);
 
 
+  const packageDataCity=carAllSection?.filter(item=>item?.category==="category1");
+  const packageData=carAllSection?.filter(item=>item?.category==="category2");
+
+  // console.log("all section fetchHeading2 data is here ----> ",packageData?.[0]?.options);
+
   const carHireData = [
+    {
+      title: "New Delhi Car Hire",
+      services: [
+        "Greater Noida Car Hire",
+        "Noida Car Hire",
+        "Gurgaon Car Hire",
+      ],
+    },
+    {
+      title: "Mumbai Car Hire",
+      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
+    },
+    {
+      title: "Bangalore Car Hire",
+      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
+    },
+    {
+      title: "New Delhi Car Hire",
+      services: [
+        "Greater Noida Car Hire",
+        "Noida Car Hire",
+        "Gurgaon Car Hire",
+      ],
+    },
+    {
+      title: "Mumbai Car Hire",
+      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
+    },
+    {
+      title: "Bangalore Car Hire",
+      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
+    },
+    {
+      title: "New Delhi Car Hire",
+      services: [
+        "Greater Noida Car Hire",
+        "Noida Car Hire",
+        "Gurgaon Car Hire",
+      ],
+    },
+    {
+      title: "Mumbai Car Hire",
+      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
+    },
+    {
+      title: "Bangalore Car Hire",
+      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
+    },
     {
       title: "New Delhi Car Hire",
       services: [
@@ -229,7 +289,7 @@ export default function App() {
             >
               <div className="absolute top-20">
                 <p className="md:font-semibold font-bold md:text-xl text-lg  text-white w-2/3">
-                  India No.1 Bizare Expedition Car rental
+                  {carBanner?.title}
                 </p>
               </div>
             </div>
@@ -244,7 +304,7 @@ export default function App() {
             <div onClick={() => setCarSelectionPopup(false)}>
               <Image
                 className=" w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={carBanner?.path||"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                 alt=""
                 width={1283}
                 height={854}
@@ -260,28 +320,13 @@ export default function App() {
           >
             <div>
               <p className="md:font-semibold font-medium text-xl">
-                Hello I am Heading
+               {carHeading1?.heading1}
               </p>
               <p
                 className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
                   }`}
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatum nulla soluta officia est facere, vel eius nam, et
-                corrupti ratione cum magnam provident! Eligendi maiores nulla
-                delectus vel, quisquam blanditiis sequi neque iste ullam.
-                corrupti ratione cum magnam provident! Eligendi maiores nulla
-                delectus vel, quisquam blanditiis sequi neque iste ullam.
-                corrupti ratione cum magnam provident! Eligendi maiores nulla
-                delectus vel, quisquam blanditiis sequi neque iste ullam. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-                nulla soluta officia est facere, vel eius nam, et corrupti
-                ratione cum magnam provident! Eligendi maiores nulla delectus
-                vel, quisquam blanditiis sequi neque iste ullam. Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Voluptatum nulla
-                soluta officia est facere, vel eius nam, et corrupti ratione cum
-                magnam provident! Eligendi maiores nulla delectus vel, quisquam
-                blanditiis sequi neque iste ullam.
+               {carHeading1?.description1}
               </p>
             </div>
             <div className="flex justify-end">
@@ -303,7 +348,7 @@ export default function App() {
 
         {/* CarCities are here */}
         <div>
-          <CarCities cityPromoData={cityPromoData} />
+          <CarCities cityPromoData={packageDataCity?.[0]?.options} />
         </div>
         {/* Static section are here */}
         <div className="container-wrapper">
@@ -335,11 +380,11 @@ export default function App() {
           </div>
         </div>
         <div className="container-wrapper">
-          <CarCarousel />
+          <CarCarousel carCarousel={carCarousel}/>
         </div>
         {/* Car Packages are here */}
         <div>
-          <CarPackageCarousel carPackageData={carPackageData} />
+          <CarPackageCarousel carPackageData={packageData?.[0]?.options} />
         </div>
         <div
           className="container-wrapper"
@@ -347,16 +392,13 @@ export default function App() {
         >
           <div className="py-5">
             <p className="md:font-semibold font-medium text-xl">
-              Hello I am Heading
+              {carHeading2?.heading2}
             </p>
-            <p className="text-[15px] pt-1 pb-7 md:font-semibold font-medium">
+            {/* <p className="text-[15px] pt-1 pb-7 md:font-semibold font-medium">
               Find the Car Deals
-            </p>
+            </p> */}
             <p className="text-[15px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.Voluptatum
-              nulla soluta officia est facere, vel eius iis sequi neque iste
-              ullam. et corrupti ratione cum magnam provident! Eligendi maiores
-              nulla delectus vel, quisquam blanditiis sequi neque iste ullam.
+            {carHeading2?.description2}
             </p>
           </div>
           <div className="py-12">
