@@ -37,6 +37,13 @@ const fetchPromoListCity = async () => {
   const data = await response.json();
   return data;
 }
+const fetchCarPromoList = async () => {
+  const response = await fetch(
+    `/api/public/package-state/carpromo/fetchpromocat?selectType=city`
+  );
+  const data = await response.json();
+  return data;
+};
 const Searchable = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('category1');
@@ -47,6 +54,7 @@ const Searchable = () => {
     category4: [],
     category5: [],
     category6: [],
+    category7: [],
   });
   const [printValue, setPrintValue] = useState(0);
   const [options, setOptions] = useState({
@@ -56,6 +64,7 @@ const Searchable = () => {
     category4: [],
     category5: [],
     category6: [],
+    category7: [],
   })
 
 
@@ -64,7 +73,7 @@ const Searchable = () => {
     if (selectedCategory === "category3") {
       return option?.category?.toLowerCase().includes(searchQuery.toLowerCase())
     }
-    else if(selectedCategory === "category1"||selectedCategory === "category2"){
+    else if(selectedCategory === "category1"||selectedCategory === "category2"||selectedCategory === "category6"){
       return option?.selectedItem?.toLowerCase().includes(searchQuery.toLowerCase())
     }
     return option?.name?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -105,9 +114,16 @@ const Searchable = () => {
     fetchCities().then(res => {
       setOptions((prevOptions) => ({
         ...prevOptions,
-        category6: res.result
+        category7: res.result
       }));
     })
+    fetchCarPromoList().then((res) => {
+      setOptions((prevOptions) => ({
+        ...prevOptions,
+        category6: res?.responseData,
+      }));
+        console.log("res---> ",res)
+    });
 
   }, [])
 
@@ -182,9 +198,10 @@ console.log("option",filteredOptions);
               <option value="category1">Section 1</option>
               <option value="category2">Section 2</option>
               <option value="category3">Section 3</option>
-              <option value="category4">Section 4</option>
+              <option value="category4">Section 4(cars)</option>
               <option value="category5">Section 5</option>
-              <option value="category6">Popular Cities</option>
+              <option value="category6">Section 6 (car promo)</option>
+              <option value="category7">Popular Cities</option>
             </select>
           </div>
           <div>
@@ -211,7 +228,7 @@ console.log("option",filteredOptions);
                     }
                     className="mr-2 accent-navyblack"
                   />
-                  {(selectedCategory === "category1" || selectedCategory === "category2" ) && <span className={
+                  {(selectedCategory === "category1"||selectedCategory === "category6" || selectedCategory === "category2" ) && <span className={
                     selectedOptions[selectedCategory].length >= maxSelections &&
                       !selectedOptions[selectedCategory].includes(option)
                       ? "text-gray-400 cursor-not-allowed"
@@ -227,7 +244,7 @@ console.log("option",filteredOptions);
                   }>
                     {option.name}
                   </span>}
-                  {(selectedCategory === "category6") && <span className={
+                  {(selectedCategory === "category7") && <span className={
                     selectedOptions[selectedCategory].length >= maxSelections &&
                       !selectedOptions[selectedCategory].includes(option)
                       ? "text-gray-400 cursor-not-allowed"

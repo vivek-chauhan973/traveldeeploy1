@@ -30,7 +30,11 @@ const fetchCarPackage = async (packageUrl) => {
     // console.log("..............................",packageUrl)
     return data;
 };
-
+const getAllPackages = async () => {
+    const response = await fetch('/api/cars/package/get-packages')
+    const data = await response.json()
+    return data;
+}
 export default function CarDetail() {
 
     const router = useRouter();
@@ -41,6 +45,16 @@ export default function CarDetail() {
     const [carDepartureDetails, setCarDepartureDetails] = useState([])
 
     // console.log("package1", package1);
+    const [carAllPackages, setCarAllPackages] = useState([])
+
+    useEffect(() => {
+        getAllPackages().then(res => {
+            console.log("res of getAllPackages =======>", res?.packages);
+            setCarAllPackages(res?.packages);
+        })
+    }, [])
+const carSidePackages = carAllPackages?.filter(item=>item.customId === carPackage?.highlightedPackage)
+
     useEffect(() => {
         if (package1) {
             fetchCarPackage(package1).then(res => { setCarPackage(res || {}) })
@@ -92,6 +106,9 @@ export default function CarDetail() {
         );
     }
     // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
+
+    // console.log("carPackage----==>  ", carPackage);
+    // console.log("carSidePackages----==>  ", carSidePackages);
 
 
     return (
@@ -451,7 +468,7 @@ export default function CarDetail() {
                                     </div>
                                 </div>
                                 {/* card is here */}
-                                <CarItinerarySideCard />
+                                <CarItinerarySideCard carSidePackages={carSidePackages}/>
                             </div>
                         </div>
                     </div>
