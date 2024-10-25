@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../../app/globals.css";
 import CarDeparturePopup from "./CarDeparture & booking/CarDeparturePopup";
 
-const CarDepartureSection = ({ carPackage }) => {
+const CarDepartureSection = ({ carPackage,setCarDepartureDetails }) => {
     const [showPopup, setShowPopup] = useState(false);
+    const [departureData, setdepartureData] = useState();
     const data = carPackage?.prices?.departureData;
-    console.log("departureData", data);
+    // console.log("data", data);
+    // console.log("departureData", departureData);
+   const  handleCityPopup = (item) => {
+        setShowPopup(true);
+        setdepartureData(item);
+    }
+
+    useEffect(()=>{
+        setCarDepartureDetails(departureData);
+    },[departureData?.departureCity])
+    
 
     return (
         <>
@@ -19,9 +30,14 @@ const CarDepartureSection = ({ carPackage }) => {
                         </div>
                         <hr />
                         <div className="overflow-y-auto">
-                        {showPopup && (
-                            <CarDeparturePopup setShowPopup={setShowPopup}/>
-                        )}
+                            {showPopup && (
+                                <CarDeparturePopup
+                                    setShowPopup={setShowPopup}
+                                    carPackage={carPackage}
+                                    setdepartureData={setdepartureData}
+                                    departureData={departureData}
+                                />
+                            )}
                             {/* Display the current month's calendar */}
                             <div className=" ml-5">
                                 <div className="my-5">
@@ -33,10 +49,13 @@ const CarDepartureSection = ({ carPackage }) => {
                                                 { weekday: "short" }
                                             );
                                             return (
-                                                <div className="cursor-pointer" key={index}>
+                                                <div key={index}
+                                                    onClick={()=>handleCityPopup(item)}
+                                                    className="cursor-pointer"
+                                                >
                                                     <div className="hover:bg-gray-500 group text-white bg-gray-200 w-16 rounded-md overflow-hidden">
                                                         <p className="text-center text-xxs text-white group-hover:text-white bg-navyblack uppercase">
-                                                        {dayOfWeek}
+                                                            {dayOfWeek}
                                                         </p>
                                                         <hr />
                                                         <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
@@ -106,9 +125,9 @@ const CarDepartureSection = ({ carPackage }) => {
                                     Highlights
                                 </h6>
                                 <div>
-                                    {carPackage?.highlights?.map((highlight) => (
+                                    {carPackage?.highlights?.map((highlight, id) => (
                                         <ul
-                                            key={highlight?._id}
+                                            key={id}
                                             className="ml-3">
                                             <li className="xl:ml-5 ml-2 mr-2 text-para">
                                                 {highlight.text}

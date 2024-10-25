@@ -1,10 +1,32 @@
 import "../../../app/globals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import CarDeptBookingPopup from "./CarDeparture & booking/CarDeptBookingPopup";
+import { useState } from "react";
 
-const CardDetailPricingCard = ({ carPackage }) => {
+const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
+    const [showPopup, setShowPopup] = useState(false);
+    const [travellers, setTravellers] = useState(0);
+
     const seatingCapacity = carPackage?.selectedVicle?.seatingCapacity || 0;
-    console.log("seatingCapacity", seatingCapacity);
+    // console.log("seatingCapacity", seatingCapacity);
+    
+    const GSTPrice = Math.floor(carPackage?.price * (carDepartureDetails?.GST / 100));
+    const grandTotal = carPackage?.price + GSTPrice;
+    // console.log("GSTPrice", GSTPrice);
+
+    const handleBookNowClick = () => {
+        // console.log("Clicked Book Now");
+        carDepartureDetails['travellers']=travellers;
+        carDepartureDetails['grandTotal']=grandTotal;
+        setShowPopup(true);
+    };
+    const handleEdit = () => {
+        // console.log("Clicked Edit");
+        setShowPopup(true);
+    }
+        console.log("travellers",travellers);
+        console.log("carDepartureDetails", carDepartureDetails);
 
     return (
         <>
@@ -19,6 +41,7 @@ const CardDetailPricingCard = ({ carPackage }) => {
                                 <FontAwesomeIcon
                                     icon={faPenToSquare}
                                     className="font1 cursor-pointer"
+                                    onClick={handleEdit}
                                 />
                             </div>
                         </div>
@@ -27,12 +50,14 @@ const CardDetailPricingCard = ({ carPackage }) => {
                     <div className="">
                         <div className="flex my-3 text-sm">
                             <p className=" w-20">PickUp Loc : </p>
-                            <p className="font-semibold text-graytext capitalize">Mumbai</p>
+                            <p className="font-semibold text-graytext capitalize">
+                                {carDepartureDetails?.departureCity ? carDepartureDetails?.departureCity : "--"}
+                            </p>
                         </div>
                         <div className="flex mb-2.5 text-sm">
                             <p className=" w-20">Dept. Date :</p>
                             <p className=" font-bold text-graytext">
-                                10 Mar 2024 - 17 Mar 2024
+                                {carDepartureDetails?.Date ? carDepartureDetails?.Date : "--"}
                             </p>
                         </div>
                     </div>
@@ -49,6 +74,9 @@ const CardDetailPricingCard = ({ carPackage }) => {
                                     name="travellers"
                                     id="travellers"
                                     className="border rounded w-1/2 pl-3 cursor-pointer focus:border-primary outline-none"
+                                    onChange={(e) => {
+                                        setTravellers(e.target.value);
+                                      }}
                                     disabled={!seatingCapacity}  // Disable if seating capacity is 0 or not set
                                 >
                                     <option value="" className="cursor-pointer">
@@ -61,17 +89,17 @@ const CardDetailPricingCard = ({ carPackage }) => {
                                     ))}
                                 </select>
                             </div>
-                            {/* {fixedDepCity ? null : ( */}
-                            <p className="md:text-xxs text-[10px] text-red-600 xl:text-end md:text-center text-end xl:pr-10 md:pl-28">
-                                Please Select Person First
-                            </p>
-                            {/* )} */}
+                            {carDepartureDetails?.departureCity ? null : (
+                                <p className="md:text-xxs text-[10px] text-red-600 xl:text-end md:text-center text-end xl:pr-10 md:pl-28">
+                                    Please Select Person First
+                                </p>
+                            )}
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-1">
                         <p className="text-sm font-semibold">Base Price</p>
                         <p className="text-md font-medium text-graytext">
-                            {carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                            {carPackage?.price ? carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
                         </p>
                     </div>
                     <hr className="border-dashed my-2 " />
@@ -79,7 +107,9 @@ const CardDetailPricingCard = ({ carPackage }) => {
                         <div></div>
                         <div className="grid grid-cols-2">
                             <p>Total Cost</p>
-                            <p className="">₹ 40,000</p>
+                            <p className="">
+                                {carPackage?.price ? carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
+                            </p>
                         </div>
                     </div>
                     <div className="text-para grid-cols-2 -mt-2 grid pr-1">
@@ -87,13 +117,12 @@ const CardDetailPricingCard = ({ carPackage }) => {
                         <div className="grid grid-cols-2">
                             <p>
                                 GST{" "}
-                                {/* {fixedDepartureButtonEnaibleAndDisable
-                                    ? departureSectionData?.GST
-                                    : null}{" "} */}
+                                {carDepartureDetails?.GST && carDepartureDetails.GST !== 0
+                                    ? `${carDepartureDetails.GST}%`
+                                    : null}
                             </p>
                             <p className="">
-                                ₹
-                                {/* {fixedDepartureButtonEnaibleAndDisable ? (calculatedPrizeOfGst * limitKey)?.toLocaleString() : "0"} */}
+                                {carDepartureDetails?.GST && carDepartureDetails.GST !== 0 ? GSTPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "All Inclusive"}
                             </p>
                         </div>
                     </div>
@@ -103,8 +132,9 @@ const CardDetailPricingCard = ({ carPackage }) => {
                         <div className="grid grid-cols-2 gap-1">
                             <p className="font-semibold">Grand Total</p>
                             <p className="font-semibold text-graytext">
-                                ₹ 60,000
-                                {/* {fixedDepartureButtonEnaibleAndDisable ? grandTotal?.toLocaleString() : "0"} */}
+                                {grandTotal ?
+                                    grandTotal?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) :
+                                    carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                             </p>
                         </div>
                     </div>
@@ -136,13 +166,21 @@ const CardDetailPricingCard = ({ carPackage }) => {
                                 Customise
                             </button>
                             {/* </CustomiseTour> */}
-                            <button
+                            <button onClick={handleBookNowClick}
                                 className="border px-5 py-2 rounded-md bg-gradient-to-r from-orange-500 to-red-500 text-center text-white text-para"
+                                disabled={!travellers}
                             >
                                 Book now
                             </button>
                         </div>
                     </div>
+                    {showPopup && (
+                        <CarDeptBookingPopup
+                            setShowPopup={setShowPopup}
+                            carPackage={carPackage}
+                            carDepartureDetails={carDepartureDetails}
+                        />
+                    )}
                 </div>
             </div>
         </>

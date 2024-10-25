@@ -20,6 +20,7 @@ import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarItineraryTourDetails from "@/components/car-rental/car-detail/CarItineraryTourDetails";
 import { useRouter } from "next/router";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 const fetchCarPackage = async (packageUrl) => {
     // console.log("page url :: ",packageUrl)
     const response = await fetch(`/api/cars/public/${packageUrl}`, {
@@ -37,6 +38,7 @@ export default function CarDetail() {
     const package1 = detail?.replace("-tour-package", "")
 
     const [carPackage, setCarPackage] = useState({})
+    const [carDepartureDetails, setCarDepartureDetails] = useState([])
 
     // console.log("package1", package1);
     useEffect(() => {
@@ -89,6 +91,8 @@ export default function CarDetail() {
             "_blank"
         );
     }
+    // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
+
 
     return (
         <AppProvider>
@@ -111,10 +115,14 @@ export default function CarDetail() {
                                 <h2 className=" text-lg md:text-lg font-semibold capitalize my-2">
                                     Vehicle Type : {carPackage?.selectedVicle?.vehicleType}
                                 </h2>
-                                <button
-                                    className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white">
-                                    badge
-                                </button>
+                                {carPackage?.badges?.length > 0 && carPackage?.badges?.map((item, i) => {
+                                    return (
+                                        <button key={i}
+                                            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white">
+                                            {item}
+                                        </button>
+                                    )
+                                })}
                                 <p className="md:text-md text-[16px] my-2 capitalize">Ex City : {carPackage?.startcity}</p>
                             </div>
                             <div className="flex gap-5">
@@ -164,9 +172,15 @@ export default function CarDetail() {
                         </div>
                         <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
                             {/* Calender, About & Highlight */}
-                            <CarDepartureSection carPackage={carPackage}/>
+                            <CarDepartureSection
+                                carPackage={carPackage}
+                                setCarDepartureDetails={setCarDepartureDetails}
+                            />
                             {/* Booking Summary */}
-                            <CardDetailPricingCard carPackage={carPackage}/>
+                            <CardDetailPricingCard
+                                carPackage={carPackage}
+                                carDepartureDetails={carDepartureDetails}
+                            />
                         </div>
                     </div>
                 </div>
@@ -445,7 +459,7 @@ export default function CarDetail() {
 
                 {/* Car reviewsCard */}
                 <div className="my-7">
-                    <CarReviewsCard carPackage={carPackage}/>
+                    <CarReviewsCard carPackage={carPackage} />
                 </div>
 
                 {/* Similar Car package */}
