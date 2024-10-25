@@ -13,6 +13,7 @@ import CarSelectionPopup from "@/components/car-rental/CarSelectionPopup";
 import CarCities from "@/components/car-rental/CarCities";
 import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 import CarCarousel from "@/components/car-rental/CarCarousel";
+import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 const fetchPromoList = async () => {
   const response = await fetch(
     `/api/public/package-state/carpromo/fetchpromocat?selectType=city`
@@ -412,6 +413,9 @@ export default function App() {
               ))}
             </div>
           </div>
+        </div>
+        <div>
+           <CarReviewCard/>
         </div>
         <div
           className="container-wrapper"
