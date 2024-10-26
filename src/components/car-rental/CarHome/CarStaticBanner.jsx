@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from 'react';
 const fetchCrouselData = async () => {
-    const data = await fetch("/api/cars/carhome/carCrousel");
+    const data = await fetch("/api/cars/carhome/carCrouselStatic");
     return await data.json();
 }
 export default function CarStaticBanner() {
@@ -51,7 +51,7 @@ export default function CarStaticBanner() {
             form.append("description", formData.description);
             form.append("url", formData.url);
 
-            const data = await fetch('/api/cars/carhome/carCrousel', {
+            const data = await fetch('/api/cars/carhome/carCrouselStatic', {
                 method: "POST",
                 body: form
             });
@@ -106,7 +106,7 @@ export default function CarStaticBanner() {
     const handleDelete = async (index) => {
         const updatedItems = crouselData.filter((item) => item?._id !== index); // Filter out the item to delete
         setCrouselData(updatedItems);
-        const data = await fetch(`/api/cars/carhome/carCrousel?id=${index}`, {
+        const data = await fetch(`/api/cars/carhome/carCrouselStatic?id=${index}`, {
             method: "DELETE"
         })
         if (data) {
