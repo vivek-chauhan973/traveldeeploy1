@@ -1,9 +1,10 @@
 import HomeFooter from "@/models/Home";
 import PackageMasterCategory from "@/models/package/PackageCategory";
-import Car from "@/models/car-package/cars";
 import Package from "@/models/Package";
 import City from "@/models/City";
 import PackageState from "@/models/package/PackageState";
+import CarPackageState from "@/models/car-package/package/PackageState";
+import CarPackage1 from "@/models/CarPackage";
 
 const homeFooterApi=async (req,res)=>{
   const {category,selectedOptions}=req.body;
@@ -45,12 +46,15 @@ const homeFooterApi=async (req,res)=>{
           return PackageMasterCategory.findById(id).exec();
         }
         if(item.category==="category4"){
-          return Car.findById(id).exec();
+          return CarPackage1.findById(id).exec();
         }
         if(item.category==="category5"){
           return Package.findById(id).exec();
         }
         if(item.category==="category6"){
+          return CarPackageState.findById(id).exec();
+        }
+        if(item.category==="category7"){
           return City.findById(id).exec();
         }
       }));

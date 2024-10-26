@@ -123,6 +123,7 @@ export default function Home() {
   useEffect(() => {
     fetchAllMultiSction().then(res => {
       SetHomePackages(res?.data)
+      console.log("all section is here----> ",res?.data)
     })
     fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
   }, []);
