@@ -42,14 +42,19 @@ const CarHireSection = ({ title, services }) => {
       </div>
       {isOpen && (
         <ul className="py-1 pl-2">
-          {services.map((service, index) => (
-            <li
-              key={index}
-              className="capitalize text-sm hover:underline cursor-pointer text-gray-600"
-            >
-              {service}
-            </li>
+          {services?.slice(0, 3)?.map((service, index) => (
+            <div key={index}>
+              <li className="capitalize text-sm hover:underline cursor-pointer text-gray-600">
+                {service}
+              </li>
+            </div>
           ))}
+          <div className="flex justify-end pb-2">
+            <button
+              className="py-1 px-5 rounded-md text-xs bg-navyblack text-white">
+              More.....
+            </button>
+          </div>
         </ul>
       )}
       <hr />
@@ -338,20 +343,39 @@ export default function App() {
           <CarPackageCarousel carPackageData={packageData?.[0]?.options} />
         </div>
         <div
-          className="container-wrapper"
+          className="py-5 container-wrapper pt-10 -z-40"
           onClick={() => setCarSelectionPopup(false)}
         >
-          <div className="py-5">
+          <div>
             <p className="md:font-semibold font-medium text-xl">
               {carHeading2?.heading2}
             </p>
-            <p className="text-[15px]">
+            <p
+              className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
+                }`}
+            >
               {carHeading2?.description2}
             </p>
           </div>
+          <div className="flex justify-end">
+            <div className="flex justify-center items-center md:h-6 h-5 md:w-24 w-20 mt-2 bg-navyblack rounded shadow-sm text-white cursor-pointer">
+              <button className=" md:text-sm text-xs" onClick={handleToggle}>
+                {show ? "Read less" : "Read more"}
+              </button>
+              <span>
+                <IoMdArrowDropdown
+                  className={`transition-transform  ${show ? "rotate-180" : ""
+                    } `}
+                  onClick={handleToggle}
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="container-wrapper">
           <div className="py-12">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              {carHireData.map((carHire, index) => (
+              {carHireData?.slice(0, 24)?.map((carHire, index) => (
                 <CarHireSection
                   key={index}
                   title={carHire.title}
