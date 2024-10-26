@@ -13,15 +13,14 @@ const fetchPromoListCategory = async () => {
   return data;
 };
 
-const CarArrowSection = () => {
+const CarArrowSection = ({carCityPromos}) => {
   const [promoCarCategory, setPromoCarCategory] = useState([]);
 
   useEffect(() => {
-    fetchPromoListCategory().then((res) => {
-      // console.log("res category-----> ", res?.responseData);
-      setPromoCarCategory(res?.responseData);
-    });
-  }, []);
+    
+      setPromoCarCategory(carCityPromos);
+    
+  }, [carCityPromos]);
 
   // console.log("promoCarCategory =======> ", promoCarCategory);
   
@@ -89,11 +88,7 @@ const CarArrowSection = () => {
                   className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden"
                 >
                   <Link
-                    href={
-                      `/speciality-tours/` +
-                      items.selectedItem +
-                      "-tour-packages"
-                    }
+                   href={`/car-rental/${items?.selectedItem?.toLowerCase()?.split(" ")?.join("-")}-car-hire`}
                   >
                     <Image
                       className="relative object-cover"
@@ -103,11 +98,7 @@ const CarArrowSection = () => {
                     />
                   </Link>
                   <Link
-                    href={
-                      `/speciality-tours/` +
-                      items.selectedItem +
-                      "-tour-packages"
-                    }
+                   href={`/car-rental/${items?.selectedItem?.toLowerCase()?.split(" ")?.join("-")}-car-hire`}
                   >
                     <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 p-4">
                       <div className=''>

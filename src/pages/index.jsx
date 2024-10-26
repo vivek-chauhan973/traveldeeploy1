@@ -118,6 +118,8 @@ export default function Home() {
   const [category1, setCategory1] = useState([]);
   const [category2, setCategory2] = useState([]);
   const [category3, setCategory3] = useState([]);
+  const [carPackages,setCarPackages]=useState([]);
+  const [carCityPromos,setCarCityPromo]=useState([]);
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
@@ -135,8 +137,11 @@ export default function Home() {
     const data1 = homePackages?.filter(item => item.category === "category5");
     setPackages(data1?.[0]?.options || []);
     const data2 = homePackages?.filter(item => item.category === "category2");
+    const data4 = homePackages?.filter(item => item.category === "category4");
+    const data5 = homePackages?.filter(item => item.category === "category6");
+    setCarPackages(data4?.[0]?.options || [])
     setCityPackages(data2?.[0]?.options || [])
-
+    setCarCityPromo(data5?.[0]?.options || [])
   }, [homePackages]);
   useEffect(() => {
     const data = homeSinglePackages?.filter(item => item.category === "category1");
@@ -145,7 +150,6 @@ export default function Home() {
     setCategory2(data1);
     const data2 = homeSinglePackages?.filter(item => item.category === "category2");
     setCategory3(data2)
-
   }, [homeSinglePackages]);
 
   return (
@@ -293,11 +297,11 @@ export default function Home() {
       </div>
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
         <div className=" md:mt-4 mt-4">
-          <CarArrowSection />
+          <CarArrowSection carCityPromos={carCityPromos}/>
         </div>
       </div>
       <div>
-        <CarPackageCarousel />
+        <CarPackageCarousel carPackageData={carPackages} />
       </div>
       <div className="w-full h-96 flex justify-center items-center text-2xl">
         Travel Guide
