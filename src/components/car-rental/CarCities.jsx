@@ -41,7 +41,7 @@ const CarCities = ({cityPromoData}) => {
     const boxShadowStyle = {
         boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
     };
-console.log("city promodata-----> ",cityPromoData)
+// console.log("city promodata-----> ",cityPromoData)
     return (
         <div className="md:mt-9 mt-4">
             <div className="carousel-container relative container-wrapper ">

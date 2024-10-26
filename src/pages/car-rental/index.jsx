@@ -24,16 +24,30 @@ const fetchPromoList = async () => {
   return data;
 };
 
-const CarHireSection = ({ title, services }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const getCitiesCarPackages=async (cityId)=>{
+  const res=await fetch(`/api/cars/location/get-citypackage?cityId=${cityId}`);
+  return await res.json();
+}
 
+const CarHireSection = ({ title, services,url }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [carCTPackages,setCarCTPackages]=useState([]);
+
+  useEffect(()=>{
+    getCitiesCarPackages(services).then(res=>console.log("res of packages----> ",res))
+  },[services])
+  const handleClick=()=>{
+     setIsOpen(!isOpen)
+     getCitiesCarPackages(services).then(res=>{setCarCTPackages(res?.data||[])})
+  }
+  // console.log("res of packages----> ",carCTPackages);
   return (
     <div className="px-5">
       <div
         className="flex justify-between cursor-pointer items-center"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleClick}
       >
-        <p className="capitalize font-semibold cursor-pointer">{title}</p>
+        <p className="capitalize font-semibold cursor-pointer">{title} Taxi Service</p>
         {isOpen ? (
           <MdKeyboardArrowUp size={25} className="font-semibold" />
         ) : (
@@ -42,18 +56,18 @@ const CarHireSection = ({ title, services }) => {
       </div>
       {isOpen && (
         <ul className="py-1 pl-2">
-          {services?.slice(0, 3)?.map((service, index) => (
-            <div key={index}>
+          {carCTPackages?.slice(0, 3)?.map((service, index) => (
+            <a href={"/car-rental/" + service.location.url + "/" + service.pageUrl} key={index}>
               <li className="capitalize text-sm hover:underline cursor-pointer text-gray-600">
-                {service}
+                {service?.name}
               </li>
-            </div>
+            </a>
           ))}
           <div className="flex justify-end pb-2">
-            <button
+            <a href={`/car-rental/${url}-car-hire`}
               className="py-1 px-5 rounded-md text-xs bg-navyblack text-white">
               More.....
-            </button>
+            </a>
           </div>
         </ul>
       )}
@@ -87,6 +101,10 @@ const fetchCarousel = async () => {
   return await data.json();
 }
 
+const fetchAllCities=async ()=>{
+  const res=await fetch("/api/location/city");
+  return await res.json();
+}
 
 export default function App() {
   const [cityPromoData, setCityPromoData] = useState([]);
@@ -97,6 +115,7 @@ export default function App() {
   const [carCarousel, setCarCarousel] = useState([]);
   const [carAllSection, setCarAllSection] = useState([]);
   const [staticBanner, setStaticBanner] = useState([]);
+  const [cities,setCities]=useState([]);
 
   useEffect(() => {
     // Fetch itinerary data
@@ -119,6 +138,7 @@ export default function App() {
     fetchHeading2().then(res => { setCarHeading2(res?.data?.[0] || {}) })
 
     fetchCarousel().then(res => { setCarCarousel(res?.data || []) })
+    fetchAllCities().then(res=>{setCities(res?.result||[])});
   }, []);
 
 
@@ -127,95 +147,10 @@ export default function App() {
       setCityPromoData(res?.responseData || []);
     });
   }, []);
-
-
   const packageDataCity = carAllSection?.filter(item => item?.category === "category1");
   const packageData = carAllSection?.filter(item => item?.category === "category2");
 
-  // console.log("all section fetchHeading2 data is here ----> ",packageData?.[0]?.options);
-
-  const carHireData = [
-    {
-      title: "New Delhi Car Hire",
-      services: [
-        "Greater Noida Car Hire",
-        "Noida Car Hire",
-        "Gurgaon Car Hire",
-      ],
-    },
-    {
-      title: "Mumbai Car Hire",
-      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
-    },
-    {
-      title: "Bangalore Car Hire",
-      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
-    },
-    {
-      title: "New Delhi Car Hire",
-      services: [
-        "Greater Noida Car Hire",
-        "Noida Car Hire",
-        "Gurgaon Car Hire",
-      ],
-    },
-    {
-      title: "Mumbai Car Hire",
-      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
-    },
-    {
-      title: "Bangalore Car Hire",
-      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
-    },
-    {
-      title: "New Delhi Car Hire",
-      services: [
-        "Greater Noida Car Hire",
-        "Noida Car Hire",
-        "Gurgaon Car Hire",
-      ],
-    },
-    {
-      title: "Mumbai Car Hire",
-      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
-    },
-    {
-      title: "Bangalore Car Hire",
-      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
-    },
-    {
-      title: "New Delhi Car Hire",
-      services: [
-        "Greater Noida Car Hire",
-        "Noida Car Hire",
-        "Gurgaon Car Hire",
-      ],
-    },
-    {
-      title: "Mumbai Car Hire",
-      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
-    },
-    {
-      title: "Bangalore Car Hire",
-      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
-    },
-    {
-      title: "New Delhi Car Hire",
-      services: [
-        "Greater Noida Car Hire",
-        "Noida Car Hire",
-        "Gurgaon Car Hire",
-      ],
-    },
-    {
-      title: "Mumbai Car Hire",
-      services: ["Navi Mumbai Car Hire", "Thane Car Hire"],
-    },
-    {
-      title: "Bangalore Car Hire",
-      services: ["Whitefield Car Hire", "Indiranagar Car Hire"],
-    },
-  ];
+  // console.log("all section fetchHeading2 data is here ----> ",cities);
 
 
   const [show, setShow] = useState(false);
@@ -375,11 +310,12 @@ export default function App() {
         <div className="container-wrapper">
           <div className="py-12">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              {carHireData?.slice(0, 24)?.map((carHire, index) => (
+              {cities?.slice(0, 24)?.map((carHire, index) => (
                 <CarHireSection
                   key={index}
-                  title={carHire.title}
-                  services={carHire.services}
+                  title={carHire?.name}
+                  services={carHire?._id}
+                  url={carHire?.url}
                 />
               ))}
             </div>
