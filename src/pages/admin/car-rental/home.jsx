@@ -26,7 +26,7 @@ const fetchPromoList = async () => {
   const data = await response.json();
   return data;
 };
-const home = () => {
+const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("category1");
   const [selectedOptions, setSelectedOptions] = useState({
@@ -324,4 +324,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;

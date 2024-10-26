@@ -12,7 +12,7 @@ const SearchCarPagePackageList = ({ carPackageList }) => {
         <div>
             {carPackageList?.length > 0 && carPackageList?.map((items, i) => {
                 return (
-                    <div className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
+                    <div key={i} className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
                         <div className="md:pl-5 flex items-center md:w-[35%]">
                             <Image
                                 width={500}

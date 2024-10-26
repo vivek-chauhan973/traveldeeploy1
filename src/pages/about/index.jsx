@@ -22,13 +22,13 @@ const About = () => {
           <h4 className="md:text-2xl text-md font-medium mb-2 capitalize">About US</h4>
           <p className="text-para line-clamp-5">
             A great About Us page comes across as human. It puts a face to a name, 
-            showing your potential customers that you're a real person. Any well-written About page makes the reader feel a 
+            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a 
             sense of connection with the brand. It makes them feel like they know you and that you have something in common.
             A great About Us page comes across as human. It puts a face to a name, 
-            showing your potential customers that you're a real person. Any well-written About page makes the reader feel a 
+            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a 
             sense of connection with the brand. It makes them feel like they know you and that you have something in common.
             A great About Us page comes across as human. It puts a face to a name, 
-            showing your potential customers that you're a real person. Any well-written About page makes the reader feel a 
+            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a 
             sense of connection with the brand. It makes them feel like they know you and that you have something in common.
           </p>
         </div>
