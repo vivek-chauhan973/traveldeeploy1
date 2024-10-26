@@ -6,8 +6,9 @@ const CarDepartureSection = ({ carPackage,setCarDepartureDetails }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [departureData, setdepartureData] = useState();
     const data = carPackage?.prices?.departureData;
-    // console.log("data", data);
+    console.log("data", data);
     // console.log("departureData", departureData);
+
    const  handleCityPopup = (item) => {
         setShowPopup(true);
         setdepartureData(item);
@@ -16,6 +17,7 @@ const CarDepartureSection = ({ carPackage,setCarDepartureDetails }) => {
     useEffect(()=>{
         setCarDepartureDetails(departureData);
     },[departureData?.departureCity])
+
     
 
     return (

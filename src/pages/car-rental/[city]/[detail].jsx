@@ -20,6 +20,7 @@ import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarItineraryTourDetails from "@/components/car-rental/car-detail/CarItineraryTourDetails";
 import { useRouter } from "next/router";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+import CarDeptBookingPopup from "@/components/car-rental/car-detail/CarDeparture & booking/CarDeptBookingPopup";
 
 const fetchCarPackage = async (packageUrl) => {
     // console.log("page url :: ",packageUrl)
@@ -53,7 +54,7 @@ export default function CarDetail() {
             setCarAllPackages(res?.packages);
         })
     }, [])
-const carSidePackages = carAllPackages?.filter(item=>item.customId === carPackage?.highlightedPackage)
+    const carSidePackages = carAllPackages?.filter(item => item.customId === carPackage?.highlightedPackage)
 
     useEffect(() => {
         if (package1) {
@@ -105,11 +106,11 @@ const carSidePackages = carAllPackages?.filter(item=>item.customId === carPackag
             "_blank"
         );
     }
-    // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
+    console.log("CarDepartureDetails----==>  ", carDepartureDetails);
 
     // console.log("carPackage----==>  ", carPackage);
     // console.log("carSidePackages----==>  ", carSidePackages);
-
+    const save = 5;
 
     return (
         <AppProvider>
@@ -117,15 +118,10 @@ const carSidePackages = carAllPackages?.filter(item=>item.customId === carPackag
             <div>
                 {/* <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%"> */}
                 <DesktopHeader />
-                <Breadcrumbs />
+                {/* <Breadcrumbs /> */}
                 {/* Car-rental Banner section */}
                 <div>
-                    <CarDetailHeroSection />
-                    <div className="w-full h-20 bg-[#FF6600] flex flex-col justify-center items-center mb-3">
-                        <h1 className="font-bold capitalize">
-                            {carPackage?.name} from {carPackage?.selectedVicle?.vehicleType}
-                        </h1>
-                    </div>
+                    <CarDetailHeroSection carPackage={carPackage} />
                     <div className="container-wrapper">
                         <div className="flex justify-between">
                             <div>
@@ -135,7 +131,7 @@ const carSidePackages = carAllPackages?.filter(item=>item.customId === carPackag
                                 {carPackage?.badges?.length > 0 && carPackage?.badges?.map((item, i) => {
                                     return (
                                         <button key={i}
-                                            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white">
+                                            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white mr-2">
                                             {item}
                                         </button>
                                     )
@@ -147,24 +143,28 @@ const carSidePackages = carAllPackages?.filter(item=>item.customId === carPackag
                                     <p className="text-base leading-5 text-green-600 font-semibold uppercase">
                                         best deal price
                                     </p>
-                                    <div className="flex gap-1 items-end">
-                                        <p className="text-sm line-through">₹</p>
-                                        <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
-                                            5% Off
-                                        </button>
-                                    </div>
+
                                     <p className="text-sm leading-5">
-                                        with GST include {" "}
+                                        Without GST{" "}
                                         <span className="text-lg text-graytext font-medium">
                                             {carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                         </span>
                                     </p>
+                                    <div className="flex gap-1 items-end">
+                                        {carPackage?.highSave !== 0 &&
+                                            <button className="capitalize text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                                                {carPackage?.highSave && carPackage.highSave !== 0
+                                                    ? `Save ${carPackage.highSave}%`
+                                                    : null}
+                                            </button>
+                                        }
+                                    </div>
                                 </div>
                                 <div className="flex flex-col align-middle my-auto pl-2 gap-2">
-                                    <p
+                                    <button 
                                         className="bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer px-5 py-2 rounded-md text-white text-center text-para">
                                         Book Now
-                                    </p>
+                                    </button>
                                     {/* <CustomiseTour> */}
                                     <button className=" border-primary w-full border text-primary px-5 py-2 text-para rounded-md">
                                         Customise
@@ -468,7 +468,7 @@ const carSidePackages = carAllPackages?.filter(item=>item.customId === carPackag
                                     </div>
                                 </div>
                                 {/* card is here */}
-                                <CarItinerarySideCard carSidePackages={carSidePackages}/>
+                                <CarItinerarySideCard carSidePackages={carSidePackages} />
                             </div>
                         </div>
                     </div>
