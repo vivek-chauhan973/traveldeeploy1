@@ -6,6 +6,7 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarBanner from "@/components/car-rental/CarHome/Banner";
 import HeadingDesc from "@/components/car-rental/CarHome/HeadingDesc";
 import CarCarouselBanner from "@/components/car-rental/CarHome/CarCarouselBanner";
+import CarStaticBanner from "@/components/car-rental/CarHome/CarStaticBanner";
 const fetchCarHomeData = async () => {
   const data = await fetch("/api/cars/carhome/seoData");
   return await data.json();
@@ -318,6 +319,7 @@ const Home = () => {
           <CarBanner />
           <CarCarouselBanner />
           <HeadingDesc />
+          <CarStaticBanner/>
         </div>
       </Layout>
     </AppProvider>

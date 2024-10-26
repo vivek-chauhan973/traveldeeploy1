@@ -14,6 +14,8 @@ import CarCities from "@/components/car-rental/CarCities";
 import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 import CarCarousel from "@/components/car-rental/CarCarousel";
 import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
+import StaticBanner from "@/components/car-rental/StaticBanner";
+import Footer from "@/components/Footer";
 const fetchPromoList = async () => {
   const response = await fetch(
     `/api/public/package-state/carpromo/fetchpromocat?selectType=city`
@@ -55,52 +57,28 @@ const CarHireSection = ({ title, services }) => {
   );
 };
 
-const FAQSection = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div className="px-5 mb-10">
-      <div
-        className="flex justify-between cursor-pointer items-center"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <p className="capitalize cursor-pointer">{question}</p>
-        {isOpen ? (
-          <MdKeyboardArrowUp size={25} className="font-semibold" />
-        ) : (
-          <MdKeyboardArrowDown size={25} className="font-semibold" />
-        )}
-      </div>
-      {isOpen && (
-        <div>
-          <p className="text-para py-1">{answer}</p>
-        </div>
-      )}
-      <hr />
-    </div>
-  );
-};
 
 //all api is here --------------------------------> 
 
-const fetchAllSection=async ()=>{
-  const data=await fetch("/api/cars/carhome");
+const fetchAllSection = async () => {
+  const data = await fetch("/api/cars/carhome");
   return await data.json();
 }
-const fetchCarBanner=async ()=>{
-  const data=await fetch("/api/cars/carhome/carbanner");
+const fetchCarBanner = async () => {
+  const data = await fetch("/api/cars/carhome/carbanner");
   return await data.json();
 }
-const fetchHeading1=async ()=>{
-  const data=await fetch("/api/cars/carhome/heading1");
+const fetchHeading1 = async () => {
+  const data = await fetch("/api/cars/carhome/heading1");
   return await data.json();
 }
-const fetchHeading2=async ()=>{
-  const data=await fetch("/api/cars/carhome/heading2");
+const fetchHeading2 = async () => {
+  const data = await fetch("/api/cars/carhome/heading2");
   return await data.json();
 }
-const fetchCarousel=async ()=>{
-  const data=await fetch("/api/cars/carhome/carCrousel");
+const fetchCarousel = async () => {
+  const data = await fetch("/api/cars/carhome/carCrousel");
   return await data.json();
 }
 
@@ -108,11 +86,13 @@ const fetchCarousel=async ()=>{
 export default function App() {
   const [cityPromoData, setCityPromoData] = useState([]);
   const [carPackageData, seCarPackageData] = useState([]);
-  const [carBanner,setCarBanner]=useState({});
-  const [carHeading1,setCarHeading1]=useState({});
-  const [carHeading2,setCarHeading2]=useState({});
-  const [carCarousel,setCarCarousel]=useState([]);
-  const [carAllSection,setCarAllSection]=useState([]);
+  const [carBanner, setCarBanner] = useState({});
+  const [carHeading1, setCarHeading1] = useState({});
+  const [carHeading2, setCarHeading2] = useState({});
+  const [carCarousel, setCarCarousel] = useState([]);
+  const [carAllSection, setCarAllSection] = useState([]);
+  const [staticBanner, setStaticBanner] = useState([]);
+
   useEffect(() => {
     // Fetch itinerary data
     const fetchItineraryData = async () => {
@@ -125,15 +105,15 @@ export default function App() {
     };
 
     fetchItineraryData();
-    fetchAllSection().then(res=>{
-      setCarAllSection(res?.data||[])
+    fetchAllSection().then(res => {
+      setCarAllSection(res?.data || [])
     })
-    fetchCarBanner().then(res=>{setCarBanner(res?.data?.[0]||{})})
-    
-    fetchHeading1().then(res=>{setCarHeading1(res?.data?.[0]||{})})
-    fetchHeading2().then(res=>{setCarHeading2(res?.data?.[0]||{})})
+    fetchCarBanner().then(res => { setCarBanner(res?.data?.[0] || {}) })
 
-    fetchCarousel().then(res=>{setCarCarousel(res?.data||[])})
+    fetchHeading1().then(res => { setCarHeading1(res?.data?.[0] || {}) })
+    fetchHeading2().then(res => { setCarHeading2(res?.data?.[0] || {}) })
+
+    fetchCarousel().then(res => { setCarCarousel(res?.data || []) })
   }, []);
 
 
@@ -144,8 +124,8 @@ export default function App() {
   }, []);
 
 
-  const packageDataCity=carAllSection?.filter(item=>item?.category==="category1");
-  const packageData=carAllSection?.filter(item=>item?.category==="category2");
+  const packageDataCity = carAllSection?.filter(item => item?.category === "category1");
+  const packageData = carAllSection?.filter(item => item?.category === "category2");
 
   // console.log("all section fetchHeading2 data is here ----> ",packageData?.[0]?.options);
 
@@ -232,36 +212,6 @@ export default function App() {
     },
   ];
 
-  const faqData = [
-    {
-      question: "How to hire a car in New Delhi?",
-      answer:
-        "You can hire a car by contacting our support or booking online through our website.",
-    },
-    {
-      question: "What documents are required?",
-      answer:
-        "You need a valid driving license, ID proof, and address proof to hire a car.",
-    },
-    {
-      question: "What are the payment options?",
-      answer: "We accept credit cards, debit cards, and UPI payments.",
-    },
-    {
-      question: "How to hire a car in New Delhi?",
-      answer:
-        "You can hire a car by contacting our support or booking online through our website.",
-    },
-    {
-      question: "What documents are required?",
-      answer:
-        "You need a valid driving license, ID proof, and address proof to hire a car.",
-    },
-    {
-      question: "What are the payment options?",
-      answer: "We accept credit cards, debit cards, and UPI payments.",
-    },
-  ];
 
   const [show, setShow] = useState(false);
 
@@ -305,7 +255,7 @@ export default function App() {
             <div onClick={() => setCarSelectionPopup(false)}>
               <Image
                 className=" w-full h-full object-cover"
-                src={carBanner?.path||"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                src={carBanner?.path || "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                 alt=""
                 width={1283}
                 height={854}
@@ -321,13 +271,13 @@ export default function App() {
           >
             <div>
               <p className="md:font-semibold font-medium text-xl">
-               {carHeading1?.heading1}
+                {carHeading1?.heading1}
               </p>
               <p
                 className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
                   }`}
               >
-               {carHeading1?.description1}
+                {carHeading1?.description1}
               </p>
             </div>
             <div className="flex justify-end">
@@ -353,7 +303,7 @@ export default function App() {
         </div>
         {/* Static section are here */}
         <div className="container-wrapper">
-          <div className="flex flex-col md:flex-row justify-between items-center pb-12 pt-4 px-3">
+          <div className="flex flex-col md:flex-row justify-between items-center pt-16 pb-20 px-3">
             {/* Global Reach */}
             <div className="flex flex-col max-w-xs">
               <div className="flex items-center mb-2 gap-3">
@@ -381,7 +331,7 @@ export default function App() {
           </div>
         </div>
         <div className="container-wrapper">
-          <CarCarousel carCarousel={carCarousel}/>
+          <CarCarousel carCarousel={carCarousel} />
         </div>
         {/* Car Packages are here */}
         <div>
@@ -395,11 +345,8 @@ export default function App() {
             <p className="md:font-semibold font-medium text-xl">
               {carHeading2?.heading2}
             </p>
-            {/* <p className="text-[15px] pt-1 pb-7 md:font-semibold font-medium">
-              Find the Car Deals
-            </p> */}
             <p className="text-[15px]">
-            {carHeading2?.description2}
+              {carHeading2?.description2}
             </p>
           </div>
           <div className="py-12">
@@ -415,24 +362,13 @@ export default function App() {
           </div>
         </div>
         <div>
-           <CarReviewCard/>
+          <StaticBanner staticBanner={staticBanner} carCarousel={carCarousel} />
         </div>
-        <div
-          className="container-wrapper"
-          onClick={() => setCarSelectionPopup(false)}
-        >
-          <p className="md:font-semibold font-medium text-lg py-10">
-            Frequently Asked Questions
-          </p>
-          <div className="grid grid-cols-1 lg:grid-cols-2 ">
-            {faqData.map((faq, index) => (
-              <FAQSection
-                key={index}
-                question={faq.question}
-                answer={faq.answer}
-              />
-            ))}
-          </div>
+        <div className="">
+          <CarReviewCard />
+        </div>
+        <div >
+          <Footer />
         </div>
       </div>
     </AppProvider>

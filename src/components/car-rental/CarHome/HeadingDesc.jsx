@@ -74,7 +74,7 @@ const HeadingDesc = () => {
  }
   return (
     <>
-      <div className="flex items-center gap-5 text-primary xl:mt-5 mb-5">
+      <div className="flex items-center gap-5 text-primary xl:my-10 mb-5">
         <FontAwesomeIcon icon={faCube} className="text-2xl" />
         <p className="md:text-[28px] text-xl text-black">Heading Description</p>
         <FontAwesomeIcon

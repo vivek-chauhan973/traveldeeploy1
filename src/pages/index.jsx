@@ -95,6 +95,7 @@ import Promises from "@/components/Home/Cards/Promises";
 import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
 import StateCard from "@/components/Home/Cards/StateCard";
 import Link from "next/link";
+import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 const fetchAllSingleSction = async () => {
   const res = await fetch("/api/home/homefooter");
   return await res.json();
@@ -123,7 +124,7 @@ export default function Home() {
   useEffect(() => {
     fetchAllMultiSction().then(res => {
       SetHomePackages(res?.data)
-      console.log("all section is here----> ",res?.data)
+      console.log("all section is here----> ", res?.data)
     })
     fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
   }, []);
@@ -161,21 +162,21 @@ export default function Home() {
             <h1 className="md:text-[16px] text-para line-clamp-3">
               {category1?.[0]?.description}
             </h1>
-            <Link href={`/speciality-tours/`+category1?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
-            <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
-              Know more
-            </button>
+            <Link href={`/speciality-tours/` + category1?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+              <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+                Know more
+              </button>
             </Link>
           </div>
           <div className=" md:ml-28">
-          <Link href={`/speciality-tours/`+category1?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
-            <Image
-              width={400}
-              height={200}
-              className="object-cover rounded-[17px] w-[500px] h-[265px]"
-              src={category1?.[0]?.options?.[0]?.posterPath ? category1?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-              alt=""
-            />
+            <Link href={`/speciality-tours/` + category1?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+              <Image
+                width={400}
+                height={200}
+                className="object-cover rounded-[17px] w-[500px] h-[265px]"
+                src={category1?.[0]?.options?.[0]?.posterPath ? category1?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                alt=""
+              />
             </Link>
           </div>
         </div>
@@ -196,21 +197,21 @@ export default function Home() {
             <h1 className="md:text-[16px] text-para line-clamp-3">
               {category3?.[0]?.description}
             </h1>
-            <Link href={`/speciality-tours/`+category3?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
-            <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
-              Know more
-            </button>
+            <Link href={`/speciality-tours/` + category3?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+              <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+                Know more
+              </button>
             </Link>
           </div>
           <div className=" md:ml-28 ">
-          <Link href={`/speciality-tours/`+category3?.[0]?.options?.[0]?.selectedItem+'-tour-packages'}>
-            <Image
-              className="object-cover rounded-[17px] w-[500px] h-[265px]"
-              width={400}
-              height={200}
-              src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-              alt=""
-            />
+            <Link href={`/speciality-tours/` + category3?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+              <Image
+                className="object-cover rounded-[17px] w-[500px] h-[265px]"
+                width={400}
+                height={200}
+                src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                alt=""
+              />
             </Link>
           </div>
         </div>
@@ -219,14 +220,14 @@ export default function Home() {
       <div className="container-wrapper md:pb-10 pb-5">
         <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
           <div className="">
-          <Link href={"/package/"+category2?.[0]?.options?.[0]?.pageUrl}>
-            <Image
-              className=" object-cover rounded-[17px] w-[420px] h-[265px]"
-              width={450}
-              height={450}
-              src={category2?.[0]?.options?.[0]?.uploads?.[0]}
-              alt=""
-            />
+            <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
+              <Image
+                className=" object-cover rounded-[17px] w-[420px] h-[265px]"
+                width={450}
+                height={450}
+                src={category2?.[0]?.options?.[0]?.uploads?.[0]}
+                alt=""
+              />
             </Link>
           </div>
           <div className="">
@@ -238,10 +239,10 @@ export default function Home() {
               {category2?.[0]?.description}
             </h1>
             <div className=" mt-4  flex md:justify-between gap-3  ">
-              <Link href={"/package/"+category2?.[0]?.options?.[0]?.pageUrl}>
-              <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
-                Know more
-              </button>
+              <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
+                <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+                  Know more
+                </button>
               </Link>
             </div>
           </div>
@@ -268,7 +269,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      
+
       <div>
         <Card4 packages={packages} />
       </div>
@@ -294,6 +295,9 @@ export default function Home() {
         <div className=" md:mt-4 mt-4">
           <CarArrowSection />
         </div>
+      </div>
+      <div>
+        <CarPackageCarousel />
       </div>
       <div className="w-full h-96 flex justify-center items-center text-2xl">
         Travel Guide
