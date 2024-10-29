@@ -2,13 +2,9 @@ import { useEffect, useState } from "react";
 import "../../../app/globals.css";
 import CarDeparturePopup from "./CarDeparture & booking/CarDeparturePopup";
 
-const CarDepartureSection = ({ carPackage,setCarDepartureDetails ,setCarPrice1}) => {
-    const [showPopup, setShowPopup] = useState(false);
+const CarDepartureSection = ({ carPackage,showPopup,setCarDepartureDetails ,setCarPrice1,setShowPopup}) => {
     const [departureData, setdepartureData] = useState();
     const data = carPackage?.prices?.departureData;
-    console.log("data", data);
-    // console.log("departureData", departureData);
-
    const  handleCityPopup = (item) => {
         setShowPopup(true);
         setdepartureData(item);

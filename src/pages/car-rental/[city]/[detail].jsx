@@ -45,13 +45,13 @@ export default function CarDetail() {
     const [carPackage, setCarPackage] = useState({})
     const [carDepartureDetails, setCarDepartureDetails] = useState([])
     const [carPrice1,setCarPrice1]=useState(0);
+    const [showPopup, setShowPopup] = useState(false);
 
     // console.log("package1", package1);
     const [carAllPackages, setCarAllPackages] = useState([])
 
     useEffect(() => {
         getAllPackages().then(res => {
-            console.log("res of getAllPackages =======>", res?.packages);
             setCarAllPackages(res?.packages);
         })
     }, [])
@@ -110,7 +110,7 @@ export default function CarDetail() {
     // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
 
     // console.log("carPackage----==>  ", carPackage);
-    console.log("carSidePackages----==>  ", carPrice1);
+    // console.log("carSidePackages----==>  ", carPrice1);
     const save = 5;
 
     return (
@@ -194,6 +194,8 @@ export default function CarDetail() {
                                 carPackage={carPackage}
                                 setCarDepartureDetails={setCarDepartureDetails}
                                 setCarPrice1={setCarPrice1}
+                                setShowPopup={setShowPopup}
+                                showPopup={showPopup}
                             />
                             {/* Booking Summary */}
                             <CardDetailPricingCard
