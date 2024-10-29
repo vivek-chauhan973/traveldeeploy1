@@ -118,8 +118,8 @@ export default function Home() {
   const [category1, setCategory1] = useState([]);
   const [category2, setCategory2] = useState([]);
   const [category3, setCategory3] = useState([]);
-  const [carPackages,setCarPackages]=useState([]);
-  const [carCityPromos,setCarCityPromo]=useState([]);
+  const [carPackages, setCarPackages] = useState([]);
+  const [carCityPromos, setCarCityPromo] = useState([]);
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
@@ -156,18 +156,19 @@ export default function Home() {
     <>
       <DesktopHeader />
       <HeroSection />
+      {/* First image and text */}
       <div className="container-wrapper  md:py-11 py-5">
         <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
           <div className=" md:shrink-0">
-            <p className=" text-amber-600   font-semibold mt-2">
+            <p className=" text-amber-600   font-semibold mb-0.5">
               {category1?.[0]?.subtitle}
             </p>
-            <h1 className=" md:text-[25px] text-xl  font-medium">{category1?.[0]?.title}</h1>
-            <h1 className="md:text-[16px] text-para line-clamp-3">
+            <h1 className=" md:text-[25px] text-xl  font-medium ">{category1?.[0]?.title}</h1>
+            <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
               {category1?.[0]?.description}
             </h1>
             <Link href={`/speciality-tours/` + category1?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
-              <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+              <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                 Know more
               </button>
             </Link>
@@ -190,24 +191,24 @@ export default function Home() {
         <StateCard states={states} />
       </div>
 
-      {/* second image and text */}
+      {/* Second image and text */}
       <div className="container-wrapper  md:py-11 py-5">
         <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
           <div className=" md:shrink-0">
-            <p className=" text-amber-600 font-semibold mt-2">
+            <p className=" text-amber-600 font-semibold mb-0.5">
               {category3?.[0]?.subtitle}
             </p>
             <h1 className=" md:text-[25px] text-xl  font-medium">{category3?.[0]?.title}</h1>
-            <h1 className="md:text-[16px] text-para line-clamp-3">
+            <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
               {category3?.[0]?.description}
             </h1>
             <Link href={`/speciality-tours/` + category3?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
-              <button className="mt-3 shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+              <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                 Know more
               </button>
             </Link>
           </div>
-          <div className=" md:ml-28 ">
+          <div className="md:ml-28 ">
             <Link href={`/speciality-tours/` + category3?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
               <Image
                 className="object-cover rounded-[17px] w-[500px] h-[265px]"
@@ -220,7 +221,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* third first image and text */}
+      {/* Third first image and text */}
       <div className="container-wrapper md:pb-10 pb-5">
         <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
           <div className="">
@@ -235,14 +236,14 @@ export default function Home() {
             </Link>
           </div>
           <div className="">
-            <p className=" text-amber-600  font-semibold mt-2">{category2?.[0]?.subtitle}</p>
+            <p className=" text-amber-600  font-semibold mb-0.5">{category2?.[0]?.subtitle}</p>
             <h1 className="md:text-[25px] text-xl font-medium">
               {category2?.[0]?.title}
             </h1>
-            <h1 className="md:text-[16px] text-para line-clamp-3 ">
+            <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
               {category2?.[0]?.description}
             </h1>
-            <div className=" mt-4  flex md:justify-between gap-3  ">
+            <div className="flex md:justify-between gap-3">
               <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
                 <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                   Know more
@@ -297,7 +298,7 @@ export default function Home() {
       </div>
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
         <div className=" md:mt-4 mt-4">
-          <CarArrowSection carCityPromos={carCityPromos}/>
+          <CarArrowSection carCityPromos={carCityPromos} />
         </div>
       </div>
       <div>

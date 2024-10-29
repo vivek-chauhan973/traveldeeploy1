@@ -44,8 +44,8 @@ const Card4 = ({ packages }) => {
         <div className="md:mt-9 mt-4 bg-slate-100 ">
             {packages?.length > 0 &&
                 <div className="container-wrapper  text-center py-7">
-                    <p className='md:text-[25px] text-xl font-medium mb-1'>
-                        Handpicked Highlights for Your Perfect Tour Package
+                    <p className='md:text-[25px] text-xl font-medium mb-1 capitalize'>
+                        Handpicked highlights for your perfect tour package
                     </p>
                     <p className="md:text-md text-para font-normal">
                         Discovered expertly curated travel package tailored to offer you unforgettable experiences.
@@ -61,30 +61,35 @@ const Card4 = ({ packages }) => {
                                 <div className="shadow-md  rounded-lg overflow-hidden">
                                     <div className="relative">
                                         <div className=" w-full h-52">
-                                            {items?.uploads&&<Image className=" relative  object-cover " layout="fill"
+                                            {items?.uploads && <Image className=" relative  object-cover " layout="fill"
                                                 src={items?.uploads?.[0]}
                                                 alt="images"
                                             />}
                                         </div>
-                                        <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 pt-4 pb-1 px-2">
+                                        {/* <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 pt-4 pb-1 px-2">
                                             <div className='flex gap-3'>
                                                 <p className="font-semibold md:text-base text-sm text-white ">Started From {items?.startcity}</p>
                                                 <p className="font-semibold md:text-base text-sm text-white">{items?.days} Days</p>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
-                                    <div className=" flex flex-col gap-3 px-3 py-3 bg-white">
+                                    <div className=" flex flex-col gap-3 px-3 pt-3 pb-5 bg-white">
+                                        <div className='flex gap-3 w-full'>
+                                            <p className="font-semibold md:text-base text-sm text-black w-[75%]">Started From {items?.startcity}</p>
+                                            <p className="font-semibold md:text-base text-sm text-black w-25%]">{items?.days} Days</p>
+                                        </div>
                                         <div className="w-full md:h-7 h-8">
                                             <p className="md:text-lg text-base font-semibold">{items?.name}</p>
                                         </div>
                                         <p dangerouslySetInnerHTML={{ __html: items?.about }}
-                                            className="text-para line-clamp-3"></p>
+                                            className="text-para line-clamp-3">
+                                        </p>
                                         <div>
-                                            <div className="flex gap-5 items-center justify-between pr-4">
+                                            <div className="flex gap-5 items-center justify-between pr-4 pt-1">
                                                 <p className="text-lg font-semibold">
                                                     {items?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
-                                                <Link href={"/package/"+items?.pageUrl}>
+                                                <Link href={"/package/" + items?.pageUrl}>
                                                     <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
                                                         Know More
                                                     </button>

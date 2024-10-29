@@ -13,17 +13,17 @@ const fetchPromoListCategory = async () => {
   return data;
 };
 
-const CarArrowSection = ({carCityPromos}) => {
+const CarArrowSection = ({ carCityPromos }) => {
   const [promoCarCategory, setPromoCarCategory] = useState([]);
 
   useEffect(() => {
-    
-      setPromoCarCategory(carCityPromos);
-    
+
+    setPromoCarCategory(carCityPromos);
+
   }, [carCityPromos]);
 
   // console.log("promoCarCategory =======> ", promoCarCategory);
-  
+
   const carouselRef = useRef(null);
 
   const scrollNext = () => {
@@ -67,13 +67,11 @@ const CarArrowSection = ({carCityPromos}) => {
     <div className=" md:grid md:grid-cols-[450px,auto] ">
       {promoCarCategory?.length > 0 && (
         <div className="max-w-[450px] px-5 items-center  pt-5 md:pt-20">
-          <p className="md:text-[25px] text-[22px] -mt-5 font-medium text-center flex flex-wrap">
-            Looking for a specific style for holiday from car
+          <p className="md:text-[25px] text-[22px] -mt-5 font-medium text-center flex flex-wrap capitalize">
+            Searching for a specific kind of holiday getaway by car
           </p>
           <p className="text-para pt-3 line-clamp-2 mb-4 text-center">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-            consequatur adipisci aliquam rerum error odio, nam, atque nostrum
-            labore harum possimus nesciunt!
+            Explore carefully curated holiday adventures designed for road trips, tailored to your specific style and preferences.
           </p>
         </div>
       )}
@@ -88,7 +86,7 @@ const CarArrowSection = ({carCityPromos}) => {
                   className=" h-96 w-full shrink-0 relative max-w-[290px]  rounded-lg overflow-hidden"
                 >
                   <Link
-                   href={`/car-rental/${items?.selectedItem?.toLowerCase()?.split(" ")?.join("-")}-car-hire`}
+                    href={`/car-rental/${items?.selectedItem?.toLowerCase()?.split(" ")?.join("-")}-car-hire`}
                   >
                     <Image
                       className="relative object-cover"
@@ -98,7 +96,7 @@ const CarArrowSection = ({carCityPromos}) => {
                     />
                   </Link>
                   <Link
-                   href={`/car-rental/${items?.selectedItem?.toLowerCase()?.split(" ")?.join("-")}-car-hire`}
+                    href={`/car-rental/${items?.selectedItem?.toLowerCase()?.split(" ")?.join("-")}-car-hire`}
                   >
                     <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 p-4">
                       <div className=''>

@@ -66,13 +66,11 @@ const ArrowSection = () => {
     <div className=" md:grid md:grid-cols-[450px,auto] ">
       {promoCategory?.length > 0 && (
         <div className="max-w-[450px] px-5 items-center  pt-5 md:pt-20">
-          <p className="md:text-[25px] text-[22px] -mt-5 font-medium text-center flex flex-wrap">
-            Looking for a specific style for holiday
+          <p className="md:text-[25px] text-[22px] -mt-5 font-medium text-center flex flex-wrap capitalize">
+            Discovering the perfect holiday style
           </p>
           <p className="text-para pt-3 line-clamp-2 mb-4 text-center">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-            consequatur adipisci aliquam rerum error odio, nam, atque nostrum
-            labore harum possimus nesciunt!
+            Escape to destinations designed around your personal style.
           </p>
         </div>
       )}
