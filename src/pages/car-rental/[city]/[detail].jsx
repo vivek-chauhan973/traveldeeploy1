@@ -14,13 +14,15 @@ import CarItineraryFaq from "@/components/car-rental/car-detail/CarItineraryFaq"
 import CarItinerarymap from "@/components/car-rental/car-detail/CarItineraryMap";
 import CarItineraryPaymentTerms from "@/components/car-rental/car-detail/CarItineraryPaymentterms";
 import CarItinerarySideCard from "@/components/car-rental/car-detail/CarItinerarySideCard";
-import CarReviewsCard from "@/components/car-rental/car-detail/CarReviewsCard";
 import CarDetailFaq from "@/components/car-rental/car-detail/CarDetailFaq";
 import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarItineraryTourDetails from "@/components/car-rental/car-detail/CarItineraryTourDetails";
 import { useRouter } from "next/router";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarDeptBookingPopup from "@/components/car-rental/car-detail/CarDeparture & booking/CarDeptBookingPopup";
+import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
+import Footer from "@/components/Footer";
+import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 
 const fetchCarPackage = async (packageUrl) => {
     // console.log("page url :: ",packageUrl)
@@ -44,7 +46,8 @@ export default function CarDetail() {
 
     const [carPackage, setCarPackage] = useState({})
     const [carDepartureDetails, setCarDepartureDetails] = useState([])
-    const [carPrice1,setCarPrice1]=useState(0);
+    const [carPrice1, setCarPrice1] = useState(0);
+    // For departure city pop up
     const [showPopup, setShowPopup] = useState(false);
 
     // console.log("package1", package1);
@@ -111,7 +114,6 @@ export default function CarDetail() {
 
     // console.log("carPackage----==>  ", carPackage);
     // console.log("carSidePackages----==>  ", carPrice1);
-    const save = 5;
 
     return (
         <AppProvider>
@@ -148,7 +150,7 @@ export default function CarDetail() {
                                     <p className="text-sm leading-5">
                                         Without GST{" "}
                                         <span className="text-lg text-graytext font-medium">
-                                            {(carPrice1||carPackage?.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                            {(carPrice1 || carPackage?.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                         </span>
                                     </p>
                                     <div className="flex gap-1 items-end">
@@ -162,15 +164,15 @@ export default function CarDetail() {
                                     </div>
                                 </div>
                                 <div className="flex flex-col align-middle my-auto pl-2 gap-2">
-                                    <button 
+                                    <button
                                         className="bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer px-5 py-2 rounded-md text-white text-center text-para">
                                         Book Now
                                     </button>
-                                    {/* <CustomiseTour> */}
+                                    <CustomiseTour>
                                     <button className=" border-primary w-full border text-primary px-5 py-2 text-para rounded-md">
                                         Customise
                                     </button>
-                                    {/* </CustomiseTour> */}
+                                    </CustomiseTour>
                                 </div>
                             </div>
                         </div>
@@ -480,7 +482,7 @@ export default function CarDetail() {
 
                 {/* Car reviewsCard */}
                 <div className="my-7">
-                    <CarReviewsCard carPackage={carPackage} />
+                    <CarReviewCard />
                 </div>
 
                 {/* Similar Car package */}
@@ -489,7 +491,7 @@ export default function CarDetail() {
                 </div>
 
                 {/* FAQ section --- when data is not available then all content will hide */}
-                <div className="my-7 md:p-0 px-4">
+                <div className="mt-7 mb-16 md:p-0 px-4">
                     <div className="text-center mb-4">
                         <p className="md:text-[22px] text-[20px] mb-2 capitalize font-semibold">
                             Frequently Asked Questions (FAQs){" "}
@@ -502,6 +504,9 @@ export default function CarDetail() {
                         </p>
                     </div>
                     <CarDetailFaq carPackage={carPackage} />
+                </div>
+                <div >
+                    <Footer />
                 </div>
 
                 {/* bottom link is here*/}

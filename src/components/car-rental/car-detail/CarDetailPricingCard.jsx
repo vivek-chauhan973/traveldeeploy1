@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CarDeptBookingPopup from "./CarDeparture & booking/CarDeptBookingPopup";
 import { useEffect, useState } from "react";
+import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 
 const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
     const [showPopup, setShowPopup] = useState(false);
@@ -10,23 +11,28 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
 
     const seatingCapacity = carPackage?.selectedVicle?.seatingCapacity || 0;
     // console.log("seatingCapacity", seatingCapacity);
-    
-    const GSTPrice = Math.floor((carPackage?.price+(carPackage?.price*(carDepartureDetails?.Hike / 100)) )* (carDepartureDetails?.GST / 100));
+
+    const GSTPrice = Math.floor((carPackage?.price + (carPackage?.price * (carDepartureDetails?.Hike / 100))) * (carDepartureDetails?.GST / 100));
     const grandTotal = carPackage?.price + GSTPrice;
     // console.log("GSTPrice", GSTPrice);
-    
+
     const handleBookNowClick = () => {
         // console.log("Clicked Book Now");
-        carDepartureDetails['travellers']=travellers;
-        carDepartureDetails['grandTotal']=grandTotal;
-        setShowPopup(true);
+        if (travellers !== 0) {
+            carDepartureDetails['travellers'] = travellers;
+        }
+        if(grandTotal > 0){
+            carDepartureDetails['grandTotal'] = grandTotal;
+        }
+        if(travellers !== 0){
+            setShowPopup(true);
+        }
     };
     const handleEdit = () => {
-        // console.log("Clicked Edit");
         setShowPopup(true);
     }
-        // console.log("travellers",travellers);
-        // console.log("carDepartureDetails", carDepartureDetails);
+    // console.log("travellers",travellers);
+    // console.log("carDepartureDetails", carDepartureDetails);
 
     return (
         <>
@@ -76,7 +82,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                                     className="border rounded w-1/2 pl-3 cursor-pointer focus:border-primary outline-none"
                                     onChange={(e) => {
                                         setTravellers(e.target.value);
-                                      }}
+                                    }}
                                     disabled={!seatingCapacity}  // Disable if seating capacity is 0 or not set
                                 >
                                     <option value="" className="cursor-pointer">
@@ -99,7 +105,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                     <div className="grid grid-cols-2 gap-1">
                         <p className="text-sm font-semibold">Base Price</p>
                         <p className="text-md font-medium text-graytext">
-                            {carPackage?.price ? (carDepartureDetails?.Hike?((carPackage?.price)+((carPackage?.price)*(carDepartureDetails?.Hike/100)))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }):carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }))||carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
+                            {carPackage?.price ? (carDepartureDetails?.Hike ? ((carPackage?.price) + ((carPackage?.price) * (carDepartureDetails?.Hike / 100)))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })) || carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
                         </p>
                     </div>
                     <hr className="border-dashed my-2 " />
@@ -108,7 +114,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                         <div className="grid grid-cols-2">
                             <p>Total Cost</p>
                             <p className="">
-                            {carPackage?.price ? (carDepartureDetails?.Hike?((carPackage?.price)+((carPackage?.price)*(carDepartureDetails?.Hike/100)))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }):carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }))||carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
+                                {carPackage?.price ? (carDepartureDetails?.Hike ? ((carPackage?.price) + ((carPackage?.price) * (carDepartureDetails?.Hike / 100)))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })) || carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
                             </p>
                         </div>
                     </div>
@@ -161,14 +167,18 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                     </div>
                     <div className="xl:block hidden">
                         <div className=" grid grid-cols-2 gap-3 my-3">
-                            {/* <CustomiseTour> */}
-                            <button className=" border-primary w-full border text-primary flex-flow  flex justify-center px-5 py-2 text-para rounded-md">
-                                Customise
-                            </button>
-                            {/* </CustomiseTour> */}
+                            <CustomiseTour>
+                                <button className=" border-primary w-full border text-primary flex-flow  flex justify-center px-5 py-2 text-para rounded-md">
+                                    Customise
+                                </button>
+                            </CustomiseTour>
                             <button onClick={handleBookNowClick}
-                                className="border px-5 py-2 rounded-md bg-gradient-to-r from-orange-500 to-red-500 text-center text-white text-para"
-                                disabled={!travellers}
+                                // className="border px-5 py-2 rounded-md bg-gradient-to-r from-orange-500 to-red-500 text-center text-white text-para"
+                                // disabled={!travellers}
+                                className={` ${travellers
+                                    ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
+                                    : "bg-gradient-to-r from-orange-200 to-red-200"
+                                    } px-5 py-2 rounded-md text-white text-center text-para`}
                             >
                                 Book now
                             </button>
