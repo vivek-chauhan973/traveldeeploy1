@@ -119,12 +119,13 @@ useEffect(()=>{
   }
   setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
   }
-
-  //here are all logics and state related car-rental package
-
- 
-
   const [groupDeparturePerson,setGroupDeparturePerson]=useState(0);
+  //here are all logics and state related car-rental package
+  const [carbookdisableandenable,setCarbookdisableandenable]=useState(false);
+  const [carPrice,setCarPrice]=useState(0);
+  // console.log("carbookdisableandenable---------> ",carbookdisableandenable);
+  // console.log("carPrice---------> ",carPrice);
+
   const contextFun = {
     initialData,
     closeBtn,
@@ -151,7 +152,7 @@ useEffect(()=>{
     filterApi,
     fixedDepDate,setFixedDepDate,
     fixedDepCity,setFixedDepCity,
-     setFixedDepDate1,
+    setFixedDepDate1,
     setFixedDepCity1,
     handleCleckOnDepartureFixed,
     fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable,
@@ -165,7 +166,7 @@ useEffect(()=>{
     fixedDeparturePopupPrice,setFixedDeparturePopupPrice,
     groupDeparturePerson,setGroupDeparturePerson,
     highLightedPackage,setHighLightedPackage,
-    addCarPackage
+    addCarPackage,carbookdisableandenable,setCarbookdisableandenable,carPrice,setCarPrice
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>

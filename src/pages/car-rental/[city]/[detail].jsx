@@ -44,6 +44,7 @@ export default function CarDetail() {
 
     const [carPackage, setCarPackage] = useState({})
     const [carDepartureDetails, setCarDepartureDetails] = useState([])
+    const [carPrice1,setCarPrice1]=useState(0);
 
     // console.log("package1", package1);
     const [carAllPackages, setCarAllPackages] = useState([])
@@ -61,7 +62,7 @@ export default function CarDetail() {
             fetchCarPackage(package1).then(res => { setCarPackage(res || {}) })
         }
     }, [package1])
-    console.log("car Rental package detail response ---->", carPackage);
+    // console.log("car Rental package detail response ---->", carPackage);
 
     const handleSendItinerary = () => {
         const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
@@ -106,10 +107,10 @@ export default function CarDetail() {
             "_blank"
         );
     }
-    console.log("CarDepartureDetails----==>  ", carDepartureDetails);
+    // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
 
     // console.log("carPackage----==>  ", carPackage);
-    // console.log("carSidePackages----==>  ", carSidePackages);
+    console.log("carSidePackages----==>  ", carPrice1);
     const save = 5;
 
     return (
@@ -147,7 +148,7 @@ export default function CarDetail() {
                                     <p className="text-sm leading-5">
                                         Without GST{" "}
                                         <span className="text-lg text-graytext font-medium">
-                                            {carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                            {(carPrice1||carPackage?.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                         </span>
                                     </p>
                                     <div className="flex gap-1 items-end">
@@ -192,6 +193,7 @@ export default function CarDetail() {
                             <CarDepartureSection
                                 carPackage={carPackage}
                                 setCarDepartureDetails={setCarDepartureDetails}
+                                setCarPrice1={setCarPrice1}
                             />
                             {/* Booking Summary */}
                             <CardDetailPricingCard

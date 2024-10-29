@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../../../app/globals.css";
 import CarDeparturePopup from "./CarDeparture & booking/CarDeparturePopup";
 
-const CarDepartureSection = ({ carPackage,setCarDepartureDetails }) => {
+const CarDepartureSection = ({ carPackage,setCarDepartureDetails ,setCarPrice1}) => {
     const [showPopup, setShowPopup] = useState(false);
     const [departureData, setdepartureData] = useState();
     const data = carPackage?.prices?.departureData;
@@ -38,6 +38,7 @@ const CarDepartureSection = ({ carPackage,setCarDepartureDetails }) => {
                                     carPackage={carPackage}
                                     setdepartureData={setdepartureData}
                                     departureData={departureData}
+                                    setCarPrice1={setCarPrice1}
                                 />
                             )}
                             {/* Display the current month's calendar */}
@@ -64,7 +65,7 @@ const CarDepartureSection = ({ carPackage,setCarDepartureDetails }) => {
                                                             {item?.Date}
                                                         </p>
                                                         <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
-                                                            {carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                            {(carPackage?.price+(((carPackage?.price)*(item?.Hike))/100))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                         </div>
                                                         <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
                                                             {item?.Save > 0 && <p>Save {item?.Save}%</p>}

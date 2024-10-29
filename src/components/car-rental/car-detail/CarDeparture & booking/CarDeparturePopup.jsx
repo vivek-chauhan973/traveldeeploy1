@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
-const CarDeparturePopup = ({ setShowPopup, carPackage,setdepartureData,departureData }) => {
+const CarDeparturePopup = ({ setShowPopup, carPackage,setdepartureData,departureData,setCarPrice1 }) => {
   const [handleCity, setHandleCity] = useState(false);
   const [departureCity, setdepartureCity] = useState([]);
+  const {setCarPrice}=useAppContext();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -15,13 +17,14 @@ const CarDeparturePopup = ({ setShowPopup, carPackage,setdepartureData,departure
   const handleSubmit = () => {
     departureData['departureCity']=departureCity;
     setdepartureData(departureData);
+    setCarPrice(((carPackage?.price)+((carPackage?.price)*(departureData?.Hike/100))));
+    setCarPrice1(((carPackage?.price)+((carPackage?.price)*(departureData?.Hike/100))));
     setShowPopup(false);
   };
   const handlePopupClose = () => {
     setShowPopup(false);
   };
-  // console.log("DepartureCity", departureCity);
-
+  // console.log("DepartureCity data", departureData);
   return (
     <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
       <div className="absolute inset-0 bg-black opacity-50"></div>

@@ -2,7 +2,7 @@ import "../../../app/globals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CarDeptBookingPopup from "./CarDeparture & booking/CarDeptBookingPopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
     const [showPopup, setShowPopup] = useState(false);
@@ -11,10 +11,10 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
     const seatingCapacity = carPackage?.selectedVicle?.seatingCapacity || 0;
     // console.log("seatingCapacity", seatingCapacity);
     
-    const GSTPrice = Math.floor(carPackage?.price * (carDepartureDetails?.GST / 100));
+    const GSTPrice = Math.floor((carPackage?.price+(carPackage?.price*(carDepartureDetails?.Hike / 100)) )* (carDepartureDetails?.GST / 100));
     const grandTotal = carPackage?.price + GSTPrice;
     // console.log("GSTPrice", GSTPrice);
-
+    
     const handleBookNowClick = () => {
         // console.log("Clicked Book Now");
         carDepartureDetails['travellers']=travellers;
@@ -25,8 +25,8 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
         // console.log("Clicked Edit");
         setShowPopup(true);
     }
-        console.log("travellers",travellers);
-        console.log("carDepartureDetails", carDepartureDetails);
+        // console.log("travellers",travellers);
+        // console.log("carDepartureDetails", carDepartureDetails);
 
     return (
         <>
@@ -99,7 +99,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                     <div className="grid grid-cols-2 gap-1">
                         <p className="text-sm font-semibold">Base Price</p>
                         <p className="text-md font-medium text-graytext">
-                            {carPackage?.price ? carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
+                            {carPackage?.price ? (carDepartureDetails?.Hike?((carPackage?.price)+((carPackage?.price)*(carDepartureDetails?.Hike/100)))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }):carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }))||carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
                         </p>
                     </div>
                     <hr className="border-dashed my-2 " />
@@ -108,7 +108,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                         <div className="grid grid-cols-2">
                             <p>Total Cost</p>
                             <p className="">
-                                {carPackage?.price ? carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
+                            {carPackage?.price ? (carDepartureDetails?.Hike?((carPackage?.price)+((carPackage?.price)*(carDepartureDetails?.Hike/100)))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }):carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }))||carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
                             </p>
                         </div>
                     </div>

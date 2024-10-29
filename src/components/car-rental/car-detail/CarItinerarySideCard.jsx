@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 
 const CarItinerarySideCard = ({ carSidePackages}) => {
-   console.log("carSidePackages",carSidePackages);
+//    console.log("carSidePackages",carSidePackages);
    
 
     return (

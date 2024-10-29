@@ -35,7 +35,7 @@ const destinationHeader=async (req,res)=>{
           return CarPackageState.findById(id).exec();
         }
         if(item.category==="category2"){
-          return CarPackage1.findById(id).exec();
+          return CarPackage1.findById(id).populate("location").exec();
         }
         
       }));
