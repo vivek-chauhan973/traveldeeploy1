@@ -35,7 +35,7 @@ export default function Management () {
                 <div>
                     <div className="flex items-center gap-5 text-primary pb-3">
                         <LuPackagePlus size={24} className="font-semibold" />
-                        <p className="text-[28px] text-black">Promo Manage</p>
+                        <p className="text-[28px] text-black">Blog Promo Management</p>
                         <HiOutlineArrowNarrowRight size={28} className=" text-teal-700" />
                     </div>
                     <div className=" ">
@@ -57,7 +57,7 @@ export default function Management () {
                         <div>
                             <div className="bg-white rounded p-4">
                                 <div>
-                                    <p className="text-[15px] font-semibold">Package Image Upload</p>
+                                    <p className="text-[15px] font-semibold">Blog Image Upload</p>
                                 </div>
                                 <div className="py-10 border border-slate-500/45  px-2 rounded">
                                     <div className="w-2/3">
@@ -89,7 +89,7 @@ export default function Management () {
                                 <p>Faq  Section</p>
                             </div>
                             <div>
-                                <FaqSection />
+                                {/* <FaqSection /> */}
                             </div>
                         </div>
                         <div className="flex">
