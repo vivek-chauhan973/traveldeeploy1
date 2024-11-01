@@ -84,7 +84,7 @@ const YourComponent = () => {
             <div className="flex justify-between items-center pb-5">
               <div className="flex items-center gap-5 text-primary pb-3">
                 <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                <p className="text-[24px] text-black">Package List</p>
+                <p className="text-[24px] text-black">Car Package List</p>
                 <FontAwesomeIcon
                   icon={faArrowRightLong}
                   className=" text-teal-700 text-xl"
