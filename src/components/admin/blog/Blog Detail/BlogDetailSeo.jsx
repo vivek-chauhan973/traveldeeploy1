@@ -5,7 +5,7 @@ const fetchCarHomeData = async () => {
     return await data.json();
 };
 
-const BlogSeo = () => {
+const BlogDetailSeo = () => {
 
     //Blog seo field here
     const [title, setTitle] = useState("");
@@ -91,8 +91,8 @@ const BlogSeo = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="keyword" className=" font-semibold">
-                        Keyword
+                <label htmlFor="keyword" className=" font-semibold">
+                   Keyword
                     </label>
                     <input
                         className="py-0.5 mt-1 mb-2 w-full border rounded h-8 px-2 focus:border-primary outline-none"
@@ -116,4 +116,4 @@ const BlogSeo = () => {
     )
 }
 
-export default BlogSeo
+export default BlogDetailSeo;

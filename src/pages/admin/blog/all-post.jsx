@@ -164,11 +164,12 @@ import Link from "next/link";
 import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
 import dynamic from "next/dynamic";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
 
 const AllPosts = () => {
+
   const [itineraries, setItineraries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8); // Number of items per page
@@ -182,7 +183,7 @@ const AllPosts = () => {
       try {
         const response = await fetch("/api/cars/package/get-packages");
         const data = await response.json();
-        console.log("all packages list is here ---> ",data);
+        console.log("all packages list is here ---> ", data);
         setItineraries(data.packages || []); // Provide a default empty array if data.packages is undefined
       } catch (error) {
         console.error("Error fetching itinerary data:", error);
@@ -243,7 +244,7 @@ const AllPosts = () => {
             <div className="flex justify-between items-center pb-5">
               <div className="flex items-center gap-5 text-primary pb-3">
                 <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                <p className="text-[24px] text-black">Blog All Post</p>
+                <p className="text-[24px] text-black">All Post</p>
                 <FontAwesomeIcon
                   icon={faArrowRightLong}
                   className=" text-teal-700 text-xl"
@@ -273,26 +274,14 @@ const AllPosts = () => {
                   <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">
                     Image
                   </th>
-                  {/* <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
-                    Pckage ID
-                  </th> */}
                   <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
                     Name
                   </th>
                   <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
-                    Category
+                    Post Type
                   </th>
                   <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
-                    Price
-                  </th>
-                  <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
-                    Rating
-                  </th>
-                  <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
-                    Status
-                  </th>
-                  <th className="py-2 bg-slate-600 text-white border text-[15px] px-2">
-                    Edit & Remove1
+                    Edit & Remove
                   </th>
                 </tr>
               </thead>
@@ -316,20 +305,12 @@ const AllPosts = () => {
                         }}
                       />
                     </td>
-                    {/* <td className="py-4 text-center border-x capitalize">
-                      {itinerary.customId}
-                    </td> */}
                     <td className="py-4 pl-4 text-start border-x capitalize">
                       {itinerary.name}
                     </td>
                     <td className="py-4 text-center border-x capitalize">
-                      {itinerary.category?.map((item,i)=><p key={i} className="px-2">{item?.category}</p>)}
+                      Blog/Guide/News
                     </td>
-                    <td className="text-center border-x">Rs {itinerary.price}</td>
-                    <td className="py-4 text-center border-x">
-                      {itinerary.packageRating}
-                    </td>
-                    <td className="text-center border-x">{itinerary.status}</td>
                     <td className="py-4 flex justify-center items-center gap-3">
                       <Link
                         href={"/admin/car-rental/itinerary/" + itinerary?._id + "?type=edit"}

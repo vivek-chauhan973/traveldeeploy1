@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong, faEdit, faCirclePlus, faTrash, faCancel, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
-import BlogCategory from "@/components/admin/blog/BlogCategory";
 import BlogSeo from "@/components/admin/blog/BlogSeo";
 
 export default function BlogMaster() {
@@ -25,8 +24,6 @@ export default function BlogMaster() {
               />
             </div>
             <div className=" grid grid-cols-1 xl:grid-cols-2 gap-5 rounded">
-              {/* category section */}
-              <BlogCategory/>
               <BlogSeo/> 
             </div>
           </div>
