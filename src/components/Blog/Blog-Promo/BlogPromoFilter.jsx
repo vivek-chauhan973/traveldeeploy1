@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import "../../../../app/globals.css"
+import "../../../../src/app/globals.css"
 import React, { useState } from "react";
 
 const BlogPromoFilter = () => {

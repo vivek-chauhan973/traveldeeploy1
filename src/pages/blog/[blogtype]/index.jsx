@@ -3,8 +3,8 @@ import "../../../../src/app/globals.css";
 import { Breadcrumbs } from "@mui/material";
 import Footer from "@/components/Footer";
 import Image from 'next/image';
-import BlogPromoFilter from "@/components/Blog/Blog-Detail/Blog-Promo/BlogPromoFilter";
-import BlogPromoPackageList from "@/components/Blog/Blog-Detail/Blog-Promo/BlogPromoPackageList";
+import BlogPromoFilter from "@/components/Blog/Blog-Promo/BlogPromoFilter";
+import BlogPromoPackageList from "@/components/Blog/Blog-Promo/BlogPromoPackageList";
 
 export default function Promo() {
 
@@ -49,20 +49,7 @@ export default function Promo() {
                     <div>
                         <BlogPromoPackageList />
                     </div>
-                </div>
-                <div className="border-t border">
-                    <div className="w-full md:w-3/4 m-auto px-2 pb-5">
-                        <div className="text-center mt-5 mb-10">
-                            <p className="md:text-[22px] text-[20px] font-semibold mb-2 capitalize">
-                                Frequently Asked Questions (FAQs) <span className='lowercase'>for</span>
-                            </p>
-                            <p className="text-para md:text-base">
-                                We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
-                            </p>
-                        </div>
-                        {/* <CraPromoFaq /> */}
-                    </div>
-                </div>
+                </div>  
                 <Footer />
             </div>
         </>

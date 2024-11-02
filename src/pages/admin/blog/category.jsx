@@ -24,7 +24,7 @@ export default function BlogMaster() {
               />
             </div>
             <div className=" grid grid-cols-1 xl:grid-cols-2 gap-5 rounded">
-              <BlogSeo/> 
+              {/* <BlogSeo/>  */}
             </div>
           </div>
         </Layout>
