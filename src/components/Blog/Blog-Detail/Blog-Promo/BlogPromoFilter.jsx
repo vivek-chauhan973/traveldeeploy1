@@ -43,10 +43,10 @@ const handleChangeBlogPost=(e)=>{
             className="flex capitalize items-center gap-2 pb-5 px-5">
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
-              type="checkbox"
+              type="radio"
               id="category1"
               onChange={handleChangeBlogPost}
-              name=""
+              name="radio"
               value=""
             />
             <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
@@ -57,10 +57,10 @@ const handleChangeBlogPost=(e)=>{
             className="flex capitalize items-center gap-2 pb-5 px-5">
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
-              type="checkbox"
-              id="category2"
+              type="radio"
+              id="category1"
               onChange={handleChangeGuides}
-              name=""
+              name="radio"
               value=""
             />
             <label htmlFor="category2" className="cursor-pointer label-text md:text-[14px] text-[12px]">
@@ -71,10 +71,10 @@ const handleChangeBlogPost=(e)=>{
             className="flex capitalize items-center gap-2 px-5">
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
-              type="checkbox"
+              type="radio"
               id="category3"
               onChange={handleChangeArticles}
-              name=""
+              name="radio"
               value=""
             />
             <label htmlFor="category3" className="cursor-pointer label-text md:text-[14px] text-[12px]">
