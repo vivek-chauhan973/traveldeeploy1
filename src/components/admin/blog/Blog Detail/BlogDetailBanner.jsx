@@ -124,7 +124,7 @@ const BlogDetailBanner = () => {
 
     return (
         <div className='p-4 mb-5 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600'>
-            <p className="md:text-lg text-base font-semibold mb-2">
+            <p className="text-base font-medium mb-2">
                 Blog Detail Banner
             </p>
             <div className="p-4">

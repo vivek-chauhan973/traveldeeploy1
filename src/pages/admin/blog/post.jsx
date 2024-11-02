@@ -220,10 +220,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 import BlogDetailSeo from "@/components/admin/blog/Blog Detail/BlogDetailSeo";
 import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBanner";
-
+import DetailsQuestion from "@/components/admin/blog/Blog Detail/DetailsQuestion";
 
 export default function AdminBlogPanel() {
-
 
   return (
     <AppProvider>
@@ -244,10 +243,6 @@ export default function AdminBlogPanel() {
           <select
             id="postTypes"
             className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
-          // onChange={(e) => {
-          //   setCatoryorstate(true);
-          //   setSelectCatagoryOrState(e.target.value);
-          // }}
           >
             <option>Select Type</option>
             <option value="blog">Blog</option>
@@ -257,8 +252,9 @@ export default function AdminBlogPanel() {
         </div>
         <div>
           <BlogDetailBanner />
+          <DetailsQuestion/>
         </div>
-        <div className=" grid grid-cols-1 xl:grid-cols-2 gap-5 rounded">
+        <div className=" grid grid-cols-1 xl:grid-cols-2 gap-5 rounded mt-5">
           <BlogDetailSeo />
         </div>
       </Layout>

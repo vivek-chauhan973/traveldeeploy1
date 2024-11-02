@@ -27,7 +27,7 @@ const BlogDetailSeo = () => {
             return alert("Each field is required !!!!");
         }
         const seoData = { title, canonicalUrl, description, keyword };
-        // console.log("seo data -----> ", seoData);
+
         try {
             const data = await fetch("/api/cars/carhome/seoData", {
                 method: "POST",
