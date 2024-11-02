@@ -1,8 +1,33 @@
+import { useRouter } from "next/router";
 import "../../../../app/globals.css"
 import React, { useState } from "react";
 
 const BlogPromoFilter = () => {
-
+const router=useRouter()
+const handleChangeArticles=(e)=>{
+ if(e.target.checked){
+  router.push("/blog/articles")
+ }
+ else{
+  router.push("/blog")
+ }
+}
+const handleChangeBlogPost=(e)=>{
+  if(e.target.checked){
+   router.push("/blog/blog-posts")
+  }
+  else{
+   router.push("/blog")
+  }
+ }
+ const handleChangeGuides=(e)=>{
+  if(e.target.checked){
+   router.push("/blog/guides")
+  }
+  else{
+   router.push("/blog")
+  }
+ }
   return (
     <>
       <div className="bg-white rounded-md">
@@ -20,11 +45,12 @@ const BlogPromoFilter = () => {
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
               type="checkbox"
               id="category1"
+              onChange={handleChangeBlogPost}
               name=""
               value=""
             />
             <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
-              Blog
+              BlogPost
             </label>
           </div>
           <div
@@ -32,11 +58,12 @@ const BlogPromoFilter = () => {
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
               type="checkbox"
-              id="category1"
+              id="category2"
+              onChange={handleChangeGuides}
               name=""
               value=""
             />
-            <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
+            <label htmlFor="category2" className="cursor-pointer label-text md:text-[14px] text-[12px]">
               Guides
             </label>
           </div>
@@ -45,11 +72,12 @@ const BlogPromoFilter = () => {
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
               type="checkbox"
-              id="category1"
+              id="category3"
+              onChange={handleChangeArticles}
               name=""
               value=""
             />
-            <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
+            <label htmlFor="category3" className="cursor-pointer label-text md:text-[14px] text-[12px]">
               Articles
             </label>
           </div>

@@ -77,12 +77,12 @@ export default function Detail () {
 
                     <div className="grid mb-2 grid-cols-1 lg:grid-cols-[3fr,1fr] gap-5">
                         <div className=" rounded bg-white">
-                            <Image className="w-full  " src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                            <Image className="w-full  " height={100} width={100} src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                         </div>
                         {/* sidebar content is here down */}
                         <div className="">
                             <div className="relative rounded-t-lg overflow-hidden">
-                                <Image className="w-full  " src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                                <Image className="w-full  " height={100} width={100} src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                                 <span className="absolute top-0 right-0 rounded-badge px-2 text-[12px] font-semibold text-white bg-primary mt-2 mr-2">Best Deal</span>
                                 <div className="border rounded-b-lg px-2 bg-white">
                                     <div className="flex mt-3 gap-3 mb-3">
@@ -103,7 +103,7 @@ export default function Detail () {
                 </div>
                 {/* banner */}
                 <div className="container-wrapper">
-                    <Image className="w-full md:h-72 object-cover rounded-lg" src="https://images.unsplash.com/photo-1447746249824-4be4e1b76d66?q=80&w=1468&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <Image className="w-full md:h-72 object-cover rounded-lg" width={100} height={100} src="https://images.unsplash.com/photo-1447746249824-4be4e1b76d66?q=80&w=1468&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
 
                 </div>
                 {/* suggested card is here */}
@@ -112,7 +112,7 @@ export default function Detail () {
                 </div>
                 <div className="container-wrapper md:flex grid grid-rows-4 gap-2 pb-5 md:gap-5 ">
                     <div className="relative rounded-t-lg overflow-hidden">
-                        <Image className="w-full  " src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <Image className="w-full  " width={100} height={100} src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                         <span className="absolute top-0 right-0 rounded-badge px-2 text-[12px] font-semibold text-white bg-primary mt-2 mr-2">Best Deal</span>
                         <div className="border rounded-b-lg px-2 bg-white">
                             <div className="flex mt-3 gap-3 mb-3">
@@ -130,7 +130,7 @@ export default function Detail () {
                     </div>
                     {/* repeat */}
                     <div className="relative rounded-t-lg overflow-hidden">
-                        <Image className="w-full  " src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <Image className="w-full  " height={100} width={100} src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                         <span className="absolute top-0 right-0 rounded-badge px-2 text-[12px] font-semibold text-white bg-primary mt-2 mr-2">Best Deal</span>
                         <div className="border rounded-b-lg px-2 bg-white">
                             <div className="flex mt-3 gap-3 mb-3">
@@ -148,7 +148,8 @@ export default function Detail () {
                     </div>
                     {/* repeat */}
                     <div className="relative rounded-t-lg overflow-hidden">
-                        <Image className="w-full  " src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <Image className="w-full  " width={100}
+                        height={100} src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                         <span className="absolute top-0 right-0 rounded-badge px-2 text-[12px] font-semibold text-white bg-primary mt-2 mr-2">Best Deal</span>
                         <div className="border rounded-b-lg px-2 bg-white">
                             <div className="flex mt-3 gap-3 mb-3">
@@ -166,7 +167,8 @@ export default function Detail () {
                     </div>
                     {/* repeat */}
                     <div className="relative rounded-t-lg overflow-hidden">
-                        <Image className="w-full  " src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <Image className="w-full  " height={100}
+                        width={100} src="https://images.unsplash.com/photo-1476297820623-03984cf5cdbb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                         <span className="absolute top-0 right-0 rounded-badge px-2 text-[12px] font-semibold text-white bg-primary mt-2 mr-2">Best Deal</span>
                         <div className="border rounded-b-lg px-2 bg-white">
                             <div className="flex mt-3 gap-3 mb-3">

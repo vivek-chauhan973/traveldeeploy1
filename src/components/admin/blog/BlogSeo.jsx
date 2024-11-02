@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 const fetchCarHomeData = async () => {
-    const data = await fetch("/api/cars/carhome/seoData");
+    const data = await fetch("/api/blog/blogpromo");
+  
     return await data.json();
 };
 
@@ -29,7 +30,7 @@ const BlogSeo = () => {
         const seoData = { title, canonicalUrl, description, keyword };
         // console.log("seo data -----> ", seoData);
         try {
-            const data = await fetch("/api/cars/carhome/seoData", {
+            const data = await fetch("/api/blog/blogpromo", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

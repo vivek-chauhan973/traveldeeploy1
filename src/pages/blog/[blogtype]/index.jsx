@@ -1,5 +1,5 @@
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
-import "../../../src/app/globals.css";
+import "../../../../src/app/globals.css";
 import { Breadcrumbs } from "@mui/material";
 import Footer from "@/components/Footer";
 import Image from 'next/image';
@@ -7,7 +7,6 @@ import BlogPromoFilter from "@/components/Blog/Blog-Detail/Blog-Promo/BlogPromoF
 import BlogPromoPackageList from "@/components/Blog/Blog-Detail/Blog-Promo/BlogPromoPackageList";
 
 export default function Promo() {
-
 
     return (
         <>
