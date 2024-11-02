@@ -17,7 +17,7 @@ export default function Management() {
     // Function to fetch existing image
     async function fetchImage() {
         try {
-            const res = await fetch("/api/home");
+            const res = await fetch("/api/blog");
             const data = await res.json();
             if (data.data.length > 0) {
                 const image = data.data[0];
@@ -66,9 +66,8 @@ export default function Management() {
         if (selectedImageId) {
             formData.append("id", selectedImageId);
         }
-
         try {
-            const res = await fetch("/api/home", {
+            const res = await fetch("/api/blog", {
                 method: "POST",
                 body: formData,
             });
@@ -103,7 +102,7 @@ export default function Management() {
         }
 
         try {
-            const res = await fetch(`/api/home?id=${selectedImageId}`, {
+            const res = await fetch(`/api/blog?id=${selectedImageId}`, {
                 method: "DELETE",
             });
 
