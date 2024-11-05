@@ -3,31 +3,9 @@ import "../../../../src/app/globals.css"
 import React, { useState } from "react";
 
 const BlogPromoFilter = () => {
-const router=useRouter()
-const handleChangeArticles=(e)=>{
- if(e.target.checked){
-  router.push("/blog/articles")
- }
- else{
-  router.push("/blog")
- }
-}
-const handleChangeBlogPost=(e)=>{
-  if(e.target.checked){
-   router.push("/blog/blog-posts")
-  }
-  else{
-   router.push("/blog")
-  }
- }
- const handleChangeGuides=(e)=>{
-  if(e.target.checked){
-   router.push("/blog/guides")
-  }
-  else{
-   router.push("/blog")
-  }
- }
+
+
+
   return (
     <>
       <div className="bg-white rounded-md">
@@ -43,10 +21,9 @@ const handleChangeBlogPost=(e)=>{
             className="flex capitalize items-center gap-2 pb-5 px-5">
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
-              type="radio"
+              type="checkbox"
               id="category1"
-              onChange={handleChangeBlogPost}
-              name="radio"
+              name="category1"
               value=""
             />
             <label htmlFor="category1" className="cursor-pointer label-text md:text-[14px] text-[12px]">
@@ -57,10 +34,9 @@ const handleChangeBlogPost=(e)=>{
             className="flex capitalize items-center gap-2 pb-5 px-5">
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
-              type="radio"
-              id="category1"
-              onChange={handleChangeGuides}
-              name="radio"
+              type="checkbox"
+              id="category2"
+              name="category2"
               value=""
             />
             <label htmlFor="category2" className="cursor-pointer label-text md:text-[14px] text-[12px]">
@@ -71,10 +47,9 @@ const handleChangeBlogPost=(e)=>{
             className="flex capitalize items-center gap-2 px-5">
             <input
               className="cursor-pointer md:h-5 md:w-5 h-4 w-4 rounded-lg accent-navyblack"
-              type="radio"
+              type="checkbox"
               id="category3"
-              onChange={handleChangeArticles}
-              name="radio"
+              name="category3"
               value=""
             />
             <label htmlFor="category3" className="cursor-pointer label-text md:text-[14px] text-[12px]">

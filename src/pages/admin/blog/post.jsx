@@ -223,7 +223,8 @@ import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBann
 import DetailsQuestion from "@/components/admin/blog/Blog Detail/DetailsQuestion";
 
 export default function AdminBlogPanel() {
-
+const [selectType,setSelectType]=useState("");
+const [blogItinery,setBlogItinery]=useState({});
   return (
     <AppProvider>
       <Layout>
@@ -242,6 +243,7 @@ export default function AdminBlogPanel() {
           </label>
           <select
             id="postTypes"
+            onChange={(e)=>setSelectType(e.target.value)}
             className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
           >
             <option>Select Type</option>
@@ -251,11 +253,11 @@ export default function AdminBlogPanel() {
           </select>
         </div>
         <div>
-          <BlogDetailBanner />
+          <BlogDetailBanner selectType={selectType} setBlogItinery={setBlogItinery} />
           <DetailsQuestion/>
         </div>
         <div className=" grid grid-cols-1 xl:grid-cols-2 gap-5 rounded mt-5">
-          <BlogDetailSeo />
+         <BlogDetailSeo />
         </div>
       </Layout>
     </AppProvider>

@@ -289,13 +289,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             }
         }
     };
-const [generateNum,setGenerateNum]=useState(1);
-    // const handleGenUniqueKey = () => {
-    //     const key = "BXP" + generateNum;
-    //     setPackageIdGenerate(key);
-    //     setGenerateNum(generateNum+1);
-    // }
-    // console.log("Rakesh Rikki ", packageRating);
+  
     return (
         <>
             <div className="bg-white p-4 rounded-md">
