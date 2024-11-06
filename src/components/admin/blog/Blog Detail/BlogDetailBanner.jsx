@@ -5,23 +5,49 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 import BlogPromoSeo from "@/components/admin/blog/Blog Promo/BlogPromoSeo";
+import MultipleSelectCheckmarks from "../../itineraryCreate/CheckMarkSelect";
 
-export default function BlogDetailBanner({selectType,setBlogItinery}) {
+export default function BlogDetailBanner() {
     const [file, setFile] = useState(null);
     // const [preview, setPreview] = useState(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [isUpdating, setIsUpdating] = useState(false);
     const [selectedImageId, setSelectedImageId] = useState(null);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectType,setSelectType]=useState("");
 
-
+    const [packageCategories, setPackageCategories] = useState();
+    const fetchCategories = async () => {
+        try {
+            const categoriesList = await fetch('/api/package-setting/category/get-categories');
+            const categories = await categoriesList.json();
+            setPackageCategories(categories.data);
+        } catch (err) {
+            console.log(err);
+            return [];
+        }
+    };
+    useEffect(() => {
+        const fetchData = async () => {
+            await fetchCategories();
+        };
+        fetchData();
+    }, []);
     // Function to handle file input change
     function handleChange(e) {
         const selectedFile = e.target.files[0];
         setFile(selectedFile);
         // setPreview(URL.createObjectURL(selectedFile));
     }
-
+    const handleCategory = (category) => {
+        setSelectedCategories(category);
+        // if (!category?.length) {
+        //     setCategoryValidate("Category is required");
+        // } else {
+        //     setCategoryValidate("");
+        // }
+    };
     // Function to handle image upload or update
     async function handleUpload() {
         if (!file && !isUpdating) {
@@ -40,11 +66,9 @@ export default function BlogDetailBanner({selectType,setBlogItinery}) {
             formData.append("title", title);
             formData.append("description", description);
             formData.append("blogType", selectType);
+            formData.append("category", selectedCategories);
         }
-
-        if (selectedImageId) {
-            formData.append("id", selectedImageId);
-        }
+        // console.log("selectedCategories -------------> ",selectedCategories)
         try {
             const res = await fetch("/api/blog/blogdetail", {
                 method: "POST",
@@ -101,6 +125,22 @@ export default function BlogDetailBanner({selectType,setBlogItinery}) {
                                 </div> */}
                             </div>
                             <div className="flex-1 my-5">
+                            <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
+          <label htmlFor="postTypes"
+            className="font-semibold text-para md:text-base">
+            Select Post Types :
+          </label>
+          <select
+            id="postTypes"
+            onChange={(e)=>setSelectType(e.target.value)}
+            className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+          >
+            <option>Select Type</option>
+            <option value="blog">Blog</option>
+            <option value="guide">Travel Guide</option>
+            <option value="news">News</option>
+          </select>
+        </div>
                                 <div>
                                     <label htmlFor="title" className=" font-semibold">
                                         Title
@@ -114,6 +154,13 @@ export default function BlogDetailBanner({selectType,setBlogItinery}) {
                                         onChange={(e) => setTitle(e.target.value)}
                                     />
                                 </div>
+                                <div className="my-4">
+                            <div>
+                                <label htmlFor="cityBages" className="pb-2 font-semibold text-para">Category :</label>
+                                <MultipleSelectCheckmarks packageCategories={packageCategories} onSelectedCategoryIdsChange={handleCategory} selectedCategories1={selectedCategories} />
+                                {/* <span className="text-xs text-red-700 capitalize pl-5">{categoryValidate}</span> */}
+                            </div>
+                        </div>
                                 <div>
                                     <label htmlFor="textarea" className=" font-semibold">
                                         Description

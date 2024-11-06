@@ -167,7 +167,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
-
+const getAllPost=async ()=>{
+  return await((await fetch('/api/blog/blogdetail',{method:"GET"})).json())
+}
 const AllPosts = () => {
 
   const [itineraries, setItineraries] = useState([]);
@@ -178,19 +180,8 @@ const AllPosts = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    // Fetch itinerary data
-    const fetchItineraryData = async () => {
-      try {
-        const response = await fetch("/api/cars/package/get-packages");
-        const data = await response.json();
-        console.log("all packages list is here ---> ", data);
-        setItineraries(data.packages || []); // Provide a default empty array if data.packages is undefined
-      } catch (error) {
-        console.error("Error fetching itinerary data:", error);
-      }
-    };
-
-    fetchItineraryData();
+    // Fetch itinerary data 
+    getAllPost().then(res=>{setItineraries(res?.data||[])})
   }, []);
 
   const handleDelete = () => {
@@ -218,7 +209,7 @@ const AllPosts = () => {
 
   // Filter items based on search query
   let filteredItineraries = itineraries?.filter((itinerary) =>
-    itinerary?.customId?.toLowerCase().includes(searchQuery.toLowerCase())
+    itinerary?.title?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const totalItemsCount = filteredItineraries.length;
@@ -227,7 +218,7 @@ const AllPosts = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-  // console.log("Rakesh2", currentItems);
+  console.log("Rakesh2", currentItems);
   return (
     <AppProvider>
       <Layout>
@@ -292,8 +283,8 @@ const AllPosts = () => {
                       <Image
                         className="w-40 h-16 object-cover rounded"
                         src={
-                          itinerary?.uploads?.[0]
-                            ? itinerary?.uploads?.[0]
+                          itinerary?.videoPath
+                            ? itinerary?.videoPath
                             : "https://images.unsplash.com/photo-1707343848552-893e05dba6ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         }
                         alt=""
@@ -306,10 +297,10 @@ const AllPosts = () => {
                       />
                     </td>
                     <td className="py-4 pl-4 text-start border-x capitalize">
-                      {itinerary.name}
+                      {itinerary?.title}
                     </td>
                     <td className="py-4 text-center border-x capitalize">
-                      Blog/Guide/News
+                      {itinerary?.blogType}
                     </td>
                     <td className="py-4 flex justify-center items-center gap-3">
                       <Link

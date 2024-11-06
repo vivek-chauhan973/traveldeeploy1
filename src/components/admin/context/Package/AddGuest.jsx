@@ -1,24 +1,18 @@
 import React, { useEffect, createContext, useState, useContext } from "react";
 import { useRouter } from "next/router";
-
 const AppContext = createContext(null);
-
 const fetchPackage = async (packageUrl) => {
-  // console.log("page url :: ",packageUrl)
   const response = await fetch(`/api/public/package/${packageUrl}`, {
     method: "GET",
   });
   const data = await response.json();
-  // console.log("..............................",packageUrl)
   return data;
 };
 const fetchCarPackage = async (packageUrl) => {
-  // console.log("page url :: ",packageUrl)
   const response = await fetch(`/api/cars/public/${packageUrl}`, {
     method: "GET",
   });
   const data = await response.json();
-  // console.log("..............................",packageUrl)
   return data;
 };
 
