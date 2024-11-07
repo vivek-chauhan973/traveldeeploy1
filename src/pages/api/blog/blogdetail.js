@@ -4,7 +4,6 @@ import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db';
 import BlogDetail from '@/models/blog/BlogDetail';
-
 const uploadDirectory = './public/uploads/blogdetail';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });

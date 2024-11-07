@@ -39,9 +39,11 @@ useEffect(()=>{
         { indent: "-1" },
         { indent: "+1" },
       ],
-      ["link"],
+      ['link', 'image'],
     ],
   };
+
+  console.log("editorHtmlDescription--------------> ",editorHtmlDescription);
 
   // Add or Update functionality
   const handleAddOrUpdate = () => {

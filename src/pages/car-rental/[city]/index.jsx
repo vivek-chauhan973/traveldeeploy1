@@ -64,7 +64,7 @@ useEffect(()=>{
                     </div>
                     <div className='relative'>
                         <div className='hidden xl:block'>
-                            <CarPromoSearchPageFilter/>
+                            <CarPromoSearchPageFilter cityId={cityId}/>
                         </div>
                     </div>
                 </div>

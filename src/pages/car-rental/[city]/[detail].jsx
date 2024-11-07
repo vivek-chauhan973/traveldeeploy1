@@ -23,6 +23,8 @@ import CarDeptBookingPopup from "@/components/car-rental/car-detail/CarDeparture
 import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 import Footer from "@/components/Footer";
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
+import TestingCard from "@/components/ItineraryDetail/TestingCard";
+import CarTestingCard from "@/components/car-rental/car-detail/CarTestingCard";
 
 const fetchCarPackage = async (packageUrl) => {
     // console.log("page url :: ",packageUrl)
@@ -487,7 +489,7 @@ export default function CarDetail() {
 
                 {/* Similar Car package */}
                 <div className=" mt-12 pb-6">
-                    {/* <TestingCard/> */}
+                    <CarTestingCard addPackage={carPackage}/>
                 </div>
 
                 {/* FAQ section --- when data is not available then all content will hide */}
