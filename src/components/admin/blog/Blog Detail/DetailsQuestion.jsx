@@ -14,7 +14,7 @@ const questionsData=async ()=>{
   return await ((await fetch("/api/blog/blogquestion")).json());
 }
 
-const DetailsQuestion = () => {
+const DetailsQuestion = ({setActiveTab,blogData}) => {
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(
     []
   );
@@ -43,7 +43,7 @@ useEffect(()=>{
     ],
   };
 
-  console.log("editorHtmlDescription--------------> ",editorHtmlDescription);
+  // console.log("editorHtmlDescription--------------> ",editorHtmlDescription);
 
   // Add or Update functionality
   const handleAddOrUpdate = () => {
@@ -93,23 +93,26 @@ useEffect(()=>{
 
   const handleSaveData= async ()=>{
 
-    try {
-      const data = await fetch("/api/blog/blogquestion", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(itineraryDayWiseDataArray),
-    });
-    if(data?.ok){
-      alert("data added successfully")
-      questionsData().then(res=>{
-        setItineraryDayWiseDataArray(res?.data?.[0]?.questions||[])
-      });
-    }
-    } catch (error) {
-      console.log("something went wrong")
-    }
+    // try {
+    //   const data = await fetch("/api/blog/blogquestion", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(itineraryDayWiseDataArray),
+    // });
+    // if(data?.ok){
+    //   alert("data added successfully")
+    //   questionsData().then(res=>{
+    //     setItineraryDayWiseDataArray(res?.data?.[0]?.questions||[])
+    //   });
+    // }
+    // } catch (error) {
+    //   console.log("something went wrong")
+
+    // }
+
+    setActiveTab("Tab3")
    
   }
   return (

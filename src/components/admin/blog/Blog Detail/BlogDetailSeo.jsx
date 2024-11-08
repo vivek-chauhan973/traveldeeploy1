@@ -5,7 +5,7 @@ const fetchCarHomeData = async () => {
     return await data.json();
 };
 
-const BlogDetailSeo = () => {
+const BlogDetailSeo = ({setActiveTab,blogData}) => {
 
     //Blog seo field here
     const [title, setTitle] = useState("");
@@ -28,23 +28,24 @@ const BlogDetailSeo = () => {
         }
         const seoData = { title, canonicalUrl, description, keyword };
 
-        try {
-            const data = await fetch("/api/blog/blogdetailSeo", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(seoData),
-            });
-            // console.log("seo data ----> ", data?.ok);
-            if (data.ok) {
-                alert("Data add succesfully");
-            } else {
-                alert("Something went wrong");
-            }
-        } catch (error) {
-            console.log("something went wrong");
-        }
+        // try {
+        //     const data = await fetch("/api/blog/blogdetailSeo", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(seoData),
+        //     });
+        //     // console.log("seo data ----> ", data?.ok);
+        //     if (data.ok) {
+        //         alert("Data add succesfully");
+        //     } else {
+        //         alert("Something went wrong");
+        //     }
+        // } catch (error) {
+        //     console.log("something went wrong");
+        // }
+        setActiveTab("Tab1")
     };
 
     return (
