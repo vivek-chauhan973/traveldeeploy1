@@ -79,19 +79,15 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
             body: formData,
         });
         const data1=await res.json()
-        // console.log("data1--->",data1?.data?._id)
         if (res?.ok) {
             setActiveTab("Tab2");
-            alert(`File ${isUpdating ? "updated" : "uploaded"} successfully`);
-            
+            alert(`File ${isUpdating ? "updated" : "uploaded"} successfully`);  
             // Optionally, reset form fields or update state after successful upload
         } else {
             alert(`File ${isUpdating ? "update" : "upload"} failed`);
         }
-        if(data1){
-          router.push("/admin/blog/itinerypost1/"+data1?.data?._id)
-        }
-        // router.push("/admin/blog/itinerypost/"+data1?.data?._id);
+        
+         // router.push("/admin/blog/itinerypost/"+data1?.data?._id);
     } catch (error) {
         console.error(
             `Error ${isUpdating ? "updating" : "uploading"} file:`,
@@ -99,12 +95,7 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
         );
 
     }
-    // console.log("hi")
-  
   }
-
-  // Function to handle image removal
-
   return (
     <>
       <div className="p-4 mb-5 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600">
@@ -118,7 +109,7 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
                 onChange={handleChange}
               />
               {/* <div>
-                                    {preview && (
+                        {preview && (
                                         <Image
                                             className="md:w-36 w-auto h-auto shadow-md mb-4"
                                             src={preview}
