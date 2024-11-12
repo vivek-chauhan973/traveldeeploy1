@@ -13,7 +13,12 @@ const BlogSeoDetailSchema=new mongoose.Schema({
     },
     keyword:{
         type:String
-    }
+    },
+    blog:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"BlogDetail"
+    
+      }
 },{})
 
 const BlogSeoDetail=mongoose.models.BlogSeoDetail || mongoose.model("BlogSeoDetail",BlogSeoDetailSchema);

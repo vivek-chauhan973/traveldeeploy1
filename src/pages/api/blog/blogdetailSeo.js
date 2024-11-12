@@ -1,16 +1,26 @@
+import BlogDetail from "@/models/blog/BlogDetail";
 import BlogSeoDetail from "@/models/blog/BlogSeoDetail";
 const blogdetailSeoApi=async (req,res)=>{
-    const {title,canonicalUrl,description,keyword}=req.body;
+    const {seoData,blog}=req.body;
+    const {title,canonicalUrl,description,keyword}=seoData;
    if(req.method==="POST"){ try {
-        let data1=await BlogSeoDetail.findOne();
+        let data1=await BlogSeoDetail.findOne({blog});
         let data;
         if(!data1){
-            data=await BlogSeoDetail.create({title,canonicalUrl,description,keyword});
+            data=await BlogSeoDetail.create({title,canonicalUrl,description,keyword,blog});
+            if(!data){
+                return res.status(301).json({message:"something went wrong"})
+            }
+            await BlogDetail.findByIdAndUpdate({_id:blog},{$set:{blogSeo:data?._id}})
             return res.status(201).json({message:"data is successfully created",data:data})
         }
-        data=await BlogSeoDetail.findByIdAndUpdate({_id:data1?._id},{
-            $set:{title,canonicalUrl,description,keyword}
+        data=await BlogSeoDetail.findOneAndUpdate({blog},{
+            $set:{title,canonicalUrl,description,keyword,blog}
         })
+        if(!data){
+            return res.status(301).json({message:"something went wrong"})
+        }
+        await BlogDetail.findByIdAndUpdate({_id:blog},{$set:{blogSeo:data?._id}})
         return res.status(200).json({message:"data is successfully updated",data:data})
         
     } catch (error) {

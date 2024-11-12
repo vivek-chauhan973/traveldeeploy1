@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import "../package/PackageCategory";
+import  "./BlogQuestion";
+import  "./BlogSeoDetail";
 const BlogDetailSchema=new mongoose.Schema({
     blogType:{
         type:String,

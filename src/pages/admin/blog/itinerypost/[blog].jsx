@@ -5,14 +5,15 @@ import Layout from "@/components/admin/Layout";
 import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBanner";
 import BlogDetailSeo from "@/components/admin/blog/Blog Detail/BlogDetailSeo";
 import DetailsQuestion from "@/components/admin/blog/Blog Detail/DetailsQuestion";
-
+const postDataAccordingId=async (id)=>{
+  return await ((await fetch(`/api/blog/${id}`)).json());
+}
 export default function CreateWebinar() {
   const router=useRouter();
-  const {edit}=router?.query;
+  const {blog}=router?.query;
   const [blogData, setBlogData] = useState(null);
   const [activeTab, setActiveTab] = useState("Tab1");
-
-  console.log("edit id is here ---> ",edit);
+  console.log("edit id is here ---> ",blog);
   useEffect(()=>{
     if (activeTab === "Tab1") {
           setActiveTab("Tab2");
@@ -20,6 +21,12 @@ export default function CreateWebinar() {
           setActiveTab("Tab3");
         }
   },[])
+  useEffect(()=>{
+    if(blog){
+      postDataAccordingId(blog).then(res=>{console.log("blog data is here=---> ",res?.data);setBlogData(res?.data||null)})
+    }
+    
+  },[blog])
 
   return (
     <AppProvider>
@@ -49,7 +56,7 @@ export default function CreateWebinar() {
                     : "border-black text-slate-500"
                 } px-3 py-1`}
               >
-               Post Questions
+               Blog Questions
               </button>
               <button
                 onClick={() => setActiveTab("Tab3")}

@@ -212,54 +212,99 @@
 
 
 
+// import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+// import Layout from "@/components/admin/Layout";
+// import { useState, useEffect } from "react";
+// import Image from "next/image";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
+// import BlogDetailSeo from "@/components/admin/blog/Blog Detail/BlogDetailSeo";
+// import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBanner";
+// import DetailsQuestion from "@/components/admin/blog/Blog Detail/DetailsQuestion";
+
+// export default function AdminBlogPanel() {
+// const [selectType,setSelectType]=useState("");
+// const [blogItinery,setBlogItinery]=useState({});
+//   return (
+//     <AppProvider>
+//       <Layout>
+//         <div className="flex items-center gap-5 text-primary xl:mt-5 mb-7">
+//           <FontAwesomeIcon icon={faCube} className="text-2xl" />
+//           <p className="md:text-[28px] text-xl text-black">Create Blog Post</p>
+//           <FontAwesomeIcon
+//             icon={faArrowRightLong}
+//             className=" text-teal-700 text-xl"
+//           />
+//         </div>
+//         <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
+//           <label htmlFor="postTypes"
+//             className="font-semibold text-para md:text-base">
+//             Select Post Types :
+//           </label>
+//           <select
+//             id="postTypes"
+//             onChange={(e)=>setSelectType(e.target.value)}
+//             className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+//           >
+//             <option>Select Type</option>
+//             <option value="blog">Blog</option>
+//             <option value="guide">Travel Guide</option>
+//             <option value="news">News</option>
+//           </select>
+//         </div>
+//         <div>
+//           <BlogDetailBanner selectType={selectType} setBlogItinery={setBlogItinery} />
+//           <DetailsQuestion/>
+//         </div>
+//         <div className=" grid grid-cols-1 xl:grid-cols-2 gap-5 rounded mt-5">
+//          <BlogDetailSeo />
+//         </div>
+//       </Layout>
+//     </AppProvider>
+//   );
+// }
+
+
+
+
+import { useState } from "react";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
-import BlogDetailSeo from "@/components/admin/blog/Blog Detail/BlogDetailSeo";
 import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBanner";
-import DetailsQuestion from "@/components/admin/blog/Blog Detail/DetailsQuestion";
 
-export default function AdminBlogPanel() {
-const [selectType,setSelectType]=useState("");
-const [blogItinery,setBlogItinery]=useState({});
+export default function CreateWebinar() {
+  const [blogData, setBlogData] = useState(null);
+  const [activeTab, setActiveTab] = useState("Tab1")
   return (
     <AppProvider>
-      <Layout>
-        <div className="flex items-center gap-5 text-primary xl:mt-5 mb-7">
-          <FontAwesomeIcon icon={faCube} className="text-2xl" />
-          <p className="md:text-[28px] text-xl text-black">Create Blog Post</p>
-          <FontAwesomeIcon
-            icon={faArrowRightLong}
-            className=" text-teal-700 text-xl"
-          />
-        </div>
-        <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
-          <label htmlFor="postTypes"
-            className="font-semibold text-para md:text-base">
-            Select Post Types :
-          </label>
-          <select
-            id="postTypes"
-            onChange={(e)=>setSelectType(e.target.value)}
-            className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+        <Layout>
+      <div className="flex items-center gap-5 text-primary pb-3">
+        <p className="md:text-[28px] text-2xl text-black">Create Webinar</p>
+      </div>
+      <div className="border-b border-slate-300 mb-5">
+        <div className="flex gap-2 text-[14px] pt-3 pb-2 flex-wrap">
+          <button
+            onClick={() => setActiveTab("Tab1")}
+            className={`${
+              activeTab === "Tab1"
+                ? "border-b-2 scale-105 border-black text-black"
+                : "border-black text-slate-500"
+            } px-3 py-1`}
           >
-            <option>Select Type</option>
-            <option value="blog">Blog</option>
-            <option value="guide">Travel Guide</option>
-            <option value="news">News</option>
-          </select>
+            Basic Information
+          </button>
         </div>
-        <div>
-          <BlogDetailBanner selectType={selectType} setBlogItinery={setBlogItinery} />
-          <DetailsQuestion/>
-        </div>
-        <div className=" grid grid-cols-1 xl:grid-cols-2 gap-5 rounded mt-5">
-         <BlogDetailSeo />
-        </div>
+      </div>
+
+      {/* Render each tab's content conditionally */}
+      <div
+        className={`tab-content ${activeTab === "Tab1" ? "block" : "hidden"}`}
+      >
+        <BlogDetailBanner  setActiveTab={setActiveTab} blogData={blogData} />
+      </div>
       </Layout>
+     
     </AppProvider>
   );
 }
+

@@ -10,7 +10,12 @@ const miniquestionSchema=new mongoose.Schema({
 })
 
 const blogQuestionSchema=new mongoose.Schema({
-  questions:[ miniquestionSchema ]
+  questions:[ miniquestionSchema ],
+  blog:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"BlogDetail"
+
+  }
 },{
     timestamps:true
 });

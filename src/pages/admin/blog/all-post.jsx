@@ -303,14 +303,14 @@ const AllPosts = () => {
                       {itinerary?.blogType}
                     </td>
                     <td className="py-4 flex justify-center items-center gap-3">
-                      <Link
-                        href={"/admin/car-rental/itinerary/" + itinerary?._id + "?type=edit"}
+                      <a
+                        href={"/admin/blog/itinerypost/" + itinerary?._id }
                       >
                         <FontAwesomeIcon
                           icon={faEdit}
                           className="font1 hover:text-primary cursor-pointer"
                         />
-                      </Link>
+                      </a>
                       <FontAwesomeIcon
                         icon={faTrash}
                         className="font1 hover:text-primary cursor-pointer"

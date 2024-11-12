@@ -10,25 +10,24 @@ const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   loading: () => <p>Loading...</p>,
 });
 
-const questionsData=async ()=>{
-  return await ((await fetch("/api/blog/blogquestion")).json());
-}
+// const questionsData=async ()=>{
+//   return await ((await fetch("/api/blog/blogquestion")).json());
+// }
 
 const DetailsQuestion = ({setActiveTab,blogData}) => {
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(
     []
   );
-  const [deletePopup, setDeletePopu] = useState(false);
+  // const [deletePopup, setDeletePopu] = useState(false);
   const [editorHtmlQuestion, setEditorHtmlQuestion] = useState("");
   const [editorHtmlDescription, setEditorHtmlDescription] = useState("");
 
   const [editingIndex, setEditingIndex] = useState(null);
   const [itineraryValidate, setItineraryValidate] = useState("");
 useEffect(()=>{
-  questionsData().then(res=>{console.log("questions is here ----> ",res?.data);
-    setItineraryDayWiseDataArray(res?.data?.[0]?.questions||[])
-  });
-},[])
+  setItineraryDayWiseDataArray(blogData?.blogQuestions?.questions||[])
+},[blogData])
+// console.log("blog data is here----> ",blogData)
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }],
@@ -48,7 +47,7 @@ useEffect(()=>{
   // Add or Update functionality
   const handleAddOrUpdate = () => {
     if (
-      editorHtmlQuestion.trim() === "" ||
+      !editorHtmlQuestion ||
       editorHtmlDescription.trim() === ""
     ) {
       setItineraryValidate("Both question and description are required.");
@@ -93,26 +92,27 @@ useEffect(()=>{
 
   const handleSaveData= async ()=>{
 
-    // try {
-    //   const data = await fetch("/api/blog/blogquestion", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(itineraryDayWiseDataArray),
-    // });
-    // if(data?.ok){
-    //   alert("data added successfully")
-    //   questionsData().then(res=>{
-    //     setItineraryDayWiseDataArray(res?.data?.[0]?.questions||[])
-    //   });
-    // }
-    // } catch (error) {
-    //   console.log("something went wrong")
+    try {
+      const data = await fetch("/api/blog/blogquestion", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({questions:itineraryDayWiseDataArray,blog:blogData?._id}),
+    });
+    if(data?.ok){
+      alert(blogData?"data updated successfully":"data added successfully")
+      setActiveTab("Tab3")
+      // questionsData().then(res=>{
+      //   setItineraryDayWiseDataArray(res?.data?.[0]?.questions||[])
+      // });
+    }
+    } catch (error) {
+      console.log("something went wrong")
 
-    // }
+    }
 
-    setActiveTab("Tab3")
+    // setActiveTab("Tab3")
    
   }
   return (
@@ -126,7 +126,7 @@ useEffect(()=>{
                 <label className="pb-2 font-semibold text-para">
                   Questions
                 </label>
-                <div className="w-full">
+                {/* <div className="w-full">
                   <QuillNoSSRWrapper
                     className="rounded h-48"
                     theme="snow"
@@ -134,6 +134,17 @@ useEffect(()=>{
                     onChange={setEditorHtmlQuestion}
                     placeholder="Enter Your Questions"
                     modules={modules}
+                  />
+                </div> */}
+                <div className="grow flex gap-5 items-center">
+                  <input
+                    className="border rounded-md h-8 px-2 text-para grow focus:border-primary outline-none"
+                    type="text"
+                    id="title"
+                    name="title"
+                    value={editorHtmlQuestion}
+                    onChange={(e)=>setEditorHtmlQuestion(e.target.value)}
+                    placeholder="Enter the Questions"
                   />
                 </div>
               </div>

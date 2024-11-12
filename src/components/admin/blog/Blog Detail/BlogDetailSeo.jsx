@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-const fetchCarHomeData = async () => {
-    const data = await fetch("/api/blog/blogdetailSeo");
-    return await data.json();
-};
-
 const BlogDetailSeo = ({setActiveTab,blogData}) => {
 
     //Blog seo field here
@@ -13,14 +8,11 @@ const BlogDetailSeo = ({setActiveTab,blogData}) => {
     const [description, setDescription] = useState("");
     const [keyword, setKeyword] = useState("");
     useEffect(() => {
-
-        fetchCarHomeData().then((res) => {
-            setTitle(res?.data?.[0]?.title);
-            setCanonicalUrl(res?.data?.[0]?.canonicalUrl);
-            setDescription(res?.data?.[0]?.description);
-            setKeyword(res?.data?.[0]?.keyword);
-        });
-    }, []);
+        setTitle(blogData?.blogSeo?.title);
+        setCanonicalUrl(blogData?.blogSeo?.canonicalUrl);
+        setDescription(blogData?.blogSeo?.description);
+        setKeyword(blogData?.blogSeo?.keyword);
+    }, [blogData]);
 
     const handleSaveCarSeoData = async () => {
         if (!title || !canonicalUrl || !description || !keyword) {
@@ -28,23 +20,23 @@ const BlogDetailSeo = ({setActiveTab,blogData}) => {
         }
         const seoData = { title, canonicalUrl, description, keyword };
 
-        // try {
-        //     const data = await fetch("/api/blog/blogdetailSeo", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(seoData),
-        //     });
-        //     // console.log("seo data ----> ", data?.ok);
-        //     if (data.ok) {
-        //         alert("Data add succesfully");
-        //     } else {
-        //         alert("Something went wrong");
-        //     }
-        // } catch (error) {
-        //     console.log("something went wrong");
-        // }
+        try {
+            const data = await fetch("/api/blog/blogdetailSeo", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({seoData,blog:blogData?._id}),
+            });
+            // console.log("seo data ----> ", data?.ok);
+            if (data.ok) {
+                alert(blogData?"data updated successfully":"data added successfully")
+            } else {
+                alert("Something went wrong");
+            }
+        } catch (error) {
+            console.log("something went wrong");
+        }
         setActiveTab("Tab1")
     };
 

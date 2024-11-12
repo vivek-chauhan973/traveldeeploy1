@@ -22,7 +22,7 @@ const upload = multer({ storage });
 const apiRoute = async (req, res) => {
   await dbConnect();
 const {post}=req.query;
-  if (req.method === 'POST') {
+  if (req.method === 'PUT') {
     upload.single('file')(req, File, async (err) => {
       if (err instanceof multer.MulterError) {
         console.error('Multer error:', err);
@@ -64,7 +64,7 @@ const {post}=req.query;
     });
   } else if (req.method === 'GET') {
     try {
-      const files = await BlogDetail.findOne({_id:post});
+      const files = await BlogDetail.findOne({_id:post}).populate("blogSeo blogQuestions");
       return res.status(200).json({ data: files });
     } catch (error) {
       console.error('Error fetching files:', error);
