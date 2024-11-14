@@ -1,19 +1,20 @@
 const { default: mongoose } = require("mongoose");
-const miniquestionSchema=new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
-    },
-    information:{
-        type:String
-    }
-})
-
 const blogQuestionSchema=new mongoose.Schema({
-  questions:[ miniquestionSchema ],
+  title:{
+    type:String,
+    required:true
+},
+information:{
+    type:String
+},
   blog:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"BlogDetail"
+
+  },
+  blogSubQuestion:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"SubQuestions"
 
   }
 },{

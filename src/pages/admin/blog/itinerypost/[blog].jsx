@@ -13,7 +13,7 @@ export default function CreateWebinar() {
   const {blog}=router?.query;
   const [blogData, setBlogData] = useState(null);
   const [activeTab, setActiveTab] = useState("Tab1");
-  console.log("edit id is here ---> ",blog);
+  // console.log("edit id is here ---> ",blog);
   useEffect(()=>{
     if (activeTab === "Tab1") {
           setActiveTab("Tab2");
@@ -23,7 +23,7 @@ export default function CreateWebinar() {
   },[])
   useEffect(()=>{
     if(blog){
-      postDataAccordingId(blog).then(res=>{console.log("blog data is here=---> ",res?.data);setBlogData(res?.data||null)})
+      postDataAccordingId(blog).then(res=>{setBlogData(res?.data||null)})
     }
     
   },[blog])

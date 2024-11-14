@@ -4,11 +4,13 @@ import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db';
 import BlogDetail from '@/models/blog/BlogDetail';
+import BlogSeoDetail from '@/models/blog/BlogSeoDetail';
+import BlogQuestion from '@/models/blog/BlogQuestion';
+import SubQuestions from '@/models/blog/SubQuestions';
 const uploadDirectory = './public/uploads/blogdetail';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
-
 const storage = multer.diskStorage({
   destination: uploadDirectory,
   filename: (req, file, cb) => {
@@ -70,6 +72,15 @@ const apiRoute = async (req, res) => {
       if (file) {
         fs.unlinkSync(path.join(uploadDirectory, file.filename));
         await BlogDetail.findByIdAndDelete(id);
+        await BlogSeoDetail.findOneAndDelete({blog:id});
+        for (const number of file?.blogQuestions) {
+          const data=await BlogQuestion.findById({_id:number});
+          if(data?.blogSubQuestion){
+            await SubQuestions.findByIdAndDelete({_id:data?.blogSubQuestion});
+          }
+          await BlogQuestion.findByIdAndDelete({_id:number});
+        }        
+        
         return res.status(200).json({ message: 'File removed successfully' });
       } else {
         return res.status(404).json({ error: 'File not found' });

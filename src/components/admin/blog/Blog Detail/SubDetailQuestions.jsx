@@ -1,43 +1,31 @@
 import dynamic from "next/dynamic";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 // import DeletePop from "../../iternaryPopup/DeletePop";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
-import SubDetailQuestions from "./SubDetailQuestions";
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
 const questionsData=async (id)=>{
-  return await ((await fetch(`/api/blog/blogquestion/get?blog=${id}`)).json());
-}
-const questionsEditData=async (id)=>{
-  return await ((await fetch(`/api/blog/blogquestion/edit?quesId=${id}`)).json());
+  return await ((await fetch(`/api/blog/blogquestion?blog=${id}`)).json());
 }
 
-const DetailsQuestion = ({setActiveTab,blogData}) => {
+const SubDetailQuestions = ({setSubQuestionState,subQueID}) => {
   const [itineraryDayWiseDataArray, setItineraryDayWiseDataArray] = useState(
     []
   );
+
   // const [deletePopup, setDeletePopu] = useState(false);
   const [editorHtmlQuestion, setEditorHtmlQuestion] = useState("");
   const [editorHtmlDescription, setEditorHtmlDescription] = useState("");
-  const [subQuestionState,setSubQuestionState]=useState(false);
-  const [subQueID,setSubQueId]=useState("");
 
   const [editingIndex, setEditingIndex] = useState(null);
   const [itineraryValidate, setItineraryValidate] = useState("");
-  const [editId,setEditId]=useState(null);
 
-useEffect(()=>{
-  if(blogData){
-    questionsData(blogData?._id).then(res=>{setItineraryDayWiseDataArray(res?.data1)});
-  }
-  
-},[blogData])
-// console.log("blog data is here----> ",blogData)
+
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }],
@@ -51,66 +39,88 @@ useEffect(()=>{
       ['link', 'image'],
     ],
   };
-
-  // Edit functionality
-  const handleEdit = (index,id) => {
-    questionsEditData(id).then(res=>{
-      setEditorHtmlQuestion(res?.data?.title);
-    setEditorHtmlDescription(res?.data?.information);
-    })
-    setEditId(id);
-
-    setEditingIndex(index);
-  };
-const handleDelete=async(id)=>{
-  const data=await fetch(`/api/blog/blogquestion/delete?quesId=${id}`,{
-    method:"DELETE"
-  })
-  if(data?.ok){
-    alert("question successfully Deleted");
-    if(blogData){
-      questionsData(blogData?._id).then(res=>{setItineraryDayWiseDataArray(res?.data1)});
-    }
-  }
-  else{
-    alert("something went wrong");
-  }
-}
-
   useEffect(()=>{
     if(subQueID){
-      setSubQuestionState(true);
+      questionsData(subQueID).then(res=>{setItineraryDayWiseDataArray(res?.data1?.blogSubQuestion?.questions||[])});
     }
+   
   },[subQueID])
 
-  const handleAddorUpdate=async ()=>{
+  // console.log("editorHtmlDescription--------------> ",editorHtmlDescription);
+
+  // Add or Update functionality
+  const handleAddOrUpdate = () => {
+    if (
+      !editorHtmlQuestion ||
+      editorHtmlDescription.trim() === ""
+    ) {
+      setItineraryValidate("Both question and description are required.");
+      return;
+    }
+
     const newEntry = {
-          title: editorHtmlQuestion,
-          information: editorHtmlDescription,
-        };
+      title: editorHtmlQuestion,
+      information: editorHtmlDescription,
+    };
+
+    if (editingIndex !== null) {
+      // Update existing entry
+      const updatedArray = [...itineraryDayWiseDataArray];
+      updatedArray[editingIndex] = newEntry;
+      setItineraryDayWiseDataArray(updatedArray);
+      setEditingIndex(null);
+    } else {
+      // Add new entry
+      setItineraryDayWiseDataArray([...itineraryDayWiseDataArray, newEntry]);
+    }
+    setEditorHtmlQuestion("");
+    setEditorHtmlDescription("");
+    setItineraryValidate("");
+  };
+
+  // Delete functionality
+  const handleDelete = (index) => {
+    const updatedArray = itineraryDayWiseDataArray.filter(
+      (_, i) => i !== index
+    );
+    setItineraryDayWiseDataArray(updatedArray);
+  };
+
+  // Edit functionality
+  const handleEdit = (index) => {
+    const entryToEdit = itineraryDayWiseDataArray[index];
+    setEditorHtmlQuestion(entryToEdit.title);
+    setEditorHtmlDescription(entryToEdit.information);
+    setEditingIndex(index);
+  };
+
+  const handleSaveData= async ()=>{
+
     try {
-      const data = await fetch(`/api/blog/blogquestion/${editingIndex !== null?`edit?quesId=${editId}`:"add"}`, {
-        method:editingIndex !== null?"PUT": "POST",
+      const data = await fetch("/api/blog/blogquestion", {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body:editingIndex !== null?JSON.stringify({questions:newEntry,blog:blogData?._id}): JSON.stringify({questions:newEntry,blog:blogData?._id}),
+        body: JSON.stringify({questions:itineraryDayWiseDataArray,blog:subQueID}),
     });
     if(data?.ok){
-      alert(blogData?"data updated successfully":"data added successfully")
-      setActiveTab("Tab3")
-      if(blogData){
-        questionsData(blogData?._id).then(res=>{setItineraryDayWiseDataArray(res?.data1)});
-      }
+      alert("data added successfully")
+      setSubQuestionState(false);
+      // questionsData().then(res=>{
+      //   setItineraryDayWiseDataArray(res?.data?.[0]?.questions||[])
+      // });
     }
     } catch (error) {
       console.log("something went wrong")
 
     }
-  }
 
+    // setActiveTab("Tab3")
+   
+  }
   return (
-    <><div className="px-4 py-4 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600">
+    <div className="px-4 py-4 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600">
       <h2 className="text-base font-semibold mb-2">Detail Table Question</h2>
       <div>
         <div className="border bg-white p-3 rounded">
@@ -158,7 +168,7 @@ const handleDelete=async(id)=>{
                 </div>
                 <div className="md:pt-12 pt-24">
                   <button
-                   onClick={handleAddorUpdate}
+                    onClick={handleAddOrUpdate}
                     className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1 cursor-pointer`}
                   >
                     {editingIndex !== null ? "Update" : "Add"}
@@ -177,8 +187,6 @@ const handleDelete=async(id)=>{
                           <p className="capitalize flex gap-2 md:text-para text-sm">
                             <span>{index + 1}. </span>
                             <div
-                            onClick={()=>{ setSubQueId(item?._id);
-                              }}
                               dangerouslySetInnerHTML={{ __html: item?.title }}
                             />
                           </p>
@@ -187,12 +195,12 @@ const handleDelete=async(id)=>{
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="font1 cursor-pointer hover:text-primary"
-                            onClick={() => {handleEdit(index,item?._id)}}
+                            onClick={() => handleEdit(index)}
                           />
                           <FontAwesomeIcon
                             icon={faTrash}
                             className="font1 cursor-pointer hover:text-red-500"
-                            onClick={() => handleDelete(item?._id)}
+                            onClick={() => handleDelete(index)}
                           />
                         </div>
                       </div>
@@ -206,21 +214,14 @@ const handleDelete=async(id)=>{
                 </span>
               </div>
             </div>
-            {/* <button
-            //  onClick={handleSaveData}
-             className="w-full rounded py-2 bg-black text-white">
+            <button onClick={handleSaveData} className="w-full rounded py-2 bg-black text-white">
               Save
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div className="mt-4">
-    {subQuestionState&&<SubDetailQuestions setSubQuestionState={setSubQuestionState} subQueID={subQueID}/>}
-    </div>
-   
-    </>
   );
 };
 
-export default DetailsQuestion;
+export default SubDetailQuestions;

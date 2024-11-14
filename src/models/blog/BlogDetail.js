@@ -30,10 +30,10 @@ const BlogDetailSchema=new mongoose.Schema({
           ref: "PackageMasterCategory",
         },
       ],
-    blogQuestions:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"BlogQuestion"
-    },
+    blogQuestions:[
+        {type:mongoose.Schema.Types.ObjectId,
+        ref:"BlogQuestion"}
+    ],
     blogSeo:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"BlogSeoDetail"
