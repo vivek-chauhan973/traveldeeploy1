@@ -5,9 +5,13 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import CraPromoFaq from "@/components/car-rental/car-promo/CarPromoFaq";
 import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarPromoSearchPageFilter from "@/components/car-rental/car-promo/CarPromoSearchPageFilter";
+import CarPromoPhoneFilter from "@/components/car-rental/car-promo/CarPromoPhoneFilter";
 import SearchCarPagePackageList from "@/components/car-rental/car-promo/SearchCarPackageList";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Modal from '@mui/material/Modal';
+import { CancelIcon } from "@/components/icons/index"
+
 
 const fetchLocationAccordingToCity=async (city)=>{
     const res=await fetch(`/api/cars/location?city=${city}`);
@@ -47,6 +51,39 @@ useEffect(()=>{
 
 // console.log('city id --->',cityId)
 // console.log("cityPromoData",cityPromoData);
+const [isModalOpen, setIsModalOpen] = useState(false);
+
+const handleOpenModal = () => {
+    setIsModalOpen(true);
+};
+
+const handleCloseModal = () => {
+    setIsModalOpen(false);
+};
+
+const handleApplyFilter = (filters) => {
+    alert(`Filters applied`);
+    console.log(filters);
+    handleCloseModal();  // Close the modal when filters are applied
+};
+
+
+const handleResize = () => {
+    // Check if window width is 1200 pixels or less
+    if (window.innerWidth <= 1200) {
+        setIsModalOpen(false); // Close modal if window width is 1200 or less
+    }
+};
+
+useEffect(() => {
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+        // Cleanup by removing event listener on component unmount
+        window.removeEventListener('resize', handleResize);
+    };
+}, []);
 
     return (
         <>
@@ -56,6 +93,39 @@ useEffect(()=>{
                 <Breadcrumbs />
                 <CarPromoHeroSection cityPromoData={cityPromoData}/>
                 {/* <SearchHeaderWpr /> */}
+                <div className="container-wrapper flex justify-between pb-5 items-center">
+                    <div>
+                        <div className=" md:flex gap-2 items-center">
+                            <p className="text-[16px]"> Havelock Tour Package Car Packages</p>
+                        </div>
+                        <p className="text-[13px]">Lorem ipsum dolor sit amet.</p>
+                    </div>
+                    <div>
+                        <select className="select w-full max-w-xs hidden  select-sm text-[13px]">
+                            <option disabled selected>
+                                Who shot first?
+                            </option>
+                            <option>Han Solo</option>
+                            <option>Greedo</option>
+                        </select>
+                        <button className="border rounded-sm border-gray-400 text-sm px-2 py-0.5 hover:bg-white xl:hidden block"
+                            onClick={handleOpenModal}
+                        >
+                            Filter
+                        </button>
+                    </div>
+                    <Modal open={isModalOpen} onClose={handleCloseModal}>
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-2 mt-7">
+                            <div className="relative bg-white px-6 py-8 rounded-lg w-full max-w-md h-[80%] max-h-[95vh] overflow-y-auto">
+                                <button onClick={handleCloseModal}
+                                    className="absolute top-3 right-2 text-gray-500 hover:text-gray-700">
+                                    <CancelIcon />
+                                </button>
+                                <CarPromoPhoneFilter onApplyFilter={handleApplyFilter}/>
+                            </div>
+                        </div>
+                    </Modal>
+                </div>
                 <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[2fr,320px] gap-5 relative">
                     <div>
                         <div>

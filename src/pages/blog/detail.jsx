@@ -171,59 +171,64 @@ const Detail = () => {
       <Breadcrumbs />
       {/* Blog Hero Section */}
       <div className="bg-slate-100 md:py-16 py-8">
-      <div className="container-wrapper">
-        <div className="grid md:grid-cols-2 grid-cols-1">
+        <div className="container-wrapper">
+          <div className="grid md:grid-cols-2 grid-cols-1">
             <div className="relative w-full h-60 overflow-hidden md:hidden block mb-5">
-                <Image
+              <Image
                 className="top-0 left-0 w-full h-full object-cover object-center rounded-lg"
                 src="https://www.google.com/url?sa=i&url=https%3A%2F%2Favit.ac.in%2Fcontact%2F&psig=AOvVaw2a30A9-VUVeov-cz3KWFaz&ust=1729578845164000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCwxbntnokDFQAAAAAdAAAAABAE"
                 alt=""
                 width={100}
                 height={100}
                 onError={(e) =>
-                    (e.target.src =
+                  (e.target.src =
                     "https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
                 }
-                />
+              />
             </div>
-            <div className="md:py-10 py-5 pr-3 md:pl-7 pl-5 flex flex-col justify-around items-start w-full h-80 md:h-96 lg:h-[28rem] overflow-hidden rounded-lg shadow-lg bg-white">
-                <h1 className="xl:text-[37px] text-xl  leading-tight text-para font-semibold">
-                    Apps for trip planning: top 8 corporate travel tools to streamline your business
-                </h1>
-                <p className="md:text-para text-sm line-clamp-3">
-                    Find business travel planning stressful? 
-                    Click here for the best apps for trip planning and take all the hard work out of it.
-                </p>
-                <div className="flex xl:gap-5 gap-3 flex-wrap">
-                    <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
-                        Business travel tips
-                    </button>
-                    <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
-                        Business travellers
-                    </button>
-                    <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
-                        Business travel management
-                    </button>             
-                    <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
-                        Business travel tips
-                    </button>
-                </div>
+            <div className="p-5 flex flex-col justify-between items-start w-full h-80 md:h-96 lg:h-[24rem] overflow-hidden rounded-lg shadow-lg bg-white">
+              <div className="flex justify-between w-full text-xs text-gray-500">
+                <h5>15/12/24</h5>
+                <h5>15 mins read</h5>
+              </div>
+              <h1 className="xl:text-[37px] text-xl leading-tight text-para font-semibold">
+                Apps for trip planning: top 8 corporate travel tools to
+                streamline your business
+              </h1>
+              <p className="md:text-para text-sm line-clamp-3">
+                Find business travel planning stressful? Click here for the best
+                apps for trip planning and take all the hard work out of it.
+              </p>
+              <div className="flex xl:gap-5 gap-3 flex-wrap">
+                <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
+                  Business travel tips
+                </button>
+                <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
+                  Business travellers
+                </button>
+                <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
+                  Business travel management
+                </button>
+                <button className=" md:px-5 px-3 py-1 rounded-full shadow-md bg-[#C8E4F8] text-blue-500 text-xs">
+                  Business travel tips
+                </button>
+              </div>
             </div>
-            <div className="relative w-full h-80 md:h-96 lg:h-[28rem] overflow-hidden py-10 md:block hidden">
-                <Image
+            <div className="relative w-full h-80 md:h-96 lg:h-[24rem] overflow-hidden py-10 md:block hidden">
+              <Image
                 className=" top-0 left-0 w-full h-full object-cover object-center rounded-r-lg"
                 src="https://www.google.com/url?sa=i&url=https%3A%2F%2Favit.ac.in%2Fcontact%2F&psig=AOvVaw2a30A9-VUVeov-cz3KWFaz&ust=1729578845164000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCwxbntnokDFQAAAAAdAAAAABAE"
                 alt=""
                 width={100}
                 height={100}
                 onError={(e) =>
-                    (e.target.src =
+                  (e.target.src =
                     "https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
                 }
-                />
+              />
             </div>
+          </div>
         </div>
-      </div>
       </div>
       {/* Blog Detail section start*/}
       <div className="container-wrapper py-10">

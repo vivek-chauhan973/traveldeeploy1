@@ -39,7 +39,7 @@ const fetchCategories = async () => {
   }
 };
 
-const CarPromoSearchPageFilter = ({ cityId }) => {
+const CarPromoPhoneFilter = ({ cityId }) => {
   const [priceRange, setPriceRange] = useState([MIN_PRICE, MAX_PRICE]);
   const [durationRange, setDurationRange] = useState([MIN_DAYS, MAX_DAYS]);
   const [packageCategory, setPackageCategory] = useState([]);
@@ -119,29 +119,29 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
             </Box>
           </Box>
           <div className="md:text-para text-sm font-light">
-            <div className="flex gap-3 my-3">
+            <div className="flex md:gap-3 gap-1 my-3 md:text-sm text-xs">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
                 onClick={() => handlePriceButtonClick(5000, 10000)}
               >
                 ₹5,000 - ₹10,000
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
                 onClick={() => handlePriceButtonClick(10000, 20000)}
               >
                 ₹10,000 - ₹20,000
               </button>
             </div>
-            <div className="flex gap-3">
+            <div className="flex md:gap-3 gap-1 md:text-sm text-xs">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
                 onClick={() => handlePriceButtonClick(20000, 40000)}
               >
                 ₹20,000 - ₹40,000
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
                 onClick={() => handlePriceButtonClick(40000, MAX_PRICE)}
               >
                 ₹40,000 & above
@@ -173,7 +173,7 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
             </p>
           </div>
           <div className="md:text-para text-sm font-light">
-            <div className="flex gap-3 my-3">
+            <div className="flex gap-3 my-3 md:text-sm text-xs">
               <button
                 className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
                 onClick={() => handleDurationButtonClick(1, 3)}
@@ -187,7 +187,7 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
                 3 - 8 days
               </button>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 md:text-sm text-xs">
               <button
                 className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
                 onClick={() => handleDurationButtonClick(8, 15)}
@@ -206,15 +206,15 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
 
         {/* Package Category Section */}
         <div className="border-b md:mt-2 mt-1"></div>
-        <div className="pr-5 pb-4">
-          <h3 className="md:text-[16px] text-[14px] font-medium md:my-3 px-5">Package Category</h3>
-          <div className="overflow-scroll max-h-[200px] pl-5">
+        <div className="">
+          <h3 className="md:text-[16px] text-[14px] font-medium md:my-3 my-3">Package Category</h3>
+          <div className="overflow-scroll max-h-[200px] pl-2">
             {packageCategory.length > 0 ? (
               packageCategory.map((category) => (
                 <label key={category._id} className="flex items-center mb-2">
                   <input
                     type="checkbox"
-                    className="form-checkbox w-4 h-4"
+                    className="form-checkbox"
                     value={category._id}
                     onChange={() => handleCategoryChange(category._id)}
                   />
@@ -226,9 +226,12 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
             )}
           </div>
         </div>
+        <div className="flex justify-center">
+          <button className="bg-black text-white px-4 py-1.5 text-xs rounded-md mt-5">Apply Filters</button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CarPromoSearchPageFilter;
+export default CarPromoPhoneFilter;
