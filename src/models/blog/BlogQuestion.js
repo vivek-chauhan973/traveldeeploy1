@@ -16,7 +16,9 @@ information:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"SubQuestions"
 
-  }
+  },
+  filename:[String]
+
 },{
     timestamps:true
 });

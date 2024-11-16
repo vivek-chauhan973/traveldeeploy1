@@ -2,11 +2,11 @@ import BlogDetail from "@/models/blog/BlogDetail";
 import BlogQuestion from "@/models/blog/BlogQuestion";
 const blogquestionApi = async (req, res) => {
   if (req.method === "POST") {
-    const { questions, blog } = req.body;
+    const { questions, blog ,filename} = req.body;
     const { title, information } = questions;
 
     try {
-      const data = await BlogQuestion.create({ title, information, blog });
+      const data = await BlogQuestion.create({ title, information, blog ,filename});
       if (!data) {
         return res.status(300).json({ message: "somthing went wrong" });
       }
