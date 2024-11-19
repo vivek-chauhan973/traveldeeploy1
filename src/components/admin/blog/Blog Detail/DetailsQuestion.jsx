@@ -242,11 +242,11 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
                                 handleEdit(index, item?._id);
                               }}
                             />
-                            <FontAwesomeIcon
+                            {/*<FontAwesomeIcon
                               icon={faTrash}
                               className="font1 cursor-pointer hover:text-red-500"
                               onClick={() => handleDelete(item?._id)}
-                            />
+                            />*/}
                           </div>
                         </div>
                       </div>
