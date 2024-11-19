@@ -29,7 +29,9 @@ const fetchFilteredData = async (locationId, priceRange, days, category) => {
 // Fetch package categories
 const fetchCategories = async () => {
   try {
-    const categoriesList = await fetch("/api/cars/package-setting/category/get-categories");
+    const categoriesList = await fetch(
+      "/api/cars/package-setting/category/get-categories"
+    );
     const categories = await categoriesList.json();
     console.log("Categories fetched:", categories); // Log the fetched categories
     return categories;
@@ -54,9 +56,12 @@ const CarPromoPhoneFilter = ({ cityId }) => {
 
   useEffect(() => {
     const data = { priceRange, durationRange, selectedCategories };
-    fetchFilteredData(cityId, data?.priceRange, data?.durationRange, data?.selectedCategories).then((res) =>
-      console.log("Filtered data:", res)
-    );
+    fetchFilteredData(
+      cityId,
+      data?.priceRange,
+      data?.durationRange,
+      data?.selectedCategories
+    ).then((res) => console.log("Filtered data:", res));
   }, [cityId, priceRange, durationRange, selectedCategories]);
 
   // Handlers for price range buttons
@@ -71,10 +76,11 @@ const CarPromoPhoneFilter = ({ cityId }) => {
 
   // Handler for category checkbox change
   const handleCategoryChange = (categoryId) => {
-    setSelectedCategories((prevCategories) =>
-      prevCategories.includes(categoryId)
-        ? prevCategories.filter((id) => id !== categoryId) // Remove if already selected
-        : [...prevCategories, categoryId] // Add if not selected
+    setSelectedCategories(
+      (prevCategories) =>
+        prevCategories.includes(categoryId)
+          ? prevCategories.filter((id) => id !== categoryId) // Remove if already selected
+          : [...prevCategories, categoryId] // Add if not selected
     );
   };
 
@@ -84,8 +90,12 @@ const CarPromoPhoneFilter = ({ cityId }) => {
         {/* Price Range Section */}
         <div className="md:p-5 p-2">
           <div className="flex justify-between md:pb-2 pb-1">
-            <h3 className="md:text-[16px] text-[14px] font-medium">Package Prices</h3>
-            <p className="text-[12px] underline text-blue-800 cursor-pointer">Clear All</p>
+            <h3 className="md:text-[16px] text-[14px] font-medium">
+              Package Prices
+            </h3>
+            <p className="text-[12px] underline text-blue-800 cursor-pointer">
+              Clear All
+            </p>
           </div>
           <Box>
             <Slider
@@ -106,15 +116,15 @@ const CarPromoPhoneFilter = ({ cityId }) => {
                   currency: "INR",
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 0,
-                })}
-                {" "} - {" "}
+                })}{" "}
+                -{" "}
                 {priceRange[1].toLocaleString("en-IN", {
                   style: "currency",
                   currency: "INR",
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 0,
-                })}
-                {" "}Prices
+                })}{" "}
+                Prices
               </p>
             </Box>
           </Box>
@@ -152,7 +162,9 @@ const CarPromoPhoneFilter = ({ cityId }) => {
 
         {/* Tour Duration Section */}
         <div className="border-t md:px-5 py-3 p-2">
-          <h3 className="md:text-[16px] text-[14px] font-medium my-2">Tour Duration</h3>
+          <h3 className="md:text-[16px] text-[14px] font-medium my-2">
+            Tour Duration
+          </h3>
           <Box sx={{ width: "100%" }}>
             <Slider
               getAriaLabel={() => "Tour duration range"}
@@ -207,8 +219,10 @@ const CarPromoPhoneFilter = ({ cityId }) => {
         {/* Package Category Section */}
         <div className="border-b md:mt-2 mt-1"></div>
         <div className="">
-          <h3 className="md:text-[16px] text-[14px] font-medium md:my-3 my-3">Package Category</h3>
-          <div className="overflow-scroll max-h-[200px] pl-2">
+          <h3 className="md:text-[16px] text-[14px] font-medium my-3 md:ml-3">
+            Package Category
+          </h3>
+          <div className="overflow-scroll max-h-[200px] md:pl-5 pl-2">
             {packageCategory.length > 0 ? (
               packageCategory.map((category) => (
                 <label key={category._id} className="flex items-center mb-2">
@@ -227,7 +241,9 @@ const CarPromoPhoneFilter = ({ cityId }) => {
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="bg-black text-white px-4 py-1.5 text-xs rounded-md mt-5">Apply Filters</button>
+          <button className="bg-black text-white px-4 py-1.5 text-xs rounded-md mt-5">
+            Apply Filters
+          </button>
         </div>
       </div>
     </div>
