@@ -58,7 +58,7 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
   // Edit functionality
   const handleEdit = (index, id) => {
     questionsEditData(id).then((res) => {
-      // console.log("res data is here ----> ", res);
+      
       setEditorHtmlQuestion(res?.data?.title || "");
       setContent(res?.data?.information || "");
       setFilename(res?.data?.filename || []);
@@ -67,7 +67,7 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
 
     setEditingIndex(index);
   };
- 
+
 
   const handleDelete = async (id) => {
     const data = await fetch(`/api/blog/blogquestion/delete?quesId=${id}`, {
@@ -135,6 +135,7 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
       console.log("something went wrong");
     }
   };
+  console.log("content is here -----> ",filename)
 
   return (
     <>
@@ -241,11 +242,11 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
                                 handleEdit(index, item?._id);
                               }}
                             />
-                            <FontAwesomeIcon
+                            {/*<FontAwesomeIcon
                               icon={faTrash}
                               className="font1 cursor-pointer hover:text-red-500"
                               onClick={() => handleDelete(item?._id)}
-                            />
+                            />*/}
                           </div>
                         </div>
                       </div>

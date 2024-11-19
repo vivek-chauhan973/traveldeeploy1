@@ -197,11 +197,11 @@ const SubDetailQuestions = ({setSubQuestionState,subQueID}) => {
                             className="font1 cursor-pointer hover:text-primary"
                             onClick={() => handleEdit(index)}
                           />
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={faTrash}
                             className="font1 cursor-pointer hover:text-red-500"
                             onClick={() => handleDelete(index)}
-                          />
+                          /> */}
                         </div>
                       </div>
                     </div>

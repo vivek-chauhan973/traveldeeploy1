@@ -9,10 +9,16 @@ import BlogPromoFilter from "@/components/Blog/Blog-Promo/BlogPromoFilter";
 import BlogPromoPackageList from "@/components/Blog/Blog-Promo/BlogPromoPackageList";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PhoneFilter from "@/components/Blog/Blog-Promo/PhoneFilter";
-
+const fetchBlogPromoBanner=async ()=>{
+    return (await(await fetch("/api/blog",{method:"GET"})).json())
+}
+const fetchBlogs=async ()=>{
+    return (await(await fetch("/api/blog/getallblogs")).json())
+}
 export default function Promo() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+const [blogHero,setBlogHero]=useState({});
+const [blogs,setBlogs]=useState([]);
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -45,6 +51,11 @@ export default function Promo() {
         };
     }, []);
 
+    useEffect(()=>{
+        fetchBlogPromoBanner().then(res=>{setBlogHero(res?.data||{})});
+        fetchBlogs().then(res=>{console.log("blogs are here -------> ",res?.data);setBlogs(res?.data||[])});
+    },[])
+
     return (
         <>
             {/* CarPromoSkeleton */}
@@ -56,7 +67,7 @@ export default function Promo() {
                     <div className="relative w-full h-80 md:h-96 lg:h-[32rem] overflow-hidden">
                         <Image
                             className=" top-0 left-0 w-full h-full object-cover object-center"
-                            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Favit.ac.in%2Fcontact%2F&psig=AOvVaw2a30A9-VUVeov-cz3KWFaz&ust=1729578845164000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCwxbntnokDFQAAAAAdAAAAABAE"
+                            src={blogHero?.videoPath||"https://www.google.com/url?sa=i&url=https%3A%2F%2Favit.ac.in%2Fcontact%2F&psig=AOvVaw2a30A9-VUVeov-cz3KWFaz&ust=1729578845164000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCwxbntnokDFQAAAAAdAAAAABAE"}
                             alt=""
                             width={100}
                             height={100}
@@ -64,15 +75,9 @@ export default function Promo() {
                         />
                     </div>
                     <div className='container-wrapper py-5'>
-                        <h4 className="md:text-2xl text-md font-medium mb-2 capitalize">Blog Promo</h4>
+                        <h4 className="md:text-2xl text-md font-medium mb-2 capitalize">{blogHero?.title}</h4>
                         <p className="text-para line-clamp-5">
-                            A great About Us page comes across as human. It puts a face to a name,
-                            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-                            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-                            A great About Us page comes across as human. It puts a face to a name,
-                            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-                            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-                            A great About Us page comes across as human. It puts a face to a name,
+                           {blogHero?.description}
                         </p>
                     </div>
                 </div>

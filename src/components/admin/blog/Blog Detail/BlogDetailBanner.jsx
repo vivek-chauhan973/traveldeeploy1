@@ -1,12 +1,18 @@
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 import BlogPromoSeo from "@/components/admin/blog/Blog Promo/BlogPromoSeo";
 import MultipleSelectCheckmarks from "../../itineraryCreate/CheckMarkSelect";
 import { useRouter } from "next/navigation";
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
+const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 
 export default function BlogDetailBanner({ setActiveTab, blogData }) {
   const [file, setFile] = useState(null);
@@ -16,15 +22,17 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectType, setSelectType] = useState("");
+  const [editorHtmlDescription, setEditorHtmlDescription] = useState("");
   const router = useRouter();
-  useEffect(()=>{
-    setSelectType(blogData?.blogType||"")
-    setTitle(blogData?.title||"")
+  useEffect(() => {
+    setSelectType(blogData?.blogType || "");
+    setTitle(blogData?.title || "");
     setSelectedCategories(blogData?.category);
-    setDescription(blogData?.description||"")
-    setPreview(blogData?.videoPath||"");
-  },[blogData])
-// console.log("blogData?.category",blogData?.category)
+    setDescription(blogData?.description || "");
+    setPreview(blogData?.videoPath || "");
+    setEditorHtmlDescription(blogData?.contentsummary || "");
+  }, [blogData]);
+  // console.log("blogData?.category",blogData?.category)
   const [packageCategories, setPackageCategories] = useState();
   const fetchCategories = async () => {
     try {
@@ -58,6 +66,19 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
     //     setCategoryValidate("");
     // }
   };
+  const modules = {
+    toolbar: [
+      [{ header: "1" }, { header: "2" }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link"],
+    ],
+  };
   // Function to handle image upload or update
   async function handleUpload() {
     if (!file && !isUpdating) {
@@ -77,37 +98,38 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
       formData.append("description", description);
       formData.append("blogType", selectType);
       formData.append("category", selectedCategories);
+      formData.append("contentsummary", editorHtmlDescription);
     }
     // console.log("selectedCategories -------------> ",selectedCategories)
     try {
-        const res = await fetch(`/api/blog/${blogData?blogData?._id:"blogdetail"}`, {
-            method:blogData?"PUT":"POST",
-            body: formData,
-        });
-        const data1=await res.json()
-        // console.log("data1--->",data1?.data?._id)
-        if (res?.ok) {
-          router.push("/admin/blog/itinerypost/"+data1?.data?._id)
-            setActiveTab("Tab2");
-            alert(`File ${blogData ? "updated" : "uploaded"} successfully`);
-
-            // Optionally, reset form fields or update state after successful upload
-        } else {
-            alert(`File ${blogData ? "update" : "upload"} failed`);
+      const res = await fetch(
+        `/api/blog/${blogData ? blogData?._id : "blogdetail"}`,
+        {
+          method: blogData ? "PUT" : "POST",
+          body: formData,
         }
-     
-        // router.push("/admin/blog/itinerypost/"+data1?.data?._id);
-    } catch (error) {
-        console.error(
-            `Error ${blogData ? "updating" : "uploading"} file:`,
-            error
-        );
+      );
+      const data1 = await res.json();
+      // console.log("data1--->",data1?.data?._id)
+      if (res?.ok) {
+        router.push("/admin/blog/itinerypost/" + data1?.data?._id);
+        setActiveTab("Tab2");
+        alert(`File ${blogData ? "updated" : "uploaded"} successfully`);
 
+        // Optionally, reset form fields or update state after successful upload
+      } else {
+        alert(`File ${blogData ? "update" : "upload"} failed`);
+      }
+
+      // router.push("/admin/blog/itinerypost/"+data1?.data?._id);
+    } catch (error) {
+      console.error(
+        `Error ${blogData ? "updating" : "uploading"} file:`,
+        error
+      );
     }
   }
-
-  
-
+// console.log("content is here as ------>  ",editorHtmlDescription)
   return (
     <>
       <div className="p-4 mb-5 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600">
@@ -121,16 +143,16 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
                 onChange={handleChange}
               />
               <div>
-                                    {preview && (
-                                        <Image
-                                            className="md:w-36 w-auto h-auto shadow-md mb-4"
-                                            src={preview}
-                                            alt="Preview"
-                                            width={150}
-                                            height={200}
-                                        />
-                                    )}
-                                </div>
+                {preview && (
+                  <Image
+                    className="md:w-36 w-auto h-auto shadow-md mb-4"
+                    src={preview}
+                    alt="Preview"
+                    width={150}
+                    height={200}
+                  />
+                )}
+              </div>
             </div>
             <div className="flex-1 my-5">
               <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
@@ -143,10 +165,13 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
                 <select
                   id="postTypes"
                   onChange={(e) => setSelectType(e.target.value)}
-                  
                   className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                 >
-                  {selectType?<option value="blog">{selectType}</option>:<option value="blog">select type </option>}
+                  {selectType ? (
+                    <option value="blog">{selectType}</option>
+                  ) : (
+                    <option value="blog">select type </option>
+                  )}
                   <option value="Blog">Blog</option>
                   <option value="Travel Guide">Travel Guide</option>
                   <option value="News">News</option>
@@ -195,6 +220,17 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
                 ></textarea>
               </div>
             </div>
+          </div>
+          <div className="w-full">
+            <h3 className=" font-semibold mb-2">Content Summary</h3>
+            <QuillNoSSRWrapper
+              className="rounded h-48 mb-16"
+              theme="snow"
+              value={editorHtmlDescription}
+              onChange={setEditorHtmlDescription}
+              placeholder="Enter Your Answer"
+              modules={modules}
+            />
           </div>
           <div className="flex md:flex-row flex-col md:gap-5 gap-3">
             <button

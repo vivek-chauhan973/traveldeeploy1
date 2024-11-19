@@ -32,12 +32,13 @@ const {post}=req.query;
         return res.status(500).json({ error: 'File upload failed' });
       }
 
-      const { title,description ,blogType,category} = req.body;
+      const { title,description ,blogType,category,contentsummary} = req.body;
       // console.log("title --> ",title)
       // console.log("req.file.filename---->",req.file.filename)
       const fileData = req.file && {
         blogType,
         title,
+        contentsummary,
         description,
         category,
         filename: req.file.filename,
@@ -64,7 +65,7 @@ const {post}=req.query;
     });
   } else if (req.method === 'GET') {
     try {
-      const files = await BlogDetail.findOne({_id:post}).populate("blogSeo blogQuestions");
+      const files = await BlogDetail.findOne({_id:post}).populate("blogSeo blogQuestions table");
       return res.status(200).json({ data: files });
     } catch (error) {
       console.error('Error fetching files:', error);
