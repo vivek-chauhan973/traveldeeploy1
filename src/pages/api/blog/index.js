@@ -67,7 +67,7 @@ const apiRoute = async (req, res) => {
     });
   } else if (req.method === 'GET') {
     try {
-      const files = await BlogPromoBanner.find({});
+      const files = await BlogPromoBanner.findOne({});
       return res.status(200).json({ data: files });
     } catch (error) {
       console.error('Error fetching files:', error);

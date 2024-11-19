@@ -5,6 +5,7 @@ import Layout from "@/components/admin/Layout";
 import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBanner";
 import BlogDetailSeo from "@/components/admin/blog/Blog Detail/BlogDetailSeo";
 import DetailsQuestion from "@/components/admin/blog/Blog Detail/DetailsQuestion";
+import Table from "@/components/admin/blog/Blog Detail/Table";
 const postDataAccordingId=async (id)=>{
   return await ((await fetch(`/api/blog/${id}`)).json());
 }
@@ -19,6 +20,9 @@ export default function CreateWebinar() {
           setActiveTab("Tab2");
         } else if (activeTab === "Tab2") {
           setActiveTab("Tab3");
+        }
+        else if(activeTab === "Tab3"){
+          setActiveTab("Tab4");
         }
   },[])
   useEffect(()=>{
@@ -68,6 +72,16 @@ export default function CreateWebinar() {
               >
                Seo Field
               </button>
+              <button
+                onClick={() => setActiveTab("Tab4")}
+                className={`${
+                  activeTab === "Tab4"
+                    ? "border-b-2 scale-105 border-black text-black"
+                    : "border-black text-slate-500"
+                } px-3 py-1`}
+              >
+               Table Data
+              </button>
             </>
          
         </div>
@@ -97,6 +111,13 @@ export default function CreateWebinar() {
             }`}
           >
             <BlogDetailSeo blogData={blogData} setActiveTab={setActiveTab} />
+          </div>
+          <div
+            className={`tab-content ${
+              activeTab === "Tab4" ? "block" : "hidden"
+            }`}
+          >
+            <Table blogData={blogData} setActiveTab={setActiveTab} />
           </div>
         </>
         </Layout>

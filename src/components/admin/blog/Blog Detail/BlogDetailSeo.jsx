@@ -31,13 +31,14 @@ const BlogDetailSeo = ({setActiveTab,blogData}) => {
             // console.log("seo data ----> ", data?.ok);
             if (data.ok) {
                 alert(blogData?"data updated successfully":"data added successfully")
+                setActiveTab("Tab4")
             } else {
                 alert("Something went wrong");
             }
         } catch (error) {
             console.log("something went wrong");
         }
-        setActiveTab("Tab1")
+       
     };
 
     return (
