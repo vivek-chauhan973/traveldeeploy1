@@ -50,6 +50,20 @@ const FlyoutLink = ({ children, href, FlyoutContent }) => {
             <FlyoutContent />
           </motion.div>
         )}
+        {children === "Travel" && showFlyout && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 15 }}
+            style={{ translateX: "-30%" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className=" absolute left-5 top-5  text-black"
+          >
+            <div />
+            <div />
+            <FlyoutContent />
+          </motion.div>
+        )}
         {children === "Spaciality Tour"  && showFlyout && (
           <motion.div
             initial={{ opacity: 0, y: 15 }}

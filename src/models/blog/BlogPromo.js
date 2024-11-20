@@ -13,8 +13,12 @@ const blogpromoSchema=new mongoose.Schema({
     },
     keyword:{
         type:String
+    },
+    promo:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"BlogPromoBanner"
     }
-},{})
+},{timestamps:true})
 
 const BlogPromo=mongoose.models.BlogPromo || mongoose.model("BlogPromo",blogpromoSchema);
 export default BlogPromo;

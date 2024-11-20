@@ -5,6 +5,10 @@ const bannerSchema=new mongoose.Schema({
         required:true
 
     },
+    selectType:{
+        type:String,
+        required:true
+    },
     filename:{
         type:String,
         required:true
@@ -16,6 +20,11 @@ const bannerSchema=new mongoose.Schema({
     videoPath:{
         type:String,
         required:true
+    }
+    ,
+    seo:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"BlogPromo"
     }
 },{timestamps:true})
 

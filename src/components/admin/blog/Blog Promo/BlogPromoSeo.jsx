@@ -1,32 +1,43 @@
 import React, { useEffect, useState } from "react";
-
-const fetchCarHomeData = async () => {
-    const data = await fetch("/api/blog/blogpromo");
+const fetchCarHomeData = async (id) => {
+    const data = await fetch(`/api/blog/blogpromo?promo=${id}`);
     return await data.json();
 };
 
-const BlogPromoSeo = () => {
-
+const BlogPromoSeo = ({selectedPromoId}) => {
     //Blog seo field here
     const [title, setTitle] = useState("");
     const [canonicalUrl, setCanonicalUrl] = useState("");
     const [description, setDescription] = useState("");
+    const [promoId,setPromoId]=useState(null);
     const [keyword, setKeyword] = useState("");
+    useEffect(()=>{
+        if(selectedPromoId){
+            setPromoId(selectedPromoId||null)
+            
+        }
+       
+    },[selectedPromoId])
     useEffect(() => {
 
-        fetchCarHomeData().then((res) => {
-            setTitle(res?.data?.[0]?.title);
-            setCanonicalUrl(res?.data?.[0]?.canonicalUrl);
-            setDescription(res?.data?.[0]?.description);
-            setKeyword(res?.data?.[0]?.keyword);
-        });
-    }, []);
-
+        if(promoId){
+            fetchCarHomeData(promoId).then((res) => {
+                setTitle(res?.data?.title||"");
+                setCanonicalUrl(res?.data?.canonicalUrl||"");
+                setDescription(res?.data?.description||"");
+                setKeyword(res?.data?.keyword||"");
+                setPromoId(res?.data?.promo||promoId)
+                // console.log("res---> ",res)
+            });
+        }
+        
+    }, [promoId]);
+    console.log("promo id is here ----> ",promoId)
     const handleSaveCarSeoData = async () => {
-        if (!title || !canonicalUrl || !description || !keyword) {
+        if (!promoId||!title || !canonicalUrl || !description || !keyword) {
             return alert("Each field is required !!!!");
         }
-        const seoData = { title, canonicalUrl, description, keyword };
+        const seoData = { title, canonicalUrl, description, keyword,promoId };
         // console.log("seo data -----> ", seoData);
         try {
             const data = await fetch("/api/blog/blogpromo", {

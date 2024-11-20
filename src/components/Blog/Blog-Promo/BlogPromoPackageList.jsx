@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSuitcase, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
-const BlogPromoPackageList = () => {
+const BlogPromoPackageList = ({blogs}) => {
 
     const blogPromoPakcage = [
         {
@@ -72,7 +72,7 @@ const BlogPromoPackageList = () => {
     return (
         <div>
             <div className="flex flex-wrap gap-6">
-                {blogPromoPakcage?.length > 0 && blogPromoPakcage?.map((items, i) => {
+                {blogs?.length > 0 && blogs?.map((items, i) => {
                     return (
                         <div key={i} className="relative pb-5 mb-5 w-[250px] md:h-[450px]  rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
                             <div className=" flex items-center h-[150px] w-full">
@@ -80,7 +80,7 @@ const BlogPromoPackageList = () => {
                                     width={200}
                                     height={200}
                                     className="h-[220px] mx-5 md:m-0 w-full md:p-0 md:h-full rounded-t-md overflow-hidden object-cover"
-                                    src={items?.img}
+                                    src={items?.videoPath}
                                     alt="ui/ux review check"
                                     onError={(e) => {
                                         e.target.onerror = null; // Prevent infinite loop if fallback also fails
@@ -91,7 +91,7 @@ const BlogPromoPackageList = () => {
                             <div className="h-[300px]">
                                 <div className="px-5 w-full">
                                     <div className="mt-3">
-                                        <p className="text-sm">{items.date}</p>
+                                        <p className="text-sm">{ new Date(items?.updatedAt).toLocaleDateString()}</p>
                                     </div>
                                     <div className="my-4">
                                         <h5 className="block font-sans text-base leading-relaxed capitalize font-semibold antialiased text-black">
@@ -103,7 +103,7 @@ const BlogPromoPackageList = () => {
                                             // dangerouslySetInnerHTML={{ __html: items?.about }}
                                             className="block text-[12px] font-normal text-gray-800 md:line-clamp-4 line-clamp-2"
                                         >
-                                            {items.description}
+                                            {items?.description}
                                         </p>
                                     </div>
                                 </div>

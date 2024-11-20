@@ -3,6 +3,7 @@ import Show from "./Show"
 import SpacialityTour from "./SpacialityTour";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompass ,  faCake,faCar,faDiamond} from '@fortawesome/free-solid-svg-icons';
+import Travel from "./Travel";
 // const data1=[{
 //   state:"Himachal Pradesh",
 //   cities:['Chandratal','Dalhouse','Kaza','Manali','shimla'],
@@ -69,6 +70,11 @@ const header=[
 {
   name:"Car Hire",
   element:SpacialityTour,
+   icon:<FontAwesomeIcon icon={faCar}  className='font'  />
+},
+{
+  name:"Travel",
+  element:Travel,
    icon:<FontAwesomeIcon icon={faCar}  className='font'  />
 },
 ]

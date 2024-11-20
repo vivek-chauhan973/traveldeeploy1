@@ -1,10 +1,8 @@
 import BlogDetail from "@/models/blog/BlogDetail";
-
-
 const fetchAllBlogApi=async (req,res)=>{
-
+const {selectType}=req.query;
     try {
-        const data=await BlogDetail.find({}).populate("blogQuestions category");
+        const data=await BlogDetail.find({blogType:selectType}).populate("blogQuestions category");
         if(!data){
             res.status(404).json({message:"blogs are not found"})
         }

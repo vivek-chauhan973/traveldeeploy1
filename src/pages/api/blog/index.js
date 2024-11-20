@@ -2,13 +2,15 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db';
-import Banner from '@/models/Home/Bannner';
 import BlogPromoBanner from '@/models/blog/BlogPromoBanner';
+
+// Set up the upload directory
 const uploadDirectory = './public/uploads/blogpromo';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
 
+// Set up multer storage configuration
 const storage = multer.diskStorage({
   destination: uploadDirectory,
   filename: (req, file, cb) => {
@@ -20,11 +22,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// API route handler
 const apiRoute = async (req, res) => {
   await dbConnect();
 
   if (req.method === 'POST') {
-    upload.single('file')(req, File, async (err) => {
+    // Use multer middleware to handle the file upload
+    upload.single('file')(req, res, async (err) => {
       if (err instanceof multer.MulterError) {
         console.error('Multer error:', err);
         return res.status(500).json({ error: 'File upload failed' });
@@ -33,64 +37,67 @@ const apiRoute = async (req, res) => {
         return res.status(500).json({ error: 'File upload failed' });
       }
 
-      const { title,description } = req.body;
-      // console.log("title --> ",title)
-      // console.log("req.file.filename---->",req.file.filename)
-      const fileData = req.file && {
+      // Check if the file exists and extract form data
+      const { title, description, selectType } = req.body;
+      if (!selectType || !title || !description) {
+        return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      const fileData = req.file ? {
+        selectType,
         title,
         description,
         filename: req.file.filename,
         videoPath: `/uploads/blogpromo/${req.file.filename}`,
-      }
-      try {
-        const existingFile = await BlogPromoBanner.findOne({});
-        if (existingFile) {
-          const updatedFile = await BlogPromoBanner.findOneAndUpdate(
-            { _id: existingFile._id },
-            { $set: fileData },
-            { new: true }
-          );
-          const file = await BlogPromoBanner.findById(existingFile._id);
-          if(file){
-            fs.unlinkSync(path.join(uploadDirectory, file.filename));
+      } : null;
+
+      if (fileData) {
+        try {
+          const existingFile = await BlogPromoBanner.findOne({ selectType });
+
+          if (existingFile) {
+            // Update existing file
+            const updatedFile = await BlogPromoBanner.findOneAndUpdate(
+              { _id: existingFile._id },
+              { $set: fileData },
+              { new: true }
+            );
+
+            // Remove the old file if it exists
+            if (existingFile.filename) {
+              fs.unlinkSync(path.join(uploadDirectory, existingFile.filename));
+            }
+
+            return res.status(200).json({ data: updatedFile });
+          } else {
+            // Create a new entry if no existing file is found
+            const file = new BlogPromoBanner(fileData);
+            await file.save();
+            return res.status(200).json({ data: file });
           }
-          return res.status(200).json({ data: updatedFile });
-        } else {
-          const file = new BlogPromoBanner(fileData);
-          await file.save();
-          return res.status(200).json({ data: file });
+        } catch (error) {
+          console.error('Error updating or saving file:', error);
+          return res.status(500).json({ error: 'Internal Server Error' });
         }
-      } catch (error) {
-        console.error('Error updating or saving file:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+      } else {
+        return res.status(400).json({ error: 'File upload failed' });
       }
     });
   } else if (req.method === 'GET') {
     try {
-      const files = await BlogPromoBanner.findOne({});
+      const { selectType } = req.query;
+      if (!selectType) {
+        return res.status(400).json({ error: 'Missing selectType' });
+      }
+
+      const files = await BlogPromoBanner.findOne({ selectType }).populate("seo");
       return res.status(200).json({ data: files });
     } catch (error) {
       console.error('Error fetching files:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
-  } else if (req.method === 'DELETE') {
-    const { id } = req.query;
-    console.log("file image id by selected logo ",path.join(uploadDirectory));
-    try {
-      const file = await BlogPromoBanner.findById(id);
-      if (file) {
-        fs.unlinkSync(path.join(uploadDirectory, file.filename));
-        await BlogPromoBanner.findByIdAndDelete(id);
-        return res.status(200).json({ message: 'File removed successfully' });
-      } else {
-        return res.status(404).json({ error: 'File not found' });
-      }
-    } catch (error) {
-      console.error('Error deleting file:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
   } else {
-    res.setHeader('Allow', ['POST', 'GET', 'DELETE']);
+    res.setHeader('Allow', ['POST', 'GET']);
     return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 };
@@ -99,6 +106,6 @@ export default apiRoute;
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: false, // Disable body parser for multer to handle the file
   },
 };

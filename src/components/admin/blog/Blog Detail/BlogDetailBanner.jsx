@@ -168,13 +168,13 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
                   className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                 >
                   {selectType ? (
-                    <option value="blog">{selectType}</option>
+                    <option disabled >{selectType}</option>
                   ) : (
-                    <option value="blog">select type </option>
+                    <option >select type </option>
                   )}
-                  <option value="Blog">Blog</option>
-                  <option value="Travel Guide">Travel Guide</option>
-                  <option value="News">News</option>
+                  <option value="blog">Blog</option>
+                  <option value="travel-guide">Travel Guide</option>
+                  <option value="news">News</option>
                 </select>
               </div>
               <div>

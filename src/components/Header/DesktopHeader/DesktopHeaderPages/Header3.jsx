@@ -131,7 +131,7 @@ const Header3 = () => {
 
             </li>
           ))}
-            <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
+            {/* <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
             <Link href='/blog'>
               <FontAwesomeIcon
                 icon={faHome}
@@ -141,7 +141,7 @@ const Header3 = () => {
                 Blog
               </span>
             </Link>
-          </li>
+          </li> */}
           <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
             <Link href='/deals'>
               <FontAwesomeIcon
