@@ -112,9 +112,9 @@ export default function CarDetail() {
             "_blank"
         );
     }
-    // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
+    console.log("CarDepartureDetails----==>  ", carDepartureDetails);
 
-    // console.log("carPackage----==>  ", carPackage);
+    console.log("carPackage----==>  ", carPackage);
     // console.log("carSidePackages----==>  ", carPrice1);
 
     return (
@@ -123,11 +123,11 @@ export default function CarDetail() {
             <div>
                 {/* <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%"> */}
                 <DesktopHeader />
-                {/* <Breadcrumbs /> */}
+                <Breadcrumbs />
                 {/* Car-rental Banner section */}
                 <div>
-                    <CarDetailHeroSection carPackage={carPackage} />
-                    <div className="container-wrapper">
+                    <CarDetailHeroSection carPackage={carPackage} carPrice1={carPrice1} />
+                    {/* <div className="container-wrapper xl:block hidden">
                         <div className="flex justify-between">
                             <div>
                                 <h2 className=" text-lg md:text-lg font-semibold capitalize my-2">
@@ -178,7 +178,7 @@ export default function CarDetail() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 {/* Departure and Booking summary starts */}
                 <div className="bg-gray-100  mt-[20px] pb-7">
@@ -513,6 +513,53 @@ export default function CarDetail() {
 
                 {/* bottom link is here*/}
                 {/* <BottomLink /> */}
+                <div className=" flex xl:hidden z-30  sticky bottom-0 bg-white border-t-2 border-primary">
+                    <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
+                        <div className="hidden sm:flex items-center">
+                            <p className=" text-[20px] font-semibold">{carPackage?.name}</p>
+                            <div>
+                            <span></span>
+                            </div>
+                        </div>
+                        <div className="flex gap-1 md:justify-end justify-around  items-center">
+                            <div className="text-right flex flex-col items-end justify-center ">
+                            <p className="text-base leading-5 text-green-600 font-semibold uppercase">
+                                best deal price
+                            </p>
+                                <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                                Save {carPackage?.highSave}%
+                                </button>
+                            <p className="text-sm leading-5">
+                                Starts From{" "}
+                                <span className="text-lg text-graytext font-medium">
+                                    {Math.floor(
+                                    carPrice1 || carPackage?.price
+                                    ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                </span>
+                            </p>
+                            {/* <p className="text-xxs leading-5">per person on twin sharing</p> */}
+                            </div>
+
+                            <div className="flex-col align-middle my-auto pl-2 gap-2 py-2">
+                                <button 
+                                //   onClick={handleSubmit}
+                                  className={`border px-5 py-1 rounded-md ${
+                                    carPrice1
+                                      ? "bg-gradient-to-r from-orange-500 to-red-500"
+                                      : " bg-gradient-to-r from-orange-200 to-red-200"
+                                  }  text-center text-white text-para`}
+                                >
+                                Book Now
+                                </button>
+                                <CustomiseTour>
+                                <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">
+                                    Customise
+                                </button>
+                                </CustomiseTour>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </AppProvider>
     )

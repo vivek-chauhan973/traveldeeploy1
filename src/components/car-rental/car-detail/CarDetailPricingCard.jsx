@@ -173,14 +173,13 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                                 </button>
                             </CustomiseTour>
                             <button onClick={handleBookNowClick}
-                                // className="border px-5 py-2 rounded-md bg-gradient-to-r from-orange-500 to-red-500 text-center text-white text-para"
                                 // disabled={!travellers}
                                 className={` ${travellers
                                     ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
                                     : "bg-gradient-to-r from-orange-200 to-red-200"
                                     } px-5 py-2 rounded-md text-white text-center text-para`}
                             >
-                                Book now
+                                Book Now
                             </button>
                         </div>
                     </div>
