@@ -194,18 +194,33 @@ export default function CarDetail() {
                         </div>
                         <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">
                             {/* Calender, About & Highlight */}
-                            <CarDepartureSection
-                                carPackage={carPackage}
-                                setCarDepartureDetails={setCarDepartureDetails}
-                                setCarPrice1={setCarPrice1}
-                                setShowPopup={setShowPopup}
-                                showPopup={showPopup}
-                            />
+                            <div id="departure" className=" hidden xl:block">
+                                <CarDepartureSection
+                                    carPackage={carPackage}
+                                    setCarDepartureDetails={setCarDepartureDetails}
+                                    setCarPrice1={setCarPrice1}
+                                    setShowPopup={setShowPopup}
+                                    showPopup={showPopup}
+                                /> 
+                            </div>
+                            <div className="xl:hidden">
+                                <CarDepartureSection
+                                    carPackage={carPackage}
+                                    setCarDepartureDetails={setCarDepartureDetails}
+                                    setCarPrice1={setCarPrice1}
+                                    setShowPopup={setShowPopup}
+                                    showPopup={showPopup}
+                                /> 
+                            </div>
                             {/* Booking Summary */}
-                            <CardDetailPricingCard
-                                carPackage={carPackage}
-                                carDepartureDetails={carDepartureDetails}
-                            />
+                            <div>
+                                <div className="hidden xl:block">
+                                    <CardDetailPricingCard
+                                        carPackage={carPackage}
+                                        carDepartureDetails={carDepartureDetails}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
