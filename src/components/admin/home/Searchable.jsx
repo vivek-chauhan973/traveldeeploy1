@@ -44,6 +44,9 @@ const fetchCarPromoList = async () => {
   const data = await response.json();
   return data;
 };
+const fetchBlogs=async (id)=>{
+  return (await(await fetch(`/api/blog/getallblogs?selectType=${id}`)).json())
+}
 const Searchable = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('category1');
@@ -55,6 +58,8 @@ const Searchable = () => {
     category5: [],
     category6: [],
     category7: [],
+    category8: [],
+    category9: [],
   });
   const [printValue, setPrintValue] = useState(0);
   const [options, setOptions] = useState({
@@ -65,6 +70,8 @@ const Searchable = () => {
     category5: [],
     category6: [],
     category7: [],
+    category8: [],
+    category9: [],
   })
 
 
@@ -75,6 +82,9 @@ const Searchable = () => {
     }
     else if(selectedCategory === "category1"||selectedCategory === "category2"||selectedCategory === "category6"){
       return option?.selectedItem?.toLowerCase().includes(searchQuery.toLowerCase())
+    }
+    else if(selectedCategory === "category8"||selectedCategory === "category9"){
+      return option?.title?.toLowerCase().includes(searchQuery.toLowerCase())
     }
     return option?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   }
@@ -98,7 +108,6 @@ const Searchable = () => {
         category3: res?.data
       }));
     })
-    fetchAllCarPackagesData().then(res => console.log("res of car packages is here -----> ", res))
     fetchAllCarPackagesData().then(res => {
       setOptions((prevOptions) => ({
         ...prevOptions,
@@ -122,7 +131,21 @@ const Searchable = () => {
         ...prevOptions,
         category6: res?.responseData,
       }));
-        console.log("res---> ",res)
+      
+    });
+    fetchBlogs("travel-guide").then((res) => {
+      setOptions((prevOptions) => ({
+        ...prevOptions,
+        category8: res?.data,
+      }));
+      
+    });
+    fetchBlogs("blog").then((res) => {
+      setOptions((prevOptions) => ({
+        ...prevOptions,
+        category9: res?.data,
+      }));
+      
     });
 
   }, [])
@@ -202,6 +225,8 @@ console.log("option",filteredOptions);
               <option value="category5">Section 5</option>
               <option value="category6">Section 6 (car promo)</option>
               <option value="category7">Popular Cities</option>
+              <option value="category8">Travel Guide</option>
+              <option value="category9">Blogs</option>
             </select>
           </div>
           <div>
@@ -259,6 +284,14 @@ console.log("option",filteredOptions);
                       : ""
                   }>
                     {option.category}
+                  </span>}
+                  {(selectedCategory === "category8"||selectedCategory === "category9" ) && <span className={
+                    selectedOptions[selectedCategory].length >= maxSelections &&
+                      !selectedOptions[selectedCategory].includes(option)
+                      ? "text-gray-400 cursor-not-allowed"
+                      : ""
+                  }>
+                    {option?.title}
                   </span>}
                 </label>
               ))

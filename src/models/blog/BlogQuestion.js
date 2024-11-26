@@ -1,4 +1,5 @@
 const { default: mongoose } = require("mongoose");
+import "./SubQuestions";
 const blogQuestionSchema=new mongoose.Schema({
   title:{
     type:String,

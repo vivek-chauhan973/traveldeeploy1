@@ -5,6 +5,7 @@ import City from "@/models/City";
 import PackageState from "@/models/package/PackageState";
 import CarPackageState from "@/models/car-package/package/PackageState";
 import CarPackage1 from "@/models/CarPackage";
+import BlogDetail from "@/models/blog/BlogDetail";
 
 const homeFooterApi=async (req,res)=>{
   const {category,selectedOptions}=req.body;
@@ -56,6 +57,12 @@ const homeFooterApi=async (req,res)=>{
         }
         if(item.category==="category7"){
           return City.findById(id).exec();
+        }
+        if(item.category==="category9"){
+          return BlogDetail.findById(id).exec();
+        }
+        if(item.category==="category8"){
+          return BlogDetail.findById(id).exec();
         }
       }));
     

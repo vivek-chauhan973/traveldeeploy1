@@ -1,80 +1,21 @@
 import Link from "next/link";
 import Pagination from "react-js-pagination";
 import Image from 'next/image'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSuitcase, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSuitcase, faUser } from "@fortawesome/free-solid-svg-icons";
+// import { useEffect, useState } from "react";
 
 const BlogPromoPackageList = ({blogs}) => {
+const router=useRouter();
 
-    const blogPromoPakcage = [
-        {
-            img: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0c/04/55/9b.jpg",
-            title: "Booking.com for Business: Best for full-service business travel platform",
-            description: `Business travel planning involves a multitude of moving parts, 
-                        which can swiftly become overwhelming. With Booking.com for Business, 
-                        you can take control of travel plans from inception to completion. 
-                        Use Booking’s all-in-one platform to reserve flights, car rentals, and accommodation without paying added fees. 
-                        It offers exclusive business rates for travellers and letting you earn loyalty points. `,
-            date: "04/10/24",
-        },
-        {
-            img: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0c/04/55/9b.jpg",
-            title: "Booking.com for Business: Best for full-service business travel platform",
-            description: `Business travel planning involves a multitude of moving parts, 
-                        which can swiftly become overwhelming. With Booking.com for Business, 
-                        you can take control of travel plans from inception to completion. 
-                        Use Booking’s all-in-one platform to reserve flights, car rentals, and accommodation without paying added fees. 
-                        It offers exclusive business rates for travellers and letting you earn loyalty points. `,
-            date: "04/10/24",
-        },
-        {
-            img: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0c/04/55/9b.jpg",
-            title: "Booking.com for Business: Best for full-service business travel platform",
-            description: `Business travel planning involves a multitude of moving parts, 
-                        which can swiftly become overwhelming. With Booking.com for Business, 
-                        you can take control of travel plans from inception to completion. 
-                        Use Booking’s all-in-one platform to reserve flights, car rentals, and accommodation without paying added fees. 
-                        It offers exclusive business rates for travellers and letting you earn loyalty points. `,
-            date: "04/10/24",
-        },
-        {
-            img: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0c/04/55/9b.jpg",
-            title: "Booking.com for Business: Best for full-service business travel platform",
-            description: `Business travel planning involves a multitude of moving parts, 
-                        which can swiftly become overwhelming. With Booking.com for Business, 
-                        you can take control of travel plans from inception to completion. 
-                        Use Booking’s all-in-one platform to reserve flights, car rentals, and accommodation without paying added fees. 
-                        It offers exclusive business rates for travellers and letting you earn loyalty points. `,
-            date: "04/10/24",
-        },
-        {
-            img: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0c/04/55/9b.jpg",
-            title: "Booking.com for Business: Best for full-service business travel platform",
-            description: `Business travel planning involves a multitude of moving parts, 
-                        which can swiftly become overwhelming. With Booking.com for Business, 
-                        you can take control of travel plans from inception to completion. 
-                        Use Booking’s all-in-one platform to reserve flights, car rentals, and accommodation without paying added fees. 
-                        It offers exclusive business rates for travellers and letting you earn loyalty points. `,
-            date: "04/10/24",
-        },
-        {
-            img: "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0c/04/55/9b.jpg",
-            title: "Booking.com for Business: Best for full-service business travel platform",
-            description: `Business travel planning involves a multitude of moving parts, 
-                        which can swiftly become overwhelming. With Booking.com for Business, 
-                        you can take control of travel plans from inception to completion. 
-                        Use Booking’s all-in-one platform to reserve flights, car rentals, and accommodation without paying added fees. 
-                        It offers exclusive business rates for travellers and letting you earn loyalty points. `,
-            date: "04/10/24",
-        },
-    ]
+// console.log(".............................................",router?.query?.post);
     return (
         <div>
             <div className="flex flex-wrap gap-6">
                 {blogs?.length > 0 && blogs?.map((items, i) => {
                     return (
-                        <div key={i} className="relative pb-5 mb-5 w-[250px] md:h-[450px]  rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
+                        <div key={i} className="relative pb-5 mb-5 w-[250px] md:h-[400px]  rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
                             <div className=" flex items-center h-[150px] w-full">
                                 <Image
                                     width={200}
@@ -90,8 +31,9 @@ const BlogPromoPackageList = ({blogs}) => {
                             </div>
                             <div className="h-[300px]">
                                 <div className="px-5 w-full">
-                                    <div className="mt-3">
+                                    <div className="mt-3 flex justify-between">
                                         <p className="text-sm">{ new Date(items?.updatedAt).toLocaleDateString()}</p>
+                                        <p className="text-sm">{items?.time} min</p>
                                     </div>
                                     <div className="my-4">
                                         <h5 className="block font-sans text-base leading-relaxed capitalize font-semibold antialiased text-black">
@@ -109,8 +51,8 @@ const BlogPromoPackageList = ({blogs}) => {
                                 </div>
                                 <div className="px-5">
                                     <Link
-                                        href=""
-                                        // href={"/car-rental/" + items.location.url + "/" + items.pageUrl}
+                                        // href=""
+                                        href={"/travel/" + router?.query?.post + "/" + items?.title?.split(" ")?.join("-")}
                                         className="mt-3 block w-full select-none rounded-lg bg-gradient-to-r from-orange-500 to-red-500 py-2.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
                                         type="button"
                                     >

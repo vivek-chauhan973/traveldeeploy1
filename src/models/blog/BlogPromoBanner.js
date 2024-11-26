@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import "./BlogPromo"
 const bannerSchema=new mongoose.Schema({
     title:{
         type:String,

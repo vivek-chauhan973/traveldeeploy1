@@ -96,6 +96,8 @@ import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
 import StateCard from "@/components/Home/Cards/StateCard";
 import Link from "next/link";
 import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
+import TravelGuideCarousel from "@/components/TravelGuideCarousel";
+import BlogsCarousel from "@/components/BlogsCarousel";
 const fetchAllSingleSction = async () => {
   const res = await fetch("/api/home/homefooter");
   return await res.json();
@@ -120,35 +122,45 @@ export default function Home() {
   const [category3, setCategory3] = useState([]);
   const [carPackages, setCarPackages] = useState([]);
   const [carCityPromos, setCarCityPromo] = useState([]);
+  const [travelGuidePackage,setTravelGuidePackage]=useState([]);
+  const [blogsPackages,setBlogsPackages]=useState([]);
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
   useEffect(() => {
     fetchAllMultiSction().then(res => {
       SetHomePackages(res?.data)
-      console.log("all section is here----> ", res?.data)
+      // console.log("all section is here----> ", res?.data)
     })
     fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
   }, []);
 
   useEffect(() => {
-    const data = homePackages?.filter(item => item.category === "category1");
+    const data = homePackages?.filter(item => item?.category === "category1");
     setStates(data?.[0]?.options || []);
-    const data1 = homePackages?.filter(item => item.category === "category5");
+    const data1 = homePackages?.filter(item => item?.category === "category5");
     setPackages(data1?.[0]?.options || []);
-    const data2 = homePackages?.filter(item => item.category === "category2");
-    const data4 = homePackages?.filter(item => item.category === "category4");
-    const data5 = homePackages?.filter(item => item.category === "category6");
+    const data2 = homePackages?.filter(item => item?.category === "category2");
+    const data4 = homePackages?.filter(item => item?.category === "category4");
+    const data5 = homePackages?.filter(item => item?.category === "category6");
+    const data6 = homePackages?.filter(item => item?.category === "category8");
+    const data7 = homePackages?.filter(item => item?.category === "category9");
+
     setCarPackages(data4?.[0]?.options || [])
     setCityPackages(data2?.[0]?.options || [])
     setCarCityPromo(data5?.[0]?.options || [])
+    setTravelGuidePackage(data6?.[0]?.options || [])
+    setBlogsPackages(data7?.[0]?.options || [])
+    
   }, [homePackages]);
+  console.log("travel guide section is here----> ", travelGuidePackage)
+  console.log("blogs section is here----> ", blogsPackages)
   useEffect(() => {
-    const data = homeSinglePackages?.filter(item => item.category === "category1");
+    const data = homeSinglePackages?.filter(item => item?.category === "category1");
     setCategory1(data);
-    const data1 = homeSinglePackages?.filter(item => item.category === "category5");
+    const data1 = homeSinglePackages?.filter(item => item?.category === "category5");
     setCategory2(data1);
-    const data2 = homeSinglePackages?.filter(item => item.category === "category2");
+    const data2 = homeSinglePackages?.filter(item => item?.category === "category2");
     setCategory3(data2)
   }, [homeSinglePackages]);
 
@@ -260,7 +272,7 @@ export default function Home() {
 
       {/* horizontal card */}
       <div className="">
-        {cityPackages.length > 0 &&
+        {cityPackages?.length > 0 &&
           <div className="container-wrapper text-center pb-2">
             <p className='md:text-[25px] text-xl font-medium mb-1'>
               Your Next Remarkable Adventure Awaits
@@ -271,6 +283,7 @@ export default function Home() {
         <div className="container-wrapper justify-center  flex flex-wrap">
           {cityPackages?.map((item, i) => (
             <HorizontalCard key={i} item={item} />
+            
           ))}
         </div>
       </div>
@@ -290,7 +303,7 @@ export default function Home() {
       </div>
       {/* Our Promise */}
       <div>
-        <Promises />
+        {/* <Promises /> */}
       </div>
       {/* Country card  */}
       <div>
@@ -304,11 +317,11 @@ export default function Home() {
       <div>
         <CarPackageCarousel carPackageData={carPackages} />
       </div>
-      <div className="w-full h-96 flex justify-center items-center text-2xl">
-        Travel Guide
+      <div >
+        <TravelGuideCarousel carPackageData={travelGuidePackage}/>
       </div>
-      <div className="w-full h-96 flex justify-center items-center text-2xl border-t">
-        Blog
+      <div >
+      <BlogsCarousel carPackageData={blogsPackages}/>
       </div>
       <div>
         <ReviewsCard />

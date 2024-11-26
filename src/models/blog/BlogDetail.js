@@ -3,6 +3,10 @@ import "../package/PackageCategory";
 import "./BlogQuestion";
 import "./BlogSeoDetail";
 import "./Table";
+import "./SubQuestions";
+import  "../State";
+import "../Country";
+import "../City";
 const BlogDetailSchema = new mongoose.Schema(
   {
     blogType: {
@@ -12,6 +16,7 @@ const BlogDetailSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      trim:true
     },
     filename: {
       type: String,
@@ -21,11 +26,30 @@ const BlogDetailSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    time: {
+      type: String,
+      required: true,
+    },
     contentsummary: {
       type: String,
     },
     videoPath: {
       type: String,
+      required: true,
+    },
+    location: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "City",
+      required: true,
+    },
+    country:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Country",
+      required: true,
+    },
+    state:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "State",
       required: true,
     },
     table: {
