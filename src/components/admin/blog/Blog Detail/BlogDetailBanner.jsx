@@ -46,6 +46,10 @@ const fetchCities = async (stateId) => {
       return [];
   }
 };
+const fetchWriterData = async () => {
+  const data = await fetch("/api/blog/blogwriter",{method:"GET"});
+  return await data.json();
+};
 
 export default function BlogDetailBanner({ setActiveTab, blogData }) {
   const [file, setFile] = useState(null);
@@ -65,6 +69,8 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
     const [cities, setCities] = useState();
     const [cityPopup, setCityPopup] = useState(false);
     const [selectTime,setSelectTime]=useState("");
+    const [allWriter,setAllWriter]=useState([])
+    const [writer,setWriter]=useState(null);
   const router = useRouter();
   useEffect(() => {
 
@@ -75,7 +81,11 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
     };
 
     fetchCountry();
+    fetchWriterData().then((res) => {
+      setAllWriter(res?.data || []);
+    });
 }, []);
+
 const handleSelectCountry1 = (value) => {
   const fetchState = async () => {
       const fetchedStates = await fetchStates(value);
@@ -133,6 +143,7 @@ const handleLocation1 = (location) => {
     setSelectedLocation(blogData?.location?._id);
     handleSelectCountry(blogData?.associateCountry?._id);
         handleSelectState(blogData?.associateState?._id);
+        setWriter(blogData?.writer?._id||null);
     if (!blogData) {
       setCityPopup(true);
     
@@ -214,6 +225,7 @@ const handleLocation1 = (location) => {
       formData.append("state", selectedState);
       formData.append("country", selectedCountry);
       formData.append("time", selectTime||blogData?.time);
+      formData.append("writer",writer);
     }
     // console.log("selectedCategories -------------> ",selectedCategories)
     try {
@@ -321,6 +333,27 @@ const handleLocation1 = (location) => {
                   />
                   {/* <span className="text-xs text-red-700 capitalize pl-5">{categoryValidate}</span> */}
                 </div>
+              </div>
+              <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
+                <label
+                  htmlFor="postWriter"
+                  className="font-semibold text-para md:text-sm"
+                >
+                  Select Writer :
+                </label>
+                <select
+                  id="postWriter"
+                  onChange={(e) => setWriter(e.target.value)}
+                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                  defaultValue={blogData?.writer?._id}
+                >
+                  {blogData ? (
+                    <option disabled >{blogData?.writer?.blogwriter}</option>
+                  ) : (
+                    <option >select writer </option>
+                  )}
+                  {allWriter?.map((item,i)=><option key={i} value={item?._id}>{item.blogwriter}</option>)}
+                </select>
               </div>
               <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
                 <label

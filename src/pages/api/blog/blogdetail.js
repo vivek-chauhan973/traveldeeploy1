@@ -42,7 +42,7 @@ const apiRoute = async (req, res) => {
         return res.status(500).json({ error: 'File upload failed' });
       }
 
-      const { title, description, blogType, category, contentsummary,location,country,state,time } = req.body;
+      const { title, description, blogType, category,writer, contentsummary,location,country,state,time } = req.body;
 
       // Convert category into an array of ObjectIds
       const categoryArray = category.split(',').map(id => new mongoose.Types.ObjectId(id.trim()));
@@ -51,6 +51,7 @@ const apiRoute = async (req, res) => {
         blogType,
         title,
         time,
+        writer,
         location,country,state,
         contentsummary,
         category: categoryArray,

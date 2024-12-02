@@ -1,24 +1,16 @@
 import Layout from "@/components/admin/Layout";
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCube,
   faArrowRightLong,
-  faEdit,
-  faCirclePlus,
   faTrash,
-  faCancel,
-  faSave,
-  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 
 const fetchCrouselData = async () => {
-  const data = await fetch("/api/cars/carhome/carCrouselStatic");
+  const data = await fetch("/api/blog/blogwriter",{method:"GET"});
   return await data.json();
 };
 
@@ -28,11 +20,6 @@ export default function BlogMaster() {
     title: "",
   });
   const [crouselData, setCrouselData] = useState([]);
-  const [carouselItems, setCarouselItems] = useState([]);
-  const [isEditing, setIsEditing] = useState(false); // To check if we are editing an existing item
-  const [editIndex, setEditIndex] = useState(null);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [uploadButtonEnabled, setUploadButtonEnabled] = useState(false);
 
   // Handler for title,desc,url field changes
   const handleFormChange = (e) => {
@@ -44,7 +31,7 @@ export default function BlogMaster() {
   };
   useEffect(() => {
     fetchCrouselData().then((res) => {
-      console.log("crousel response is here ----> ", res);
+      // console.log("crousel response is here ----> ", res);
       setCrouselData(res?.data || []);
     });
   }, []);
@@ -63,28 +50,25 @@ export default function BlogMaster() {
     if (formData.image && formData.title) {
       const form = new FormData();
       form.append("file", formData.image);
-      form.append("title", formData.title);
+      form.append("blogwriter", formData.title);
 
-      const data = await fetch("/api/cars/carhome/carCrouselStatic", {
+      const data = await fetch("/api/blog/blogwriter", {
         method: "POST",
         body: form,
       });
 
-      if (isEditing) {
-        // Update existing item
-        const updatedItems = [...carouselItems];
-        updatedItems[editIndex] = formData;
-        setCarouselItems(updatedItems);
-        setIsEditing(false);
-        setEditIndex(null);
-        alert("Item updated successfully!");
-      } else {
-        // Add new item
-        setCarouselItems((prevItems) => [...prevItems, formData]);
-        alert("Item added successfully!");
+      if(data?.ok){
+        alert("user is added successfully");
+        resetForm();
+        fetchCrouselData().then((res) => {
+          setCrouselData(res?.data || []);
+        });
+      }
+      else{
+        alert("something went wrong")
       }
       // Reset form
-      resetForm();
+     
     }
   };
 
@@ -93,36 +77,22 @@ export default function BlogMaster() {
       image: null,
       title: "",
     });
-    setUploadButtonEnabled(false);
-    setIsEditing(false);
-    setEditIndex(null);
   };
 
-  const handleEdit = async (index) => {
-    const itemToEdit = carouselItems[index];
-    const res = await fetch(`/api/home/edit-crousel?id=${index}`);
-    const data = await res.json();
-    console.log("res ----- > ", data?.data);
-    if (res?.ok) {
-      setFormData((prevData) => ({
-        ...prevData,
-        image: data?.data?.path, // Store the image file in the formData state
-      }));
-    }
-    setFormData(itemToEdit); // Set the form data with the selected item
-    setIsEditing(true); // Enable editing mode
-    setEditIndex(index); // Track the index of the item being edited
-    setUploadButtonEnabled(true);
-  };
+
 
   const handleDelete = async (index) => {
-    const updatedItems = crouselData.filter((item) => item?._id !== index); // Filter out the item to delete
-    setCrouselData(updatedItems);
-    const data = await fetch(`/api/cars/carhome/carCrouselStatic?id=${index}`, {
+    const data = await fetch(`/api/blog/blogwriter?id=${index}`, {
       method: "DELETE",
     });
-    if (data) {
-      alert("Item deleted successfully!");
+    if (data?.ok) {
+      alert("User deleted successfully!");
+      fetchCrouselData().then((res) => {
+        setCrouselData(res?.data || []);
+      });
+    }
+    else{
+      alert("User can not be deleted due to occuring some error")
     }
   };
 
@@ -162,13 +132,7 @@ export default function BlogMaster() {
                           width="220"
                           height="120"
                         />
-                        <div className="mt-2">
-                          <p>Title</p>
-                          <input
-                            className="border px-2 py-1 rounded w-full md:w-36"
-                            type="text"
-                          />
-                        </div>
+                     
                         <div className="mt-2">
                           <p>Alt</p>
                           <input
@@ -195,14 +159,14 @@ export default function BlogMaster() {
                       className="p-2 mb-4 w-full border rounded-md h-10 px-2 focus:border-primary outline-none"
                       required
                     />
-                    {!isFormSubmitted && (
+                    
                       <button
                         onClick={handleSubmitForm}
                         className="mt-4 bg-navyblack text-white px-4 py-2 rounded md:w-auto w-full"
                       >
-                        {isEditing ? "Update" : "Upload"}
+                         "Upload"
                       </button>
-                    )}
+                   
                   </div>
                 </div>
               </div>
@@ -216,7 +180,7 @@ export default function BlogMaster() {
                     Image
                   </th>
                   <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">
-                    Title
+                    Writer
                   </th>
                   <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">
                     Edit & Remove
@@ -236,14 +200,9 @@ export default function BlogMaster() {
                       />
                     </td>
                     <td className="py-4 px-2 border-x capitalize  text-center text-wrap">
-                      {item.title}r
+                      {item.blogwriter}
                     </td>
                     <td className="flex justify-center items-center gap-2 pt-7">
-                      <FontAwesomeIcon
-                        icon={faEdit}
-                        className="font1 cursor-pointer"
-                        onClick={() => handleEdit(item?._id)}
-                      />
                       <FontAwesomeIcon
                         icon={faTrash}
                         className="font1 cursor-pointer"

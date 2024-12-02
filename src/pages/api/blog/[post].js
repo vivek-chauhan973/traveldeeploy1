@@ -40,7 +40,7 @@ const apiRoute = async (req, res) => {
         return res.status(500).json({ error: 'File upload failed' });
       }
 
-      const { title, description, blogType, category, contentsummary, location, country, state,time } = req.body;
+      const { title, description, blogType,writer, category, contentsummary, location, country, state,time } = req.body;
       const categoryArray = category.split(',').map(id => new mongoose.Types.ObjectId(id.trim()));
       const fileData = req.file && {
         blogType,
@@ -49,6 +49,7 @@ const apiRoute = async (req, res) => {
         location,
         country,
         state,
+        writer,
         contentsummary,
         description,
         category: categoryArray,
@@ -86,7 +87,7 @@ const apiRoute = async (req, res) => {
   } else if (req.method === 'GET') {
     // Handle GET request
     try {
-      const files = await BlogDetail.findOne({ _id: post }).populate("blogSeo blogQuestions table location state country");
+      const files = await BlogDetail.findOne({ _id: post }).populate("blogSeo blogQuestions table location state country writer");
       return res.status(200).json({ data: files });
     } catch (error) {
       console.error('Error fetching files:', error);

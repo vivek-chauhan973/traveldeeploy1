@@ -7,6 +7,7 @@ import "./SubQuestions";
 import  "../State";
 import "../Country";
 import "../City";
+import "./BlogWriter";
 const BlogDetailSchema = new mongoose.Schema(
   {
     blogType: {
@@ -55,6 +56,10 @@ const BlogDetailSchema = new mongoose.Schema(
     table: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "BlogTable",
+    },
+    writer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BlogWriter",
     },
     category: [
       {
