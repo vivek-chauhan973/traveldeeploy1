@@ -6,8 +6,7 @@ import '../../app/globals.css';
 import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import BottomLink from '@/components/ItineraryDetail/BottomLink';
-import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
+import { PromoBanner} from '@/components/Skeleton/Package/promo';
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
@@ -28,32 +27,21 @@ const fetchCategoryPackages = async (locationId) => {
   const data = await response.json();
   return data;
 };
-
-
 const SpacilityTour=()=> {
   const router = useRouter();
+  console.log("..........router ",router)
   const state = router.query.spacilityTour?.replace("-tour-packages", "");
-//   console.log("state is here :: ", state);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [maxDay, setMaxDay] = useState(50);
-  const [minDay, setMinDay] = useState(1);
-  const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
   const [packages,setPackages]=useState([]);
-  // console.log("selected location ",selectedLocation)
-
   useEffect(()=>{
     if(selectedLocation){
     fetchCategoryPackages(selectedLocation?._id).then(res=>{setPackages(res?.packages);console.log("packages---->",res?.packages)});
     }
   },[selectedLocation])
-  useEffect(() => {
-    setTourDuration([minDay, maxDay]);
-  }, [maxDay, minDay]);
   useEffect(() => {
     const fetchPackages = async () => {
       try {
@@ -103,9 +91,6 @@ const SpacilityTour=()=> {
     }
   }, [selectedLocation]);
 
-  const handleApplyFilter = (priceRange) => {
-    setSelectedPriceRange(priceRange);
-  };
 
   if (loading) {
     return <PromoBanner />;
@@ -122,12 +107,12 @@ const SpacilityTour=()=> {
         <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
           <div className='relative'>
             <div className='hidden xl:block'>
-              <SearchPageFilter onApplyFilter={handleApplyFilter} setTourDuration={setTourDuration} tourDuration={tourDuration} setMaxDay={setMaxDay} setMinDay={setMinDay} setClearAll={setClearAll} />
+              <SearchPageFilter  setClearAll={setClearAll} />
             </div>
           </div>
           <div>
             <div>
-              {selectedPriceRange && <SearchPagePackageList locationId={packages} priceRange={packages} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll} />}
+              <SearchPagePackageList locationId={packages}  clearAll={clearAll}  />
             </div>
           </div>
         </div>

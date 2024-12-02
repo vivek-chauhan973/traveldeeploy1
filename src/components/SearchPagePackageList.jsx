@@ -4,54 +4,29 @@ import { useRouter } from "next/router";
 import Pagination from "react-js-pagination";
 import Image from 'next/image'
 import { useAppContext } from "./admin/context/Package/AddGuest";
-import Category from "@/pages/admin/package/category";
-
 const filteredData = async (id, cat, min, max, minDay, maxDay) => {
   const response = await fetch(`/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}&minDay=${minDay}&maxDay=${maxDay}`)
   const data = await response.json();
   // console.log("filter data is here --->:: ", data);
   return data;
 }
-const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
+const SearchPagePackageList = ({ locationId }) => {
   const router = useRouter();
-  const pathnames = router.asPath.split("/").filter((x) => x);
+  // const pathnames = router.asPath.split("/").filter((x) => x);
   const [packages, setPackages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
-  const [filterPackage, setFilterPackage] = useState(null);
-  const [filterData1, setFilterData1] = useState([]);
   const { filterApi,setHighLightedPackage } = useAppContext();
-  useEffect(() => {
-    filteredData(filterApi?.locationId, filterApi?.catagoryId, filterApi?.minPrice, filterApi?.maxPrice, filterApi?.duration?.[0], filterApi?.duration?.[1]).then(res => setFilterPackage(res?.packages))
-
-  }, [filterApi])
 
   useEffect(() => {
     setPackages(locationId);
-  }, [locationId, currentPage, itemsPerPage, clearAll]);
+  }, [locationId, currentPage, itemsPerPage]);
   useEffect(() => {
-    setFilterData1(packages)
     // console.log("packages 12334678",packages)
     setHighLightedPackage(packages||[]);
   }, [packages])
-  useEffect(() => {
-    if (filterPackage?.length > 0) {
-      if (clearAll === false) {
-        setFilterData1(filterPackage || [])
 
-      }
-
-    }
-
-  }, [filterData1, locationId, currentPage, filterApi, filterPackage])
-  if(packages?.length > 0){
-    for (let item of packages) {
-      if (maxDay < item?.days) {
-        setMaxDay(item?.days)
-      }
-    }
-  }
-
+ 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     const windowHeight = window.innerHeight;
@@ -60,18 +35,13 @@ const SearchPagePackageList = ({ locationId, setMaxDay, maxDay, clearAll }) => {
   };
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filterData1?.slice(indexOfFirstItem, indexOfLastItem);
-  const totalItems = filterData1?.length;
+  const currentItems = packages?.slice(indexOfFirstItem, indexOfLastItem);
+  const totalItems = packages?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  // Function to calculate price details
-  console.log("packageData", locationId);
-  
   return (
     <div>
       {currentItems?.map((packageData, i) => {
-        // console.log("packageData",packageData?.icons?.iconData)
         return (
-
           <div key={i} className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
             <div className="md:pl-5 flex items-center">
               <Image

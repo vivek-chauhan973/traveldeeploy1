@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import SearchPageTopSeoContent from '@/components/SearchPageTopSeoContent';
 import SearchHeaderWpr from '@/components/SearchHeaderWpr';
 import '../../app/globals.css';
 import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import BottomLink from '@/components/ItineraryDetail/BottomLink';
-import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
+import { PromoBanner } from '@/components/Skeleton/Package/promo';
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import mongoose from 'mongoose';
+import { useRouter } from 'next/router';
 const fetchPromoManagementData = async () => {
   const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
   const response = await fetch(`/api/public/package-state/spacialitypromo?id=${objectId}`);
@@ -24,21 +23,16 @@ const fetchAllPackages=async ()=>{
    return await res.json();
 }
 export default function India() {
-  const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
+  const router=useRouter();
+  console.log("..........router ",router)
   const [promoData, setPromoData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [maxDay, setMaxDay] = useState(50);
-  const [minDay, setMinDay] = useState(1);
-  const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
   const [packages,setPackages]=useState([]);
   const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
 const selectedLocation={};
 selectedLocation._id=objectId;
-  useEffect(() => {
-    setTourDuration([minDay, maxDay]);
-  }, [maxDay, minDay]);
 
   useEffect(() => {
       fetchPromoManagementData().then(res => setPromoData(res?.data || {}));
@@ -61,21 +55,16 @@ selectedLocation._id=objectId;
   }, []);
 
   useEffect(()=>{
-    fetchAllPackages().then(res=>{console.log("res----> ",res?.packages);setPackages(res?.packages||[])});
+    fetchAllPackages().then(res=>{setPackages(res?.packages||[])});
   },[promoData])
 
-  const handleApplyFilter = (priceRange) => {
-    setSelectedPriceRange(priceRange);
-  };
+
 useEffect(()=>{
   setLoading(false)
 },[promoData])
   if (loading) {
     return <PromoBanner />;
   }
-// console.log("packages is here --> ",packages)
-console.log("router---> ",promoData)
-
   return (
     <AppProvider>
       <div className='bg-slate-100'>
@@ -86,12 +75,12 @@ console.log("router---> ",promoData)
         <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
           <div className='relative'>
             <div className='hidden xl:block'>
-              <SearchPageFilter onApplyFilter={handleApplyFilter} setTourDuration={setTourDuration} tourDuration={tourDuration} setMaxDay={setMaxDay} setMinDay={setMinDay} setClearAll={setClearAll} />
+              <SearchPageFilter   setClearAll={setClearAll} />
             </div>
           </div>
           <div>
             <div>
-              {selectedPriceRange && <SearchPagePackageList locationId={packages} priceRange={selectedPriceRange} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll} />}
+              <SearchPagePackageList locationId={packages}  clearAll={clearAll}  />
             </div>
           </div>
         </div>

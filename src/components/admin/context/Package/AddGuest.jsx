@@ -79,17 +79,8 @@ useEffect(()=>{
   const [toglePopup, setToglePopup] = useState(true);
   const [pricingManagement, setPricingManagement] = useState(null);
   const [locationId, setLocationId] = useState(null);
-  const [catagoryId, setCatagoryId] = useState(null);
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(9900);
-  const [duration,setDuration]=useState([]);
-  const filterApi = {
-    locationId,
-    catagoryId,
-    minPrice,
-    maxPrice,
-    duration
-  };
+ 
+ 
   const [price2,setPrice2]=useState(0);
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
@@ -117,8 +108,15 @@ useEffect(()=>{
   //here are all logics and state related car-rental package
   const [carbookdisableandenable,setCarbookdisableandenable]=useState(false);
   const [carPrice,setCarPrice]=useState(0);
-  // console.log("carbookdisableandenable---------> ",carbookdisableandenable);
-  // console.log("carPrice---------> ",carPrice);
+
+  // packages filter data
+  const [filteredApi,setFilteredDataApi]=useState({});
+
+  const filterApi=(days,price,category)=>{
+    const data={days,price,category};
+    setFilteredDataApi(data);
+  }
+// console.log("....123....",filteredApi)
 
   const contextFun = {
     initialData,
@@ -139,23 +137,19 @@ useEffect(()=>{
     setDepartureSectionData,
     departureSectionData,
     setLocationId,
-    setCatagoryId,
-    setMinPrice,
-    setMaxPrice,
     price2,setPrice2,
-    filterApi,
     fixedDepDate,setFixedDepDate,
     fixedDepCity,setFixedDepCity,
     setFixedDepDate1,
     setFixedDepCity1,
     handleCleckOnDepartureFixed,
     fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable,
-    setDuration,
     setSubmitButtonOfPricingCalculation,
     submitButtonOfPricingCalculation,
     fixedDepartureProceedButton,setFixedDepartureProceedButton,
     contactAdmin, setContactAdimn,
     showPopup, setShowPopup,
+    filterApi,
     showPopup1, setShowPopup1,
     fixedDeparturePopupPrice,setFixedDeparturePopupPrice,
     groupDeparturePerson,setGroupDeparturePerson,

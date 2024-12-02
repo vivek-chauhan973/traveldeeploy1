@@ -6,7 +6,6 @@ import '../../app/globals.css';
 import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import BottomLink from '@/components/ItineraryDetail/BottomLink';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
@@ -33,14 +32,11 @@ const fetchPackages = async (locationId) => {
 
 export default function SearchPage() {
   const router = useRouter();
+  console.log("..........router ",router)
   const state = router.query.state?.replace("-tour-packages", "");
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100 });
   const [promoData, setPromoData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [maxDay, setMaxDay] = useState(50);
-  const [minDay, setMinDay] = useState(1);
-  const [tourDuration, setTourDuration] = useState([20, 36]);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
   const [packages,setPackages]=useState([]);
@@ -69,9 +65,6 @@ useEffect(()=>{
 },[selectedLocation])
 
 
-  useEffect(() => {
-    setTourDuration([minDay, maxDay]);
-  }, [maxDay, minDay]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,14 +95,11 @@ useEffect(()=>{
     }
   }, [selectedLocation]);
 
-  const handleApplyFilter = (priceRange) => {
-    setSelectedPriceRange(priceRange);
-  };
 
   if (loading) {
     return <PromoBanner />;
   }
-console.log("packages is here --> ",priorityPackage)
+// console.log("packages is here --> ",priorityPackage)
 
   return (
     <AppProvider>
@@ -121,12 +111,12 @@ console.log("packages is here --> ",priorityPackage)
         <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
           <div className='relative'>
             <div className='hidden xl:block'>
-              <SearchPageFilter onApplyFilter={handleApplyFilter} setTourDuration={setTourDuration} tourDuration={tourDuration} setMaxDay={setMaxDay} setMinDay={setMinDay} setClearAll={setClearAll} />
+              <SearchPageFilter  setClearAll={setClearAll} />
             </div>
           </div>
           <div>
             <div>
-              {selectedPriceRange && <SearchPagePackageList locationId={packages} priceRange={selectedPriceRange} setMaxDay={setMaxDay} maxDay={maxDay} clearAll={clearAll} setClearAll={setClearAll} />}
+            <SearchPagePackageList locationId={packages} />
             </div>
           </div>
         </div>
