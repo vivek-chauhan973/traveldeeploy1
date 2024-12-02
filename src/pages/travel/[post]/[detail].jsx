@@ -289,10 +289,10 @@ const Detail = () => {
                     {item?.blogSubQuestion?.questions?.length > 0 && (
                       <ol className="text-para font-medium ml-10">
                         {item?.blogSubQuestion?.questions?.map((item1, k) => (
-                          <li className="hover:cursor-pointer hover:text-primary">
+                          <li  key={i} className="hover:cursor-pointer hover:text-primary">
                             <ScrollLink
                               to={`${item?._id}st${k}`}
-                              key={i}
+                             
                               spy={true}
                               smooth={true}
                               offset={-100}
