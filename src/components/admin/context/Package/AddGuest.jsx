@@ -40,7 +40,13 @@ const [showPopup1, setShowPopup1] = useState(false);
 
   const router = useRouter();
 
-
+  // console.log("..........router ",router)
+  // if(router?.query?.hasOwnProperty("state")){
+  //   console.log("this is hi");
+  // }
+  // if(router?.query?.hasOwnProperty("spacilityTour")){
+  //   console.log("this is spacilityTour");
+  // }
   const initialData = {
     adult:0,
     child: 0,

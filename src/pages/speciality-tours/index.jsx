@@ -24,7 +24,7 @@ const fetchAllPackages=async ()=>{
 }
 export default function India() {
   const router=useRouter();
-  console.log("..........router ",router)
+  // console.log("..........router ",router)
   const [promoData, setPromoData] = useState({});
   const [loading, setLoading] = useState(true);
   const [clearAll, setClearAll] = useState(false);

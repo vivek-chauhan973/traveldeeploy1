@@ -60,7 +60,7 @@ export default function India() {
 useEffect(()=>{
   fetchPackages(selectedLocation?._id).then(res=>{setPackages(res)});
 },[selectedLocation])
-console.log("..........router ",router)
+// console.log("..........router ",router)
   useEffect(() => {
     const fetchData = async () => {
       try {

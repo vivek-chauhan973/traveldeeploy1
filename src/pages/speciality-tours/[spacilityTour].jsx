@@ -29,7 +29,7 @@ const fetchCategoryPackages = async (locationId) => {
 };
 const SpacilityTour=()=> {
   const router = useRouter();
-  console.log("..........router ",router)
+  // console.log("..........router ",router)
   const state = router.query.spacilityTour?.replace("-tour-packages", "");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [promoData, setPromoData] = useState({});

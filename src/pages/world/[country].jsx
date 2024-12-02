@@ -7,7 +7,7 @@ import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 const SearchPage = () => {
     const router = useRouter();
     const country = router.query.country || '';
-console.log("..........router ",router)
+// console.log("..........router ",router)
     return (
         <AppProvider>
         <div className='mt-2'>

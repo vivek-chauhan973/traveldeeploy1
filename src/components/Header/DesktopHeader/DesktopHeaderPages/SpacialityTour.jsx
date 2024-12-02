@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 const fetchCatagories = async () => {
@@ -15,10 +16,10 @@ const SpacialityTour = () => {
   }, [])
   const [popularCatogories, setPopularCatagories] = useState([]);
   useEffect(() => {
-    fetchPopularCities().then(res => { ; setPopularCatagories(res?.data || []) });
+    fetchPopularCities().then(res => {setPopularCatagories(res?.data || []) });
   }, [])
   const data = popularCatogories?.filter(item => item.category === "category6");
-  console.log("Replace by Famous Tourist Attraction",data);
+  console.log("Replace by Famous Tourist Attraction",data?.[0]?.options);
   
   return (
     <div className="flex flex-col min-w-[800px] h-full rounded-b-lg bg-gray-100 mt-3" >
@@ -39,12 +40,12 @@ const SpacialityTour = () => {
         <h4 className='font-bold w-full text-md text-[#29499A] uppercase mb-2'>Replace by Famous Tourist Attraction</h4>
         <div className=" grid grid-cols-4 gap-x-10" >
             {data?.[0]?.options.map((item, i) =>
-              <a
+              <Link
                 href={`/india/` + item?.url + "-tour-packages"}
                 key={i} className='text-para font-semibold mb-2'
               >
-                {item?.name}
-              </a>
+                {item?.selectedItem}
+              </Link>
             )}
         </div>
       </div>

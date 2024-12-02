@@ -32,7 +32,7 @@ const fetchPackages = async (locationId) => {
 
 export default function SearchPage() {
   const router = useRouter();
-  console.log("..........router ",router)
+  // console.log("..........router ",router)
   const state = router.query.state?.replace("-tour-packages", "");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [promoData, setPromoData] = useState({});
