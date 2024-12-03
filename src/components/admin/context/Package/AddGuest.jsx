@@ -16,42 +16,163 @@ const fetchCarPackage = async (packageUrl) => {
   return data;
 };
 
+// <-------all filter api is here---->
+
+const filteredData = async (id, price, days, category) => {
+  const response = await fetch(
+    `/api/public/filter-india-packages?id=${id}&price=${price}&days=${days}&category=${category}`
+  );
+  const data = await response.json();
+  // console.log("filter data is here --->:: ", data);
+  return data;
+};
+const filteredDataCityOrState = async (id, price, days, category) => {
+  const response = await fetch(
+    `/api/public/filter-city-state-packages?id=${id}&price=${price}&days=${days}&category=${category}`
+  );
+  const data = await response.json();
+  // console.log("filter data is here --->:: ", data);
+  return data;
+};
+const filteredDataofSpecilityCategories= async (price, days, category) => {
+  const response = await fetch(
+    `/api/public/specility-filter?price=${price}&days=${days}&category=${category}`
+  );
+  const data = await response.json();
+  // console.log("filter data is here --->:: ", data);
+  return data;
+};
+const filteredDataofCategoriesWise= async (id,price, days, category) => {
+  const response = await fetch(
+    `/api/public/filter-category-wise?id=${id}&price=${price}&days=${days}&category=${category}`
+  );
+  const data = await response.json();
+  // console.log("filter data is here --->:: ", data);
+  return data;
+};
+
 export const AppProvider = ({ children }) => {
   const [closeBtn, setCloseBtn] = useState(false);
   const [addPackage, setAddPackage] = useState({});
   const [guestPrice, setGuestPrice] = useState(0);
-  const [fixedDepCity,setFixedDepCity]=useState("");
-  const [fixedDepDate,setFixedDepDate]=useState("");
-  const [fixedDepCity1,setFixedDepCity1]=useState("");
-  const [fixedDepDate1,setFixedDepDate1]=useState("");
+  const [fixedDepCity, setFixedDepCity] = useState("");
+  const [fixedDepDate, setFixedDepDate] = useState("");
+  const [fixedDepCity1, setFixedDepCity1] = useState("");
+  const [fixedDepDate1, setFixedDepDate1] = useState("");
   const [contactAdmin, setContactAdimn] = useState(false);
-  const [submitButtonOfPricingCalculation,setSubmitButtonOfPricingCalculation]=useState(false);
-  const [fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable]=useState(false);
-  const [highLightedPackage,setHighLightedPackage]=useState([]);
-// set final price to show fixed departure popup
+  const [
+    submitButtonOfPricingCalculation,
+    setSubmitButtonOfPricingCalculation,
+  ] = useState(false);
+  const [
+    fixedDepartureButtonEnaibleAndDisable,
+    setFixedDepartureButtonEnaibleAndDisable,
+  ] = useState(false);
+  const [highLightedPackage, setHighLightedPackage] = useState([]);
+  // set final price to show fixed departure popup
 
-const [fixedDeparturePopupPrice,setFixedDeparturePopupPrice]=useState(0);
+  const [fixedDeparturePopupPrice, setFixedDeparturePopupPrice] = useState(0);
 
-// handle popup sate of booking and addguest
+  // handle popup sate of booking and addguest
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup1, setShowPopup1] = useState(false);
 
+  //all filter logics here---->
+  const [filteredApi, setFilteredDataApi] = useState({});
 
-const [showPopup, setShowPopup] = useState(false);
-const [showPopup1, setShowPopup1] = useState(false);
+  const filterApi = (days, price, category) => {
+    const data = { days, price, category };
+    setFilteredDataApi(data);
+  };
+
+  const [selectedId, setSelectedId] = useState(null);
+
+  const [filteredPackages, setFilteredPackages] = useState([]);
 
   const router = useRouter();
-
-  // console.log("..........router ",router)
-  // if(router?.query?.hasOwnProperty("state")){
+  console.log("selected id is here ---> ",selectedId)
+  console.log("..........router ",router)
+  // if(!router?.query?.hasOwnProperty("state")&&router?.query?.hasOwnProperty("india")){
   //   console.log("this is hi");
   // }
   // if(router?.query?.hasOwnProperty("spacilityTour")){
   //   console.log("this is spacilityTour");
   // }
+
+  useEffect(() => {
+    if (
+      !router?.query?.hasOwnProperty("state") &&
+      router?.query?.hasOwnProperty("india")
+    ) {
+      if (selectedId) {
+        filteredData(
+          selectedId,
+          filteredApi?.price,
+          filteredApi?.days,
+          filteredApi?.category
+        ).then((res) => {
+          // console.log("filted data is here-->1--", res);
+          if (res?.message === "not found") {
+            setFilteredPackages(["not found"]);
+          } else {
+            setFilteredPackages(res?.packages || []);
+          }
+        });
+      }
+    }
+    else if(router?.query?.hasOwnProperty("state")){
+      if (selectedId) {
+        filteredDataCityOrState(
+          selectedId,
+          filteredApi?.price,
+          filteredApi?.days,
+          filteredApi?.category
+        ).then((res) => {
+          // console.log("filteredDataCityOrState data is here-->1--", res);
+          if (res?.message === "not found") {
+            setFilteredPackages(["not found"]);
+          } else {
+            setFilteredPackages(res?.packages || []);
+          }
+        });
+      }
+    }
+    else if(router?.pathname==="/speciality-tours"){
+      filteredDataofSpecilityCategories(
+        filteredApi?.price,
+        filteredApi?.days,
+        filteredApi?.category
+      ).then((res) => {
+        // console.log("filteredDataCityOrState data is here-->1--", res);
+        if (res?.message === "not found") {
+          setFilteredPackages(["not found"]);
+        } else {
+          setFilteredPackages(res?.packages || []);
+        }
+      });
+    }
+    else if(router?.query?.hasOwnProperty("spacilityTour")){
+      filteredDataofCategoriesWise(
+        selectedId,
+        filteredApi?.price,
+        filteredApi?.days,
+        filteredApi?.category
+      ).then((res) => {
+        console.log("filteredDataCityOrState data is here-->1--", res);
+        if (res?.message === "not found") {
+          setFilteredPackages(["not found"]);
+        } else {
+          setFilteredPackages(res?.packages || []);
+        }
+      });
+    }
+  }, [selectedId, filteredApi]);
+
   const initialData = {
-    adult:0,
+    adult: 0,
     child: 0,
     infant: 0,
-    infant1:0,
+    infant1: 0,
     singleRoom: 0,
     twinRoom: 0,
     tripleRoom: 0,
@@ -76,53 +197,51 @@ const [showPopup1, setShowPopup1] = useState(false);
     fetchData();
   }, [packageUrl]);
 
-// Car retal package detail here
-const [addCarPackage, setAddCarPackage] = useState({});
-useEffect(()=>{
-  fetchCarPackage(router?.query?.detail?.replace("-tour-package","")).then(res=> {setAddCarPackage(res||{})})
-},[router?.query?.detail?.replace("-tour-package","")])
+  // Car retal package detail here
+  const [addCarPackage, setAddCarPackage] = useState({});
+  useEffect(() => {
+    fetchCarPackage(router?.query?.detail?.replace("-tour-package", "")).then(
+      (res) => {
+        setAddCarPackage(res || {});
+      }
+    );
+  }, [router?.query?.detail?.replace("-tour-package", "")]);
 
   const [toglePopup, setToglePopup] = useState(true);
   const [pricingManagement, setPricingManagement] = useState(null);
   const [locationId, setLocationId] = useState(null);
- 
- 
-  const [price2,setPrice2]=useState(0);
+
+  const [price2, setPrice2] = useState(0);
   const [showAddguest, setShowAddguest] = useState(null);
   const [departureSectionData, setDepartureSectionData] = useState(null);
-  const [fixedDepartureData1,setFixedDepartureData1]=useState(null);
-  const [fixedDepartureProceedButton,setFixedDepartureProceedButton]=useState(false);
+  const [fixedDepartureData1, setFixedDepartureData1] = useState(null);
+  const [fixedDepartureProceedButton, setFixedDepartureProceedButton] =
+    useState(false);
   const finalDataOfBookingByUsingMethodAddGuest = {
     departureCity: showAddguest,
     itemDateAndDay: departureSectionData,
     twinSharingPrice: addPackage?.prices?.twinSharingRoom,
     totalCalculatedPrize: guestPrice,
-    allDetail: inputData
+    allDetail: inputData,
   };
-  const handleCleckOnDepartureFixed=()=>{
-
-  const finalDataOfBookingByUsingMethodFixedDeparture={
-    depardate:departureSectionData?.Date,
-    name:"Pradhumn",
-    packageprice:guestPrice||addPackage?.price,
-    packagename:addPackage?.name,
-    departureCity: showAddguest,
-  }
-  setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture)
-  }
-  const [groupDeparturePerson,setGroupDeparturePerson]=useState(0);
+  const handleCleckOnDepartureFixed = () => {
+    const finalDataOfBookingByUsingMethodFixedDeparture = {
+      depardate: departureSectionData?.Date,
+      name: "Pradhumn",
+      packageprice: guestPrice || addPackage?.price,
+      packagename: addPackage?.name,
+      departureCity: showAddguest,
+    };
+    setFixedDepartureData1(finalDataOfBookingByUsingMethodFixedDeparture);
+  };
+  const [groupDeparturePerson, setGroupDeparturePerson] = useState(0);
   //here are all logics and state related car-rental package
-  const [carbookdisableandenable,setCarbookdisableandenable]=useState(false);
-  const [carPrice,setCarPrice]=useState(0);
+  const [carbookdisableandenable, setCarbookdisableandenable] = useState(false);
+  const [carPrice, setCarPrice] = useState(0);
 
   // packages filter data
-  const [filteredApi,setFilteredDataApi]=useState({});
 
-  const filterApi=(days,price,category)=>{
-    const data={days,price,category};
-    setFilteredDataApi(data);
-  }
-// console.log("....123....",filteredApi)
+  // console.log("....123....",filteredApi)
 
   const contextFun = {
     initialData,
@@ -140,27 +259,44 @@ useEffect(()=>{
     pricingManagement,
     setShowAddguest,
     showAddguest,
+    filteredPackages,
+    setSelectedId,
     setDepartureSectionData,
     departureSectionData,
     setLocationId,
-    price2,setPrice2,
-    fixedDepDate,setFixedDepDate,
-    fixedDepCity,setFixedDepCity,
+    price2,
+    setPrice2,
+    fixedDepDate,
+    setFixedDepDate,
+    fixedDepCity,
+    setFixedDepCity,
     setFixedDepDate1,
     setFixedDepCity1,
     handleCleckOnDepartureFixed,
-    fixedDepartureButtonEnaibleAndDisable,setFixedDepartureButtonEnaibleAndDisable,
+    fixedDepartureButtonEnaibleAndDisable,
+    setFixedDepartureButtonEnaibleAndDisable,
     setSubmitButtonOfPricingCalculation,
     submitButtonOfPricingCalculation,
-    fixedDepartureProceedButton,setFixedDepartureProceedButton,
-    contactAdmin, setContactAdimn,
-    showPopup, setShowPopup,
+    fixedDepartureProceedButton,
+    setFixedDepartureProceedButton,
+    contactAdmin,
+    setContactAdimn,
+    showPopup,
+    setShowPopup,
     filterApi,
-    showPopup1, setShowPopup1,
-    fixedDeparturePopupPrice,setFixedDeparturePopupPrice,
-    groupDeparturePerson,setGroupDeparturePerson,
-    highLightedPackage,setHighLightedPackage,
-    addCarPackage,carbookdisableandenable,setCarbookdisableandenable,carPrice,setCarPrice
+    showPopup1,
+    setShowPopup1,
+    fixedDeparturePopupPrice,
+    setFixedDeparturePopupPrice,
+    groupDeparturePerson,
+    setGroupDeparturePerson,
+    highLightedPackage,
+    setHighLightedPackage,
+    addCarPackage,
+    carbookdisableandenable,
+    setCarbookdisableandenable,
+    carPrice,
+    setCarPrice,
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>
@@ -170,4 +306,3 @@ useEffect(()=>{
 export const useAppContext = () => {
   return useContext(AppContext);
 };
- 

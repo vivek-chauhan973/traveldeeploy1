@@ -14,12 +14,13 @@ const stripHtmlTags = (html) => {
 };
 
 const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
-  const { setLocationId } = useAppContext();
+  const { setLocationId,setSelectedId } = useAppContext();
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(true);
 
   useEffect(() => {
     setLocationId(state?._id);
+    setSelectedId(state?._id||null)
   }, [state?._id, setLocationId]);
 
   const handleToggle = () => {

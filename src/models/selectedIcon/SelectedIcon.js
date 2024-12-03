@@ -13,7 +13,8 @@ const miniSchema=new mongoose.Schema({
 const IconSchema=new mongoose.Schema({
     iconData:[miniSchema],
     package:{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Package",
         required: true
     }
 },{timestamps:true})

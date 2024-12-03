@@ -4,19 +4,14 @@ import { useRouter } from "next/router";
 import Pagination from "react-js-pagination";
 import Image from 'next/image'
 import { useAppContext } from "./admin/context/Package/AddGuest";
-const filteredData = async (id, cat, min, max, minDay, maxDay) => {
-  const response = await fetch(`/api/public/filter-packages?locationId=${id}&categoryId=${cat}&priceMin=${min}&priceMax=${max}&minDay=${minDay}&maxDay=${maxDay}`)
-  const data = await response.json();
-  // console.log("filter data is here --->:: ", data);
-  return data;
-}
+
 const SearchPagePackageList = ({ locationId }) => {
   const router = useRouter();
   // const pathnames = router.asPath.split("/").filter((x) => x);
   const [packages, setPackages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
-  const { filterApi,setHighLightedPackage } = useAppContext();
+  const {setHighLightedPackage,filteredPackages } = useAppContext();
 
   useEffect(() => {
     setPackages(locationId);
@@ -25,6 +20,12 @@ const SearchPagePackageList = ({ locationId }) => {
     // console.log("packages 12334678",packages)
     setHighLightedPackage(packages||[]);
   }, [packages])
+
+  useEffect(()=>{
+    if(filteredPackages?.length>0){
+      setPackages(filteredPackages);
+    }
+  },[filteredPackages])
 
  
   const handlePageChange = (pageNumber) => {
@@ -38,8 +39,13 @@ const SearchPagePackageList = ({ locationId }) => {
   const currentItems = packages?.slice(indexOfFirstItem, indexOfLastItem);
   const totalItems = packages?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  if(packages?.[0]==="not found"){
+    return <p className="font-semibold text-2xl mt-10 text-center">No Packages Available According To filter</p>
+  }
   return (
     <div>
+      
       {currentItems?.map((packageData, i) => {
         return (
           <div key={i} className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
@@ -181,7 +187,7 @@ const SearchPagePackageList = ({ locationId }) => {
                   <p className="text-[10px] text-neutral-600">Visa</p>
                 </div> */}
 
-                {packageData?.icons?.iconData?.map((item,i)=><div key={i} className="flex flex-col items-center">
+                {(packageData?.icons?.iconData||packageData?.iconsPopulated?.[0]?.iconData)?.map((item,i)=><div key={i} className="flex flex-col items-center">
                   <Image width={150} height={150}
                     className="w-8"
                     src={item?.icon||"https://www.svgrepo.com/show/13776/building.svg"}
