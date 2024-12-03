@@ -251,10 +251,10 @@ export default function PromoManage() {
                                     }}
                                 >
                                     <option value="">Select One</option>
-                                    <option value="category">Category</option>
+                                    {/* <option value="category">Category</option> */}
                                     <option value="city">City</option>
-                                    <option value="country">Country</option>
-                                    <option value="state">State</option> 
+                                    {/* <option value="country">Country</option>
+                                    <option value="state">State</option>  */}
                                 </select>
                                 {catoryorstate && (
                                     <select

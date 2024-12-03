@@ -90,14 +90,7 @@ export const AppProvider = ({ children }) => {
   const [filteredPackages, setFilteredPackages] = useState([]);
 
   const router = useRouter();
-  console.log("selected id is here ---> ",selectedId)
-  console.log("..........router ",router)
-  // if(!router?.query?.hasOwnProperty("state")&&router?.query?.hasOwnProperty("india")){
-  //   console.log("this is hi");
-  // }
-  // if(router?.query?.hasOwnProperty("spacilityTour")){
-  //   console.log("this is spacilityTour");
-  // }
+ 
 
   useEffect(() => {
     if (
@@ -158,7 +151,7 @@ export const AppProvider = ({ children }) => {
         filteredApi?.days,
         filteredApi?.category
       ).then((res) => {
-        console.log("filteredDataCityOrState data is here-->1--", res);
+        // console.log("filteredDataCityOrState data is here-->1--", res);
         if (res?.message === "not found") {
           setFilteredPackages(["not found"]);
         } else {

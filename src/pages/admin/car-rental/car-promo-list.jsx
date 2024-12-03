@@ -34,8 +34,6 @@ const YourComponent = () => {
   const [selectType, setSelectType] = useState("all");
  
 
-  // code for promo list
-
   const fetchPromoList=async ()=>{
     const response=await fetch(`/api/public/package-state/carpromo/fetchpromocat?selectType=${selectType}`);
     const data=await response.json();
@@ -57,20 +55,40 @@ const YourComponent = () => {
         const response = await fetch(`/api/public/package-state/carpromo/${id}`, {
           method: 'DELETE',   
       });
+      if(response?.ok){
+        alert("promo successfully deleted");
+      }
       } catch (error) {
         
         console.log("data can't deleted,something went wrong")
       }
       
-      const newPackages = itineraries.filter((item) => item._id !== id);
+      const newPackages = itineraries?.filter((item) => item._id !== id);
       setItineraries(newPackages);
     }
     
   };
 
+
+  useEffect(()=>{
+const searchedData=itineraries?.filter(item=>item?.selectedItem?.includes(searchQuery))
+
+if(searchQuery){
+  setItineraries(searchedData||[])
+}
+else{
+  fetchPromoList().then(res=>{
+    setItineraries(res?.responseData||[])});
+}
+
+  },[searchQuery])
+ 
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -107,7 +125,7 @@ const YourComponent = () => {
                     className=" text-teal-700"
                   />
                 </div>
-                <div className="flex gap-3">
+                {/* <div className="flex gap-3">
                   <p className="">Select type: </p>
                   <select className="ml-4 h-7 xl:w-44 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                   onChange={(e)=>setSelectType(e.target.value)}
@@ -117,7 +135,7 @@ const YourComponent = () => {
                     <option value="state">state wise</option>
                     <option value="country">country wise</option>
                   </select>
-                </div>
+                </div> */}
               </div>
               <label className="relative block">
                 <span className="sr-only">Search</span>
@@ -146,9 +164,9 @@ const YourComponent = () => {
                   <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">
                     Type Name
                   </th>
-                  <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">
+                  {/* <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">
                     Status
-                  </th>
+                  </th> */}
                   <th className="py-2 bg-slate-600 text-white border text-[15px] pl-2">
                     Edit & Remove
                   </th>
@@ -179,7 +197,7 @@ const YourComponent = () => {
                       {itinerary.selectedItem}
                     </td>
                     
-                    <td className="py-4 pl-4 border-x">{0}</td>
+                    {/* <td className="py-4 pl-4 border-x">{0}</td> */}
                     <td className="justify-center flex gap-2 items-center my-auto py-3">
                     <a href={"./promo/"+itinerary.relatedId+"?type=edit"}>
                     <FaEdit className=" cursor-pointer hover:text-blue-500 text-xl mt-1"

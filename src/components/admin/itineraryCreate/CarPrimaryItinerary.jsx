@@ -3,7 +3,6 @@ import "../../../app/globals.css";
 import MultipleSelectChip from "./Select";
 import MultipleSelectCheckmarks from "./CheckMarkSelect";
 import { useRouter } from "next/router";
-import { useAppContext } from "../context/Package/AddGuest";
 const fetchCountries = async () => {
     try {
         const res = await fetch('/api/location?type=country', { method: 'GET' });
@@ -71,7 +70,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
     }, []);
   
   useEffect(()=>{
-    fetchCars().then(res=>{console.log("res all cars is here ---> ",res?.data);setAllCars(res?.data||[])})
+    fetchCars().then(res=>{setAllCars(res?.data||[])})
   },[])
 
     const [file, setFile] = useState();
@@ -113,7 +112,7 @@ const CarPrimaryItinerary= ({setActiveTab, itinerary,setBasicDot })=> {
     const [packageCategories, setPackageCategories] = useState();
     const fetchCategories = async () => {
         try {
-            const categoriesList = await fetch('/api/cars/package-setting/category/get-categories');
+            const categoriesList = await fetch('/api/package-setting/category/get-categories');
             const categories = await categoriesList.json();
             setPackageCategories(categories.data);
         } catch (err) {
