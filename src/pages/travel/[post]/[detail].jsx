@@ -183,7 +183,7 @@ const Detail = () => {
     }
   }, [detail]);
 
-  console.log("blogpost response is here -----> ", detailData);
+  console.log("blogpost response is here -----> ", detailData?.table);
 
   return (
     <div>
@@ -206,7 +206,7 @@ const Detail = () => {
               <div className="flex justify-between w-full text-xs text-gray-500">
                 {post === "blog" && (
                   <div className=" flex gap-3">
-                    <div >
+                    <div>
                       <Image
                         src={detailData?.writer?.path}
                         height={70}
@@ -335,6 +335,22 @@ const Detail = () => {
                 tips to help you get started.
               </p>
             </div>
+            <div class="overflow-x-auto border rounded-t-md mt-7 ">
+              <table class="min-w-full table-auto border">
+                <thead>
+                  <tr class="bg-gray-100">
+                    {detailData?.table?.tableColumn?.map((item,i)=><th key={i} class="px-4 py-2 text-left">{item}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {detailData?.table?.tableData?.map((item,i)=><tr key={i} class="border-b">
+                  {detailData?.table?.tableColumn?.map((item1,k)=><td key={k} class="px-4 py-2">{item[item1]}</td>)} 
+                  </tr>)}
+                  
+                </tbody>
+              </table>
+            </div>
+
             {detailData?.blogQuestions?.map((item, i) => (
               <div className="pt-7" id={`${item?._id}st`} key={i}>
                 <h3 className="text-[30px] font-medium mb-2">{item?.title}</h3>
