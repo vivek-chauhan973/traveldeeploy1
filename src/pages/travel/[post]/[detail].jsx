@@ -164,6 +164,7 @@ import { Link as ScrollLink } from "react-scroll";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRouter } from "next/router";
 import BlogSuggestedCardPackages from "@/components/Blog/BlogSuggestedCardPackages";
+import Navigation from "@/components/Blog/BlogNavigation";
 const fetchPost = async (id) => {
   const data = await fetch(`/api/blog/posttitle?title=${id}`, {
     method: "GET",
@@ -189,6 +190,7 @@ const Detail = () => {
     <div>
       <DesktopHeader />
       <Breadcrumbs />
+      <Navigation/>
       {/* Blog Hero Section */}
       <div className="bg-slate-100 md:py-16 py-8">
         <div className="container-wrapper">
