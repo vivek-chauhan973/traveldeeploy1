@@ -171,26 +171,45 @@ const fetchPost = async (id) => {
   });
   return await data.json();
 };
+
+const fetchNavLinkPackages=async (type,location)=>{
+  const data = await fetch(`/api/blog/navlink-travel-guide?blogType=${type}&location=${location}`);
+  return await data.json();
+}
 const Detail = () => {
   const router = useRouter();
   const [detailData, setDetailData] = useState({});
   const { post, detail } = router.query;
+  const [navLinkData,setNavLinkData]=useState([]);
 
   useEffect(() => {
     if (detail) {
       fetchPost(detail).then((res) => {
         setDetailData(res?.data || {});
       });
+      
     }
+  
   }, [detail]);
 
-  console.log("blogpost response is here -----> ", detailData?.table);
+  useEffect(()=>{
+    if(detailData){
+      fetchNavLinkPackages(detailData?.blogType,detailData?.location).then(res=>{
+        // console.log("nav link packages is here ----> ",res?.data)
+        setNavLinkData(res?.data||[])
+      })
+    }
+  },[detailData])
+
+
+
+  // console.log("blogpost response is here -----> ", detailData);
 
   return (
     <div>
       <DesktopHeader />
       <Breadcrumbs />
-      <Navigation/>
+      {detailData?.blogType==="travel-guide"&&<Navigation navLinkData={navLinkData} detailData={detailData}/>}
       {/* Blog Hero Section */}
       <div className="bg-slate-100 md:py-16 py-8">
         <div className="container-wrapper">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link"; // Import Link from Next.js
 import { useRouter } from "next/router"; // Import useRouter hook to track active link
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,11 +6,18 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import DFlyoutLink from "./DropDown";
 import DropDownContent from "./DropDownContent";
 
-const Navigation = () => {
+const Navigation = ({navLinkData,detailData}) => {
   const router = useRouter(); // Get the current route from the router
-
   // Helper function to check if the current route matches the link
   const [tab, setTab] = useState("");
+
+  useEffect(()=>{
+    if(navLinkData?.length>0){
+      const data=navLinkData?.filter(item=>item?._id===detailData?._id);
+      setTab(`/travel/${router?.query?.post}/${data?.[0]?.title?.split(" ")?.join("-")}`)
+    }
+   
+  },[navLinkData,detailData,router])
 
   const isActive = (path) => {
     return router.pathname === path;
@@ -20,172 +27,55 @@ const Navigation = () => {
     <div className="bg-white px-10  py-4 ">
       <nav className="flex space-x-4  overflow-x-auto ove xl:hidden">
         <div className="flex space-x-4   text-lg mb-4 xl:mb-0">
-          <Link href="/haridwar">
+         {navLinkData?.length>0&&navLinkData?.map((items,i)=> <Link key={i} href={"/travel/" + router?.query?.post + "/" + items?.title?.split(" ")?.join("-")}>
             <p
-              onClick={() => setTab("/haridwar")}
+              onClick={() => setTab(`/travel/${router?.query?.post}/${items?.title?.split(" ")?.join("-")}`)}
               className={`relative px-3 group text-nowrap text-gray-500 hover:text-blue-500 ${
-                isActive("/haridwar")
+                isActive(`/travel/${router?.query?.post}/${items?.title?.split(" ")?.join("-")}`)
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : ""
               }`}
             >
-              Haridwar
+              {items?.title}
               <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              {tab === "/haridwar" && (
+              {tab === `/travel/${router?.query?.post}/${items?.title?.split(" ")?.join("-")}` && (
                 <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 text-blue-500 "></span>
               )}
             </p>
-          </Link>
-          <Link href="/places-to-visit">
-            <p
-              onClick={() => setTab("/places-to-visit")}
-              className={`relative px-3 group text-nowrap text-gray-500 hover:text-blue-500 ${
-                isActive("/places-to-visit")
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : ""
-              }`}
-            >
-              Places To Visit
-              <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              {tab === "/places-to-visit" && (
-                <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500  text-blue-500 "></span>
-              )}
-            </p>
-          </Link>
-          <Link href="/packages">
-            <p
-              onClick={() => setTab("/packages")}
-              className={`relative group px-3 text-nowrap text-gray-500 hover:text-blue-500 ${
-                isActive("/packages")
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : ""
-              }`}
-            >
-              Packages
-              <span
-                className={`absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}
-              ></span>
-              {tab === "/packages" && (
-                <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 text-blue-500  "></span>
-              )}
-            </p>
-          </Link>
+          </Link>)}
+        
         </div>
-        <div className="flex space-x-4 text-lg">
-          <Link href="/haridwar">
-            <p
-              onClick={() => setTab("/haridwar")}
-              className={`relative px-3 group text-nowrap text-gray-500 hover:text-blue-500 ${
-                isActive("/haridwar")
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : ""
-              }`}
-            >
-              Haridwar
-              <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              {tab === "/haridwar" && (
-                <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 text-blue-500 "></span>
-              )}
-            </p>
-          </Link>
-          <Link href="/places-to-visit">
-            <p
-              onClick={() => setTab("/places-to-visit")}
-              className={`relative px-3 group text-gray-500 text-nowrap hover:text-blue-500 ${
-                isActive("/places-to-visit")
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : ""
-              }`}
-            >
-              Places To Visit
-              <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              {tab === "/places-to-visit" && (
-                <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500  text-blue-500 "></span>
-              )}
-            </p>
-          </Link>
-          <Link href="/packages">
-            <p
-              onClick={() => setTab("/packages")}
-              className={`relative group px-3 text-gray-500 text-nowrap hover:text-blue-500 ${
-                isActive("/packages")
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : ""
-              }`}
-            >
-              Packages
-              <span
-                className={`absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}
-              ></span>
-              {tab === "/packages" && (
-                <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 text-blue-500  "></span>
-              )}
-            </p>
-          </Link>
-        </div>
+        
       </nav>
       <nav className=" space-x-4 hidden xl:flex">
         <div className="flex space-x-4   text-lg mb-4 xl:mb-0">
-          <Link href="/haridwar">
+        {navLinkData?.length>0&&navLinkData?.map((items,i)=> <Link key={i} href={"/travel/" + router?.query?.post + "/" + items?.title?.split(" ")?.join("-")}>
             <p
-              onClick={() => setTab("/haridwar")}
+              onClick={() => setTab(`/travel/${router?.query?.post}/${items?.title?.split(" ")?.join("-")}`)}
               className={`relative px-3 group text-nowrap text-gray-500 hover:text-blue-500 ${
-                isActive("/haridwar")
+                isActive(`/travel/${router?.query?.post}/${items?.title?.split(" ")?.join("-")}`)
                   ? "text-blue-500 border-b-2 border-blue-500"
                   : ""
               }`}
             >
-              Haridwar
+              {items?.title}
               <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              {tab === "/haridwar" && (
+              {tab === `/travel/${router?.query?.post}/${items?.title?.split(" ")?.join("-")}` && (
                 <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 text-blue-500 "></span>
               )}
             </p>
-          </Link>
-          <Link href="/places-to-visit">
-            <p
-              onClick={() => setTab("/places-to-visit")}
-              className={`relative px-3 group text-nowrap text-gray-500 hover:text-blue-500 ${
-                isActive("/places-to-visit")
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : ""
-              }`}
-            >
-              Places To Visit
-              <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              {tab === "/places-to-visit" && (
-                <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500  text-blue-500 "></span>
-              )}
-            </p>
-          </Link>
-          <Link href="/packages">
-            <p
-              onClick={() => setTab("/packages")}
-              className={`relative group px-3 text-nowrap text-gray-500 hover:text-blue-500 ${
-                isActive("/packages")
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : ""
-              }`}
-            >
-              Packages
-              <span
-                className={`absolute left-0 -bottom-2 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}
-              ></span>
-              {tab === "/packages" && (
-                <span className="absolute left-0 -bottom-2 w-full h-1 bg-blue-500 text-blue-500  "></span>
-              )}
-            </p>
-          </Link>
+          </Link>)}
+        
         </div>
         
-        <div className="hidden xl:block ">
+        {navLinkData?.length>7&&<div className="hidden xl:block ">
           <DFlyoutLink FlyoutContent={DropDownContent}>
             <div className="flex gap-3 items-center">
               <span>more</span>
               <FontAwesomeIcon className="mt-2" icon={faChevronDown} />
             </div>
           </DFlyoutLink>
-        </div>
+        </div>}
       </nav>
     </div>
   );
