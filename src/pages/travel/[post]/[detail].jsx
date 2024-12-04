@@ -160,7 +160,6 @@ import "../../../app/globals.css";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import Image from "next/image";
 import Footer from "@/components/Footer";
-import SuggestedBlog from "@/components/Blog/Blog-Deatil/SuggestedBlog";
 import { Link as ScrollLink } from "react-scroll";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRouter } from "next/router";
@@ -173,7 +172,6 @@ const fetchPost = async (id) => {
 };
 const Detail = () => {
   const router = useRouter();
-  // console.log("..........................................",router)
   const [detailData, setDetailData] = useState({});
   const { post, detail } = router.query;
 
@@ -184,7 +182,9 @@ const Detail = () => {
       });
     }
   }, [detail]);
-  console.log("blogpost response is here -----> ", detailData?.blogQuestions);
+
+  console.log("blogpost response is here -----> ", detailData);
+
   return (
     <div>
       <DesktopHeader />
@@ -205,9 +205,22 @@ const Detail = () => {
             <div className="p-5 flex flex-col justify-between items-start w-full h-80 md:h-96 lg:h-[24rem] overflow-hidden rounded-lg shadow-lg bg-white">
               <div className="flex justify-between w-full text-xs text-gray-500">
                 {post === "blog" && (
-                  <div>
-                    <h2 className=" font-bold">Pradhumn</h2>
-                    <p className="pl-4">writer</p>
+                  <div className=" flex gap-3">
+                    <div >
+                      <Image
+                        src={detailData?.writer?.path}
+                        height={70}
+                        width={70}
+                        className="rounded-full w-[65px] h-[70px]"
+                        alt="Writer's image"
+                      />
+                    </div>
+                    <div>
+                      <h2 className=" font-bold">
+                        {detailData?.writer?.blogwriter}
+                      </h2>
+                      <p className="pl-4">writer</p>
+                    </div>
                   </div>
                 )}
                 {post === "travel-guide" && (
@@ -246,7 +259,6 @@ const Detail = () => {
                     {item?.category}
                   </button>
                 ))}
-
               </div>
             </div>
             <div className="relative w-full h-80 md:h-96 lg:h-[24rem] overflow-hidden py-10 md:block hidden">
@@ -289,10 +301,12 @@ const Detail = () => {
                     {item?.blogSubQuestion?.questions?.length > 0 && (
                       <ol className="text-para font-medium ml-10">
                         {item?.blogSubQuestion?.questions?.map((item1, k) => (
-                          <li  key={i} className="hover:cursor-pointer hover:text-primary">
+                          <li
+                            key={i}
+                            className="hover:cursor-pointer hover:text-primary"
+                          >
                             <ScrollLink
                               to={`${item?._id}st${k}`}
-                             
                               spy={true}
                               smooth={true}
                               offset={-100}
@@ -306,7 +320,6 @@ const Detail = () => {
                     )}
                   </ScrollLink>
                 ))}
-
               </div>
             </div>
           </div>
@@ -330,12 +343,13 @@ const Detail = () => {
                     dangerouslySetInnerHTML={{ __html: item?.information }}
                   />
                 </p>
-                
+
                 {item?.blogSubQuestion?.questions?.length > 0 &&
                   item?.blogSubQuestion?.questions?.map((item1, k) => (
                     <div className="pt-7" id={`${item?._id}st${k}`} key={i}>
                       <h3 className="text-[30px] font-medium mb-2">
-                       {k+1}{"."} {" "} {item1?.title}
+                        {k + 1}
+                        {"."} {item1?.title}
                       </h3>
                       <p className="text-base leading-relaxed">
                         <div
@@ -348,7 +362,6 @@ const Detail = () => {
                   ))}
               </div>
             ))}
-           
           </div>
         </div>
       </div>

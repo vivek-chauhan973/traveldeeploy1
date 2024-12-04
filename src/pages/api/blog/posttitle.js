@@ -16,7 +16,7 @@ const apiRoute = async (req, res) => {
 
  
       const blogPost = await BlogDetail.findOne({ title: formattedTitle })
-        .populate("blogSeo category") 
+        .populate("blogSeo category writer table") 
         .populate({
           path: "blogQuestions", 
           populate: {
