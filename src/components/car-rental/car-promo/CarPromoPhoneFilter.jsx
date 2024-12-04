@@ -3,10 +3,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { useState, useEffect } from "react";
+import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 const MAX_PRICE = 50000;
 const MIN_PRICE = 0;
-const MAX_DAYS = 30;
+const MAX_DAYS = 50;
 const MIN_DAYS = 1;
 
 const priceMarks = [
@@ -14,23 +15,11 @@ const priceMarks = [
   { value: MAX_PRICE, label: "" },
 ];
 
-// Helper function for aria label
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-const fetchFilteredData = async (locationId, priceRange, days, category) => {
-  const data = await fetch(
-    `/api/cars/public/filter-packages?locationId=${locationId}&price=${priceRange}&days=${days}&category=${category}`
-  );
-  return await data.json();
-};
-
 // Fetch package categories
 const fetchCategories = async () => {
   try {
     const categoriesList = await fetch(
-      "/api/cars/package-setting/category/get-categories"
+      "/api/package-setting/category/get-categories"
     );
     const categories = await categoriesList.json();
     console.log("Categories fetched:", categories); // Log the fetched categories
@@ -41,37 +30,48 @@ const fetchCategories = async () => {
   }
 };
 
-const CarPromoPhoneFilter = ({ cityId }) => {
+const CarPromoPhoneFilter = ({handleCloseModal}) => {
   const [priceRange, setPriceRange] = useState([MIN_PRICE, MAX_PRICE]);
   const [durationRange, setDurationRange] = useState([MIN_DAYS, MAX_DAYS]);
   const [packageCategory, setPackageCategory] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const { setCarFilteredDataApi } = useAppContext();
+  const [selectedPriceRange, setSelectedPriceRange] = useState(false); // Track price range selection
+  const [selectedDurationRange, setSelectedDurationRange] = useState(false); // Track duration range selection
 
   useEffect(() => {
     fetchCategories().then((res) => {
-      console.log("Categories loaded into state:", res?.data); // Check the loaded data
       setPackageCategory(res?.data || []);
     });
   }, []);
 
+  const data = { priceRange, durationRange, selectedCategories };
   useEffect(() => {
-    const data = { priceRange, durationRange, selectedCategories };
-    fetchFilteredData(
-      cityId,
-      data?.priceRange,
-      data?.durationRange,
-      data?.selectedCategories
-    ).then((res) => console.log("Filtered data:", res));
-  }, [cityId, priceRange, durationRange, selectedCategories]);
+    setCarFilteredDataApi(data);
+  }, [priceRange, durationRange, selectedCategories]);
 
   // Handlers for price range buttons
   const handlePriceButtonClick = (min, max) => {
-    setPriceRange([min, max]);
+    if (selectedPriceRange && priceRange[0] === min && priceRange[1] === max) {
+      // Deselect if same range is clicked again
+      setPriceRange([MIN_PRICE, MAX_PRICE]);
+      setSelectedPriceRange(false);
+    } else {
+      setPriceRange([min, max]);
+      setSelectedPriceRange(true);
+    }
   };
 
   // Handlers for duration range buttons
   const handleDurationButtonClick = (min, max) => {
-    setDurationRange([min, max]);
+    if (selectedDurationRange && durationRange[0] === min && durationRange[1] === max) {
+      // Deselect if same range is clicked again
+      setDurationRange([MIN_DAYS, MAX_DAYS]);
+      setSelectedDurationRange(false);
+    } else {
+      setDurationRange([min, max]);
+      setSelectedDurationRange(true);
+    }
   };
 
   // Handler for category checkbox change
@@ -83,6 +83,17 @@ const CarPromoPhoneFilter = ({ cityId }) => {
           : [...prevCategories, categoryId] // Add if not selected
     );
   };
+  const handleClearALL = () => {
+    setDurationRange([MIN_DAYS, MAX_DAYS]);
+    setPriceRange([MIN_PRICE, MAX_PRICE]);
+    setSelectedCategories([]);
+    setSelectedPriceRange(null);
+    setSelectedDurationRange(null);
+  };
+
+  const handleFilter=()=>{
+    handleCloseModal();
+  }
 
   return (
     <div>
@@ -93,13 +104,13 @@ const CarPromoPhoneFilter = ({ cityId }) => {
             <h3 className="md:text-[16px] text-[14px] font-medium">
               Package Prices
             </h3>
-            <p className="text-[12px] underline text-blue-800 cursor-pointer">
+            <p onClick={handleClearALL} className="text-[12px] underline text-blue-800 cursor-pointer">
               Clear All
             </p>
           </div>
           <Box>
             <Slider
-              className="w-full"
+              className={`w-full`} // Highlight the selected range
               marks={priceMarks}
               step={100}
               value={priceRange}
@@ -131,13 +142,13 @@ const CarPromoPhoneFilter = ({ cityId }) => {
           <div className="md:text-para text-sm font-light">
             <div className="flex md:gap-3 gap-1 my-3 md:text-sm text-xs">
               <button
-                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${priceRange[0] === 5000 && priceRange[1] === 10000 ? "bg-blue-100" : ""}`}
                 onClick={() => handlePriceButtonClick(5000, 10000)}
               >
                 ₹5,000 - ₹10,000
               </button>
               <button
-                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${priceRange[0] === 10000 && priceRange[1] === 20000 ? "bg-blue-100" : ""}`}
                 onClick={() => handlePriceButtonClick(10000, 20000)}
               >
                 ₹10,000 - ₹20,000
@@ -145,13 +156,13 @@ const CarPromoPhoneFilter = ({ cityId }) => {
             </div>
             <div className="flex md:gap-3 gap-1 md:text-sm text-xs">
               <button
-                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${priceRange[0] === 20000 && priceRange[1] === 40000 ? "bg-blue-100" : ""}`}
                 onClick={() => handlePriceButtonClick(20000, 40000)}
               >
                 ₹20,000 - ₹40,000
               </button>
               <button
-                className="px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-1 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${priceRange[0] === 40000 && priceRange[1] === MAX_PRICE ? "bg-blue-100" : ""}`}
                 onClick={() => handlePriceButtonClick(40000, MAX_PRICE)}
               >
                 ₹40,000 & above
@@ -167,6 +178,7 @@ const CarPromoPhoneFilter = ({ cityId }) => {
           </h3>
           <Box sx={{ width: "100%" }}>
             <Slider
+              className={`w-full `} // Highlight the selected range
               getAriaLabel={() => "Tour duration range"}
               value={durationRange}
               valueLabelDisplay="auto"
@@ -187,13 +199,13 @@ const CarPromoPhoneFilter = ({ cityId }) => {
           <div className="md:text-para text-sm font-light">
             <div className="flex gap-3 my-3 md:text-sm text-xs">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${durationRange[0] === 1 && durationRange[1] === 3 ? "bg-blue-100" : ""}`}
                 onClick={() => handleDurationButtonClick(1, 3)}
               >
                 1 - 3 days
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${durationRange[0] === 3 && durationRange[1] === 8 ? "bg-blue-100" : ""}`}
                 onClick={() => handleDurationButtonClick(3, 8)}
               >
                 3 - 8 days
@@ -201,13 +213,13 @@ const CarPromoPhoneFilter = ({ cityId }) => {
             </div>
             <div className="flex gap-3 md:text-sm text-xs">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${durationRange[0] === 8 && durationRange[1] === 15 ? "bg-blue-100" : ""}`}
                 onClick={() => handleDurationButtonClick(8, 15)}
               >
                 8 - 15 days
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${durationRange[0] === 15 && durationRange[1] === MAX_DAYS ? "bg-blue-100" : ""}`}
                 onClick={() => handleDurationButtonClick(15, MAX_DAYS)}
               >
                 15 & above
@@ -241,7 +253,7 @@ const CarPromoPhoneFilter = ({ cityId }) => {
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="bg-black text-white px-4 py-1.5 text-xs rounded-md mt-5">
+          <button onClick={handleFilter} className="bg-black text-white px-4 py-1.5 text-xs rounded-md mt-5">
             Apply Filters
           </button>
         </div>

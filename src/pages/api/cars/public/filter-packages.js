@@ -1,45 +1,73 @@
-import mongoose from "mongoose";
 import CarPackage1 from "@/models/CarPackage";
-
+import mongoose from "mongoose";
 const packagePublicFilter = async (req, res) => {
-    const { price, locationId, days, category } = req.query;
-
-    // Initialize the filter object
-    const filter = {};
-
-    // Add `locationId` filter if it’s provided
-    const days1=days.split(",")
-    const price1=price.split(",")
-    const category1 = category 
-    ? category.split(",").map(id =>new mongoose.Types.ObjectId(id))
-    : null;
-
-    console.log("days is here as -------> ",days1)
-    console.log("price1 is here as -------> ",Number(price1?.[0]))
-
-    console.log("category1 is here as -------> ",category1?.length)
-
-    
-
-    try {
-        let data = await CarPackage1.find({location:locationId});
-        if(Number(price1?.[0])>0 && category1?.length>0){
-            data=await CarPackage1.find({$and:[{location:locationId},{category:{$in:category1}}]});
-        }
-        if(Number(price1?.[0])>0 && Number(price1?.[1])>0){
-            data=await CarPackage1.find({$and:[{location:locationId},{price:{$gte:Number(price1?.[0]),$lte:Number(price1?.[1])}}]});
-        }
-        if(Number(days1?.[0])>0 && Number(days1?.[1])>0){
-            data=await CarPackage1.find({$and:[{location:locationId},{days:{$gte:Number(days1?.[0]),$lte:Number(days1?.[1])}}]});
-        }
-        if(Number(price1?.[0])>0 && Number(price1?.[1])>0 &&Number(days1?.[0])>0 && Number(days1?.[1])>0 && category1?.length>0){
-            data=await CarPackage1.find({$and:[{location:locationId},{days:{$gte:Number(price1?.[0]),$lte:Number(price1?.[1])}},{days:{$gte:Number(days1?.[0]),$lte:Number(days1?.[1])}},{category:{$in:category1}}]});
-        }
-        return res.status(200).json({ message: "everything is ok", data });
-    } catch (error) {
-        console.error('Error handling API request:', error);
-        return res.status(500).json({ message: error.message });
+  try {
+    const { id, price, days, category } = req.query;
+    if (!id) {
+      return res.status(400).json({ message: "Invalid ID format" });
     }
+    const pipeline=[]
+   
+      if (id) {
+        pipeline.push({
+          $match: {
+            location: new mongoose.Types.ObjectId(id),
+          },
+        });
+      }
+    
+    if (price) {
+        const priceRange = price.split(',').map(Number);
+        if (priceRange[0] !== 0 || priceRange[1] !== 50000) {
+            if (priceRange.length === 2) {
+                pipeline.push({
+                    $match: {
+                        price: { $gte: priceRange[0], $lte: priceRange[1] }
+                    }
+                });
+            } else {
+                return res.status(400).json({ message: 'Invalid price range format' });
+            }
+        }
+    }
+    if (days) {
+        const daysRange = days.split(',').map(Number); // Assuming days is in format "min,max"
+        if (daysRange[0] !== 1 || daysRange[1] !== 50) {
+            if (daysRange.length === 2) {
+                pipeline.push({
+                    $match: {
+                        days: { $gte: daysRange[0], $lte: daysRange[1] }
+                    }
+                });
+            } else {
+                return res.status(400).json({ message: 'Invalid days range format' });
+            }
+        }
+    }
+
+    const addMatchCondition = (field, valueArray) => {
+        if (valueArray?.length > 0 && valueArray?.[0] !== '') {
+            pipeline.push({
+                $match: {
+                    [field]: { $in: valueArray }
+                }
+            });
+        }
+    };
+
+    const categoryArray = category ? category.split(",").map(c => new mongoose.Types.ObjectId(c)) : [];
+
+    addMatchCondition("category", categoryArray);
+  
+    const packages = await CarPackage1.aggregate(pipeline).exec();
+    if(packages?.length===0){
+        return res.status(404).json({message:"not found"});
+    }
+    return res.status(200).json({ packages });
+  } catch (error) {
+    console.error("Error handling API request:", error);
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 export default packagePublicFilter;

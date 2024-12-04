@@ -1,7 +1,8 @@
 import Image from "next/image";
 import "../../../app/globals.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 const IoMdArrowDropdown = dynamic(() =>
   import("react-icons/io").then((mod) => mod.IoMdArrowDropdown)
 );
@@ -13,8 +14,14 @@ const stripHtmlTags = (html) => {
   div.innerHTML = html;
   return div.textContent || div.innerText || "";
 };
-const CarPromoHeroSection = ({ cityPromoData }) => {
+const CarPromoHeroSection = ({ cityPromoData,cityId }) => {
   // console.log( "Herosection cityPromoData",cityPromoData );
+  const {setCarSelectedId}=useAppContext();
+  useEffect(()=>{
+    if(cityId){
+      setCarSelectedId(cityId)
+    }
+  },[cityId])
 
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(true);

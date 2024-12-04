@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Modal from '@mui/material/Modal';
 import { CancelIcon } from "@/components/icons/index"
+import { AppProvider, useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 
 const fetchLocationAccordingToCity=async (city)=>{
@@ -40,12 +41,12 @@ useEffect(()=>{
 },[city])
 useEffect(()=>{
     if(city){
-        fetchPromoDataCity(cityId).then(res=>{console.log("promo data res--> ",res);setCityPromoData(res?.data||{})})
+        fetchPromoDataCity(cityId).then(res=>{setCityPromoData(res?.data||{})})
     }
 },[cityId])
 useEffect(()=>{
     if(city){
-        fetchCarPackageList(cityId).then(res=>{console.log("promo data res package list--> ",res);setCarPackageList(res?.data||[])})
+        fetchCarPackageList(cityId).then(res=>{setCarPackageList(res?.data||[])})
     }
 },[cityId])
 
@@ -61,11 +62,7 @@ const handleCloseModal = () => {
     setIsModalOpen(false);
 };
 
-const handleApplyFilter = (filters) => {
-    alert(`Filters applied`);
-    console.log(filters);
-    handleCloseModal();  // Close the modal when filters are applied
-};
+
 
 
 const handleResize = () => {
@@ -88,10 +85,11 @@ useEffect(() => {
     return (
         <>
             {/* CarPromoSkeleton */}
+            <AppProvider>
             <div className='bg-slate-100'>
                 <DesktopHeader />
                 <Breadcrumbs />
-                <CarPromoHeroSection cityPromoData={cityPromoData}/>
+                <CarPromoHeroSection cityPromoData={cityPromoData} cityId={cityId}/>
                 {/* <SearchHeaderWpr /> */}
                 <div className="container-wrapper flex justify-between pb-5 items-center">
                     <div>
@@ -121,7 +119,7 @@ useEffect(() => {
                                     className="absolute top-3 right-2 text-gray-500 hover:text-gray-700">
                                     <CancelIcon />
                                 </button>
-                                <CarPromoPhoneFilter onApplyFilter={handleApplyFilter}/>
+                                <CarPromoPhoneFilter handleCloseModal={handleCloseModal} />
                             </div>
                         </div>
                     </Modal>
@@ -129,12 +127,12 @@ useEffect(() => {
                 <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[2fr,320px] gap-5 relative">
                     <div>
                         <div>
-                            <SearchCarPagePackageList carPackageList={carPackageList}/>
+                            <SearchCarPagePackageList carPackageList={carPackageList} setCarPackageList={setCarPackageList}/>
                         </div>
                     </div>
                     <div className='relative'>
                         <div className='hidden xl:block'>
-                            <CarPromoSearchPageFilter cityId={cityId}/>
+                            <CarPromoSearchPageFilter />
                         </div>
                     </div>
                 </div>
@@ -155,6 +153,7 @@ useEffect(() => {
                     <BottomLink/>
                 </div> */}
             </div>
+            </AppProvider>
         </>
     );
 }

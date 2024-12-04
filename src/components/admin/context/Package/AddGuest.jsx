@@ -50,6 +50,14 @@ const filteredDataofCategoriesWise= async (id,price, days, category) => {
   // console.log("filter data is here --->:: ", data);
   return data;
 };
+const CarFilteredData= async (id,price, days, category) => {
+  const response = await fetch(
+    `/api/cars/public/filter-packages?id=${id}&price=${price}&days=${days}&category=${category}`
+  );
+  const data = await response.json();
+  // console.log("filter data is here --->:: ", data);
+  return data;
+};
 
 export const AppProvider = ({ children }) => {
   const [closeBtn, setCloseBtn] = useState(false);
@@ -77,7 +85,7 @@ export const AppProvider = ({ children }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showPopup1, setShowPopup1] = useState(false);
 
-  //all filter logics here---->
+  //<---------------all filter logics of packages here-------------->
   const [filteredApi, setFilteredDataApi] = useState({});
 
   const filterApi = (days, price, category) => {
@@ -160,6 +168,41 @@ export const AppProvider = ({ children }) => {
       });
     }
   }, [selectedId, filteredApi]);
+
+  // <---------------all filter logics of packages here-------------->
+
+
+  const [carSelectedId, setCarSelectedId] = useState(null);
+
+  const [CarFilteredPackages, setCarFilteredPackages] = useState([]);
+  const [CarFilteredApi, setCarFilteredDataApi] = useState({});
+
+// console.log("carselected Id ------------------> ",carSelectedId)
+// console.log("CarFilteredApi Id ------------------> ",CarFilteredApi)
+
+useEffect(() => {
+ 
+    if (carSelectedId) {
+      CarFilteredData(
+        carSelectedId,
+        CarFilteredApi?.priceRange,
+        CarFilteredApi?.durationRange,
+        CarFilteredApi?.selectedCategories
+      ).then((res) => {
+        // console.log("filted data is here-->1--", res);
+        if (res?.message === "not found") {
+          setCarFilteredPackages(["not found"]);
+        } else {
+          setCarFilteredPackages(res?.packages || []);
+        }
+      });
+    }
+  
+  
+  
+  console.log("hi")
+ 
+}, [selectedId, CarFilteredApi]);
 
   const initialData = {
     adult: 0,
@@ -252,8 +295,10 @@ export const AppProvider = ({ children }) => {
     pricingManagement,
     setShowAddguest,
     showAddguest,
+    setCarSelectedId,
     filteredPackages,
     setSelectedId,
+    setCarFilteredDataApi,
     setDepartureSectionData,
     departureSectionData,
     setLocationId,
@@ -290,6 +335,7 @@ export const AppProvider = ({ children }) => {
     setCarbookdisableandenable,
     carPrice,
     setCarPrice,
+    CarFilteredPackages,
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>

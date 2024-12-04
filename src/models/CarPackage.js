@@ -82,7 +82,7 @@ const packageSchema = new Schema({
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "CarPackageMasterCategory",
+        ref: "PackageMasterCategory",
         required: true,
       },
     ],

@@ -3,10 +3,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { useState, useEffect } from "react";
+import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 const MAX_PRICE = 50000;
 const MIN_PRICE = 0;
-const MAX_DAYS = 30;
+const MAX_DAYS = 50;
 const MIN_DAYS = 1;
 
 const priceMarks = [
@@ -14,26 +15,13 @@ const priceMarks = [
   { value: MAX_PRICE, label: "" },
 ];
 
-// Helper function for aria label
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-const fetchFilteredData = async (locationId, priceRange, days, category) => {
-  const data = await fetch(
-    `/api/cars/public/filter-packages?locationId=${locationId}&price=${priceRange}&days=${days}&category=${category}`
-  );
-  return await data.json();
-};
-
-// Fetch package categories
 const fetchCategories = async () => {
   try {
     const categoriesList = await fetch(
-      "/api/cars/package-setting/category/get-categories"
+      "/api/package-setting/category/get-categories"
     );
     const categories = await categoriesList.json();
-    console.log("Categories fetched:", categories); // Log the fetched categories
+    console.log("Categories fetched:", categories);
     return categories;
   } catch (err) {
     console.log("Error fetching categories:", err);
@@ -41,47 +29,65 @@ const fetchCategories = async () => {
   }
 };
 
-const CarPromoSearchPageFilter = ({ cityId }) => {
+const CarPromoSearchPageFilter = () => {
   const [priceRange, setPriceRange] = useState([MIN_PRICE, MAX_PRICE]);
   const [durationRange, setDurationRange] = useState([MIN_DAYS, MAX_DAYS]);
   const [packageCategory, setPackageCategory] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const { setCarFilteredDataApi } = useAppContext();
+
+  const [selectedPriceRange, setSelectedPriceRange] = useState(null); // Track selected price range
+  const [selectedDurationRange, setSelectedDurationRange] = useState(null); // Track selected duration range
 
   useEffect(() => {
     fetchCategories().then((res) => {
-      console.log("Categories loaded into state:", res?.data); // Check the loaded data
       setPackageCategory(res?.data || []);
     });
   }, []);
 
+  const data = { priceRange, durationRange, selectedCategories };
+
   useEffect(() => {
-    const data = { priceRange, durationRange, selectedCategories };
-    fetchFilteredData(
-      cityId,
-      data?.priceRange,
-      data?.durationRange,
-      data?.selectedCategories
-    ).then((res) => console.log("Filtered data:", res));
-  }, [cityId, priceRange, durationRange, selectedCategories]);
+    setCarFilteredDataApi(data);
+  }, [priceRange, durationRange, selectedCategories]);
 
   // Handlers for price range buttons
   const handlePriceButtonClick = (min, max) => {
-    setPriceRange([min, max]);
+    if (selectedPriceRange === `${min}-${max}`) {
+      setPriceRange([MIN_PRICE, MAX_PRICE]); // Reset to default
+      setSelectedPriceRange(null); // Deselect the range
+    } else {
+      setPriceRange([min, max]);
+      setSelectedPriceRange(`${min}-${max}`);
+    }
   };
 
   // Handlers for duration range buttons
   const handleDurationButtonClick = (min, max) => {
-    setDurationRange([min, max]);
+    if (selectedDurationRange === `${min}-${max}`) {
+      setDurationRange([MIN_DAYS, MAX_DAYS]); // Reset to default
+      setSelectedDurationRange(null); // Deselect the range
+    } else {
+      setDurationRange([min, max]);
+      setSelectedDurationRange(`${min}-${max}`);
+    }
   };
 
   // Handler for category checkbox change
   const handleCategoryChange = (categoryId) => {
-    setSelectedCategories(
-      (prevCategories) =>
-        prevCategories.includes(categoryId)
-          ? prevCategories.filter((id) => id !== categoryId) // Remove if already selected
-          : [...prevCategories, categoryId] // Add if not selected
+    setSelectedCategories((prevCategories) =>
+      prevCategories.includes(categoryId)
+        ? prevCategories.filter((id) => id !== categoryId) // Remove if already selected
+        : [...prevCategories, categoryId] // Add if not selected
     );
+  };
+
+  const handleClearALL = () => {
+    setDurationRange([MIN_DAYS, MAX_DAYS]);
+    setPriceRange([MIN_PRICE, MAX_PRICE]);
+    setSelectedCategories([]);
+    setSelectedPriceRange(null);
+    setSelectedDurationRange(null);
   };
 
   return (
@@ -93,7 +99,10 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
             <h3 className="md:text-[16px] text-[14px] font-medium">
               Package Prices
             </h3>
-            <p className="text-[12px] underline text-blue-800 cursor-pointer">
+            <p
+              onClick={handleClearALL}
+              className="text-[12px] underline text-blue-800 cursor-pointer"
+            >
               Clear All
             </p>
           </div>
@@ -131,13 +140,17 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
           <div className="md:text-para text-sm font-light">
             <div className="flex gap-3 my-3">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedPriceRange === "5000-10000" ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handlePriceButtonClick(5000, 10000)}
               >
                 ₹5,000 - ₹10,000
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedPriceRange === "10000-20000" ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handlePriceButtonClick(10000, 20000)}
               >
                 ₹10,000 - ₹20,000
@@ -145,13 +158,17 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
             </div>
             <div className="flex gap-3">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedPriceRange === "20000-40000" ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handlePriceButtonClick(20000, 40000)}
               >
                 ₹20,000 - ₹40,000
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedPriceRange === `40000-${MAX_PRICE}` ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handlePriceButtonClick(40000, MAX_PRICE)}
               >
                 ₹40,000 & above
@@ -187,13 +204,17 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
           <div className="md:text-para text-sm font-light">
             <div className="flex gap-3 my-3">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedDurationRange === "1-3" ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handleDurationButtonClick(1, 3)}
               >
                 1 - 3 days
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedDurationRange === "3-8" ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handleDurationButtonClick(3, 8)}
               >
                 3 - 8 days
@@ -201,13 +222,17 @@ const CarPromoSearchPageFilter = ({ cityId }) => {
             </div>
             <div className="flex gap-3">
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedDurationRange === "8-15" ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handleDurationButtonClick(8, 15)}
               >
                 8 - 15 days
               </button>
               <button
-                className="px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full"
+                className={`px-2 py-2 w-1/2 border border-slate-300 hover:border-slate-500 text-gray-600 rounded-full ${
+                  selectedDurationRange === `15-${MAX_DAYS}` ? "bg-blue-100" : ""
+                }`}
                 onClick={() => handleDurationButtonClick(15, MAX_DAYS)}
               >
                 15 & above

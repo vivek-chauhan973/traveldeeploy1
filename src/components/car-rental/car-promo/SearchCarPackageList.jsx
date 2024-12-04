@@ -4,9 +4,22 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSuitcase, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
-const SearchCarPagePackageList = ({ carPackageList }) => {
-    console.log("carPackageList", carPackageList);
+const SearchCarPagePackageList = ({ carPackageList,setCarPackageList }) => {
+    // console.log("carPackageList", carPackageList);
+    const {CarFilteredPackages}=useAppContext();
+
+    useEffect(()=>{
+        if(CarFilteredPackages?.length>0){
+            setCarPackageList(CarFilteredPackages)
+        }
+       
+    },[CarFilteredPackages])
+
+    if(CarFilteredPackages?.[0]==="not found"){
+        return <p className=" text-center mt-20 font-semibold">No Car Packages found</p>
+    }
 
     return (
         <div>
@@ -111,7 +124,7 @@ const SearchCarPagePackageList = ({ carPackageList }) => {
                             </div>
                             <div className="flex flex-cols">
                                 <Link
-                                    href={"/car-rental/" + items.location.url + "/" + items.pageUrl}
+                                    href={"/car-rental/" + items?.location?.url + "/" + items?.pageUrl}
                                     className="mt-3 block w-full select-none rounded-lg bg-gradient-to-r from-orange-500 to-red-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
                                     type="button"
                                 >
