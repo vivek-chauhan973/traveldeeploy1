@@ -16,12 +16,18 @@ const fetchBlogPromoBanner=async (id)=>{
 const fetchBlogs=async (id)=>{
     return (await(await fetch(`/api/blog/getallblogs?selectType=${id}`)).json())
 }
+
+const fetchFilteredBlogs=async (id,category)=>{
+    return (await(await fetch(`/api/blog/blog-filter?selectType=${id}&category=${category}`)).json())
+}
 export default function Promo() {
     const router=useRouter();
     // console.log("router .........................",router?.query?.post)
     const [isModalOpen, setIsModalOpen] = useState(false);
 const [blogHero,setBlogHero]=useState({});
 const [blogs,setBlogs]=useState([]);
+const [selectedCategories, setSelectedCategories] = useState([]);
+const [filteredBlog,setFilteredBlog]=useState([]);
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -29,13 +35,6 @@ const [blogs,setBlogs]=useState([]);
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
-
-    const handleApplyFilter = (filters) => {
-        alert(`Filters applied`);
-        console.log(filters);
-        handleCloseModal();  // Close the modal when filters are applied
-    };
-
 
     const handleResize = () => {
         // Check if window width is 1200 pixels or less
@@ -47,21 +46,40 @@ const [blogs,setBlogs]=useState([]);
     useEffect(() => {
         // Add event listener for window resize
         window.addEventListener('resize', handleResize);
-
+    
         return () => {
             // Cleanup by removing event listener on component unmount
             window.removeEventListener('resize', handleResize);
         };
+        
     }, []);
 
     useEffect(()=>{
         if(router?.query?.post){
 
             fetchBlogPromoBanner(router?.query?.post).then(res=>{setBlogHero(res?.data||{})});
-            fetchBlogs(router?.query?.post).then(res=>{console.log("blog are here -------> ",res?.data);setBlogs(res?.data||[])});
+            fetchBlogs(router?.query?.post).then(res=>{setBlogs(res?.data||[])});
         }
+        setSelectedCategories([])
     },[router?.query?.post])
 
+    useEffect(()=>{
+        fetchFilteredBlogs(router?.query?.post,selectedCategories).then(res=>{
+            // console.log("filtered data of blogs is here ----> ",res)
+            if(res?.message==="not found"){
+                setFilteredBlog(["not found"])
+            }else{
+                setFilteredBlog(res?.data);
+            }
+        })
+    },[router?.query?.post,selectedCategories])
+
+    useEffect(()=>{
+        if(filteredBlog?.length>0){
+            setBlogs(filteredBlog);
+        }
+    },[filteredBlog])
+  
     return (
         <>
             {/* CarPromoSkeleton */}
@@ -115,7 +133,7 @@ const [blogs,setBlogs]=useState([]);
                                     className="absolute top-3 right-2 text-gray-500 hover:text-gray-700">
                                     <CancelIcon />
                                 </button>
-                                <PhoneFilter onApplyFilter={handleApplyFilter}/>
+                                <PhoneFilter setSelectedCategories={setSelectedCategories} selectedCategories={selectedCategories} handleCloseModal={handleCloseModal}/>
                             </div>
                         </div>
                     </Modal>
@@ -123,7 +141,7 @@ const [blogs,setBlogs]=useState([]);
                 <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[300px,2fr] gap-5 relative">
                     <div className='relative'>
                         <div className='hidden xl:block'>
-                            <BlogPromoFilter />
+                            <BlogPromoFilter setSelectedCategories={setSelectedCategories} selectedCategories={selectedCategories} />
                         </div>
                     </div>
                     <div>

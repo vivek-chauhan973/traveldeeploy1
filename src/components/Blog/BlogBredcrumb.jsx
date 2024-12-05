@@ -6,7 +6,7 @@ const BlogBredcrumb = () => {
     const router = useRouter();
     const pathnames = router.asPath.split("/").filter((x) => x);
     const data=pathnames?.filter(item=>item!=="travel")
-    console.log("breadcrumbs is here ----> ",data)
+    // console.log("breadcrumbs is here ----> ",data)
     return (
         <div className="container mx-auto py-2 px-4">
             <div className="text-sm breadcrumbs">
