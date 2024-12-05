@@ -198,11 +198,13 @@ useEffect(() => {
       });
     }
   
-  
-  
-  console.log("hi")
  
 }, [selectedId, CarFilteredApi]);
+
+
+// navlink logic that is implement in blog
+
+
 
   const initialData = {
     adult: 0,

@@ -1,15 +1,15 @@
 import BlogDetail from "@/models/blog/BlogDetail"; 
-
 const packageNavLink = async (req, res) => {
     try {
-        const { blogType, location } = req.query;
+        const { blogType, location, id } = req.query;
 
-        // Check if blogType is provided
+        // Validate inputs
         if (!blogType) {
             return res.status(400).json({ message: 'Blog type is required' });
         }
-
-        // Optional: Ensure location is provided, if it's required for your query
+        if (!id) {
+            return res.status(400).json({ message: 'ID is required' });
+        }
         if (!location) {
             return res.status(400).json({ message: 'Location is required' });
         }
@@ -20,8 +20,7 @@ const packageNavLink = async (req, res) => {
                 { blogType: blogType },
                 { location: location }
             ]
-        })
-        .populate("blogSeo category writer table") 
+        }).populate("blogSeo category writer table") 
         .populate({
             path: "blogQuestions", 
             populate: {
@@ -29,14 +28,28 @@ const packageNavLink = async (req, res) => {
             }
         });
 
-        // If no blog posts are found
+        const blogPost1 = await BlogDetail.findOne({ _id: id }).populate("blogSeo category writer table") 
+        .populate({
+            path: "blogQuestions", 
+            populate: {
+                path: "blogSubQuestion", 
+            }
+        });;
+
+        // Check if blog posts are found
         if (!blogPost || blogPost.length === 0) {
             return res.status(404).json({ error: 'No blog posts found for the given parameters' });
         }
+        if (!blogPost1) {
+            return res.status(404).json({ error: 'No blog post found for the given ID' });
+        }
 
-        // Return the blog posts if found
-        return res.status(200).json({ data: blogPost });
-        
+        // Filter out the blogPost1 from blogPost
+        let filterBlogPost = blogPost?.filter(item => item?._id.toString() !== blogPost1?._id.toString());
+        filterBlogPost.unshift(blogPost1);
+        // Return the filtered blog posts
+        return res.status(200).json({ data: filterBlogPost });
+
     } catch (error) {
         console.error('Error handling API request:', error);
         return res.status(500).json({ message: 'Internal Server Error', error: error.message });

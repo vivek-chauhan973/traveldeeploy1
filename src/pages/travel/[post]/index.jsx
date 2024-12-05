@@ -7,9 +7,9 @@ import Footer from "@/components/Footer";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import BlogPromoFilter from "@/components/Blog/Blog-Promo/BlogPromoFilter";
 import BlogPromoPackageList from "@/components/Blog/Blog-Promo/BlogPromoPackageList";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import PhoneFilter from "@/components/Blog/Blog-Promo/PhoneFilter";
 import { useRouter } from "next/router";
+import BlogBredcrumb from "@/components/Blog/BlogBredcrumb";
 const fetchBlogPromoBanner=async (id)=>{
     return (await(await fetch(`/api/blog?selectType=${id}`,{method:"GET"})).json())
 }
@@ -67,7 +67,7 @@ const [blogs,setBlogs]=useState([]);
             {/* CarPromoSkeleton */}
             <div className='bg-slate-100'>
                 <DesktopHeader />
-                <Breadcrumbs />
+                <BlogBredcrumb/>
                 {/* <CarPromoHeroSection/> */}
                 <div className="mb-10">
                     <div className="relative w-full h-80 md:h-96 lg:h-[32rem] overflow-hidden">
