@@ -135,7 +135,7 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
       console.log("something went wrong");
     }
   };
-  console.log("content is here -----> ",filename)
+  // console.log("content is here -----> ",filename)
 
   return (
     <>
