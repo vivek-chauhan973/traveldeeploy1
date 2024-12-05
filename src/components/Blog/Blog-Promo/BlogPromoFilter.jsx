@@ -43,7 +43,7 @@ export default function BlogPromoFilter({setSelectedCategories,selectedCategorie
                   Clear All
                 </p>
               </div>
-              <div>
+              <div className="max-h-[500px] overflow-y-scroll">
                 {packageCategory?.map((item) => (
                   <div
                     key={item._id}

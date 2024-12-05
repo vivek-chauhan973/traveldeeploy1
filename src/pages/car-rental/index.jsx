@@ -253,7 +253,7 @@ export default function App() {
               <p className="text-[23px]  font-semibold">2,000+ SIXT stations in over 105 countries</p>
             </div>
             {/* Distinctive Fleet */}
-            <div className="flex flex-col max-w-xs">
+            <div className="flex flex-col max-w-xs my-4">
               <div className="flex items-center mb-2 gap-3">
                 <FaCar className="text-2xl" />
                 <h3 className="text-md font-semibold">Distinctive fleet</h3>
@@ -261,7 +261,7 @@ export default function App() {
               <p className="text-[23px]  font-semibold">From high-end convertibles to premium SUVs</p>
             </div>
             {/* Exceptional Service */}
-            <div className="flex flex-col max-w-xs">
+            <div className="flex flex-col max-w-xs my-3">
               <div className="flex items-center mb-2 gap-3">
                 <FaHandsHelping className="text-2xl" />
                 <h3 className="text-md font-semibold">Exceptional service</h3>

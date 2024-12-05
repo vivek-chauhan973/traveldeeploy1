@@ -64,6 +64,9 @@ const [filteredBlog,setFilteredBlog]=useState([]);
     },[router?.query?.post])
 
     useEffect(()=>{
+        if(selectedCategories?.length>0){
+
+        
         fetchFilteredBlogs(router?.query?.post,selectedCategories).then(res=>{
             // console.log("filtered data of blogs is here ----> ",res)
             if(res?.message==="not found"){
@@ -71,8 +74,11 @@ const [filteredBlog,setFilteredBlog]=useState([]);
             }else{
                 setFilteredBlog(res?.data);
             }
-        })
-    },[router?.query?.post,selectedCategories])
+        })}
+        else{
+            fetchBlogs(router?.query?.post).then(res=>{setBlogs(res?.data||[])}); 
+        }
+    },[router?.query?.post,selectedCategories?.length])
 
     useEffect(()=>{
         if(filteredBlog?.length>0){

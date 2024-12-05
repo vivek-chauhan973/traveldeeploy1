@@ -230,7 +230,7 @@ export default function SearchPageFilter({
           <div className="border-b md:mt-2 mt-1"></div>
           <div className="pr-5 py-2">
             <h3 className="md:text-[16px] text-[14px] font-medium md:my-2 my-1 px-5">Package Category</h3>
-            <div>
+            <div className=" overflow-y-scroll max-h-[250px]">
               {packageCategory?.map((item) => (
                 <div key={item._id} className="flex capitalize items-center gap-2 px-5 pb-2 py-2">
                   <input

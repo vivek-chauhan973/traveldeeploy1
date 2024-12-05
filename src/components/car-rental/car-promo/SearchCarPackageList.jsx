@@ -16,14 +16,28 @@ const SearchCarPagePackageList = ({ carPackageList,setCarPackageList }) => {
         }
        
     },[CarFilteredPackages])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    const windowHeight = window.innerHeight;
+    const middleOfWindow = windowHeight / 2;
+    window.scrollTo({ top: middleOfWindow, behavior: "smooth" });
+  };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = carPackageList?.slice(indexOfFirstItem, indexOfLastItem);
+  const totalItems = carPackageList?.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
     if(CarFilteredPackages?.[0]==="not found"){
         return <p className=" text-center mt-20 font-semibold">No Car Packages found</p>
     }
-
+console.log("carPackageList------------> ",carPackageList);
     return (
         <div>
-            {carPackageList?.length > 0 && carPackageList?.map((items, i) => {
+            {currentItems?.length > 0 && currentItems?.map((items, i) => {
                 return (
                     <div key={i} className="relative py-5 mb-5 w-full md:flex md:h-[220px] gap-5 justify-between rounded-xl bg-white bg-clip-border text-gray-700 shadow-sm overflow-hidden">
                         <div className="md:pl-5 flex items-center md:w-[35%]">
@@ -137,17 +151,17 @@ const SearchCarPagePackageList = ({ carPackageList,setCarPackageList }) => {
             })}
             <div className="flex justify-end my-5 list-none">
                 <Pagination
-                // activePage={currentPage}
-                // itemsCountPerPage={itemsPerPage}
-                // totalItemsCount={packages?.length}
-                // onChange={handlePageChange}
-                // itemClass="pagination-item"
-                // linkClass="pagination-link"
-                // prevPageText="Previous"
-                // nextPageText="Next"
-                // firstPageText="1"
-                // lastPageText={`...${totalPages}`}
-                // innerClass="pagination"
+                activePage={currentPage}
+                itemsCountPerPage={itemsPerPage}
+                totalItemsCount={carPackageList?.length}
+                onChange={handlePageChange}
+                itemClass="pagination-item"
+                linkClass="pagination-link"
+                prevPageText="Previous"
+                nextPageText="Next"
+                firstPageText="1"
+                lastPageText={`...${totalPages}`}
+                innerClass="pagination"
                 />
             </div>
 

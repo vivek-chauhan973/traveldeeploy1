@@ -247,7 +247,7 @@ const CarPromoSearchPageFilter = () => {
           <h3 className="md:text-[16px] text-[14px] font-medium md:my-3 px-5">
             Package Category
           </h3>
-          <div className="overflow-scroll max-h-[200px] pl-5">
+          <div className=" overflow-y-scroll max-h-[200px] pl-5">
             {packageCategory.length > 0 ? (
               packageCategory.map((category) => (
                 <label key={category._id} className="flex items-center mb-2">
