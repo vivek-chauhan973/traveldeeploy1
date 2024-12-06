@@ -52,8 +52,8 @@ const Cardwork = () => {
               ${index === startIndex ? "translate-x-0" : "translate-x-full"}`}
             >
               <div className="">
-                <Image className="relative object-cover"
-                  layout="fill"
+                <Image className="relative  object-cover h-full w-[1320px] md:h-[400px]"
+                layout='fill'
                   src={item.path}
                   alt="images"
                 />

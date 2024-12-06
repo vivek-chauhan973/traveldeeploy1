@@ -133,63 +133,9 @@ const SearchPagePackageList = ({ locationId }) => {
                 </div>
               </div>
               <div className="flex gap-3 mt-3 md:gap-4 justify-between md:justify-normal max-w-[350px] mb-3">
-                {/* <div className="flex flex-col items-center">
-                  <Image width={100} height={100}
-                    className="w-4"
-                    src="https://www.svgrepo.com/show/13776/building.svg"
-                    alt=""
-                  />
-                  <p className="text-[10px] text-neutral-600">Hotel</p>
-                </div>
-
-                <div className="flex flex-col items-center">
-                  <Image width={100} height={100}
-                    className="w-4"
-                    src="https://www.svgrepo.com/show/6379/french-fries-on-container.svg"
-                    alt=""
-                  />
-                  <p className="text-[10px] text-neutral-600">Meals</p>
-                </div>
-
-                <div className="flex flex-col items-center">
-                  <Image width={100} height={100}
-                    className="w-4"
-                    src="https://www.svgrepo.com/show/447874/transport.svg"
-                    alt=""
-                  />
-                  <p className="text-[10px] text-neutral-600">Transport</p>
-                </div>
-
-                <div className="flex flex-col items-center">
-                  <Image width={100} height={100}
-                    className="w-4"
-                    src="https://www.svgrepo.com/show/438545/flight.svg"
-                    alt=""
-                  />
-                  <p className="text-[10px] text-neutral-600">Flight</p>
-                </div>
-
-                <div className="flex flex-col items-center">
-                  <Image width={100} height={100}
-                    className="w-4"
-                    src="https://www.svgrepo.com/show/533057/camera-alt-1.svg"
-                    alt=""
-                  />
-                  <p className="text-[10px] text-neutral-600">Sightseeing</p>
-                </div>
-
-                <div className="flex flex-col items-center">
-                  <Image width={100} height={100}
-                    className="w-4"
-                    src="https://www.svgrepo.com/show/394547/visa.svg"
-                    alt=""
-                  />
-                  <p className="text-[10px] text-neutral-600">Visa</p>
-                </div> */}
-
                 {(packageData?.icons?.iconData||packageData?.iconsPopulated?.[0]?.iconData)?.map((item,i)=><div key={i} className="flex flex-col items-center">
                   <Image width={150} height={150}
-                    className="w-8"
+                    className="max-w-[30px] max-h-[20px]"
                     src={item?.icon||"https://www.svgrepo.com/show/13776/building.svg"}
                     alt={item?.name||"png"}
                   />

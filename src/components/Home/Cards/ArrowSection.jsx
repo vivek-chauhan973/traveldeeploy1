@@ -92,7 +92,7 @@ const ArrowSection = () => {
                     }
                   >
                     <Image
-                      className="relative object-cover"
+                      className="relative object-cover max-h-[390px]"
                       layout="fill"
                       src={items?.posterPath}
                       alt=""

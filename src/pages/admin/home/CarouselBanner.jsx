@@ -92,7 +92,7 @@ export default function CarCarouselBanner() {
         const itemToEdit = carouselItems[index];
         const res=await fetch(`/api/home/edit-crousel?id=${index}`);
         const data=await res.json();
-        console.log("res ----- > ",data?.data)
+        // console.log("res ----- > ",data?.data)
         if(res?.ok){
             setFormData(prevData => ({
                 ...prevData,
@@ -131,7 +131,9 @@ export default function CarCarouselBanner() {
                 {/* Conditionally render the form and image section */}
                 <div className="grid md:grid-cols-2 border-b-2 border-gray-100">
                     <div>
-                        <p className="md:text-lg text-base font-semibold">Car Carousel Banner Image</p>
+                        <div className="flex gap-4">   <p className="md:text-lg text-base font-semibold">Car Carousel Banner Image</p>
+                        <p>banner(h=400px and w=1320px)</p></div>
+                     
                         <div className="py-5 xl:pl-10 md:pl-2">
                             <input
                                 type="file"

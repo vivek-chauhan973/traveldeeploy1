@@ -113,7 +113,7 @@ const ItineraryHeroSection = ({
         <div className="container-wrapper  grid grid-cols-1 xl:grid-cols-[2fr,1fr]  gap-4 ">
           <div className="relative rounded-md overflow-hidden">
             <img
-              className=" h-[400px] object-cover w-full hidden xl:flex"
+              className="h-[300px] md:h-[400px] object-cover w-[850px] hidden xl:flex"
               src={(hemages && hemages?.[0])}
               alt="img 1"
               width={200}

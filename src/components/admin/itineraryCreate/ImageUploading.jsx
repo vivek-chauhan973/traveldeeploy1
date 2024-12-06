@@ -214,7 +214,9 @@ export default function ImageUploading({ itinerary, setImageDot }) {
   return (
     <>
       <div className="grid xl:grid-cols-2 bg-white p-5 rounded-md">
-        <div className="my-5 ">
+        
+        <div className=" ">
+        <p className="my-5 flex"><sup className="text-red-600 text-xl">*</sup><span>please upload image size w-850px and h-400px</span></p>
           <div className="">
             {previews.map((preview, index) => (
               <div

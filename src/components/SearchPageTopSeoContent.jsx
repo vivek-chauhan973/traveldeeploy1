@@ -36,7 +36,7 @@ const SearchPageTopSeoContent = ({ state, promoData, priorityPackage }) => {
       <div className="relative w-full h-80 md:h-96 lg:h-[28rem] overflow-hidden">
         
           <Image
-            className=" top-0 left-0 w-full h-full object-cover object-center"
+            className=" top-0 left-0 w-full   object-cover object-center h-[450px]"
             src={promoData?.image}
             alt=""
             width={100}

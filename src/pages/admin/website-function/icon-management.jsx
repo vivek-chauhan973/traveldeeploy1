@@ -115,7 +115,10 @@ export default function IconManagement() {
           </p>
           <div>
             <div className="flex md:flex-row flex-col md:gap-10 gap-5 md:my-10 my-5  items-center xl:pl-5 ">
+              <div>
               <input type="file" className="mb-4" onChange={handleChange} />
+              <p className="mt-28 flex"><sup className="text-red-600 text-xl">*</sup><span>upload h=25px and w=35px icons</span></p>
+              </div>
               <div>
                 {preview && (
                   <Image

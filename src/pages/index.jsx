@@ -190,7 +190,7 @@ export default function Home() {
               <Image
                 width={400}
                 height={200}
-                className="object-cover rounded-[17px] w-[500px] h-[265px]"
+                className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
                 src={category1?.[0]?.options?.[0]?.posterPath ? category1?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                 alt=""
               />
@@ -223,7 +223,7 @@ export default function Home() {
           <div className="md:ml-28 ">
             <Link href={`/speciality-tours/` + category3?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
               <Image
-                className="object-cover rounded-[17px] w-[500px] h-[265px]"
+                className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
                 width={400}
                 height={200}
                 src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
@@ -234,12 +234,13 @@ export default function Home() {
         </div>
       </div>
       {/* Third first image and text */}
+      
       <div className="container-wrapper md:pb-10 pb-5">
         <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
           <div className="">
             <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
               <Image
-                className=" object-cover rounded-[17px] w-[420px] h-[265px]"
+                className=" object-cover rounded-[17px] w-[600px] h-[265px] md:w-[420px] md:h-[265px]"
                 width={450}
                 height={450}
                 src={category2?.[0]?.options?.[0]?.uploads?.[0]}
@@ -292,6 +293,7 @@ export default function Home() {
         <Card4 packages={packages} />
       </div>
       {/* Card Kuoni copy */}
+      
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
         <div className=" md:mt-4 mt-4">
           <ArrowSection />
