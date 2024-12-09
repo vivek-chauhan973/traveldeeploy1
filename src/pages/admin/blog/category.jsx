@@ -164,7 +164,7 @@ export default function BlogMaster() {
                         onClick={handleSubmitForm}
                         className="mt-4 bg-navyblack text-white px-4 py-2 rounded md:w-auto w-full"
                       >
-                         "Upload"
+                         Upload
                       </button>
                    
                   </div>
