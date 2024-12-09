@@ -27,7 +27,7 @@ const Login = ({ handleCheckbox, handleOnChange, setPriceManagementDot }) => {
         <div className="flex flex-col gap-4 md:w-auto w-full justify-start   bg-slate-400 rounded-lg  p-5">
           <div className="">
             <p className="font-bold md:text-lg text-base">
-              Please select Package category
+              Please select Package category 
             </p>
           </div>
           <div className=" flex flex-col gap-2">

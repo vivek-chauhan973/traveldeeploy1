@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 RoadIcon,DownArrow 
 } from "@/components/icons/index"
@@ -6,10 +6,27 @@ RoadIcon,DownArrow
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot} from '@fortawesome/free-solid-svg-icons';
+import Link from "next/link";
 
-
+const fetchCatagories = async () => {
+  const categoriesList = await fetch('/api/package-setting/category/get-categories');
+  return await categoriesList.json();
+}
+const fetchPopularCities = async () => {
+  const res = await fetch("/api/homefooter");
+  return await res.json();
+}
 
 const Speciality = ({ setOpenClose }) => {
+  const [categories, setCatagories] = useState([]);
+  useEffect(() => {
+    fetchCatagories().then(res => setCatagories(res?.data || []));
+  }, [])
+  const [popularCatogories, setPopularCatagories] = useState([]);
+  useEffect(() => {
+    fetchPopularCities().then(res => {setPopularCatagories(res?.data || []) });
+  }, [])
+  const data = popularCatogories?.filter(item => item.category === "category6");
   return (
     <div className="flex h-[90vh] flex-col sm:p-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
       <div className="flex justify-between mt-3">
@@ -31,71 +48,35 @@ const Speciality = ({ setOpenClose }) => {
       <hr className="border-b mt-3 border-gray-400 w-90 overflow-hidden" />
       <div className="px-1">
         <div className="flex mt-1 gap-1">
-          <span>
-          <FontAwesomeIcon icon={ faLocationDot}  className='font'  />
-          </span>
           <h4 className="text-blue-600 text-md font-bold">
-            POPULAR AND AVAILABLE TOURS
+          POPULAR & AVAILABLE TOURS
           </h4>
         </div>
-        <div className="mt-2 pl-3">
-          <span className="font-semibold text-[15px]">Honeymoon Special</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">
-            Inspiring beautiful journeys Scenic Routes.
-          </p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Road Trips</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">Embark on a journey of togetherness</p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Senior Special</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">Embark on a journey of togetherness</p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Short Trip</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">Embark on a journey of togetherness</p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Women Special</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">Embark on a journey of togetherness</p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Family Tour</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">Embark on a journey of togetherness</p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Family Tour</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">Embark on a journey of togetherness</p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Family Tour</span>
-          <span className="text-sm"> 35 Departures</span>
-          <p className="text-xs">Embark on a journey of togetherness</p>
+        <div className=" flex flex-col pt-2" >
+            {categories?.map((item, i) =>
+              <Link
+                href={`/speciality-tours/` + item.category + '-tour-packages'}
+                key={i} className='text-para font-semibold mb-2 mx-2'
+              >
+                {item?.category}
+              </Link>
+            )}
         </div>
 
         <div className="mt-6 flex gap-3 px-1">
-          <span>
-            <RoadIcon />
-          </span>
           <h4 className="text-blue-600 text-md font-bold">
-            POPULAR AND AVAILABLE TOURS
+          Replace by Famous Tourist Attraction
           </h4>
         </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Couples Only</span>
-          <p className="text-xs">Exclusive tours for middle-aged couples</p>
-        </div>
-        <div className="mt-4 pl-3">
-          <span className="font-semibold text-[15px]">Couples Only</span>
-          <p className="text-xs">Exclusive tours for middle-aged couples</p>
+        <div className="flex flex-col pt-2" >
+            {data?.[0]?.options.map((item, i) =>
+              <Link
+                href={`/india/` + item?.url + "-tour-packages"}
+                key={i} className='text-para font-semibold mb-2 mx-2'
+              >
+                {item?.selectedItem}
+              </Link>
+            )}
         </div>
       </div>
     </div>

@@ -28,6 +28,7 @@ const Detail = () => {
   useEffect(() => {
     if (detail) {
       fetchPost(detail).then((res) => {
+        console.log("res====> ",res)
         setDetailData(res?.data || {});
       });
       
@@ -43,6 +44,7 @@ const Detail = () => {
       })
     }
   },[detailData?.location])
+  console.log("travel-guide packages",detail)
 
   // useEffect(()=>{
   //   if(navLinkData?.length>0){

@@ -1,6 +1,6 @@
 
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import im from "./im.webp";
 import Image from "next/image";
 import {
@@ -18,8 +18,18 @@ import {
   DownArrow
 } from "@/components/icons/index"
 
-
+const fetchCategory = async () => {
+  const res = await fetch("/api/homefooter");
+  return await res.json();
+}
 const CustomizedHoliday = ({ setOpenClose }) => {
+  const [catogories, setCatagories] = useState([]);
+  useEffect(() => {
+    fetchCategory().then(res => { ; setCatagories(res?.data || []) });
+  }, [])
+
+  const data = catogories?.filter(item => item.category === "category3");
+  // console.log("catories is here", data?.[0]?.options)
 
   return (
     <div className="ml-2   h-[90vh] w-full   overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 ">
@@ -28,7 +38,7 @@ const CustomizedHoliday = ({ setOpenClose }) => {
           <div className=" rotate-90 mt-2">
             <DownArrow />
           </div>
-          <h5 className=" font-semibold text-md">Customized Holidays</h5>
+          <h5 className=" font-semibold text-md"> Holidays</h5>
         </div>
         <div>
           <h5 className=" underline font-bold text-md px-2 text-blue-600">View All Tours</h5>
@@ -42,67 +52,18 @@ const CustomizedHoliday = ({ setOpenClose }) => {
           </span>
           THEMED EXPERINCE -Find your reason!
         </h4>
-        <div className=" gap-y-4 flex flex-col mt-2 text-sm">
-          <p className="flex items-center gap-3">
-            <span>
-              <FunIcon />
-            </span>
-            Family fun
-          </p>
-          <p className="flex items-center gap-3">
-            <span>
-              <LoveIcon />
-            </span>
-            Romantic Holiday
-          </p>
-          <p className="flex items-center gap-3">
-            <span>
-              <CatIcon />
-            </span>
-            City Breakes
-          </p>
-          <p className="flex items-center gap-3 ">
-            <span>
-              <TreeIcon size={20} />
-            </span>
-            gateway
-          </p>
-          <p className="flex items-center gap-3 ">
-            <span>
-              <FlagIcon />
-            </span>
-            Aventure stiries{" "}
-          </p>
-          <p className="flex items-center gap-3 ">
-            <span>
-              <WinIcon size={20} />
-            </span>
-            Taj Holoiday
-          </p>
-          <p className="flex items-center gap-3 ">
-            <span>
-              <PlanIcon size={20} />
-            </span>
-            Air Inclusive Holidays
-          </p>
+        <div className="flex flex-col pt-2">
+          {data?.[0]?.options?.map((item, i) =>
+            <a
+              key={i} className='text-para font-semibold mb-2'
+              href={'/speciality-tours/' + item.category + '-tour-packages'}
+            >
+                {item.category}
+            </a>
+          )}
         </div>
       </div>
-      <div className="flex flex-col mt-4 pl-2">
-        <div>
-          <Image src={im} className=" h-32 w-64 rounded-md " alt="abc" />
-          <h5 className="font-semibold text-md mt-1">Luxury Holiday. </h5>
-          <p className=" text-xs w-64">
-            choose the the right tailer-mad luxuary travel vacation
-          </p>
-        </div>
-        <div className="mt-5">
-          <Image src={im} className=" h-32 w-64 rounded-md " alt="abc" />
-          <h5 className="font-semibold text-md mt-1">Luxury Holiday. </h5>
-          <p className=" text-xs w-64">
-            choose the the right tailer-mad luxuary travel vacation
-          </p>
-        </div>
-      </div>
+      
     </div>
   );
 };

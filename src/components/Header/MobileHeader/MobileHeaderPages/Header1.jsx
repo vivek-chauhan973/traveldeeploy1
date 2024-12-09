@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image'
-
 import Data from './Data';
 import {
   DownArrow, WhatAppIcon,
 } from "@/components/icons/index"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faClock, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
-
-
+import {faAngleUp,faAngleDown,faClock, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 const Header1 = ({ setTogle, togle }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [openClose, setOpenClose] = useState(false);
   const [renderedComponent, setRenderedComponent] = useState(null);
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [isVisible1, setIsVisible1] = useState(true);
+  const [travel, setTravel] = useState(false);
 
   const handleScroll = useCallback(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -57,8 +55,10 @@ const Header1 = ({ setTogle, togle }) => {
           <div>
             <div className="  ml-1 h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
               <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
+                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="/">Home</Link>
                 <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>India</h3>
+
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>Destination</h3>
                   <div className="cursor-pointer">
 
                     <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>
@@ -66,7 +66,7 @@ const Header1 = ({ setTogle, togle }) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(1) }}>World</h3>
                   <div className="cursor-pointer">
                     <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(1) }} >
@@ -74,7 +74,7 @@ const Header1 = ({ setTogle, togle }) => {
                     </div>
 
                   </div>
-                </div>
+                </div> */}
                 <div className="flex justify-between">
                   <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>Speciality Tours</h3>
                   <div className="cursor-pointer">
@@ -85,32 +85,31 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Customized Holidays</h3>
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Holidays</h3>
                   <div className="cursor-pointer">
                     <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(3) }} >
                       <DownArrow />
                     </div>
                   </div>
                 </div>
-                <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Corporate Travel</h3>
-                <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Inbound</h3>
-                <div className="flex justify-between">
-                  <h6 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(4) }}>Forex</h6>
-                  <div className="cursor-pointer">
-                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(4) }} >
-                      <DownArrow />
-                    </div>
+                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="/car-rental"> Car Hire</Link>
+                <div>
+                  <div className='flex justify-between'>
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setTravel(true) }} >Travel</h3>
+                   {travel?<FontAwesomeIcon icon={faAngleUp} onClick={()=>setTravel(false)}/>:<FontAwesomeIcon icon={faAngleDown} onClick={()=>setTravel(true)}/>}
                   </div>
+                  {travel && <div className=' flex flex-col gap-2 mx-4 mt-2' ><Link className="cursor-pointer  sm:text-[16px] md:text-xl " onClick={() => { setTogle(false); setTravel(false) }} href="/travel/blog"> Blog</Link>
+                    <Link className="cursor-pointer  sm:text-[16px] md:text-xl" onClick={() => { setTogle(false); setTravel(false) }} href="/travel/travel-guide"> Travel Guide</Link>
+                    <Link className="cursor-pointer  sm:text-[16px] md:text-xl " onClick={() => { setTogle(false); setTravel(false) }} href="/travel/news"> News</Link>
+                  </div>}
                 </div>
-                <h3 className="cursor-pointer md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Gift a Tour</h3>
+
                 <h3 className="cursor-pointer md: sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Contact Us</h3>
               </div>
               <hr className="mx-1" />
               <div className="w-full flex flex-col gap-4 px-2 sm:px-4 my-2">
                 <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">About Us</h6>
                 <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Career</h6>
-                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Blogs</h6>
-                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Contact js</h6>
               </div>
               <hr className="mx-1" />
               <div className="w-full flex flex-col gap-6 px-2 sm:px-4 my-2">
