@@ -47,6 +47,7 @@ const StateCard = ({ states }) => {
                 <div className="carousel gap-5" ref={carouselRef}>
                     {states?.length > 0 && states?.map((items, i) => {
                         const data=items?.selectedItem?.toLowerCase()?.split(" ")?.join("-");
+                        // console.log("item poster path -----------> ",items?.posterPath)
                         return (
                             <div key={i} className="carousel-item md:w-[280px] w-64 mb-11  rounded-[17px]">
                                 <div className="shadow-md  rounded-[17px] overflow-hidden">

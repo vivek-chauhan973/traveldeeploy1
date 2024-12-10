@@ -19,7 +19,7 @@ const HeroSection = () => {
         {banner?.[0]?.videoPath &&<video autoPlay muted loop
           className="absolute  inset-0 z-0 w-full h-full object-cover"
           >
-          <source src="/video.mp4" type="video/mp4" />
+          <source src="/Video.mp4" type="video/mp4" />
         </video>}
         <div className="absolute inset-0 z-1 bg-black opacity-10"></div>
         <div className="z-20 text-white text-center relative  xl:w-[50vw] w-[80vw]">
