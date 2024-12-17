@@ -9,7 +9,7 @@ import { MdMailOutline } from "react-icons/md";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const fetchCatagories=async ()=>{
+const fetchCatagories = async () => {
     const categoriesList = await fetch('/api/package-setting/category/get-categories');
     return await categoriesList.json();
 }
@@ -17,43 +17,43 @@ const fetchCategoryPackages = async (locationId) => {
     const response = await fetch(`/api/public/category/${locationId}`);
     const data = await response.json();
     return data;
-  };
+};
 
 export default function Footer() {
     const [categoryArray, setCategoryArray] = useState([]);
-    const [list1,setList1]=useState([]);
-    const [list2,setList2]=useState([]);
+    const [list1, setList1] = useState([]);
+    const [list2, setList2] = useState([]);
 
     const processCategories = async () => {
-      try {
-        const categories = await fetchCatagories();
-        let uniqueCategories = [];
-        for (let item of categories?.data) {
-          const result = await fetchCategoryPackages(item._id);
-          const data = { category: item?.category, result: result?.packages };
-          const isExisting = uniqueCategories.some(
-            (entry) => entry.category === data.category
-          );
-          if (!isExisting) {
-            uniqueCategories.push(data);
-          }
+        try {
+            const categories = await fetchCatagories();
+            let uniqueCategories = [];
+            for (let item of categories?.data) {
+                const result = await fetchCategoryPackages(item._id);
+                const data = { category: item?.category, result: result?.packages };
+                const isExisting = uniqueCategories.some(
+                    (entry) => entry.category === data.category
+                );
+                if (!isExisting) {
+                    uniqueCategories.push(data);
+                }
+            }
+            setCategoryArray(uniqueCategories);
+        } catch (error) {
+            console.error("Error processing categories or packages: ", error);
         }
-        setCategoryArray(uniqueCategories);
-      } catch (error) {
-        console.error("Error processing categories or packages: ", error);
-      }
-    }; 
+    };
     useEffect(() => {
-      processCategories();
+        processCategories();
     }, []);
 
     // devide categories in two section 
 
-    const data1=categoryArray?.slice(0,5);
-    const data2=categoryArray?.slice(5,10);
-    
+    const data1 = categoryArray?.slice(0, 5);
+    const data2 = categoryArray?.slice(5, 10);
 
-//   console.log("Fetched packages1:---->", data1); 
+
+    //   console.log("Fetched packages1:---->", data1); 
     return (
         <>
             <div>
@@ -66,15 +66,15 @@ export default function Footer() {
                         <footer className="  ">
                             <div className="bg-navyblack text-white p-6">
                                 <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
-                                    {categoryArray?.map((item,i)=><div key={i} className="flex flex-col gap-y-5">
+                                    {categoryArray?.map((item, i) => <div key={i} className="flex flex-col gap-y-5">
                                         <div className="flex flex-col space-y-2 ">
                                             <h2 className="font-semibold text-base">{item?.category}</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                {item?.result?.map((subItem,i)=><Link key={i} href={`/package/`+subItem.pageUrl}><p rel="noopener noreferrer" href="#" className="footer-content">{subItem?.name}</p></Link>)}
-                                                
+                                                {item?.result?.map((subItem, i) => <Link key={i} href={`/package/` + subItem.pageUrl}><p rel="noopener noreferrer" href="#" className="footer-content">{subItem?.name}</p></Link>)}
+
                                             </div>
                                         </div>
-                                        
+
                                     </div>)}
                                 </div>
                             </div>
@@ -106,7 +106,7 @@ export default function Footer() {
                                             </div>
                                         </div>
                                         <div>
-                                            <div className="flex flex-col space-y-2">
+                                            {/* <div className="flex flex-col space-y-2">
                                                 <h2 className="font-semibold text-base">Customization</h2>
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">Configuration</Link>
@@ -115,7 +115,7 @@ export default function Footer() {
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">Customizing Colors</Link>
 
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div>
                                             <div className="flex flex-col space-y-3">
@@ -137,25 +137,35 @@ export default function Footer() {
                                 <div className="container-wrapper">
                                     <hr className="container-wrapper" />
                                     <div className=" py-2 ">
-                                        <p className="text-xs">*Caution: Beware of Fake Promotions or Offers *Please be cautious and do not engage with any promotional emails, SMS, or web links that ask you to click on a link and provide your personal details. All authorized communications from BizareXpedition™️ Services will come exclusively from our registered domains: @bizarexpedition.com, @bizarexpedition.online, or @bizarexpedition.in.For any inquiries, you can also reach us through our official WhatsApp channel at 9897581113. *BizareXpedition™️ Services is not liable for any fraudulent or misleading communications that do not originate from our official domains.</p>
+                                        <p className="text-xs">
+                                            *Caution: Beware of Fake Promotions or Offers *Please be cautious and do not engage with any promotional emails, SMS, or web links that ask you to click on a link and provide your personal details. All authorized communications from BizareXpedition™️ Services will come exclusively from our registered domains: @bizarexpedition.com, @bizarexpedition.online, or @bizarexpedition.in.For any inquiries, you can also reach us through our official WhatsApp channel at 9897581113. *BizareXpedition™️ Services is not liable for any fraudulent or misleading communications that do not originate from our official domains.
+                                        </p>
                                     </div>
                                     <hr className="container-wrapper" />
 
                                     <div className="  md:flex md:items-center md:justify-between py-1 ">
                                         <ul className="flex items-center  flex-wrap ">
-                                            <li className=" list-none"><Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Terms
-                                                and
-                                                conditions</Link>
+                                            <li className=" list-none">
+                                                <Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                    Terms and conditions
+                                                </Link>
                                             </li>
-                                            <li className=" list-none"><Link href="#"
-                                                className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Privacy
-                                                Policy</Link></li>
-                                            <li className=" list-none"><Link href="#"
+                                            <li className=" list-none">
+                                                <Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                    Privacy Policy
+                                                </Link>
+                                            </li>
+                                            <li className=" list-none">
+                                                <Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                    Site Map
+                                                </Link>
+                                            </li>
+                                            {/* <li className=" list-none"><Link href="#"
                                                 className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Licensing</Link>
-                                            </li>
-                                            <li className=" list-none"><Link href="#"
+                                            </li> */}
+                                            {/* <li className=" list-none"><Link href="#"
                                                 className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Cookie
-                                                Policy</Link></li>
+                                                Policy</Link></li> */}
                                             <li className=" list-none"><Link href="#" className="text-sm font-normal text-gray-500 hover:underline">Contact</Link></li>
                                         </ul>
                                         <div className="flex sm:justify-center space-x-6">
@@ -196,7 +206,7 @@ export default function Footer() {
                                             </Link>
                                         </div>
                                     </div>
-                                    <hr className="container-wrapper"  />
+                                    <hr className="container-wrapper" />
                                     <div className="flex md:flex-row flex-col items-center justify-between md:gap-0 gap-2 py-1">
                                         <div className="flex">
                                             <span className="dark:text-gray-400 md:text-sm text-xs">© Copyright 1986. All Rights Reserved. | Country India</span>
@@ -206,7 +216,7 @@ export default function Footer() {
                                             />
                                         </div>
                                         <div className="flex justify-center items-center gap-2">
-                                          <Image width={5} height={5} src="/assets/Affiliation 1.png"
+                                            <Image width={5} height={5} src="/assets/Affiliation 1.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
@@ -218,7 +228,7 @@ export default function Footer() {
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
-                                          <Image width={5} height={5} src="/assets/Affiliation 4.png"
+                                            <Image width={5} height={5} src="/assets/Affiliation 4.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />

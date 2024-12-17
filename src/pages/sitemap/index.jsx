@@ -6,7 +6,7 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-const About = () => {
+const Sitemap = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
@@ -72,7 +72,7 @@ const About = () => {
   return (
     <div>
       <DesktopHeader />
-      <Breadcrumbs/>
+      <Breadcrumbs />
       <div>
         <div className="relative w-full h-80 md:h-96 lg:h-[32rem] overflow-hidden">
           <Image
@@ -85,7 +85,7 @@ const About = () => {
           />
         </div>
         <div className='container-wrapper pt-5'>
-          <h4 className="md:text-2xl text-md font-medium mb-2 capitalize">About US</h4>
+          <h4 className="md:text-2xl text-md font-medium mb-2 capitalize">Site Map</h4>
           <p className="text-para line-clamp-5">
             A great About Us page comes across as human. It puts a face to a name,
             showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
@@ -102,7 +102,7 @@ const About = () => {
           <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
             <div className="">
               <div className="sticky top-40 z-10 bg-white shadow-xl rounded-xl md:p-7 p-5">
-                <h4 className="text-md font-semibold mb-4 capitalize pl-3">About US</h4>
+                <h4 className="text-md font-semibold mb-4 capitalize pl-3">Site Map</h4>
                 <div>
                   {paragraphs.map((item, index) => (
                     <ScrollLink
@@ -158,4 +158,4 @@ const About = () => {
   )
 }
 
-export default About;
+export default Sitemap;
