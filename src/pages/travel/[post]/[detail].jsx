@@ -229,7 +229,7 @@ const Detail = () => {
                 <h3 className="text-[30px] font-medium mb-2">{item?.title}</h3>
                 <p className="text-base leading-relaxed">
                   <div
-                    dangerouslySetInnerHTML={{ __html: item?.information }}
+                    dangerouslySetInnerHTML={{ __html: item?.information }} className="blog-travel-news"
                   />
                 </p>
 

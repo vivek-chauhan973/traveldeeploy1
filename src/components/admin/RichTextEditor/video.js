@@ -57,9 +57,9 @@ const Video = Node.create({
           frameborder: '0',
           allow: 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
           allowfullscreen: true,
-          width: '80%',
-          height: '400px',
-          style: 'display: block; margin-left: auto; margin-right: auto;margin-top:8px;margin-bottom:8px;'
+          width: '100%',
+          height: 'auto',
+          style: 'display: block; margin-left: auto; margin-right: auto;margin-top:20px;margin-bottom:20px;'
         },
       ];
     }

@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { use, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash,faPlus ,faMinus  } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 // import DeletePop from "../../iternaryPopup/DeletePop";
 // import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import SubDetailQuestions from "./SubDetailQuestions";
@@ -58,7 +58,7 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
   // Edit functionality
   const handleEdit = (index, id) => {
     questionsEditData(id).then((res) => {
-      
+
       setEditorHtmlQuestion(res?.data?.title || "");
       setContent(res?.data?.information || "");
       setFilename(res?.data?.filename || []);
@@ -98,8 +98,7 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
     };
     try {
       const data = await fetch(
-        `/api/blog/blogquestion/${
-          editingIndex !== null ? `edit?quesId=${editId}` : "add"
+        `/api/blog/blogquestion/${editingIndex !== null ? `edit?quesId=${editId}` : "add"
         }`,
         {
           method: editingIndex !== null ? "PUT" : "POST",
@@ -109,15 +108,15 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
           body:
             editingIndex !== null
               ? JSON.stringify({
-                  questions: newEntry,
-                  blog: blogData?._id,
-                  filename,
-                })
+                questions: newEntry,
+                blog: blogData?._id,
+                filename,
+              })
               : JSON.stringify({
-                  questions: newEntry,
-                  blog: blogData?._id,
-                  filename,
-                }),
+                questions: newEntry,
+                blog: blogData?._id,
+                filename,
+              }),
         }
       );
       if (data?.ok) {
@@ -171,9 +170,12 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
                     />
                   </div>
                 </div>
-                <div className="md:mt-12 mt-24">
-                  <label className="pb-2 font-semibold text-para">
-                    Descriptions
+                <div className="md:mt-7 mt-5">
+                  <label className="pb-2 font-semibold text-para flex md:flex-row flex-col">
+                    <p>Descriptions </p>
+                    <p className="font-medium text-gray-500 md:ml-10 md:text-sm text-xxs">
+                      <span className="text-red-500">* </span>Please upload img size 730X400px
+                    </p>
                   </label>
                   <div className="w-full">
                     {/* <QuillNoSSRWrapper
@@ -191,7 +193,7 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
                       filename={filename}
                     />
                   </div>
-                  <div className="md:pt-12 pt-24">
+                  <div className="pt-3">
                     <button
                       onClick={handleAddorUpdate}
                       className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1 cursor-pointer`}
@@ -212,32 +214,32 @@ const DetailsQuestion = ({ setActiveTab, blogData }) => {
                             <p className="capitalize flex gap-2 md:text-para text-sm">
                               <span>{index + 1}. </span>
                               <div
-                               
+
                                 dangerouslySetInnerHTML={{
                                   __html: item?.title,
                                 }}
                               />
                             </p>
                           </div>
-                          
+
                           <div className="flex gap-3">
-                          {(subQuestionState&&subQueID===item?._id)?<FontAwesomeIcon
+                            {(subQuestionState && subQueID === item?._id) ? <FontAwesomeIcon
                               icon={faMinus}
-                              className="font1 cursor-pointer hover:text-primary"
+                              className="md:text-sm text-xs cursor-pointer hover:text-primary"
                               onClick={() => {
                                 setSubQueId(null);
                                 setSubQuestionState(false)
                               }}
-                            />:<FontAwesomeIcon
+                            /> : <FontAwesomeIcon
                               icon={faPlus}
-                              className="font1 cursor-pointer hover:text-primary"
+                              className="md:text-sm text-xs cursor-pointer hover:text-primary"
                               onClick={() => {
                                 setSubQueId(item?._id);
                               }}
                             />}
                             <FontAwesomeIcon
                               icon={faEdit}
-                              className="font1 cursor-pointer hover:text-primary"
+                              className="md:text-sm text-xs cursor-pointer hover:text-primary"
                               onClick={() => {
                                 handleEdit(index, item?._id);
                               }}

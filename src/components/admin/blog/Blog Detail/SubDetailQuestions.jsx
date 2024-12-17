@@ -152,7 +152,7 @@ const SubDetailQuestions = ({setSubQuestionState,subQueID}) => {
                   />
                 </div>
               </div>
-              <div className="md:mt-12 mt-24">
+              <div className="md:mt-7 mt-5">
                 <label className="pb-2 font-semibold text-para">
                   Descriptions
                 </label>
@@ -166,7 +166,7 @@ const SubDetailQuestions = ({setSubQuestionState,subQueID}) => {
                     modules={modules}
                   />
                 </div>
-                <div className="md:pt-12 pt-24">
+                <div className="md:pt-14 pt-24">
                   <button
                     onClick={handleAddOrUpdate}
                     className={`bg-navyblack text-white md:w-auto w-full rounded px-10 py-1 cursor-pointer`}
