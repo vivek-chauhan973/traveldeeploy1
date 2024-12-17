@@ -289,7 +289,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
             }
         }
     };
-    console.log("selectedcategories----> ",selectedCategories)
+    // console.log("selectedcategories----> ",selectedCategories)
   
     return (
         <>
