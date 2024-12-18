@@ -43,11 +43,11 @@ export default function ColorManagement() {
     const handleBtnColorChange = (e) => {
         // console.log(e.target.value)
         isColor.button = e.target.value
+        console.log("set color property is here--------> ",e.target.value)
     }
 
     const colorSubmit = async (e) => {
         e.preventDefault()
-        // console.log("here is click and change the states",isColor)
         try {
             const response = await fetch('/api/website-color/update', {
                 method: 'POST',
