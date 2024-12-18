@@ -77,7 +77,6 @@ const Cardwork = () => {
             </div>
           ))}
         </div>
-
         <BsArrowRightCircleFill
           size={30}
           onClick={nextSlide}

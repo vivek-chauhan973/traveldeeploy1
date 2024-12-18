@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Link from 'next/link';
 
 const About = () => {
 
@@ -72,32 +73,41 @@ const About = () => {
   return (
     <div>
       <DesktopHeader />
-      <Breadcrumbs/>
+      <Breadcrumbs />
       <div>
-        <div className="relative w-full h-80 md:h-96 lg:h-[32rem] overflow-hidden">
-          <Image
-            className=" top-0 left-0 w-full h-full object-cover object-center"
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Favit.ac.in%2Fcontact%2F&psig=AOvVaw2a30A9-VUVeov-cz3KWFaz&ust=1729578845164000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCwxbntnokDFQAAAAAdAAAAABAE"
-            alt=""
-            width={100}
-            height={100}
-            onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
-          />
+        {/* herosection start */}
+        <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
+          <div className="h-full w-full ">
+            <div>
+              <Image className="relative object-cover h-full w-full"
+                layout='fill'
+                src="/assets/staticimage/aboutUs.jpg"
+                alt="images"
+              />
+              <div
+                className="absolute bg-gradient-to-r from-black to-gray"
+              >
+                <div className='w-[50%] h-full md:h-[450px] flex justify-center items-center'>
+                  <div className='w-[85%] flex flex-col justify-center items-center'>
+                    <h2 className="xl:text-[50px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-primary text-center">
+                      About us <span className='text-white'>Excellence Defined</span>
+                    </h2>
+                    <p className="my-5 md:text-para text-sm  text-white text-center">
+                      At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions. 
+                      we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
+                    </p>
+                    <Link href="#">
+                      <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                        Eexplore Now
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className='container-wrapper pt-5'>
-          <h4 className="md:text-2xl text-md font-medium mb-2 capitalize">About US</h4>
-          <p className="text-para line-clamp-5">
-            A great About Us page comes across as human. It puts a face to a name,
-            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-            A great About Us page comes across as human. It puts a face to a name,
-            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-            A great About Us page comes across as human. It puts a face to a name,
-            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-          </p>
-        </div>
+        {/* herosection end */}     
         <div className="container-wrapper py-10">
           <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
             <div className="">

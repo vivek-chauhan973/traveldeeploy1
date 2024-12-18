@@ -5,11 +5,15 @@ import Image from 'next/image';
 import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Link from 'next/link';
 
 const PrivacyPolicy = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
 
+  const boxShadowStyle = {
+    boxShadow: "inset 0px -400px 20px  rgba(0, 0, 0, 0.2)",
+  };
   const paragraphs = [
     {
       id: "1st",
@@ -74,23 +78,72 @@ const PrivacyPolicy = () => {
       <DesktopHeader />
       <Breadcrumbs />
       <div>
-        <div className='w-full h-[550px] bg-black flex gap-3 justify-around items-center px-5'>
-          <div className='w-[650px] h-[400px] text-white flex flex-col justify-between items-start py-10 px-5'>
-            <h4 className="md:text-[30px] text-md font-medium mb-2 capitalize">Privacy Policy</h4>
-            <p className='text-[64px]'><span className='text-primary'>PAINT THE WORLD ORANGE</span> WITH SIXT</p>
-            <p className='text-md'>
-              Veena World’s privacy policy goes over the information we collect from customers and explains your choices surrounding
-              how we use information about you.
-            </p>
+        {/* herosection start */}
+        {/* <div className="relative flex justify-center items-center overflow-hidden w-full md:h-96 h-72">
+          <div className="h-full w-full ">
+            <div className="bg-white h-full w-full md:h-[400px]">
+              <Image className="relative  object-cover h-full w-full md:h-[400px]"
+                layout='fill'
+                src="/assets/staticimage/privacyPolicy.jpg"
+                alt="images"
+              />
+              <div
+                className="absolute w-full h-full bg-gradient-to-r from-black to-gray"
+              >
+                <div className='absolute md:bottom-5 bottom-0 md:left-20 left-0 mx-5 my-5'>
+                  <div className='md:w-[45%] w-full flex flex-col justify-between items-center'>
+                    <h2 className="xl:text-[50px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-primary text-center">
+                      Privacy Policy Your privacy matters to us
+                    </h2>
+                    <p className="my-2 md:text-para text-sm  text-white text-center">
+                      At BizareXpedtion, we are commited to protecting your privacy and ensuring a safe online experience.
+                      This Privacy Policy outlines how we collect, use, and safe-guard your personel information when you visit
+                      our website or use our services.
+                    </p>
+                    <Link href="#">
+                      <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                        Eexplore Now
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className='w-[480px] h-[480px]'>
-            <img 
-            className='w-full h-full rounded-md'
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiX0OEfszfFZTjChd66ocwlhpcLvALqCLJKA&s" 
-            alt="" 
-            />
+        </div> */}
+        <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
+          <div className="h-full w-full ">
+            <div>
+              <Image className="relative object-cover h-full w-full"
+                layout='fill'
+                src="/assets/staticimage/privacyPolicy.jpg"
+                alt="images"
+              />
+              <div
+                className="absolute bg-gradient-to-r from-black to-gray"
+              >
+                <div className='w-[50%] h-full md:h-[450px] flex justify-center items-center'>
+                  <div className='w-[85%] flex flex-col justify-center items-center'>
+                    <h2 className="xl:text-[50px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-primary text-center">
+                      Privacy Policy <br /><span className='text-white'>Your privacy matters to us</span>
+                    </h2>
+                    <p className="my-5 md:text-para text-sm  text-white text-center">
+                      At BizareXpedtion, we are commited to protecting your privacy and ensuring a safe online experience.
+                      This Privacy Policy outlines how we collect, use, and safe-guard your personel information when you visit
+                      our website or use our services.
+                    </p>
+                    <Link href="#">
+                      <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                        Eexplore Now
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        {/* herosection end */}
         <div className="container-wrapper py-10">
           <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
             <div className="">
@@ -152,3 +205,8 @@ const PrivacyPolicy = () => {
 }
 
 export default PrivacyPolicy;
+
+
+
+
+

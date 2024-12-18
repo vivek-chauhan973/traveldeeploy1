@@ -16,6 +16,8 @@ import CarItineraryTour from "@/components/admin/itineraryMaster/CarItineraryTou
 import CarTermsAndCondition from "@/components/admin/itineraryMaster/Car/CarTermsAndCondition";
 import CarGst from "@/components/admin/dashboard/CarGst";
 import CarTime from "@/components/admin/itineraryMaster/Car/CarTime";
+import CarLocation from "@/components/admin/itineraryMaster/Car/CarLocation";
+import CarPricingManagement from "@/components/admin/itineraryMaster/Car/CarPricingManagement";
 
 
 export default function Category() {
@@ -332,8 +334,7 @@ export default function Category() {
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+                            <CarGst />
                         </div>
                         <div className="my-5">
                             <CarItineraryTour />
@@ -344,8 +345,11 @@ export default function Category() {
                         <div className="mt-5 mb-10">
                             <CarTime />
                         </div>
-                        <div>
-                            <CarGst />
+                        <div className="mt-5 mb-10">
+                            <CarPricingManagement />
+                        </div>
+                        <div className="mt-5 mb-10">
+                            <CarLocation />
                         </div>
                     </div>
                 </Layout>

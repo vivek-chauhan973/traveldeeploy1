@@ -1,0 +1,226 @@
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import * as XLSX from "xlsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faArrowRightLong,
+    faCirclePlus,
+    faCube,
+    faEdit,
+    faFloppyDisk,
+    faTrash,
+    faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+
+// const fetchFixedDepartureData = async (itinerary) => {
+//     const res = await fetch("/api/cars/package/price/departures/" + itinerary.id);
+//     return await res.json();
+//   };
+
+const CarPricingManagement = () => {
+
+    const [data, setData] = useState([]);
+    const [editingIndex, setEditingIndex] = useState(null);
+    const [editFormData, setEditFormData] = useState({});
+    const [fixedDeparture, setFixedDeparture] = useState(null);
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const binaryStr = e.target.result;
+                const workbook = XLSX.read(binaryStr, { type: "binary" });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(sheet, {
+                    raw: false,
+                    dateNF: "mm/dd/yyyy",
+                });
+                setData(jsonData);
+            };
+            reader.readAsBinaryString(file);
+        }
+    };
+
+    const handleEdit = (index) => {
+        setEditingIndex(index);
+        setEditFormData(data[index]);
+    };
+
+    const handleDelete = (index) => {
+        const updatedData = data.filter((_, i) => i !== index);
+        setData(updatedData);
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setEditFormData({ ...editFormData, [name]: value });
+    };
+
+    const handleSave = () => {
+        const updatedData = [...data];
+        updatedData[editingIndex] = editFormData;
+        setData(updatedData);
+        setEditingIndex(null);
+        setEditFormData({});
+    };
+    // useEffect(() => {
+    //     if (itinerary?.prices) {
+    //         setData(itinerary?.prices?.departureData);
+    //     }
+    //     //  console.log("itinerary?.addguest---> ",itinerary?.addguest)
+    //     setFixedDeparture(itinerary?.addguest);
+    // }, [itinerary]);
+    // console.log("itinary is here ------> ", data);
+    const handleSubmit = async () => {
+        alert(`Data submitted`);
+        // try {
+        //     const res = await fetch("/api/cars/package/price/departures/" + itinerary.id, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(
+        //             data
+        //         ),
+        //     });
+        // } catch (error) {
+        //     console.log("Error submitting data", error);
+        // }
+    };
+
+
+    return (
+        <div>
+            <div className="flex items-center gap-5 text-primary mb-5">
+                <FontAwesomeIcon icon={faCube} className="text-2xl" />
+                <p className="md:text-[28px] text-xl text-black">Car Pricing Management</p>
+                <FontAwesomeIcon
+                    icon={faArrowRightLong}
+                    className=" text-teal-700 text-xl"
+                />
+            </div>
+            <div className="grid grid-cols-1 gap-5 rounded">
+                <div className="shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600">
+                    <div className="">
+                        <div className="mb-4 xl:flex justify-start gap-5">
+                            <p className="md:text-md text-md font-semibold text-gray-700">
+                                Upload Excel File
+                            </p>
+                            <input
+                                type="file"
+                                onChange={handleFileUpload}
+                                accept=".xls,.xlsx"
+                                className="px-2 py-1.5 border md:w-auto w-full rounded-lg"
+                            />
+                        </div>
+                        <div className="">
+                            {data?.length !== 0 && (
+                                <h1 className="md:text-lg text-md font-semibold text-gray-800 mb-1">
+                                    Fixed Departure Entries
+                                </h1>
+                            )}
+                            <div className="overflow-x-auto">
+                                {data?.length !== 0 && (
+                                    <table className="min-w-full ">
+                                        <thead>
+                                            <tr className="bg-navyblack text-white text-center">
+                                                <th className="p-2 border">Date</th>
+                                                <th className="p-2 border">Hike %</th>
+                                                <th className="p-2 border">Save %</th>
+                                                <th className="p-2 border">GST %</th>
+                                                <th className="p-2 border">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {data?.map((item, i) => (
+                                                <tr key={i} className="text-center border-b">
+                                                    {editingIndex === i ? (
+                                                        <>
+                                                            <td className="p-2 border">
+                                                                <input
+                                                                    name="Date"
+                                                                    value={editFormData.Date}
+                                                                    onChange={handleInputChange}
+                                                                    className="p-1 border md:text-base text-sm rounded-md text-center"
+                                                                />
+                                                            </td>
+                                                            <td className="p-2 border">
+                                                                <input
+                                                                    name="Price"
+                                                                    value={editFormData.Hike}
+                                                                    onChange={handleInputChange}
+                                                                    className="p-1 border md:text-base text-sm rounded-md text-center"
+                                                                />
+                                                            </td>
+                                                            <td className="p-2 border">
+                                                                <input
+                                                                    name="Start_drop_down"
+                                                                    value={editFormData.Save}
+                                                                    onChange={handleInputChange}
+                                                                    className="p-1 md:text-base text-sm border rounded-md text-center"
+                                                                />
+                                                            </td>
+                                                            <td className="p-2 border">
+                                                                <input
+                                                                    name="End_drop_down"
+                                                                    value={editFormData.GST}
+                                                                    onChange={handleInputChange}
+                                                                    className="p-1 md:text-base text-sm border rounded-md text-center"
+                                                                />
+                                                            </td>
+
+                                                            <td className="p-2 border">
+                                                                <FontAwesomeIcon
+                                                                    icon={faFloppyDisk}
+                                                                    onClick={handleSave}
+                                                                    className="text-xl hover:text-primary cursor-pointer"
+                                                                />
+                                                            </td>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <td className="px-1 py-2 border">{item?.Date}</td>
+                                                            <td className="px-1 py-2 border">{item?.Hike}</td>
+                                                            <td className="px-1 py-2 border">
+                                                                {item?.Save}
+                                                            </td>
+                                                            <td className="px-1 py-2 border">
+                                                                {item?.GST}
+                                                            </td>
+                                                            <td className="px-1 py-2 border">
+                                                                <div className="flex justify-center gap-3">
+                                                                    <FontAwesomeIcon
+                                                                        icon={faEdit}
+                                                                        onClick={() => handleEdit(i)}
+                                                                        className="hover:text-primary cursor-pointer"
+                                                                    />
+                                                                    <FontAwesomeIcon
+                                                                        icon={faTrash}
+                                                                        onClick={() => handleDelete(i)}
+                                                                        className=" hover:text-primary cursor-pointer"
+                                                                    />
+                                                                </div>
+                                                            </td>
+                                                        </>
+                                                    )}
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button
+                onClick={handleSubmit}
+                className="bg-black text-white w-full rounded-lg py-3 mt-4"
+            >
+                Submit All Data
+            </button>
+        </div>
+    );
+}
+export default CarPricingManagement;

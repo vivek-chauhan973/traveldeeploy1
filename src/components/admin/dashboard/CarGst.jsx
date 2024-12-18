@@ -13,9 +13,6 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-const MdOutlineAddCircle = dynamic(() =>
-  import("react-icons/md").then((mod) => mod.MdOutlineAddCircle)
-);
 
 const CarGst = () => {
   const [gstRate, setGstRate] = useState("");
@@ -70,15 +67,7 @@ const CarGst = () => {
 
   return (
     <div>
-      <div className="flex items-center gap-5 text-primary pb-3 mb-5">
-        <FontAwesomeIcon icon={faCube} className="text-2xl" />
-        <p className="md:text-[28px] text-xl text-black">Car GST Management</p>
-        <FontAwesomeIcon
-          icon={faArrowRightLong}
-          className=" text-teal-700 text-xl"
-        />
-      </div>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 rounded">
+      <div className="grid grid-cols-1 gap-5 rounded">
         <div className="shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600">
           <form
             onSubmit={handleSubmit}
@@ -86,7 +75,7 @@ const CarGst = () => {
           >
             <div className="grow flex flex-col">
               <label htmlFor="" className="pb-2 font-semibold text-para">
-                GST Rate
+                Car GST Rate
               </label>
               <input
                 value={gstRate}
@@ -135,7 +124,7 @@ const CarGst = () => {
                         />
                       </>
                     ) : (
-                      <>                       
+                      <>
                         <FontAwesomeIcon
                           icon={faTrash}
                           onClick={() => handleDelete(item._id)}
