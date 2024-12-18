@@ -11,16 +11,24 @@ import { GiMoneyStack } from "react-icons/gi";
 import { PiPackageDuotone } from "react-icons/pi";
 import Chart1 from "@/components/admin/dashboard/charts/chart1";
 
-import List from "@/components/admin/dashboard/transaction/index";
+import Transaction from "@/components/admin/dashboard/transaction/index";
 import BlogTable from "@/components/admin/dashboard/BlogTable";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 
 import ReviewForm from "@/components/Reviews";
 import RatingForm from "@/components/admin/dashboard/Rating";
+import { useEffect, useState } from "react";
 // import RatingForm from "@/components/admin/dashboard/Rating";
 // import Gst from "@/components/admin/dashboard/Gst";
-
+const fetchBlogs=async ()=>{
+    return (await(await fetch(`/api/blog/getallblogs?selectType=blog`)).json())
+}
 export default function AdminDashboard() {
+    const [blogPosts,setBlogPosts]=useState([]);
+
+    useEffect(()=>{
+        fetchBlogs().then(res=>{setBlogPosts(res?.data||[])})
+    },[])
     return (
         <AppProvider>
             <Layout>
@@ -30,7 +38,7 @@ export default function AdminDashboard() {
                     <h1 className="text-para font-bold mb-4">Dashboard</h1>
 
                     {/* Cards Section */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-6">
                         <div className="relative group border-l-2 border-teal-700 backdrop-blur-xl bg-amber-50/40 pt-5 overflow-hidden rounded-lg shadow-md">
                             <SparklineChart />
                             <div className="absolute right-5 top-5">
@@ -54,15 +62,16 @@ export default function AdminDashboard() {
 
                         <div className="relative group border-l-2 border-teal-700 bg-gradient-to-r from-cyan-500/50 to-blue-500/50 pt-5 overflow-hidden rounded-lg shadow-md">
                             <SparklineChart4 />
+                           
                             <div className="absolute right-5 top-5">
-                                <GiMoneyStack className="text-white group-hover:scale-105 group-hover:drop-shadow-lg" size={40} />
+                            <GiMoneyStack className="text-white group-hover:scale-105 group-hover:drop-shadow-lg" size={40} />
                             </div>
                         </div>
                     </div>
 
                     {/* Charts Section */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
-                        <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-5">
+                        <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg px-1 rounded-lg shadow-md mt-5">
                             <Chart1 />
                         </div>
                         <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
@@ -73,22 +82,16 @@ export default function AdminDashboard() {
                     </div>
 
                     {/* Lists and Tables Section */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-5">
                         <div className="border-l-2 border-teal-700 p-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
-                            <List />
+                            <Transaction />
                         </div>
                         <div className="border-l-2 border-teal-700 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
                             <div className="px-2 py-1">
                                 <p className="font-semibold text-md">Recent Post</p>
                             </div>
                             <div className="h-96 overflow-y-auto">
-                                <BlogTable />
-                                <BlogTable />
-                                <BlogTable />
-                                <BlogTable />
-                                <BlogTable />
-                                <BlogTable />
-                                <BlogTable />
+                                {blogPosts?.map((item,i)=><BlogTable item={item} key={i} />)}
                             </div>
                         </div>
                     </div>
