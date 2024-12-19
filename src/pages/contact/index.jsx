@@ -107,6 +107,7 @@ const Contact = () => {
             </div>
           </div>
         </div> */}
+        {/* medium devices */}
         <div className='md:block hidden'>
           <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
             <div className='w-[30%] h-full bg-black flex items-center justify-end'>
@@ -136,6 +137,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
+        {/* small devices */}
         <div className='md:hidden'>
           <div className='w-full flex items-center justify-center bg-black p-5'>
             <div className='w-full flex flex-col justify-center items-center'>
