@@ -2,72 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCirclePlus, faCube, faEdit, faFloppyDisk, faTrash, faXmark, } from "@fortawesome/free-solid-svg-icons";
 
-const fetchCountries = async () => {
-  try {
-    const res = await fetch('/api/location?type=country', { method: 'GET' });
-    const data = await res.json();
-    return data.result;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-};
-
-const fetchStates = async (countryId) => {
-  try {
-    const res = await fetch('/api/location?type=state&countryId=' + countryId, { method: 'GET' });
-    const data = await res.json();
-    return data.result;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-};
-const fetchCities = async (stateId) => {
-  try {
-    const res = await fetch('/api/location?type=city&stateId=' + stateId, { method: 'GET' });
-    const data = await res.json();
-    return data.result;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-};
-
 const CarLocation = () => {
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedCountries = await fetchCountries();
-      setCountries(fetchedCountries);
-    };
-
-    fetchData();
-  }, []);
-
-  const [country, setCountry] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
-  const [countries, setCountries] = useState();
   const [states, setStates] = useState();
   const [cities, setCities] = useState();
-  const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
-  const [editCountryValue, setEditCountryValue] = useState('');
   const [editStateValue, setEditStateValue] = useState('');
   const [editCityValue, setEditCityValue] = useState('');
-  const [editCountryId, setEditCountryId] = useState(null);
   const [editStateId, setEditStateId] = useState(null);
   const [editCityId, setEditCityId] = useState(null);
 
-  const handleCountryInputChange = (event) => {
-    setCountry(event.target.value);
-  };
-
-  const toggleEditCountry = (countryId) => {
-    setEditCountryId(countryId === editCountryId ? null : countryId);
-    setEditCountryValue('')
-  };
 
   const toggleEditState = (StateId) => {
     setEditStateId(StateId === editStateId ? null : StateId);
@@ -79,22 +25,7 @@ const CarLocation = () => {
     setEditCityValue('')
   };
 
-  const saveEditCountry = async (countryId) => {
-    try {
-      const response = await fetch('/api/location/edit?type=country', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ countryId, name: editCountryValue }),
-      });
-      toggleEditCountry(countryId)
-      const fetchedCountries = await fetchCountries();
-      setCountries(fetchedCountries);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
   const saveEditState = async (stateId) => {
     try {
       const response = await fetch('/api/location/edit?type=state', {
@@ -136,36 +67,13 @@ const CarLocation = () => {
   const handleCityInputChange = (e) => {
     setCity(e.target.value)
   }
-  const handleCountrySelect = async (countryId) => {
-    setSelectedCountry(countryId);
-    const fetchedStates = await fetchStates(countryId);
-    setStates(fetchedStates);
-    setSelectedState(null)
-  };
+  
 
   const handleStateSelect = async (stateId) => {
     setSelectedState(stateId);
     const fetchedCities = await fetchCities(stateId);
     setCities(fetchedCities);
   };
-
-
-  const handleAddCountry = async () => {
-    try {
-      const response = await fetch('/api/location/add?type=country', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ country }),
-      });
-      const fetchedCountries = await fetchCountries();
-      setCountries(fetchedCountries);
-      setCountry('')
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const handleAddState = async () => {
     try {
@@ -199,29 +107,7 @@ const CarLocation = () => {
       console.log(error);
     }
   }
-  const handleDeleteCountry = async (countryId) => {
-    try {
-      const userConfirmed = confirm('Are you sure?');
-
-      if (!userConfirmed) {
-        return;
-      }
-      const response = await fetch(`/api/location/delete?type=country&countryId=${countryId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.ok) {
-        const fetchedCountries = await fetchCountries();
-        setCountries(fetchedCountries);
-      } else {
-        console.error('Failed to delete country');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  
   const handleDeleteState = async (stateId) => {
     try {
       const userConfirmed = confirm('Are you sure?');
@@ -282,80 +168,11 @@ const CarLocation = () => {
         />
       </div>
       <div className="w-full  border-l-2 border-teal-600 bg-white mt-2 p-4 shadow-[0_0px_10px_-4px_rgba(0,0,0,0.3)] rounded-md">
+        <p className='text-xl mb-3 font-semibold'>Local Location</p>
         <p className='text-para font-semibold'>Pickup Location and Pickup Point</p>
         <div className="border   rounded p-2">
-          <div className='grid grid-cols-1 xl:grid-cols-2 gap-3'>
-            <div className='border md:px-4 py-4 px-2 rounded-md bg-white'>
-              <div className='flex items-center justify-between gap-1'>
-                <div className='md:flex items-center'>
-                  <label htmlFor="country">Country :</label>
-                  <input className=' border md:ml-2 rounded-md h-8 px-2 focus:border-primary outline-none'
-                    value={country}
-                    onChange={handleCountryInputChange} />
-                </div>
-                <FontAwesomeIcon
-                  icon={faCirclePlus}
-                  onClick={handleAddCountry}
-                  disabled={!country}
-                  className="text-xl hover:text-primary cursor-pointer md:mb-1 md:mt-0 mt-5"
-                />
-              </div>
-              {/* data is here show */}
-              <hr className='my-3' />
-              <ul>
-                {countries?.map(countryData => (
-                  <li key={countryData._id} className='flex justify-between even:bg-slate-50 md:px-5 px-3'>
-                    <input
-                      type="radio" className="accent-navyblack"
-                      checked={selectedCountry === countryData._id}
-                      onChange={() => handleCountrySelect(countryData._id)}
-                      value={countryData._id} />
-                    <p className='leading-8 basis-1/2'>
-
-                      {editCountryId === countryData._id ? (
-                        <input
-                          className='border ml-2 rounded-md h-8 px-2 focus:border-primary outline-none'
-                          defaultValue={countryData.name}
-                          onChange={(e) => setEditCountryValue(e.target.value)}
-                        />
-                      ) : countryData.name}
-                    </p>
-                    <div className='flex gap-2 basis-1/3'>
-                      {editCountryId === countryData._id ? (
-                        <span className="flex gap-2 px-2">
-                          {editCountryValue &&
-                            <FontAwesomeIcon
-                              icon={faFloppyDisk}
-                              onClick={() => saveEditCountry(countryData._id)}
-                              className="font1 mt-1 hover:text-primary cursor-pointer"
-                            />
-                          }
-                          <FontAwesomeIcon
-                            icon={faXmark}
-                            onClick={() => toggleEditCountry(countryData._id)}
-                            className="font1 mt-1 hover:text-primary cursor-pointer"
-                          />
-                        </span>
-                      ) : (
-                        <FontAwesomeIcon
-                          icon={faEdit}
-                          onClick={() => toggleEditCountry(countryData._id)}
-                          className="font1 mt-1 hover:text-primary cursor-pointer"
-                        />
-                      )}
-                      {!editCountryValue &&
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          onClick={() => handleDeleteCountry(countryData._id)}
-                          className="mt-1 font1 hover:text-primary cursor-pointer"
-                        />
-                      }
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className='border md:px-4 py-4 px-3 rounded-md bg-white' hidden={!selectedCountry}>
+          <div className='grid grid-cols-1 xl:grid-cols-2 gap-3'>  
+            <div className='border md:px-4 py-4 px-3 rounded-md bg-white' >
               <div>
                 <div className='flex items-center justify-between gap-1'>
                   <div className='md:flex items-center'>
@@ -424,7 +241,9 @@ const CarLocation = () => {
                 </div>))}
               </div>
             </div>
-            <div className='border md:px-4 py-4 px-3 rounded-md bg-white' hidden={!selectedState}>
+            <div className='border md:px-4 py-4 px-3 rounded-md bg-white' 
+            // hidden={!selectedState}
+            >
               <div>
                 <div className='flex items-center justify-between gap-1'>
                   <div className='md:flex items-center'>
@@ -494,3 +313,6 @@ const CarLocation = () => {
   )
 }
 export default CarLocation;
+
+
+
