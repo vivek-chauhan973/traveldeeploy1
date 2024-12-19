@@ -46,6 +46,10 @@ const CarSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Markup is required'],
   },
+  locationrate: {
+    type: Number,
+    required: [true, 'locationrate is required'],
+  },
   imageDetails: [{
     url: {
       type: String,

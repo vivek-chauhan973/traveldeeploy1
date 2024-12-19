@@ -1,6 +1,5 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-
 // Dynamically import the ApexChart component with no SSR
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -84,8 +83,8 @@ class Chart1 extends React.Component {
   render() {
     return (
       <div>
-        <div id="chart">
-          <ApexChart options={this.state.options} series={this.state.series} type="line" height={350} />
+        <div id="chart" >
+          <ApexChart options={this.state.options} series={this.state.series} type="line" height={350}  className="md:w-[550px] xl:w-[450px]" />
         </div>
       </div>
     );

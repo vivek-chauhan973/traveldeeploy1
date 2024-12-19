@@ -71,7 +71,7 @@ export default function AdminDashboard() {
 
                     {/* Charts Section */}
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-5">
-                        <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg px-1 rounded-lg shadow-md mt-5">
+                        <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg px-1 rounded-lg object-contain shadow-md mt-5">
                             <Chart1 />
                         </div>
                         <div className="border-l-2 border-teal-700 pt-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5">
