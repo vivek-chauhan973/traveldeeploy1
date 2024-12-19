@@ -11,6 +11,7 @@ import { faArrowRightLong, faCube, faEdit, faTrash } from "@fortawesome/free-sol
 
 export default function AddCar() {
   const [cars, setCars] = useState([]);
+  const [previewImage,setPreviewImage]=useState(null);
   const [form, setForm] = useState({
     misc: '',
     capacity: '',
@@ -23,7 +24,8 @@ export default function AddCar() {
     outStationBasePrice: '',
     perKmRate: '',
     markup: '',
-    imageDetails: [{ url: '', title: '', alt: '' }]
+    imageDetails: [{ url: '', title: '', alt: '' }],
+    locationrate:''
   });
   const [selectedImages, setSelectedImages] = useState([]);
   const [editMode, setEditMode] = useState(false);
@@ -49,7 +51,13 @@ export default function AddCar() {
   };
 
   const handleFileChange = (e) => {
-    setSelectedImages([...e.target.files]);
+    const files = e.target.files;
+    setSelectedImages([...files]); // Store all selected files
+    
+    // If there's at least one file selected, update the preview
+    if (files.length > 0) {
+      setPreviewImage(URL.createObjectURL(files[0])); // Preview the first image
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -114,7 +122,9 @@ export default function AddCar() {
           outStationBasePrice: '',
           perKmRate: '',
           markup: '',
-          imageDetails: [{ url: '', title: '', alt: '' }]
+          imageDetails: [{ url: '', title: '', alt: '' }],
+          locationrate:''
+
         });
         setSelectedImages([]);
         setEditMode(false);
@@ -129,19 +139,22 @@ export default function AddCar() {
 
   const handleEdit = (car) => {
     setForm({
-      misc: car.misc,
-      capacity: car.capacity,
-      ac: car.ac,
-      bags: car.bags,
-      seatingCapacity: car.seatingCapacity,
-      vehicleType: car.vehicleType,
-      dailyLimit: car.dailyLimit,
-      rate: car.rate,
-      outStationBasePrice: car.outStationBasePrice,
-      perKmRate: car.perKmRate,
-      markup: car.markup,
-      imageDetails: car.imageDetails || [{ url: '', title: '', alt: '' }]
+      misc: car?.misc,
+      capacity: car?.capacity,
+      ac: car?.ac,
+      bags: car?.bags,
+      seatingCapacity: car?.seatingCapacity,
+      vehicleType: car?.vehicleType,
+      dailyLimit: car?.dailyLimit,
+      rate: car?.rate,
+      outStationBasePrice: car?.outStationBasePrice,
+      perKmRate: car?.perKmRate,
+      markup: car?.markup,
+      imageDetails: car?.imageDetails || [{ url: '', title: '', alt: '' }],
+      locationrate:car?.locationrate,
+
     });
+    setPreviewImage(car?.imageDetails[0]?.url)
     setEditMode(true);
     setEditId(car._id);
   };
@@ -180,8 +193,8 @@ export default function AddCar() {
             <div className='grid grid-cols-1 xl:grid-cols-2 gap-5 items-center grid-cols-reverse'>
               <div className="w-full p-5 h-full border bg-white rounded mt-1">
                 <div className="bg-slate-200 h-56 w-full rounded">
-                  {form.imageDetails[0]?.url && (
-                    <img src={form.imageDetails[0]?.url} alt={form.imageDetails[0]?.alt || "Car Image"} className="h-full w-full object-cover" />
+                  {previewImage&&(
+                    <img src={previewImage} alt={form.imageDetails[0]?.alt || "car image"} className="h-full w-full object-cover" />
                   )}
                 </div>
                 <div className="mt-4">
@@ -226,10 +239,11 @@ export default function AddCar() {
                   { label: "Base Fare/Per Day", name: "capacity", type: "number" },
                   { label: "Base price for KM's", name: "rate", type: "number" },
                   { label: "Out Station Base Price for KM", name: "outStationBasePrice", type: "number" },
-                  { label: "Per KM Rate", name: "perKmRate", type: "number" },
-                  { label: "Markup", name: "markup", type: "number" },
+                  { label: "Per KM Price", name: "perKmRate", type: "number" },
+                  { label: "Markup (2%=2)", name: "markup", type: "number" },
                   { label: "AC Charge per Day", name: "ac", type: "number" },
                   { label: "Misc", name: "misc", type: "number" },
+                  { label: "Location based rate percentage (2%=2)", name: "locationrate", type: "number" },
                 ].map((field) => (
                   <div key={field.name} className="mt-2 flex md:flex-row flex-col md:items-center pb-2">
                     <div className="w-40">
@@ -303,13 +317,16 @@ export default function AddCar() {
                     Rate
                   </th>
                   <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
-                    Markup
+                    Markup (%)
                   </th>
                   <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
                     AC Charge
                   </th>
                   <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
                     Misc
+                  </th>
+                  <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
+                    Location Rate(%)
                   </th>
                   <th className="border-t border-l p-2 text-wrap font-semibold border-r ">
                     Actions
@@ -344,13 +361,16 @@ export default function AddCar() {
                       {car?.perKmRate?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
                     </td>
                     <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
-                      {car?.markup?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
+                      {car?.markup}                     
                     </td>
                     <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
                       {car?.ac?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
                     </td>
                     <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
                       {car?.misc?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}                     
+                    </td>
+                    <td className="border-t border-l border-r px-2 py-2 border-b font-semibold capitalize">
+                      {car?.locationrate}                     
                     </td>
                     <td className="border-t border-l border-r px-2 py-2 border-b capitalize">
                       <FontAwesomeIcon
