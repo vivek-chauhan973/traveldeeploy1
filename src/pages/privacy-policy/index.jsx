@@ -102,7 +102,7 @@ const PrivacyPolicy = () => {
                     </p>
                     <Link href="#">
                       <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
-                        Eexplore Now
+                        Explore Now
                       </button>
                     </Link>
                   </div>
@@ -116,7 +116,7 @@ const PrivacyPolicy = () => {
             <div>
               <Image className="relative object-cover h-full w-full"
                 layout='fill'
-                src="/assets/staticimage/privacyPolicy.jpg"
+                src="/assets/staticimage/privacyPolicy1.jpg"
                 alt="images"
               />
               <div
@@ -124,7 +124,7 @@ const PrivacyPolicy = () => {
               >
                 <div className='w-[50%] h-full md:h-[450px] flex justify-center items-center'>
                   <div className='w-[85%] flex flex-col justify-center items-center'>
-                    <h2 className="xl:text-[50px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-primary text-center">
+                    <h2 className="xl:text-[50px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
                       Privacy Policy <br /><span className='text-white'>Your privacy matters to us</span>
                     </h2>
                     <p className="my-5 md:text-para text-sm  text-white text-center">
@@ -134,7 +134,7 @@ const PrivacyPolicy = () => {
                     </p>
                     <Link href="#">
                       <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
-                        Eexplore Now
+                        Explore Now
                       </button>
                     </Link>
                   </div>

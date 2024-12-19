@@ -112,7 +112,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
           <div className="flex gap-5 px-4">
             <div className="flex gap-3 ml-3">
               <div className="py-2">
-                <p className="font-medium">Select the Vehicle</p>
+                <p className="font-medium">Select Vehicle</p>
                 <div
                   className=" border-2 flex gap-1 mt-1 rounded-lg"
                   onClick={() => setCarSelectionPopup(true)}
@@ -128,8 +128,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-3">
-              <div className="pt-2 ">
+            <div className="flex gap-5">
+              <div className="pt-2">
                 <p className="font-medium">Select Date | Time</p>
                 <div className=" border-2 flex gap-1 my-1 rounded-lg">
                   <input
@@ -144,13 +144,13 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 <div className=" border-2 flex gap-1 my-1 rounded-lg">
                   <input
                     type="text"
-                    className="px-1 outline-none w-36 text-start py-2"
+                    className="px-1 w-44 text-start py-2  border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                   />
                 </div>
               </div>
               <div className="mt-8">
                 <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
-                  Show Cars
+                  Book Cars
                 </button>
               </div>
             </div>
@@ -158,10 +158,10 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         </div>
         {/* OutStation */}
         <div className={`${activeTab === "Tab2" ? "block" : "hidden"}`}>
-          <div className="flex gap-5 px-4">
+          <div className="flex gap-4 px-4">
             <div className=" flex gap-3 ml-3">
               <div className="py-2">
-                <p className="font-medium">Select the Vihicle</p>
+                <p className="font-medium">Select Vehicle</p>
                 <div
                   className="border-2 flex gap-1 my-1 rounded-lg"
                   onClick={() => setCarSelectionPopup(true)}
@@ -177,7 +177,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <div className="py-2 ">
                 <p className="font-medium">Pick-up date</p>
                 <div className=" border-2 flex gap-1 my-1 rounded-lg">
@@ -200,7 +200,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
               </div>
               <div className="mt-8">
                 <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
-                  Show Cars
+                  Book Cars
                 </button>
               </div>
             </div>

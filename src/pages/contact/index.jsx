@@ -76,7 +76,7 @@ const Contact = () => {
       <Breadcrumbs />
       <div>
         {/* herosection start */}
-        <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
+        {/* <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
           <div className="h-full w-full ">
             <div>
               <Image className="relative object-cover h-full w-full"
@@ -105,6 +105,56 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div> */}
+        <div className='md:block hidden'>
+          <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+            <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+            </div>
+            <div className='relative w-[80%] h-full flex'>
+              <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
+              <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+              </div>
+            </div>
+            <div className='w-full h-full absolute'>
+              <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                <div className='w-full flex flex-col justify-center items-center'>
+                  <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                    Contact us <br /> <span className='text-white'>We are here to help</span>
+                  </h2>
+                  <p className="my-5 md:text-base text-sm  text-white text-center">
+                    we are here to help! Whether you have a question about your booking, need assistance with your travel plans, or just want to know
+                    more about our services, feel free to get in touch with us.
+                  </p>
+                  <Link href="#">
+                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                      Eexplore Now
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='md:hidden'>
+          <div className='w-full flex items-center justify-center bg-black p-5'>
+            <div className='w-full flex flex-col justify-center items-center'>
+              <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                Contact us <br /> <span className='text-white'>We are here to help</span>
+              </h2>
+              <p className="my-5 md:text-base text-sm  text-white text-center">
+                we are here to help! Whether you have a question about your booking, need assistance with your travel plans, or just want to know
+                more about our services, feel free to get in touch with us.
+              </p>
+              <Link href="#">
+                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                  Eexplore Now
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className='relative w-full h-72'>
+            <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
           </div>
         </div>
         {/* herosection end */}
@@ -162,7 +212,9 @@ const Contact = () => {
           </div>
         </div>
         {/* footer is here */}
-        <Footer />
+        <div className='mt-10'>
+          <Footer />
+        </div>
       </div>
     </div>
   )

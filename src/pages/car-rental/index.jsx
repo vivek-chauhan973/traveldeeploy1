@@ -185,7 +185,7 @@ export default function App() {
               </div>
             </div>
             <div className="container-wrapper xl:block hidden">
-              <div className="absolute top-2/4 -translate-y-2/4">
+              <div className="absolute top-2/4 -translate-y-3/4">
                 <Picker
                   setCarSelectionPopup={setCarSelectionPopup}
                   carSelectionPopup={carSelectionPopup}
