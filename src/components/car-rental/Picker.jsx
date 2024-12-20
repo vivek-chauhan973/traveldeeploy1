@@ -14,6 +14,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   const [activeItem, setActiveItem] = useState(null);
   const [activeTab, setActiveTab] = useState("Tab1");
   const [isShowDateTimePicker, setShowDateTimePicker] = useState(false);
+  const [selectedDate,setSelectedDate]=useState("");
   const [localData, setLocalData] = useState({
     location: "",
     pickupDate: null,
@@ -135,6 +136,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="date"
                     className=" outline-none mx-1  text-start py-1 border-r-2"
+                    onChange={(e)=>setSelectedDate(e.target.value)}
                   />
                   <input type="time" className="mt-1 outline-none py-1 " />
                 </div>
