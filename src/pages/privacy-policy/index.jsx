@@ -79,39 +79,7 @@ const PrivacyPolicy = () => {
       <Breadcrumbs />
       <div>
         {/* herosection start */}
-        {/* <div className="relative flex justify-center items-center overflow-hidden w-full md:h-96 h-72">
-          <div className="h-full w-full ">
-            <div className="bg-white h-full w-full md:h-[400px]">
-              <Image className="relative  object-cover h-full w-full md:h-[400px]"
-                layout='fill'
-                src="/assets/staticimage/privacyPolicy.jpg"
-                alt="images"
-              />
-              <div
-                className="absolute w-full h-full bg-gradient-to-r from-black to-gray"
-              >
-                <div className='absolute md:bottom-5 bottom-0 md:left-20 left-0 mx-5 my-5'>
-                  <div className='md:w-[45%] w-full flex flex-col justify-between items-center'>
-                    <h2 className="xl:text-[50px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-primary text-center">
-                      Privacy Policy Your privacy matters to us
-                    </h2>
-                    <p className="my-2 md:text-para text-sm  text-white text-center">
-                      At BizareXpedtion, we are commited to protecting your privacy and ensuring a safe online experience.
-                      This Privacy Policy outlines how we collect, use, and safe-guard your personel information when you visit
-                      our website or use our services.
-                    </p>
-                    <Link href="#">
-                      <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
-                        Explore Now
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
+        {/* <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
           <div className="h-full w-full ">
             <div>
               <Image className="relative object-cover h-full w-full"
@@ -141,6 +109,60 @@ const PrivacyPolicy = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div> */}
+        {/* medium devices */}
+        <div className='md:block hidden'>
+          <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+            <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+            </div>
+            <div className='relative w-[80%] h-full flex'>
+              <img src="/assets/staticimage/privacyPolicy1.jpg" alt="" className='relative w-full h-full' />
+              <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+              </div>
+            </div>
+            <div className='w-full h-full absolute'>
+              <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                <div className='w-full flex flex-col justify-center items-center'>
+                  <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                    Privacy Policy <br /> <span className='text-white'>Your privacy matters to us</span>
+                  </h2>
+                  <p className="my-5 md:text-base text-sm  text-white text-center">
+                    At BizareXpedtion, we are commited to protecting your privacy and ensuring a safe online experience.
+                    This Privacy Policy outlines how we collect, use, and safe-guard your personel information when you visit
+                    our website or use our services.
+                  </p>
+                  <Link href="#">
+                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                      Explore Now
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* small devices */}
+        <div className='md:hidden'>
+          <div className='w-full flex items-center justify-center bg-black p-5'>
+            <div className='w-full flex flex-col justify-center items-center'>
+              <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                Privacy Policy <br /> <span className='text-white'>Your privacy matters to us</span>
+              </h2>
+              <p className="my-5 md:text-base text-sm  text-white text-center">
+                At BizareXpedtion, we are commited to protecting your privacy and ensuring a safe online experience.
+                This Privacy Policy outlines how we collect, use, and safe-guard your personel information when you visit
+                our website or use our services.
+              </p>
+              <Link href="#">
+                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                  Explore Now
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className='relative w-full h-72'>
+            <img src="/assets/staticimage/privacyPolicy1.jpg" alt="" className='relative w-full h-full' />
           </div>
         </div>
         {/* herosection end */}

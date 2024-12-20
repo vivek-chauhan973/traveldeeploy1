@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Link from 'next/link';
 
 const TermsAndCondition = () => {
 
@@ -72,31 +73,59 @@ const TermsAndCondition = () => {
   return (
     <div>
       <DesktopHeader />
-      <Breadcrumbs/>
+      <Breadcrumbs />
       <div>
-        <div className="relative w-full h-80 md:h-96 lg:h-[32rem] overflow-hidden">
-          <Image
-            className=" top-0 left-0 w-full h-full object-cover object-center"
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Favit.ac.in%2Fcontact%2F&psig=AOvVaw2a30A9-VUVeov-cz3KWFaz&ust=1729578845164000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCwxbntnokDFQAAAAAdAAAAABAE"
-            alt=""
-            width={100}
-            height={100}
-            onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
-          />
+        {/* medium devices */}
+        <div className='md:block hidden'>
+          <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+            <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+            </div>
+            <div className='relative w-[80%] h-full flex'>
+              <img src="/assets/staticimage/t&c.jpg" alt="" className='relative w-full h-full' />
+              <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+              </div>
+            </div>
+            <div className='w-full h-full absolute'>
+              <div className='w-[63%] h-full flex items-center justify-end px-16'>
+                <div className='w-full flex flex-col justify-center items-center'>
+                  <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                    Terms and Conditions <br /> <span className='text-white'>Need tpo know before you go</span>
+                  </h2>
+                  <p className="my-5 md:text-base text-sm  text-white text-center">
+                    Welcome to BizareXpedtion! By using our website and services, you agree to comply with the following terms and conditions.
+                    Please read them carefullly before proceeding.
+                  </p>
+                  <Link href="#">
+                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                      Explore Now
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className='container-wrapper pt-5'>
-          <h4 className="md:text-2xl text-md font-medium mb-2 capitalize">Terms & condition</h4>
-          <p className="text-para line-clamp-5">
-            A great About Us page comes across as human. It puts a face to a name,
-            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-            A great About Us page comes across as human. It puts a face to a name,
-            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-            A great About Us page comes across as human. It puts a face to a name,
-            showing your potential customers that you are a real person. Any well-written About page makes the reader feel a
-            sense of connection with the brand. It makes them feel like they know you and that you have something in common.
-          </p>
+        {/* small devices */}
+        <div className='md:hidden'>
+          <div className='w-full flex items-center justify-center bg-black p-5'>
+            <div className='w-full flex flex-col justify-center items-center'>
+              <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                About us <br /> <span className='text-white'>Excellence Defined</span>
+              </h2>
+              <p className="my-5 md:text-base text-sm  text-white text-center">
+                At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
+                we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
+              </p>
+              <Link href="#">
+                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                  Explore Now
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className='relative w-full h-72'>
+            <img src="/assets/staticimage/aboutUs.jpg" alt="" className='relative w-full h-full' />
+          </div>
         </div>
         <div className="container-wrapper py-10">
           <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">

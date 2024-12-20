@@ -76,7 +76,7 @@ const About = () => {
       <Breadcrumbs />
       <div>
         {/* herosection start */}
-        <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
+        {/* <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
           <div className="h-full w-full ">
             <div>
               <Image className="relative object-cover h-full w-full"
@@ -93,7 +93,7 @@ const About = () => {
                       About us <span className='text-white'>Excellence Defined</span>
                     </h2>
                     <p className="my-5 md:text-para text-sm  text-white text-center">
-                      At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions. 
+                      At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
                       we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
                     </p>
                     <Link href="#">
@@ -106,8 +106,60 @@ const About = () => {
               </div>
             </div>
           </div>
+        </div> */}
+        {/* medium devices */}
+        <div className='md:block hidden'>
+          <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+            <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+            </div>
+            <div className='relative w-[80%] h-full flex'>
+              <img src="/assets/staticimage/aboutUs.jpg" alt="" className='relative w-full h-full' />
+              <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+              </div>
+            </div>
+            <div className='w-full h-full absolute'>
+              <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                <div className='w-full flex flex-col justify-center items-center'>
+                  <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                    About us <br /> <span className='text-white'>Excellence Defined</span>
+                  </h2>
+                  <p className="my-5 md:text-base text-sm  text-white text-center">
+                    At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
+                    we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
+                  </p>
+                  <Link href="#">
+                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                      Explore Now
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* herosection end */}     
+        {/* small devices */}
+        <div className='md:hidden'>
+          <div className='w-full flex items-center justify-center bg-black p-5'>
+            <div className='w-full flex flex-col justify-center items-center'>
+              <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                About us <br /> <span className='text-white'>Excellence Defined</span>
+              </h2>
+              <p className="my-5 md:text-base text-sm  text-white text-center">
+                At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
+                we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
+              </p>
+              <Link href="#">
+                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                  Explore Now
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className='relative w-full h-72'>
+            <img src="/assets/staticimage/aboutUs.jpg" alt="" className='relative w-full h-full' />
+          </div>
+        </div>
+        {/* herosection end */}
         <div className="container-wrapper py-10">
           <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
             <div className="">

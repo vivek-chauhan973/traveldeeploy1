@@ -129,7 +129,7 @@ const Contact = () => {
                   </p>
                   <Link href="#">
                     <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
-                      Eexplore Now
+                      Explore Now
                     </button>
                   </Link>
                 </div>
@@ -150,7 +150,7 @@ const Contact = () => {
               </p>
               <Link href="#">
                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
-                  Eexplore Now
+                  Explore Now
                 </button>
               </Link>
             </div>
