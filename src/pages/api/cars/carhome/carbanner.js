@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db';
 import CarBanner from '@/models/car-package/CarHome/CarBanner';
+
 const uploadDirectory = './public/uploads/carbanner';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
@@ -23,7 +24,7 @@ const apiRoute = async (req, res) => {
   await dbConnect();
 
   if (req.method === 'POST') {
-    upload.single('file')(req, File, async (err) => {
+    upload.single('file')(req, res, async (err) => {
       if (err instanceof multer.MulterError) {
         console.error('Multer error:', err);
         return res.status(500).json({ error: 'File upload failed' });
@@ -32,28 +33,34 @@ const apiRoute = async (req, res) => {
         return res.status(500).json({ error: 'File upload failed' });
       }
 
-      const { title} = req.body;
-      // console.log("title --> ",title)
-      // console.log("req.file.filename---->",req.file.filename)
+      const { title } = req.body;
       const fileData = req.file && {
         title,
         filename: req.file.filename,
         path: `/uploads/carbanner/${req.file.filename}`,
-      }
+      };
+
       try {
         const existingFile = await CarBanner.findOne({});
         if (existingFile) {
+          // Delete old file from directory
+          if (existingFile.filename) {
+            const oldFilePath = path.join(uploadDirectory, existingFile.filename);
+            if (fs.existsSync(oldFilePath)) {
+              fs.unlinkSync(oldFilePath);
+            }
+          }
+
+          // Update the database entry
           const updatedFile = await CarBanner.findOneAndUpdate(
             { _id: existingFile._id },
             { $set: fileData },
             { new: true }
           );
-          const file = await CarBanner.findById(existingFile._id);
-          if(file){
-            fs.unlinkSync(path.join(uploadDirectory, file.filename));
-          }
+
           return res.status(200).json({ data: updatedFile });
         } else {
+          // Create a new entry
           const file = new CarBanner(fileData);
           await file.save();
           return res.status(200).json({ data: file });
@@ -73,12 +80,20 @@ const apiRoute = async (req, res) => {
     }
   } else if (req.method === 'DELETE') {
     const { id } = req.query;
-    console.log("file image id by selected logo ",path.join(uploadDirectory));
+
     try {
       const file = await CarBanner.findById(id);
       if (file) {
-        fs.unlinkSync(path.join(uploadDirectory, file.filename));
+        const filePath = path.join(uploadDirectory, file.filename);
+
+        // Delete the file from the directory
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        }
+
+        // Remove from the database
         await CarBanner.findByIdAndDelete(id);
+
         return res.status(200).json({ message: 'File removed successfully' });
       } else {
         return res.status(404).json({ error: 'File not found' });

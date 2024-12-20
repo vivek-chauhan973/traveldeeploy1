@@ -86,7 +86,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
       <div className="text-xs w-28 h-5 bg-primary text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
         Rent a car
       </div>
-      <div className="w-[840px] bg-white rounded-lg py-3 relative">
+      <div className=" w-[750px] lg:w-[840px] bg-white rounded-lg py-3 relative">
         <div className="flex items-center relative mb-2">
           <div
             onClick={() => setActiveTab("Tab1")}
@@ -144,7 +144,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 <div className=" border-2 flex gap-1 my-1 rounded-lg">
                   <input
                     type="text"
-                    className="px-1 w-44 text-start py-2  border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+                    className="px-1 w-28 lg:w-44 text-start py-2  border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                   />
                 </div>
               </div>
@@ -208,15 +208,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
         </div>
       </div>
-      {/* toggle pop up show  */}
-      {/* {isOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300">
-                    <div className="bg-white p-8 rounded-lg relative opacity-100 transition-opacity duration-300">
-                        <span className="absolute top-0 right-0 cursor-pointer" onClick={togglePopup}>&times;</span>
-                        <p>Popup Content Goes Here</p>
-                    </div>
-                </div>
-            )} */}
     </div>
   );
 };

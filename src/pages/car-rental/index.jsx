@@ -1,7 +1,7 @@
 import "../../app/globals.css";
 import { useEffect, useState } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import { FaGlobe, FaCar, FaHandsHelping } from 'react-icons/fa';
+import { FaGlobe, FaCar, FaHandsHelping } from "react-icons/fa";
 import Carousel from "@/components/car-rental/CarouselCard";
 import Image from "next/image";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
@@ -24,22 +24,28 @@ const fetchPromoList = async () => {
   return data;
 };
 
-const getCitiesCarPackages=async (cityId)=>{
-  const res=await fetch(`/api/cars/location/get-citypackage?cityId=${cityId}`);
+const getCitiesCarPackages = async (cityId) => {
+  const res = await fetch(
+    `/api/cars/location/get-citypackage?cityId=${cityId}`
+  );
   return await res.json();
-}
+};
 
-const CarHireSection = ({ title, services,url }) => {
+const CarHireSection = ({ title, services, url }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [carCTPackages,setCarCTPackages]=useState([]);
+  const [carCTPackages, setCarCTPackages] = useState([]);
 
-  useEffect(()=>{
-    getCitiesCarPackages(services).then(res=>console.log("res of packages----> ",res))
-  },[services])
-  const handleClick=()=>{
-     setIsOpen(!isOpen)
-     getCitiesCarPackages(services).then(res=>{setCarCTPackages(res?.data||[])})
-  }
+  useEffect(() => {
+    getCitiesCarPackages(services).then((res) =>
+      console.log("res of packages----> ", res)
+    );
+  }, [services]);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+    getCitiesCarPackages(services).then((res) => {
+      setCarCTPackages(res?.data || []);
+    });
+  };
   // console.log("res of packages----> ",carCTPackages);
   return (
     <div className="px-5">
@@ -47,7 +53,9 @@ const CarHireSection = ({ title, services,url }) => {
         className="flex justify-between cursor-pointer items-center"
         onClick={handleClick}
       >
-        <p className="capitalize font-semibold cursor-pointer">{title} Taxi Service</p>
+        <p className="capitalize font-semibold cursor-pointer">
+          {title} Taxi Service
+        </p>
         {isOpen ? (
           <MdKeyboardArrowUp size={25} className="font-semibold" />
         ) : (
@@ -57,15 +65,22 @@ const CarHireSection = ({ title, services,url }) => {
       {isOpen && (
         <ul className="py-1 pl-2">
           {carCTPackages?.slice(0, 3)?.map((service, index) => (
-            <a href={"/car-rental/" + service.location.url + "/" + service.pageUrl} key={index}>
+            <a
+              href={
+                "/car-rental/" + service.location.url + "/" + service.pageUrl
+              }
+              key={index}
+            >
               <li className="capitalize text-sm hover:underline cursor-pointer text-gray-600">
                 {service?.name}
               </li>
             </a>
           ))}
           <div className="flex justify-end pb-2">
-            <a href={`/car-rental/${url}-car-hire`}
-              className="py-1 px-5 rounded-md text-xs bg-navyblack text-white">
+            <a
+              href={`/car-rental/${url}-car-hire`}
+              className="py-1 px-5 rounded-md text-xs bg-navyblack text-white"
+            >
               More.....
             </a>
           </div>
@@ -76,35 +91,33 @@ const CarHireSection = ({ title, services,url }) => {
   );
 };
 
-
-
-//all api is here --------------------------------> 
+//all api is here -------------------------------->
 
 const fetchAllSection = async () => {
   const data = await fetch("/api/cars/carhome");
   return await data.json();
-}
+};
 const fetchCarBanner = async () => {
   const data = await fetch("/api/cars/carhome/carbanner");
   return await data.json();
-}
+};
 const fetchHeading1 = async () => {
   const data = await fetch("/api/cars/carhome/heading1");
   return await data.json();
-}
+};
 const fetchHeading2 = async () => {
   const data = await fetch("/api/cars/carhome/heading2");
   return await data.json();
-}
+};
 const fetchCarousel = async () => {
   const data = await fetch("/api/cars/carhome/carCrousel");
   return await data.json();
-}
+};
 
-const fetchAllCities=async ()=>{
-  const res=await fetch("/api/location/city");
+const fetchAllCities = async () => {
+  const res = await fetch("/api/location/city");
   return await res.json();
-}
+};
 
 export default function App() {
   const [cityPromoData, setCityPromoData] = useState([]);
@@ -115,7 +128,7 @@ export default function App() {
   const [carCarousel, setCarCarousel] = useState([]);
   const [carAllSection, setCarAllSection] = useState([]);
   const [staticBanner, setStaticBanner] = useState([]);
-  const [cities,setCities]=useState([]);
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
     // Fetch itinerary data
@@ -124,34 +137,45 @@ export default function App() {
         const response = await fetch("/api/cars/package/get-packages");
         const data = await response.json();
         seCarPackageData(data.packages || []); // Provide a default empty array if data.packages is undefined
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchItineraryData();
-    fetchAllSection().then(res => {
-      setCarAllSection(res?.data || [])
-    })
-    fetchCarBanner().then(res => { setCarBanner(res?.data?.[0] || {}) })
+    fetchAllSection().then((res) => {
+      setCarAllSection(res?.data || []);
+    });
+    fetchCarBanner().then((res) => {
+      setCarBanner(res?.data?.[0] || {});
+    });
 
-    fetchHeading1().then(res => { setCarHeading1(res?.data?.[0] || {}) })
-    fetchHeading2().then(res => { setCarHeading2(res?.data?.[0] || {}) })
+    fetchHeading1().then((res) => {
+      setCarHeading1(res?.data?.[0] || {});
+    });
+    fetchHeading2().then((res) => {
+      setCarHeading2(res?.data?.[0] || {});
+    });
 
-    fetchCarousel().then(res => { setCarCarousel(res?.data || []) })
-    fetchAllCities().then(res=>{setCities(res?.result||[])});
+    fetchCarousel().then((res) => {
+      setCarCarousel(res?.data || []);
+    });
+    fetchAllCities().then((res) => {
+      setCities(res?.result || []);
+    });
   }, []);
-
 
   useEffect(() => {
     fetchPromoList().then((res) => {
       setCityPromoData(res?.responseData || []);
     });
   }, []);
-  const packageDataCity = carAllSection?.filter(item => item?.category === "category1");
-  const packageData = carAllSection?.filter(item => item?.category === "category2");
+  const packageDataCity = carAllSection?.filter(
+    (item) => item?.category === "category1"
+  );
+  const packageData = carAllSection?.filter(
+    (item) => item?.category === "category2"
+  );
 
   // console.log("all section fetchHeading2 data is here ----> ",cities);
-
 
   const [show, setShow] = useState(false);
 
@@ -184,7 +208,7 @@ export default function App() {
                 </p>
               </div>
             </div>
-            <div className="container-wrapper xl:block hidden">
+            <div className="container-wrapper md:block hidden">
               <div className="absolute top-2/4 -translate-y-3/4">
                 <Picker
                   setCarSelectionPopup={setCarSelectionPopup}
@@ -195,14 +219,17 @@ export default function App() {
             <div onClick={() => setCarSelectionPopup(false)}>
               <Image
                 className=" w-full h-full object-cover"
-                src={carBanner?.path || "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                src={
+                  carBanner?.path ||
+                  "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                }
                 alt=""
                 width={1283}
                 height={854}
               />
             </div>
           </div>
-          <div className="absolute top-[480px] left-20 -translate-y-2/4">
+          <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
             {carSelectionPopup && <CarSelectionPopup />}
           </div>
           <div
@@ -214,8 +241,9 @@ export default function App() {
                 {carHeading1?.heading1}
               </p>
               <p
-                className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
-                  }`}
+                className={`text-[15px] pt-4 ${
+                  show ? "" : "line-clamp-6 md:line-clamp-3"
+                }`}
               >
                 {carHeading1?.description1}
               </p>
@@ -227,8 +255,9 @@ export default function App() {
                 </button>
                 <span>
                   <IoMdArrowDropdown
-                    className={`transition-transform  ${show ? "rotate-180" : ""
-                      } `}
+                    className={`transition-transform  ${
+                      show ? "rotate-180" : ""
+                    } `}
                     onClick={handleToggle}
                   />
                 </span>
@@ -250,7 +279,9 @@ export default function App() {
                 <FaGlobe className="text-2xl" />
                 <h3 className="text-md font-semibold">Global reach</h3>
               </div>
-              <p className="text-[23px]  font-semibold">2,000+ SIXT stations in over 105 countries</p>
+              <p className="text-[23px]  font-semibold">
+                2,000+ SIXT stations in over 105 countries
+              </p>
             </div>
             {/* Distinctive Fleet */}
             <div className="flex flex-col max-w-xs my-4">
@@ -258,7 +289,9 @@ export default function App() {
                 <FaCar className="text-2xl" />
                 <h3 className="text-md font-semibold">Distinctive fleet</h3>
               </div>
-              <p className="text-[23px]  font-semibold">From high-end convertibles to premium SUVs</p>
+              <p className="text-[23px]  font-semibold">
+                From high-end convertibles to premium SUVs
+              </p>
             </div>
             {/* Exceptional Service */}
             <div className="flex flex-col max-w-xs my-3">
@@ -266,7 +299,9 @@ export default function App() {
                 <FaHandsHelping className="text-2xl" />
                 <h3 className="text-md font-semibold">Exceptional service</h3>
               </div>
-              <p className="text-[23px] font-semibold">Stress-free, trustworthy, no hidden costs</p>
+              <p className="text-[23px] font-semibold">
+                Stress-free, trustworthy, no hidden costs
+              </p>
             </div>
           </div>
         </div>
@@ -286,8 +321,9 @@ export default function App() {
               {carHeading2?.heading2}
             </p>
             <p
-              className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
-                }`}
+              className={`text-[15px] pt-4 ${
+                show ? "" : "line-clamp-6 md:line-clamp-3"
+              }`}
             >
               {carHeading2?.description2}
             </p>
@@ -299,8 +335,9 @@ export default function App() {
               </button>
               <span>
                 <IoMdArrowDropdown
-                  className={`transition-transform  ${show ? "rotate-180" : ""
-                    } `}
+                  className={`transition-transform  ${
+                    show ? "rotate-180" : ""
+                  } `}
                   onClick={handleToggle}
                 />
               </span>
@@ -327,7 +364,7 @@ export default function App() {
         <div className="">
           <CarReviewCard />
         </div>
-        <div >
+        <div>
           <Footer />
         </div>
       </div>
