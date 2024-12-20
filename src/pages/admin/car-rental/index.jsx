@@ -334,7 +334,7 @@ export default function Category() {
                                     </div>
                                 </div>
                             </div>
-                            <CarGst />
+                            {/* <CarGst /> */}
                         </div>
                         <div className="my-5">
                             <CarItineraryTour />

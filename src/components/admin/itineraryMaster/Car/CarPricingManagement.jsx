@@ -4,25 +4,21 @@ import * as XLSX from "xlsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faArrowRightLong,
-    faCirclePlus,
     faCube,
     faEdit,
     faFloppyDisk,
     faTrash,
-    faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-// const fetchFixedDepartureData = async (itinerary) => {
-//     const res = await fetch("/api/cars/package/price/departures/" + itinerary.id);
-//     return await res.json();
-//   };
-
+const fetchAllData=async ()=>{
+    const res=await fetch("/api/cars/carrentalLocalPrice/localdategst", {
+        method: "GET"})
+    return await res.json();
+}
 const CarPricingManagement = () => {
-
     const [data, setData] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
     const [editFormData, setEditFormData] = useState({});
-    const [fixedDeparture, setFixedDeparture] = useState(null);
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -34,13 +30,25 @@ const CarPricingManagement = () => {
                 const sheet = workbook.Sheets[sheetName];
                 const jsonData = XLSX.utils.sheet_to_json(sheet, {
                     raw: false,
-                    dateNF: "mm/dd/yyyy",
+                    dateNF: "dd-mm-yyyy",
                 });
-                setData(jsonData);
+
+                // Format dates as dd-mm-yyyy
+                const formattedData = jsonData.map((item) => ({
+                    ...item,
+                    Date: item.Date
+                        ? new Date(item.Date).toLocaleDateString("en-GB").replace(/\//g, "-")
+                        : "",
+                }));
+                setData(formattedData);
             };
             reader.readAsBinaryString(file);
         }
     };
+
+    useEffect(()=>{
+        fetchAllData().then(res=>{setData(res?.data?.localdatagst)});
+    },[])
 
     const handleEdit = (index) => {
         setEditingIndex(index);
@@ -59,36 +67,36 @@ const CarPricingManagement = () => {
 
     const handleSave = () => {
         const updatedData = [...data];
-        updatedData[editingIndex] = editFormData;
+        updatedData[editingIndex] = {
+            ...editFormData,
+            Date: new Date(editFormData.Date)
+                .toLocaleDateString("en-GB")
+                .replace(/\//g, "-"),
+        };
         setData(updatedData);
         setEditingIndex(null);
         setEditFormData({});
     };
-    // useEffect(() => {
-    //     if (itinerary?.prices) {
-    //         setData(itinerary?.prices?.departureData);
-    //     }
-    //     //  console.log("itinerary?.addguest---> ",itinerary?.addguest)
-    //     setFixedDeparture(itinerary?.addguest);
-    // }, [itinerary]);
-    // console.log("itinary is here ------> ", data);
-    const handleSubmit = async () => {
-        alert(`Data submitted`);
-        // try {
-        //     const res = await fetch("/api/cars/package/price/departures/" + itinerary.id, {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(
-        //             data
-        //         ),
-        //     });
-        // } catch (error) {
-        //     console.log("Error submitting data", error);
-        // }
-    };
 
+    const handleSubmit = async () => {
+        try {
+            const res = await fetch("/api/cars/carrentalLocalPrice/localdategst", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if(res?.ok){
+                fetchAllData().then(res=>setData(res?.data?.localdatagst));
+                alert("data is submited");
+            }
+
+        } catch (error) {
+            console.log("Error submitting data", error);
+        }
+    };
 
     return (
         <div>
@@ -97,7 +105,7 @@ const CarPricingManagement = () => {
                 <p className="md:text-[28px] text-xl text-black">Car Pricing Management</p>
                 <FontAwesomeIcon
                     icon={faArrowRightLong}
-                    className=" text-teal-700 text-xl"
+                    className="text-teal-700 text-xl"
                 />
             </div>
             <div className="grid grid-cols-1 gap-5 rounded">
@@ -114,20 +122,17 @@ const CarPricingManagement = () => {
                                 className="px-2 py-1.5 border md:w-auto w-full rounded-lg"
                             />
                         </div>
-                        <div className="">
-                            {data?.length !== 0 && (
+                        {data?.length !== 0 && (
+                            <>
                                 <h1 className="md:text-lg text-md font-semibold text-gray-800 mb-1">
                                     Fixed Departure Entries
                                 </h1>
-                            )}
-                            <div className="overflow-x-auto">
-                                {data?.length !== 0 && (
-                                    <table className="min-w-full ">
+                                <div className="overflow-x-auto">
+                                    <table className="min-w-full">
                                         <thead>
                                             <tr className="bg-navyblack text-white text-center">
                                                 <th className="p-2 border">Date</th>
-                                                <th className="p-2 border">Hike %</th>
-                                                <th className="p-2 border">Save %</th>
+                                                <th className="p-2 border">Additional_Markup %</th>
                                                 <th className="p-2 border">GST %</th>
                                                 <th className="p-2 border">Actions</th>
                                             </tr>
@@ -147,29 +152,20 @@ const CarPricingManagement = () => {
                                                             </td>
                                                             <td className="p-2 border">
                                                                 <input
-                                                                    name="Price"
-                                                                    value={editFormData.Hike}
+                                                                    name="Additional_Markup"
+                                                                    value={editFormData.Additional_Markup}
                                                                     onChange={handleInputChange}
                                                                     className="p-1 border md:text-base text-sm rounded-md text-center"
                                                                 />
                                                             </td>
                                                             <td className="p-2 border">
                                                                 <input
-                                                                    name="Start_drop_down"
-                                                                    value={editFormData.Save}
-                                                                    onChange={handleInputChange}
-                                                                    className="p-1 md:text-base text-sm border rounded-md text-center"
-                                                                />
-                                                            </td>
-                                                            <td className="p-2 border">
-                                                                <input
-                                                                    name="End_drop_down"
+                                                                    name="GST"
                                                                     value={editFormData.GST}
                                                                     onChange={handleInputChange}
                                                                     className="p-1 md:text-base text-sm border rounded-md text-center"
                                                                 />
                                                             </td>
-
                                                             <td className="p-2 border">
                                                                 <FontAwesomeIcon
                                                                     icon={faFloppyDisk}
@@ -180,14 +176,9 @@ const CarPricingManagement = () => {
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <td className="px-1 py-2 border">{item?.Date}</td>
-                                                            <td className="px-1 py-2 border">{item?.Hike}</td>
-                                                            <td className="px-1 py-2 border">
-                                                                {item?.Save}
-                                                            </td>
-                                                            <td className="px-1 py-2 border">
-                                                                {item?.GST}
-                                                            </td>
+                                                            <td className="px-1 py-2 border">{item.Date}</td>
+                                                            <td className="px-1 py-2 border">{item.Additional_Markup}</td>
+                                                            <td className="px-1 py-2 border">{item.GST}</td>
                                                             <td className="px-1 py-2 border">
                                                                 <div className="flex justify-center gap-3">
                                                                     <FontAwesomeIcon
@@ -198,7 +189,7 @@ const CarPricingManagement = () => {
                                                                     <FontAwesomeIcon
                                                                         icon={faTrash}
                                                                         onClick={() => handleDelete(i)}
-                                                                        className=" hover:text-primary cursor-pointer"
+                                                                        className="hover:text-primary cursor-pointer"
                                                                     />
                                                                 </div>
                                                             </td>
@@ -208,9 +199,9 @@ const CarPricingManagement = () => {
                                             ))}
                                         </tbody>
                                     </table>
-                                )}
-                            </div>
-                        </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
@@ -222,5 +213,6 @@ const CarPricingManagement = () => {
             </button>
         </div>
     );
-}
+};
+
 export default CarPricingManagement;
