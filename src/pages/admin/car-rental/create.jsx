@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
 import Layout from "@/components/admin/Layout";
-import { MdOutlineAddCircle, MdDeleteForever } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
-import { BiSolidCarMechanic } from "react-icons/bi";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
-import Image from 'next/image';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
