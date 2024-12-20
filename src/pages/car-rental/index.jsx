@@ -229,7 +229,7 @@ export default function App() {
               />
             </div>
           </div>
-          <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
+          <div className="absolute md:top-[240px] md:left-2.5 lg:top-[240px] xl:top-[340px] lg:left-10 xl:left-20 -translate-y-2/4 hidden md:block">
             {carSelectionPopup && <CarSelectionPopup />}
           </div>
           <div
