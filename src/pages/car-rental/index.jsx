@@ -16,6 +16,8 @@ import CarCarousel from "@/components/car-rental/CarCarousel";
 import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 import StaticBanner from "@/components/car-rental/StaticBanner";
 import Footer from "@/components/Footer";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+
 const fetchPromoList = async () => {
   const response = await fetch(
     `/api/public/package-state/carpromo/fetchpromocat?selectType=city`
@@ -46,7 +48,8 @@ const CarHireSection = ({ title, services, url }) => {
       setCarCTPackages(res?.data || []);
     });
   };
-  // console.log("res of packages----> ",carCTPackages);
+  console.log("res of packages----> ", carCTPackages);
+
   return (
     <div className="px-5">
       <div
@@ -137,7 +140,7 @@ export default function App() {
         const response = await fetch("/api/cars/package/get-packages");
         const data = await response.json();
         seCarPackageData(data.packages || []); // Provide a default empty array if data.packages is undefined
-      } catch (error) {}
+      } catch (error) { }
     };
 
     fetchItineraryData();
@@ -176,6 +179,9 @@ export default function App() {
   );
 
   // console.log("all section fetchHeading2 data is here ----> ",cities);
+  // const {userFormData} = useCarPopupContext();
+  // console.log("userFormData",userFormData);
+
 
   const [show, setShow] = useState(false);
 
@@ -216,7 +222,7 @@ export default function App() {
                 />
               </div>
             </div>
-            <div onClick={() => setCarSelectionPopup(false)}>
+            <div>
               <Image
                 className=" w-full h-full object-cover"
                 src={
@@ -230,20 +236,16 @@ export default function App() {
             </div>
           </div>
           <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
-            {carSelectionPopup && <CarSelectionPopup />}
+            {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
           </div>
-          <div
-            className="py-5 container-wrapper pt-10 -z-40"
-            onClick={() => setCarSelectionPopup(false)}
-          >
+          <div className="py-5 container-wrapper pt-10 -z-40">
             <div>
               <p className="md:font-semibold font-medium text-xl">
                 {carHeading1?.heading1}
               </p>
               <p
-                className={`text-[15px] pt-4 ${
-                  show ? "" : "line-clamp-6 md:line-clamp-3"
-                }`}
+                className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
+                  }`}
               >
                 {carHeading1?.description1}
               </p>
@@ -255,9 +257,8 @@ export default function App() {
                 </button>
                 <span>
                   <IoMdArrowDropdown
-                    className={`transition-transform  ${
-                      show ? "rotate-180" : ""
-                    } `}
+                    className={`transition-transform  ${show ? "rotate-180" : ""
+                      } `}
                     onClick={handleToggle}
                   />
                 </span>
@@ -321,9 +322,8 @@ export default function App() {
               {carHeading2?.heading2}
             </p>
             <p
-              className={`text-[15px] pt-4 ${
-                show ? "" : "line-clamp-6 md:line-clamp-3"
-              }`}
+              className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
+                }`}
             >
               {carHeading2?.description2}
             </p>
@@ -335,9 +335,8 @@ export default function App() {
               </button>
               <span>
                 <IoMdArrowDropdown
-                  className={`transition-transform  ${
-                    show ? "rotate-180" : ""
-                  } `}
+                  className={`transition-transform  ${show ? "rotate-180" : ""
+                    } `}
                   onClick={handleToggle}
                 />
               </span>

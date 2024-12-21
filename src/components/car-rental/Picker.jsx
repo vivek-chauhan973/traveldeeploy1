@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import CarBookingPopup from "./CarBookingPopup";
 
 const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
@@ -26,6 +27,13 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   });
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+
+  const [selectedDate, setSelectedDate] = useState();
+  const [selectedTime, setSelectedTime] = useState();
+  const [showPopup, setShowPopup] = useState(false)
+  console.log("selectedDate", selectedDate);
+  console.log("selectedTime", selectedTime);
+
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -81,6 +89,10 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     }
   };
 
+  const handleBookCar = () => {
+    setShowPopup(true);
+  }
+
   return (
     <div>
       <div className="text-xs w-28 h-5 bg-primary text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
@@ -135,8 +147,14 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="date"
                     className=" outline-none mx-1  text-start py-1 border-r-2"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
                   />
-                  <input type="time" className="mt-1 outline-none py-1 " />
+                  <input type="time"
+                    className="mt-1 outline-none py-1 "
+                    value={selectedTime}
+                    onChange={(e) => setSelectedTime(e.target.value)}
+                  />
                 </div>
               </div>
               <div className="pt-2">
@@ -149,10 +167,19 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="mt-8">
-                <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
+                <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
+                  onClick={handleBookCar}
+                >
                   Book Cars
                 </button>
               </div>
+              {showPopup && (
+                <CarBookingPopup
+                  setShowPopup={setShowPopup}
+                // carPackage={carPackage}
+                // carDepartureDetails={carDepartureDetails}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -199,10 +226,18 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="mt-8">
-                <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
+                <button onClick={handleBookCar}
+                  className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
                   Book Cars
                 </button>
               </div>
+              {showPopup && (
+                <CarBookingPopup
+                  setShowPopup={setShowPopup}
+                // carPackage={carPackage}
+                // carDepartureDetails={carDepartureDetails}
+                />
+              )}
             </div>
           </div>
 
