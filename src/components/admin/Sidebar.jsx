@@ -111,9 +111,12 @@ const handleLogout=async ()=>{
       ]
     },
     {
-      label: "Pages ",
+      label: "Static Page",
       icon: () => <FontAwesomeIcon icon={faFile} />,
-      href: "/admin/page-create"
+      subMenu: [
+        { label: "Create Pages", href: "/admin/page-create" },
+        { label: "List of Pages", href: "/admin/page-list" },
+      ]
     },
     {
       label: "Setting",
