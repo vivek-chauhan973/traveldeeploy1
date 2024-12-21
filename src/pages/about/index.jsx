@@ -7,6 +7,10 @@ import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 
+const fetchAboutUsPage = async () => {
+  const res = await fetch(`/api/static-page/static-page-type?name=about-us`);
+  return await res.json();
+};
 const About = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);

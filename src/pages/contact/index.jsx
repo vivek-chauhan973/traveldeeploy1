@@ -6,7 +6,10 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
-
+const fetchContactUsPage = async () => {
+  const res = await fetch(`/api/static-page/static-page-type?name=contact-us`);
+  return await res.json();
+};
 const Contact = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);

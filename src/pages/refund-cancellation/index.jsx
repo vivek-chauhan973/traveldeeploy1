@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../app/globals.css";
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
 import Image from 'next/image';
@@ -6,10 +6,19 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
-
+const fetchRefundCancellationPage = async () => {
+    const res = await fetch(`/api/static-page/static-page-type?name=refunds-and-cancellations`);
+    return await res.json();
+  };
 const RefundCancellation = () => {
 
     const [activeIndex, setActiveIndex] = useState(null);
+
+    const [data,setData]=useState([])
+    useEffect(()=>{
+        fetchRefundCancellationPage().then(res=>setData(res?.data))
+    },[])
+    console.log("data is here ----> ",data)
 
     const paragraphs = [
         {
@@ -131,13 +140,13 @@ const RefundCancellation = () => {
                 <div className="container-wrapper py-10">
                     <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
                         <div className="">
-                            <div className="sticky top-40 z-10 bg-white shadow-xl rounded-xl md:p-7 p-5">
+                            <div className="sticky top-40 z-10 bg-white w-full xl:w-80 shadow-xl rounded-xl md:p-7 p-5">
                                 <h4 className="text-md font-semibold mb-4 capitalize pl-3">Refunds and Cancellations</h4>
                                 <div>
-                                    {paragraphs.map((item, index) => (
+                                    {data?.topics?.map((item, index) => (
                                         <ScrollLink
-                                            key={item.id}
-                                            to={item.id}
+                                            key={`${index+1}id`}
+                                            to={`${index+1}id`}
                                             spy={true}
                                             smooth={true}
                                             offset={-100}
@@ -150,7 +159,7 @@ const RefundCancellation = () => {
                                                     : " text-gray-400"
                                                     }`}
                                             >
-                                                {item.text}
+                                                {item.title}
                                             </p>
                                         </ScrollLink>
                                     ))}
@@ -168,13 +177,13 @@ const RefundCancellation = () => {
                                     tackle all the above.
                                 </p>
                             </div>
-                            {paragraphs.map((item, index) => (
-                                <div key={item.id} className="pt-7 " id={item.id}>
+                            {data?.topics?.map((item, index) => (
+                                <div key={`${index+1}id`} className="pt-7 " id={`${index+1}id`}>
                                     <h3 className="md:text-2xl text-xl font-medium mb-2">
-                                        {item.text}
+                                        {item.title}
                                     </h3>
                                     <p className="text-base leading-relaxed">
-                                        {item.desc}
+                                        <div  dangerouslySetInnerHTML={{ __html: item.description }}/>
                                     </p>
                                 </div>
                             ))}

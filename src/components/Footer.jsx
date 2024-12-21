@@ -99,7 +99,7 @@ export default function Footer() {
                                                 <h2 className="font-semibold text-base">Help</h2>
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">FAQs</Link>
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Cancellations & Returns</Link>
+                                                    <a rel="noopener noreferrer" href="refund-cancellation" className="footer-content2">Cancellations & Returns</a>
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">Dark Mode</Link>
 
                                                 </div>

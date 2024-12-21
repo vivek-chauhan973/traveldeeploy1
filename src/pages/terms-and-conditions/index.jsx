@@ -6,7 +6,10 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
-
+const fetchTermsAndConditionPage = async () => {
+  const res = await fetch(`/api/static-page/static-page-type?name=terms-and-conditions`);
+  return await res.json();
+};
 const TermsAndCondition = () => {
 
   const [activeIndex, setActiveIndex] = useState(null);
