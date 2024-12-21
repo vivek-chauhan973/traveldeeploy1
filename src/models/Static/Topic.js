@@ -1,6 +1,4 @@
 const { default: mongoose } = require("mongoose");
-
-
 const topicSchema=new mongoose.Schema({
    title:{
     type:String
@@ -8,8 +6,9 @@ const topicSchema=new mongoose.Schema({
    description:{
     type:String
    },
-   titleIndex:{
-    type:Number
+   filename:[String],
+   pageId:{
+
    }
     
 },

@@ -8,8 +8,6 @@ const staticPagesSchema=new mongoose.Schema({
     topics:[{type:mongoose.Schema.Types.ObjectId,
         ref:"Topic"
     }]
-    ,
-    deletedtopics:[Number]
 },{timestamps:true});
 
 const StaticPage=mongoose.models.StaticPage||mongoose.model("StaticPage",staticPagesSchema);
