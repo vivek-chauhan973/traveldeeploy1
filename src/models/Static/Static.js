@@ -1,13 +1,20 @@
 const { default: mongoose } = require("mongoose");
-import  "./Topic";
+const topicSchema=new mongoose.Schema({
+  title:{
+   type:String
+  },
+  description:{
+   type:String
+  },
+  filename:[String],  
+}
+)
 const staticPagesSchema=new mongoose.Schema({
     name:{
       type:String,
       required:true
     },
-    topics:[{type:mongoose.Schema.Types.ObjectId,
-        ref:"Topic"
-    }]
+    topics:[topicSchema]
 },{timestamps:true});
 
 const StaticPage=mongoose.models.StaticPage||mongoose.model("StaticPage",staticPagesSchema);
