@@ -22,7 +22,7 @@ const StaticPage = () => {
               <p className="pb-2 font-semibold text-para">
                 Choose Static Page Type
               </p>
-              <select name="staticPage" id="staticPage" className=" outline-none w-full md:w-40"
+              <select name="staticPage" id="staticPage" className="focus:border-primary outline-none w-full md:w-40"
               onChange={(e)=>setSelectedPage(e.target.value)}
               >
                 <option value="">Select Page Type</option>
@@ -39,7 +39,7 @@ const StaticPage = () => {
               <div className="border p-4 rounded-md bg-white grow mb-2">
                 <div>
                   <label className="pb-2 font-semibold text-para">
-                    Questions
+                    Title
                   </label>
                   <div className="grow flex gap-5 items-center">
                     <input
