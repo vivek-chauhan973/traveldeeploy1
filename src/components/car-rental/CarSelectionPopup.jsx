@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+
 const fetchCars = async () => {
   try {
     const response = await fetch("/api/cars/carapi");
@@ -27,9 +30,8 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
   const [selectedlocation, setSelectedlocation] = useState(null);
   const [selectedPickupPoint, setSelectedPickupPoint] = useState(null);
 
-
-  const { userFormData, setUserFormData } = useCarPopupContext();
-
+  const { getDetail} = useCarPopupContext(); 
+  
   useEffect(() => {
     fetchCars().then((res) => {
       setCarData(res?.data || []);
@@ -71,7 +73,7 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
       selectedlocation: localLocation.filter(item => item._id === selectedlocation),
       selectedPickupPoint: localPickupPointLocation.filter(item => item._id === selectedPickupPoint),
     };
-    setUserFormData(formData);
+    getDetail(formData)
     // console.log("formData",formData);
     alert('User Data Submitted');
     setCarSelectionPopup(false);
@@ -85,15 +87,20 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
   // console.log("persons", persons);
   // console.log("selectedCar", selectedCar);
 
-  // console.log('userFormData', userFormData);
-
   return (
     <div className="absolute flex items-center mt-2 justify-center z-[9999]">
       <div className="bg-white rounded-xl shadow-lg w-96 px-6 pb-6 pt-3 border">
-        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">
-          Car Selection
-        </h2>
-        <div className="space-y-4">
+        <div className="flex justify-between mb-2.5">
+          <h2 className="text-xl font-semibold text-center text-gray-700">
+            Car Selection
+          </h2>
+          <FontAwesomeIcon
+            icon={faCircleXmark}
+            className="text-lg mt-1 cursor-pointer"
+            onClick={handleCancel}
+          />
+        </div>
+        <div>
           <div>
             <label className="block text-gray-600 mb-0.5" htmlFor="numPersons">
               No. of Person
@@ -101,7 +108,7 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
             <input
               type="number"
               id="numPersons"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+              className="mb-2.5 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
               placeholder="Enter number of persons"
               value={persons}
               onChange={(e) => setPersons(e.target.value)}
@@ -114,7 +121,7 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
             <select
               name=""
               id="vehicle"
-              className=" mb-2.5 text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+              className="mb-2.5 text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
               onChange={(e) => setSelectedCar(e.target.value)}
             >
               <option value="">Select Car</option>
@@ -156,7 +163,7 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
             <select
               name=""
               id="vehicle"
-              className=" mb-2.5 text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+              className="text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
               onChange={(e) => handleChangePickupLocation(e.target.value)}
             >
               <option value="">Select Pickup Point</option>
@@ -169,7 +176,7 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
             </select>
           </div>
         </div>
-        <div className="mt-14 flex justify-end space-x-4">
+        <div className="mt-16 flex justify-end space-x-4">
           <button className="px-4 py-2 bg-gray-400 text-gray-700 rounded-md"
             onClick={handleCancel}
           >

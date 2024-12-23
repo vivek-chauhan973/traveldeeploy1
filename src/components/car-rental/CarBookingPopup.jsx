@@ -2,13 +2,14 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
 
 const fetchPackgesTerm = async () => {
     const response = await fetch("/api/cars/package/terms-condition/packageTerm/get");
     return await response.json();
 };
 
-const CarBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) => {
+const CarBookingPopup = ({ setShowPopup }) => {
 
     const [check, setCheck] = useState(false);
     const [CarPackageTerm, setCarPackageTerm] = useState([]);
@@ -17,6 +18,11 @@ const CarBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) => {
     const [email, setEmail] = useState("");
     const [mobileError, setMobileError] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
+
+    const { userFormData, userDate, userTime, userPlan, } = useCarPopupContext();
+
+    console.log("userFormData", userFormData);
+
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -71,7 +77,7 @@ const CarBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) => {
         <>
             <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-[99999] mt-14">
                 <div className="flex justify-center items-center max-h-auto">
-                    <div className="overflow-y-scroll max-w-lg md:max-w-2xl mx-auto h-[700px] max-h-[700px]">
+                    <div className="overflow-y-scroll max-w-lg md:max-w-2xl mx-auto md:h-[600px] xl:h-[650px] max-h-[700px]">
                         <div className="flex">
                             <div className="bg-navyblack rounded-l-lg shadow-lg text-white md:w-1/3 hidden md:block">
                                 <div className="mb-4 w-full h-2/5"></div>
@@ -95,12 +101,9 @@ const CarBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) => {
                                     <FontAwesomeIcon
                                         icon={faCircleXmark}
                                         className="font1 cursor-pointer"
-                                    // size={28}
                                     />
                                 </div>
-                                <form 
-                                // className="max-h-96 h-72 overflow-y-scroll"
-                                >
+                                <form>
                                     <div className="space-y-4 mb-2">
                                         <input
                                             type="text"
@@ -174,51 +177,60 @@ const CarBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) => {
                                         <h5 className="md:text-lg text-md font-semibold text-graytext border-b pb-1">
                                             Booking Summary
                                         </h5>
-                                        <div className="grid grid-cols-2 mt-1">
+                                        <div className="grid grid-cols-2 mt-1 gap-3">
                                             <div className="flex mb-2 text-sm ">
                                                 <p className=" w-20 font-medium">Vehicle Type : </p>
                                                 <p className="font-semibold text-graytext capitalize ml-1">
-                                                    {carDepartureDetails?.departureCity}  Sedan
+                                                    {userFormData?.selectedCar?.[0].vehicleType}
                                                 </p>
                                             </div>
                                             <div className="flex mb-2 text-sm">
                                                 <p className=" w-32 font-medium">Number Of Person :</p>
                                                 <p className=" font-semibold text-graytext">
-                                                    {carDepartureDetails?.travellers} 2
+                                                    {userFormData?.persons}
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="grid grid-cols-2">
-                                            <div className="flex mb-2 text-sm">
+                                        <div className="grid grid-cols-2 gap-3 mb-2">
+                                            <div className="flex text-sm">
                                                 <p className=" w-20 font-medium">Dept. Date :</p>
                                                 <p className=" font-bold text-graytext">
-                                                    {carDepartureDetails?.Date} 25-12-2024
+                                                {userDate}
                                                 </p>
                                             </div>
-                                            <div className="flex mb-2 text-sm">
+                                            <div className="flex text-sm">
                                                 <p className=" w-20 font-medium">Dept. Time :</p>
                                                 <p className=" font-bold text-graytext">
-                                                    {carDepartureDetails?.Date} 10:30 AM
+                                                    {userTime}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="flex mb-2 text-sm">
                                             <p className=" w-28 font-medium">PickUp Location : </p>
                                             <p className="font-semibold text-graytext capitalize">
-                                                {carDepartureDetails?.departureCity} Noida - sector-49
+                                                {userFormData?.selectedlocation?.[0].location}
+                                                {" "}-{" "}
+                                                {userFormData?.selectedPickupPoint?.[0].name}
                                             </p>
                                         </div>
-                                        <div className="flex mb-2 text-sm">
-                                            <p className=" w-20 font-medium">Cost Per KM : </p>
-                                            <p className="font-semibold text-graytext ml-1">
-                                                {carDepartureDetails?.departureCity} 14
-                                            </p>
+                                        <div className="grid grid-cols-2 gap-3 mb-2">
+                                            <div className="flex text-sm">
+                                                <p className=" w-20 font-medium">Cost Per KM : </p>
+                                                <p className="font-semibold text-graytext ml-1">
+                                                    {userFormData?.selectedCar?.[0].perKmRate.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                </p>
+                                            </div>
+                                            <div className="flex text-sm">
+                                                <p className=" w-24 font-medium">Choosed Plan : </p>
+                                                <p className="font-semibold text-graytext">
+                                                    {userPlan} KM
+                                                </p>
+                                            </div>
                                         </div>
-
-                                        <div className="grid grid-cols-2">
+                                        <div className="grid grid-cols-2 gap-3">
                                             <p className="font-semibold">Grand Total :</p>
                                             <p className="font-semibold text-graytext">
-                                                {carDepartureDetails?.grandTotal?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                {/* {carDepartureDetails?.grandTotal?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
                                                 4,000
                                             </p>
                                         </div>

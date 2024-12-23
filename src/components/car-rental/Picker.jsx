@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { GiByzantinTemple } from "react-icons/gi";
 import { MdMosque } from "react-icons/md";
@@ -9,6 +9,13 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import CarBookingPopup from "./CarBookingPopup";
+import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
+
+const fetcLimitedTime = async () => {
+  const res = await fetch("/api/cars/package/terms-condition/LimitedTime/get");
+  const data = await res.json();
+  return data;
+}
 
 const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
@@ -27,12 +34,33 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   });
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [localTime, setLocalTime] = useState();
+  // const [selectedDate, setSelectedDate] = useState();
+  // const [selectedTime, setSelectedTime] = useState();
+  // const [plan, setPlan] = useState();
 
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedTime, setSelectedTime] = useState();
-  const [showPopup, setShowPopup] = useState(false)
-  console.log("selectedDate", selectedDate);
-  console.log("selectedTime", selectedTime);
+  const { setUserDate, setUserTime, setUserPlan} = useCarPopupContext();
+// set selected time ,date and plan to globally 
+  // useEffect(() => {
+  //   const dateTime = {
+  //     selectedDate,
+  //     selectedTime,
+  //     plan
+  //   }
+  //   getDateTime(dateTime);
+  // }, [selectedDate,selectedTime,plan]);
+
+  useEffect(() => {
+    fetcLimitedTime().then((res) => {
+      // console.log("response of limited time ", res);
+      setLocalTime(res?.CancellationGroupData);
+    });
+  }, []);
+
+  // console.log("localTime", localTime);
+  // console.log("selectedDate", selectedDate);
+  // console.log("selectedTime", selectedTime);
 
 
   const togglePopup = () => {
@@ -143,18 +171,25 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
             <div className="flex gap-5">
               <div className="pt-2">
                 <p className="font-medium">Select Date | Time</p>
-                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                <div className="border-2 flex gap-0 my-1 rounded-lg">
                   <input
                     type="date"
-                    className=" outline-none mx-1  text-start py-1 border-r-2"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="w-[60%] outline-none text-start py-1 border-r-2 px-1"
+                    // value={selectedDate}
+                    onChange={(e) => setUserDate(e.target.value)}
                   />
-                  <input type="time"
-                    className="mt-1 outline-none py-1 "
-                    value={selectedTime}
-                    onChange={(e) => setSelectedTime(e.target.value)}
-                  />
+                  <select
+                    className="text-para w-[40%] px-3 py-2 h-10 outline-none border-none"
+                    onChange={(e) => setUserTime(e.target.value)}
+                  >
+                    <option value="">Select Time</option>
+                    {localTime?.length > 0 &&
+                      localTime?.map((item, i) => (
+                        <option key={i} value={item?.groupName}>
+                          {item?.groupName}
+                        </option>
+                      ))}
+                  </select>
                 </div>
               </div>
               <div className="pt-2">
@@ -162,6 +197,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 <div className=" border-2 flex gap-1 my-1 rounded-lg">
                   <input
                     type="text"
+                    // value={plan}
+                    onChange={(e) => setUserPlan(e.target.value)}
                     className="px-1 w-28 lg:w-44 text-start py-2  border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                   />
                 </div>
@@ -176,8 +213,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
               {showPopup && (
                 <CarBookingPopup
                   setShowPopup={setShowPopup}
-                // carPackage={carPackage}
-                // carDepartureDetails={carDepartureDetails}
                 />
               )}
             </div>
@@ -234,8 +269,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
               {showPopup && (
                 <CarBookingPopup
                   setShowPopup={setShowPopup}
-                // carPackage={carPackage}
-                // carDepartureDetails={carDepartureDetails}
                 />
               )}
             </div>

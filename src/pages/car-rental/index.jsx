@@ -16,7 +16,6 @@ import CarCarousel from "@/components/car-rental/CarCarousel";
 import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 import StaticBanner from "@/components/car-rental/StaticBanner";
 import Footer from "@/components/Footer";
-import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 
 const fetchPromoList = async () => {
   const response = await fetch(
@@ -48,7 +47,8 @@ const CarHireSection = ({ title, services, url }) => {
       setCarCTPackages(res?.data || []);
     });
   };
-  console.log("res of packages----> ", carCTPackages);
+
+  //  console.log("res of packages----> ", carCTPackages);
 
   return (
     <div className="px-5">
@@ -179,11 +179,9 @@ export default function App() {
   );
 
   // console.log("all section fetchHeading2 data is here ----> ",cities);
-  // const {userFormData} = useCarPopupContext();
-  // console.log("userFormData",userFormData);
-
 
   const [show, setShow] = useState(false);
+  const [carSelectionPopup, setCarSelectionPopup] = useState(false);
 
   const handleToggle = () => {
     setShow(!show);
@@ -192,8 +190,6 @@ export default function App() {
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
-
-  const [carSelectionPopup, setCarSelectionPopup] = useState(false);
 
   return (
     <AppProvider>
