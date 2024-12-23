@@ -88,7 +88,6 @@ export default function Footer() {
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                     <Link rel="noopener noreferrer" href="/about" className="footer-content2">About Us</Link>
                                                     <Link rel="noopener noreferrer" href="/contact" className="footer-content2">Contact Us</Link>
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Careers</Link>
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">Blog</Link>
 
                                                 </div>
@@ -99,23 +98,22 @@ export default function Footer() {
                                                 <h2 className="font-semibold text-base">Help</h2>
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">FAQs</Link>
-                                                    <a rel="noopener noreferrer" href="refund-cancellation" className="footer-content2">Cancellations & Returns</a>
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Dark Mode</Link>
-
+                                                    <Link rel="noopener noreferrer" href="refund-cancellation" className="footer-content2">Cancellations & Returns</Link>
+                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Careers</Link>
+                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Jobs</Link>
                                                 </div>
                                             </div>
                                         </div>
                                         <div>
-                                            {/* <div className="flex flex-col space-y-2">
-                                                <h2 className="font-semibold text-base">Customization</h2>
+                                            <div className="flex flex-col space-y-2">
+                                                <h2 className="font-semibold text-base">Support</h2>
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Configuration</Link>
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Theme Configuration</Link>
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Breakpoints</Link>
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Customizing Colors</Link>
+                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Privacy Policy</Link>
+                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Payment Policy</Link>
+                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Terms and Conditions</Link>
 
                                                 </div>
-                                            </div> */}
+                                            </div>
                                         </div>
                                         <div>
                                             <div className="flex flex-col space-y-3">
@@ -166,7 +164,7 @@ export default function Footer() {
                                             {/* <li className=" list-none"><Link href="#"
                                                 className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">Cookie
                                                 Policy</Link></li> */}
-                                            <li className=" list-none"><Link href="#" className="text-sm font-normal text-gray-500 hover:underline">Contact</Link></li>
+                                            {/* <li className=" list-none"><Link href="#" className="text-sm font-normal text-gray-500 hover:underline">Contact</Link></li> */}
                                         </ul>
                                         <div className="flex sm:justify-center space-x-6">
                                             <Link href="#" className="text-gray-500 hover:text-primary">
