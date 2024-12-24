@@ -16,6 +16,11 @@ const fetcLimitedTime = async () => {
   const data = await res.json();
   return data;
 }
+const fetcFlexibleTime = async () => {
+  const res = await fetch("/api/cars/package/terms-condition/FlexibleTime/get");
+  const data = await res.json();
+  return data;
+}
 
 const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
@@ -36,20 +41,9 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [localTime, setLocalTime] = useState();
-  // const [selectedDate, setSelectedDate] = useState();
-  // const [selectedTime, setSelectedTime] = useState();
-  // const [plan, setPlan] = useState();
+  const [flexibleTime, setFlexibleTime] = useState();
 
-  const { setUserDate, setUserTime, setUserPlan} = useCarPopupContext();
-// set selected time ,date and plan to globally 
-  // useEffect(() => {
-  //   const dateTime = {
-  //     selectedDate,
-  //     selectedTime,
-  //     plan
-  //   }
-  //   getDateTime(dateTime);
-  // }, [selectedDate,selectedTime,plan]);
+  const { setUserDate, setUserTime, setUserPlan } = useCarPopupContext();
 
   useEffect(() => {
     fetcLimitedTime().then((res) => {
@@ -58,7 +52,15 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     });
   }, []);
 
+  useEffect(() => {
+    fetcFlexibleTime().then((res) => {
+      // console.log("response of flexibleTime time ", res);
+      setFlexibleTime(res?.CancellationGroupData);
+    });
+  }, []);
+
   // console.log("localTime", localTime);
+  console.log("flexibleTime", flexibleTime);
   // console.log("selectedDate", selectedDate);
   // console.log("selectedTime", selectedTime);
 
@@ -120,6 +122,10 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   const handleBookCar = () => {
     setShowPopup(true);
   }
+  const planKM = [
+    { value: '80KM-8HRS', label: '80KM - 8HRS' },
+    { value: '100KM-10HRS', label: '100KM - 10HRS' },
+  ];
 
   return (
     <div>
@@ -175,7 +181,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="date"
                     className="w-[60%] outline-none text-start py-1 border-r-2 px-1"
-                    // value={selectedDate}
                     onChange={(e) => setUserDate(e.target.value)}
                   />
                   <select
@@ -193,14 +198,20 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="pt-2">
-                <p className="font-medium">Choose Plan</p>
-                <div className=" border-2 flex gap-1 my-1 rounded-lg">
-                  <input
-                    type="text"
-                    // value={plan}
+                <p className="font-medium">Choose Plan<span className="text-sm">(KM)</span></p>
+                <div className=" border-1 flex gap-1 my-1 rounded-lg">
+                  <select
+                    className="text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                     onChange={(e) => setUserPlan(e.target.value)}
-                    className="px-1 w-28 lg:w-44 text-start py-2  border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
-                  />
+                  >
+                    <option value="">Choose Your Plan</option>
+                    {planKM?.length > 0 &&
+                      planKM.map((item, i) => (
+                        <option key={`80-${i}`} value={item.value}>
+                          {item.label}
+                        </option>
+                      ))}
+                  </select>
                 </div>
               </div>
               <div className="mt-8">
@@ -220,7 +231,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         </div>
         {/* OutStation */}
         <div className={`${activeTab === "Tab2" ? "block" : "hidden"}`}>
-          <div className="flex gap-4 px-4">
+          <div className="flex gap-3 px-4">
             <div className=" flex gap-3 ml-3">
               <div className="py-2">
                 <p className="font-medium">Select Vehicle</p>
@@ -239,15 +250,26 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <div className="py-2 ">
                 <p className="font-medium">Pick-up date</p>
                 <div className=" border-2 flex gap-1 my-1 rounded-lg">
                   <input
                     type="date"
-                    className=" outline-none mx-1  text-start py-1 border-r-2"
+                    className=" outline-none text-start py-1 px-1 border-r-2"
                   />
-                  <input type="time" className="mt-1 outline-none py-1 " />
+                  <select
+                    className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
+                  // onChange={(e) => setUserTime(e.target.value)}
+                  >
+                    <option value="">Select Time</option>
+                    {flexibleTime?.length > 0 &&
+                      flexibleTime?.map((item, i) => (
+                        <option key={i} value={item?.groupName}>
+                          {item?.groupName}
+                        </option>
+                      ))}
+                  </select>
                 </div>
               </div>
               <div className="py-2 ">
@@ -255,9 +277,20 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 <div className=" border-2 flex gap-1 my-1 rounded-lg">
                   <input
                     type="date"
-                    className=" outline-none mx-1  text-start py-1 border-r-2"
+                    className=" outline-none text-start py-1 px-1 border-r-2"
                   />
-                  <input type="time" className="mt-1 outline-none py-1 " />
+                  <select
+                    className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
+                  // onChange={(e) => setUserTime(e.target.value)}
+                  >
+                    <option value="">Select Time</option>
+                    {flexibleTime?.length > 0 &&
+                      flexibleTime?.map((item, i) => (
+                        <option key={i} value={item?.groupName}>
+                          {item?.groupName}
+                        </option>
+                      ))}
+                  </select>
                 </div>
               </div>
               <div className="mt-8">

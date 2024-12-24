@@ -16,10 +16,10 @@ export const CarPopupProvider = ({ children }) => {
     }
   }
 
-  console.log("userFormData global",userFormData);
-  console.log("userDate global",userDate);
-  console.log("userTime global",userTime);
-  console.log("userPlan global",userPlan);
+  // console.log("userFormData global",userFormData);
+  // console.log("userDate global",userDate);
+  // console.log("userTime global",userTime);
+  // console.log("userPlan global",userPlan);
 
   const contextFun = {
     userFormData , setUserFormData, getDetail, userDate, userTime, userPlan, setUserDate, setUserTime, setUserPlan

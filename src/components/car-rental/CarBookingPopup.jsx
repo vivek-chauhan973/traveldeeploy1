@@ -71,7 +71,31 @@ const CarBookingPopup = ({ setShowPopup }) => {
         }
     };
     //   console.log("departure section data is here ---> ", departureSectionData) 
-    // console.log("CarPackageTerm is here ---> ", CarPackageTerm)
+    // console.log("CarPackageTerm is here ---> ", CarPackageTerm);
+
+    {/* Calculation of local car booking*/}
+    let rate = userFormData?.selectedCar?.[0]?.rate ?? 0;
+    let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
+    let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;
+    let selectedlocation = userFormData?.selectedlocation?.[0].localLocation;
+    let cityIncreament = selectedlocation?.split('-')[1]?.trim() ?? 0; // extract city increament cost from selected local Location
+    let cityIncrementNumber = parseInt(cityIncreament, 10); // city increament string convert into number
+    // console.log("cityIncrementNumber here ---> ", cityIncrementNumber);
+
+    let baseCost = rate + cityIncrementNumber + misc;
+    let a = baseCost + Math.floor((baseCost * markup) / 100); // baseCost with markup 
+    // console.log("baseCost here ---> ", baseCost);
+    // console.log("a here ---> ", a);
+
+    let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
+    let b = Math.floor(perKmRate + Math.floor((perKmRate * markup) / 100)); // per km rate with markup 
+    // console.log("perKmRate here ---> ", perKmRate);
+    const choosePlanKm = userPlan && userPlan.match(/\d+/) ? parseInt(userPlan.match(/\d+/)[0], 10) : 1;
+    let c = b * choosePlanKm;
+    // console.log("c here ---> ", c);
+
+    let totalCost = a + c; // Total cost ====>  base cost + per km rate 
+    console.log("totalCost here ---> ", totalCost);
 
     return (
         <>
@@ -195,7 +219,7 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                             <div className="flex text-sm">
                                                 <p className=" w-20 font-medium">Dept. Date :</p>
                                                 <p className=" font-bold text-graytext">
-                                                {userDate}
+                                                    {userDate}
                                                 </p>
                                             </div>
                                             <div className="flex text-sm">
@@ -208,9 +232,9 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                         <div className="flex mb-2 text-sm">
                                             <p className=" w-28 font-medium">PickUp Location : </p>
                                             <p className="font-semibold text-graytext capitalize">
-                                                {userFormData?.selectedlocation?.[0].location}
-                                                {" "}-{" "}
                                                 {userFormData?.selectedPickupPoint?.[0].name}
+                                                {" "}-{" "}
+                                                {userFormData?.selectedlocation?.[0].location}
                                             </p>
                                         </div>
                                         <div className="grid grid-cols-2 gap-3 mb-2">
@@ -223,15 +247,14 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                             <div className="flex text-sm">
                                                 <p className=" w-24 font-medium">Choosed Plan : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {userPlan} KM
+                                                    {userPlan? userPlan : "--"}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="grid grid-cols-2 gap-3">
                                             <p className="font-semibold">Grand Total :</p>
                                             <p className="font-semibold text-graytext">
-                                                {/* {carDepartureDetails?.grandTotal?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
-                                                4,000
+                                                {totalCost?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                             </p>
                                         </div>
                                     </div>
