@@ -5,10 +5,10 @@ const BlogTable = ({ item }) => {
   console.log("blogpost item is here -------> ", item);
   return (
     <div className="m-2 ">
-      <div className="flex justify-between gap-3 items-center bg-white rounded p-2">
+      <div className="flex justify-between gap-3 items-center bg-white rounded">
         <div className="rounded">
           <Image
-            className=" w-[150px] h-[80px] overflow-hidden rounded "
+            className=" w-[150px] h-[80px] overflow-hidden rounded-l"
             src={
               item?.videoPath ||
               "https://images.unsplash.com/photo-1634926878768-2a5b3c42f139?q=80&w=1956&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -19,13 +19,13 @@ const BlogTable = ({ item }) => {
           />
         </div>
         <div className="flex flex-col md:flex-row">
-          <div className="max-w-60">
-            <p className="text-md font-semibold">{item?.title}</p>
+          <div className="max-w-56">
+            <p className="font-semibold">{item?.title}</p>
             <div className="line-clamp-1">
               <p className="text-light text-sm">{item?.description}</p>
             </div>
           </div>
-          <div className="flex justify-start  flex-col">
+          <div className="flex justify-start  flex-col pr-1">
             <span className="text-xs">
               {new Date(item?.createdAt)?.toDateString()?.split(" ")?.length >
                 0 && (

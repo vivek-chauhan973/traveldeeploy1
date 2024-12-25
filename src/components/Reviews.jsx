@@ -49,11 +49,11 @@ const ReviewForm = () => {
     const { title, information, rating, name, selectDate } = formData;
 
     const errors = {};
-    if (!title) errors.title = 'Title is required';
-    if (!information) errors.information = 'Information is required';
-    if (!rating) errors.rating = 'Rating is required';
-    if (!name) errors.name = 'Name is required';
-    if (!selectDate) errors.selectDate = 'Select Date is required';
+    if (!title) errors.title = 'Required';
+    if (!information) errors.information = 'Required';
+    if (!rating) errors.rating = 'Required';
+    if (!name) errors.name = 'Required';
+    if (!selectDate) errors.selectDate = 'Required';
     setValidationErrors(errors);
 
     if (Object.keys(errors).length > 0) return;
@@ -133,7 +133,7 @@ const ReviewForm = () => {
         <title>Review Form</title>
       </Head>
       {/* <div className="border-l-2 border-teal-700 p-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-md mt-5"> */}
-      <div className=" p-4 rounded">
+      <div className="border-2 border-slate-300 p-4 rounded m-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Title */}
           <div className="sm:flex items-center mb-2">
@@ -150,7 +150,7 @@ const ReviewForm = () => {
               placeholder="Enter Title"
             />
             {validationErrors.title && (
-              <span className="text-xs text-red-700">{validationErrors.title}</span>
+              <span className="text-xs text-red-400 font-medium ml-1">{validationErrors.title}</span>
             )}
           </div>
 
@@ -168,7 +168,7 @@ const ReviewForm = () => {
               placeholder="Enter Information"
             />
             {validationErrors.information && (
-              <span className="text-xs text-red-700">{validationErrors.information}</span>
+              <span className="text-xs text-red-400 font-medium ml-1">{validationErrors.information}</span>
             )}
           </div>
 
@@ -187,7 +187,7 @@ const ReviewForm = () => {
               placeholder="Enter Rating"
             />
             {validationErrors.rating && (
-              <span className="text-xs text-red-700">{validationErrors.rating}</span>
+              <span className="text-xs text-red-400 font-medium ml-1">{validationErrors.rating}</span>
             )}
           </div>
 
@@ -206,7 +206,7 @@ const ReviewForm = () => {
               placeholder="Enter Name"
             />
             {validationErrors.name && (
-              <span className="text-xs text-red-700">{validationErrors.name}</span>
+              <span className="text-xs text-red-400 font-medium ml-1">{validationErrors.name}</span>
             )}
           </div>
 
@@ -224,12 +224,12 @@ const ReviewForm = () => {
               className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
             />
             {validationErrors.selectDate && (
-              <span className="text-xs text-red-700">{validationErrors.selectDate}</span>
+              <span className="text-xs text-red-400 font-medium ml-1">{validationErrors.selectDate}</span>
             )}
           </div>
 
           <div className='flex justify-end items-center'>
-            <button type="submit" className="px-2 py-1.5 text-sm bg-primary text-white rounded-md">
+            <button type="submit" className="px-2 py-1.5 text-sm bg-navyblack text-white rounded-md">
               {editingId ? 'Update Review' : 'Add Review'}
             </button>
           </div>

@@ -10,25 +10,25 @@ import { RiHotelLine } from "react-icons/ri";
 import { GiMoneyStack } from "react-icons/gi";
 import { PiPackageDuotone } from "react-icons/pi";
 import Chart1 from "@/components/admin/dashboard/charts/chart1";
-
 import Transaction from "@/components/admin/dashboard/transaction/index";
 import BlogTable from "@/components/admin/dashboard/BlogTable";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-
 import ReviewForm from "@/components/Reviews";
 import RatingForm from "@/components/admin/dashboard/Rating";
 import { useEffect, useState } from "react";
-// import RatingForm from "@/components/admin/dashboard/Rating";
 // import Gst from "@/components/admin/dashboard/Gst";
+
 const fetchBlogs=async ()=>{
     return (await(await fetch(`/api/blog/getallblogs?selectType=blog`)).json())
 }
+
 export default function AdminDashboard() {
     const [blogPosts,setBlogPosts]=useState([]);
 
     useEffect(()=>{
         fetchBlogs().then(res=>{setBlogPosts(res?.data||[])})
     },[])
+
     return (
         <AppProvider>
             <Layout>

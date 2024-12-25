@@ -16,6 +16,7 @@ import CarCarousel from "@/components/car-rental/CarCarousel";
 import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 import StaticBanner from "@/components/car-rental/StaticBanner";
 import Footer from "@/components/Footer";
+import MobilePicker from "@/components/car-rental/MobilePicker";
 
 const fetchPromoList = async () => {
   const response = await fetch(
@@ -218,6 +219,14 @@ export default function App() {
                 />
               </div>
             </div>
+            {/* <div className="container-wrapper md:hidden block">
+              <div className="absolute my-3">
+                <MobilePicker
+                  setCarSelectionPopup={setCarSelectionPopup}
+                  carSelectionPopup={carSelectionPopup}
+                />
+              </div>
+            </div> */}
             <div>
               <Image
                 className=" w-full h-full object-cover"
@@ -231,9 +240,19 @@ export default function App() {
               />
             </div>
           </div>
+          
           <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
             {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
           </div>
+
+            <div className="md:hidden block">
+              <div className=" p-2 my-5 bg-black">
+                <MobilePicker
+                  setCarSelectionPopup={setCarSelectionPopup}
+                  carSelectionPopup={carSelectionPopup}
+                />
+              </div>
+            </div>
           <div className="py-5 container-wrapper pt-10 -z-40">
             <div>
               <p className="md:font-semibold font-medium text-xl">
