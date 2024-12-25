@@ -244,7 +244,11 @@ export default function Category() {
     //     seteditCategoryId(category_id == editCategoryId ? null : category_id);
     //     setEditCategoryValue('')
     // }
+    const [isActive, setIsActive] = useState(true);
 
+    const handleToggle = () => {
+        setIsActive((prev) => !prev); // Toggles between true and false
+    };
 
     return (
         <>
@@ -265,12 +269,12 @@ export default function Category() {
                             <div className='shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600'>
                                 <form onSubmit={isSubmitBadge} className='flex items-end justify-between gap-3'>
                                     <div className='grow flex flex-col  '>
-                                        <label htmlFor="" className="mb-2 pl-2 text-para font-semibold">Badges</label>
+                                        <label htmlFor="badges" className="mb-2 pl-2 text-para font-semibold">Badges</label>
                                         <input
                                             onChange={isHandleBadge}
-                                            className=' border rounded-md h-8 px-2 text-para grow focus:border-black font-sans outline-none'
+                                            className=' border rounded-md h-8 px-2 text-para grow focus:border-primary font-sans outline-none'
                                             type="text" name="badge"
-
+                                            id="badges"
                                             placeholder="Enter Your Badges" />
                                     </div>
                                     <button type="submit">
@@ -291,7 +295,7 @@ export default function Category() {
                                                         <span>{index + 1} </span>
                                                         {editBadgeId === item._id ? (
                                                             <input
-                                                                className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-black font-sans outline-none'
+                                                                className='border ml-2 rounded-md h-8 px-2 capitalize focus:border-primary font-sans outline-none'
                                                                 defaultValue={item.badge}
                                                                 onChange={(e) => setEditBadgeValue(e.target.value)}
                                                             />
@@ -333,8 +337,32 @@ export default function Category() {
                                         ))}
                                     </div>
                                 </div>
-                            </div>
+                            </div >
                             {/* <CarGst /> */}
+                            {/* Active Option / Inactive Option toggle */}
+                            <div className='shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600'>
+                                <h5 className="mb-2 pl-2 text-para font-semibold">Car Booking Status</h5>
+                                <div className="flex justify-center items-center border p-2 xl:h-72 md:h-24 h-16 rounded">
+                                    <div className="flex items-center space-x-2">
+                                        <p className={`md:text-base md:font-semibold font-medium  text-para transition duration-300 ${isActive ? "text-black" : "text-gray-400 blur-none"}`}>Active</p>
+                                        <div className="w-10 h-5 flex justify-between items-center rounded-full bg-white border-2 border-black"
+                                            onClick={handleToggle}
+                                        >
+                                            <div
+                                                className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isActive ? "bg-navyblack shadow-md" : "bg-white text-gray-500"
+                                                    }`}
+                                            >
+                                            </div>
+                                            <div
+                                                className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isActive ? "bg-navyblack  shadow-md" : "bg-white text-red-500"
+                                                    }`}
+                                            >
+                                            </div>
+                                        </div>
+                                        <p className={`md:text-base md:font-semibold font-medium text-para transition duration-300 ${!isActive ? "text-black" : "text-gray-400 blur-none"}`}>Inactive</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="my-5">
                             <CarItineraryTour />
