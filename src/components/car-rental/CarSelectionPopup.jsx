@@ -88,40 +88,40 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
   // console.log("selectedCar", selectedCar);
 
   return (
-    <div className="absolute flex items-center mt-2 justify-center z-[9999]">
-      <div className="bg-white rounded-xl shadow-lg w-96 px-6 pb-6 pt-3 border">
-        <div className="flex justify-between mb-2.5">
-          <h2 className="text-xl font-semibold text-center text-gray-700">
+    <div className="absolute flex items-center justify-center z-[9999]">
+      <div className="bg-white rounded-xl shadow-lg md:w-80 w-72 md:ml-0 ml-5 md:py-5 py-2 px-5 border">
+        <div className="flex justify-between md:mb-2.5 mb-1">
+          <h2 className="md:text-xl text-lg font-semibold text-center text-gray-700">
             Car Selection
           </h2>
           <FontAwesomeIcon
             icon={faCircleXmark}
-            className="text-lg mt-1 cursor-pointer"
+            className="md:text-lg text-md mt-1 cursor-pointer"
             onClick={handleCancel}
           />
         </div>
         <div>
           <div>
-            <label className="block text-gray-600 mb-0.5" htmlFor="numPersons">
+            <label className="block text-gray-600 mb-0.5 text-para" htmlFor="numPersons">
               No. of Person
             </label>
             <input
               type="number"
               id="numPersons"
-              className="mb-2.5 w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+              className="md:mb-2.5 mb-1.5 w-full px-3 md:py-2 py-1.5 md:h-10 h-9 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
               placeholder="Enter number of persons"
               value={persons}
               onChange={(e) => setPersons(e.target.value)}
             />
           </div>
           <div>
-            <label className="block text-gray-600 mb-0.5" htmlFor="vehicle">
+            <label className="block text-gray-600 mb-0.5 text-para" htmlFor="vehicle">
               Select any one vehicle
             </label>
             <select
               name=""
               id="vehicle"
-              className="mb-2.5 text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+              className="md:mb-2.5 mb-1.5 text-para w-full px-3 md:py-2 py-1.5 md:h-10 h-9 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
               onChange={(e) => setSelectedCar(e.target.value)}
             >
               <option value="">Select Car</option>
@@ -136,7 +136,7 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
 
           <div>
             <label
-              className="block text-gray-600 mb-0.5"
+              className="block text-gray-600 mb-0.5 text-para"
               htmlFor="pickupLocation"
             >
               Pickup Location
@@ -144,7 +144,7 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
             <select
               name=""
               id="vehicle"
-              className=" mb-2.5 text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+              className="md:mb-2.5 mb-1.5 text-para w-full px-3 md:py-2 py-1.5 md:h-10 h-9 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
               onChange={(e) => handleChangeLocation(e.target.value)}
             >
               <option value="">Select Location</option>
@@ -157,13 +157,13 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
             </select>
           </div>
           <div>
-            <label className="block text-gray-600 mb-0.5" htmlFor="pickupPoint">
+            <label className="block text-gray-600 mb-0.5 text-para" htmlFor="pickupPoint">
               Pickup Point
             </label>
             <select
               name=""
               id="vehicle"
-              className="text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+              className="text-para w-full px-3 md:py-2 py-1.5 md:h-10 h-9 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
               onChange={(e) => handleChangePickupLocation(e.target.value)}
             >
               <option value="">Select Pickup Point</option>
@@ -176,13 +176,13 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
             </select>
           </div>
         </div>
-        <div className="mt-16 flex justify-end space-x-4">
-          <button className="px-4 py-2 bg-gray-400 text-gray-700 rounded-md"
+        <div className=" mt-14 md:mb-0 mb-1.5 flex justify-end space-x-4">
+          <button className="md:px-4 px-3 md:py-2 py-1.5 md:text-para text-sm bg-gray-400 text-gray-700 rounded-md"
             onClick={handleCancel}
           >
             Cancel
           </button>
-          <button className="px-4 py-2 bg-navyblack text-white rounded-md"
+          <button className="md:px-4 px-3 md:py-2 py-1.5 md:text-para text-sm bg-navyblack text-white rounded-md"
             onClick={handleSubmit} disabled={!selectedPickupPoint}>
             Confirm
           </button>

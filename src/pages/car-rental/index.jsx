@@ -199,8 +199,8 @@ export default function App() {
         <DesktopHeader setCarSelectionPopup={setCarSelectionPopup} />
         <Breadcrumbs />
         <div className="container-wrapper"></div>
-        <div className="mb-5">
-          <div className="overflow-hidden relative md:h-[83vh]">
+        <div className="mb-2 md:mb-5">
+          <div className="overflow-hidden relative md:h-[83vh] h-[65vh]">
             <div
               className="container-wrapper"
               onClick={() => setCarSelectionPopup(false)}
@@ -219,17 +219,9 @@ export default function App() {
                 />
               </div>
             </div>
-            {/* <div className="container-wrapper md:hidden block">
-              <div className="absolute my-3">
-                <MobilePicker
-                  setCarSelectionPopup={setCarSelectionPopup}
-                  carSelectionPopup={carSelectionPopup}
-                />
-              </div>
-            </div> */}
             <div>
               <Image
-                className=" w-full h-full object-cover"
+                className=" w-full md:h-full h-[65vh] object-cover"
                 src={
                   carBanner?.path ||
                   "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -240,48 +232,80 @@ export default function App() {
               />
             </div>
           </div>
-          
-          <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
-            {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
+          <div className="md:block hidden">
+            <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
+              {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
+            </div>
           </div>
-
-            <div className="md:hidden block">
-              <div className=" p-2 my-5 bg-black">
-                <MobilePicker
-                  setCarSelectionPopup={setCarSelectionPopup}
-                  carSelectionPopup={carSelectionPopup}
-                />
-              </div>
+          <div className="md:hidden block">
+            <div className="absolute top-[175px]">
+              {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
             </div>
-          <div className="py-5 container-wrapper pt-10 -z-40">
-            <div>
-              <p className="md:font-semibold font-medium text-xl">
-                {carHeading1?.heading1}
-              </p>
-              <p
-                className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
-                  }`}
-              >
-                {carHeading1?.description1}
-              </p>
-            </div>
-            <div className="flex justify-end">
-              <div className="flex justify-center items-center md:h-6 h-5 md:w-24 w-20 mt-2 bg-navyblack rounded shadow-sm text-white cursor-pointer">
-                <button className=" md:text-sm text-xs" onClick={handleToggle}>
-                  {show ? "Read less" : "Read more"}
-                </button>
-                <span>
-                  <IoMdArrowDropdown
-                    className={`transition-transform  ${show ? "rotate-180" : ""
-                      } `}
-                    onClick={handleToggle}
-                  />
-                </span>
-              </div>
+          </div>
+          <div className="md:hidden block absolute top-32">
+            <div className="p-2 my-5">
+              <MobilePicker
+                setCarSelectionPopup={setCarSelectionPopup}
+                carSelectionPopup={carSelectionPopup}
+              />
             </div>
           </div>
         </div>
-
+        {/* small devices */}
+        {/* <div className="mb-5 md:hidden block">
+          <div className="w-full h-[80vh] relative">
+            <Image
+              className="w-full h-full object-cover"
+              src={
+                carBanner?.path ||
+                "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
+              alt=""
+              width={1283}
+              height={854}
+            />
+          </div>
+          <div className="absolute top-40 flex justify-center items-center">
+            <p className="font-semibold  text-xl text-white w-4/5">
+              {carBanner?.title}
+            </p>
+          </div>
+          <div className="absolute top-56">
+            <div className=" my-5">
+              <MobilePicker
+                setCarSelectionPopup={setCarSelectionPopup}
+                carSelectionPopup={carSelectionPopup}
+              />
+            </div>
+          </div>
+        </div> */}
+        <div className="py-5 container-wrapper">
+          <div classname="">
+            <p className="md:font-semibold font-medium text-xl">
+              {carHeading1?.heading1}
+            </p>
+            <p
+              className={`text-[15px] pt-4 ${show ? "" : "line-clamp-6 md:line-clamp-3"
+                }`}
+            >
+              {carHeading1?.description1}
+            </p>
+          </div>
+          <div className="flex justify-end">
+            <div className="flex justify-center items-center md:h-6 h-5 md:w-24 w-20 mt-2 bg-navyblack rounded shadow-sm text-white cursor-pointer">
+              <button className=" md:text-sm text-xs" onClick={handleToggle}>
+                {show ? "Read less" : "Read more"}
+              </button>
+              <span>
+                <IoMdArrowDropdown
+                  className={`transition-transform  ${show ? "rotate-180" : ""
+                    } `}
+                  onClick={handleToggle}
+                />
+              </span>
+            </div>
+          </div>
+        </div>
         {/* CarCities are here */}
         <div>
           <CarCities cityPromoData={packageDataCity?.[0]?.options} />
@@ -321,7 +345,7 @@ export default function App() {
             </div>
           </div>
         </div>
-        <div className="container-wrapper">
+        <div className="md:container-wrapper">
           <CarCarousel carCarousel={carCarousel} />
         </div>
         {/* Car Packages are here */}

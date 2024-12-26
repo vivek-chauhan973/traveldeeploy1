@@ -128,7 +128,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     ];
 
     return (
-        <div className="p-2">
+        <div className="p-5">
             <div className="text-xs w-28 h-5 bg-primary text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
                 Rent a car
             </div>
@@ -155,73 +155,72 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
                 {/* Local */}
                 <div className={`${activeTab === "Tab1" ? "block" : "hidden"}`}>
-                    <div>
-                        <div className="w-full mb-2">
-                            <p className="text-para font-medium">Select Vehicle</p>
-                            <div
-                                className=" border-2 flex gap-1 rounded-lg"
-                                onClick={() => setCarSelectionPopup(true)}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faMagnifyingGlass}
-                                    className="px-2 py-2"
-                                />
-                                <input
-                                    type="text"
-                                    className="outline-none w-full text-start py-1.5"
-                                />
-                            </div>
-                        </div>
-                        <div className="mb-2">
-                            <p className="text-para font-medium">Select Date | Time</p>
-                            <div className="border-2 flex gap-0 rounded-lg">
-                                <input
-                                    type="date"
-                                    className="w-[60%] outline-none text-start border-r-2 px-1"
-                                    onChange={(e) => setUserDate(e.target.value)}
-                                />
-                                <select
-                                    className="text-para w-[40%] px-3 h-10 outline-none border-none"
-                                    onChange={(e) => setUserTime(e.target.value)}
-                                >
-                                    <option value="">Select Time</option>
-                                    {localTime?.length > 0 &&
-                                        localTime?.map((item, i) => (
-                                            <option key={i} value={item?.groupName}>
-                                                {item?.groupName}
-                                            </option>
-                                        ))}
-                                </select>
-                            </div>
-                        </div>
-                        <div className="mb-3">
-                            <p className="text-sm font-medium">Choose Plan<span className="text-xxs">(KM)</span></p>
-                            <div className=" border-1 flex gap-1 rounded-lg">
-                                <select
-                                    className="text-para w-full px-3 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
-                                    onChange={(e) => setUserPlan(e.target.value)}
-                                >
-                                    <option value="">Choose Your Plan</option>
-                                    {planKM?.length > 0 &&
-                                        planKM.map((item, i) => (
-                                            <option key={`80-${i}`} value={item.value}>
-                                                {item.label}
-                                            </option>
-                                        ))}
-                                </select>
-                            </div>
-                        </div>
-                        <button className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
-                            onClick={handleBookCar}
+                    <div className="w-full mb-2">
+                        <p className="text-para font-medium">Select Vehicle</p>
+                        <div
+                            className=" border-2 flex gap-1 rounded-lg"
+                            onClick={(e) => setCarSelectionPopup(true)}
                         >
-                            Book Cars
-                        </button>
-                        {showPopup && (
-                            <CarBookingPopup
-                                setShowPopup={setShowPopup}
+                            <FontAwesomeIcon
+                                icon={faMagnifyingGlass}
+                                className="px-2 py-2"
                             />
-                        )}
+                            <input
+                                type="text"
+                                className="outline-none w-full text-start py-1.5"
+                            />
+                        </div>
                     </div>
+                    <div className="mb-2">
+                        <p className="text-para font-medium">Select Date | Time</p>
+                        <div className="border-2 flex gap-0 rounded-lg">
+                            <input
+                                type="date"
+                                className="w-[60%] outline-none text-start border-r-2 px-1"
+                                onChange={(e) => setUserDate(e.target.value)}
+                            />
+                            <select
+                                className="text-para w-[40%] px-3 h-10 outline-none border-none"
+                                onChange={(e) => setUserTime(e.target.value)}
+                            >
+                                <option value="">Select Time</option>
+                                {localTime?.length > 0 &&
+                                    localTime?.map((item, i) => (
+                                        <option key={i} value={item?.groupName}>
+                                            {item?.groupName}
+                                        </option>
+                                    ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="mb-3">
+                        <p className="text-sm font-medium mb-0.5">Choose Plan<span className="text-xxs">(KM)</span></p>
+                        <div className=" border-1 flex gap-0 rounded-lg">
+                            <select
+                                className="accent-navyblack text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+                                onChange={(e) => setUserPlan(e.target.value)}
+                            >
+                                <option value="" disabled>Choose Your Plan</option>
+                                <option value="BY KMs">By Kms</option>
+                                {planKM?.length > 0 &&
+                                    planKM.map((item, i) => (
+                                        <option key={`80-${i}`} value={item.value}>
+                                            {item.label}
+                                        </option>
+                                    ))}
+                            </select>
+                        </div>
+                    </div>
+                    <button className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
+                        onClick={handleBookCar}
+                    >
+                        Book Cars
+                    </button>
+                    {showPopup && (
+                        <CarBookingPopup
+                            setShowPopup={setShowPopup}
+                        />
+                    )}
                 </div>
                 {/* OutStation */}
                 <div className={`${activeTab === "Tab2" ? "block" : "hidden"}`}>

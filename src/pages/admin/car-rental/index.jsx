@@ -341,7 +341,7 @@ export default function Category() {
                             {/* <CarGst /> */}
                             {/* Active Option / Inactive Option toggle */}
                             <div className='shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)] p-4 rounded-md bg-white border-l-2 border-teal-600'>
-                                <h5 className="mb-2 pl-2 text-para font-semibold">Car Booking Status</h5>
+                                <h5 className="mb-2 pl-2 text-para font-semibold">Rent a Car Status</h5>
                                 <div className="flex justify-center items-center border p-2 xl:h-72 md:h-24 h-16 rounded">
                                     <div className="flex items-center space-x-2">
                                         <p className={`md:text-base md:font-semibold font-medium  text-para transition duration-300 ${isActive ? "text-black" : "text-gray-400 blur-none"}`}>Active</p>
