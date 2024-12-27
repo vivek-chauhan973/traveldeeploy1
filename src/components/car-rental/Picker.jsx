@@ -215,7 +215,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </p>
                 <div className=" border-1 flex gap-1 my-1 rounded-lg">
                   <select
-                    className=" text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+                    className="text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                     onChange={(e) => setUserPlan(e.target.value)}
                   >
                     <option value="" disabled>

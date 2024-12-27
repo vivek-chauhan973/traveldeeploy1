@@ -211,7 +211,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         <p className="text-sm font-medium mb-0.5">Choose Plan<span className="text-xxs">(KM)</span></p>
                         <div className=" border-1 flex gap-0 rounded-lg">
                             <select
-                                className="accent-navyblack text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+                                className="text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                                 onChange={(e) => setUserPlan(e.target.value)}
                             >
                                 <option value="" disabled>Choose Your Plan</option>

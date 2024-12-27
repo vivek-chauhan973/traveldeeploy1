@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../app/globals.css";
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
 import Image from 'next/image';
@@ -12,6 +12,13 @@ const fetchAboutUsPage = async () => {
   return await res.json();
 };
 const About = () => {
+  const [aboutData,setAboutData]=useState();
+
+  useEffect(()=>{
+    fetchAboutUsPage().then(res=>{
+      console.log("about page is here ---> ",res)
+    })
+  },[])
 
   const [activeIndex, setActiveIndex] = useState(null);
 
