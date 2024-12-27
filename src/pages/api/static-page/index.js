@@ -6,7 +6,7 @@ const uploadDirectory = "./public/uploads/images";
 
 const staticPageApi = async (req, res) => {
   if (req.method === "POST") {
-    const { topics, name } = req.body;
+    const { topics, name ,contentSummary} = req.body;
 
     if (!name || !topics) {
       return res.status(400).json({ message: "'name' and 'topics' are required" });
@@ -18,7 +18,7 @@ const staticPageApi = async (req, res) => {
 
       if (!existingPage) {
         // Create new page
-        result = await StaticPage.create({ topics, name });
+        result = await StaticPage.create({ topics, name,contentSummary });
         return res.status(201).json({
           message: "Page created successfully",
           data: result,
@@ -26,7 +26,7 @@ const staticPageApi = async (req, res) => {
       }
 
       // Replace existing page
-      result = await StaticPage.findOneAndReplace({ name }, { name, topics });
+      result = await StaticPage.findOneAndReplace({ name }, { name, topics ,contentSummary});
       if (!result) {
         return res.status(500).json({ message: "Failed to update the page" });
       }

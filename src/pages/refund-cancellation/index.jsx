@@ -12,73 +12,12 @@ const fetchRefundCancellationPage = async () => {
   };
 const RefundCancellation = () => {
 
-    const [activeIndex, setActiveIndex] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const [data,setData]=useState([])
     useEffect(()=>{
         fetchRefundCancellationPage().then(res=>setData(res?.data))
     },[])
-    console.log("data is here ----> ",data)
-
-    const paragraphs = [
-        {
-            id: "1st",
-            text: "What is a business travel app?",
-            desc: `What do we mean by corporate travel app, exactly, and what can
-             these business travel apps do? Whether accessed via a desktop or
-             downloaded to your smartphone or tablet, travel apps lighten the
-             load of trip planning. Use general travel apps to find and book
-             flights, hotels, and car rentals, or plan your itinerary. With
-             business-specific apps, you can also track expenses and find
-             meeting facilities.`
-        },
-        {
-            id: "2nd",
-            text: "How long does it take the average person to plan a trip?",
-            desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated they had be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
-        },
-        {
-            id: "3rd",
-            text: "Business travel tips: how do you plan a trip like a professional?",
-            desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated theyd be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
-        },
-        {
-            id: "4th",
-            text: "How can a corporate travel app simplify the planning process?",
-            desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated theyd be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
-        },
-        {
-            id: "5th",
-            text: "Corporate travel tools: you'll be able to put all our business travel.",
-            desc: `With these apps, youll be able to put all our business travel
-             tips into action for fuss-free planning. youll be able to put all our business travel corporate travel.`
-        },
-    ];
-
     return (
         <div>
             <DesktopHeader />

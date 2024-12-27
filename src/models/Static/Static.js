@@ -14,7 +14,10 @@ const staticPagesSchema=new mongoose.Schema({
       type:String,
       required:true
     },
-    topics:[topicSchema]
+    topics:[topicSchema],
+    contentSummary:{
+      type:String
+    }
 },{timestamps:true});
 
 const StaticPage=mongoose.models.StaticPage||mongoose.model("StaticPage",staticPagesSchema);

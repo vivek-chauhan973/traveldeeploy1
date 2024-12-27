@@ -43,6 +43,7 @@ const StaticPage = () => {
     if (selectedPage) {
       fetchAllTopic(selectedPage).then((res) => {
         setItineraryDayWiseDataArray(res?.data?.topics || []);
+        console.log("error is happening -----> ",res)
       });
     }
   }, [selectedPage]);
@@ -92,6 +93,7 @@ const StaticPage = () => {
       body: JSON.stringify({
         name: selectedPage,
         topics: itineraryDayWiseDataArray,
+        contentSummary
       }),
     });
     if (res?.ok) {
