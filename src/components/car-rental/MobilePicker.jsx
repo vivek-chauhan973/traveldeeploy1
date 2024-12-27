@@ -21,6 +21,11 @@ const fetcFlexibleTime = async () => {
     const data = await res.json();
     return data;
 }
+const fetchBookingProcess = async () => {
+    const response = await fetch("/api/cars/carStatus");
+    return await response.json();
+}
+
 
 const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
@@ -42,6 +47,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [localTime, setLocalTime] = useState();
     const [flexibleTime, setFlexibleTime] = useState();
+    const [activeBookingProcess, setActiveBookingProcess] = useState();
 
     const { setUserDate, setUserTime, setUserPlan } = useCarPopupContext();
 
@@ -50,13 +56,16 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
             // console.log("response of limited time ", res);
             setLocalTime(res?.CancellationGroupData);
         });
-    }, []);
 
-    useEffect(() => {
         fetcFlexibleTime().then((res) => {
             // console.log("response of flexibleTime time ", res);
             setFlexibleTime(res?.CancellationGroupData);
         });
+
+        fetchBookingProcess().then(res => {
+            console.log("Car booking process acticvation ==> ", res?.data?.isActive);
+            setActiveBookingProcess(res?.data?.isActive)
+        })
     }, []);
 
     // console.log("localTime", localTime);
@@ -120,7 +129,12 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     };
 
     const handleBookCar = () => {
-        setShowPopup(true);
+        if(activeBookingProcess === false){
+            setShowPopup(false);
+            alert(`Something went wrong Try Next time`)
+        }else{
+            setShowPopup(true);
+        }
     }
     const planKM = [
         { value: '80KM-8HRS', label: '80KM - 8HRS' },
@@ -212,7 +226,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         </div>
                     </div>
                     <button className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
-                        onClick={handleBookCar}
+                        onClick={handleBookCar} 
                     >
                         Book Cars
                     </button>

@@ -72,7 +72,7 @@ const CarBookingPopup = ({ setShowPopup }) => {
     };
     //   console.log("departure section data is here ---> ", departureSectionData) 
     // console.log("CarPackageTerm is here ---> ", CarPackageTerm);
-
+    
     {/* Calculation of local car booking*/ }
     let rate = userFormData?.selectedCar?.[0]?.rate ?? 0;
     let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;

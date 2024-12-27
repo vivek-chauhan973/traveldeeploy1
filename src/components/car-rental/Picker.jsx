@@ -15,15 +15,19 @@ const fetcLimitedTime = async () => {
   const res = await fetch("/api/cars/package/terms-condition/LimitedTime/get");
   const data = await res.json();
   return data;
-}
+};
 const fetcFlexibleTime = async () => {
   const res = await fetch("/api/cars/package/terms-condition/FlexibleTime/get");
   const data = await res.json();
   return data;
-}
+};
+
+const fetchBookingProcess = async () => {
+  const response = await fetch("/api/cars/carStatus");
+  return await response.json();
+};
 
 const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
-
   const [activeItem, setActiveItem] = useState(null);
   const [activeTab, setActiveTab] = useState("Tab1");
   const [isShowDateTimePicker, setShowDateTimePicker] = useState(false);
@@ -42,6 +46,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [localTime, setLocalTime] = useState();
   const [flexibleTime, setFlexibleTime] = useState();
+  const [activeBookingProcess, setActiveBookingProcess] = useState();
 
   const { setUserDate, setUserTime, setUserPlan } = useCarPopupContext();
 
@@ -50,20 +55,20 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
       // console.log("response of limited time ", res);
       setLocalTime(res?.CancellationGroupData);
     });
-  }, []);
-
-  useEffect(() => {
     fetcFlexibleTime().then((res) => {
       // console.log("response of flexibleTime time ", res);
       setFlexibleTime(res?.CancellationGroupData);
     });
+    fetchBookingProcess().then((res) => {
+      console.log("Car booking process acticvation ==> ", res?.data?.isActive);
+      setActiveBookingProcess(res?.data?.isActive);
+    });
   }, []);
 
   // console.log("localTime", localTime);
-  console.log("flexibleTime", flexibleTime);
+  // console.log("flexibleTime", flexibleTime);
   // console.log("selectedDate", selectedDate);
   // console.log("selectedTime", selectedTime);
-
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -120,11 +125,16 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   };
 
   const handleBookCar = () => {
-    setShowPopup(true);
-  }
+    if (activeBookingProcess === false) {
+      setShowPopup(false);
+      alert(`Something went wrong Try Next time`)
+    } else {
+      setShowPopup(true);
+    }
+  };
   const planKM = [
-    { value: '80KM-8HRS', label: '80KM - 8HRS' },
-    { value: '100KM-10HRS', label: '100KM - 10HRS' },
+    { value: "80KM-8HRS", label: "80KM - 8HRS" },
+    { value: "100KM-10HRS", label: "100KM - 10HRS" },
   ];
 
   return (
@@ -136,19 +146,21 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         <div className="flex items-center relative mb-2">
           <div
             onClick={() => setActiveTab("Tab1")}
-            className={`p-2 ${activeTab === "Tab1"
-              ? "bg-navyblack text-white"
-              : "bg-primary/20 text-primary/80"
-              } cursor-pointer mx-2 rounded-full`}
+            className={`p-2 ${
+              activeTab === "Tab1"
+                ? "bg-navyblack text-white"
+                : "bg-primary/20 text-primary/80"
+            } cursor-pointer mx-2 rounded-full`}
           >
             <p className="text-para px-3">Local</p>
           </div>
           <div
             onClick={() => setActiveTab("Tab2")}
-            className={`p-2 ${activeTab === "Tab2"
-              ? "bg-navyblack text-white"
-              : "bg-primary/20 text-primary/80"
-              } cursor-pointer mx-2 rounded-full`}
+            className={`p-2 ${
+              activeTab === "Tab2"
+                ? "bg-navyblack text-white"
+                : "bg-primary/20 text-primary/80"
+            } cursor-pointer mx-2 rounded-full`}
           >
             <p className="text-para px-2">OutStation</p>
           </div>
@@ -198,17 +210,27 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="pt-2">
-                <p className="font-medium">Choose Plan<span className="text-sm">(KM)</span></p>
+                <p className="font-medium">
+                  Choose Plan<span className="text-sm">(KM)</span>
+                </p>
                 <div className=" border-1 flex gap-1 my-1 rounded-lg">
                   <select
                     className=" text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                     onChange={(e) => setUserPlan(e.target.value)}
                   >
-                    <option value="" disabled>Choose Your Plan</option>
-                    <option value="BY KMs" className="accent-navyblack">BY KMs</option>
+                    <option value="" disabled>
+                      Choose Your Plan
+                    </option>
+                    <option value="BY KMs" className="accent-navyblack">
+                      BY KMs
+                    </option>
                     {planKM?.length > 0 &&
                       planKM.map((item, i) => (
-                        <option key={`80-${i}`} value={item.value} className="accent-navyblack">
+                        <option
+                          key={`80-${i}`}
+                          value={item.value}
+                          className="accent-navyblack"
+                        >
                           {item.label}
                         </option>
                       ))}
@@ -216,17 +238,14 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="mt-8">
-                <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
+                <button
+                  className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
                   onClick={handleBookCar}
                 >
                   Book Cars
                 </button>
               </div>
-              {showPopup && (
-                <CarBookingPopup
-                  setShowPopup={setShowPopup}
-                />
-              )}
+              {showPopup && <CarBookingPopup setShowPopup={setShowPopup} />}
             </div>
           </div>
         </div>
@@ -261,7 +280,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   />
                   <select
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
-                  // onChange={(e) => setUserTime(e.target.value)}
+                    // onChange={(e) => setUserTime(e.target.value)}
                   >
                     <option value="">Select Time</option>
                     {flexibleTime?.length > 0 &&
@@ -282,7 +301,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   />
                   <select
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
-                  // onChange={(e) => setUserTime(e.target.value)}
+                    // onChange={(e) => setUserTime(e.target.value)}
                   >
                     <option value="">Select Time</option>
                     {flexibleTime?.length > 0 &&
@@ -295,19 +314,16 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="mt-8">
-                <button onClick={handleBookCar}
-                  className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md">
+                <button
+                  onClick={handleBookCar}
+                  className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
+                >
                   Book Cars
                 </button>
               </div>
-              {showPopup && (
-                <CarBookingPopup
-                  setShowPopup={setShowPopup}
-                />
-              )}
+              {showPopup && <CarBookingPopup setShowPopup={setShowPopup} />}
             </div>
           </div>
-
         </div>
       </div>
     </div>
