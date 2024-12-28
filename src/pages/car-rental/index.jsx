@@ -200,7 +200,7 @@ export default function App() {
         <Breadcrumbs />
         <div className="container-wrapper"></div>
         <div className="mb-2 md:mb-5">
-          <div className="overflow-hidden relative md:h-[83vh] h-[65vh]">
+          <div className="overflow-hidden relative md:h-[83vh] h-[70vh]">
             <div
               className="container-wrapper"
               onClick={() => setCarSelectionPopup(false)}
@@ -221,7 +221,7 @@ export default function App() {
             </div>
             <div>
               <Image
-                className=" w-full md:h-full h-[65vh] object-cover"
+                className=" w-full md:h-full h-[70vh] object-cover"
                 src={
                   carBanner?.path ||
                   "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -238,11 +238,11 @@ export default function App() {
             </div>
           </div>
           <div className="md:hidden block">
-            <div className="absolute top-[175px]">
+            <div className="absolute top-[265px]">
               {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
             </div>
           </div>
-          <div className="md:hidden block absolute top-32">
+          <div className="md:hidden block absolute top-56">
             <div className="p-2 my-5">
               <MobilePicker
                 setCarSelectionPopup={setCarSelectionPopup}

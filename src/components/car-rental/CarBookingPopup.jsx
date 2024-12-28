@@ -8,6 +8,10 @@ const fetchPackgesTerm = async () => {
     const response = await fetch("/api/cars/package/terms-condition/packageTerm/get");
     return await response.json();
 };
+const fetchGSTDate = async () => {
+    const response = await fetch("/api/cars/carrentalLocalPrice/localdategst");
+    return await response.json();
+}
 
 const CarBookingPopup = ({ setShowPopup }) => {
 
@@ -18,11 +22,45 @@ const CarBookingPopup = ({ setShowPopup }) => {
     const [email, setEmail] = useState("");
     const [mobileError, setMobileError] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
+    const [gstDateWise, setGstDateWise] = useState()
+    const [selectedGST, setSelectedGST] = useState(null);
+    const [additionalmarkup, setAdditionalmarkup] = useState(0);
+    // console.log("gstDateWise ", gstDateWise);
 
     const { userFormData, userDate, userTime, userPlan, } = useCarPopupContext();
 
-    console.log("userFormData", userFormData);
+    // console.log("userFormData", userFormData);
 
+    // Convert the string to a Date object
+    let dateObj = new Date(userDate);
+    // Extract day, month, and year
+    let day = dateObj.getDate().toString().padStart(2, '0'); // Ensure two digits
+    let month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    let year = dateObj.getFullYear();
+    // Format as dd-mm-yyyy
+    let formattedDate = `${day}-${month}-${year}`;
+    // console.log("Formatted userDate ==>", formattedDate);
+
+    useEffect(() => {
+        if (gstDateWise && formattedDate) {
+            // Find the matching date and get the GST value
+            const matchingItem = gstDateWise.find(item => item?.Date === formattedDate);
+            if (matchingItem) {
+                console.log("matchingItem:", matchingItem);
+                setSelectedGST(matchingItem?.GST); // Set GST if a match is found
+                setAdditionalmarkup(matchingItem?.Additional_Markup); // Set GST if a match is found
+            } else {
+                setSelectedGST(0); // Set null if no match is found
+                setAdditionalmarkup(0); // Set null if no match is found
+            }
+        }
+    }, [gstDateWise, userDate]);
+
+    // Log the selected GST value
+    useEffect(() => {
+        console.log("Selected GST value:", selectedGST);
+        console.log("Selected additionalmarkup value:", additionalmarkup);
+    }, [selectedGST, additionalmarkup]);
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -33,10 +71,16 @@ const CarBookingPopup = ({ setShowPopup }) => {
 
     useEffect(() => {
         fetchPackgesTerm().then(res => {
-            console.log("terma and condition=========> ", res?.CancellationGroupData)
+            // console.log("terma and condition=========> ", res?.CancellationGroupData)
             setCarPackageTerm(res?.CancellationGroupData)
+        });
+
+        fetchGSTDate().then(res => {
+            // console.log("GST Date wise =========> ", res?.data?.localdatagst);
+            setGstDateWise(res?.data?.localdatagst);
         })
-    }, [])
+    }, []);
+
     const validateMobile = (mobileNumber) => {
         const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
         if (!isValid) {
@@ -72,33 +116,34 @@ const CarBookingPopup = ({ setShowPopup }) => {
     };
     //   console.log("departure section data is here ---> ", departureSectionData) 
     // console.log("CarPackageTerm is here ---> ", CarPackageTerm);
-    
+
     {/* Calculation of local car booking*/ }
     let rate = userFormData?.selectedCar?.[0]?.rate ?? 0;
     let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
     let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;
+    let totalMarkup = markup + additionalmarkup;
     let selectedlocation = userFormData?.selectedlocation?.[0].localLocation;
     let cityIncreament = selectedlocation?.split('-')[1]?.trim() ?? 0; // extract city increament cost from selected local Location
     let cityIncrementNumber = parseInt(cityIncreament, 10); // city increament string convert into number
     // console.log("cityIncrementNumber here ---> ", cityIncrementNumber);
 
     let baseCost = rate + cityIncrementNumber + misc;
-    let a = baseCost + Math.floor((baseCost * markup) / 100); // baseCost with markup 
+    let a = baseCost + Math.floor((baseCost * totalMarkup) / 100); // baseCost with markup 
     // console.log("baseCost here ---> ", baseCost);
     // console.log("a here ---> ", a);
 
     let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
-    let b = Math.floor(perKmRate + Math.floor((perKmRate * markup) / 100)); // per km rate with markup 
+    let b = Math.floor(perKmRate + Math.floor((perKmRate * totalMarkup) / 100)); // per km rate with markup 
     // console.log("perKmRate here ---> ", perKmRate);
     const choosePlanKm = userPlan && userPlan.match(/\d+/) ? parseInt(userPlan.match(/\d+/)[0], 10) : 1;
     let c = b * choosePlanKm;
     // console.log("c here ---> ", c);
 
     let totalCost = a + c; // Total cost ====>  base cost + per km rate 
-    console.log("totalCost here ---> ", totalCost);
-    let gst = 120;
-    let grandTotalFixedPlan = totalCost + gst;
-    let grandTotalByKm = a + gst;
+    // console.log("totalCost here ---> ", totalCost);
+    let gstPrice = Math.floor((totalCost * selectedGST) / 100);
+    let grandTotalFixedPlan = totalCost + gstPrice;
+    let grandTotalByKm = a + gstPrice;
 
     return (
         <>
@@ -246,10 +291,11 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                                     </p>
                                                 </div>
                                                 <div className="flex mb-1 text-sm">
-                                                    <p className=" w-24  font-medium">GST : </p>
+                                                    <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                     <p className="font-semibold text-graytext">
-                                                        ₹120
-                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span>
+                                                        {/* {gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span> */}
+                                                    {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tenative Price)`: "ALL inclusive"}
                                                     </p>
                                                 </div>
                                                 <div className="flex items-center gap-0">
@@ -276,9 +322,9 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                                     </p>
                                                 </div>
                                                 <div className="flex mb-1 text-sm">
-                                                    <p className=" w-24  font-medium">GST : </p>
+                                                    <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                     <p className="font-semibold text-graytext">
-                                                        ₹120 {" "}
+                                                    {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`: "ALL inclusive"}
                                                     </p>
                                                 </div>
                                                 <div className="flex items-center gap-0">

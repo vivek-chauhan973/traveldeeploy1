@@ -47,28 +47,44 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   const [localTime, setLocalTime] = useState();
   const [flexibleTime, setFlexibleTime] = useState();
   const [activeBookingProcess, setActiveBookingProcess] = useState();
+  const [preventDate, setPreventDate] = useState();
 
   const { setUserDate, setUserTime, setUserPlan } = useCarPopupContext();
 
   useEffect(() => {
+    
     fetcLimitedTime().then((res) => {
       // console.log("response of limited time ", res);
       setLocalTime(res?.CancellationGroupData);
     });
+
     fetcFlexibleTime().then((res) => {
       // console.log("response of flexibleTime time ", res);
       setFlexibleTime(res?.CancellationGroupData);
     });
+
     fetchBookingProcess().then((res) => {
-      console.log("Car booking process acticvation ==> ", res?.data?.isActive);
+      // console.log("Car booking process acticvation ==> ", res?.data?.isActive);
       setActiveBookingProcess(res?.data?.isActive);
+      // console.log("Car booking process acticvation ==> ", res?.data?.preventedDays);
+      setPreventDate(res?.data?.preventedDays);
     });
+
   }, []);
 
   // console.log("localTime", localTime);
   // console.log("flexibleTime", flexibleTime);
   // console.log("selectedDate", selectedDate);
   // console.log("selectedTime", selectedTime);
+
+  const [currentDate, setCurrentDate] = useState('');
+
+  // Set the current date when the component mounts
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+    setCurrentDate(formattedDate);
+  }, []);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -137,6 +153,9 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     { value: "100KM-10HRS", label: "100KM - 10HRS" },
   ];
 
+
+
+
   return (
     <div>
       <div className="text-xs w-28 h-5 bg-primary text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
@@ -146,21 +165,19 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         <div className="flex items-center relative mb-2">
           <div
             onClick={() => setActiveTab("Tab1")}
-            className={`p-2 ${
-              activeTab === "Tab1"
+            className={`p-2 ${activeTab === "Tab1"
                 ? "bg-navyblack text-white"
                 : "bg-primary/20 text-primary/80"
-            } cursor-pointer mx-2 rounded-full`}
+              } cursor-pointer mx-2 rounded-full`}
           >
             <p className="text-para px-3">Local</p>
           </div>
           <div
             onClick={() => setActiveTab("Tab2")}
-            className={`p-2 ${
-              activeTab === "Tab2"
+            className={`p-2 ${activeTab === "Tab2"
                 ? "bg-navyblack text-white"
                 : "bg-primary/20 text-primary/80"
-            } cursor-pointer mx-2 rounded-full`}
+              } cursor-pointer mx-2 rounded-full`}
           >
             <p className="text-para px-2">OutStation</p>
           </div>
@@ -194,6 +211,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                     type="date"
                     className="w-[60%] outline-none text-start py-1 border-r-2 px-1"
                     onChange={(e) => setUserDate(e.target.value)}
+                    min={currentDate} // Disable dates before current date
                   />
                   <select
                     className="text-para w-[40%] px-3 py-2 h-10 outline-none border-none"
@@ -277,10 +295,12 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="date"
                     className=" outline-none text-start py-1 px-1 border-r-2"
+                    // onChange={(e) => setUserDate(e.target.value)}
+                    min={currentDate} // Disable dates before current date
                   />
                   <select
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
-                    // onChange={(e) => setUserTime(e.target.value)}
+                  // onChange={(e) => setUserTime(e.target.value)}
                   >
                     <option value="">Select Time</option>
                     {flexibleTime?.length > 0 &&
@@ -298,10 +318,12 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="date"
                     className=" outline-none text-start py-1 px-1 border-r-2"
+                    // onChange={(e) => setUserDate(e.target.value)}
+                    min={currentDate} // Disable dates before current date
                   />
                   <select
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
-                    // onChange={(e) => setUserTime(e.target.value)}
+                  // onChange={(e) => setUserTime(e.target.value)}
                   >
                     <option value="">Select Time</option>
                     {flexibleTime?.length > 0 &&

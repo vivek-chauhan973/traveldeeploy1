@@ -52,6 +52,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     const { setUserDate, setUserTime, setUserPlan } = useCarPopupContext();
 
     useEffect(() => {
+
         fetcLimitedTime().then((res) => {
             // console.log("response of limited time ", res);
             setLocalTime(res?.CancellationGroupData);
@@ -63,15 +64,25 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         });
 
         fetchBookingProcess().then(res => {
-            console.log("Car booking process acticvation ==> ", res?.data?.isActive);
+            // console.log("Car booking process acticvation ==> ", res?.data?.isActive);
             setActiveBookingProcess(res?.data?.isActive)
-        })
+        });
+        
     }, []);
 
     // console.log("localTime", localTime);
-    console.log("flexibleTime", flexibleTime);
+    // console.log("flexibleTime", flexibleTime);
     // console.log("selectedDate", selectedDate);
     // console.log("selectedTime", selectedTime);
+
+    const [currentDate, setCurrentDate] = useState('');
+
+    // Set the current date when the component mounts
+    useEffect(() => {
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+        setCurrentDate(formattedDate);
+    }, []);
 
 
     const togglePopup = () => {
@@ -129,10 +140,10 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     };
 
     const handleBookCar = () => {
-        if(activeBookingProcess === false){
+        if (activeBookingProcess === false) {
             setShowPopup(false);
             alert(`Something went wrong Try Next time`)
-        }else{
+        } else {
             setShowPopup(true);
         }
     }
@@ -192,6 +203,8 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                                 type="date"
                                 className="w-[60%] outline-none text-start border-r-2 px-1"
                                 onChange={(e) => setUserDate(e.target.value)}
+                                min={currentDate} // Disable dates before current date
+
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
@@ -226,7 +239,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         </div>
                     </div>
                     <button className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
-                        onClick={handleBookCar} 
+                        onClick={handleBookCar}
                     >
                         Book Cars
                     </button>
@@ -260,6 +273,9 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             <input
                                 type="date"
                                 className="w-[60%] outline-none text-start px-1 border-r-2"
+                                // onChange={(e) => setUserDate(e.target.value)}
+                                min={currentDate} // Disable dates before current date
+
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
@@ -281,6 +297,8 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             <input
                                 type="date"
                                 className="w-[60%] outline-none text-start px-1 border-r-2"
+                                // onChange={(e) => setUserDate(e.target.value)}
+                                min={currentDate} // Disable dates before current date
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
