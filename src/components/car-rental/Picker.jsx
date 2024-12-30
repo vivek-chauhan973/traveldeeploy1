@@ -49,10 +49,12 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   const [activeBookingProcess, setActiveBookingProcess] = useState();
   const [preventDate, setPreventDate] = useState();
 
-  const { setUserDate, setUserTime, setUserPlan } = useCarPopupContext();
+  const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
+    setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
+    setUserPlanOutstation } = useCarPopupContext();
 
   useEffect(() => {
-    
+
     fetcLimitedTime().then((res) => {
       // console.log("response of limited time ", res);
       setLocalTime(res?.CancellationGroupData);
@@ -166,8 +168,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
           <div
             onClick={() => setActiveTab("Tab1")}
             className={`p-2 ${activeTab === "Tab1"
-                ? "bg-navyblack text-white"
-                : "bg-primary/20 text-primary/80"
+              ? "bg-navyblack text-white"
+              : "bg-primary/20 text-primary/80"
               } cursor-pointer mx-2 rounded-full`}
           >
             <p className="text-para px-3">Local</p>
@@ -175,8 +177,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
           <div
             onClick={() => setActiveTab("Tab2")}
             className={`p-2 ${activeTab === "Tab2"
-                ? "bg-navyblack text-white"
-                : "bg-primary/20 text-primary/80"
+              ? "bg-navyblack text-white"
+              : "bg-primary/20 text-primary/80"
               } cursor-pointer mx-2 rounded-full`}
           >
             <p className="text-para px-2">OutStation</p>
@@ -210,14 +212,14 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="date"
                     className="w-[60%] outline-none text-start py-1 border-r-2 px-1"
-                    onChange={(e) => setUserDate(e.target.value)}
+                    onChange={(e) => setUserDateLocal(e.target.value)}
                     min={currentDate} // Disable dates before current date
                   />
                   <select
                     className="text-para w-[40%] px-3 py-2 h-10 outline-none border-none"
-                    onChange={(e) => setUserTime(e.target.value)}
+                    onChange={(e) => setUserTimeLocal(e.target.value)}
                   >
-                    <option value="">Select Time</option>
+                    <option value="" disabled>Select Time</option>
                     {localTime?.length > 0 &&
                       localTime?.map((item, i) => (
                         <option key={i} value={item?.groupName}>
@@ -234,12 +236,12 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 <div className=" border-1 flex gap-1 my-1 rounded-lg">
                   <select
                     className="text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
-                    onChange={(e) => setUserPlan(e.target.value)}
+                    onChange={(e) => setUserPlanLocal(e.target.value)}
                   >
                     <option value="" disabled>
                       Choose Your Plan
                     </option>
-                    <option value="BY KMs" className="accent-navyblack">
+                    <option value="BY KMs">
                       BY KMs
                     </option>
                     {planKM?.length > 0 &&
@@ -247,7 +249,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         <option
                           key={`80-${i}`}
                           value={item.value}
-                          className="accent-navyblack"
                         >
                           {item.label}
                         </option>
@@ -269,8 +270,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         </div>
         {/* OutStation */}
         <div className={`${activeTab === "Tab2" ? "block" : "hidden"}`}>
-          <div className="flex gap-3 px-4">
-            <div className=" flex gap-3 ml-3">
+          <div className="flex gap-2 px-2">
+            <div className=" flex gap-0 ml-3">
               <div className="py-2">
                 <p className="font-medium">Select Vehicle</p>
                 <div
@@ -283,26 +284,26 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   />
                   <input
                     type="text"
-                    className=" outline-none w-36 text-start py-2"
+                    className=" outline-none w-20 text-start py-2"
                   />
                 </div>
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <div className="py-2 ">
-                <p className="font-medium">Pick-up date</p>
-                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                <p className="font-medium">Pick-up date | Time</p>
+                <div className=" border-2 flex gap-0 my-1 rounded-lg">
                   <input
                     type="date"
-                    className=" outline-none text-start py-1 px-1 border-r-2"
-                    // onChange={(e) => setUserDate(e.target.value)}
+                    className=" outline-none text-start py-1 px-1 border-r-2 w-32"
+                    onChange={(e) => setPickupDateOutstation(e.target.value)}
                     min={currentDate} // Disable dates before current date
                   />
                   <select
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
-                  // onChange={(e) => setUserTime(e.target.value)}
+                    onChange={(e) => setPickupTimeOutstation(e.target.value)}
                   >
-                    <option value="">Select Time</option>
+                    <option value="" disabled>Select Time</option>
                     {flexibleTime?.length > 0 &&
                       flexibleTime?.map((item, i) => (
                         <option key={i} value={item?.groupName}>
@@ -313,25 +314,46 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 </div>
               </div>
               <div className="py-2 ">
-                <p className="font-medium">Return date</p>
-                <div className=" border-2 flex gap-1 my-1 rounded-lg">
+                <p className="font-medium">Return date | Time</p>
+                <div className=" border-2 flex gap-0 my-1 rounded-lg">
                   <input
                     type="date"
-                    className=" outline-none text-start py-1 px-1 border-r-2"
-                    // onChange={(e) => setUserDate(e.target.value)}
+                    className=" outline-none text-start py-1 px-1 border-r-2 w-32"
+                    onChange={(e) => setReturnDateOutstation(e.target.value)}
                     min={currentDate} // Disable dates before current date
                   />
                   <select
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
-                  // onChange={(e) => setUserTime(e.target.value)}
+                    onChange={(e) => setReturnTimeOutstation(e.target.value)}
                   >
-                    <option value="">Select Time</option>
+                    <option value="" disabled>Select Time</option>
                     {flexibleTime?.length > 0 &&
                       flexibleTime?.map((item, i) => (
                         <option key={i} value={item?.groupName}>
                           {item?.groupName}
                         </option>
                       ))}
+                  </select>
+                </div>
+              </div>
+              <div className="pt-2.5">
+                <p className="font-medium">
+                  Choose Plan<span className="text-sm">(KM)</span>
+                </p>
+                <div className=" border-1 flex gap-1 my-1 rounded-lg">
+                  <select
+                    className="text-para w-32 px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+                    onChange={(e) => setUserPlanOutstation(e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Choose Plan
+                    </option>
+                    <option value="BY KMs">
+                      BY KMs
+                    </option>
+                    <option value="BY KMs">
+                      Per Days
+                    </option>
                   </select>
                 </div>
               </div>

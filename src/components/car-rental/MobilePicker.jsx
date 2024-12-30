@@ -49,7 +49,9 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     const [flexibleTime, setFlexibleTime] = useState();
     const [activeBookingProcess, setActiveBookingProcess] = useState();
 
-    const { setUserDate, setUserTime, setUserPlan } = useCarPopupContext();
+    const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
+        setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
+        setUserPlanOutstation } = useCarPopupContext();
 
     useEffect(() => {
 
@@ -67,7 +69,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
             // console.log("Car booking process acticvation ==> ", res?.data?.isActive);
             setActiveBookingProcess(res?.data?.isActive)
         });
-        
+
     }, []);
 
     // console.log("localTime", localTime);
@@ -202,13 +204,13 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             <input
                                 type="date"
                                 className="w-[60%] outline-none text-start border-r-2 px-1"
-                                onChange={(e) => setUserDate(e.target.value)}
+                                onChange={(e) => setUserDateLocal(e.target.value)}
                                 min={currentDate} // Disable dates before current date
 
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
-                                onChange={(e) => setUserTime(e.target.value)}
+                                onChange={(e) => setUserTimeLocal(e.target.value)}
                             >
                                 <option value="">Select Time</option>
                                 {localTime?.length > 0 &&
@@ -225,7 +227,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         <div className=" border-1 flex gap-0 rounded-lg">
                             <select
                                 className="text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
-                                onChange={(e) => setUserPlan(e.target.value)}
+                                onChange={(e) => setUserPlanLocal(e.target.value)}
                             >
                                 <option value="" disabled>Choose Your Plan</option>
                                 <option value="BY KMs">By Kms</option>
@@ -268,18 +270,18 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         </div>
                     </div>
                     <div className="mb-2">
-                        <p className="text-para font-medium">Pick-up date</p>
+                        <p className="text-para font-medium">Pick-up date | Time</p>
                         <div className="border-2 flex gap-0 rounded-lg">
                             <input
                                 type="date"
                                 className="w-[60%] outline-none text-start px-1 border-r-2"
-                                // onChange={(e) => setUserDate(e.target.value)}
+                                onChange={(e) => setPickupDateOutstation(e.target.value)}
                                 min={currentDate} // Disable dates before current date
 
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
-                            // onChange={(e) => setUserTime(e.target.value)}
+                            onChange={(e) => setPickupTimeOutstation(e.target.value)}
                             >
                                 <option value="">Select Time</option>
                                 {flexibleTime?.length > 0 &&
@@ -292,17 +294,17 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         </div>
                     </div>
                     <div className="mb-3">
-                        <p className="text-para font-medium">Return date</p>
+                        <p className="text-para font-medium">Return date | Time</p>
                         <div className=" border-2 flex gap-0 rounded-lg">
                             <input
                                 type="date"
                                 className="w-[60%] outline-none text-start px-1 border-r-2"
-                                // onChange={(e) => setUserDate(e.target.value)}
+                                onChange={(e) => setReturnDateOutstation(e.target.value)}
                                 min={currentDate} // Disable dates before current date
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
-                            // onChange={(e) => setUserTime(e.target.value)}
+                            onChange={(e) => setReturnTimeOutstation(e.target.value)}
                             >
                                 <option value="">Select Time</option>
                                 {flexibleTime?.length > 0 &&
@@ -311,6 +313,19 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                                             {item?.groupName}
                                         </option>
                                     ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="mb-3">
+                        <p className="text-sm font-medium mb-0.5">Choose Plan<span className="text-xxs">(KM)</span></p>
+                        <div className=" border-1 flex gap-0 rounded-lg">
+                            <select
+                                className="text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
+                                onChange={(e) => setUserPlanOutstation(e.target.value)}
+                            >
+                                <option value="" disabled>Choose Your Plan</option>
+                                <option value="BY KMs">By Kms</option>
+                                <option value="BY KMs">Per Days</option>
                             </select>
                         </div>
                     </div>

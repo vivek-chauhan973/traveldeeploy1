@@ -200,7 +200,7 @@ export default function App() {
         <Breadcrumbs />
         <div className="container-wrapper"></div>
         <div className="mb-2 md:mb-5">
-          <div className="overflow-hidden relative md:h-[83vh] h-[70vh]">
+          <div className="overflow-hidden relative xl:h-[83vh] h-[80vh]">
             <div
               className="container-wrapper"
               onClick={() => setCarSelectionPopup(false)}
@@ -211,7 +211,7 @@ export default function App() {
                 </p>
               </div>
             </div>
-            <div className="container-wrapper md:block hidden">
+            <div className="container-wrapper xl:block hidden">
               <div className="absolute top-2/4 -translate-y-3/4">
                 <Picker
                   setCarSelectionPopup={setCarSelectionPopup}
@@ -221,7 +221,7 @@ export default function App() {
             </div>
             <div>
               <Image
-                className=" w-full md:h-full h-[70vh] object-cover"
+                className=" w-full xl:h-full h-[80vh] object-cover"
                 src={
                   carBanner?.path ||
                   "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -232,18 +232,18 @@ export default function App() {
               />
             </div>
           </div>
-          <div className="md:block hidden">
+          <div className="xl:block hidden">
             <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
               {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
             </div>
           </div>
-          <div className="md:hidden block">
-            <div className="absolute top-[265px]">
+          <div className="xl:hidden block">
+            <div className="absolute top-[265px] md:left-56">
               {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
             </div>
           </div>
-          <div className="md:hidden block absolute top-56">
-            <div className="p-2 my-5">
+          <div className="xl:hidden block absolute top-56 md:left-56">
+            <div className="p-2 my-5 md:flex justify-center items-center">
               <MobilePicker
                 setCarSelectionPopup={setCarSelectionPopup}
                 carSelectionPopup={carSelectionPopup}
@@ -311,36 +311,33 @@ export default function App() {
           <CarCities cityPromoData={packageDataCity?.[0]?.options} />
         </div>
         {/* Static section are here */}
-        <div className="container-wrapper">
-          <div className="flex flex-col md:flex-row justify-between items-center pt-16 pb-20 px-3">
-            {/* Global Reach */}
-            <div className="flex flex-col max-w-xs">
-              <div className="flex items-center mb-2 gap-3">
+        <div className="xl:px-20 md:px-7 px-5">
+          <div className="flex flex-col md:flex-row md:gap-7 gap-10 justify-between items-center md:pb-20 pb-14 md:pt-10 pt-7 mx-auto">
+            <div className="flex flex-col max-w-sm">
+              <div className="flex items-center mb-2 gap-3 ">
                 <FaGlobe className="text-2xl" />
-                <h3 className="text-md font-semibold">Global reach</h3>
-              </div>
-              <p className="text-[23px]  font-semibold">
-                2,000+ SIXT stations in over 105 countries
-              </p>
-            </div>
-            {/* Distinctive Fleet */}
-            <div className="flex flex-col max-w-xs my-4">
-              <div className="flex items-center mb-2 gap-3">
-                <FaCar className="text-2xl" />
-                <h3 className="text-md font-semibold">Distinctive fleet</h3>
-              </div>
-              <p className="text-[23px]  font-semibold">
-                From high-end convertibles to premium SUVs
-              </p>
-            </div>
-            {/* Exceptional Service */}
-            <div className="flex flex-col max-w-xs my-3">
-              <div className="flex items-center mb-2 gap-3">
-                <FaHandsHelping className="text-2xl" />
-                <h3 className="text-md font-semibold">Exceptional service</h3>
+                <h3 className="text-md font-semibold">Wide Range of Vehicles</h3>
               </div>
               <p className="text-[23px] font-semibold">
-                Stress-free, trustworthy, no hidden costs
+                we offer vehicles that suit every journey.
+              </p>
+            </div>
+            <div className="flex flex-col max-w-sm my-4 ">
+              <div className="flex items-center mb-2 gap-3 ">
+                <FaCar className="text-2xl" />
+                <h3 className="text-md font-semibold">Affordable Pricing</h3>
+              </div>
+              <p className="text-[23px] font-semibold">
+                Experience competitive rates without compromising on quality.
+              </p>
+            </div>
+            <div className="flex flex-col max-w-sm my-3 ">
+              <div className="flex items-center mb-2 gap-3 ">
+                <FaHandsHelping className="text-2xl" />
+                <h3 className="text-md font-semibold">Easy Booking Process</h3>
+              </div>
+              <p className="text-[23px] font-semibold">
+                Lets you book your ride in just a few clicks.
               </p>
             </div>
           </div>
