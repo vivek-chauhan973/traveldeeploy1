@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import CarBookingPopup from "./CarBookingPopup";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
+import CarBookingPopupOutsation from "./CarBookingPopupOutstation";
 
 const fetcLimitedTime = async () => {
   const res = await fetch("/api/cars/package/terms-condition/LimitedTime/get");
@@ -44,14 +45,15 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showPopupOutstation, setShowPopupOutstation] = useState(false);
   const [localTime, setLocalTime] = useState();
   const [flexibleTime, setFlexibleTime] = useState();
   const [activeBookingProcess, setActiveBookingProcess] = useState();
   const [preventDate, setPreventDate] = useState();
 
-  const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
+  const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal, pickupDateOutstation, returnDateOutstation,
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
-    setUserPlanOutstation } = useCarPopupContext();
+    setPlanOutstation } = useCarPopupContext();
 
   useEffect(() => {
 
@@ -83,9 +85,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
   // Set the current date when the component mounts
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
-    setCurrentDate(formattedDate);
+    const today = new Date().toISOString().split('T')[0]; // Format date as YYYY-MM-DD 
+    setCurrentDate(today);
   }, []);
 
   const togglePopup = () => {
@@ -150,13 +151,34 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
       setShowPopup(true);
     }
   };
+  const handleBookCarOutstation = () => {
+    if (activeBookingProcess === false) {
+      setShowPopupOutstation(false);
+      alert(`Something went wrong Try Next time`)
+    } else {
+      setShowPopupOutstation(true);
+    }
+  };
   const planKM = [
     { value: "80KM-8HRS", label: "80KM - 8HRS" },
     { value: "100KM-10HRS", label: "100KM - 10HRS" },
   ];
 
+  const calculateDaysDifference = () => {
+    if (pickupDateOutstation && returnDateOutstation) {
+      const pickupDate = new Date(pickupDateOutstation);
+      const returnDate = new Date(returnDateOutstation);
 
+      // Calculate the difference in milliseconds
+      const differenceInTime = returnDate - pickupDate;
 
+      // Convert milliseconds to days
+      const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
+
+      // Ensure no negative values
+      setDaysDifference(differenceInDays > 0 ? differenceInDays : 0);
+    }
+  };
 
   return (
     <div>
@@ -320,7 +342,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                     type="date"
                     className=" outline-none text-start py-1 px-1 border-r-2 w-32"
                     onChange={(e) => setReturnDateOutstation(e.target.value)}
-                    min={currentDate} // Disable dates before current date
+                    min={pickupDateOutstation} // Ensure return date is after pick-up date
                   />
                   <select
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
@@ -343,15 +365,15 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 <div className=" border-1 flex gap-1 my-1 rounded-lg">
                   <select
                     className="text-para w-32 px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
-                    onChange={(e) => setUserPlanOutstation(e.target.value)}
+                    onChange={(e) => setPlanOutstation(e.target.value)}
                   >
                     <option value="" disabled>
                       Choose Plan
                     </option>
-                    <option value="BY KMs">
+                    <option value="By Kms">
                       BY KMs
                     </option>
-                    <option value="BY KMs">
+                    <option value="Per Days">
                       Per Days
                     </option>
                   </select>
@@ -359,13 +381,13 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
               </div>
               <div className="mt-8">
                 <button
-                  onClick={handleBookCar}
+                  onClick={handleBookCarOutstation}
                   className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
                 >
                   Book Cars
                 </button>
               </div>
-              {showPopup && <CarBookingPopup setShowPopup={setShowPopup} />}
+              {showPopupOutstation && <CarBookingPopupOutsation setShowPopupOutstation={setShowPopupOutstation} />}
             </div>
           </div>
         </div>

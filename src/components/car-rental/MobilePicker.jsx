@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import CarBookingPopup from "./CarBookingPopup";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
+import CarBookingPopupOutsation from "./CarBookingPopupOutstation";
 
 const fetcLimitedTime = async () => {
     const res = await fetch("/api/cars/package/terms-condition/LimitedTime/get");
@@ -45,13 +46,14 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     const [errors, setErrors] = useState({});
     const [isOpen, setIsOpen] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const [showPopupOutstation, setShowPopupOutstation] = useState(false);
     const [localTime, setLocalTime] = useState();
     const [flexibleTime, setFlexibleTime] = useState();
     const [activeBookingProcess, setActiveBookingProcess] = useState();
 
     const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
         setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
-        setUserPlanOutstation } = useCarPopupContext();
+        setPlanOutstation } = useCarPopupContext();
 
     useEffect(() => {
 
@@ -149,6 +151,14 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
             setShowPopup(true);
         }
     }
+    const handleBookCarOutstation = () => {
+        if (activeBookingProcess === false) {
+            setShowPopupOutstation(false);
+            alert(`Something went wrong Try Next time`)
+        } else {
+            setShowPopupOutstation(true);
+        }
+    };
     const planKM = [
         { value: '80KM-8HRS', label: '80KM - 8HRS' },
         { value: '100KM-10HRS', label: '100KM - 10HRS' },
@@ -281,7 +291,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
-                            onChange={(e) => setPickupTimeOutstation(e.target.value)}
+                                onChange={(e) => setPickupTimeOutstation(e.target.value)}
                             >
                                 <option value="">Select Time</option>
                                 {flexibleTime?.length > 0 &&
@@ -304,7 +314,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             />
                             <select
                                 className="text-para w-[40%] px-3 h-10 outline-none border-none"
-                            onChange={(e) => setReturnTimeOutstation(e.target.value)}
+                                onChange={(e) => setReturnTimeOutstation(e.target.value)}
                             >
                                 <option value="">Select Time</option>
                                 {flexibleTime?.length > 0 &&
@@ -321,23 +331,19 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         <div className=" border-1 flex gap-0 rounded-lg">
                             <select
                                 className="text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
-                                onChange={(e) => setUserPlanOutstation(e.target.value)}
+                                onChange={(e) => setPlanOutstation(e.target.value)}
                             >
-                                <option value="" disabled>Choose Your Plan</option>
-                                <option value="BY KMs">By Kms</option>
-                                <option value="BY KMs">Per Days</option>
+                                <option value="" disabled>Choose Plan</option>
+                                <option value="By Kms">BY KMs</option>
+                                <option value="Per Days">Per Days</option>
                             </select>
                         </div>
                     </div>
-                    <button onClick={handleBookCar}
+                    <button onClick={handleBookCarOutstation}
                         className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md">
                         Book Cars
                     </button>
-                    {showPopup && (
-                        <CarBookingPopup
-                            setShowPopup={setShowPopup}
-                        />
-                    )}
+                    {showPopupOutstation && <CarBookingPopupOutsation setShowPopupOutstation={setShowPopupOutstation} />}
                 </div>
             </div>
         </div>
