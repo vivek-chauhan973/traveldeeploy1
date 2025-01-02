@@ -100,7 +100,7 @@ const CarArrowSection = ({ carCityPromos }) => {
                   >
                     <div className="box-Shadow-Style-Package absolute bottom-0 z-20 w-full  text-white bg-black bg-opacity-20 p-4">
                       <div className=''>
-                        <p className="text-xl font-semibold text-white">{items.title}</p>
+                        <p className="text-xl font-semibold text-white capitalize">{items.title}</p>
                         <p
                           dangerouslySetInnerHTML={{
                             __html: items?.description,

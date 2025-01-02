@@ -541,7 +541,7 @@ export default function CarDetail() {
                             <p className="text-base leading-5 text-green-600 font-semibold uppercase">
                                 best deal price
                             </p>
-                                <button className="uppercase text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                                <button className="uppercase text-[10px] text-white bg-navyblack px-1.5 py-1 rounded-sm text-center">
                                 Save {carPackage?.highSave}%
                                 </button>
                             <p className="text-sm leading-5">

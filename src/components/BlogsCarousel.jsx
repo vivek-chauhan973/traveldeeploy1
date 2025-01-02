@@ -54,7 +54,6 @@ const BlogsCarousel = ({ carPackageData }) => {
             <div className="carousel-container relative container-wrapper ">
                 <div className="carousel gap-5" ref={carouselRef}>
                     {carPackageData?.length > 0 && carPackageData?.map((items, i) => {
-
                         return (
                             <div key={i} className="carousel-item w-60 md:w-80 mb-11  rounded-md">
                                 <div className="shadow-md rounded-lg overflow-hidden">

@@ -57,13 +57,13 @@ const CarDepartureSection = ({ carPackage,showPopup,setCarDepartureDetails ,setC
                                                             {dayOfWeek}
                                                         </p>
                                                         <hr />
-                                                        <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xs">
+                                                        <p className="text-center group:hover:text-white font-bold text-black group-hover:text-white text-xxs">
                                                             {item?.Date}
                                                         </p>
                                                         <div className="flex justify-center text-black group-hover:text-white items-center mt-1 text-xxs">
                                                             {(carPackage?.price+(((carPackage?.price)*(item?.Hike))/100))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                         </div>
-                                                        <div className="text-center flex justify-center gap-1 text-xxs text-white group-hover:text-white bg-navyblack">
+                                                        <div className="text-center flex justify-center gap-1 text-[10px] text-white group-hover:text-white bg-navyblack">
                                                             {item?.Save > 0 && <p>Save {item?.Save}%</p>}
                                                         </div>
                                                     </div>
