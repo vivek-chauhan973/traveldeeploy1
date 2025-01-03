@@ -30,10 +30,16 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
     const { userFormData, pickupDateOutstation, returnDateOutstation, pickupTimeOutstation,
         returnTimeOutstation, planOutstation, } = useCarPopupContext();
 
-    // console.log("userPlanOutstation",planOutstation);
-    // console.log("pickupDateOutstation",pickupDateOutstation);
-    // console.log("returnDateOutstation",returnDateOutstation);
+    // console.log("userPlanOutstation", planOutstation);
+    // console.log("pickupDateOutstation", pickupDateOutstation);
+    // console.log("returnDateOutstation", returnDateOutstation);
     // console.log("userFormData", userFormData);
+
+    // Calculate the difference in time (in milliseconds)
+    const timeDifference = new Date(returnDateOutstation) - new Date(pickupDateOutstation);
+    // Convert time difference from milliseconds to days
+    const numberOfDays = (timeDifference / (1000 * 60 * 60 * 24)) + 1;
+    console.log("Number of days:", numberOfDays);
 
     // Convert the string to a Date object
     let dateObj = new Date(pickupDateOutstation);
@@ -121,33 +127,58 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
     //   console.log("departure section data is here ---> ", departureSectionData) 
     // console.log("carGroupDepartureTerm is here ---> ", carGroupDepartureTerm);
 
-    {/* Calculation of local car booking*/ }
-    // let rate = userFormData?.selectedCar?.[0]?.rate ?? 0;
-    // let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
-    // let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;
-    // let totalMarkup = markup + additionalmarkup;
-    // let selectedlocation = userFormData?.selectedlocation?.[0].localLocation;
-    // let cityIncreament = selectedlocation?.split('-')[1]?.trim() ?? 0; // extract city increament cost from selected local Location
-    // let cityIncrementNumber = parseInt(cityIncreament, 10); // city increament string convert into number
-    // // console.log("cityIncrementNumber here ---> ", cityIncrementNumber);
+    {/* Calculation of outstation by km  car booking*/ }
+    let rate = userFormData?.selectedCar?.[0]?.outStationBasePrice ?? 0;
+    // console.log("rate here ---> ", rate);
+    let rate2 = userFormData?.selectedCar?.[0]?.capacity ?? 0;
+    // console.log("rate here ---> ", rate);
+    let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
+    // console.log("misc here ---> ", misc);
+    let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;
+    // console.log("markup here ---> ", markup);
+    let totalMarkup = markup + additionalmarkup;
+    // console.log("totalMarkup here ---> ", totalMarkup);
+    let dailyLimit = userFormData?.selectedCar?.[0]?.dailyLimit ?? 1;
+    let kmLimit = numberOfDays * dailyLimit ;
+    let selectedlocation = userFormData?.selectedlocation?.[0].localLocation;
+    // console.log("selectedlocation here ---> ", selectedlocation);
+    let cityIncreament = selectedlocation?.split('-')[1]?.trim() ?? 0; // extract city increament cost from selected local Location
+    let cityIncrementNumber = parseInt(cityIncreament, 10); // city increament string convert into number
+    // console.log("cityIncrementNumber here ---> ", cityIncrementNumber);
 
-    // let baseCost = rate + cityIncrementNumber + misc;
-    // let a = baseCost + Math.floor((baseCost * totalMarkup) / 100); // baseCost with markup 
-    // // console.log("baseCost here ---> ", baseCost);
-    // // console.log("a here ---> ", a);
+    let baseCost = rate + misc;
+    let a = baseCost + Math.floor((baseCost * totalMarkup) / 100); // baseCost with markup 
+    // console.log("baseCost here ---> ", baseCost);
+    // console.log("a here ---> ", a);
+    let basePrice = (a * numberOfDays) + cityIncrementNumber ;
+    // console.log("basePrice here ---> ", basePrice);
 
-    // let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
-    // let b = Math.floor(perKmRate + Math.floor((perKmRate * totalMarkup) / 100)); // per km rate with markup 
-    // // console.log("perKmRate here ---> ", perKmRate);
+    let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
+    let perKmMarkup = (perKmRate * totalMarkup) / 100;
+    console.log("perKmMarkup here ---> ", perKmMarkup);
+    let b = Math.floor(perKmRate + perKmMarkup); // per km rate with markup  
+    console.log("perKmRate here ---> ", perKmRate);
+    console.log("b here ---> ", b);
+
     // const choosePlanKm = userPlanLocal && userPlanLocal.match(/\d+/) ? parseInt(userPlanLocal.match(/\d+/)[0], 10) : 1;
     // let c = b * choosePlanKm;
     // // console.log("c here ---> ", c);
 
-    // let totalCost = a + c; // Total cost ====>  base cost + per km rate 
-    // // console.log("totalCost here ---> ", totalCost);
-    // let gstPrice = Math.floor((totalCost * selectedGST) / 100);
-    // let grandTotalFixedPlan = totalCost + gstPrice;
-    // let grandTotalByKm = a + gstPrice;
+    let totalCost = basePrice; // Total cost ====  base cost
+    // console.log("totalCost here ---> ", totalCost);
+
+    let gstPrice = Math.floor((totalCost * selectedGST) / 100);
+    let grandTotalByKm = totalCost + gstPrice;
+
+
+    let baseCost2 = rate2 + misc;
+    let a2 = baseCost2 + Math.floor((baseCost2 * totalMarkup) / 100); // baseCost with markup 
+    console.log("baseCost2 here ---> ", baseCost2);
+    console.log("a2 here ---> ", a2);
+    let basePrice2 = (a2 * numberOfDays) + cityIncrementNumber ;
+    console.log("basePrice2 here ---> ", basePrice2);
+    let gstPrice2 = Math.floor((basePrice2 * selectedGST) / 100);
+    let grandTotalPerDay = basePrice2 + gstPrice2;
 
     return (
         <>
@@ -277,8 +308,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                         <div className="flex text-sm md:mb-0 mb-1">
                                             <p className=" w-24 font-medium">Cost Per KM : </p>
                                             <p className="font-semibold text-graytext">
-                                                {/* {userFormData?.selectedCar?.[0].perKmRate.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
-                                                {/* {b?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
+                                                {b?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                             </p>
                                         </div>
                                         <div className="flex text-sm">
@@ -288,14 +318,16 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="flex mb-1 text-sm">
-                                        <p className=" w-24 font-medium">Base Price : </p>
-                                        <p className="font-semibold text-graytext">
-                                            {/* {a?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
-                                        </p>
-                                    </div>
+                                    
                                     {planOutstation !== "Per Days" &&
                                         <div>
+                                            <div className="flex mb-1 text-sm">
+                                                <p className="md:w-24 w-28 font-medium">Base Price : </p>
+                                                <p className="font-semibold text-graytext">
+                                                    {basePrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    { " "} <span className="text-xxs font-semibold ml-1">{` (Daily allowance, Night charges for ${numberOfDays} days included) `}</span>
+                                                </p>
+                                            </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className="md:w-24 w-36 font-medium">Per KM Price : </p>
                                                 <p className="font-semibold text-graytext">
@@ -303,25 +335,30 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
+                                                <p className="md:w-24 w-36 font-medium">KM Limit : </p>
+                                                <p className="font-semibold text-graytext bg-yellow-200">
+                                                    {kmLimit} KM                                                </p>
+                                            </div>
+                                            <div className="flex mb-1 text-sm">
                                                 <p className=" w-24  font-medium">Total : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {/* {a?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
-                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span>
+                                                    {totalCost?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                 <p className="font-semibold text-graytext">
                                                     {/* {gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span> */}
-                                                    {/* {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tenative Price)` : "ALL inclusive"} */}
+                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span> */}
+                                                    {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tentative Price)` : "ALL inclusive"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center gap-0">
                                                 <p className="font-semibold">Grand Total :</p>
                                                 <p className="font-semibold text-graytext ml-1">
-                                                    {/* {grandTotalByKm?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
-                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span>
+                                                    {grandTotalByKm?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -329,27 +366,38 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                     {planOutstation === "Per Days" &&
                                         <div>
                                             <div className="flex mb-1 text-sm">
+                                                <p className="md:w-24 w-28 font-medium">Base Price : </p>
+                                                <p className="font-semibold text-graytext">
+                                                    {basePrice2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                </p>
+                                            </div>
+                                            <div className="flex mb-1 text-sm">
                                                 <p className="w-24 font-medium">Per KM Price : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {/* {c?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
+                                                    {/* {(b* kmLimit)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
                                                 </p>
+                                            </div>
+                                            <div className="flex mb-1 text-sm">
+                                                <p className="md:w-24 w-36 font-medium">KM Limit : </p>
+                                                <p className="font-semibold text-graytext">
+                                                    {kmLimit} KM                                                </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">Total : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {/* {totalCost?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
+                                                    {basePrice2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {/* {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : "ALL inclusive"} */}
+                                                    {gstPrice2 > "0" ? `${gstPrice2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : "ALL inclusive"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center gap-0">
                                                 <p className="font-semibold">Grand Total :</p>
                                                 <p className="font-bold text-graytext ml-1">
-                                                    {/* {grandTotalFixedPlan?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
+                                                    {grandTotalPerDay?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
                                             </div>
                                         </div>

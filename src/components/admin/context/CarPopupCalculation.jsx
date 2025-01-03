@@ -31,7 +31,7 @@ export const CarPopupProvider = ({ children }) => {
   // console.log("pickupTimeOutstation global",pickupTimeOutstation);
   // console.log("returnDateOutstation global",returnDateOutstation);
   // console.log("returnTimeOutstation global",returnTimeOutstation);
-  console.log("PlanOutstation global",planOutstation);
+  // console.log("PlanOutstation global",planOutstation);
 
   const contextFun = {
     userFormData , setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal, 

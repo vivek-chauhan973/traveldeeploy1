@@ -288,22 +288,22 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                                 <p className=" w-24  font-medium">Total : </p>
                                                 <p className="font-semibold text-graytext">
                                                     {a?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span>
+                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                 <p className="font-semibold text-graytext">
                                                     {/* {gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span> */}
-                                                    {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tenative Price)` : "ALL inclusive"}
+                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span> */}
+                                                    {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tentative Price)` : "ALL inclusive"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center gap-0">
                                                 <p className="font-semibold">Grand Total :</p>
                                                 <p className="font-semibold text-graytext ml-1">
                                                     {grandTotalByKm?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tenative Price)"}</span>
+                                                    {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
                                         </div>
