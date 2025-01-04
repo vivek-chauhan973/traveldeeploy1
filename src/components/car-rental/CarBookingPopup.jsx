@@ -28,7 +28,6 @@ const CarBookingPopup = ({ setShowPopup }) => {
     // console.log("gstDateWise ", gstDateWise);
 
     const { userFormData, userDateLocal, userTimeLocal, userPlanLocal, } = useCarPopupContext();
-
     // console.log("userFormData", userFormData);
 
     // Convert the string to a Date object
@@ -46,7 +45,7 @@ const CarBookingPopup = ({ setShowPopup }) => {
             // Find the matching date and get the GST value
             const matchingItem = gstDateWise.find(item => item?.Date === formattedDate);
             if (matchingItem) {
-                console.log("matchingItem:", matchingItem);
+                // console.log("matchingItem:", matchingItem);
                 setSelectedGST(matchingItem?.GST); // Set GST if a match is found
                 setAdditionalmarkup(matchingItem?.Additional_Markup); // Set GST if a match is found
             } else {
@@ -114,42 +113,64 @@ const CarBookingPopup = ({ setShowPopup }) => {
             alert("Please fill all fields and check the confirmation box.");
         }
     };
-    //   console.log("departure section data is here ---> ", departureSectionData) 
-    // console.log("carGroupDepartureTerm is here ---> ", carGroupDepartureTerm);
+
+    const [isActive, setIsActive] = useState(true);
+    const handleToggle = () => {
+        setIsActive((prev) => !prev); // Toggles between true and false
+    };
+    // console.log("isActive",isActive);
 
     {/* Calculation of local car booking*/ }
     let rate = userFormData?.selectedCar?.[0]?.rate ?? 0;
     let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
+    let ac = userFormData?.selectedCar?.[0]?.ac ?? 0;
     let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;
     let totalMarkup = markup + additionalmarkup;
     let selectedlocation = userFormData?.selectedlocation?.[0].localLocation;
     let cityIncreament = selectedlocation?.split('-')[1]?.trim() ?? 0; // extract city increament cost from selected local Location
     let cityIncrementNumber = parseInt(cityIncreament, 10); // city increament string convert into number
-    // console.log("cityIncrementNumber here ---> ", cityIncrementNumber);
 
-    let baseCost = rate + cityIncrementNumber + misc;
+    let baseCost = rate + misc;
     let a = baseCost + Math.floor((baseCost * totalMarkup) / 100); // baseCost with markup 
-    // console.log("baseCost here ---> ", baseCost);
-    // console.log("a here ---> ", a);
+    const basePrice = a + cityIncrementNumber ;
+    // console.log("basePrice here ---> ", basePrice);
 
     let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
-    let b = Math.floor(perKmRate + Math.floor((perKmRate * totalMarkup) / 100)); // per km rate with markup 
-    // console.log("perKmRate here ---> ", perKmRate);
+    let costPerKm = Math.floor(perKmRate + Math.floor((perKmRate * totalMarkup) / 100)); // per km rate with markup 
     const choosePlanKm = userPlanLocal && userPlanLocal.match(/\d+/) ? parseInt(userPlanLocal.match(/\d+/)[0], 10) : 1;
-    let c = b * choosePlanKm;
+    let c = costPerKm * choosePlanKm;
     // console.log("c here ---> ", c);
 
-    let totalCost = a + c; // Total cost ====>  base cost + per km rate 
-    // console.log("totalCost here ---> ", totalCost);
-    let gstPrice = Math.floor((totalCost * selectedGST) / 100);
-    let grandTotalFixedPlan = totalCost + gstPrice;
-    let grandTotalByKm = a + gstPrice;
+    let basePrice2 = basePrice + c; // Total cost ====>  base cost + per km rate 
+    // console.log("basePrice2 here ---> ", basePrice2);
+
+    const [price1, setPrice1] = useState();
+    const [price2, setPrice2] = useState();
+    useEffect(()=>{
+        if(isActive === true){
+            setPrice1(basePrice + ac);
+            setPrice2(basePrice2 + ac);
+        }
+        else{
+            setPrice1(basePrice);
+            setPrice2(basePrice2);
+        }
+    },[isActive,basePrice,basePrice2]);
+
+    let gstPrice1 = Math.floor((price1 * selectedGST) / 100);
+    let grandTotalByKm = price1 + gstPrice1;
+
+    let gstPrice2 = Math.floor((price2 * selectedGST) / 100);
+    let grandTotalFixedPlan = price2 + gstPrice2;
+
+    // console.log("price1 here ---> ", price1);
+    // console.log("price2 here ---> ", price2);
 
     return (
         <>
             <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-[99999] pt-14">
                 <div className="flex justify-center items-center max-h-auto">
-                    <div className="max-w-lg md:max-w-2xl mx-auto"> {/*overflow-y-scroll */}
+                    <div className="max-w-lg md:max-w-2xl mx-auto">
                         <div className="flex">
                             <div className="bg-navyblack rounded-l-lg shadow-lg text-white md:w-1/3 hidden md:block">
                                 <div className="mb-4 w-full h-2/5"></div>
@@ -259,8 +280,7 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                         <div className="flex text-sm md:mb-0 mb-1">
                                             <p className=" w-24 font-medium">Cost Per KM : </p>
                                             <p className="font-semibold text-graytext">
-                                                {/* {userFormData?.selectedCar?.[0].perKmRate.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
-                                                {b?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                {costPerKm?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                             </p>
                                         </div>
                                         <div className="flex text-sm">
@@ -270,10 +290,46 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                             </p>
                                         </div>
                                     </div>
+                                    <div className="flex text-sm mb-1">
+                                        <p className="w-24 font-medium">AC Option :</p>
+                                        <div className="flex items-center space-x-2">
+                                            <p
+                                                className={`font-medium transition duration-300 ${!isActive ? "text-black" : "text-gray-400 blur-none"
+                                                    }`}
+                                            >
+                                                Non Ac
+                                            </p>
+                                            <div
+                                                className="w-6 h-3 flex justify-between items-center rounded-full bg-white border-2 border-black"
+                                                onClick={handleToggle}
+                                            >
+                                                <div
+                                                    className={`flex items-center justify-center w-2.5 h-2 cursor-pointer rounded-full transition-all duration-300 ${!isActive
+                                                        ? "bg-navyblack  shadow-md"
+                                                        : "bg-white text-red-500"
+                                                        }`}
+                                                ></div>
+                                                <div
+                                                    className={`flex items-center justify-center w-2.5 h-2 cursor-pointer rounded-full transition-all duration-300 ${isActive
+                                                        ? "bg-navyblack shadow-md"
+                                                        : "bg-white text-gray-500"
+                                                        }`}
+                                                ></div>
+
+                                            </div>
+
+                                            <p
+                                                className={`font-medium transition duration-300 ${isActive ? "text-black" : "text-gray-400 blur-none"
+                                                    }`}
+                                            >
+                                                Ac
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div className="flex mb-1 text-sm">
                                         <p className=" w-24 font-medium">Base Price : </p>
                                         <p className="font-semibold text-graytext">
-                                            {a?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                            {price1?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                         </p>
                                     </div>
                                     {userPlanLocal === "BY KMs" &&
@@ -287,16 +343,14 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24  font-medium">Total : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {a?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {price1?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                     {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {/* {gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span> */}
-                                                    {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tentative Price)` : "ALL inclusive"}
+                                                    {gstPrice1 > "0" ? `${gstPrice1?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tentative Price)` : "ALL inclusive"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center gap-0">
@@ -319,13 +373,13 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">Total : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {totalCost?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {price2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : "ALL inclusive"}
+                                                    {gstPrice2 > "0" ? `${gstPrice2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}` : "ALL inclusive"}
                                                 </p>
                                             </div>
                                             <div className="flex items-center gap-0">
@@ -335,7 +389,7 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                    }
+                                     }
                                 </div>
                                 {/* Terms and conditions with checkboxes */}
                                 <div className="w-full p-2 border border-gray-300 md:h-52 h-44 max-h-64 mb-4 overflow-y-scroll py-4">

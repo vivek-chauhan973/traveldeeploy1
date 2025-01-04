@@ -30,16 +30,12 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
     const { userFormData, pickupDateOutstation, returnDateOutstation, pickupTimeOutstation,
         returnTimeOutstation, planOutstation, } = useCarPopupContext();
 
-    // console.log("userPlanOutstation", planOutstation);
-    // console.log("pickupDateOutstation", pickupDateOutstation);
-    // console.log("returnDateOutstation", returnDateOutstation);
     // console.log("userFormData", userFormData);
 
     // Calculate the difference in time (in milliseconds)
     const timeDifference = new Date(returnDateOutstation) - new Date(pickupDateOutstation);
     // Convert time difference from milliseconds to days
     const numberOfDays = (timeDifference / (1000 * 60 * 60 * 24)) + 1;
-    console.log("Number of days:", numberOfDays);
 
     // Convert the string to a Date object
     let dateObj = new Date(pickupDateOutstation);
@@ -49,14 +45,13 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
     let year = dateObj.getFullYear();
     // Format as dd-mm-yyyy
     let formattedDate = `${day}-${month}-${year}`;
-    // console.log("Formatted userDateLocal ==>", formattedDate);
 
     useEffect(() => {
         if (gstDateWise && formattedDate) {
             // Find the matching date and get the GST value
             const matchingItem = gstDateWise.find(item => item?.Date === formattedDate);
             if (matchingItem) {
-                console.log("matchingItem:", matchingItem);
+                // console.log("matchingItem:", matchingItem);
                 setSelectedGST(matchingItem?.GST); // Set GST if a match is found
                 setAdditionalmarkup(matchingItem?.Additional_Markup); // Set GST if a match is found
             } else {
@@ -124,61 +119,71 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
             alert("Please fill all fields and check the confirmation box.");
         }
     };
-    //   console.log("departure section data is here ---> ", departureSectionData) 
-    // console.log("carGroupDepartureTerm is here ---> ", carGroupDepartureTerm);
 
+    const [isActive, setIsActive] = useState(true);
+
+    const handleToggle = () => {
+        setIsActive((prev) => !prev); // Toggles between true and false
+    };
+    console.log("isActive",isActive);
+    
     {/* Calculation of outstation by km  car booking*/ }
     let rate = userFormData?.selectedCar?.[0]?.outStationBasePrice ?? 0;
     // console.log("rate here ---> ", rate);
     let rate2 = userFormData?.selectedCar?.[0]?.capacity ?? 0;
     // console.log("rate here ---> ", rate);
     let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
-    // console.log("misc here ---> ", misc);
+    let ac = userFormData?.selectedCar?.[0]?.ac ?? 0;
     let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;
-    // console.log("markup here ---> ", markup);
     let totalMarkup = markup + additionalmarkup;
-    // console.log("totalMarkup here ---> ", totalMarkup);
     let dailyLimit = userFormData?.selectedCar?.[0]?.dailyLimit ?? 1;
-    let kmLimit = numberOfDays * dailyLimit ;
+    let kmLimit = numberOfDays * dailyLimit;
     let selectedlocation = userFormData?.selectedlocation?.[0].localLocation;
-    // console.log("selectedlocation here ---> ", selectedlocation);
     let cityIncreament = selectedlocation?.split('-')[1]?.trim() ?? 0; // extract city increament cost from selected local Location
     let cityIncrementNumber = parseInt(cityIncreament, 10); // city increament string convert into number
-    // console.log("cityIncrementNumber here ---> ", cityIncrementNumber);
 
+    // by km calculation
     let baseCost = rate + misc;
     let a = baseCost + Math.floor((baseCost * totalMarkup) / 100); // baseCost with markup 
-    // console.log("baseCost here ---> ", baseCost);
-    // console.log("a here ---> ", a);
-    let basePrice = (a * numberOfDays) + cityIncrementNumber ;
+    let basePrice = (a * numberOfDays) + cityIncrementNumber;
     // console.log("basePrice here ---> ", basePrice);
 
     let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
     let perKmMarkup = (perKmRate * totalMarkup) / 100;
-    console.log("perKmMarkup here ---> ", perKmMarkup);
-    let b = Math.floor(perKmRate + perKmMarkup); // per km rate with markup  
-    console.log("perKmRate here ---> ", perKmRate);
-    console.log("b here ---> ", b);
+    let costPerKm = Math.floor(perKmRate + perKmMarkup); // per km rate with markup  
+    // console.log("costPerKm here ---> ", costPerKm);
 
-    // const choosePlanKm = userPlanLocal && userPlanLocal.match(/\d+/) ? parseInt(userPlanLocal.match(/\d+/)[0], 10) : 1;
-    // let c = b * choosePlanKm;
-    // // console.log("c here ---> ", c);
-
-    let totalCost = basePrice; // Total cost ====  base cost
-    // console.log("totalCost here ---> ", totalCost);
-
-    let gstPrice = Math.floor((totalCost * selectedGST) / 100);
-    let grandTotalByKm = totalCost + gstPrice;
-
-
+    // per days calculation
     let baseCost2 = rate2 + misc;
     let a2 = baseCost2 + Math.floor((baseCost2 * totalMarkup) / 100); // baseCost with markup 
-    console.log("baseCost2 here ---> ", baseCost2);
-    console.log("a2 here ---> ", a2);
     let basePrice2 = (a2 * numberOfDays) + cityIncrementNumber ;
-    console.log("basePrice2 here ---> ", basePrice2);
-    let gstPrice2 = Math.floor((basePrice2 * selectedGST) / 100);
-    let grandTotalPerDay = basePrice2 + gstPrice2;
+    // console.log("basePrice2 here ---> ", basePrice2);
+    let acCharge = ac * numberOfDays;
+    // console.log("acCharge",acCharge);
+
+    const [price1, setPrice1] = useState();
+    const [price2, setPrice2] = useState();
+
+    useEffect(()=>{
+        if(isActive === true){
+            setPrice1(basePrice + acCharge);
+            setPrice2(basePrice2+ acCharge);
+        }
+        else{
+            setPrice1(basePrice);
+            setPrice2(basePrice2);
+        }
+    },[isActive,basePrice,basePrice2])
+
+    let gstPrice = Math.floor((price1 * selectedGST) / 100);
+    let grandTotalByKm = price1 + gstPrice;
+
+    let gstPrice2 = Math.floor((price2 * selectedGST) / 100);
+    let grandTotalPerDay = price2 + gstPrice2;
+
+    // console.log("price1",price1);
+    // console.log("price2",price2);
+    
 
     return (
         <>
@@ -200,7 +205,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                     <p className="font-semibold mt-2 text-center">Rakesh Kumar</p>
                                 </div>
                             </div>
-                            <div className="md:w-2/3 w-full md:m-0 m-2 p-5 bg-white rounded-r-lg md:rounded-l-none rounded-l-lg shadow-lg overflow-y-scroll md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px]">
+                            <div className="md:w-2/3 w-full md:m-0 m-2 px-5 md:pt-3 pt-2 pb-3 bg-white rounded-r-lg md:rounded-l-none rounded-l-lg shadow-lg overflow-y-scroll md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px]">
                                 <div className="cursor-pointer flex justify-end">
                                     <FontAwesomeIcon
                                         icon={faCircleXmark}
@@ -208,8 +213,8 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                         onClick={() => setShowPopupOutstation(false)}
                                     />
                                 </div>
-                                <form className="br-red-500">
-                                    <div className="space-y-4 mb-2 hidden">
+                                <form className="">
+                                    <div className="md:space-y-4 md:mb-2 hidden">
                                         <input
                                             type="text"
                                             placeholder="Name"
@@ -269,8 +274,8 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                         </div>
                                     </div>
                                     <div className="flex mb-1 text-sm">
-                                        <p className=" w-28 font-medium">PickUp Location : </p>
-                                        <p className="font-semibold text-graytext capitalize">
+                                        <p className="md:w-28 font-medium">PickUp Location : </p>
+                                        <p className="font-semibold text-graytext capitalize md:ml-0 ml-1">
                                             {userFormData?.selectedPickupPoint?.[0].name}
                                             {" "}-{" "}
                                             {userFormData?.selectedlocation?.[0].location}
@@ -304,28 +309,63 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="grid md:grid-cols-2 md:gap-3 mb-1">
-                                        <div className="flex text-sm md:mb-0 mb-1">
-                                            <p className=" w-24 font-medium">Cost Per KM : </p>
-                                            <p className="font-semibold text-graytext">
-                                                {b?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                    <div className="flex text-sm mb-1">
+                                        <p className="w-24 font-medium">AC Option :</p>
+                                        <div className="flex items-center space-x-2">
+                                            <p
+                                                className={`font-medium transition duration-300 ${!isActive ? "text-black" : "text-gray-400 blur-none"
+                                                    }`}
+                                            >
+                                                Non Ac
                                             </p>
-                                        </div>
-                                        <div className="flex text-sm">
-                                            <p className=" w-24 font-medium">Choosed Plan : </p>
-                                            <p className="font-semibold text-graytext">
-                                                {planOutstation}
+                                            <div
+                                                className="w-6 h-3 flex justify-between items-center rounded-full bg-white border-2 border-black"
+                                                onClick={handleToggle}
+                                            >
+                                                <div
+                                                    className={`flex items-center justify-center w-2.5 h-2 cursor-pointer rounded-full transition-all duration-300 ${!isActive
+                                                        ? "bg-navyblack  shadow-md"
+                                                        : "bg-white text-red-500"
+                                                        }`}
+                                                ></div>
+                                                <div
+                                                    className={`flex items-center justify-center w-2.5 h-2 cursor-pointer rounded-full transition-all duration-300 ${isActive
+                                                        ? "bg-navyblack shadow-md"
+                                                        : "bg-white text-gray-500"
+                                                        }`}
+                                                ></div>
+
+                                            </div>
+
+                                            <p
+                                                className={`font-medium transition duration-300 ${isActive ? "text-black" : "text-gray-400 blur-none"
+                                                    }`}
+                                            >
+                                                Ac
                                             </p>
                                         </div>
                                     </div>
-                                    
                                     {planOutstation !== "Per Days" &&
                                         <div>
+                                            <div className="grid md:grid-cols-2 md:gap-3 mb-1">
+                                                <div className="flex text-sm md:mb-0 mb-1">
+                                                    <p className=" w-24 font-medium">Cost Per KM : </p>
+                                                    <p className="font-semibold text-graytext">
+                                                        {costPerKm?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    </p>
+                                                </div>
+                                                <div className="flex text-sm">
+                                                    <p className=" w-24 font-medium">Choosed Plan : </p>
+                                                    <p className="font-semibold text-graytext">
+                                                        {planOutstation}
+                                                    </p>
+                                                </div>
+                                            </div>
                                             <div className="flex mb-1 text-sm">
-                                                <p className="md:w-24 w-28 font-medium">Base Price : </p>
+                                                <p className="md:w-24 w-44 font-medium">Base Price : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {basePrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                                    { " "} <span className="text-xxs font-semibold ml-1">{` (Daily allowance, Night charges for ${numberOfDays} days included) `}</span>
+                                                    {price1?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {" "} <span className="text-xxs font-semibold ml-1">{` (Daily allowance, Night charges for ${numberOfDays} days included) `}</span>
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
@@ -335,14 +375,14 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
-                                                <p className="md:w-24 w-36 font-medium">KM Limit : </p>
+                                                <p className="w-24 font-medium">KM Limit : </p>
                                                 <p className="font-semibold text-graytext bg-yellow-200">
                                                     {kmLimit} KM                                                </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24  font-medium">Total : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {totalCost?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {price1?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                     {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
@@ -366,28 +406,29 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                     {planOutstation === "Per Days" &&
                                         <div>
                                             <div className="flex mb-1 text-sm">
-                                                <p className="md:w-24 w-28 font-medium">Base Price : </p>
+                                                <p className=" w-24 font-medium">Choosed Plan : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {basePrice2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {planOutstation}
                                                 </p>
                                             </div>
+
                                             <div className="flex mb-1 text-sm">
-                                                <p className="w-24 font-medium">Per KM Price : </p>
-                                                <p className="font-semibold text-graytext">
-                                                    {/* {(b* kmLimit)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} */}
-                                                </p>
-                                            </div>
-                                            <div className="flex mb-1 text-sm">
-                                                <p className="md:w-24 w-36 font-medium">KM Limit : </p>
-                                                <p className="font-semibold text-graytext">
+                                                <p className="w-24 font-medium">KM Limit : </p>
+                                                <p className="font-semibold text-graytext bg-yellow-200">
                                                     {kmLimit} KM                                                </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
+                                                <p className="w-24 font-medium">Base Price : </p>
+                                                <p className="font-semibold text-graytext">
+                                                    {price2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                </p>
+                                            </div>
+                                            {/* <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">Total : </p>
                                                 <p className="font-semibold text-graytext">
                                                     {basePrice2?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
-                                            </div>
+                                            </div> */}
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                 <p className="font-semibold text-graytext">
@@ -404,7 +445,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                     }
                                 </div>
                                 {/* Terms and conditions with checkboxes */}
-                                <div className="w-full p-2 border border-gray-300 md:h-52 h-44 max-h-64 mb-4 overflow-y-scroll py-4">
+                                <div className="w-full pr-2 border border-gray-300 md:h-52 h-40 max-h-64 mb-2 overflow-y-scroll py-3">
                                     {carGroupDepartureTerm?.length > 0 &&
                                         carGroupDepartureTerm.map((item, index) => (
                                             <div
@@ -420,16 +461,16 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                         ))
                                     }
                                 </div>
-                                <div className="flex justify-start items-center gap-2 mb-4">
+                                <div className="flex justify-start items-center gap-2 mb-2">
                                     <input
-                                        className="cursor-pointer h-4 w-4 rounded-lg accent-navyblack md:mb-0  mb-3"
+                                        className="cursor-pointer h-3 w-3 rounded-lg accent-navyblack md:mb-0 mb-4"
                                         type="checkbox"
                                         id="checked"
                                         checked={check}
                                         onChange={() => setCheck(!check)}
                                     />
                                     <label htmlFor="checked"
-                                        className="cursor-pointer label-text md:text-para text-xs font-medium text-gray-700 "
+                                        className="cursor-pointer label-text md:text-sm text-xs font-medium text-gray-700 "
                                     >
                                         I have read and agree to the Terms & Conditions
                                     </label>
