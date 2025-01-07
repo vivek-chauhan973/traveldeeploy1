@@ -53,7 +53,7 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
     const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
         setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
-        setPlanOutstation } = useCarPopupContext();
+        setPlanOutstation, userFormData } = useCarPopupContext();
 
     useEffect(() => {
 
@@ -189,6 +189,8 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             <input
                                 type="text"
                                 className="outline-none w-full text-start py-1.5"
+                                value={userFormData?.selectedCar?.[0].vehicleType}
+                                readOnly
                             />
                         </div>
                     </div>
@@ -265,6 +267,8 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             <input
                                 type="text"
                                 className="outline-none w-full text-start py-1.5"
+                                value={userFormData?.selectedCar?.[0].vehicleType}
+                                readOnly
                             />
                         </div>
                     </div>

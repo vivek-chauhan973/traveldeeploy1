@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
 
-const fetchGroupDepartureTerm = async () => {
-    const response = await fetch("/api/cars/package/terms-condition/GroupDepartureTerm/get");
+const fetchGroupDepartureTermOutstation = async () => {
+    const response = await fetch("/api/cars/package/terms-condition/GroupDepartureTermOutstation/get");
     return await response.json();
 };
 const fetchGSTDate = async () => {
@@ -16,7 +16,7 @@ const fetchGSTDate = async () => {
 const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess }) => {
 
     const [check, setCheck] = useState(false);
-    const [carGroupDepartureTerm, setCarGroupDepartureTerm] = useState([]);
+    const [carGroupDepartureTermOutstation, setCarGroupDepartureTermOutstation] = useState([]);
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
@@ -75,9 +75,9 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
     }, []);
 
     useEffect(() => {
-        fetchGroupDepartureTerm().then(res => {
+        fetchGroupDepartureTermOutstation().then(res => {
             // console.log("terma and condition=========> ", res?.CancellationGroupData)
-            setCarGroupDepartureTerm(res?.CancellationGroupData)
+            setCarGroupDepartureTermOutstation(res?.CancellationGroupData)
         });
 
         fetchGSTDate().then(res => {
@@ -86,37 +86,38 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
         })
     }, []);
 
-    // const validateMobile = (mobileNumber) => {
-    //     const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
-    //     if (!isValid) {
-    //         setMobileError("Please enter a valid 10-digit mobile number.");
-    //     } else {
-    //         setMobileError("");
-    //     }
-    //     return isValid;
-    // };
+    const validateMobile = (mobileNumber) => {
+        const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
+        if (!isValid) {
+            setMobileError("Please enter a valid 10-digit mobile number.");
+        } else {
+            setMobileError("");
+        }
+        return isValid;
+    };
 
-    // useEffect(() => {
-    //     // Check if all the required fields are filled and checkbox is checked
-    //     if (name.trim() !== "" && mobile.trim() !== "" && email.trim() !== "" && check) {
-    //         setIsFormValid(true);
-    //     } else {
-    //         setIsFormValid(false);
-    //     }
-    // }, [name, mobile, email, check]);
+    useEffect(() => {
+        // Check if all the required fields are filled and checkbox is checked
+        if (name.trim() !== "" && mobile.trim() !== "" && email.trim() !== "" && check) {
+            setIsFormValid(true);
+        } else {
+            setIsFormValid(false);
+        }
+    }, [name, mobile, email, check]);
 
     const handleSubmit = () => {
-        // if (isFormValid) {
-        //     const userData = {
-        //         name: name,
-        //         email: email,
-        //         mobile: mobile,
-        //     };
-        //     console.log("User Data filled:", userData);
-        //     setShowPopupOutstation(false);
-        // } else {
-        //     alert("Please fill all fields and check the confirmation box.");
-        // }
+        if (isFormValid) {
+            const userData = {
+                name: name,
+                email: email,
+                mobile: mobile,
+            };
+            console.log("User Data filled:", userData);
+            setShowPopupOutstation(false);
+        } else {
+            alert("Please fill all fields and check the confirmation box.");
+        }
+        
         if (activeBookingProcess === false) {
             alert(`Something went wrong Try Next time`);
             setShowPopupOutstation(false);
@@ -131,7 +132,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
     const handleToggle = () => {
         setIsActive((prev) => !prev); // Toggles between true and false
     };
-    console.log("isActive", isActive);
+    // console.log("isActive", isActive);
 
     {/* Calculation of outstation by km  car booking*/ }
     let rate = userFormData?.selectedCar?.[0]?.outStationBasePrice ?? 0;
@@ -147,11 +148,14 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
     let selectedlocation = userFormData?.selectedlocation?.[0].localLocation;
     let cityIncreament = selectedlocation?.split('-')[1]?.trim() ?? 0; // extract city increament cost from selected local Location
     let cityIncrementNumber = parseInt(cityIncreament, 10); // city increament string convert into number
+    let cityMarkup = userFormData?.selectedCar?.[0]?.locationrate ?? 0;
+    let locationratePercentage = cityIncrementNumber + Math.floor((cityIncrementNumber * cityMarkup) / 100);
+    // console.log("locationratePercentage here ---> ", locationratePercentage);
 
     // by km calculation
     let baseCost = rate + misc;
     let a = baseCost + Math.floor((baseCost * totalMarkup) / 100); // baseCost with markup 
-    let basePrice = (a * numberOfDays) + cityIncrementNumber;
+    let basePrice = (a * numberOfDays) + locationratePercentage;
     // console.log("basePrice here ---> ", basePrice);
 
     let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
@@ -162,7 +166,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
     // per days calculation
     let baseCost2 = rate2 + misc;
     let a2 = baseCost2 + Math.floor((baseCost2 * totalMarkup) / 100); // baseCost with markup 
-    let basePrice2 = (a2 * numberOfDays) + cityIncrementNumber;
+    let basePrice2 = (a2 * numberOfDays) + locationratePercentage;
     // console.log("basePrice2 here ---> ", basePrice2);
     let acCharge = ac * numberOfDays;
     // console.log("acCharge",acCharge);
@@ -457,8 +461,8 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
                                 </div>
                                 {/* Terms and conditions with checkboxes */}
                                 <div className="w-full pr-2 border border-gray-300 md:h-52 h-40 max-h-64 mb-2 overflow-y-scroll py-3">
-                                    {carGroupDepartureTerm?.length > 0 &&
-                                        carGroupDepartureTerm.map((item, index) => (
+                                    {carGroupDepartureTermOutstation?.length > 0 &&
+                                        carGroupDepartureTermOutstation.map((item, index) => (
                                             <div
                                                 key={index}
                                                 className="text-sm md:ml-4 md:leading-6 leading-5 md:mb-3 about-margin">

@@ -14,7 +14,7 @@ const QuillNoSSRWrapper = dynamic(() => import('react-quill'), {
     loading: () => <p>Loading...</p>,
 });
 
-const CarGroupDepartureTerm = () => {
+const CarGroupDepartureTermOutstation = () => {
     const [NeedToKnowGroup, setNeedToKnowGroup] = useState({ groupName: "", description: "" });
     const [groupsData, setGroupsData] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ const CarGroupDepartureTerm = () => {
 
     const fetchGroups = async () => {
         try {
-            const response = await fetch('/api/cars/package/terms-condition/GroupDepartureTerm/get');
+            const response = await fetch('/api/cars/package/terms-condition/GroupDepartureTermOutstation/get');
             const result = await response.json();
             setGroupsData(result.CancellationGroupData.reverse());
         } catch (error) {
@@ -45,7 +45,7 @@ const CarGroupDepartureTerm = () => {
     const handleDelete = async () => {
         if (deleteGroupId) {
             try {
-                const response = await fetch('/api/cars/package/terms-condition/GroupDepartureTerm/delete', {
+                const response = await fetch('/api/cars/package/terms-condition/GroupDepartureTermOutstation/delete', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ group_id: deleteGroupId })
@@ -76,8 +76,8 @@ const CarGroupDepartureTerm = () => {
 
     const handleSave = async () => {
         const url = isEditing
-            ? '/api/cars/package/terms-condition/GroupDepartureTerm/edit'
-            : '/api/cars/package/terms-condition/GroupDepartureTerm/add';
+            ? '/api/cars/package/terms-condition/GroupDepartureTermOutstation/edit'
+            : '/api/cars/package/terms-condition/GroupDepartureTermOutstation/add';
         const payload = isEditing
             ? { group_id: editGroupId, ...NeedToKnowGroup }
             : NeedToKnowGroup;
@@ -110,14 +110,15 @@ const CarGroupDepartureTerm = () => {
             ['link']
         ]
     };
-
+    console.log("NeedToKnowGroup",NeedToKnowGroup);
+    
     return (
         <div >
             <div className="md:flex gap-5">
 
                 <div className=" grow border rounded p-3 h-72">
                     <div className='flex flex-col'>
-                        <label className="pb-2 font-semibold">Local Terms and Condition</label>
+                        <label className="pb-2 font-semibold">Outstation Terms and Condition</label>
                         <div className="flex items-center md:gap-3 gap-1">
                             <input
                                 className='border rounded-md h-8 px-2 grow focus:border-primary outline-none'
@@ -212,4 +213,4 @@ const CarGroupDepartureTerm = () => {
     );
 };
 
-export default CarGroupDepartureTerm;
+export default CarGroupDepartureTermOutstation;

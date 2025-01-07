@@ -53,7 +53,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
 
   const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal, pickupDateOutstation, returnDateOutstation,
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
-    setPlanOutstation } = useCarPopupContext();
+    setPlanOutstation, userFormData } = useCarPopupContext();
 
   useEffect(() => {
 
@@ -163,7 +163,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
       setDaysDifference(differenceInDays > 0 ? differenceInDays : 0);
     }
   };
-
+  console.log("userFormData picker", userFormData);
+ 
   return (
     <div>
       <div className="text-xs w-28 h-5 bg-primary text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
@@ -207,6 +208,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="text"
                     className="outline-none w-36 text-start py-2"
+                    value={userFormData?.selectedCar?.[0].vehicleType}
+                    readOnly
                   />
                 </div>
               </div>
@@ -299,6 +302,8 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   <input
                     type="text"
                     className=" outline-none w-20 text-start py-2"
+                    value={userFormData?.selectedCar?.[0].vehicleType}
+                    readOnly
                   />
                 </div>
               </div>
