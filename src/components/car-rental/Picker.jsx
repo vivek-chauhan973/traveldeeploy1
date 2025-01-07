@@ -143,22 +143,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     }
   };
 
-  const handleBookCar = () => {
-    if (activeBookingProcess === false) {
-      setShowPopup(false);
-      alert(`Something went wrong Try Next time`)
-    } else {
-      setShowPopup(true);
-    }
-  };
-  const handleBookCarOutstation = () => {
-    if (activeBookingProcess === false) {
-      setShowPopupOutstation(false);
-      alert(`Something went wrong Try Next time`)
-    } else {
-      setShowPopupOutstation(true);
-    }
-  };
   const planKM = [
     { value: "80KM-8HRS", label: "80KM - 8HRS" },
     { value: "100KM-10HRS", label: "100KM - 10HRS" },
@@ -260,7 +244,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                     className="text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                     onChange={(e) => setUserPlanLocal(e.target.value)}
                   >
-                    <option value="" disabled>
+                    <option value="Choose Plan" disabled>
                       Choose Your Plan
                     </option>
                     <option value="BY KMs">
@@ -281,12 +265,20 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
               <div className="mt-8">
                 <button
                   className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
-                  onClick={handleBookCar}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowPopup(true);
+                  }}
                 >
                   Book Cars
                 </button>
               </div>
-              {showPopup && <CarBookingPopup setShowPopup={setShowPopup} />}
+              {showPopup &&
+                <CarBookingPopup
+                  setShowPopup={setShowPopup}
+                  activeBookingProcess={activeBookingProcess}
+                />
+              }
             </div>
           </div>
         </div>
@@ -367,7 +359,7 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                     className="text-para w-32 px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                     onChange={(e) => setPlanOutstation(e.target.value)}
                   >
-                    <option value="" disabled>
+                    <option value="Choose Plan" disabled>
                       Choose Plan
                     </option>
                     <option value="By Kms">
@@ -381,13 +373,21 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
               </div>
               <div className="mt-8">
                 <button
-                  onClick={handleBookCarOutstation}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowPopupOutstation(true);
+                  }}
                   className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
                 >
                   Book Cars
                 </button>
               </div>
-              {showPopupOutstation && <CarBookingPopupOutsation setShowPopupOutstation={setShowPopupOutstation} />}
+              {showPopupOutstation &&
+                <CarBookingPopupOutsation
+                  setShowPopupOutstation={setShowPopupOutstation}
+                  activeBookingProcess={activeBookingProcess}
+                />
+              }
             </div>
           </div>
         </div>

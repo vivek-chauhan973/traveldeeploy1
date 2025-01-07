@@ -143,22 +143,6 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         }
     };
 
-    const handleBookCar = () => {
-        if (activeBookingProcess === false) {
-            setShowPopup(false);
-            alert(`Something went wrong Try Next time`)
-        } else {
-            setShowPopup(true);
-        }
-    }
-    const handleBookCarOutstation = () => {
-        if (activeBookingProcess === false) {
-            setShowPopupOutstation(false);
-            alert(`Something went wrong Try Next time`)
-        } else {
-            setShowPopupOutstation(true);
-        }
-    };
     const planKM = [
         { value: '80KM-8HRS', label: '80KM - 8HRS' },
         { value: '100KM-10HRS', label: '100KM - 10HRS' },
@@ -250,14 +234,19 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             </select>
                         </div>
                     </div>
-                    <button className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
-                        onClick={handleBookCar}
+                    <button
+                        className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setShowPopup(true);
+                        }}
                     >
                         Book Cars
                     </button>
                     {showPopup && (
                         <CarBookingPopup
                             setShowPopup={setShowPopup}
+                            activeBookingProcess={activeBookingProcess}
                         />
                     )}
                 </div>
@@ -339,11 +328,21 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                             </select>
                         </div>
                     </div>
-                    <button onClick={handleBookCarOutstation}
-                        className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md">
+                    <button
+                        className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setShowPopupOutstation(true);
+                        }}
+                    >
                         Book Cars
                     </button>
-                    {showPopupOutstation && <CarBookingPopupOutsation setShowPopupOutstation={setShowPopupOutstation} />}
+                    {showPopupOutstation && (
+                        <CarBookingPopupOutsation
+                            setShowPopupOutstation={setShowPopupOutstation}
+                            activeBookingProcess={activeBookingProcess}
+                        />
+                    )}
                 </div>
             </div>
         </div>

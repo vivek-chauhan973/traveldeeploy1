@@ -13,7 +13,7 @@ const fetchGSTDate = async () => {
     return await response.json();
 }
 
-const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
+const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess }) => {
 
     const [check, setCheck] = useState(false);
     const [carGroupDepartureTerm, setCarGroupDepartureTerm] = useState([]);
@@ -86,37 +86,43 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
         })
     }, []);
 
-    const validateMobile = (mobileNumber) => {
-        const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
-        if (!isValid) {
-            setMobileError("Please enter a valid 10-digit mobile number.");
-        } else {
-            setMobileError("");
-        }
-        return isValid;
-    };
+    // const validateMobile = (mobileNumber) => {
+    //     const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
+    //     if (!isValid) {
+    //         setMobileError("Please enter a valid 10-digit mobile number.");
+    //     } else {
+    //         setMobileError("");
+    //     }
+    //     return isValid;
+    // };
 
-    useEffect(() => {
-        // Check if all the required fields are filled and checkbox is checked
-        if (name.trim() !== "" && mobile.trim() !== "" && email.trim() !== "" && check) {
-            setIsFormValid(true);
-        } else {
-            setIsFormValid(false);
-        }
-    }, [name, mobile, email, check]);
+    // useEffect(() => {
+    //     // Check if all the required fields are filled and checkbox is checked
+    //     if (name.trim() !== "" && mobile.trim() !== "" && email.trim() !== "" && check) {
+    //         setIsFormValid(true);
+    //     } else {
+    //         setIsFormValid(false);
+    //     }
+    // }, [name, mobile, email, check]);
 
     const handleSubmit = () => {
-        if (isFormValid) {
-            const userData = {
-                name: name,
-                email: email,
-                mobile: mobile,
-            };
-            console.log("User Data filled:", userData);
-
+        // if (isFormValid) {
+        //     const userData = {
+        //         name: name,
+        //         email: email,
+        //         mobile: mobile,
+        //     };
+        //     console.log("User Data filled:", userData);
+        //     setShowPopupOutstation(false);
+        // } else {
+        //     alert("Please fill all fields and check the confirmation box.");
+        // }
+        if (activeBookingProcess === false) {
+            alert(`Something went wrong Try Next time`);
             setShowPopupOutstation(false);
         } else {
-            alert("Please fill all fields and check the confirmation box.");
+            alert(`booking Successful`);
+            setShowPopupOutstation(false);
         }
     };
 
@@ -125,8 +131,8 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
     const handleToggle = () => {
         setIsActive((prev) => !prev); // Toggles between true and false
     };
-    console.log("isActive",isActive);
-    
+    console.log("isActive", isActive);
+
     {/* Calculation of outstation by km  car booking*/ }
     let rate = userFormData?.selectedCar?.[0]?.outStationBasePrice ?? 0;
     // console.log("rate here ---> ", rate);
@@ -156,7 +162,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
     // per days calculation
     let baseCost2 = rate2 + misc;
     let a2 = baseCost2 + Math.floor((baseCost2 * totalMarkup) / 100); // baseCost with markup 
-    let basePrice2 = (a2 * numberOfDays) + cityIncrementNumber ;
+    let basePrice2 = (a2 * numberOfDays) + cityIncrementNumber;
     // console.log("basePrice2 here ---> ", basePrice2);
     let acCharge = ac * numberOfDays;
     // console.log("acCharge",acCharge);
@@ -164,16 +170,16 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
     const [price1, setPrice1] = useState();
     const [price2, setPrice2] = useState();
 
-    useEffect(()=>{
-        if(isActive === true){
+    useEffect(() => {
+        if (isActive === true) {
             setPrice1(basePrice + acCharge);
-            setPrice2(basePrice2+ acCharge);
+            setPrice2(basePrice2 + acCharge);
         }
-        else{
+        else {
             setPrice1(basePrice);
             setPrice2(basePrice2);
         }
-    },[isActive,basePrice,basePrice2])
+    }, [isActive, basePrice, basePrice2])
 
     let gstPrice = Math.floor((price1 * selectedGST) / 100);
     let grandTotalByKm = price1 + gstPrice;
@@ -183,7 +189,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
 
     // console.log("price1",price1);
     // console.log("price2",price2);
-    
+
 
     return (
         <>
@@ -362,7 +368,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                                 </div>
                                             </div>
                                             <div className="flex mb-1 text-sm">
-                                                <p className="md:w-24 w-44 font-medium">Base Price : </p>
+                                                <p className="md:w-24 w-40 font-medium">Base Price : </p>
                                                 <p className="font-semibold text-graytext">
                                                     {price1?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                     {" "} <span className="text-xxs font-semibold ml-1">{` (Daily allowance, Night charges for ${numberOfDays} days included) `}</span>
@@ -375,9 +381,13 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                                 </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
-                                                <p className="w-24 font-medium">KM Limit : </p>
-                                                <p className="font-semibold text-graytext bg-yellow-200">
-                                                    {kmLimit} KM                                                </p>
+                                                <p className="md:w-24 w-16 font-medium">KM Limit : </p>
+                                                <p className="font-semibold text-graytext ">
+                                                    <span className="bg-yellow-200">{kmLimit} KM</span>
+                                                    <span className="text-xxs font-semibold ml-1">
+                                                        {"(Running limit for this trip)"}
+                                                    </span>
+                                                </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24  font-medium">Total : </p>
@@ -389,8 +399,6 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                             <div className="flex mb-1 text-sm">
                                                 <p className=" w-24 font-medium">GST {selectedGST === "0" ? "" : `${selectedGST}%`} : </p>
                                                 <p className="font-semibold text-graytext">
-                                                    {/* {gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                                        {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span> */}
                                                     {gstPrice > "0" ? `${gstPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })} (Tentative Price)` : "ALL inclusive"}
                                                 </p>
                                             </div>
@@ -413,9 +421,12 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                             </div>
 
                                             <div className="flex mb-1 text-sm">
-                                                <p className="w-24 font-medium">KM Limit : </p>
-                                                <p className="font-semibold text-graytext bg-yellow-200">
-                                                    {kmLimit} KM                                                </p>
+                                                <p className="md:w-24 w-16 font-medium">KM Limit : </p>
+                                                <p className="font-semibold text-graytext">
+                                                    <span className="bg-yellow-200">{kmLimit} KM</span>
+                                                    <span className="text-xxs font-semibold ml-1">
+                                                        {"(Running limit for this trip)"}
+                                                    </span>                                                </p>
                                             </div>
                                             <div className="flex mb-1 text-sm">
                                                 <p className="w-24 font-medium">Base Price : </p>
@@ -476,13 +487,16 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation }) => {
                                     </label>
                                 </div>
                                 <button
-                                    className={`${isFormValid ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
+                                    className={`${check ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
                                                 text-white w-full p-3 rounded-lg hover:opacity-90`}
+                                    // className={`${isFormValid ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
+                                    //             text-white w-full p-3 rounded-lg hover:opacity-90`}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         handleSubmit();
                                     }}
-                                    disabled={!isFormValid} >
+                                    // disabled={!isFormValid} 
+                                    >
                                     Book Now
                                 </button>
                             </div>

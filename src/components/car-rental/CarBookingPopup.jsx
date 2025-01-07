@@ -13,7 +13,7 @@ const fetchGSTDate = async () => {
     return await response.json();
 }
 
-const CarBookingPopup = ({ setShowPopup }) => {
+const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
 
     const [check, setCheck] = useState(false);
     const [carGroupDepartureTerm, setCarGroupDepartureTerm] = useState([]);
@@ -80,37 +80,44 @@ const CarBookingPopup = ({ setShowPopup }) => {
         })
     }, []);
 
-    const validateMobile = (mobileNumber) => {
-        const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
-        if (!isValid) {
-            setMobileError("Please enter a valid 10-digit mobile number.");
-        } else {
-            setMobileError("");
-        }
-        return isValid;
-    };
+    // const validateMobile = (mobileNumber) => {
+    //     const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
+    //     if (!isValid) {
+    //         setMobileError("Please enter a valid 10-digit mobile number.");
+    //     } else {
+    //         setMobileError("");
+    //     }
+    //     return isValid;
+    // };
 
-    useEffect(() => {
-        // Check if all the required fields are filled and checkbox is checked
-        if (name.trim() !== "" && mobile.trim() !== "" && email.trim() !== "" && check) {
-            setIsFormValid(true);
-        } else {
-            setIsFormValid(false);
-        }
-    }, [name, mobile, email, check]);
+    // useEffect(() => {
+    //     // Check if all the required fields are filled and checkbox is checked
+    //     if (name.trim() !== "" && mobile.trim() !== "" && email.trim() !== "" && check) {
+    //         setIsFormValid(true);
+    //     } else {
+    //         setIsFormValid(false);
+    //     }
+    // }, [name, mobile, email, check]);
 
     const handleSubmit = () => {
-        if (isFormValid) {
-            const userData = {
-                name: name,
-                email: email,
-                mobile: mobile,
-            };
-            console.log("User Data filled:", userData);
+        // if (isFormValid) {
+        //     const userData = {
+        //         name: name,
+        //         email: email,
+        //         mobile: mobile,
+        //     };
+        //     console.log("User Data filled:", userData);
 
-            setShowPopup(false);
+        //     setShowPopup(false);
+        // } else {
+        //     alert("Please fill all fields and check the confirmation box.");
+        // }
+        if (activeBookingProcess === false) {
+            // setShowPopup(false);
+            alert(`Something went wrong Try Next time`)
         } else {
-            alert("Please fill all fields and check the confirmation box.");
+            // setShowPopup(true);
+            alert(`booking Successful`)
         }
     };
 
@@ -132,7 +139,7 @@ const CarBookingPopup = ({ setShowPopup }) => {
 
     let baseCost = rate + misc;
     let a = baseCost + Math.floor((baseCost * totalMarkup) / 100); // baseCost with markup 
-    const basePrice = a + cityIncrementNumber ;
+    const basePrice = a + cityIncrementNumber;
     // console.log("basePrice here ---> ", basePrice);
 
     let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
@@ -146,16 +153,16 @@ const CarBookingPopup = ({ setShowPopup }) => {
 
     const [price1, setPrice1] = useState();
     const [price2, setPrice2] = useState();
-    useEffect(()=>{
-        if(isActive === true){
+    useEffect(() => {
+        if (isActive === true) {
             setPrice1(basePrice + ac);
             setPrice2(basePrice2 + ac);
         }
-        else{
+        else {
             setPrice1(basePrice);
             setPrice2(basePrice2);
         }
-    },[isActive,basePrice,basePrice2]);
+    }, [isActive, basePrice, basePrice2]);
 
     let gstPrice1 = Math.floor((price1 * selectedGST) / 100);
     let grandTotalByKm = price1 + gstPrice1;
@@ -389,7 +396,7 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                     }
+                                    }
                                 </div>
                                 {/* Terms and conditions with checkboxes */}
                                 <div className="w-full p-2 border border-gray-300 md:h-52 h-44 max-h-64 mb-4 overflow-y-scroll py-4">
@@ -423,13 +430,16 @@ const CarBookingPopup = ({ setShowPopup }) => {
                                     </label>
                                 </div>
                                 <button
-                                    className={`${isFormValid ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
+                                    className={`${check ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
                                                 text-white w-full p-3 rounded-lg hover:opacity-90`}
+                                    // className={`${isFormValid ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
+                                    //             text-white w-full p-3 rounded-lg hover:opacity-90`}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         handleSubmit();
                                     }}
-                                    disabled={!isFormValid} >
+                                // disabled={!isFormValid}
+                                >
                                     Book Now
                                 </button>
                             </div>
