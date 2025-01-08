@@ -17,6 +17,11 @@ import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 import StaticBanner from "@/components/car-rental/StaticBanner";
 import Footer from "@/components/Footer";
 import MobilePicker from "@/components/car-rental/MobilePicker";
+import Create from "@/components/login-sinup/login/create";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import CarBookingPopup from "@/components/car-rental/CarBookingPopup";
+import CarBookingPopupOutsation from "@/components/car-rental/CarBookingPopupOutstation";
+import ActiveInactive from "@/components/car-rental/ActiveInactive";
 
 const fetchPromoList = async () => {
   const response = await fetch(
@@ -134,6 +139,8 @@ export default function App() {
   const [staticBanner, setStaticBanner] = useState([]);
   const [cities, setCities] = useState([]);
 
+  const { loginPopup, showPopup, setShowPopup,
+    showPopupOutstation, activeInactivePopup } = useCarPopupContext();
   useEffect(() => {
     // Fetch itinerary data
     const fetchItineraryData = async () => {
@@ -196,6 +203,10 @@ export default function App() {
     <AppProvider>
       <div>
         {/* CarRentalHomeSkelton  */}
+        {activeInactivePopup && <ActiveInactive/>}
+        {showPopup && <CarBookingPopup />}
+        {showPopupOutstation && <CarBookingPopupOutsation />}
+        {loginPopup && <Create />}
         <DesktopHeader setCarSelectionPopup={setCarSelectionPopup} />
         <Breadcrumbs />
         <div className="container-wrapper"></div>

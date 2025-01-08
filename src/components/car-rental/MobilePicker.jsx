@@ -8,9 +8,7 @@ import dayjs from "dayjs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import CarBookingPopup from "./CarBookingPopup";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
-import CarBookingPopupOutsation from "./CarBookingPopupOutstation";
 
 const fetcLimitedTime = async () => {
     const res = await fetch("/api/cars/package/terms-condition/LimitedTime/get");
@@ -45,15 +43,15 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     });
     const [errors, setErrors] = useState({});
     const [isOpen, setIsOpen] = useState(false);
-    const [showPopup, setShowPopup] = useState(false);
-    const [showPopupOutstation, setShowPopupOutstation] = useState(false);
     const [localTime, setLocalTime] = useState();
     const [flexibleTime, setFlexibleTime] = useState();
-    const [activeBookingProcess, setActiveBookingProcess] = useState();
 
     const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
         setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
-        setPlanOutstation, userFormData } = useCarPopupContext();
+        setPlanOutstation, userFormData,
+        activeBookingProcess, setActiveBookingProcess, setShowPopup, setShowPopupOutstation,
+        setActiveInactivePopup
+    } = useCarPopupContext();
 
     useEffect(() => {
 
@@ -148,6 +146,25 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         { value: '100KM-10HRS', label: '100KM - 10HRS' },
     ];
 
+    const handleLocal = () => {
+        if (activeBookingProcess === false) {
+            setShowPopup(false);
+            setActiveInactivePopup(true);
+        } else {
+            setShowPopup(true);
+            setActiveInactivePopup(false);
+        }
+    };
+    const handleOutstation = () => {
+        if (activeBookingProcess === false) {
+            setShowPopup(false);
+            setActiveInactivePopup(true);
+        } else {
+            setShowPopupOutstation(true);
+            setActiveInactivePopup(false);
+        }
+    };
+
     return (
         <div className="p-5">
             <div className="text-xs w-28 h-5 bg-primary text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
@@ -240,17 +257,11 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
                         onClick={(e) => {
                             e.preventDefault();
-                            setShowPopup(true);
+                            handleLocal();
                         }}
                     >
                         Book Cars
                     </button>
-                    {showPopup && (
-                        <CarBookingPopup
-                            setShowPopup={setShowPopup}
-                            activeBookingProcess={activeBookingProcess}
-                        />
-                    )}
                 </div>
                 {/* OutStation */}
                 <div className={`${activeTab === "Tab2" ? "block" : "hidden"}`}>
@@ -336,17 +347,11 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                         className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-md"
                         onClick={(e) => {
                             e.preventDefault();
-                            setShowPopupOutstation(true);
+                            handleOutstation();
                         }}
                     >
                         Book Cars
                     </button>
-                    {showPopupOutstation && (
-                        <CarBookingPopupOutsation
-                            setShowPopupOutstation={setShowPopupOutstation}
-                            activeBookingProcess={activeBookingProcess}
-                        />
-                    )}
                 </div>
             </div>
         </div>

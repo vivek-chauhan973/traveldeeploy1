@@ -8,9 +8,7 @@ import dayjs from "dayjs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import CarBookingPopup from "./CarBookingPopup";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
-import CarBookingPopupOutsation from "./CarBookingPopupOutstation";
 
 const fetcLimitedTime = async () => {
   const res = await fetch("/api/cars/package/terms-condition/LimitedTime/get");
@@ -44,16 +42,16 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
   });
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [showPopupOutstation, setShowPopupOutstation] = useState(false);
   const [localTime, setLocalTime] = useState();
   const [flexibleTime, setFlexibleTime] = useState();
-  const [activeBookingProcess, setActiveBookingProcess] = useState();
   const [preventDate, setPreventDate] = useState();
 
   const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal, pickupDateOutstation, returnDateOutstation,
-    setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
-    setPlanOutstation, userFormData } = useCarPopupContext();
+    setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation,
+    setReturnTimeOutstation, setPlanOutstation, userFormData,
+    activeBookingProcess, setActiveBookingProcess, setShowPopup, setShowPopupOutstation,
+     setActiveInactivePopup
+  } = useCarPopupContext();
 
   useEffect(() => {
 
@@ -148,23 +146,43 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     { value: "100KM-10HRS", label: "100KM - 10HRS" },
   ];
 
-  const calculateDaysDifference = () => {
-    if (pickupDateOutstation && returnDateOutstation) {
-      const pickupDate = new Date(pickupDateOutstation);
-      const returnDate = new Date(returnDateOutstation);
+  // const calculateDaysDifference = () => {
+  //   if (pickupDateOutstation && returnDateOutstation) {
+  //     const pickupDate = new Date(pickupDateOutstation);
+  //     const returnDate = new Date(returnDateOutstation);
 
-      // Calculate the difference in milliseconds
-      const differenceInTime = returnDate - pickupDate;
+  //     // Calculate the difference in milliseconds
+  //     const differenceInTime = returnDate - pickupDate;
 
-      // Convert milliseconds to days
-      const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
+  //     // Convert milliseconds to days
+  //     const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
 
-      // Ensure no negative values
-      setDaysDifference(differenceInDays > 0 ? differenceInDays : 0);
+  //     // Ensure no negative values
+  //     setDaysDifference(differenceInDays > 0 ? differenceInDays : 0);
+  //   }
+  // };
+
+  console.log("userFormData picker", userFormData);
+
+  const handleLocal = () => {
+    if (activeBookingProcess === false) {
+      setShowPopup(false);
+      setActiveInactivePopup(true);
+    } else {
+      setShowPopup(true);
+      setActiveInactivePopup(false);
     }
   };
-  console.log("userFormData picker", userFormData);
- 
+  const handleOutstation = () => {
+    if (activeBookingProcess === false) {
+      setShowPopup(false);
+      setActiveInactivePopup(true);
+    } else {
+      setShowPopupOutstation(true);
+      setActiveInactivePopup(false);
+    }
+  };
+  
   return (
     <div>
       <div className="text-xs w-28 h-5 bg-primary text-white ml-10 uppercase px-3 rounded-t-lg flex justify-center items-center">
@@ -270,18 +288,12 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                   className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
                   onClick={(e) => {
                     e.preventDefault();
-                    setShowPopup(true);
+                    handleLocal();
                   }}
                 >
                   Book Cars
                 </button>
               </div>
-              {showPopup &&
-                <CarBookingPopup
-                  setShowPopup={setShowPopup}
-                  activeBookingProcess={activeBookingProcess}
-                />
-              }
             </div>
           </div>
         </div>
@@ -380,19 +392,13 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    setShowPopupOutstation(true);
+                    handleOutstation()
                   }}
                   className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 my-1 rounded-md"
                 >
                   Book Cars
                 </button>
               </div>
-              {showPopupOutstation &&
-                <CarBookingPopupOutsation
-                  setShowPopupOutstation={setShowPopupOutstation}
-                  activeBookingProcess={activeBookingProcess}
-                />
-              }
             </div>
           </div>
         </div>

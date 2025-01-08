@@ -1,8 +1,9 @@
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
+import Create from "../login-sinup/login/create";
 
 const fetchGroupDepartureTermOutstation = async () => {
     const response = await fetch("/api/cars/package/terms-condition/GroupDepartureTermOutstation/get");
@@ -13,7 +14,7 @@ const fetchGSTDate = async () => {
     return await response.json();
 }
 
-const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess }) => {
+const CarBookingPopupOutsation = () => {
 
     const [check, setCheck] = useState(false);
     const [carGroupDepartureTermOutstation, setCarGroupDepartureTermOutstation] = useState([]);
@@ -28,7 +29,8 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
     // console.log("gstDateWise ", gstDateWise);
 
     const { userFormData, pickupDateOutstation, returnDateOutstation, pickupTimeOutstation,
-        returnTimeOutstation, planOutstation, } = useCarPopupContext();
+        returnTimeOutstation, planOutstation, setLoginPopup,
+        setShowPopupOutstation, activeBookingProcess } = useCarPopupContext();
 
     // console.log("userFormData", userFormData);
 
@@ -106,25 +108,18 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
     }, [name, mobile, email, check]);
 
     const handleSubmit = () => {
-        if (isFormValid) {
-            const userData = {
-                name: name,
-                email: email,
-                mobile: mobile,
-            };
-            console.log("User Data filled:", userData);
-            setShowPopupOutstation(false);
-        } else {
-            alert("Please fill all fields and check the confirmation box.");
-        }
-        
-        if (activeBookingProcess === false) {
-            alert(`Something went wrong Try Next time`);
-            setShowPopupOutstation(false);
-        } else {
-            alert(`booking Successful`);
-            setShowPopupOutstation(false);
-        }
+        // if (isFormValid) {
+        //     const userData = {
+        //         name: name,
+        //         email: email,
+        //         mobile: mobile,
+        //     };
+        //     console.log("User Data filled:", userData);
+        //     setShowPopupOutstation(false);
+        // } else {
+        //     alert("Please fill all fields and check the confirmation box.");
+        // }
+        setLoginPopup(true);
     };
 
     const [isActive, setIsActive] = useState(true);
@@ -197,7 +192,7 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
 
     return (
         <>
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-[99999] pt-14">
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-[50]">
                 <div className="flex justify-center items-center max-h-auto">
                     <div className="max-w-lg md:max-w-2xl mx-auto"> {/*overflow-y-scroll */}
                         <div className="flex">
@@ -218,8 +213,8 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
                             <div className="md:w-2/3 w-full md:m-0 m-2 px-5 md:pt-3 pt-2 pb-3 bg-white rounded-r-lg md:rounded-l-none rounded-l-lg shadow-lg overflow-y-scroll md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px]">
                                 <div className="cursor-pointer flex justify-end">
                                     <FontAwesomeIcon
-                                        icon={faCircleXmark}
-                                        className="font1 cursor-pointer"
+                                        icon={faXmark}
+                                        className="cursor-pointer h-4 w-4 hover:bg-gray-100 rounded-full p-1"
                                         onClick={() => setShowPopupOutstation(false)}
                                     />
                                 </div>
@@ -460,12 +455,12 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
                                     }
                                 </div>
                                 {/* Terms and conditions with checkboxes */}
-                                <div className="w-full pr-2 border border-gray-300 md:h-52 h-40 max-h-64 mb-2 overflow-y-scroll py-3">
+                                <div className="w-full border border-gray-300 md:h-52 h-40 max-h-64 mb-4 overflow-y-scroll">
                                     {carGroupDepartureTermOutstation?.length > 0 &&
                                         carGroupDepartureTermOutstation.map((item, index) => (
                                             <div
                                                 key={index}
-                                                className="text-sm md:ml-4 md:leading-6 leading-5 md:mb-3 about-margin">
+                                                className="text-sm ml-4 mr-2 md:my-4 my-2 md:leading-6 leading-5 about-margin">
                                                 <span
                                                     dangerouslySetInnerHTML={{
                                                         __html: item?.description,
@@ -493,14 +488,11 @@ const CarBookingPopupOutsation = ({ setShowPopupOutstation, activeBookingProcess
                                 <button
                                     className={`${check ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
                                                 text-white w-full p-3 rounded-lg hover:opacity-90`}
-                                    // className={`${isFormValid ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
-                                    //             text-white w-full p-3 rounded-lg hover:opacity-90`}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         handleSubmit();
                                     }}
-                                    // disabled={!isFormValid} 
-                                    >
+                                >
                                     Book Now
                                 </button>
                             </div>

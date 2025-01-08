@@ -3,27 +3,33 @@ import React, { createContext, useState, useContext } from "react";
 const CarPopupContext = createContext(null);
 
 export const CarPopupProvider = ({ children }) => {
-    const [userFormData, setUserFormData] =  useState({});
-    // Local 
-    const [userDateLocal, setUserDateLocal] =  useState({});
-    const [userTimeLocal, setUserTimeLocal] =  useState({});
-    const [userPlanLocal, setUserPlanLocal] =  useState({});
-    // Outstation
-    const [pickupDateOutstation, setPickupDateOutstation] =  useState({});
-    const [pickupTimeOutstation, setPickupTimeOutstation] =  useState({});
-    const [returnDateOutstation, setReturnDateOutstation] =  useState({});
-    const [returnTimeOutstation, setReturnTimeOutstation] =  useState({});
-    // const [userPlanOutstation, setUserPlanOutstation] =  useState({});
-    const [planOutstation, setPlanOutstation] =  useState({});
+  const [userFormData, setUserFormData] = useState({});
+  // Local 
+  const [userDateLocal, setUserDateLocal] = useState({});
+  const [userTimeLocal, setUserTimeLocal] = useState({});
+  const [userPlanLocal, setUserPlanLocal] = useState({});
+  // Outstation
+  const [pickupDateOutstation, setPickupDateOutstation] = useState({});
+  const [pickupTimeOutstation, setPickupTimeOutstation] = useState({});
+  const [returnDateOutstation, setReturnDateOutstation] = useState({});
+  const [returnTimeOutstation, setReturnTimeOutstation] = useState({});
+  // const [userPlanOutstation, setUserPlanOutstation] =  useState({});
+  const [planOutstation, setPlanOutstation] = useState({});
 
   const getDetail = (item) => {
     // console.log("Item =====> ",item);
-    if(item){
+    if (item) {
       setUserFormData(item || {})
     }
   }
 
-  console.log("userFormData global",userFormData); 
+  const [loginPopup, setLoginPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupOutstation, setShowPopupOutstation] = useState(false);
+  const [activeBookingProcess, setActiveBookingProcess] = useState();
+  const [activeInactivePopup, setActiveInactivePopup] = useState(false);
+
+  console.log("userFormData global", userFormData);
   // console.log("userDate global",userDate);
   // console.log("userTime global",userTime);
   // console.log("userPlan global",userPlan);
@@ -32,13 +38,15 @@ export const CarPopupProvider = ({ children }) => {
   // console.log("returnDateOutstation global",returnDateOutstation);
   // console.log("returnTimeOutstation global",returnTimeOutstation);
   // console.log("PlanOutstation global",planOutstation);
+  // console.log("loginPopup global",loginPopup);
 
   const contextFun = {
-    userFormData , setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal, 
-    setUserDateLocal, setUserTimeLocal, setUserPlanLocal, 
-    pickupDateOutstation, returnDateOutstation, pickupTimeOutstation, returnTimeOutstation,  planOutstation,
-    setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation
-
+    userFormData, setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal,
+    setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
+    pickupDateOutstation, returnDateOutstation, pickupTimeOutstation, returnTimeOutstation, planOutstation,
+    setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation,
+    loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
+    activeBookingProcess, setActiveBookingProcess, activeInactivePopup, setActiveInactivePopup
   };
 
   return (

@@ -1,8 +1,9 @@
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
+import Create from "../login-sinup/login/create";
 
 const fetchGroupDepartureTerm = async () => {
     const response = await fetch("/api/cars/package/terms-condition/GroupDepartureTerm/get");
@@ -13,7 +14,7 @@ const fetchGSTDate = async () => {
     return await response.json();
 }
 
-const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
+const CarBookingPopup = () => {
 
     const [check, setCheck] = useState(false);
     const [carGroupDepartureTerm, setCarGroupDepartureTerm] = useState([]);
@@ -27,7 +28,9 @@ const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
     const [additionalmarkup, setAdditionalmarkup] = useState(0);
     // console.log("gstDateWise ", gstDateWise);
 
-    const { userFormData, userDateLocal, userTimeLocal, userPlanLocal, } = useCarPopupContext();
+    const { userFormData, userDateLocal, userTimeLocal, userPlanLocal,
+         setLoginPopup, setShowPopup, activeBookingProcess
+    } = useCarPopupContext();
     // console.log("userFormData", userFormData);
 
     // Convert the string to a Date object
@@ -100,25 +103,18 @@ const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
     }, [name, mobile, email, check]);
 
     const handleSubmit = () => {
-        if (isFormValid) {
-            const userData = {
-                name: name,
-                email: email,
-                mobile: mobile,
-            };
-            console.log("User Data filled:", userData);
-            setShowPopup(false);
-        } else {
-            alert("Please fill all fields and check the confirmation box.");
-        }
-
-        if (activeBookingProcess === false) {
-            // setShowPopup(false);
-            alert(`Something went wrong Try Next time`)
-        } else {
-            // setShowPopup(true);
-            alert(`booking Successful`)
-        }
+        // if (isFormValid) {
+        //     const userData = {
+        //         name: name,
+        //         email: email,
+        //         mobile: mobile,
+        //     };
+        //     console.log("User Data filled:", userData);
+        //     setShowPopup(false);
+        // } else {
+        //     alert("Please fill all fields and check the confirmation box.");
+        // }
+        setLoginPopup(true);
     };
 
     const [isActive, setIsActive] = useState(true);
@@ -178,7 +174,7 @@ const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
 
     return (
         <>
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-[99999] pt-14">
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-[50]">
                 <div className="flex justify-center items-center max-h-auto">
                     <div className="max-w-lg md:max-w-2xl mx-auto">
                         <div className="flex">
@@ -199,8 +195,8 @@ const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
                             <div className="md:w-2/3 w-full md:m-0 m-2 p-5 bg-white rounded-r-lg md:rounded-l-none rounded-l-lg shadow-lg overflow-y-scroll md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px]">
                                 <div className="cursor-pointer flex justify-end">
                                     <FontAwesomeIcon
-                                        icon={faCircleXmark}
-                                        className="font1 cursor-pointer"
+                                        icon={faXmark}
+                                        className="cursor-pointer h-4 w-4 hover:bg-gray-100 rounded-full p-1"
                                         onClick={() => setShowPopup(false)}
                                     />
                                 </div>
@@ -435,14 +431,11 @@ const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
                                 <button
                                     className={`${check ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
                                                 text-white w-full p-3 rounded-lg hover:opacity-90`}
-                                    // className={`${isFormValid ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
-                                    //             text-white w-full p-3 rounded-lg hover:opacity-90`}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         handleSubmit();
                                     }}
-                                // disabled={!isFormValid}
-                                disabled={!check}
+                                    disabled={!check}
                                 >
                                     Book Now
                                 </button>
@@ -451,6 +444,7 @@ const CarBookingPopup = ({ setShowPopup, activeBookingProcess }) => {
                     </div>
                 </div>
             </div>
+
         </>
     );
 };
