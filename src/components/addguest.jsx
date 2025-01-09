@@ -1,8 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
-
 import Image from "next/image";
 import { useAppContext } from "./admin/context/Package/AddGuest";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChild,

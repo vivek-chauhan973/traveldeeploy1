@@ -18,11 +18,6 @@ const CarBookingPopupOutsation = () => {
 
     const [check, setCheck] = useState(false);
     const [carGroupDepartureTermOutstation, setCarGroupDepartureTermOutstation] = useState([]);
-    const [name, setName] = useState("");
-    const [mobile, setMobile] = useState("");
-    const [email, setEmail] = useState("");
-    const [mobileError, setMobileError] = useState("");
-    const [isFormValid, setIsFormValid] = useState(false);
     const [gstDateWise, setGstDateWise] = useState()
     const [selectedGST, setSelectedGST] = useState(null);
     const [additionalmarkup, setAdditionalmarkup] = useState(0);
@@ -88,37 +83,7 @@ const CarBookingPopupOutsation = () => {
         })
     }, []);
 
-    const validateMobile = (mobileNumber) => {
-        const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
-        if (!isValid) {
-            setMobileError("Please enter a valid 10-digit mobile number.");
-        } else {
-            setMobileError("");
-        }
-        return isValid;
-    };
-
-    useEffect(() => {
-        // Check if all the required fields are filled and checkbox is checked
-        if (name.trim() !== "" && mobile.trim() !== "" && email.trim() !== "" && check) {
-            setIsFormValid(true);
-        } else {
-            setIsFormValid(false);
-        }
-    }, [name, mobile, email, check]);
-
     const handleSubmit = () => {
-        // if (isFormValid) {
-        //     const userData = {
-        //         name: name,
-        //         email: email,
-        //         mobile: mobile,
-        //     };
-        //     console.log("User Data filled:", userData);
-        //     setShowPopupOutstation(false);
-        // } else {
-        //     alert("Please fill all fields and check the confirmation box.");
-        // }
         setLoginPopup(true);
     };
 
@@ -195,22 +160,47 @@ const CarBookingPopupOutsation = () => {
             <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-[50]">
                 <div className="flex justify-center items-center max-h-auto">
                     <div className="max-w-lg md:max-w-2xl mx-auto"> {/*overflow-y-scroll */}
-                        <div className="flex">
-                            <div className="bg-navyblack rounded-l-lg shadow-lg text-white md:w-1/3 hidden md:block">
-                                <div className="mb-4 w-full h-2/5"></div>
-                                <div className="p-6">
-                                    <div className="flex justify-center items-center">
-                                        <div className="mr-2 text-4xl">4.6</div>
-                                        <span className="text-yellow-400">★</span>
-                                    </div>
-                                    <p className="text-sm mb-2 text-center">3800+ reviews</p>
-                                    <p className="text-sm text-center mt-20">
-                                        “Our dream trip to Europe with Pickyourtrail was delightful & seamless”
-                                    </p>
-                                    <p className="font-semibold mt-2 text-center">Rakesh Kumar</p>
+                        <div className="grid md:grid-cols-3 grid-cols-1">
+                            <div className="bg-primary rounded-l-lg shadow-lg text-white md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px] hidden md:block">
+                                <div className="w-full h-[30%]"></div>
+                                <div className="flex gap-5 justify-center">
+                                    <img
+                                        className="object-cover rounded-full w-20 h-20 "
+                                        src="/assets/Affiliation 1.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        className="object-cover rounded-full w-20 h-20 "
+                                        src="/assets/Affiliation 2.png"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="flex gap-5 justify-center">
+                                    <img
+                                        className="object-cover rounded-full w-20 h-20 "
+                                        src="/assets/Affiliation 3.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        className="object-cover rounded-full w-20 h-20 "
+                                        src="/assets/Affiliation 4.png"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="flex gap-5 justify-center">
+                                    <img
+                                        className="object-cover rounded-full w-20 h-20 "
+                                        src="/assets/Affiliation 5.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        className="object-cover rounded-full w-20 h-20 "
+                                        src="/assets/Affiliation 6.png"
+                                        alt=""
+                                    />
                                 </div>
                             </div>
-                            <div className="md:w-2/3 w-full md:m-0 m-2 px-5 md:pt-3 pt-2 pb-3 bg-white rounded-r-lg md:rounded-l-none rounded-l-lg shadow-lg overflow-y-scroll md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px]">
+                            <div className="col-span-2 w-full md:m-0 m-2 px-5 md:pt-3 pt-2 pb-3 bg-white rounded-r-lg md:rounded-l-none rounded-l-lg shadow-lg overflow-y-scroll md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px]">
                                 <div className="cursor-pointer flex justify-end">
                                     <FontAwesomeIcon
                                         icon={faXmark}
@@ -218,48 +208,6 @@ const CarBookingPopupOutsation = () => {
                                         onClick={() => setShowPopupOutstation(false)}
                                     />
                                 </div>
-                                <form className="">
-                                    <div className="md:space-y-4 md:mb-2 hidden">
-                                        <input
-                                            type="text"
-                                            placeholder="Name"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                            className="w-full md:p-2 p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            required
-                                        />
-                                        <div className="flex space-x-4">
-                                            <input
-                                                disabled
-                                                type="text"
-                                                placeholder="+91"
-                                                className="w-2/12 md:p-2 p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            />
-                                            <input
-                                                type="text"
-                                                value={mobile}
-                                                onChange={(e) => {
-                                                    setMobile(e.target.value)
-                                                    validateMobile(e.target.value);
-                                                }}
-                                                placeholder="Mobile Number"
-                                                className="w-10/12 md:p-2 p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                                required
-                                            />
-                                        </div>
-                                        {mobileError && (
-                                            <p className="text-red-500 text-xxs text-center">{mobileError}</p>
-                                        )}
-                                        <input
-                                            type="email"
-                                            placeholder="Email ID"
-                                            value={email} // Bind state to input
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            className="w-full md:p-2 p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            required
-                                        />
-                                    </div>
-                                </form>
                                 <div className="mb-2">
                                     <h5 className="md:text-lg text-md font-semibold text-graytext border-b pb-1">
                                         Booking Summary
