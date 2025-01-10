@@ -60,9 +60,11 @@ import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 import Faq1 from "@/components/Faq/Faq1";
 import PackageBreadcrums from "@/components/PackageBreadcrums";
+import Create from "@/components/login-sinup/login/create";
 const getAllPackags = async () => {
   return await (await fetch("/api/package/get-packages")).json();
 };
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 
 export default function Package1() {
   const {
@@ -84,6 +86,7 @@ export default function Package1() {
     showPopup,
     submitButtonOfPricingCalculation,
   } = useAppContext();
+  const { loginPopup, setLoginPopup } = useCarPopupContext();
 
   const [images, setImages] = useState(null);
   const [allPackages, setAllPackages] = useState([]);
@@ -101,6 +104,7 @@ export default function Package1() {
   const handleSubmit = () => {
     if (fixedDepartureButtonEnaibleAndDisable) {
       setFixedDeparturePopupOpen(true);
+      setLoginPopup(true);
     }
     if (fixedDepDate && fixedDepCity) {
       setFixedDepCity1(fixedDepCity);
@@ -187,6 +191,10 @@ export default function Package1() {
           setShowPopup1={setShowPopup1}
         />
       )}
+      {
+        loginPopup && (
+          <Create/>
+        )}
       <div className="w-full ">
         <DesktopHeader />
       </div>
@@ -547,7 +555,7 @@ export default function Package1() {
         </div>
       ) : null}
 
-      {/* bottom link */}
+      {/* bottom pricing */}
       {/* <BottomLink locationId={addPackage?.state} addPackage={addPackage} /> */}
       <div className=" flex xl:hidden z-30  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">

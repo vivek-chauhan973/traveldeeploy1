@@ -52,7 +52,7 @@ const ItineraryFaq = ({ faq }) => {
                 </div>
               </div>
               <div className='flex justify-start items-center w-[90%] h-full'>
-                <p className="text-para capitalize font-semibold text-graytext">{item.title}</p>
+                <p className="md:text-para text-xs capitalize font-semibold text-graytext line-clamp-2">{item.title}</p>
               </div>
               <div className='flex justify-center items-center md:w-[10%] w-[5%] h-full pr-1'>
                 {openIndices.includes(i) ? (

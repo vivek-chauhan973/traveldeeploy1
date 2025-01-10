@@ -195,7 +195,6 @@ const ItineraryPricingCard = () => {
             >
               {closeBtn ? "Book now" : "Add Guest & room"}
             </button>
-
           </div>
         </div>
       </div>

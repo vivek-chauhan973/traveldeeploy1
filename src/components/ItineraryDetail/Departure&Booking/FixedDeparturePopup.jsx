@@ -2,6 +2,7 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 
 const fetchPackgesTerm = async () => {
   const response = await fetch("/api/package/terms-condition/packageTerm/get");
@@ -33,6 +34,8 @@ const FixedDeparturePopup = () => {
     groupDeparturePerson
   } = useAppContext();
 
+  const { loginPopup, setLoginPopup } = useCarPopupContext();
+
   const [check, setCheck] = useState(false);
   const [packageTerm, setPackageTerm] = useState([]);
   const [groupDepartureTerm, setGroupDepartureTerm] = useState([]);
@@ -60,6 +63,7 @@ const FixedDeparturePopup = () => {
   const handleSubmit = () => {
     handleCleckOnDepartureFixed();
     setShowPopup(false);
+    setLoginPopup(true);
   };
   console.log("departure section data is here ---> ", departureSectionData)
 
