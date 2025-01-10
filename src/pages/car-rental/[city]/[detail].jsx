@@ -112,9 +112,9 @@ export default function CarDetail() {
             "_blank"
         );
     }
-    console.log("CarDepartureDetails----==>  ", carDepartureDetails);
+    // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
 
-    console.log("carPackage----==>  ", carPackage);
+    // console.log("carPackage----==>  ", carPackage);
     // console.log("carSidePackages----==>  ", carPrice1);
 
     return (
@@ -201,6 +201,7 @@ export default function CarDetail() {
                                     setCarPrice1={setCarPrice1}
                                     setShowPopup={setShowPopup}
                                     showPopup={showPopup}
+                                    carDepartureDetails={carDepartureDetails}
                                 /> 
                             </div>
                             <div className="xl:hidden">
@@ -210,6 +211,7 @@ export default function CarDetail() {
                                     setCarPrice1={setCarPrice1}
                                     setShowPopup={setShowPopup}
                                     showPopup={showPopup}
+                                    carDepartureDetails={carDepartureDetails}
                                 /> 
                             </div>
                             {/* Booking Summary */}

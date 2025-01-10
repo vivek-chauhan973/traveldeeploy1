@@ -197,7 +197,6 @@ const ItinaryFixedDepartureCard = () => {
                 </p>
               )}
             </div>
-
             {WeightPropertyPresentedOrNot && (
               <div>
                 <div className="flex flex-col mt-2 ">
@@ -231,17 +230,15 @@ const ItinaryFixedDepartureCard = () => {
               </div>
             )}
           </div>
-
           {contactAdmin && <ExtraWeightPopup />}
-
-          <div className="grid grid-cols-2 gap-1">
+          <div className="grid grid-cols-2 gap-1 my-3">
             <p className="text-sm font-semibold">Price BreakUp</p>
             <p className="text-md font-medium text-graytext">
               {guestPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
             </p>
           </div>
           <hr className="border-dashed my-2 " />
-          <div className="text-para  grid-cols-2 my-3 grid pr-1">
+          <div className="text-para  md:grid-cols-2 md:my-5 my-3 grid pr-1">
             <div></div>
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
@@ -250,7 +247,7 @@ const ItinaryFixedDepartureCard = () => {
               </p>
             </div>
           </div>
-          <div className="text-para grid-cols-2 -mt-2 grid pr-1">
+          <div className="text-para md:grid-cols-2 -mt-1 grid pr-1">
             <div></div>
             <div className="grid grid-cols-2">
               <p>
@@ -264,64 +261,8 @@ const ItinaryFixedDepartureCard = () => {
               </p>
             </div>
           </div>
-          <hr className="border-dashed my-2" />
-          {/* inject your code for mobile device */}
-          {/* <div className=' xl:hidden '>
-            <p>Table Data is here</p>
-            <div className="overflow-x-scroll">
-              <table className="w-full mt-3 border-collapse border border-gray-300 text-center text-para">
-                <thead>
-                  <tr className="border-b bg-black text-white">
-                    {columns.map((col, index) => (
-                      <th key={index} className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">
-                        {col}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="bg-gray-100">
-                  {submittedData.map((row, rowIndex) => (
-                    <tr key={rowIndex} >
-                      {columns.map((col, colIndex) => (
-                        <td key={colIndex} className="   border-t border-l  border-r px-2 py-2   capitalize overflow-hidden border-gray-300  text-wrap">
-                          {row[col]}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div> */}
-          {/* <hr /> */}
-          {/* <div className="xl:hidden my-5">
-            <div className="ml-2">
-              <p className="font-semibold text-lg mb-2 mt-1 text-graytext">
-                About us
-              </p>
-
-              <p
-                className="text-para px-3"
-                dangerouslySetInnerHTML={{
-                  __html: addPackage?.about,
-                }}
-              ></p>
-            </div>
-
-            <div>
-              <h5 className="text-lg ml-2 font-semibold my-2 text-graytext">
-                Highlights
-              </h5>
-              <div>
-                {addPackage?.highlights?.map((highlight) => (
-                  <ol key={highlight._id} className="list-disc   ">
-                    <li className="px-3 text-para">{highlight.text}</li>
-                  </ol>
-                ))}
-              </div>
-            </div>
-          </div> */}
-          <div className="text-para  grid-cols-2 grid pr-1">
+          <hr className="border-dashed md:my-5 my-3" />
+          <div className="text-para md:grid-cols-2 grid pr-1">
             <div></div>
             <div className="grid grid-cols-2 gap-1">
               <p className="font-semibold">Grand Total</p>
@@ -330,7 +271,7 @@ const ItinaryFixedDepartureCard = () => {
               </p>
             </div>
           </div>
-          <div className=" justify-center gap-10 my-3 flex">
+          {/* <div className=" justify-center gap-10 my-3 flex">
             <label className=" inline-flex items-center">
               <input
                 type="radio"
@@ -350,7 +291,7 @@ const ItinaryFixedDepartureCard = () => {
                 Pay Full Online
               </p>
             </label>
-          </div>
+          </div> */}
           <div className="xl:block hidden">
             <div className=" grid grid-cols-2 gap-3 my-3">
               <CustomiseTour>

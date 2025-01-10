@@ -38,7 +38,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
         <>
             <div className="flex flex-col gap-4 border rounded-md md:p-5 p-3 relative bg-white h-[490px] overflow-scroll">
                 <div className=" overflow-y-auto">
-                    <div className="">
+                    <div className="xl:block hidden">
                         <div className="flex justify-between mb-2 pr-3">
                             <h5 className="text-md font-semibold text-graytext">
                                 Booking Summary
@@ -109,7 +109,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                         </p>
                     </div>
                     <hr className="border-dashed my-2 " />
-                    <div className="text-para  grid-cols-2 my-3 grid pr-1">
+                    <div className="text-para  md:grid-cols-2 md:my-5 my-3 grid pr-1">
                         <div></div>
                         <div className="grid grid-cols-2">
                             <p>Total Cost</p>
@@ -118,7 +118,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                             </p>
                         </div>
                     </div>
-                    <div className="text-para grid-cols-2 -mt-2 grid pr-1">
+                    <div className="text-para md:grid-cols-2 md:-mt-2 -mt-1 grid pr-1">
                         <div></div>
                         <div className="grid grid-cols-2">
                             <p>
@@ -132,10 +132,10 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                             </p>
                         </div>
                     </div>
-                    <hr className="border-dashed my-2" />
-                    <div className="text-para  grid-cols-2 grid pr-1">
+                    <hr className="border-dashed md:my-5 my-3" />
+                    <div className="text-para grid md:grid-cols-2 pr-1">
                         <div></div>
-                        <div className="grid grid-cols-2 gap-1">
+                        <div className="grid md:grid-cols-2 gap-1">
                             <p className="font-semibold">Grand Total</p>
                             <p className="font-semibold text-graytext">
                                 {grandTotal ?
@@ -144,7 +144,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                             </p>
                         </div>
                     </div>
-                    <div className=" justify-center gap-10 my-3 flex">
+                    {/* <div className=" justify-center gap-10 my-3 flex">
                         <label className=" inline-flex items-center">
                             <input
                                 type="radio"
@@ -164,9 +164,9 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                                 Pay Full Online
                             </p>
                         </label>
-                    </div>
+                    </div> */}
                     <div className="xl:block hidden">
-                        <div className=" grid grid-cols-2 gap-3 my-3">
+                        <div className=" grid grid-cols-2 gap-3 my-5">
                             <CustomiseTour>
                                 <button className=" border-primary w-full border text-primary flex-flow  flex justify-center px-5 py-2 text-para rounded-md">
                                     Customise
