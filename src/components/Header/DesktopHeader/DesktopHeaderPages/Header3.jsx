@@ -7,11 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser, faArrowAltCircleRight, faHome, faAddressBook, faHandshakeSimple } from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import SearchPackage from "./SearchPackage";
 
 const Header3 = () => {
   const [logo, setLogo] = useState(null);
   const { setLoginPopup,searchQuery,setSearchQuery } = useCarPopupContext();
-  
+
+  const [searchPackagePopup, setSearchPackagePopup ] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,6 +49,7 @@ const Header3 = () => {
               {/* images... */}
               <div>
                 <Image
+                className="w-48 h-12 object-cover"
                   src={imageSrc}
                   height={200}
                   width={200}
@@ -57,8 +61,8 @@ const Header3 = () => {
                 <Header2 />
               </div>
             </div>
-            <div className="justify-between hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-3/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
-              <div className="flex gap-1 ">
+            <div className="justify-between hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
+              <div className="flex gap-1 " onClick={()=>setSearchPackagePopup(true)}>
                 <span className="mx-2">
                   <FontAwesomeIcon icon={faSearch} className='text-sm' />
                 </span>
@@ -73,6 +77,9 @@ const Header3 = () => {
                 />
               </div>
             </div>
+            {searchPackagePopup && (
+              <SearchPackage setSearchPackagePopup={setSearchPackagePopup}/>
+            )}
             <div className="hidden md:flex gap-3">
               <button className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg"
                 onClick={()=>setLoginPopup(true)}    

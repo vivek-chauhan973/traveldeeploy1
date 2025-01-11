@@ -27,13 +27,15 @@ const ActiveInactive = () => {
                     />
                 </div>
                 <div className="px-7">
-                    <div className="flex flex-col justify-center items-center my-5">
-                        <h2 className="text-2xl font-bold text-primary">Apologies for the inconvenience,</h2>
-                        <h2 className="text-2xl font-bold text-primary">Thank you for your patience.</h2>
+                    <div className="flex flex-col justify-center items-center  mt-3">
+                        <h2 className="md:text-2xl text-lg md:font-bold font-semibold text-primary">Apologies for the inconvenience,</h2>
+                        <h2 className="md:text-2xl text-lg md:font-bold font-semibold text-primary">Thank you for your patience.</h2>
                     </div>
-                    <div className="flex flex-col justify-center items-center my-5">
-                        <p className="text-para">We are working to resolve the issue as soon as possible,</p>
-                        <p className="text-para">Please try again later.</p>
+                    <div className="flex flex-col justify-center items-center md:my-5 my-3">
+                        <p className="md:text-para text-sm text-center md:mx-3 mx-7">
+                            We are working to resolve the issue as soon as possible,
+                        </p>
+                        <p className="md:text-para text-sm text-center">Please try again later.</p>
                     </div>
                     <div className="flex flex-col justify-center items-center my-5">
                         <Link href="/car-rental">
