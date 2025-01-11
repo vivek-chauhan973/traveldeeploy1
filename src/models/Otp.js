@@ -2,11 +2,9 @@ import mongoose  from "mongoose";
 const otpSchema=new mongoose.Schema({
     mobile:{
         type:String,
-        required:true
     },
     otp:{
         type:Number,
-        required:true
     },
     isVerified:{
         type:Boolean,
@@ -15,6 +13,9 @@ const otpSchema=new mongoose.Schema({
     isGoogleVerified:{
         type:Boolean,
         default:false
+    },
+    email:{
+        type:Number
     }
 })
 const OTPModel=mongoose.models.OTPModel||mongoose.model("OTPModel",otpSchema);
