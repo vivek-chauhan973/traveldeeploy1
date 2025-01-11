@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import FlyoutLink from "./FlyoutLink";
 import { header } from "./Data";
 import Header2 from "../../MobileHeader";
@@ -10,7 +10,7 @@ import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculati
 
 const Header3 = () => {
   const [logo, setLogo] = useState(null);
-  const { setLoginPopup } = useCarPopupContext();
+  const { setLoginPopup,searchQuery,setSearchQuery } = useCarPopupContext();
   
   useEffect(() => {
     const fetchData = async () => {
@@ -28,18 +28,14 @@ const Header3 = () => {
     };
     fetchData();
   }, []);
-
-  const [imageSrc, setImageSrc] = useState('/logo.png');
-
-  useEffect(() => {
+  const imageSrc = useMemo(() => {
     if (logo?.data?.[0]?.path) {
-      setImageSrc(logo.data[0].path);
-    } else {
-      setImageSrc('/logo.png');
+      return logo.data[0].path;
     }
-  }, [logo]);
+    return '/logo.png';
+}, [logo]);
   // console.log("logo is here :: ",imageSrc)
-
+// console.log("search query is ",searchQuery)
   return (
     <div className=" top-0 sticky z-[999]">
       {/* Navbar*/}
@@ -54,7 +50,7 @@ const Header3 = () => {
                   height={200}
                   width={200}
                   alt="Logo"
-                  onError={() => setImageSrc('/logo.png')} // Ensure fallback if image fails to load
+                  // onError={() => setImageSrc('/logo.png')} // Ensure fallback if image fails to load
                 />
               </div>
               <div className=" relative flex gap-2 md:hidden xl:hidden">
@@ -71,6 +67,8 @@ const Header3 = () => {
                   placeholder="Search Your Next Destination"
                   type="text"
                   name=""
+                  value={searchQuery}
+                  onChange={(e)=>setSearchQuery(e.target.value)}
                   id=""
                 />
               </div>

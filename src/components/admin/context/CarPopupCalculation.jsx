@@ -1,9 +1,18 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const CarPopupContext = createContext(null);
-
+const fetchSearchedData=async ()=>{
+  const data=await fetch(`/api/search-api`,
+    {
+      method:"GET"
+    }
+  );
+  return await data.json()
+}
 export const CarPopupProvider = ({ children }) => {
   const [userFormData, setUserFormData] = useState({});
+  const [pacakgeData,setPackageData]=useState([]);
+  const [searchedData,setSearchedData]=useState([]);
   // Local 
   const [userDateLocal, setUserDateLocal] = useState({});
   const [userTimeLocal, setUserTimeLocal] = useState({});
@@ -40,13 +49,25 @@ export const CarPopupProvider = ({ children }) => {
   // console.log("PlanOutstation global",planOutstation);
   // console.log("loginPopup global",loginPopup);
 
+  const [searchQuery,setSearchQuery]=useState("");
+  useEffect(()=>{
+    fetchSearchedData().then(res=>{
+      setPackageData(res?.data||[])
+    })
+  },[])
+  useEffect(()=>{
+    const data = pacakgeData?.filter(item => 
+      item?.name?.includes(searchQuery)
+    );
+    setSearchedData(data || []);
+  },[searchQuery,pacakgeData])
   const contextFun = {
     userFormData, setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal,
     setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
     pickupDateOutstation, returnDateOutstation, pickupTimeOutstation, returnTimeOutstation, planOutstation,
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation,
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
-    activeBookingProcess, setActiveBookingProcess, activeInactivePopup, setActiveInactivePopup
+    activeBookingProcess, setActiveBookingProcess, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery
   };
 
   return (
