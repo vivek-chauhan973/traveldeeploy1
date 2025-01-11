@@ -67,7 +67,7 @@ export const CarPopupProvider = ({ children }) => {
     pickupDateOutstation, returnDateOutstation, pickupTimeOutstation, returnTimeOutstation, planOutstation,
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation,
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
-    activeBookingProcess, setActiveBookingProcess, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery
+    activeBookingProcess, setActiveBookingProcess,searchedData, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery
   };
 
   return (
