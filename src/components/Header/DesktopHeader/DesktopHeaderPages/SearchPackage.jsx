@@ -3,112 +3,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
-
+import Link from "next/link";
 const SearchPackage = ({ setSearchPackagePopup }) => {
-    const {searchedData} = useCarPopupContext();
-    console.log("searchedData",searchedData);
-    
+    const { searchedData } = useCarPopupContext();
+    console.log("searchedData", searchedData);
+
     useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
             document.body.style.overflow = "auto";
         };
     }, []);
-    const pacs = [
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-        {
-            img: "https://www.k12digest.com/wp-content/uploads/2024/03/1-3-550x330.jpg",
-            title: "Chardham Yatra From Haridwar",
-            rating: "4"
-        },
-    ]
+
     return (
         <div className="md:block hidden">
-            <div className="fixed  top-28 left-0 flex items-center  justify-center z-50 -mt-2.5">
-                <div className="bg-white rounded-b-xl shadow-xl z-50 w-[100vw] h-[65vh] overflow-y-scroll">
+            <div className="fixed top-28 left-0 flex items-center justify-center z-50 -mt-4">
+                <div className="bg-white rounded-b-xl shadow-xl z-50 w-[100vw] xl:h-[60vh] md:h-[65vh] lg:h-[50vh] overflow-y-scroll">
                     <div className="pr-5 pt-1 flex justify-between items-center mt-1">
                         <h2 className="text-md font-semibold lg:ml-16 ml-10 my-1">Match tour Packages</h2>
                         <FontAwesomeIcon
                             icon={faXmark}
                             className="h-5 w-5 hover:bg-gray-100 rounded-full cursor-pointer p-1"
-                            onClick={() =>
-                                setSearchPackagePopup(false)
-                            }
+                            onClick={() => setSearchPackagePopup(false)}
                         />
                     </div>
                     <div className="w-full h-auto bg-white flex justify-start gap-10 flex-wrap lg:px-16 px-10 py-3 ">
                         {searchedData && (
                             searchedData?.map((pac, i) => {
                                 return (
-                                    <div className="w-48 h-56 ">
-                                        <div className="w-full h-[60%]">
+                                    <div className="w-48 h-52">
+                                        <div className="w-full h-[70%]">
                                             <Image
                                                 className="w-full h-full object-cover rounded-md"
-                                                // src={pac.img}
                                                 src={pac?.uploads?.[0]}
                                                 alt={pac.title}
                                                 width={200}
@@ -143,7 +69,11 @@ const SearchPackage = ({ setSearchPackagePopup }) => {
                                                     {pac?.packageRating}
                                                 </p>
                                             </div>
-                                            <h2 className="text-para font-medium h-[50%] w-full">{pac.name}</h2>
+                                            <h2 className="text-para font-medium h-[50%] w-full">
+                                                <Link href={"/package/"+ pac?.url + "-tour-package"}>
+                                                    {pac.name}
+                                                </Link>
+                                            </h2>
                                         </div>
                                     </div>
                                 )
