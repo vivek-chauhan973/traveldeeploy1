@@ -20,7 +20,7 @@ const CarTestingCard = ({ addPackage }) => {
       });
     }
   }, [addPackage]);
-  console.log("Aparana Raj",suggestedPackage);
+  // console.log("Aparana Raj",suggestedPackage);
   const scrollNext = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({ left: carouselRef.current.clientWidth, behavior: 'smooth' });

@@ -51,6 +51,7 @@ export default function CarDetail() {
     const [carPrice1, setCarPrice1] = useState(0);
     // For departure city pop up
     const [showPopup, setShowPopup] = useState(false);
+    const [showPopupBooking, setShowPopupBooking] = useState(false);
 
     // console.log("package1", package1);
     const [carAllPackages, setCarAllPackages] = useState([])
@@ -117,6 +118,11 @@ export default function CarDetail() {
     // console.log("carPackage----==>  ", carPackage);
     // console.log("carSidePackages----==>  ", carPrice1);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setShowPopupBooking(true);
+    }
+
     return (
         <AppProvider>
             {/* CarDetailSkeleton  */}
@@ -125,61 +131,12 @@ export default function CarDetail() {
                 <DesktopHeader />
                 <Breadcrumbs />
                 {/* Car-rental Banner section */}
-                <div>
-                    <CarDetailHeroSection carPackage={carPackage} carPrice1={carPrice1} />
-                    {/* <div className="container-wrapper xl:block hidden">
-                        <div className="flex justify-between">
-                            <div>
-                                <h2 className=" text-lg md:text-lg font-semibold capitalize my-2">
-                                    Vehicle Type : {carPackage?.selectedVicle?.vehicleType}
-                                </h2>
-                                {carPackage?.badges?.length > 0 && carPackage?.badges?.map((item, i) => {
-                                    return (
-                                        <button key={i}
-                                            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white mr-2">
-                                            {item}
-                                        </button>
-                                    )
-                                })}
-                                <p className="md:text-md text-[16px] my-2 capitalize">Ex City : {carPackage?.startcity}</p>
-                            </div>
-                            <div className="flex gap-5">
-                                <div className="text-right flex flex-col items-end justify-center ">
-                                    <p className="text-base leading-5 text-green-600 font-semibold uppercase">
-                                        best deal price
-                                    </p>
-
-                                    <p className="text-sm leading-5">
-                                        Without GST{" "}
-                                        <span className="text-lg text-graytext font-medium">
-                                            {(carPrice1 || carPackage?.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                        </span>
-                                    </p>
-                                    <div className="flex gap-1 items-end">
-                                        {carPackage?.highSave !== 0 &&
-                                            <button className="capitalize text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
-                                                {carPackage?.highSave && carPackage.highSave !== 0
-                                                    ? `Save ${carPackage.highSave}%`
-                                                    : null}
-                                            </button>
-                                        }
-                                    </div>
-                                </div>
-                                <div className="flex flex-col align-middle my-auto pl-2 gap-2">
-                                    <button
-                                        className="bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer px-5 py-2 rounded-md text-white text-center text-para">
-                                        Book Now
-                                    </button>
-                                    <CustomiseTour>
-                                    <button className=" border-primary w-full border text-primary px-5 py-2 text-para rounded-md">
-                                        Customise
-                                    </button>
-                                    </CustomiseTour>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
-                </div>
+                <CarDetailHeroSection
+                    carPackage={carPackage}
+                    carDepartureDetails={carDepartureDetails}
+                    carPrice1={carPrice1}
+                    setShowPopupBooking={setShowPopupBooking}
+                />
                 {/* Departure and Booking summary starts */}
                 <div className="bg-gray-100  mt-[20px] pb-7">
                     <div className="container-wrapper mb-4">
@@ -202,7 +159,9 @@ export default function CarDetail() {
                                     setShowPopup={setShowPopup}
                                     showPopup={showPopup}
                                     carDepartureDetails={carDepartureDetails}
-                                /> 
+                                    setShowPopupBooking={setShowPopupBooking}
+                                    showPopupBooking={showPopupBooking}
+                                />
                             </div>
                             <div className="xl:hidden">
                                 <CarDepartureSection
@@ -212,12 +171,16 @@ export default function CarDetail() {
                                     setShowPopup={setShowPopup}
                                     showPopup={showPopup}
                                     carDepartureDetails={carDepartureDetails}
-                                /> 
+                                    setShowPopupBooking={setShowPopupBooking}
+                                    showPopupBooking={showPopupBooking}
+                                />
                             </div>
                             {/* Booking Summary */}
                             <div>
                                 <div className="hidden xl:block">
                                     <CardDetailPricingCard
+                                        showPopupBooking={showPopupBooking}
+                                        setShowPopupBooking={setShowPopupBooking}
                                         carPackage={carPackage}
                                         carDepartureDetails={carDepartureDetails}
                                     />
@@ -506,7 +469,7 @@ export default function CarDetail() {
 
                 {/* Similar Car package */}
                 <div className=" mt-12 pb-6">
-                    <CarTestingCard addPackage={carPackage}/>
+                    <CarTestingCard addPackage={carPackage} />
                 </div>
 
                 {/* FAQ section --- when data is not available then all content will hide */}
@@ -535,45 +498,51 @@ export default function CarDetail() {
                         <div className="hidden sm:flex items-center">
                             <p className=" text-[20px] font-semibold">{carPackage?.name}</p>
                             <div>
-                            <span></span>
+                                <span></span>
                             </div>
                         </div>
                         <div className="flex gap-1 md:justify-end justify-around  items-center">
                             <div className="text-right flex flex-col items-end justify-center ">
-                            <p className="text-base leading-5 text-green-600 font-semibold uppercase">
-                                best deal price
-                            </p>
+                                <p className="text-base leading-5 text-green-600 font-semibold uppercase">
+                                    best deal price
+                                </p>
                                 <button className="uppercase text-[10px] text-white bg-navyblack px-1.5 py-1 rounded-sm text-center">
-                                Save {carPackage?.highSave}%
+                                    Save {carPackage?.highSave}%
                                 </button>
-                            <p className="text-sm leading-5">
-                                Starts From{" "}
-                                <span className="text-lg text-graytext font-medium">
-                                    {Math.floor(
-                                    carPrice1 || carPackage?.price
-                                    ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                </span>
-                            </p>
-                            {/* <p className="text-xxs leading-5">per person on twin sharing</p> */}
+                                <p className="text-sm leading-5">
+                                    Starts From{" "}
+                                    <span className="text-lg text-graytext font-medium">
+                                        {Math.floor(
+                                            carPrice1 || carPackage?.price
+                                        ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                    </span>
+                                </p>
+                                {/* <p className="text-xxs leading-5">per person on twin sharing</p> */}
                             </div>
 
                             <div className="flex-col align-middle my-auto pl-2 gap-2 py-2">
-                                <button 
-                                //   onClick={handleSubmit}
-                                  className={`border px-5 py-1 rounded-md ${
-                                    carPrice1
-                                      ? "bg-gradient-to-r from-orange-500 to-red-500"
-                                      : " bg-gradient-to-r from-orange-200 to-red-200"
-                                  }  text-center text-white text-para`}
+                                <button
+                                    onClick={handleSubmit}
+                                    className={`border px-5 py-1 rounded-md ${carPrice1
+                                        ? "bg-gradient-to-r from-orange-500 to-red-500"
+                                        : " bg-gradient-to-r from-orange-200 to-red-200"
+                                        }  text-center text-white text-para`}
                                 >
-                                Book Now
+                                    Book Now
                                 </button>
                                 <CustomiseTour>
-                                <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">
-                                    Customise
-                                </button>
+                                    <button className=" border-primary w-full border text-primary px-5 py-1 mt-2 text-para text-center rounded-md cursor-pointer">
+                                        Customise
+                                    </button>
                                 </CustomiseTour>
                             </div>
+                            {showPopupBooking && (
+                                <CarDeptBookingPopup
+                                    setShowPopupBooking={setShowPopupBooking}
+                                    carPackage={carPackage}
+                                    carDepartureDetails={carDepartureDetails}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>

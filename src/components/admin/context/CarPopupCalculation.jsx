@@ -38,7 +38,7 @@ export const CarPopupProvider = ({ children }) => {
   const [activeBookingProcess, setActiveBookingProcess] = useState();
   const [activeInactivePopup, setActiveInactivePopup] = useState(false);
 
-  console.log("userFormData global", userFormData);
+  // console.log("userFormData global", userFormData);
   // console.log("userDate global",userDate);
   // console.log("userTime global",userTime);
   // console.log("userPlan global",userPlan);

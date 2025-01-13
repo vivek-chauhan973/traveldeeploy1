@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import CardDetailPricingCard from "./CarDetailPricingCard";
 
-const CarDepartureSection = ({ carPackage, showPopup,carDepartureDetails, setCarDepartureDetails, setCarPrice1, setShowPopup }) => {
+const CarDepartureSection = ({ carPackage, showPopup, carDepartureDetails,
+    setCarDepartureDetails, setCarPrice1, setShowPopup, setShowPopupBooking, showPopupBooking }) => {
     const [departureData, setdepartureData] = useState();
     const data = carPackage?.prices?.departureData;
     const handleCityPopup = (item) => {
@@ -17,20 +18,18 @@ const CarDepartureSection = ({ carPackage, showPopup,carDepartureDetails, setCar
         setCarDepartureDetails(departureData);
     }, [departureData?.departureCity])
 
-    console.log("carDepartureDetails 2",carDepartureDetails?.departureCity);
-    
+    // console.log("carDepartureDetails 2",carDepartureDetails?.departureCity);
 
     return (
         <>
             <div>
+                {/* Medium devices */}
                 <div className="flex xl:hidden flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
                     <div>
                         <div>
-                            {/* {fixedDepartureButtonEnaibleAndDisable ? "" :  */}
                             <h4 className="font-semibold text-base p-3 text-graytext uppercase">
                                 1. Choose your departure date and city
                             </h4>
-                            {/* } */}
                         </div>
                         <hr />
                         <div className="overflow-y-auto">
@@ -73,6 +72,10 @@ const CarDepartureSection = ({ carPackage, showPopup,carDepartureDetails, setCar
                                 carDepartureDetails?.departureCity &&
                                     carDepartureDetails?.departureCity ? (
                                     <CardDetailPricingCard
+                                        showPopupBooking={showPopupBooking}
+                                        setShowPopupBooking={setShowPopupBooking}
+                                        carPackage={carPackage}
+                                        carDepartureDetails={carDepartureDetails}
                                     />
                                 ) : (
                                     <div className=" ml-5">
@@ -111,7 +114,7 @@ const CarDepartureSection = ({ carPackage, showPopup,carDepartureDetails, setCar
                                             </div>
                                         </div>
                                     </div>
-                                 )}
+                                )}
                             <hr />
                             <div className="ml-2 my-4">
                                 <h6 className="font-semibold text-md mb-3 text-graytext">
@@ -172,6 +175,7 @@ const CarDepartureSection = ({ carPackage, showPopup,carDepartureDetails, setCar
                         </div>
                     </div>
                 </div>
+                {/* Large devices */}
                 <div className="hidden xl:flex flex-col gap-4 border rounded-md p-3 relative bg-white h-[480px] overflow-scroll">
                     <div>
                         <div>

@@ -8,7 +8,7 @@ const fetchPackgesTerm = async () => {
     return await response.json();
 };
 
-const CarDeptBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) => {
+const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDetails }) => {
 
     const [check, setCheck] = useState(false);
     const [CarPackageTerm, setCarPackageTerm] = useState([]);
@@ -22,13 +22,13 @@ const CarDeptBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) 
 
     useEffect(() => {
         fetchPackgesTerm().then(res => {
-            console.log("terma and condition=========> ", res?.CancellationGroupData)
+            // console.log("terma and condition=========> ", res?.CancellationGroupData)
             setCarPackageTerm(res?.CancellationGroupData)
         })
     }, [])
 
     const handleSubmit = () => {
-        setShowPopup(false);
+        setShowPopupBooking(false);
     };
     //   console.log("departure section data is here ---> ", departureSectionData) 
     // console.log("CarPackageTerm is here ---> ", CarPackageTerm)
@@ -80,7 +80,7 @@ const CarDeptBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) 
                             </div>
                             <div className="col-span-2 w-full p-5 bg-white rounded-r-lg shadow-lg">
                                 <div
-                                    onClick={() => setShowPopup(false)}
+                                    onClick={() => setShowPopupBooking(false)}
                                     className="cursor-pointer flex justify-end"
                                 >
                                     <FontAwesomeIcon
@@ -136,14 +136,14 @@ const CarDeptBookingPopup = ({ carPackage, setShowPopup, carDepartureDetails }) 
                                 </div>
                                 <div className="flex justify-start items-center gap-2 mb-4">
                                     <input
-                                        className="cursor-pointer h-4 w-4 rounded-lg accent-navyblack"
+                                        className="cursor-pointer md:h-4 md:w-4 h-3 w-3 rounded-lg accent-navyblack"
                                         type="checkbox"
                                         id="checked"
                                         checked={check}
                                         onChange={() => setCheck(!check)}
                                     />
                                     <label htmlFor="checked"
-                                        className="cursor-pointer label-text text-para font-medium text-gray-700 "
+                                        className="cursor-pointer label-text md:text-para text-xs font-medium text-gray-700"
                                     >
                                         I have read and agree to the Terms & Conditions
                                     </label>

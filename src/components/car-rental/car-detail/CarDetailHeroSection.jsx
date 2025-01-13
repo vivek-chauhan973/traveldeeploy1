@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from 'next/image';
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 
-const CarDetailHeroSection = ({carPackage, carPrice1}) => {
+const CarDetailHeroSection = ({ carPackage, carPrice1, setShowPopupBooking, carDepartureDetails }) => {
 
     return (
         <>
@@ -45,63 +45,63 @@ const CarDetailHeroSection = ({carPackage, carPrice1}) => {
                 </div>
             </div>
             <div className="container-wrapper xl:block hidden">
-                        <div className="flex justify-between">
-                            <div>
-                                <h2 className=" text-lg md:text-lg font-semibold capitalize my-2">
-                                    Vehicle Type : {carPackage?.selectedVicle?.vehicleType}
-                                </h2>
-                                {carPackage?.badges?.length > 0 && carPackage?.badges?.map((item, i) => {
-                                    return (
-                                        <button key={i}
-                                            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white mr-2">
-                                            {item}
-                                        </button>
-                                    )
-                                })}
-                                <p className="md:text-md text-[16px] my-2 capitalize">Ex City : {carPackage?.startcity}</p>
-                            </div>
-                            <div className="flex gap-5">
-                                <div className="text-right flex flex-col items-end justify-center ">
-                                    <p className="text-base leading-5 text-green-600 font-semibold uppercase">
-                                        best deal price
-                                    </p>
+                <div className="flex justify-between">
+                    <div>
+                        <h2 className=" text-lg md:text-lg font-semibold capitalize my-2">
+                            Vehicle Type : {carPackage?.selectedVicle?.vehicleType}
+                        </h2>
+                        {carPackage?.badges?.length > 0 && carPackage?.badges?.map((item, i) => {
+                            return (
+                                <button key={i}
+                                    className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 capitalize rounded-full py-1 px-2 text-xxs font-semibold text-white mr-2">
+                                    {item}
+                                </button>
+                            )
+                        })}
+                        <p className="md:text-md text-[16px] my-2 capitalize">Ex City : {carPackage?.startcity}</p>
+                    </div>
+                    <div className="flex gap-5">
+                        <div className="text-right flex flex-col items-end justify-center ">
+                            <p className="text-base leading-5 text-green-600 font-semibold uppercase">
+                                best deal price
+                            </p>
 
-                                    <p className="text-sm leading-5">
-                                        Without GST{" "}
-                                        <span className="text-lg text-graytext font-medium">
-                                            {(carPrice1 || carPackage?.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                                        </span>
-                                    </p>
-                                    <div className="flex gap-1 items-end">
-                                        {carPackage?.highSave !== 0 &&
-                                            <button className="capitalize text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
-                                                {carPackage?.highSave && carPackage.highSave !== 0
-                                                    ? `Save ${carPackage.highSave}%`
-                                                    : null}
-                                            </button>
-                                        }
-                                    </div>
-                                </div>
-                                <div className="flex flex-col align-middle my-auto pl-2 gap-2">
-                                    <button
-                                        // className="bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer px-5 py-2 rounded-md text-white text-center text-para"
-                                        className={`border px-5 py-1 rounded-md ${
-                                            carPrice1
-                                              ? "bg-gradient-to-r from-orange-500 to-red-500"
-                                              : " bg-gradient-to-r from-orange-200 to-red-200"
-                                          }  text-center text-white text-para`}
-                                        >
-                                        Book Now
+                            <p className="text-sm leading-5">
+                                Without GST{" "}
+                                <span className="text-lg text-graytext font-medium">
+                                    {(carPrice1 || carPackage?.price)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                </span>
+                            </p>
+                            <div className="flex gap-1 items-end">
+                                {carPackage?.highSave !== 0 &&
+                                    <button className="capitalize text-xxs text-white bg-navyblack px-1 py-1 rounded-sm text-center">
+                                        {carPackage?.highSave && carPackage.highSave !== 0
+                                            ? `Save ${carPackage.highSave}%`
+                                            : null}
                                     </button>
-                                    <CustomiseTour>
-                                    <button className=" border-primary w-full border text-primary px-5 py-2 text-para rounded-md">
-                                        Customise
-                                    </button>
-                                    </CustomiseTour>
-                                </div>
+                                }
                             </div>
                         </div>
-                    </div>    
+                        <div className="flex flex-col align-middle my-auto pl-2 gap-2">
+                            <button
+                                // className="bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer px-5 py-2 rounded-md text-white text-center text-para"
+                                className={`border px-5 py-1 rounded-md ${carPrice1
+                                        ? "bg-gradient-to-r from-orange-500 to-red-500"
+                                        : " bg-gradient-to-r from-orange-200 to-red-200"
+                                    }  text-center text-white text-para`}
+                                onClick={()=>setShowPopupBooking(true)}
+                            >
+                                Book Now
+                            </button>
+                            <CustomiseTour>
+                                <button className=" border-primary w-full border text-primary px-5 py-2 text-para rounded-md">
+                                    Customise
+                                </button>
+                            </CustomiseTour>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

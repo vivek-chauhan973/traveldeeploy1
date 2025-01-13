@@ -5,31 +5,32 @@ import CarDeptBookingPopup from "./CarDeparture & booking/CarDeptBookingPopup";
 import { useEffect, useState } from "react";
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 
-const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
-    const [showPopup, setShowPopup] = useState(false);
+const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBooking, showPopupBooking }) => {
+    // const [showPopup, setShowPopup] = useState(false);
     const [travellers, setTravellers] = useState(0);
 
     const seatingCapacity = carPackage?.selectedVicle?.seatingCapacity || 0;
     // console.log("seatingCapacity", seatingCapacity);
 
     const GSTPrice = Math.floor((carPackage?.price + (carPackage?.price * (carDepartureDetails?.Hike / 100))) * (carDepartureDetails?.GST / 100));
-    const grandTotal = carPackage?.price + GSTPrice;
-    // console.log("GSTPrice", GSTPrice);
+    const hikePrice = (carPackage?.price * (carDepartureDetails?.Hike / 100)) || 0;
+    const grandTotal = carPackage?.price + hikePrice + GSTPrice;
+    // console.log("grandTotal", grandTotal);
 
     const handleBookNowClick = () => {
         // console.log("Clicked Book Now");
         if (travellers !== 0) {
             carDepartureDetails['travellers'] = travellers;
         }
-        if(grandTotal > 0){
+        if (grandTotal > 0) {
             carDepartureDetails['grandTotal'] = grandTotal;
         }
-        if(travellers !== 0){
-            setShowPopup(true);
+        if (travellers !== 0) {
+            setShowPopupBooking(true);
         }
     };
     const handleEdit = () => {
-        setShowPopup(true);
+        setShowPopupBooking(true);
     }
     // console.log("travellers",travellers);
     // console.log("carDepartureDetails", carDepartureDetails);
@@ -114,7 +115,11 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                         <div className="grid grid-cols-2">
                             <p>Total Cost</p>
                             <p className="">
-                                {carPackage?.price ? (carDepartureDetails?.Hike ? ((carPackage?.price) + ((carPackage?.price) * (carDepartureDetails?.Hike / 100)))?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })) || carPackage?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
+                                {carPackage?.price ?
+                                    (carDepartureDetails?.Hike ?
+                                        ((carPackage?.price) + ((carPackage?.price) * (carDepartureDetails?.Hike / 100)))
+                                        : carPackage?.price)
+                                    || carPackage?.price : "--"}
                             </p>
                         </div>
                     </div>
@@ -183,9 +188,9 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails }) => {
                             </button>
                         </div>
                     </div>
-                    {showPopup && (
+                    {showPopupBooking && (
                         <CarDeptBookingPopup
-                            setShowPopup={setShowPopup}
+                            setShowPopupBooking={setShowPopupBooking}
                             carPackage={carPackage}
                             carDepartureDetails={carDepartureDetails}
                         />
