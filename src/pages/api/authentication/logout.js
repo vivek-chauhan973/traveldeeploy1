@@ -1,17 +1,20 @@
 import OTPModel from '@/models/Otp';
 import connectToDatabase from '@/utils/db';
-
-
+import cookies from 'next-cookies';
+import jwt from 'jsonwebtoken';
 const verifyOtpApi = async (req, res) => {
     await connectToDatabase();
-
     if (req.method === 'POST') {
-      const {mobile}=req.body;
+        const allCookies = cookies({ req });
+        const token = allCookies?.token;
         try {
-            const data = await OTPModel.findOneAndDelete({ mobile});
-            if (!data) {
-                return res.status(404).json({ success: false, message: 'No OTP found for this mobile number' });
-            }
+            const decoded = jwt.verify(token, process.env.Secret_key);
+            const {user}=decoded;
+            const data=await OTPModel.findById(user?._id);
+            data.otp=undefined
+            data.isVerified=undefined
+            data.token=undefined
+            await data.save()
             return res.status(200).json({ success: true, message: 'User logout successfully' });
         } catch (error) {
             console.error('Error verifying OTP:', error);

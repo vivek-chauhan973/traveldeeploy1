@@ -8,12 +8,18 @@ import { faSearch, faUser, faArrowAltCircleRight, faHome, faAddressBook, faHands
 import Link from "next/link";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import SearchPackage from "./SearchPackage";
+import Cookies from "js-cookie";
 
 const Header3 = () => {
   const [logo, setLogo] = useState(null);
-  const { setLoginPopup,searchQuery,setSearchQuery } = useCarPopupContext();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { setLoginPopup, searchQuery, setSearchQuery } = useCarPopupContext();
+  const [searchPackagePopup, setSearchPackagePopup] = useState(false);
 
-  const [searchPackagePopup, setSearchPackagePopup ] = useState(false);
+  useEffect(() => {
+    const token = Cookies.get("token");
+    setIsLoggedIn(!!token);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,30 +37,49 @@ const Header3 = () => {
     };
     fetchData();
   }, []);
+
   const imageSrc = useMemo(() => {
     if (logo?.data?.[0]?.path) {
       return logo.data[0].path;
     }
     return '/logo.png';
-}, [logo]);
-  // console.log("logo is here :: ",imageSrc)
-// console.log("search query is ",searchQuery)
+  }, [logo]);
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/authentication/logout", { method: "POST" });
+      const data = await res.json();
+      if (data?.success) {
+        Cookies.remove("token");
+        setIsLoggedIn(false); // Update login state
+        alert("User Logout Successfully");
+      } else {
+        alert("Something went wrong");
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+      alert("Something went wrong during logout");
+    }
+  };
+
+  const handleLogin = () => {
+    setLoginPopup(true); // Open login popup
+  };
+
   return (
     <div className=" top-0 sticky z-[999]">
-      {/* Navbar*/}
+      {/* Navbar */}
       <div className="bg-[#272727]">
         <div className="container-wrapper">
           <div className="flex md:items-center md:justify-between md:gap-5 py-3 ">
             <div className="flex w-full md:w-auto justify-between ">
-              {/* images... */}
+              {/* Logo */}
               <div>
                 <Image
-                className="w-48 h-12 object-cover"
                   src={imageSrc}
                   height={200}
                   width={200}
                   alt="Logo"
-                  // onError={() => setImageSrc('/logo.png')} // Ensure fallback if image fails to load
                 />
               </div>
               <div className=" relative flex gap-2 md:hidden xl:hidden">
@@ -62,7 +87,7 @@ const Header3 = () => {
               </div>
             </div>
             <div className="justify-between hidden md:block border-indigo-500 bg-white rounded-full w-full md:w-4/12 px-[8px] border-[2px] overflow-hidden  p-[5px] items-center">
-              <div className="flex gap-1 " onClick={()=>setSearchPackagePopup(true)}>
+              <div className="flex gap-1 " onClick={() => setSearchPackagePopup(true)}>
                 <span className="mx-2">
                   <FontAwesomeIcon icon={faSearch} className='text-sm' />
                 </span>
@@ -70,38 +95,34 @@ const Header3 = () => {
                   className="border-none focus:outline-none placeholder:text-sm placeholder-black w-full text-sm"
                   placeholder="Search Your Next Destination"
                   type="text"
-                  name=""
                   value={searchQuery}
-                  onChange={(e)=>setSearchQuery(e.target.value)}
-                  id=""
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
             {searchPackagePopup && (
-              <SearchPackage setSearchPackagePopup={setSearchPackagePopup}/>
+              <SearchPackage setSearchPackagePopup={setSearchPackagePopup} />
             )}
-            <div className="hidden md:flex gap-3">
-              <button className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg"
-                onClick={()=>setLoginPopup(true)}    
-              >
-                <span className=" ">
+            {(Cookies.get("token")!==undefined||isLoggedIn) ? (
+              <div onClick={handleLogout} className="flex flex-col cursor-pointer">
+                <FontAwesomeIcon icon={faUser} className='text-xl text-white' />
+                <p className="text-white text-sm">Logout</p>
+              </div>
+            ) : (
+              <div className="hidden md:flex gap-3">
+                <button
+                  className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg"
+                  onClick={handleLogin}
+                >
                   <FontAwesomeIcon icon={faArrowAltCircleRight} className='font' />
-                </span>{" "}
-                <h6 className=" ">
-                  Login{" "}
-                </h6>
-              </button>
-              <button className=" items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg">
-                <FontAwesomeIcon icon={faUser} className='font' />
-                <h6 className=" ">
-                  Sign up
-                </h6>
-                {" "}
-              </button>
-            </div>
-            {/* <div className="md:hidden text-white"align-items: flex-end;>
-              <FaBars />
-            </div> */}
+                  <h6>Login</h6>
+                </button>
+                <button className="items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg">
+                  <FontAwesomeIcon icon={faUser} className='font' />
+                  <h6>Sign up</h6>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -113,46 +134,33 @@ const Header3 = () => {
                 icon={faHome}
                 className="text-xs mb-0.5 mr-0.5 hover:text-primary cursor-pointer"
               />
-              <span>
-                Home
-              </span>
+              <span>Home</span>
             </Link>
           </li>
           {header?.map((item, i) => (
             <li
               key={i}
-              className="capitalize items-center flex  gap-1 cursor-pointer hover:text-primary"
+              className="capitalize items-center flex gap-1 cursor-pointer hover:text-primary"
             >
               {item.icon}
-              <spam>
-                {item?.name === 'Car Hire' && <Link href='/car-rental'>car hire</Link>}
-
-                {item?.name !== 'Car Hire' && <FlyoutLink FlyoutContent={item.element}>
-                  {item.name}
-                </FlyoutLink>}
-              </spam>
+              <span>
+                {item?.name === 'Car Hire' ? (
+                  <Link href='/car-rental'>car hire</Link>
+                ) : (
+                  <FlyoutLink FlyoutContent={item.element}>
+                    {item.name}
+                  </FlyoutLink>
+                )}
+              </span>
             </li>
           ))}
-            {/* <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
-            <Link href='/blog'>
-              <FontAwesomeIcon
-                icon={faHome}
-                className="text-xs mb-0.5 mr-0.5 hover:text-primary cursor-pointer"
-              />
-              <span>
-                Blog
-              </span>
-            </Link>
-          </li> */}
           <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
             <Link href='/deals'>
               <FontAwesomeIcon
                 icon={faHandshakeSimple}
                 className="text-sm mr-0.5 hover:text-primary cursor-pointer"
               />
-              <span>
-                Deals
-              </span>
+              <span>Deals</span>
             </Link>
           </li>
           <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
@@ -161,9 +169,7 @@ const Header3 = () => {
                 icon={faAddressBook}
                 className="text-sm mr-0.5 hover:text-primary cursor-pointer"
               />
-              <span>
-                Contact Us
-              </span>
+              <span>Contact Us</span>
             </Link>
           </li>
         </ul>

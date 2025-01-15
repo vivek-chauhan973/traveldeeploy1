@@ -1,97 +1,9 @@
-// import { useEffect, useState } from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faXmark} from "@fortawesome/free-solid-svg-icons";
-// import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
-
-// const Create = () => {
-//     const { setLoginPopup } = useCarPopupContext();
-//     useEffect(() => {
-//         document.body.style.overflow = "hidden";
-//         return () => {
-//             document.body.style.overflow = "auto";
-//         };
-//     }, []);
-
-//     return (
-//         <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
-//             <div className="absolute inset-0 bg-black opacity-50"></div>
-//             <div className="bg-white rounded-xl shadow-lg z-50 w-80 h-[470px] max-h-[500px]">
-//                 <div className="pr-2 pt-1 flex justify-end items-center mt-1">
-//                     <FontAwesomeIcon
-//                         icon={faXmark}
-//                         className="h-4 w-4 hover:bg-gray-100 rounded-full cursor-pointer p-1"
-//                         onClick={() =>
-//                             setLoginPopup(false)
-//                         }
-//                     />
-//                 </div>
-//                 <div className="px-7">
-//                     <div className="flex justify-center items-center">
-//                         <img
-//                             className="object-cover w-36 h-10"
-//                             src="https://images.yourstory.com/cs/images/companies/fd593ed4e9a5-bxlogo-1686298628003.png?fm=auto&ar=1%3A1&mode=fill&fill=solid&fill-color=fff&format=auto&w=384&q=75"
-//                             alt=""
-//                         />
-//                     </div>
-//                     <div className="flex justify-center items-center my-5">
-//                         <img
-//                             className="object-cover rounded-full w-20 h-20"
-//                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjGVg145rvbEunhw4fsfcCHzJTIEQzA_bhg&s"
-//                             alt=""
-//                         />
-//                     </div>
-
-//                     <div className="flex flex-col justify-center my-5">
-//                         <p className="text-center mb-3 font-medium capitalize">
-//                             Create an Account
-//                         </p>
-//                         <input
-//                             type="text"
-//                             // value={mobile}
-//                             onChange={(e) => {
-//                                 // setMobile(e.target.value)
-//                                 // validateMobile(e.target.value);
-//                             }}
-//                             placeholder="Enter phone number"
-//                             className="w-full px-5 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-1 focus:ring-orange-500"
-//                             required
-//                         />
-//                     </div>
-//                     <div className="flex flex-col justify-center items-center my-5">
-//                         <button
-//                             className="w-full bg-navyblack text-white px-5 py-2 rounded-full"
-//                         >
-//                             Continue
-//                         </button>
-//                     </div>
-//                     <div class="flex items-center justify-between my-5">
-//                         <span class="border-b w-1/5 lg:w-1/4 ml-2"></span>
-//                         <p class="text-xxs text-center text-gray-500 uppercase">
-//                             or continue with
-//                         </p>
-//                         <span class="border-b w-1/5 lg:w-1/4 mr-2"></span>
-//                     </div>
-//                     <div className="flex justify-center my-5">
-//                         <button
-//                             className="w-full bg-gray-200 text-navyblack px-5 py-2 rounded-full"
-//                         >
-//                             Google
-//                         </button>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Create;
-
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
-import Cookies from "js-cookie";
 import { useSession, signIn } from "next-auth/react";
+import Cookies from "js-cookie";
 const Create = () => {
   const { setLoginPopup } = useCarPopupContext();
   useEffect(() => {
@@ -101,18 +13,15 @@ const Create = () => {
     };
   }, []);
   const { data: session } = useSession();
-  console.log("session is here ----------> ", session);
-
-  const [step, setStep] = useState(1); // Step 1: Phone input, Step 2: OTP verification
+  const [step, setStep] = useState(1); 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
-  const [timer, setTimer] = useState(60); // Countdown timer for resend OTP
+  const [timer, setTimer] = useState(60); 
   const [mobileError, setMobileError] = useState("");
   const [otpError, setOtpError] = useState("");
   const [resendOtpError, setResendOtpError] = useState("");
-
   const validateMobile = (mobileNumber) => {
-    const isValid = /^[0-9]{10}$/.test(mobileNumber); // 10-digit number validation
+    const isValid = /^[0-9]{10}$/.test(mobileNumber);
     if (!isValid) {
       setMobileError("Please enter a valid 10-digit mobile number.");
     } else {
@@ -127,13 +36,10 @@ const Create = () => {
       setOtpError("");
     }
   };
-
-  // Simulate sending OTP
   const sendOtp = () => {
     // alert(`OTP sent to ${phoneNumber}.`);
     startTimer();
   };
-
   // Start countdown timer for OTP resend
   const startTimer = () => {
     setTimer(60);
@@ -147,7 +53,6 @@ const Create = () => {
       });
     }, 1000);
   };
-
   const handlePhoneSubmit = async () => {
     const number = "+91" + phoneNumber;
     if (!/^\+\d{12}$/.test(number)) {
@@ -162,7 +67,6 @@ const Create = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile: number }),
       });
-
       if (response.ok) {
         alert("OTP sent successfully!");
         sendOtp();
@@ -186,17 +90,9 @@ const Create = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ mobile: number, otp }),
         });
-
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Invalid response format. Expected JSON.");
-        }
-
         const data = await response.json();
-
         if (data.success) {
-          Cookies.set("verifyCookie", true, { expires: 1 });
-          Cookies.set("mobile", data.verifiedUser.mobile, { expires: 1 });
+          Cookies.set("token",data?.data?.token,{expires:1})
           setLoginPopup(false);
           setPhoneNumber("");
           setOtp("");

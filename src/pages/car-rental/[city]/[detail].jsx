@@ -118,7 +118,7 @@ export default function CarDetail() {
     }
     console.log("CarDepartureDetails----==>  ", carDepartureDetails);
 
-    console.log("carPackage----==>  ", carPackage);
+    // console.log("carPackage----==>  ", carPackage);
     // console.log("carSidePackages----==>  ", carPrice1);
 
     return (
