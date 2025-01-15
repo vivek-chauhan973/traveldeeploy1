@@ -6,7 +6,7 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID; // Your Twilio Account SID
 const authToken = process.env.TWILIO_AUTH_TOKEN;   // Your Twilio Auth Token
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const client = twilio(accountSid, authToken);
-const sendOptApi=async (req,res)=>{
+const resendOptApi=async (req,res)=>{
 
   await connectToDatabase();
 
@@ -19,11 +19,11 @@ const sendOptApi=async (req,res)=>{
         try {
         //   Send OTP via SMS
         await OTPModel.findOneAndUpdate({mobile},{$set:{mobile,otp}},{upsert:true,new:true})
-          // await client.messages.create({
-          //   body: `Your OTP is ${otp}`,
-          //   from: twilioPhoneNumber,
-          //   to: mobile,
-          // });
+          await client.messages.create({
+            body: `Your OTP is ${otp}`,
+            from: twilioPhoneNumber,
+            to: mobile,
+          });
          
           res.status(200).json({ message: 'OTP sent successfully', otp });
         } catch (error) {
@@ -37,4 +37,4 @@ const sendOptApi=async (req,res)=>{
 
 }
 
-export default sendOptApi;
+export default resendOptApi;

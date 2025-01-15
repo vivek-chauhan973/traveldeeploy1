@@ -16,6 +16,9 @@ const otpSchema=new mongoose.Schema({
     },
     email:{
         type:Number
+    },
+    token:{
+        type:String
     }
 })
 const OTPModel=mongoose.models.OTPModel||mongoose.model("OTPModel",otpSchema);

@@ -1,31 +1,30 @@
 import OTPModel from "@/models/Otp";
 import connectToDatabase from "@/utils/db";
+import jwt from 'jsonwebtoken';
+import Cookies from "js-cookie";
 const verifyOtpApi = async (req, res) => {
     await connectToDatabase();
     if (req.method === 'POST') {
         const { mobile, otp } = req.body;
-
         try {
             const data = await OTPModel.findOne({ mobile });
             if (!data) {
                 return res.status(404).json({ success: false, message: 'No OTP found for this mobile number' });
             }
-
+            const token=jwt.sign({user:data},process.env.Secret_key);
             if (parseInt(otp) === data.otp) {
                 const verifiedUser = await OTPModel.findOneAndUpdate(
-                    { mobile },
-                    { $set: { isVerified: true } },
-                    { new: true }
+                    { _id:data?._id},
+                    { $set: { isVerified: true ,token:token} },
+                    {new:true}
                 );
-
-                // Return data for client-side cookie setting
+                Cookies.set("token", token, { expires: 1 });
+                // console.log("user data of mobile is here -----> ",verifiedUser);
+                // console.log("user data of mobile is here -----> ",token);
                 return res.status(200).json({ 
                     success: true, 
                     message: 'OTP verified successfully', 
-                    verifiedUser: {
-                        mobile: verifiedUser.mobile,
-                        isVerified: verifiedUser.isVerified,
-                    }
+                    data:verifiedUser
                 });
             }
 

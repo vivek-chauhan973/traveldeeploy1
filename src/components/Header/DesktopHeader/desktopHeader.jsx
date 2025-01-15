@@ -1,10 +1,9 @@
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 import Header3 from './DesktopHeaderPages/Header3';
 import Create from '@/components/login-sinup/login/create';
-
+import { useEffect } from 'react';
 function DesktopHeader() {
   const { loginPopup } = useCarPopupContext();
-
   return (
     <>
       {loginPopup && <Create/>}
