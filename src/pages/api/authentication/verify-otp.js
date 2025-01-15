@@ -1,7 +1,7 @@
 import OTPModel from "@/models/Otp";
-
-
+import connectToDatabase from "@/utils/db";
 const verifyOtpApi = async (req, res) => {
+    await connectToDatabase();
     if (req.method === 'POST') {
         const { mobile, otp } = req.body;
 

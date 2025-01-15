@@ -1,8 +1,9 @@
 import OTPModel from '@/models/Otp';
-import DBConnection from '@/utils/dbConfig';
+import connectToDatabase from '@/utils/db';
+
 
 const logoutApi = async (req, res) => {
-    await DBConnection();
+ await connectToDatabase();
 
     if (req.method === 'POST') {
       const {email}=req.body;

@@ -1,8 +1,9 @@
 import OTPModel from "@/models/Otp"; // Ensure this path is correct and OTPModel is properly defined
-import DBConnection from "@/utils/dbConfig";
+import connectToDatabase from "@/utils/db";
+
 
 const googleApi = async (req, res) => {
-   await DBConnection();
+   await connectToDatabase();
   if (req.method === "POST") {
     const { email, accessToken } = req.body;
 

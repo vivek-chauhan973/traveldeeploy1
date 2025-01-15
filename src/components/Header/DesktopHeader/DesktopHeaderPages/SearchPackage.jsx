@@ -31,7 +31,7 @@ const SearchPackage = ({ setSearchPackagePopup }) => {
                         {searchedData && (
                             searchedData?.map((pac, i) => {
                                 return (
-                                    <div className="w-48 h-52">
+                                    <div key={i} className="w-48 h-52">
                                         <div className="relative w-full h-[70%]">
                                             <Image
                                                 className="w-full h-full object-cover rounded-md"

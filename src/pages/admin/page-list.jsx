@@ -6,8 +6,9 @@ import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 const getAllPost=async ()=>{
   return await((await fetch('/api/static-page')).json())
 } 
-const pagelist = () => {
+const Pagelist = () => {
   const [currentItems,setCurrentItems]=useState([])
+
   useEffect(()=>{
     getAllPost().then(res=>setCurrentItems(res?.data||[]))
   },[])
@@ -78,4 +79,4 @@ const pagelist = () => {
   )
 }
 
-export default pagelist
+export default Pagelist
