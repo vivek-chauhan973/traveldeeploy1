@@ -113,19 +113,21 @@ export default function CarDetail() {
             "_blank"
         );
     }
-    // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
+    console.log("CarDepartureDetails----==>  ", carDepartureDetails);
 
     // console.log("carPackage----==>  ", carPackage);
     // console.log("carSidePackages----==>  ", carPrice1);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setShowPopupBooking(true);
-    }
-
     return (
         <AppProvider>
             {/* CarDetailSkeleton  */}
+            {showPopupBooking && (
+                <CarDeptBookingPopup
+                    setShowPopupBooking={setShowPopupBooking}
+                    carPackage={carPackage}
+                    carDepartureDetails={carDepartureDetails}
+                />
+            )}
             <div>
                 {/* <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%"> */}
                 <DesktopHeader />
@@ -517,12 +519,11 @@ export default function CarDetail() {
                                         ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                     </span>
                                 </p>
-                                {/* <p className="text-xxs leading-5">per person on twin sharing</p> */}
                             </div>
 
                             <div className="flex-col align-middle my-auto pl-2 gap-2 py-2">
                                 <button
-                                    onClick={handleSubmit}
+                                    onClick={(e) => setShowPopupBooking(true)}
                                     className={`border px-5 py-1 rounded-md ${carPrice1
                                         ? "bg-gradient-to-r from-orange-500 to-red-500"
                                         : " bg-gradient-to-r from-orange-200 to-red-200"
@@ -536,13 +537,6 @@ export default function CarDetail() {
                                     </button>
                                 </CustomiseTour>
                             </div>
-                            {showPopupBooking && (
-                                <CarDeptBookingPopup
-                                    setShowPopupBooking={setShowPopupBooking}
-                                    carPackage={carPackage}
-                                    carDepartureDetails={carDepartureDetails}
-                                />
-                            )}
                         </div>
                     </div>
                 </div>

@@ -6,34 +6,31 @@ import { useEffect, useState } from "react";
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 
 const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBooking, showPopupBooking }) => {
-    // const [showPopup, setShowPopup] = useState(false);
+
     const [travellers, setTravellers] = useState(0);
 
     const seatingCapacity = carPackage?.selectedVicle?.seatingCapacity || 0;
-    // console.log("seatingCapacity", seatingCapacity);
 
     const GSTPrice = Math.floor((carPackage?.price + (carPackage?.price * (carDepartureDetails?.Hike / 100))) * (carDepartureDetails?.GST / 100));
     const hikePrice = (carPackage?.price * (carDepartureDetails?.Hike / 100)) || 0;
     const grandTotal = carPackage?.price + hikePrice + GSTPrice;
-    // console.log("grandTotal", grandTotal);
 
-    const handleBookNowClick = () => {
-        // console.log("Clicked Book Now");
+    useEffect(()=>{
         if (travellers !== 0) {
             carDepartureDetails['travellers'] = travellers;
         }
         if (grandTotal > 0) {
             carDepartureDetails['grandTotal'] = grandTotal;
         }
+    },[travellers,grandTotal]);
+    const handleBookNowClick = () => {
         if (travellers !== 0) {
             setShowPopupBooking(true);
         }
     };
     const handleEdit = () => {
         setShowPopupBooking(true);
-    }
-    // console.log("travellers",travellers);
-    // console.log("carDepartureDetails", carDepartureDetails);
+    };
 
     return (
         <>
@@ -140,7 +137,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                     <hr className="border-dashed md:my-5 my-3" />
                     <div className="text-para grid md:grid-cols-2 pr-1">
                         <div></div>
-                        <div className="grid md:grid-cols-2 gap-1">
+                        <div className="grid grid-cols-2 gap-1">
                             <p className="font-semibold">Grand Total</p>
                             <p className="font-semibold text-graytext">
                                 {grandTotal ?
@@ -149,27 +146,6 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                             </p>
                         </div>
                     </div>
-                    {/* <div className=" justify-center gap-10 my-3 flex">
-                        <label className=" inline-flex items-center">
-                            <input
-                                type="radio"
-                                className=" form-radio accent-navyblack"
-                                name="radio-group"
-                            />
-                            <p className="ml-2 font-semibold text-graytext">Pay 25% Now</p>
-                        </label>
-
-                        <label className=" inline-flex items-center">
-                            <input
-                                type="radio"
-                                className="form-radio accent-navyblack"
-                                name="radio-group"
-                            />
-                            <p className="ml-2 font-semibold text-graytext ">
-                                Pay Full Online
-                            </p>
-                        </label>
-                    </div> */}
                     <div className="xl:block hidden">
                         <div className=" grid grid-cols-2 gap-3 my-5">
                             <CustomiseTour>
@@ -177,8 +153,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                                     Customise
                                 </button>
                             </CustomiseTour>
-                            <button onClick={handleBookNowClick}
-                                // disabled={!travellers}
+                            <button onClick={handleBookNowClick}              
                                 className={` ${travellers
                                     ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
                                     : "bg-gradient-to-r from-orange-200 to-red-200"
@@ -188,13 +163,6 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                             </button>
                         </div>
                     </div>
-                    {showPopupBooking && (
-                        <CarDeptBookingPopup
-                            setShowPopupBooking={setShowPopupBooking}
-                            carPackage={carPackage}
-                            carDepartureDetails={carDepartureDetails}
-                        />
-                    )}
                 </div>
             </div>
         </>

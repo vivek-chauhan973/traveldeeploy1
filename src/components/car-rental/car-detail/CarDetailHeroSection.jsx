@@ -84,7 +84,6 @@ const CarDetailHeroSection = ({ carPackage, carPrice1, setShowPopupBooking, carD
                         </div>
                         <div className="flex flex-col align-middle my-auto pl-2 gap-2">
                             <button
-                                // className="bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer px-5 py-2 rounded-md text-white text-center text-para"
                                 className={`border px-5 py-1 rounded-md ${carPrice1
                                         ? "bg-gradient-to-r from-orange-500 to-red-500"
                                         : " bg-gradient-to-r from-orange-200 to-red-200"
