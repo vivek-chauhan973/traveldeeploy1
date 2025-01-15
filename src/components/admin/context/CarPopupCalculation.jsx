@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-
 const CarPopupContext = createContext(null);
 const fetchSearchedData=async ()=>{
   const data=await fetch(`/api/search-api`,
@@ -24,7 +23,6 @@ export const CarPopupProvider = ({ children }) => {
   const [returnTimeOutstation, setReturnTimeOutstation] = useState({});
   // const [userPlanOutstation, setUserPlanOutstation] =  useState({});
   const [planOutstation, setPlanOutstation] = useState({});
-
   const getDetail = (item) => {
     // console.log("Item =====> ",item);
     if (item) {
@@ -37,18 +35,6 @@ export const CarPopupProvider = ({ children }) => {
   const [showPopupOutstation, setShowPopupOutstation] = useState(false);
   const [activeBookingProcess, setActiveBookingProcess] = useState();
   const [activeInactivePopup, setActiveInactivePopup] = useState(false);
-
-  // console.log("userFormData global", userFormData);
-  // console.log("userDate global",userDate);
-  // console.log("userTime global",userTime);
-  // console.log("userPlan global",userPlan);
-  // console.log("pickupDateOutstation global",pickupDateOutstation);
-  // console.log("pickupTimeOutstation global",pickupTimeOutstation);
-  // console.log("returnDateOutstation global",returnDateOutstation);
-  // console.log("returnTimeOutstation global",returnTimeOutstation);
-  // console.log("PlanOutstation global",planOutstation);
-  // console.log("loginPopup global",loginPopup);
-
   const [searchQuery,setSearchQuery]=useState("");
   useEffect(()=>{
     fetchSearchedData().then(res=>{

@@ -9,13 +9,13 @@ import Link from "next/link";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import SearchPackage from "./SearchPackage";
 import Cookies from "js-cookie";
-
+import { useSession, signOut } from "next-auth/react";
 const Header3 = () => {
   const [logo, setLogo] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { setLoginPopup, searchQuery, setSearchQuery } = useCarPopupContext();
   const [searchPackagePopup, setSearchPackagePopup] = useState(false);
-
+  const { data: session } = useSession();
   useEffect(() => {
     const token = Cookies.get("token");
     setIsLoggedIn(!!token);
@@ -103,8 +103,8 @@ const Header3 = () => {
             {searchPackagePopup && (
               <SearchPackage setSearchPackagePopup={setSearchPackagePopup} />
             )}
-            {(Cookies.get("token")!==undefined||isLoggedIn) ? (
-              <div onClick={handleLogout} className="flex flex-col cursor-pointer">
+            {(session!==null||Cookies.get("token")!==undefined||isLoggedIn) ? (
+              <div onClick={session===null?handleLogout:signOut} className="flex flex-col cursor-pointer">
                 <FontAwesomeIcon icon={faUser} className='text-xl text-white' />
                 <p className="text-white text-sm">Logout</p>
               </div>
