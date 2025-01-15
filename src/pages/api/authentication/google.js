@@ -13,15 +13,12 @@ const googleApi = async (req, res) => {
     }
 
     try {
-      console.log("Request body:", req.body);
 
-      // Find and update or insert the document
       const data = await OTPModel.findOneAndUpdate(
-        { email }, // Query to find the document
-        { email, accessToken,isGoogleVerified:true }, // Data to update
-        { upsert: true, new: true } // Options
+        { email },
+        { email, accessToken,isGoogleVerified:true }, 
+        { upsert: true, new: true }
       );
-
       return res.status(200).json({
         success:true,
         message: "Successfully updated or created the record.",
@@ -35,7 +32,6 @@ const googleApi = async (req, res) => {
       });
     }
   } else {
-    // Handle unsupported HTTP methods
     res.setHeader("Allow", ["POST"]);
     return res.status(405).json({ message: `Method ${req.method} not allowed.` });
   }

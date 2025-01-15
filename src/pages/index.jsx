@@ -55,9 +55,9 @@ export default function Home() {
     fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
   }, []);
 
-  const token=Cookies.get('token');
+  // const token=Cookies.get('token');
 
-  console.log(" cookies of token is here -----> ",token)
+  // console.log(" cookies of token is here -----> ",token)
 
   useEffect(() => {
     const data = homePackages?.filter(item => item?.category === "category1");
@@ -77,8 +77,8 @@ export default function Home() {
     setBlogsPackages(data7?.[0]?.options || [])
     
   }, [homePackages]);
-  console.log("travel guide section is here----> ", travelGuidePackage)
-  console.log("blogs section is here----> ", blogsPackages)
+  // console.log("travel guide section is here----> ", travelGuidePackage)
+  // console.log("blogs section is here----> ", blogsPackages)
   useEffect(() => {
     const data = homeSinglePackages?.filter(item => item?.category === "category1");
     setCategory1(data);

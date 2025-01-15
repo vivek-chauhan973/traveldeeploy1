@@ -12,7 +12,7 @@ const Create = () => {
       document.body.style.overflow = "auto";
     };
   }, []);
-  const { data: session } = useSession();
+  
   const [step, setStep] = useState(1); 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -114,6 +114,7 @@ const Create = () => {
       setResendOtpError("Please wait before resending the OTP.");
     }
   };
+ 
 
   return (
     <>
