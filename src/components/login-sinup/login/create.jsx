@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Cookies from "js-cookie";
 const Create = () => {
   const { setLoginPopup } = useCarPopupContext();
