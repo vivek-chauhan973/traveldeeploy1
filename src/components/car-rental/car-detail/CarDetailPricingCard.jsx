@@ -6,11 +6,8 @@ import { useEffect, useState } from "react";
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 
 const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBooking, showPopupBooking }) => {
-
     const [travellers, setTravellers] = useState(0);
-
     const seatingCapacity = carPackage?.selectedVicle?.seatingCapacity || 0;
-
     const GSTPrice = Math.floor((carPackage?.price + (carPackage?.price * (carDepartureDetails?.Hike / 100))) * (carDepartureDetails?.GST / 100));
     const hikePrice = (carPackage?.price * (carDepartureDetails?.Hike / 100)) || 0;
     const grandTotal = carPackage?.price + hikePrice + GSTPrice;
@@ -23,6 +20,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
             carDepartureDetails['grandTotal'] = grandTotal;
         }
     },[travellers,grandTotal]);
+
     const handleBookNowClick = () => {
         if (travellers !== 0) {
             setShowPopupBooking(true);

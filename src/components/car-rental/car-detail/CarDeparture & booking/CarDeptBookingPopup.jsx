@@ -2,6 +2,7 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 
 const fetchPackgesTerm = async () => {
     const response = await fetch("/api/cars/package/terms-condition/packageTerm/get");
@@ -9,7 +10,8 @@ const fetchPackgesTerm = async () => {
 };
 
 const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDetails }) => {
-
+        const {loginPopup, setLoginPopup} = useCarPopupContext();
+    
     const [check, setCheck] = useState(false);
     const [CarPackageTerm, setCarPackageTerm] = useState([]);
 
@@ -28,7 +30,7 @@ const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDeta
     }, [])
 
     const handleSubmit = () => {
-        setShowPopupBooking(false);
+        setLoginPopup(true);
     };
     //   console.log("departure section data is here ---> ", departureSectionData) 
     // console.log("CarPackageTerm is here ---> ", CarPackageTerm)

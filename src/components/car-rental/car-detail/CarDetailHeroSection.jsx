@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from 'next/image';
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 
-const CarDetailHeroSection = ({ carPackage, carPrice1, setShowPopupBooking, carDepartureDetails }) => {
+const CarDetailHeroSection = ({ carPackage, carPrice1, setShowPopupBooking }) => {
 
     return (
         <>
@@ -85,10 +85,10 @@ const CarDetailHeroSection = ({ carPackage, carPrice1, setShowPopupBooking, carD
                         <div className="flex flex-col align-middle my-auto pl-2 gap-2">
                             <button
                                 className={`border px-5 py-1 rounded-md ${carPrice1
-                                        ? "bg-gradient-to-r from-orange-500 to-red-500"
-                                        : " bg-gradient-to-r from-orange-200 to-red-200"
+                                    ? "bg-gradient-to-r from-orange-500 to-red-500"
+                                    : " bg-gradient-to-r from-orange-200 to-red-200"
                                     }  text-center text-white text-para`}
-                                onClick={()=>setShowPopupBooking(true)}
+                                onClick={() => setShowPopupBooking(true)}
                             >
                                 Book Now
                             </button>

@@ -25,6 +25,8 @@ import Footer from "@/components/Footer";
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
 import TestingCard from "@/components/ItineraryDetail/TestingCard";
 import CarTestingCard from "@/components/car-rental/car-detail/CarTestingCard";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import Create from "@/components/login-sinup/login/create";
 
 const fetchCarPackage = async (packageUrl) => {
     // console.log("page url :: ",packageUrl)
@@ -52,6 +54,7 @@ export default function CarDetail() {
     // For departure city pop up
     const [showPopup, setShowPopup] = useState(false);
     const [showPopupBooking, setShowPopupBooking] = useState(false);
+    const { loginPopup, setLoginPopup } = useCarPopupContext();
 
     // console.log("package1", package1);
     const [carAllPackages, setCarAllPackages] = useState([])
@@ -128,6 +131,7 @@ export default function CarDetail() {
                     carDepartureDetails={carDepartureDetails}
                 />
             )}
+            {loginPopup && (<Create />)}
             <div>
                 {/* <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%"> */}
                 <DesktopHeader />
