@@ -69,45 +69,54 @@ const FixedDeparturePopup = () => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+      <div 
+      className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50"
+      >
         <div className="flex justify-center items-center h-screen">
           <div className="overflow-hidden max-w-lg md:max-w-2xl mx-auto">
             <div className="grid md:grid-cols-3 grid-cols-1">
               <div className="bg-primary rounded-l-lg shadow-lg text-white  hidden md:block">
-                <div className="w-full h-[30%]"></div>
+                <div className="w-full h-[25%]"></div>
                 <div className="flex gap-5 justify-center">
                   <img
-                    className="object-cover rounded-full w-20 h-20 "
+                    className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 1.png"
                     alt=""
                   />
                   <img
-                    className="object-cover rounded-full w-20 h-20 "
+                    className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 2.png"
                     alt=""
                   />
                 </div>
                 <div className="flex gap-5 justify-center">
                   <img
-                    className="object-cover rounded-full w-20 h-20 "
+                    className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 3.png"
                     alt=""
                   />
                   <img
-                    className="object-cover rounded-full w-20 h-20 "
+                    className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 4.png"
                     alt=""
                   />
                 </div>
                 <div className="flex gap-5 justify-center">
                   <img
-                    className="object-cover rounded-full w-20 h-20 "
+                    className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 5.png"
                     alt=""
                   />
                   <img
-                    className="object-cover rounded-full w-20 h-20 "
+                    className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 6.png"
+                    alt=""
+                  />
+                </div>
+                <div className="flex gap-5 justify-start pl-7">
+                  <img
+                    className="object-cover rounded-full w-16 h-16"
+                    src="/assets/Affiliation 7.png"
                     alt=""
                   />
                 </div>
@@ -193,14 +202,14 @@ const FixedDeparturePopup = () => {
                 </div>
                 <div className="flex justify-start items-center gap-2 mb-4">
                   <input
-                    className="cursor-pointer h-4 w-4 rounded-lg accent-navyblack"
+                    className="cursor-pointer md:h-4 md:w-4 h-3 w-3 rounded-lg accent-navyblack"
                     type="checkbox"
                     id="checked"
                     checked={check}
                     onChange={() => setCheck(!check)}
                   />
                   <label htmlFor="checked"
-                    className="cursor-pointer label-text text-para font-medium text-gray-700 "
+                    className="cursor-pointer label-text md:text-para text-xs font-medium text-gray-700"
                   >
                     I have read and agree to the Terms & Conditions
                   </label>

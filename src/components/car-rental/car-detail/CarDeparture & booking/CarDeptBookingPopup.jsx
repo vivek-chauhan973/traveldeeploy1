@@ -10,8 +10,8 @@ const fetchPackgesTerm = async () => {
 };
 
 const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDetails }) => {
-        const {loginPopup, setLoginPopup} = useCarPopupContext();
-    
+    const { loginPopup, setLoginPopup } = useCarPopupContext();
+
     const [check, setCheck] = useState(false);
     const [CarPackageTerm, setCarPackageTerm] = useState([]);
 
@@ -37,45 +37,52 @@ const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDeta
 
     return (
         <>
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div className="flex justify-center items-center h-screen">
                     <div className="overflow-hidden max-w-lg md:max-w-2xl mx-auto">
                         <div className="grid md:grid-cols-3 grid-cols-1">
                             <div className="bg-primary rounded-l-lg shadow-lg text-white  hidden md:block">
-                                <div className="w-full h-[30%]"></div>
+                                <div className="w-full h-[25%]"></div>
                                 <div className="flex gap-5 justify-center">
                                     <img
-                                        className="object-cover rounded-full w-20 h-20 "
+                                        className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 1.png"
                                         alt=""
                                     />
                                     <img
-                                        className="object-cover rounded-full w-20 h-20 "
+                                        className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 2.png"
                                         alt=""
                                     />
                                 </div>
                                 <div className="flex gap-5 justify-center">
                                     <img
-                                        className="object-cover rounded-full w-20 h-20 "
+                                        className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 3.png"
                                         alt=""
                                     />
                                     <img
-                                        className="object-cover rounded-full w-20 h-20 "
+                                        className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 4.png"
                                         alt=""
                                     />
                                 </div>
                                 <div className="flex gap-5 justify-center">
                                     <img
-                                        className="object-cover rounded-full w-20 h-20 "
+                                        className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 5.png"
                                         alt=""
                                     />
                                     <img
-                                        className="object-cover rounded-full w-20 h-20 "
+                                        className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 6.png"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="flex gap-5 justify-start pl-7">
+                                    <img
+                                        className="object-cover rounded-full w-16 h-16"
+                                        src="/assets/Affiliation 7.png"
                                         alt=""
                                     />
                                 </div>

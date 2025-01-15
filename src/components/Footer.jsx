@@ -238,6 +238,10 @@ export default function Footer() {
                                                 className="h-10 w-10 object-cover"
                                                 alt=""
                                             />
+                                            <Image width={5} height={5} src="/assets/Affiliation 7.png"
+                                                className="h-10 w-10 object-cover"
+                                                alt=""
+                                            />
                                         </div>
                                     </div>
                                 </div>

@@ -131,7 +131,7 @@ export default function Package1() {
   };
   useEffect(() => {
     const dataPackage = allPackages?.filter(
-      (item) => item?.customId===addPackage?.highlightedPackage
+      (item) => item?.customId === addPackage?.highlightedPackage
     );
     setHighLightedPackage1(dataPackage);
   }, [allPackages, addPackage]);
@@ -191,14 +191,8 @@ export default function Package1() {
           setShowPopup1={setShowPopup1}
         />
       )}
-      {
-        loginPopup && (
-          <Create/>
-        )}
-      <div className="w-full ">
-        <DesktopHeader />
-      </div>
-
+      {loginPopup && (<Create />)}
+      <DesktopHeader />
       {/* <Caraousel /> */}
       <div>
         <PackageBreadcrums addPackage={addPackage} />
@@ -571,9 +565,8 @@ export default function Package1() {
                 best deal price
               </p>
               <div
-                className={`${
-                  addPackage?.prices?.diskHike < 0 ? "flex" : "hidden"
-                } gap-1 items-end`}
+                className={`${addPackage?.prices?.diskHike < 0 ? "flex" : "hidden"
+                  } gap-1 items-end`}
               >
                 <p className="text-sm line-through">
                   ₹{addPackage?.prices?.withoutDiscount}
@@ -585,11 +578,11 @@ export default function Package1() {
               <p className="text-sm leading-5">
                 Starts From{" "}
                 {addPackage?.addguest === "addGuest" && (
-                  <span className="text-lg text-graytext font-medium">                    
+                  <span className="text-lg text-graytext font-medium">
                     {Math.floor(
                       (submitButtonOfPricingCalculation && guestPrice / 2) ||
-                        price2 ||
-                        addPackage?.price
+                      price2 ||
+                      addPackage?.price
                     ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                   </span>
                 )}
@@ -612,11 +605,10 @@ export default function Package1() {
                       ? handleClickPopup
                       : null
                   }
-                  className={` ${
-                    fixedDepartureButtonEnaibleAndDisable
+                  className={` ${fixedDepartureButtonEnaibleAndDisable
                       ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
                       : "bg-gradient-to-r from-orange-200 to-red-200"
-                  } px-5 py-2 rounded-md text-white text-center text-para`}
+                    } px-5 py-2 rounded-md text-white text-center text-para`}
                 >
                   <span className="disabled:opacity-75">{buttonGuest}</span>
                 </p>
@@ -624,11 +616,10 @@ export default function Package1() {
               {addPackage?.prices?.departure1 === "fixedDeparture" && (
                 <button
                   onClick={handleSubmit}
-                  className={`border px-5 py-1 rounded-md ${
-                    fixedDepartureButtonEnaibleAndDisable
+                  className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
                       ? "bg-gradient-to-r from-orange-500 to-red-500"
                       : " bg-gradient-to-r from-orange-200 to-red-200"
-                  }  text-center text-white text-para`}
+                    }  text-center text-white text-para`}
                 >
                   Book Now
                 </button>
