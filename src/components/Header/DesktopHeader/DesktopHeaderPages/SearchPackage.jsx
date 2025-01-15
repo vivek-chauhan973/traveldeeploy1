@@ -23,7 +23,7 @@ const SearchPackage = ({ setSearchPackagePopup }) => {
                         <h2 className="text-md font-semibold lg:ml-16 ml-10 my-1">Match tour Packages</h2>
                         <FontAwesomeIcon
                             icon={faXmark}
-                            className="h-5 w-5 hover:bg-gray-100 rounded-full cursor-pointer p-1"
+                            className="h-5 w-5 hover:bg-gray-100 rounded-full cursor-pointer p-1 text-gray-500"
                             onClick={() => setSearchPackagePopup(false)}
                         />
                     </div>

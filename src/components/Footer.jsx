@@ -110,7 +110,7 @@ export default function Footer() {
                                                 <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">Privacy Policy</Link>
                                                     <Link rel="noopener noreferrer" href="#" className="footer-content2">Payment Policy</Link>
-                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Terms and Conditions</Link>
+                                                    <Link rel="noopener noreferrer" href="#" className="footer-content2">Terms & Conditions</Link>
 
                                                 </div>
                                             </div>
@@ -119,8 +119,8 @@ export default function Footer() {
                                             <div className="flex flex-col space-y-3">
                                                 <div>
                                                     {/* <span>Logo Logo Logo</span> */}
-                                                    <Image width={100} height={100} src="/assets/logo.png"
-                                                        className="cursor-pointer"
+                                                    <Image width={100} height={100} src="/assets/Logo-color.png"
+                                                        className="object-cover w-[80%]"
                                                         alt=""
                                                     />
                                                 </div>
