@@ -316,7 +316,7 @@ const Create = () => {
                     {timer}s
                   </span>
                 </p>
-                <div className="flex justify-center mt-4">
+                <div className="flex justify-center my-4">
                   <button
                     onClick={handleResendOtp}
                     // disabled={timer > 0}

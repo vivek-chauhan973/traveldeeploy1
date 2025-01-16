@@ -244,7 +244,7 @@ const ItineraryHeroSection = ({
 
                 {addPackage?.prices?.addguest === "addGuest" && (
                   <p className="text-sm leading-5">
-                    with GST include {" "}
+                    Without GST {" "}
                     <span className="text-lg text-graytext font-medium">
                       {Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
