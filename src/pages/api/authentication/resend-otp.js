@@ -19,11 +19,11 @@ const resendOptApi=async (req,res)=>{
         try {
         //   Send OTP via SMS
         await OTPModel.findOneAndUpdate({mobile},{$set:{mobile,otp}},{upsert:true,new:true})
-          // await client.messages.create({
-          //   body: `Your OTP is ${otp}`,
-          //   from: twilioPhoneNumber,
-          //   to: mobile,
-          // });
+          await client.messages.create({
+            body: `Your OTP is ${otp}`,
+            from: twilioPhoneNumber,
+            to: mobile,
+          });
          
           res.status(200).json({ message: 'OTP sent successfully', otp });
         } catch (error) {
