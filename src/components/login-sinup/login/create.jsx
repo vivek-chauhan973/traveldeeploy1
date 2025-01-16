@@ -107,9 +107,34 @@ const Create = () => {
     }
   };
 
-  const handleResendOtp = () => {
+  const handleResendOtp = async() => {
     if (timer === 0) {
-      sendOtp();
+      const number = "+91" + phoneNumber;
+      if (!/^\+\d{12}$/.test(number)) {
+        alert(
+          "Please enter a valid mobile number with country code (e.g., +91XXXXXXXXXX)"
+        );
+        return;
+      }
+      try {
+        const response = await fetch("/api/authentication/resend-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mobile: number }),
+        });
+        if (response.ok) {
+          alert("Again OTP sent successfully!");
+          sendOtp();
+          setStep(2);
+          //   setSentOtp(true);
+        } else {
+          alert("Failed to send OTP. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error sending OTP:", error);
+        alert("An error occurred. Please try again.");
+      }
+     
     } else {
       setResendOtpError("Please wait before resending the OTP.");
     }
