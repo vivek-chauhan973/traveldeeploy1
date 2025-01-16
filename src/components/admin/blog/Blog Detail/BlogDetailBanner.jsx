@@ -15,39 +15,39 @@ const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
 });
 const fetchCountries = async () => {
   try {
-      const res = await fetch('/api/location?type=country', { method: 'GET' });
-      const data = await res.json();
-      return data.result;
+    const res = await fetch('/api/location?type=country', { method: 'GET' });
+    const data = await res.json();
+    return data.result;
   } catch (err) {
-      console.log(err);
-      return [];
+    console.log(err);
+    return [];
   }
 };
 
 const fetchStates = async (countryId) => {
   try {
-      const res = await fetch('/api/location?type=state&countryId=' + countryId, { method: 'GET' });
-      const data = await res.json();
-      return data.result;
+    const res = await fetch('/api/location?type=state&countryId=' + countryId, { method: 'GET' });
+    const data = await res.json();
+    return data.result;
 
   } catch (err) {
-      console.log(err);
-      return [];
+    console.log(err);
+    return [];
   }
 };
 
 const fetchCities = async (stateId) => {
   try {
-      const res = await fetch('/api/location?type=city&stateId=' + stateId, { method: 'GET' });
-      const data = await res.json();
-      return data.result;
+    const res = await fetch('/api/location?type=city&stateId=' + stateId, { method: 'GET' });
+    const data = await res.json();
+    return data.result;
   } catch (err) {
-      console.log(err);
-      return [];
+    console.log(err);
+    return [];
   }
 };
 const fetchWriterData = async () => {
-  const data = await fetch("/api/blog/blogwriter",{method:"GET"});
+  const data = await fetch("/api/blog/blogwriter", { method: "GET" });
   return await data.json();
 };
 
@@ -65,18 +65,18 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
   const [selectedCountry, setSelesctedCountry] = useState(null);
   const [selectedState, setSelesctedState] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
-    const [states, setStates] = useState();
-    const [cities, setCities] = useState();
-    const [cityPopup, setCityPopup] = useState(false);
-    const [selectTime,setSelectTime]=useState("");
-    const [allWriter,setAllWriter]=useState([])
-    const [writer,setWriter]=useState(null);
+  const [states, setStates] = useState();
+  const [cities, setCities] = useState();
+  const [cityPopup, setCityPopup] = useState(false);
+  const [selectTime, setSelectTime] = useState("");
+  const [allWriter, setAllWriter] = useState([])
+  const [writer, setWriter] = useState(null);
   const router = useRouter();
   useEffect(() => {
 
     const fetchCountry = async () => {
-        const fetchedCountries = await fetchCountries();
-        setCountries(fetchedCountries);
+      const fetchedCountries = await fetchCountries();
+      setCountries(fetchedCountries);
 
     };
 
@@ -84,52 +84,52 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
     fetchWriterData().then((res) => {
       setAllWriter(res?.data || []);
     });
-}, []);
+  }, []);
 
-const handleSelectCountry1 = (value) => {
-  const fetchState = async () => {
+  const handleSelectCountry1 = (value) => {
+    const fetchState = async () => {
       const fetchedStates = await fetchStates(value);
       setStates(fetchedStates);
+    };
+    fetchState();
   };
-  fetchState();
-};
-const handleSelectCountry = (value) => {
-  const fetchState = async () => {
+  const handleSelectCountry = (value) => {
+    const fetchState = async () => {
       const fetchedStates = await fetchStates(value);
       setStates(fetchedStates);
+    };
+    fetchState();
   };
-  fetchState();
-};
-const handleSelectState1 = (value) => {
-  const fetchCity = async () => {
+  const handleSelectState1 = (value) => {
+    const fetchCity = async () => {
       const fetchedCities = await fetchCities(value);
       setCities(fetchedCities);
+    };
+    fetchCity();
   };
-  fetchCity();
-};
-const handleSelectState = (value) => {
-  const fetchCity = async () => {
+  const handleSelectState = (value) => {
+    const fetchCity = async () => {
       const fetchedCities = await fetchCities(value);
       setCities(fetchedCities);
+    };
+    fetchCity();
   };
-  fetchCity();
-};
-const handleLocation = (location) => {
-  setSelectedLocation(location);
-  if (!location) {
+  const handleLocation = (location) => {
+    setSelectedLocation(location);
+    if (!location) {
       setLocationValidate("Location is required");
-  } else {
+    } else {
       setLocationValidate("");
-  }
-};
-const handleLocation1 = (location) => {
-  setSelectedLocation(location);
-  if (!location) {
+    }
+  };
+  const handleLocation1 = (location) => {
+    setSelectedLocation(location);
+    if (!location) {
       setLocationValidate("Location is required");
-  } else {
+    } else {
       setLocationValidate("");
-  }
-};
+    }
+  };
   useEffect(() => {
     setSelectType(blogData?.blogType || "");
     setSelectTime(blogData?.time || "");
@@ -142,19 +142,19 @@ const handleLocation1 = (location) => {
     setSelesctedState(blogData?.state?._id);
     setSelectedLocation(blogData?.location?._id);
     handleSelectCountry(blogData?.associateCountry?._id);
-        handleSelectState(blogData?.associateState?._id);
-        setWriter(blogData?.writer?._id||null);
+    handleSelectState(blogData?.associateState?._id);
+    setWriter(blogData?.writer?._id || null);
     if (!blogData) {
       setCityPopup(true);
-    
+
       const fetchState = async () => {
-          const fetchedStates = await fetchStates(blogData?.associateCountry?._id);
-          setStates(fetchedStates);
+        const fetchedStates = await fetchStates(blogData?.associateCountry?._id);
+        setStates(fetchedStates);
       };
       fetchState();
-  }
+    }
   }, [blogData]);
-  console.log("blogData?.category",blogData)
+  console.log("blogData?.category", blogData)
   const [packageCategories, setPackageCategories] = useState();
   const fetchCategories = async () => {
     try {
@@ -182,11 +182,6 @@ const handleLocation1 = (location) => {
   }
   const handleCategory = (category) => {
     setSelectedCategories(category);
-    // if (!category?.length) {
-    //     setCategoryValidate("Category is required");
-    // } else {
-    //     setCategoryValidate("");
-    // }
   };
   const modules = {
     toolbar: [
@@ -218,14 +213,14 @@ const handleLocation1 = (location) => {
       formData.append("file", file);
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("blogType", selectType||blogData?.blogType);
+      formData.append("blogType", selectType || blogData?.blogType);
       formData.append("category", selectedCategories);
       formData.append("contentsummary", editorHtmlDescription);
       formData.append("location", selectedLocation);
       formData.append("state", selectedState);
       formData.append("country", selectedCountry);
-      formData.append("time", selectTime||blogData?.time);
-      formData.append("writer",writer);
+      formData.append("time", selectTime || blogData?.time);
+      formData.append("writer", writer);
     }
     // console.log("selectedCategories -------------> ",selectedCategories)
     try {
@@ -256,14 +251,14 @@ const handleLocation1 = (location) => {
       );
     }
   }
-// console.log("content is here as ------>  ",editorHtmlDescription)
+  // console.log("content is here as ------>  ",editorHtmlDescription)
   return (
     <>
       <div className="p-4 mb-5 rounded-md bg-white shadow-[0_0px_10px_-3px_rgba(0,0,0,0.3)]  border-l-2 border-teal-600">
         <p className="text-base font-semibold mb-2">Blog Detail Banner</p>
-        <div className="p-4">
-          <div className="flex xl:flex-row flex-col md:gap-10 gap-5 items-center xl:pl-5">
-            <div className=" flex flex-1 my-7">
+        <div className="lg:p-4 p-2">
+          <div className="flex xl:flex-row flex-col md:gap-10 gap-5 lg:items-center xl:pl-5">
+            <div className=" flex flex-1 my-7 overflow-x-hidden">
               <input
                 type="file"
                 className="mb-4 ml-3"
@@ -292,13 +287,13 @@ const handleLocation1 = (location) => {
                 <select
                   id="postTypes"
                   onChange={(e) => setSelectType(e.target.value)}
-                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md focus:border-primary outline-none cursor-pointer border text-para"
                   defaultValue={blogData?.blogType}
                 >
                   {blogData ? (
                     <option disabled >{blogData?.blogType}</option>
                   ) : (
-                    <option >select type </option>
+                    <option >Select type </option>
                   )}
                   <option value="blog">Blog</option>
                   <option value="travel-guide">Travel Guide</option>
@@ -322,7 +317,7 @@ const handleLocation1 = (location) => {
                 <div>
                   <label
                     htmlFor="cityBages"
-                    className="pb-2 font-semibold text-para"
+                    className="pb-2 font-semibold text-para "
                   >
                     Category :
                   </label>
@@ -331,7 +326,6 @@ const handleLocation1 = (location) => {
                     onSelectedCategoryIdsChange={handleCategory}
                     selectedCategories1={selectedCategories}
                   />
-                  {/* <span className="text-xs text-red-700 capitalize pl-5">{categoryValidate}</span> */}
                 </div>
               </div>
               <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
@@ -344,15 +338,15 @@ const handleLocation1 = (location) => {
                 <select
                   id="postWriter"
                   onChange={(e) => setWriter(e.target.value)}
-                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md focus:border-primary outline-none cursor-pointer border text-para"
                   defaultValue={blogData?.writer?._id}
                 >
                   {blogData ? (
                     <option disabled >{blogData?.writer?.blogwriter}</option>
                   ) : (
-                    <option >select writer </option>
+                    <option >Select writer </option>
                   )}
-                  {allWriter?.map((item,i)=><option key={i} value={item?._id}>{item.blogwriter}</option>)}
+                  {allWriter?.map((item, i) => <option key={i} value={item?._id}>{item.blogwriter}</option>)}
                 </select>
               </div>
               <div className="my-5 flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
@@ -365,13 +359,13 @@ const handleLocation1 = (location) => {
                 <select
                   id="postTypes1"
                   onChange={(e) => setSelectTime(e.target.value)}
-                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md focus:border-primary outline-none cursor-pointer border text-para"
                   defaultValue={blogData?.time}
                 >
                   {blogData ? (
                     <option disabled >{blogData?.time}</option>
                   ) : (
-                    <option >select time </option>
+                    <option >Select time </option>
                   )}
                   <option value="1">1 min</option>
                   <option value="2">2 min</option>
@@ -392,54 +386,53 @@ const handleLocation1 = (location) => {
                   <option value="30">30 min</option>
                 </select>
               </div>
-              
-              <div className="border-b-2">
-                            <div className=" flex md:flex-row flex-col xl:items-center gap-3 mt-5">
-                                <div>
-                                    <label htmlFor="packageLocation" className=" font-semibold text-para">Location:</label>
-                                </div>
-                                <div className="flex gap-4 items-center flex-wrap">
-                                    {(blogData && (countries)) && (<select id="packageLocation" className=' md:w-[130px] w-full md:ml-4 pl-2 rounded-md outline-none border-black border h-7 text-para' onChange={(e) => { handleSelectCountry(e.target.value); setSelesctedCountry(e.target.value) }} defaultValue={blogData?.location?.state?.country?._id}>
-                                        <option value="">
-                                            {blogData ? blogData?.country?.name : "select Country"}</option>
-                                        {countries?.map(country => (
-                                            <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
-                                        ))}
-                                    </select>)}
-                                    {(!blogData && countries) && (<select id="packageLocation" className=' md:w-[130px] w-full md:ml-4 pl-2 rounded-md outline-none border-black border h-7 text-para' onChange={(e) => { handleSelectCountry1(e.target.value); setSelesctedCountry(e.target.value) }}>
-                                        <option value="">Select country</option>
-                                        {countries?.map(country => (
-                                            <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
-                                        ))}
-                                    </select>)}
-                                    {(blogData && (states || cityPopup)) && (<select onChange={(e) => { handleSelectState(e.target.value); setSelesctedState(e.target.value) }} className=' md:w-[130px] w-full md:ml-4 px-2 rounded-md outline-none border-black border h-7 text-para' defaultValue={blogData?.location?.state?._id}>
-                                        <option value="">{blogData ? blogData?.state?.name : "select Country"}</option>
-                                        {states?.map(state => (
-                                            <option key={state._id} className='border-none bg-slate-100 text-black' value={state._id}>{state.name}</option>
-                                        ))}
-                                    </select>)}
-                                    {(!blogData && (states)) && (<select onChange={(e) => { handleSelectState1(e.target.value); setSelesctedState(e.target.value) }} className='md:w-[130px] w-full md:ml-4 px-2 rounded-md outline-none border-black border h-7 text-para'>
-                                        <option value="">Select state</option>
-                                        {states?.map(state => (
-                                            <option key={state._id} className='border-none bg-slate-100 text-black' value={state._id}>{state.name}</option>
-                                        ))}
-                                    </select>)}
-                                    {(blogData && (cities || cityPopup)) && (<select onChange={(e) => handleLocation(e.target.value)} id="packageLocation" className='md:w-[130px] w-full md:ml-4 rounded-md outline-none border-black px-2 border h-7 text-para' defaultValue={blogData?.location?._id}>
-                                        <option value="">{blogData ? blogData?.location?.name : "select Country"}</option>
-                                        {cities?.map(city => (
-                                            <option key={city._id} className='border-none bg-slate-100 text-black' value={city._id}>{city.name}</option>
-                                        ))}
-                                    </select>)}
-                                    {(!blogData && (cities)) && (<select onChange={(e) => handleLocation1(e.target.value)} id="packageLocation" className='md:w-[130px] w-full md:ml-4 rounded-md outline-none border-black px-2 border h-7 text-para'>
-                                        <option value="">Select city</option>
-                                        {cities?.map(city => (
-                                            <option key={city._id} className='border-none bg-slate-100 text-black' value={city._id}>{city.name}</option>
-                                        ))}
-                                    </select>)}
-                                </div>
-                            </div>
-                            <span className="text-xs text-red-700 capitalize pl-5">{locationValidate}</span>
-                        </div>
+              <div className="border-b-2 mb-2">
+                <div className=" flex md:flex-row flex-col xl:items-center gap-3 mt-5">
+                  <div>
+                    <label htmlFor="packageLocation" className=" font-semibold text-para">Location:</label>
+                  </div>
+                  <div className="flex gap-4 items-center flex-wrap">
+                    {(blogData && (countries)) && (<select id="packageLocation" className=' md:w-[130px] w-full md:ml-4 pl-2 rounded-md outline-none border-black border h-7 text-para' onChange={(e) => { handleSelectCountry(e.target.value); setSelesctedCountry(e.target.value) }} defaultValue={blogData?.location?.state?.country?._id}>
+                       <option value="">
+                        {blogData ? blogData?.country?.name : "select Country"}</option>
+                      {countries?.map(country => (
+                        <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
+                      ))}
+                    </select>)}
+                    {(!blogData && countries) && (<select id="packageLocation" className=' md:w-[130px] w-full md:ml-4 pl-2 rounded-md outline-none border-black border h-7 text-para' onChange={(e) => { handleSelectCountry1(e.target.value); setSelesctedCountry(e.target.value) }}>
+                      <option value="">Select country</option>
+                      {countries?.map(country => (
+                        <option key={country._id} className='border-none bg-slate-100 text-black' value={country._id}>{country.name}</option>
+                      ))}
+                    </select>)}
+                    {(blogData && (states || cityPopup)) && (<select onChange={(e) => { handleSelectState(e.target.value); setSelesctedState(e.target.value) }} className=' md:w-[130px] w-full md:ml-4 px-2 rounded-md outline-none border-black border h-7 text-para' defaultValue={blogData?.location?.state?._id}>
+                      <option value="">{blogData ? blogData?.state?.name : "select Country"}</option>
+                      {states?.map(state => (
+                        <option key={state._id} className='border-none bg-slate-100 text-black' value={state._id}>{state.name}</option>
+                      ))}
+                    </select>)}
+                    {(!blogData && (states)) && (<select onChange={(e) => { handleSelectState1(e.target.value); setSelesctedState(e.target.value) }} className='md:w-[130px] w-full md:ml-4 px-2 rounded-md outline-none border-black border h-7 text-para'>
+                      <option value="">Select state</option>
+                      {states?.map(state => (
+                        <option key={state._id} className='border-none bg-slate-100 text-black' value={state._id}>{state.name}</option>
+                      ))}
+                    </select>)}
+                    {(blogData && (cities || cityPopup)) && (<select onChange={(e) => handleLocation(e.target.value)} id="packageLocation" className='md:w-[130px] w-full md:ml-4 rounded-md outline-none border-black px-2 border h-7 text-para' defaultValue={blogData?.location?._id}>
+                      <option value="">{blogData ? blogData?.location?.name : "select Country"}</option>
+                      {cities?.map(city => (
+                        <option key={city._id} className='border-none bg-slate-100 text-black' value={city._id}>{city.name}</option>
+                      ))}
+                    </select>)}
+                    {(!blogData && (cities)) && (<select onChange={(e) => handleLocation1(e.target.value)} id="packageLocation" className='md:w-[130px] w-full md:ml-4 rounded-md outline-none border-black px-2 border h-7 text-para'>
+                      <option value="">Select city</option>
+                      {cities?.map(city => (
+                        <option key={city._id} className='border-none bg-slate-100 text-black' value={city._id}>{city.name}</option>
+                      ))}
+                    </select>)}
+                  </div>
+                </div>
+                <span className="text-xs text-red-700 capitalize pl-5">{locationValidate}</span>
+              </div>
               <div>
                 <label htmlFor="textarea" className=" font-semibold">
                   Description
@@ -458,7 +451,7 @@ const handleLocation1 = (location) => {
           <div className="w-full">
             <h3 className=" font-semibold mb-2">Content Summary</h3>
             <QuillNoSSRWrapper
-              className="rounded h-48 mb-16"
+              className="rounded md:h-48 h-40 md:mb-16 mb-20 "
               theme="snow"
               value={editorHtmlDescription}
               onChange={setEditorHtmlDescription}

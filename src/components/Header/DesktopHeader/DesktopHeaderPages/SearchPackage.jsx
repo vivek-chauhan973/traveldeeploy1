@@ -29,27 +29,25 @@ const SearchPackage = ({ setSearchPackagePopup }) => {
                     </div>
                     <div className="w-full h-auto bg-white flex justify-start gap-10 flex-wrap lg:px-16 px-10 py-3 ">
                         {searchedData && (
-                            searchedData?.map((pac, i) => {
+                            searchedData?.slice(0, 50).map((pac, i) => {
                                 return (
                                     <div key={i} className="w-48 h-52">
                                         <div className="relative w-full h-[70%]">
-                                            <Image
-                                                className="w-full h-full object-cover rounded-md"
-                                                src={pac?.uploads?.[0] || '/logo.png'}
-                                                alt={"ui/ux review check"}
-                                                width={200}
-                                                height={200}
-                                                onError={(e) => {
-                                                    e.target.onerror = null;
-                                                    e.target.src = "/logo.png";
-                                                }}
-                                            />
+                                            <Link href={"/package/" + pac?.url + "-tour-package"}>
+                                                <Image
+                                                    className="w-full h-full object-cover rounded-md cursor-pointer"
+                                                    src={pac?.uploads?.[0] || '/logo.png'}
+                                                    alt={pac?.name}
+                                                    width={200}
+                                                    height={200}
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.src = "/logo.png";
+                                                    }}
+                                                />
+                                            </Link>
                                             <div className="absolute top-2">
                                                 <div className="py-1 text-xxs text-white flex gap-1 items-center rounded-r-md pl-1 pr-2 bg-black">
-                                                    {/* <FontAwesomeIcon
-                                                        icon={faCalendarDays}
-                                                        className="h-3 w-3 text-white"
-                                                    /> */}
                                                     {pac?.days > 1 && (
                                                         <>{pac?.days - 1} Night{pac?.days - 1 > 1 ? "s" : ""} / </>
                                                     )}

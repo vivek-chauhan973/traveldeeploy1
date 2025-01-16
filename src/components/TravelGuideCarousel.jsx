@@ -40,27 +40,25 @@ const TravelGuideCarousel = ({ carPackageData }) => {
 
 
     return (
-        <div className="md:mt-9 mt-4 bg-slate-100">
+        <div className="bg-slate-100">
             {carPackageData?.length > 0 &&
                 <div className="container-wrapper  text-center py-7">
                     <p className='md:text-[25px] text-xl font-medium mb-1 capitalize'>
-                        Discover our handpicked highlights to craft your perfect Travel Guide package
+                        Your Guide to Extraordinary Travel Destinations Around the planet
                     </p>
                     <p className="md:text-md text-para font-normal">
-                        Discovered expertly curated travel package tailored to offer you unforgettable experiences.
-                    </p>
+                    Your Comprehensive Travel Companion for Exploring the Planets Most Captivating and Unique Destinations                    </p>
                 </div>
             }
             <div className="carousel-container relative container-wrapper ">
                 <div className="carousel gap-5" ref={carouselRef}>
                     {carPackageData?.length > 0 && carPackageData?.map((items, i) => {
-
                         return (
                             <div key={i} className="carousel-item w-60 md:w-80 mb-11  rounded-md">
                                 <div className="shadow-md rounded-lg overflow-hidden">
                                     <div className="relative">
                                         <div className=" w-full h-52">
-                                             <Image className=" relative  object-cover " layout="fill"
+                                            <Image className=" relative  object-cover " layout="fill"
                                                 src={items?.videoPath}
                                                 alt="images"
                                             />
@@ -68,7 +66,7 @@ const TravelGuideCarousel = ({ carPackageData }) => {
                                     </div>
                                     <div className=" flex flex-col gap-3 px-3 pt-3 pb-5 bg-white">
                                         <div className='flex gap-3 w-full justify-between'>
-                                            <p className="font-semibold md:text-base text-sm text-black w-[80%]">{ new Date(items?.updatedAt).toLocaleDateString()}</p>
+                                            <p className="font-semibold md:text-base text-sm text-black w-[80%]">{new Date(items?.updatedAt).toLocaleDateString()}</p>
                                             <p className="font-semibold md:text-base text-sm text-black w-[20%]">{items?.time} min</p>
                                         </div>
                                         <div className="w-full md:h-7 h-8">
@@ -76,7 +74,7 @@ const TravelGuideCarousel = ({ carPackageData }) => {
                                         </div>
                                         <p
                                             className="text-para line-clamp-3">
-                                                {items?.description}
+                                            {items?.description}
                                         </p>
                                         <div>
                                             <div className="flex gap-5 items-center justify-center pr-4 pt-1">

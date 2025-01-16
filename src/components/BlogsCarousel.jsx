@@ -40,15 +40,13 @@ const BlogsCarousel = ({ carPackageData }) => {
 
 
     return (
-        <div className="md:mt-9 mt-4 bg-slate-100">
+        <div className="bg-slate-100">
             {carPackageData?.length > 0 &&
                 <div className="container-wrapper  text-center py-7">
                     <p className='md:text-[25px] text-xl font-medium mb-1 capitalize'>
-                        Discover our handpicked highlights to craft your perfect Travel Guide package
-                    </p>
+                    Unveiling the Beauty and Wonders of Must-Visit Locations all Around</p>
                     <p className="md:text-md text-para font-normal">
-                        Discovered expertly curated travel package tailored to offer you unforgettable experiences.
-                    </p>
+                    Your Ultimate Guide to Experiencing the Most Spectacular Destinations and Adventures.</p>
                 </div>
             }
             <div className="carousel-container relative container-wrapper ">
