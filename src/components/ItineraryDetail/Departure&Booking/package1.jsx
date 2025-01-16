@@ -65,6 +65,7 @@ const getAllPackags = async () => {
   return await (await fetch("/api/package/get-packages")).json();
 };
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
+import Footer from "@/components/Footer";
 
 export default function Package1() {
   const {
@@ -529,10 +530,10 @@ export default function Package1() {
       <div className=" mt-12 pb-6">
         <TestingCard addPackage={addPackage} />
       </div>
-
+                  
       {/* FAQ section --- when data is not available then all content will hide */}
       {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
-        <div className="my-7 md:p-0 px-4">
+        <div className=" mt-7 mb-16 md:p-0 px-4">
           <div className="text-center mb-4">
             <p className="md:text-[22px] text-[20px] mb-2 capitalize font-semibold">
               Frequently Asked Questions (FAQs){" "}
@@ -548,7 +549,7 @@ export default function Package1() {
           <Faq1 data={addPackage.faqs.days} />
         </div>
       ) : null}
-
+      <Footer/>
       {/* bottom pricing */}
       {/* <BottomLink locationId={addPackage?.state} addPackage={addPackage} /> */}
       <div className=" flex xl:hidden z-30  sticky bottom-0 bg-white border-t-2 border-primary">

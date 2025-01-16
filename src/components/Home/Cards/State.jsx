@@ -45,13 +45,13 @@ const State = () => {
                         Delve into the most popular destinatins and create unforgettable memories.
                     </p>
                 </div>
-                <div className="container-wrapper grid grid-cols-5 gap-3 overflow-hidden">
-                    <div className="flex xl:flex-col md:mt-14 md:gap-5 gap-2 py-5 xl:col-auto col-span-5 xl:overflow-x-hidden overflow-x-scroll">
+                <div className="container-wrapper grid grid-cols-5 lg:gap-5 gap-3 overflow-hidden">
+                    <div className="flex xl:flex-col lg:mt-28 mt-5  lg:gap-7 md:gap-5 gap-2 py-5 xl:col-auto col-span-5 xl:overflow-x-hidden overflow-x-scroll">
                         {data?.states?.slice(0, 5).map((title) => (
                             <div key={title._id}>
                                 <div className=''>
                                     <button
-                                        className="cursor-pointer capitalize shadow-md bg-gradient-to-r from-orange-500 to-red-500 xl:w-52 w-40 text-white md:text-[16px] text-para md:py-2.5 py-1.5 px-4 rounded-md"
+                                        className="cursor-pointer capitalize shadow-md bg-gradient-to-r from-orange-500 to-red-500 xl:w-52 w-40 text-white md:text-[16px] text-para lg:py-3 md:py-2.5 py-1.5 px-4 rounded-md"
                                         onClick={() => handleStatePackages(title._id)}
                                     >
                                         {title.name}
