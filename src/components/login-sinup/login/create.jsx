@@ -92,7 +92,7 @@ const Create = () => {
         });
         const data = await response.json();
         if (data.success) {
-          Cookies.set("token",data?.data?.token,{expires:1})
+          Cookies.set("token",data?.data?.token,{expires:1,secure:true})
           setLoginPopup(false);
           setPhoneNumber("");
           setOtp("");
