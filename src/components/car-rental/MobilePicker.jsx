@@ -26,7 +26,7 @@ const fetchBookingProcess = async () => {
 }
 
 
-const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
+const MobilePicker = ({ setCarSelectionPopup }) => {
 
     const [activeItem, setActiveItem] = useState(null);
     const [activeTab, setActiveTab] = useState("Tab1");
@@ -71,11 +71,6 @@ const MobilePicker = ({ carSelectionPopup, setCarSelectionPopup }) => {
         });
 
     }, []);
-
-    // console.log("localTime", localTime);
-    // console.log("flexibleTime", flexibleTime);
-    // console.log("selectedDate", selectedDate);
-    // console.log("selectedTime", selectedTime);
 
     const [currentDate, setCurrentDate] = useState('');
 

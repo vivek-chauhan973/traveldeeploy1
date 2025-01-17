@@ -98,7 +98,7 @@ const CarBookingPopupOutsation = () => {
     let rate = userFormData?.selectedCar?.[0]?.outStationBasePrice ?? 0;
     // console.log("rate here ---> ", rate);
     let rate2 = userFormData?.selectedCar?.[0]?.capacity ?? 0;
-    // console.log("rate here ---> ", rate);
+    console.log("rate2 here ---> ", rate2);
     let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
     let ac = userFormData?.selectedCar?.[0]?.ac ?? 0;
     let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;

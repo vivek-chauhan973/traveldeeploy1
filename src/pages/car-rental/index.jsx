@@ -203,19 +203,17 @@ export default function App() {
     <AppProvider>
       <div>
         {/* CarRentalHomeSkelton  */}
-        {activeInactivePopup && <ActiveInactive/>}
+        {activeInactivePopup && <ActiveInactive />}
+        {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
         {showPopup && <CarBookingPopup />}
         {showPopupOutstation && <CarBookingPopupOutsation />}
         {loginPopup && <Create />}
-        <DesktopHeader setCarSelectionPopup={setCarSelectionPopup} />
+        <DesktopHeader />
         <Breadcrumbs />
         <div className="container-wrapper"></div>
         <div className="mb-2 md:mb-5">
           <div className="overflow-hidden relative xl:h-[83vh] h-[80vh]">
-            <div
-              className="container-wrapper"
-              onClick={() => setCarSelectionPopup(false)}
-            >
+            <div className="container-wrapper">
               <div className="absolute top-20">
                 <p className="md:font-semibold font-bold md:text-xl text-lg  text-white w-2/3">
                   {carBanner?.title}
@@ -224,10 +222,7 @@ export default function App() {
             </div>
             <div className="container-wrapper xl:block hidden">
               <div className="absolute top-2/4 -translate-y-3/4">
-                <Picker
-                  setCarSelectionPopup={setCarSelectionPopup}
-                  carSelectionPopup={carSelectionPopup}
-                />
+                <Picker setCarSelectionPopup={setCarSelectionPopup} />
               </div>
             </div>
             <div>
@@ -243,53 +238,12 @@ export default function App() {
               />
             </div>
           </div>
-          <div className="xl:block hidden">
-            <div className="absolute md:top-[330px] md:left-2.5 lg:top-[460px] xl:top-[600px] lg:left-10 xl:left-20 -translate-y-2/4">
-              {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
-            </div>
-          </div>
-          <div className="xl:hidden block">
-            <div className="absolute top-[265px] md:left-56">
-              {carSelectionPopup && <CarSelectionPopup setCarSelectionPopup={setCarSelectionPopup} />}
-            </div>
-          </div>
           <div className="xl:hidden block absolute top-56 md:left-56">
             <div className="p-2 my-5 md:flex justify-center items-center">
-              <MobilePicker
-                setCarSelectionPopup={setCarSelectionPopup}
-                carSelectionPopup={carSelectionPopup}
-              />
+              <MobilePicker setCarSelectionPopup={setCarSelectionPopup} />
             </div>
           </div>
         </div>
-        {/* small devices */}
-        {/* <div className="mb-5 md:hidden block">
-          <div className="w-full h-[80vh] relative">
-            <Image
-              className="w-full h-full object-cover"
-              src={
-                carBanner?.path ||
-                "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt=""
-              width={1283}
-              height={854}
-            />
-          </div>
-          <div className="absolute top-40 flex justify-center items-center">
-            <p className="font-semibold  text-xl text-white w-4/5">
-              {carBanner?.title}
-            </p>
-          </div>
-          <div className="absolute top-56">
-            <div className=" my-5">
-              <MobilePicker
-                setCarSelectionPopup={setCarSelectionPopup}
-                carSelectionPopup={carSelectionPopup}
-              />
-            </div>
-          </div>
-        </div> */}
         <div className="py-5 container-wrapper">
           <div classname="">
             <p className="md:font-semibold font-medium text-xl">

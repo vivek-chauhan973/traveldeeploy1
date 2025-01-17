@@ -1,7 +1,7 @@
-import OTPModel from "@/models/Otp";
 import connectToDatabase from "@/utils/db";
 import jwt from 'jsonwebtoken';
 import Cookies from "js-cookie";
+import OTPModel from "@/models/Otp";
 const verifyOtpApi = async (req, res) => {
     await connectToDatabase();
     if (req.method === 'POST') {

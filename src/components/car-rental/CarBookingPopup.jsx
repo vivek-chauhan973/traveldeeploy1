@@ -109,7 +109,7 @@ const CarBookingPopup = () => {
 
     let perKmRate = userFormData?.selectedCar?.[0]?.perKmRate ?? 0;
     let costPerKm = Math.floor(perKmRate + Math.floor((perKmRate * totalMarkup) / 100)); // per km rate with markup 
-    const choosePlanKm = userPlanLocal && userPlanLocal.match(/\d+/) ? parseInt(userPlanLocal.match(/\d+/)[0], 10) : 1;
+    const choosePlanKm = userPlanLocal && userPlanLocal?.match(/\d+/) ? parseInt(userPlanLocal?.match(/\d+/)[0], 10) : 1;
     let c = costPerKm * choosePlanKm;
     // console.log("c here ---> ", c);
 

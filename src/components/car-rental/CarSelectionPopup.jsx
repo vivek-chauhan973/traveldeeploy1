@@ -30,7 +30,14 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
   const [selectedlocation, setSelectedlocation] = useState(null);
   const [selectedPickupPoint, setSelectedPickupPoint] = useState(null);
 
-  const { getDetail} = useCarPopupContext(); 
+  const { getDetail } = useCarPopupContext();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
   
   useEffect(() => {
     fetchCars().then((res) => {
@@ -74,22 +81,19 @@ const CarSelectionPopup = ({ setCarSelectionPopup }) => {
       selectedPickupPoint: localPickupPointLocation.filter(item => item._id === selectedPickupPoint),
     };
     getDetail(formData)
-    // console.log("formData",formData);
     alert('User Data Submitted');
     setCarSelectionPopup(false);
   }
   const handleCancel = () => {
     setCarSelectionPopup(false)
   }
-  // console.log("rakesh", carData);
-  // console.log("localLocation", localLocation);
-  // console.log("localPickupPointLocation", localPickupPointLocation);
-  // console.log("persons", persons);
-  // console.log("selectedCar", selectedCar);
-
+ 
   return (
-    <div className="absolute flex items-center justify-center z-[9999]">
-      <div className="bg-white rounded-xl shadow-lg md:w-80 w-72 md:ml-0 ml-5 md:py-5 py-2 px-5 border">
+    <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div 
+      className="bg-white rounded-xl shadow-lg z-50 md:w-80 w-72 h-auto max-h-[500px] md:py-5 py-2 px-5"
+      >
         <div className="flex justify-between md:mb-2.5 mb-1">
           <h2 className="md:text-xl text-lg font-semibold text-center text-gray-700">
             Car Selection

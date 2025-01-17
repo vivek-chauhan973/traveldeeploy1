@@ -26,7 +26,7 @@ const fetchBookingProcess = async () => {
   return await response.json();
 };
 
-const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
+const Picker = ({ setCarSelectionPopup }) => {
   const [activeItem, setActiveItem] = useState(null);
   const [activeTab, setActiveTab] = useState("Tab1");
   const [isShowDateTimePicker, setShowDateTimePicker] = useState(false);
@@ -73,11 +73,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     });
 
   }, []);
-
-  // console.log("localTime", localTime);
-  // console.log("flexibleTime", flexibleTime);
-  // console.log("selectedDate", selectedDate);
-  // console.log("selectedTime", selectedTime);
 
   const [currentDate, setCurrentDate] = useState('');
 
@@ -145,22 +140,6 @@ const Picker = ({ carSelectionPopup, setCarSelectionPopup }) => {
     { value: "80KM-8HRS", label: "80KM - 8HRS" },
     { value: "100KM-10HRS", label: "100KM - 10HRS" },
   ];
-
-  // const calculateDaysDifference = () => {
-  //   if (pickupDateOutstation && returnDateOutstation) {
-  //     const pickupDate = new Date(pickupDateOutstation);
-  //     const returnDate = new Date(returnDateOutstation);
-
-  //     // Calculate the difference in milliseconds
-  //     const differenceInTime = returnDate - pickupDate;
-
-  //     // Convert milliseconds to days
-  //     const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
-
-  //     // Ensure no negative values
-  //     setDaysDifference(differenceInDays > 0 ? differenceInDays : 0);
-  //   }
-  // };
 
   console.log("userFormData picker", userFormData);
 
