@@ -63,16 +63,16 @@ export default function Footer() {
         window.open(`https://wa.me/919897581113`, "_blank");
     };
     const handleFacebook = () => {
-        window.open(`https://www.facebook.com/bizareX/`, "_blank");
+        window.open(`https://www.facebook.com/bizareX`, "_blank");
     };
     const handleInstagram = () => {
-        window.open(`https://www.instagram.com/bizarexpedition/?hl=en`, "_blank");
+        window.open(`https://www.instagram.com/bizarexpedition`, "_blank");
     };
     const handleTwitter = () => {
-        window.open(`https://x.com/bizarexpedition`, "_blank");
+        window.open(`https://twitter.com/bizarexpedition`, "_blank");
     };
     const handleLinkedIn = () => {
-        window.open(`https://www.linkedin.com/company/bizare-xpedition/posts/?feedView=all`, "_blank");
+        window.open(`https://www.linkedin.com/company/13630320/`, "_blank");
     };
     const handleGoogle = () => {
         window.open(`https://www.google.com`, "_blank");
@@ -152,7 +152,7 @@ export default function Footer() {
                                     </div>
                                     <hr className="container-wrapper" />
 
-                                    <div className="  md:flex md:items-center md:justify-between py-1 ">
+                                    <div className="md:flex md:items-center md:justify-between py-1 ">
                                         <ul className="flex items-center  flex-wrap ">
                                             <li className=" list-none">
                                                 <Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
@@ -170,7 +170,7 @@ export default function Footer() {
                                                 </Link>
                                             </li>
                                         </ul>
-                                        <div className="flex sm:justify-center space-x-6">
+                                        <div className="flex sm:justify-center md:space-x-6 space-x-6 md:ml-0 ml-2 md:mb-0 mb-2">
                                             <svg
                                                 onClick={handleWhatsApp}
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +228,7 @@ export default function Footer() {
                                                 alt=""
                                             />
                                         </div>
-                                        <div className="flex justify-center items-center gap-2">
+                                        <div className="flex justify-center items-center md:gap-2 gap-1">
                                             <Image width={5} height={5} src="/assets/Affiliation 1.png"
                                                 className="h-10 w-10 object-cover"
                                                 alt=""

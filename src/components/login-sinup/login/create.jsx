@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
-import { signIn ,useSession} from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Cookies from "js-cookie";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 const Create = () => {
   const { setLoginPopup } = useCarPopupContext();
   useEffect(() => {
@@ -13,7 +14,7 @@ const Create = () => {
     };
   }, []);
   const token = Cookies.get("token");
-  const {data:session}=useSession();
+  const { data: session } = useSession();
   const [step, setStep] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -141,8 +142,8 @@ const Create = () => {
     }
   };
 
-  const handleMobileVerifiedAndGetMoreDetail=()=>{
-    
+  const handleMobileVerifiedAndGetMoreDetail = () => {
+
     setLoginPopup(false);
   }
 
@@ -175,7 +176,7 @@ const Create = () => {
                     alt=""
                   />
                 </div>
-                {(token===undefined&&session===null)&&<div>
+                {(token === undefined && session === null) && <div>
                   <div className="flex flex-col justify-center mt-5">
                     <p className="text-center mb-3 font-medium capitalize">
                       Create an Account
@@ -218,16 +219,20 @@ const Create = () => {
                     </p>
                     <span class="border-b w-1/5 lg:w-1/4 mr-2"></span>
                   </div>
-                  <div className="flex justify-center my-5">
+                  <div className="flex justify-center gap-2 my-5">
                     <button
                       onClick={() => signIn("google")}
-                      className="w-full bg-gray-200 text-navyblack px-5 py-2 rounded-full"
+                      className="w-full bg-gray-200 text-navyblack px-5 py-2 rounded-full flex justify-center gap-2 items-center"
                     >
+                      <FontAwesomeIcon
+                        icon={faGoogle}
+                        className="text-primary"
+                      />
                       Google
                     </button>
                   </div>
                 </div>}
-                {token!==undefined&&<div className="flex flex-col gap-2">
+                {token !== undefined && <div className="flex flex-col gap-2">
                   <h1 className="text-sm font-medium text-center"> Provide Details</h1>
                   <div className="flex flex-col ">
                     <label htmlFor="firstname" className="text-sm">Name</label>
@@ -239,18 +244,18 @@ const Create = () => {
                   </div> */}
                   <div className="flex flex-col">
                     <label htmlFor="email" required className="text-sm">Email</label>
-                    <input type="email"  id="email" placeholder="Enter Email Address"  className=" text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 "/>
+                    <input type="email" id="email" placeholder="Enter Email Address" className=" text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
                   </div>
                   <button onClick={handleMobileVerifiedAndGetMoreDetail} className="w-full mb-5 bg-navyblack text-white px-5 py-2 rounded-full mt-2.5">Proceed</button>
-                  </div>}
-                  {session!==null&&<div className="flex flex-col gap-2">
+                </div>}
+                {session !== null && <div className="flex flex-col gap-2">
                   <h1 className="text-para font-semibold text-center"> Provide Details</h1>
                   <div className="flex flex-col mt-3 ">
                     <label htmlFor="firstname" className="text-sm">Mobile No.</label>
                     <input type="text" id="firstname" placeholder="Enter Mobile No." required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
                   </div>
                   <button className="w-full bg-navyblack text-white px-5 mb-10 mt-5 py-2 rounded-full ">Proceed</button>
-                  </div>}
+                </div>}
               </div>
             </div>
           ) : (
