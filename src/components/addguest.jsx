@@ -58,7 +58,7 @@ const Addguest = ({
   const [maxDate, setMaxDate] = useState("");
   const [selectedCarBool, setSelectedCarBool] = useState(false);
   const [firstSelectedCar, setFirstSelectedCar] = useState(null);
-  const [firstSelectedCarPrice,setFirstSelectedCarPrice]=useState(0);
+  const [firstSelectedCarPrice, setFirstSelectedCarPrice] = useState(0);
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -418,40 +418,40 @@ const Addguest = ({
     const farePrice = firstSelectedCar?.capacity * days;
     const data1 = firstSelectedCar?.ac * days;
     let price = farePrice + data1;
-  
+
     if (departureSectionData?.hike) {
       const data1 = Math.floor(
         firstSelectedCar?.ac * days +
-          (firstSelectedCar?.ac * days * markup) / 100
+        (firstSelectedCar?.ac * days * markup) / 100
       );
       if (departureSectionData?.hike > 0) {
         const data2 = Math.floor(
           data1 + (data1 * departureSectionData?.hike) / 100
         );
-  // console.log("price is of non selecting default car is as ",data2);
-        price=(price + data2);
+        // console.log("price is of non selecting default car is as ",data2);
+        price = (price + data2);
       } else {
         const data2 = Math.floor(
           data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100
         );
         // console.log("price is of non selecting default car is as ",data2);
 
-        price=(price + data2);
+        price = (price + data2);
       }
     } else {
       const data1 = Math.floor(
         firstSelectedCar?.ac * days +
-          (firstSelectedCar?.ac * days * markup) / 100
+        (firstSelectedCar?.ac * days * markup) / 100
       );
-  // console.log("price is of non selecting default car is as ",data1);
+      // console.log("price is of non selecting default car is as ",data1);
 
-      price=(price + data1);
+      price = (price + data1);
     }
     setFirstSelectedCarPrice(price);
     // setGuestPrice(final+price);
-  // console.log("deparsection data is here 12345---final>",price)
-    
-  }, [firstSelectedCar,final]);
+    // console.log("deparsection data is here 12345---final>",price)
+
+  }, [firstSelectedCar, final]);
 
   // console.log("deparsection data is here 12345---final>",final)
   // console.log("deparsection data is here 12345--- guestprice>",guestPrice)
@@ -459,8 +459,8 @@ const Addguest = ({
   useEffect(() => {
     const farePrice = final + selectedCarIdFetchApi?.capacity * days;
     const farePrice1 = selectedCarIdFetchApi?.capacity * days;
-    const data1 = selectedCarIdFetchApi?.ac * days;  
-  // console.log("deparsection data is here 12345---final>",farePrice1 + data1)
+    const data1 = selectedCarIdFetchApi?.ac * days;
+    // console.log("deparsection data is here 12345---final>",farePrice1 + data1)
 
     setFinalPrice(farePrice + data1);
   }, [selectedCarIdFetchApi]);
@@ -469,7 +469,7 @@ const Addguest = ({
     if (departureSectionData?.hike) {
       const data1 = Math.floor(
         selectedCarIdFetchApi?.ac * days +
-          (selectedCarIdFetchApi?.ac * days * markup) / 100
+        (selectedCarIdFetchApi?.ac * days * markup) / 100
       );
       if (departureSectionData?.hike > 0) {
         const data2 = Math.floor(
@@ -498,7 +498,7 @@ const Addguest = ({
     } else {
       const data1 = Math.floor(
         selectedCarIdFetchApi?.ac * days +
-          (selectedCarIdFetchApi?.ac * days * markup) / 100
+        (selectedCarIdFetchApi?.ac * days * markup) / 100
       );
       if (isAC) {
         // console.log("calculated price -1 ",data1)
@@ -541,7 +541,7 @@ const Addguest = ({
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
-      <div className="bg-white">
+      <div className="bg-white rounded-lg">
         {addPackage?.prices?.addguest === "addGuest" && (
           <form className="w-full" action="">
             <div className="relative">
@@ -556,19 +556,19 @@ const Addguest = ({
                     onClick={() => setShowPopup1(false)}
                   />
                 </div>
-                <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
+                <div className="flex justify-between items-center py-4  px-[2vw] rounded-t-lg z-10">
                   <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
-                    add guest & Choose from{}
+                    add guest & Choose from{ }
                   </p>
                   <div>
                     <p className="text-xl font-semibold">
                       {guestPrice
                         ? guestPrice.toLocaleString("en-IN", {
-                            style: "currency",
-                            currency: "INR",
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0,
-                          })
+                          style: "currency",
+                          currency: "INR",
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0,
+                        })
                         : "₹ --"}
                     </p>
                     <p className="text-xxs">per person on twin sharing</p>
@@ -636,11 +636,10 @@ const Addguest = ({
                         name="child"
                         value={inputData?.child}
                         id="Childdropdown"
-                        className={`border w-full py-1 rounded-md ${
-                          inputData?.child === 0 &&
+                        className={`border w-full py-1 rounded-md ${inputData?.child === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
-                        }`}
+                          }`}
                         onChange={handleChange}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
@@ -708,17 +707,16 @@ const Addguest = ({
                         </div>
                       </div>
                     </label>
-
+                    
                     <div className="w-14">
                       <select
                         name="infant"
                         value={inputData?.infant}
                         id="Childdropdown2"
-                        className={`border w-full py-1 rounded-md ${
-                          inputData?.infant === 0 &&
+                        className={`border w-full py-1 rounded-md ${inputData?.infant === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
-                        }`}
+                          }`}
                         onChange={handleChange1}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
@@ -784,11 +782,10 @@ const Addguest = ({
                         name="infant1"
                         value={inputData?.infant1}
                         id="infantdropdown"
-                        className={`border w-full py-1 rounded-md ${
-                          inputData?.infant1 === 0 &&
+                        className={`border w-full py-1 rounded-md ${inputData?.infant1 === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
-                        }`}
+                          }`}
                         onChange={handleChange1}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
@@ -989,19 +986,17 @@ const Addguest = ({
                     <div className="flex items-center space-x-2">
                       {/* AC Option / Non AC Option toggle */}
                       <p
-                        className={`md:text-sm text-xxs transition duration-300 ${
-                          isAC ? "text-black" : "text-gray-400 blur-none"
-                        }`}
+                        className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-black" : "text-gray-400 blur-none"
+                          }`}
                       >
                         AC
                       </p>
                       <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
                         <div
-                          className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${
-                            isAC
+                          className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC
                               ? "bg-navyblack shadow-md"
                               : "bg-white text-gray-500"
-                          }`}
+                            }`}
                           onClick={() => {
                             if (acDisable) {
                               setIsAC(true);
@@ -1009,11 +1004,10 @@ const Addguest = ({
                           }}
                         ></div>
                         <div
-                          className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${
-                            !isAC
+                          className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC
                               ? "bg-navyblack  shadow-md"
                               : "bg-white text-red-500"
-                          }`}
+                            }`}
                           onClick={() => {
                             if (acDisable) {
                               setIsAC(false);
@@ -1022,9 +1016,8 @@ const Addguest = ({
                         ></div>
                       </div>
                       <p
-                        className={`md:text-sm text-xxs transition duration-300 ${
-                          !isAC ? "text-black" : "text-gray-400 blur-none"
-                        }`}
+                        className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-black" : "text-gray-400 blur-none"
+                          }`}
                       >
                         Non AC
                       </p>
@@ -1091,7 +1084,7 @@ const Addguest = ({
                     </div>
                   ))}
               </div>
-              <div className=" bottom-0 sticky bg-slate-50 border-t mt-3 py-2 md:px-7 px-5 flex justify-between items-center">
+              <div className=" bottom-0 sticky bg-slate-50 rounded-b-lg border-t mt-3 py-2 md:px-7 px-5 flex justify-between items-center">
                 <div>
                   <div className="flex gap-4">
                     <p className="text-sm">
@@ -1107,29 +1100,23 @@ const Addguest = ({
                       Infant
                     </p>
                   </div>
-                  <div>
-                    <p className="font-semibold text-sm md:text-base">
+                  <div className="flex gap-2 text-sm md:text-para font-semibold ">
+                    <p>
                       {inputData?.singleRoom +
                         inputData?.twinRoom +
                         inputData?.tripleRoom +
                         inputData?.quardRoom}{" "}
                       Rooms
                     </p>
-                  </div>
-                  <div className="text-sm flex gap-2">
-                    <p className="font-semibold text-sm md:text-base">
-                      {selectedCarIdFetchApi?.vehicleType}
-                    </p>
-                    <div className="flex itmes-center justify-center">
-                      <p className="font-semibold text-sm md:text-base">
-                        {selectedCarIdFetchApi?.seatingCapacity}
-                      </p>
+                    <div className="flex gap-1">
+                      <p>{selectedCarIdFetchApi?.vehicleType}</p>
+                      <p>{selectedCarIdFetchApi?.seatingCapacity}</p>
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={(e) => handleSubmit(e)}
-                  className="bg-navyblack md:text-base text-sm text-white rounded-md hover:bg-slate-400 md:px-5 md:py-2 px-4 py-1.5"
+                  className="bg-gradient-to-r from-orange-500 to-red-500 md:text-base text-sm text-white rounded-md hover:bg-slate-400 md:px-5 md:py-2 px-4 py-1.5"
                 >
                   Submit
                 </button>

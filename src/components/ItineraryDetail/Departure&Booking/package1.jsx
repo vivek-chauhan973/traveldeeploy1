@@ -137,16 +137,14 @@ export default function Package1() {
     setHighLightedPackage1(dataPackage);
   }, [allPackages, addPackage]);
   const handleSendItinerary = () => {
-    const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919810241558&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
+    const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919897581113&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
     window.location.href = whatsAppUrl;
   };
   const handleEmailRedirect = () => {
-    // window.location.href = 'mailto:?subject=Your Itinerary&body=Here is your itinerary...';
     const currentUrl = window.location.href; // Get the current URL
     const subject = encodeURIComponent("I have Itinerary related some query?");
     const body = encodeURIComponent(`Here is this itinerary: ${currentUrl}`);
-
-    window.location.href = `mailto:rakeshspm2323@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto: info@bizarexpedition.com?subject=${subject}&body=${body}`;
   };
   const [showSharePopup, setShowSharePopup] = useState(false);
 
@@ -159,26 +157,33 @@ export default function Package1() {
 
   const handleTwitter = () => {
     const currentUrl = encodeURIComponent(window.location.href);
-    window.open(`https://twitter.com/intent/tweet?url=${currentUrl}`, "_blank");
-  };
-  const handleInstagram = () => {
-    alert("Instagram does not support direct URL sharing.");
+    window.open(`https://twitter.com/intent/tweet?url=${currentUrl}`,
+    // window.open(`https://twitter.com/intent/tweet?url=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
+     "_blank");
   };
   const handleLinkedIn = () => {
-    // const currentUrl = encodeURIComponent(window.location.href);
+    const currentUrl = encodeURIComponent(window.location.href);
     window.open(
-      // `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`,
-      `https://www.linkedin.com/sharing/share-offsite/?url=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
+      `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`,
+      // `https://www.linkedin.com/sharing/share-offsite/?url=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
       "_blank"
     );
   };
   const handleFacebook = () => {
-    const currentUrl = encodeURIComponent(window.location.href);
-    window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
-      "_blank"
-    );
+      const currentUrl = encodeURIComponent(window.location.href);
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`, // Constructs the Facebook share dialog URL with the encoded current page URL
+        // `https://www.facebook.com/sharer/sharer.php?u=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
+        "_blank"
+      );
   };
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent("Check this out!");
+    const url = encodeURIComponent(window.location.href); 
+    // const url = encodeURIComponent("https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"); 
+    window.open(`https://wa.me/?text=${message}%20${url}`,"_blank");
+  };
+
   return (
     <div>
       {showPopup && <FixedDeparturePopup />}
@@ -459,9 +464,9 @@ export default function Package1() {
                   </span>
                   <p
                     onClick={handleSendItinerary}
-                    className="text-[12px] cursor-pointer"
+                    className="text-[12px] cursor-pointer mx-1 mt-0.5"
                   >
-                    Send Itinerary
+                    Connect
                   </p>
                 </div>
                 <div
@@ -473,9 +478,20 @@ export default function Package1() {
                     icon={faShareNodes}
                     className="font1 cursor-pointer hover:text-primary"
                   />
-                  <p className="text-[12px] cursor-pointer">Share Itinerary</p>
+                  <p className="text-[12px] cursor-pointer mt-0.5">Share Itinerary</p>
                   {showSharePopup && (
                     <div className="absolute top-12 left-32 z-[9999] bg-slate-100 shadow-md p-7 rounded-md flex justify-center items-center gap-7">
+                      <svg
+                        onClick={handleWhatsApp}
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-whatsapp cursor-pointer hover:text-primary"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+                      </svg>
                       <FontAwesomeIcon
                         icon={faTwitter}
                         className="font1 cursor-pointer hover:text-primary"
@@ -486,11 +502,11 @@ export default function Package1() {
                         className="font1 cursor-pointer hover:text-primary"
                         onClick={handleFacebook}
                       />
-                      <FontAwesomeIcon
+                      {/* <FontAwesomeIcon
                         icon={faInstagram}
                         className="font1 cursor-pointer hover:text-primary"
                         onClick={handleInstagram}
-                      />
+                      /> */}
                       <FontAwesomeIcon
                         icon={faLinkedin}
                         className="font1 cursor-pointer hover:text-primary"
@@ -507,7 +523,7 @@ export default function Package1() {
                   />
 
                   <p
-                    className="text-[12px] cursor-pointer"
+                    className="text-[12px] cursor-pointer mt-0.5"
                     onClick={handleEmailRedirect}
                   >
                     Email Itinerary
@@ -530,7 +546,7 @@ export default function Package1() {
       <div className=" mt-12 pb-6">
         <TestingCard addPackage={addPackage} />
       </div>
-                  
+
       {/* FAQ section --- when data is not available then all content will hide */}
       {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
         <div className=" mt-7 mb-16 md:p-0 px-4">
@@ -549,7 +565,7 @@ export default function Package1() {
           <Faq1 data={addPackage.faqs.days} />
         </div>
       ) : null}
-      <Footer/>
+      <Footer />
       {/* bottom pricing */}
       {/* <BottomLink locationId={addPackage?.state} addPackage={addPackage} /> */}
       <div className=" flex xl:hidden z-30  sticky bottom-0 bg-white border-t-2 border-primary">
@@ -607,8 +623,8 @@ export default function Package1() {
                       : null
                   }
                   className={` ${fixedDepartureButtonEnaibleAndDisable
-                      ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
-                      : "bg-gradient-to-r from-orange-200 to-red-200"
+                    ? "bg-gradient-to-r from-orange-500 to-red-500 cursor-pointer"
+                    : "bg-gradient-to-r from-orange-200 to-red-200"
                     } px-5 py-2 rounded-md text-white text-center text-para`}
                 >
                   <span className="disabled:opacity-75">{buttonGuest}</span>
@@ -618,8 +634,8 @@ export default function Package1() {
                 <button
                   onClick={handleSubmit}
                   className={`border px-5 py-1 rounded-md ${fixedDepartureButtonEnaibleAndDisable
-                      ? "bg-gradient-to-r from-orange-500 to-red-500"
-                      : " bg-gradient-to-r from-orange-200 to-red-200"
+                    ? "bg-gradient-to-r from-orange-500 to-red-500"
+                    : " bg-gradient-to-r from-orange-200 to-red-200"
                     }  text-center text-white text-para`}
                 >
                   Book Now

@@ -230,18 +230,18 @@ const Create = () => {
                 {token!==undefined&&<div className="flex flex-col gap-2">
                   <h1 className="text-sm font-medium text-center"> Provide Details</h1>
                   <div className="flex flex-col ">
-                    <label htmlFor="firstname" className="text-sm">First Name</label>
-                    <input type="text" id="firstname" placeholder="Enter First Name" required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
+                    <label htmlFor="firstname" className="text-sm">Name</label>
+                    <input type="text" id="firstname" placeholder="Enter Name" required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
                   </div>
-                  <div className="flex flex-col">
+                  {/* <div className="flex flex-col">
                     <label htmlFor="lastname" className="text-sm ">Last Name</label>
                     <input type="text"  id="lastname" placeholder="Enter Last Name"  className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 "/>
-                  </div>
+                  </div> */}
                   <div className="flex flex-col">
                     <label htmlFor="email" required className="text-sm">Email</label>
                     <input type="email"  id="email" placeholder="Enter Email Address"  className=" text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 "/>
                   </div>
-                  <button onClick={handleMobileVerifiedAndGetMoreDetail} className="w-full mb-4 bg-navyblack text-white px-5 py-2 rounded-full mt-2.5">Proceed</button>
+                  <button onClick={handleMobileVerifiedAndGetMoreDetail} className="w-full mb-5 bg-navyblack text-white px-5 py-2 rounded-full mt-2.5">Proceed</button>
                   </div>}
                   {session!==null&&<div className="flex flex-col gap-2">
                   <h1 className="text-para font-semibold text-center"> Provide Details</h1>
