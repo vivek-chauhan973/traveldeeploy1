@@ -15,22 +15,27 @@ const fetchCarAllCars = async () => {
   return await response.json();
 };
 const fetchCarById = async (id) => {
-  const data = await fetch(`/api/cars/car/${id}`)
+  const data = await fetch(`/api/cars/car/${id}`);
   return await data.json();
-}
+};
 const Addguest = ({
   guestPrice,
   inputData,
   setInputData,
   setCloseBtn,
   addPackage,
-  setShowPopup1
+  setShowPopup1,
 }) => {
   const date = new Date();
   const date2 = new Date();
-  const date3 = new Date(date2)
-  const { showAddguest, setSubmitButtonOfPricingCalculation, initialData, setGuestPrice, departureSectionData } =
-    useAppContext() ?? { showAddguest: false };
+  const date3 = new Date(date2);
+  const {
+    showAddguest,
+    setSubmitButtonOfPricingCalculation,
+    initialData,
+    setGuestPrice,
+    departureSectionData,
+  } = useAppContext() ?? { showAddguest: false };
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState("");
   const [selectedCarIdFetchApi, setSelectedCarIdFetchApi] = useState("");
@@ -42,6 +47,18 @@ const Addguest = ({
   const [transportPrice, setTransportPrice] = useState(0);
   const [final, setFinal] = useState(0);
   const [selectedDataOfCar, setSelectedDataOfCar] = useState(0);
+  const [days, setDays] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [close1, setClose1] = useState(false);
+  const [countSingleRoom, setCountSingleRoom] = useState(0);
+  const [countTwinRoom, setCountTwinRoom] = useState(0);
+  const [countTripleRoom, setCountTripleRoom] = useState(0);
+  const [countQuardRoom, setCountQuardRoom] = useState(0);
+  const [minDate, setMinDate] = useState("");
+  const [maxDate, setMaxDate] = useState("");
+  const [selectedCarBool, setSelectedCarBool] = useState(false);
+  const [firstSelectedCar, setFirstSelectedCar] = useState(null);
+  const [firstSelectedCarPrice,setFirstSelectedCarPrice]=useState(0);
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -49,24 +66,13 @@ const Addguest = ({
     };
   }, []);
 
-  const [days, setDays] = useState(0);
+  // console.log("input data is as ", inputData);
   useEffect(() => {
     setDays(addPackage?.days?.length);
-  }, [])
+  }, []);
   const infantMinDate = new Date(date.setFullYear(date.getFullYear() - 5))
     .toISOString()
     .split("T")[0];
-    // const infantMinDate1 = new Date(date1.setFullYear(date1.getFullYear() - 5))
-    // .toISOString()
-    // .split("T")[0];
-    // const infantMinDate2= new Date(date1.setFullYear(date1.getFullYear() +2))
-    // .toISOString()
-    // .split("T")[0];
-
-    // console.log("infantMinDate1 -->",infantMinDate1)
-    // console.log("infantMinDate2 -->",infantMinDate2)
-
-    const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     if (showAddguest) {
@@ -75,19 +81,16 @@ const Addguest = ({
       setOpen(false);
     }
   };
-  const [close1, setClose1] = useState(false);
-  const handleClose = () => {
 
+  const handleClose = () => {
     setOpen(false);
     setClose1(!close1);
-
   };
   useEffect(() => {
     if (!open) {
       setInputData(initialData);
     }
-
-  }, [open])
+  }, [open]);
 
   const handleChange = (e) => {
     const value = e.target.value === "" ? "" : parseInt(e.target.value);
@@ -112,29 +115,18 @@ const Addguest = ({
       setInputData((prevData) => ({ ...prevData, child: 0, infant: 0 }));
     }
   };
-  
 
-  // here fetch all cars
   useEffect(() => {
     fetchCarAllCars().then((res) => setCars(res?.data || []));
   }, []);
-  // here is the logic of select car
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowPopup1(false)
+    setShowPopup1(false);
     setSubmitButtonOfPricingCalculation(true);
     const childDateInputs = document.querySelectorAll('input[id^="childDate"]');
-    // console.log("child date Inputs --- > ",childDateInputs);
-    // const isAnyChildDateEmpty = Array.from(childDateInputs).some(
-    //   (input) => input.value === ""
-    // );
     if (inputData.adult === "") {
       return alert("Please choose adult first");
     }
-    // if (isAnyChildDateEmpty) {
-    //   return alert("Please fill in the date for each child.");
-    // }
     if (
       (inputData.adult > 0 || inputData.child > 0 || inputData.infant > 0) &&
       (inputData.singleRoom > 0 ||
@@ -152,7 +144,7 @@ const Addguest = ({
         alert("Please assign rooms for all adults.");
         return;
       }
-      setCloseBtn(true)
+      setCloseBtn(true);
       try {
         const response = await fetch(
           "http://localhost:3000/api/public/package/book-tour",
@@ -216,10 +208,6 @@ const Addguest = ({
       },
     }));
   };
-  const [countSingleRoom, setCountSingleRoom] = useState(0);
-  const [countTwinRoom, setCountTwinRoom] = useState(0);
-  const [countTripleRoom, setCountTripleRoom] = useState(0);
-  const [countQuardRoom, setCountQuardRoom] = useState(0);
 
   const handleIncrement = (roomType) => {
     const totalGuests = inputData.adult + inputData.child + inputData.infant;
@@ -344,37 +332,43 @@ const Addguest = ({
           singleRoom * inputData?.singleRoom * (days - 1) +
           twinSharingRoom * inputData?.twinRoom * (days - 1) +
           tripleSharingRoom * inputData?.tripleRoom * (days - 1) +
-          quadSharingRoom * inputData?.quardRoom * (days - 1) + misc * (days);
+          quadSharingRoom * inputData?.quardRoom * (days - 1) +
+          misc * days;
 
-        if (inputData?.singleRoom > 0 || inputData?.twinRoom > 0 || inputData?.tripleRoom > 0 || inputData?.quardRoom > 0) {
+        if (
+          inputData?.singleRoom > 0 ||
+          inputData?.twinRoom > 0 ||
+          inputData?.tripleRoom > 0 ||
+          inputData?.quardRoom > 0
+        ) {
           setGuestPrice(calculatedPrice);
           setFinal(calculatedPrice);
         }
-
       }
     }
   }, [inputData, addPackage]);
 
   useEffect(() => {
-    const {
-      markup,
-    } = addPackage?.prices;
-    const newCalculatedPrice = finalPrice + Math.floor((finalPrice * markup) / 100);
+    const { markup } = addPackage?.prices;
+    const newCalculatedPrice =
+      finalPrice + Math.floor((finalPrice * markup) / 100);
     if (departureSectionData?.hike) {
       if (departureSectionData?.hike > 0) {
-        const newCalculatedPrice1 = newCalculatedPrice + Math.floor((newCalculatedPrice * (departureSectionData?.hike)) / 100)
+        const newCalculatedPrice1 =
+          newCalculatedPrice +
+          Math.floor((newCalculatedPrice * departureSectionData?.hike) / 100);
+        setGuestPrice(newCalculatedPrice1);
+      } else if (departureSectionData?.hike < 0) {
+        const newDiskHike = Math.abs(departureSectionData?.hike);
+        const newCalculatedPrice1 =
+          newCalculatedPrice -
+          Math.floor((newCalculatedPrice * newDiskHike) / 100);
         setGuestPrice(newCalculatedPrice1);
       }
-      else if (departureSectionData?.hike < 0) {
-        const newDiskHike = Math.abs((departureSectionData?.hike));
-        const newCalculatedPrice1 = newCalculatedPrice - Math.floor((newCalculatedPrice * newDiskHike) / 100)
-        setGuestPrice(newCalculatedPrice1);
-      }
-    }
-    else {
+    } else {
       setGuestPrice(newCalculatedPrice);
     }
-  }, [finalPrice])
+  }, [finalPrice]);
 
   const handleToggle = (e) => {
     e.preventDefault();
@@ -382,103 +376,169 @@ const Addguest = ({
   };
   useEffect(() => {
     const newarr = [];
-    const filteredData = cars?.find(item => item?.seatingCapacity >= inputData?.adult);
+    const filteredData = cars?.find(
+      (item) => item?.seatingCapacity >= inputData?.adult
+    );
     setSelectedDataOfCar(filteredData?.capacity);
+    setFirstSelectedCar(filteredData);
     newarr.push(filteredData);
-    const filteredData3 = cars?.filter(item => item?.vehicleType !== filteredData?.vehicleType && item?.seatingCapacity === filteredData?.seatingCapacity);
+    const filteredData3 = cars?.filter(
+      (item) =>
+        item?.vehicleType !== filteredData?.vehicleType &&
+        item?.seatingCapacity === filteredData?.seatingCapacity
+    );
     if (filteredData3?.length !== 0) {
-      filteredData3.forEach(item => {
+      filteredData3.forEach((item) => {
         newarr.push(item);
         cars.pop(item);
-      })
+      });
     }
-    const filteredData1 = cars?.find(item => {
-      return item?.seatingCapacity > filteredData?.seatingCapacity
+    const filteredData1 = cars?.find((item) => {
+      return item?.seatingCapacity > filteredData?.seatingCapacity;
     });
     if (filteredData1) {
       newarr.push(filteredData1);
     }
-    const filteredData2 = cars?.filter(item => {
-      return item?.vehicleType !== filteredData1?.vehicleType && item?.seatingCapacity === filteredData1?.seatingCapacity
-    })
+    const filteredData2 = cars?.filter((item) => {
+      return (
+        item?.vehicleType !== filteredData1?.vehicleType &&
+        item?.seatingCapacity === filteredData1?.seatingCapacity
+      );
+    });
     if (filteredData1?.length !== 0) {
-      filteredData2?.forEach(item => {
-        newarr.push(item)
-      })
+      filteredData2?.forEach((item) => {
+        newarr.push(item);
+      });
     }
     setCarWithCapacity(newarr);
-  }, [inputData?.adult])
+  }, [inputData?.adult]);
+
+  useEffect(() => {
+    const { markup } = addPackage?.prices;
+    const farePrice = firstSelectedCar?.capacity * days;
+    const data1 = firstSelectedCar?.ac * days;
+    let price = farePrice + data1;
+  
+    if (departureSectionData?.hike) {
+      const data1 = Math.floor(
+        firstSelectedCar?.ac * days +
+          (firstSelectedCar?.ac * days * markup) / 100
+      );
+      if (departureSectionData?.hike > 0) {
+        const data2 = Math.floor(
+          data1 + (data1 * departureSectionData?.hike) / 100
+        );
+  // console.log("price is of non selecting default car is as ",data2);
+        price=(price + data2);
+      } else {
+        const data2 = Math.floor(
+          data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100
+        );
+        // console.log("price is of non selecting default car is as ",data2);
+
+        price=(price + data2);
+      }
+    } else {
+      const data1 = Math.floor(
+        firstSelectedCar?.ac * days +
+          (firstSelectedCar?.ac * days * markup) / 100
+      );
+  // console.log("price is of non selecting default car is as ",data1);
+
+      price=(price + data1);
+    }
+    setFirstSelectedCarPrice(price);
+    // setGuestPrice(final+price);
+  // console.log("deparsection data is here 12345---final>",price)
+    
+  }, [firstSelectedCar,final]);
+
+  // console.log("deparsection data is here 12345---final>",final)
+  // console.log("deparsection data is here 12345--- guestprice>",guestPrice)
 
   useEffect(() => {
     const farePrice = final + selectedCarIdFetchApi?.capacity * days;
-    const data1 = selectedCarIdFetchApi?.ac * (days);
+    const farePrice1 = selectedCarIdFetchApi?.capacity * days;
+    const data1 = selectedCarIdFetchApi?.ac * days;  
+  // console.log("deparsection data is here 12345---final>",farePrice1 + data1)
+
     setFinalPrice(farePrice + data1);
-  }, [selectedCarIdFetchApi])
+  }, [selectedCarIdFetchApi]);
   useEffect(() => {
-    const {
-      markup,
-    } = addPackage?.prices;
+    const { markup } = addPackage?.prices;
     if (departureSectionData?.hike) {
-      const data1 = Math.floor(selectedCarIdFetchApi?.ac * (days) + ((selectedCarIdFetchApi?.ac * (days)) * markup) / 100);
+      const data1 = Math.floor(
+        selectedCarIdFetchApi?.ac * days +
+          (selectedCarIdFetchApi?.ac * days * markup) / 100
+      );
       if (departureSectionData?.hike > 0) {
-        const data2 = Math.floor(data1 + (data1 * (departureSectionData?.hike)) / 100)
+        const data2 = Math.floor(
+          data1 + (data1 * departureSectionData?.hike) / 100
+        );
         if (isAC) {
+          // console.log("calculated price -1 ",data2)
           setGuestPrice(guestPrice + data2);
+        } else {
+          // console.log("calculated price -1 ",data2)
+          setGuestPrice(guestPrice - data2);
         }
-        else {
+      } else {
+        const data2 = Math.floor(
+          data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100
+        );
+        if (isAC) {
+          // console.log("calculated price -1 ",data2)
+          setGuestPrice(guestPrice + data2);
+        } else {
+          // console.log("calculated price -1 ",data2)
+
           setGuestPrice(guestPrice - data2);
         }
       }
-      else {
-        const data2 = Math.floor(data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100)
-        if (isAC) {
-          setGuestPrice(guestPrice + data2);
-        }
-        else {
-          setGuestPrice(guestPrice - data2);
-        }
-      }
-    }
-    else {
-      const data1 = Math.floor(selectedCarIdFetchApi?.ac * (days) + ((selectedCarIdFetchApi?.ac * (days)) * markup) / 100);
+    } else {
+      const data1 = Math.floor(
+        selectedCarIdFetchApi?.ac * days +
+          (selectedCarIdFetchApi?.ac * days * markup) / 100
+      );
       if (isAC) {
+        // console.log("calculated price -1 ",data1)
+
         setGuestPrice(guestPrice + data1);
-      }
-      else {
+      } else {
+        // console.log("calculated price -1 ",data1)
+
         setGuestPrice(guestPrice - data1);
       }
     }
-
-  }, [isAC])
+  }, [isAC]);
   const handleSelected = (item) => {
-    setSelectedCarIdFetchApi(item)
+    setSelectedCarIdFetchApi(item);
     setSelectedDataOfCar(item?.capacity);
     setAcDisable(true);
+    setSelectedCarBool(true);
     setIsAC(true);
-  }
+  };
 
   useEffect(() => {
-    console.log("selectedCarOf Price ", selectedDataOfCar)
-  }, [selectedDataOfCar])
-  const [minDate, setMinDate] = useState('');
-  const [maxDate, setMaxDate] = useState('');
+    // console.log("selected Car Of Price ", selectedDataOfCar);
+  }, [selectedDataOfCar]);
 
   useEffect(() => {
     const date1 = new Date();
-    
+
     // Calculate max date (1 year from current date)
     const max = new Date(date1);
     max.setFullYear(date1.getFullYear());
-    const maxFormatted = max.toISOString().split('T')[0];
+    const maxFormatted = max.toISOString().split("T")[0];
     setMaxDate(maxFormatted);
 
     // Calculate min date (5 years before current date)
     const min = new Date(date1);
-    min.setFullYear(date1.getFullYear()-2);
-    const minFormatted = min.toISOString().split('T')[0];
+    min.setFullYear(date1.getFullYear() - 2);
+    const minFormatted = min.toISOString().split("T")[0];
     setMinDate(minFormatted);
-  }, [minDate,maxDate]);
-  
+  }, [minDate, maxDate]);
+
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
       <div className="bg-white">
@@ -498,11 +558,19 @@ const Addguest = ({
                 </div>
                 <div className="flex justify-between items-center py-4  px-[2vw] bg-white z-10">
                   <p className=" capitalize md:text-md text-base px-2 md:px-0 font-semibold">
-                    add guest & Choose from{ }
+                    add guest & Choose from{}
                   </p>
                   <div>
-                    <p className="text-xl font-semibold"> 
-                      {guestPrice ? (guestPrice).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "₹ --"}</p>
+                    <p className="text-xl font-semibold">
+                      {guestPrice
+                        ? guestPrice.toLocaleString("en-IN", {
+                            style: "currency",
+                            currency: "INR",
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                          })
+                        : "₹ --"}
+                    </p>
                     <p className="text-xxs">per person on twin sharing</p>
                   </div>
                 </div>
@@ -568,10 +636,11 @@ const Addguest = ({
                         name="child"
                         value={inputData?.child}
                         id="Childdropdown"
-                        className={`border w-full py-1 rounded-md ${inputData?.child === 0 &&
+                        className={`border w-full py-1 rounded-md ${
+                          inputData?.child === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
-                          }`}
+                        }`}
                         onChange={handleChange}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
@@ -591,16 +660,22 @@ const Addguest = ({
                           className="text-para"
                           htmlFor={`childDate${index}`}
                         >
-                         Child {index + 1}
+                          Child {index + 1}
                         </label>
                         <input
                           id={`childDate${index}`}
                           className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
                           type="date"
-
-                          max={new Date(date.setFullYear(date.getFullYear())).toISOString().split("T")[0]}// Set max attribute to current date
-
-                          min={new Date(date.setFullYear(date.getFullYear() - 6)).toISOString().split("T")[0]}
+                          max={
+                            new Date(date.setFullYear(date.getFullYear()))
+                              .toISOString()
+                              .split("T")[0]
+                          } // Set max attribute to current date
+                          min={
+                            new Date(date.setFullYear(date.getFullYear() - 6))
+                              .toISOString()
+                              .split("T")[0]
+                          }
                           onChange={(e) => handleDateChange(e, index)}
                         />
 
@@ -639,10 +714,11 @@ const Addguest = ({
                         name="infant"
                         value={inputData?.infant}
                         id="Childdropdown2"
-                        className={`border w-full py-1 rounded-md ${inputData?.infant === 0 &&
+                        className={`border w-full py-1 rounded-md ${
+                          inputData?.infant === 0 &&
                           inputData?.adult === 0 &&
                           "opacity-50"
-                          }`}
+                        }`}
                         onChange={handleChange1}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
@@ -708,10 +784,12 @@ const Addguest = ({
                         name="infant1"
                         value={inputData?.infant1}
                         id="infantdropdown"
-                        className={`border w-full py-1 rounded-md ${inputData?.infant1 === 0 &&
+                        className={`border w-full py-1 rounded-md ${
+                          inputData?.infant1 === 0 &&
                           inputData?.adult === 0 &&
-                          "opacity-50"}`}
-                          onChange={handleChange1}
+                          "opacity-50"
+                        }`}
+                        onChange={handleChange1}
                         disabled={inputData?.adult === 0} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
@@ -737,7 +815,11 @@ const Addguest = ({
                           className="px-2 md:w-52 py-1 border focus:border rounded-md cursor-pointer text-base"
                           type="date"
                           max={new Date().toISOString().split("T")[0]} // Set max attribute to current date
-                          min={new Date(date3.setFullYear(date2.getFullYear()-6)).toISOString().split("T")[0]}
+                          min={
+                            new Date(date3.setFullYear(date2.getFullYear() - 6))
+                              .toISOString()
+                              .split("T")[0]
+                          }
                           onChange={(e) => handleDateChange1(e, index)}
                         />
                         <span className="text-red-400 text-xs font-medium">
@@ -906,81 +988,123 @@ const Addguest = ({
                     </p>
                     <div className="flex items-center space-x-2">
                       {/* AC Option / Non AC Option toggle */}
-                      <p className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-black" : "text-gray-400 blur-none"}`}>AC</p>
+                      <p
+                        className={`md:text-sm text-xxs transition duration-300 ${
+                          isAC ? "text-black" : "text-gray-400 blur-none"
+                        }`}
+                      >
+                        AC
+                      </p>
                       <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
                         <div
-                          className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC ? "bg-navyblack shadow-md" : "bg-white text-gray-500"
-                            }`}
+                          className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${
+                            isAC
+                              ? "bg-navyblack shadow-md"
+                              : "bg-white text-gray-500"
+                          }`}
                           onClick={() => {
                             if (acDisable) {
                               setIsAC(true);
                             }
                           }}
-                        >
-                        </div>
+                        ></div>
                         <div
-                          className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC ? "bg-navyblack  shadow-md" : "bg-white text-red-500"
-                            }`}
+                          className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${
+                            !isAC
+                              ? "bg-navyblack  shadow-md"
+                              : "bg-white text-red-500"
+                          }`}
                           onClick={() => {
                             if (acDisable) {
                               setIsAC(false);
                             }
                           }}
-                        >
-                        </div>
+                        ></div>
                       </div>
-                      <p className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-black" : "text-gray-400 blur-none"}`}>Non AC</p>
+                      <p
+                        className={`md:text-sm text-xxs transition duration-300 ${
+                          !isAC ? "text-black" : "text-gray-400 blur-none"
+                        }`}
+                      >
+                        Non AC
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* All listed Cars is here */}
 
-                {inputData?.adult && carWithCapacity?.map(item =>
-                  <div key={item?._id} onClick={() => handleSelected(item)} className="flex-col md:flex-row flex flex-1 gap-5 border-b py-3">
-
-                    <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
-                      <Image
-                        className="w-40 h-28 object-cover rounded-md"
-                        src={item?.imageDetails?.[0]?.url}
-                        alt=""
-                        width="160"
-                        height="180"
-                      />
-                    </div>
-                    <div className=" flex flex-1 mb-3">
-                      <div className="flex flex-col flex-1 justify-start md:justify-center md:pl-0 pl-4">
-                        <p className="font-bold capitalize text-md ">
-                          {item?.vehicleType}
-                        </p>
-                        <p className="text-[10px] font-medium text-gray-500 capitalize">{item?.seatingCapacity} passenger seating capacity</p>
+                {inputData?.adult &&
+                  carWithCapacity?.map((item) => (
+                    <div
+                      key={item?._id}
+                      onClick={() => handleSelected(item)}
+                      className="flex-col md:flex-row flex flex-1 gap-5 border-b py-3"
+                    >
+                      <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
+                        <Image
+                          className="w-40 h-28 object-cover rounded-md"
+                          src={item?.imageDetails?.[0]?.url}
+                          alt=""
+                          width="160"
+                          height="180"
+                        />
                       </div>
-                      <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
-                        {(item?.capacity - selectedDataOfCar) === 0 && <p></p>}
-                        {(item?.capacity - selectedDataOfCar) > 0 && <p>
-                          +{(item?.capacity - selectedDataOfCar).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                        </p>}
-                        {(item?.capacity - selectedDataOfCar) < 0 && <p>
-                          {(item?.capacity - selectedDataOfCar).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                        </p>}
+                      <div className=" flex flex-1 mb-3">
+                        <div className="flex flex-col flex-1 justify-start md:justify-center md:pl-0 pl-4">
+                          <p className="font-bold capitalize text-md ">
+                            {item?.vehicleType}
+                          </p>
+                          <p className="text-[10px] font-medium text-gray-500 capitalize">
+                            {item?.seatingCapacity} passenger seating capacity
+                          </p>
+                        </div>
+                        <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
+                          {item?.capacity - selectedDataOfCar === 0 && <p></p>}
+                          {item?.capacity - selectedDataOfCar > 0 && (
+                            <p>
+                              +
+                              {(
+                                item?.capacity - selectedDataOfCar
+                              ).toLocaleString("en-IN", {
+                                style: "currency",
+                                currency: "INR",
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0,
+                              })}
+                            </p>
+                          )}
+                          {item?.capacity - selectedDataOfCar < 0 && (
+                            <p>
+                              {(
+                                item?.capacity - selectedDataOfCar
+                              ).toLocaleString("en-IN", {
+                                style: "currency",
+                                currency: "INR",
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0,
+                              })}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>)}
+                  ))}
               </div>
               <div className=" bottom-0 sticky bg-slate-50 border-t mt-3 py-2 md:px-7 px-5 flex justify-between items-center">
                 <div>
                   <div className="flex gap-4">
                     <p className="text-sm">
-                      <span className="font-semibold">{inputData?.adult}</span>
-                      {" "}Adults
+                      <span className="font-semibold">{inputData?.adult}</span>{" "}
+                      Adults
                     </p>
                     <p className="text-sm">
-                      <span className="font-semibold">{inputData?.child}</span>
-                      {" "}Child
+                      <span className="font-semibold">{inputData?.child}</span>{" "}
+                      Child
                     </p>
                     <p className="text-sm">
-                      <span className="font-semibold">{inputData?.infant}</span>
-                      {" "}Infant
+                      <span className="font-semibold">{inputData?.infant}</span>{" "}
+                      Infant
                     </p>
                   </div>
                   <div>
@@ -993,9 +1117,13 @@ const Addguest = ({
                     </p>
                   </div>
                   <div className="text-sm flex gap-2">
-                    <p className="font-semibold text-sm md:text-base">{selectedCarIdFetchApi?.vehicleType}</p>
+                    <p className="font-semibold text-sm md:text-base">
+                      {selectedCarIdFetchApi?.vehicleType}
+                    </p>
                     <div className="flex itmes-center justify-center">
-                      <p className="font-semibold text-sm md:text-base">{selectedCarIdFetchApi?.seatingCapacity}</p>
+                      <p className="font-semibold text-sm md:text-base">
+                        {selectedCarIdFetchApi?.seatingCapacity}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -1006,12 +1134,11 @@ const Addguest = ({
                   Submit
                 </button>
               </div>
-
             </div>
           </form>
         )}
       </div>
-    </div >
+    </div>
   );
 };
 export default Addguest;
