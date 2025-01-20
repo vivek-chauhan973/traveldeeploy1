@@ -4,7 +4,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import { signIn, useSession } from "next-auth/react";
 import Cookies from "js-cookie";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import Image from "next/image";
+
 const Create = () => {
   const { setLoginPopup } = useCarPopupContext();
   useEffect(() => {
@@ -163,17 +164,21 @@ const Create = () => {
               </div>
               <div className="px-7">
                 <div className="flex justify-center items-center">
-                  <img
+                  <Image
                     className="object-cover w-36 h-10"
                     src="https://images.yourstory.com/cs/images/companies/fd593ed4e9a5-bxlogo-1686298628003.png?fm=auto&ar=1%3A1&mode=fill&fill=solid&fill-color=fff&format=auto&w=384&q=75"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <div className="flex justify-center items-center my-5">
-                  <img
+                  <Image
                     className="object-cover rounded-full w-20 h-20"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjGVg145rvbEunhw4fsfcCHzJTIEQzA_bhg&s"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
                 {(token === undefined && session === null) && <div>
@@ -224,9 +229,12 @@ const Create = () => {
                       onClick={() => signIn("google")}
                       className="w-full bg-gray-200 text-navyblack px-5 py-2 rounded-full flex justify-center gap-2 items-center"
                     >
-                      <FontAwesomeIcon
-                        icon={faGoogle}
-                        className="text-primary"
+                      <Image 
+                        src="/assets/Google.png"
+                        className="h-5 w-5 object-cover"
+                        alt=""
+                        width={200}
+                        height={200}
                       />
                       Google
                     </button>
@@ -269,17 +277,21 @@ const Create = () => {
               </div>
               <div className="px-7">
                 <div className="flex justify-center items-center">
-                  <img
+                  <Image
                     className="object-cover w-36 h-10"
                     src="https://images.yourstory.com/cs/images/companies/fd593ed4e9a5-bxlogo-1686298628003.png?fm=auto&ar=1%3A1&mode=fill&fill=solid&fill-color=fff&format=auto&w=384&q=75"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <div className="flex justify-center items-center my-5">
-                  <img
+                  <Image
                     className="object-cover rounded-full w-20 h-20"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjGVg145rvbEunhw4fsfcCHzJTIEQzA_bhg&s"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <div className="flex flex-col justify-center mt-5">

@@ -104,25 +104,16 @@ const Header3 = () => {
               <SearchPackage setSearchPackagePopup={setSearchPackagePopup} />
             )}
             {(session!==null||Cookies.get("token")!==undefined||isLoggedIn) ? (
-              // <div onClick={session===null?handleLogout:signOut} className="flex flex-col cursor-pointer">
-              //   <FontAwesomeIcon icon={faUser} className='text-xl text-white' />
-              //   <p className="text-white text-sm">Logout</p>
-              // </div>
+              <div className="hidden md:flex gap-3">
               <button className="items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg"
                   onClick={session===null?handleLogout:signOut}
                 >
                   <FontAwesomeIcon icon={faUser} className='font' />
                   <h6>Logout</h6>
                 </button>
+              </div>
             ) : (
               <div className="hidden md:flex gap-3">
-                {/* <button
-                  className="md:flex items-center gap-2 block px-2 py-1 text-sm bg-white text-navyblack rounded-lg"
-                  onClick={handleLogin}
-                >
-                  <FontAwesomeIcon icon={faArrowAltCircleRight} className='font' />
-                  <h6>Login</h6>
-                </button> */}
                 <button className="items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg"
                   onClick={handleLogin}
                 >

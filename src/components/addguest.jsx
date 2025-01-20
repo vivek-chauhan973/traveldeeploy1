@@ -512,11 +512,13 @@ const Addguest = ({
     }
   }, [isAC]);
   const handleSelected = (item) => {
-    setSelectedCarIdFetchApi(item);
-    setSelectedDataOfCar(item?.capacity);
+    const parsedItem = JSON.parse(item); 
+    setSelectedCarIdFetchApi(parsedItem);
+    setSelectedDataOfCar(parsedItem?.capacity);
     setAcDisable(true);
     setSelectedCarBool(true);
     setIsAC(true);
+    // console.log("item",parsedItem);
   };
 
   useEffect(() => {
@@ -539,6 +541,8 @@ const Addguest = ({
     setMinDate(minFormatted);
   }, [minDate, maxDate]);
 
+  // console.log("CarWithCapacity",carWithCapacity?.vehicleType);
+  
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
       <div className="bg-white rounded-lg">
@@ -981,7 +985,7 @@ const Addguest = ({
                 <div className="mt-8 ">
                   <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center p-2">
                     <p className="font-semibold text-base md:text-md">
-                      Transport Options
+                      Choose Transport Options
                     </p>
                     <div className="flex items-center space-x-2">
                       {/* AC Option / Non AC Option toggle */}
@@ -1031,7 +1035,7 @@ const Addguest = ({
                   carWithCapacity?.map((item) => (
                     <div
                       key={item?._id}
-                      onClick={() => handleSelected(item)}
+                      // onClick={() => handleSelected(item)}
                       className="flex-col md:flex-row flex flex-1 gap-5 border-b py-3"
                     >
                       <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
@@ -1050,7 +1054,23 @@ const Addguest = ({
                           </p>
                           <p className="text-[10px] font-medium text-gray-500 capitalize">
                             {item?.seatingCapacity} passenger seating capacity
-                          </p>
+                          </p>                      
+                          <div className="cursor-pointer flex justify-start items-center mt-1">
+                            <input
+                             
+                              type="radio"
+                              value={JSON.stringify(item)}
+                              name="choice"
+                              className="accent-navyblack h-4 w-4 cursor-pointer mr-1"
+                              onChange={(e) => handleSelected(e.target.value)}
+                            />
+                            <label
+                              
+                              className="text-para text-gray-500 font-medium"
+                            >
+                              Select Vehicle
+                            </label>
+                          </div>
                         </div>
                         <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
                           {item?.capacity - selectedDataOfCar === 0 && <p></p>}
@@ -1110,7 +1130,7 @@ const Addguest = ({
                     </p>
                     <div className="flex gap-1">
                       <p>{selectedCarIdFetchApi?.vehicleType}</p>
-                      <p>{selectedCarIdFetchApi?.seatingCapacity}</p>
+                      <p>{selectedCarIdFetchApi?.seatingCapacity ? `${selectedCarIdFetchApi?.seatingCapacity}S` : " "}</p>
                     </div>
                   </div>
                 </div>
