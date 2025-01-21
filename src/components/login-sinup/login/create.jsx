@@ -224,7 +224,7 @@ const Create = () => {
                     </p>
                     <span class="border-b w-1/5 lg:w-1/4 mr-2"></span>
                   </div>
-                  <div className="flex justify-center gap-2 my-5">
+                  <div className="flex justify-center gap-2 mt-5 mb-7">
                     <button
                       onClick={() => signIn("google")}
                       className="w-full bg-gray-200 text-navyblack px-5 py-2 rounded-full flex justify-center gap-2 items-center"

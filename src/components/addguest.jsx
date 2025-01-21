@@ -59,6 +59,8 @@ const Addguest = ({
   const [selectedCarBool, setSelectedCarBool] = useState(false);
   const [firstSelectedCar, setFirstSelectedCar] = useState(null);
   const [firstSelectedCarPrice, setFirstSelectedCarPrice] = useState(0);
+  const [roomError, setRoomError] = useState("");
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -512,7 +514,7 @@ const Addguest = ({
     }
   }, [isAC]);
   const handleSelected = (item) => {
-    const parsedItem = JSON.parse(item); 
+    const parsedItem = JSON.parse(item);
     setSelectedCarIdFetchApi(parsedItem);
     setSelectedDataOfCar(parsedItem?.capacity);
     setAcDisable(true);
@@ -542,7 +544,7 @@ const Addguest = ({
   }, [minDate, maxDate]);
 
   // console.log("CarWithCapacity",carWithCapacity?.vehicleType);
-  
+
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
       <div className="bg-white rounded-lg">
@@ -711,7 +713,7 @@ const Addguest = ({
                         </div>
                       </div>
                     </label>
-                    
+
                     <div className="w-14">
                       <select
                         name="infant"
@@ -998,8 +1000,8 @@ const Addguest = ({
                       <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
                         <div
                           className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC
-                              ? "bg-navyblack shadow-md"
-                              : "bg-white text-gray-500"
+                            ? "bg-navyblack shadow-md"
+                            : "bg-white text-gray-500"
                             }`}
                           onClick={() => {
                             if (acDisable) {
@@ -1009,8 +1011,8 @@ const Addguest = ({
                         ></div>
                         <div
                           className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC
-                              ? "bg-navyblack  shadow-md"
-                              : "bg-white text-red-500"
+                            ? "bg-navyblack  shadow-md"
+                            : "bg-white text-red-500"
                             }`}
                           onClick={() => {
                             if (acDisable) {
@@ -1054,23 +1056,37 @@ const Addguest = ({
                           </p>
                           <p className="text-[10px] font-medium text-gray-500 capitalize">
                             {item?.seatingCapacity} passenger seating capacity
-                          </p>                      
+                          </p>
                           <div className="cursor-pointer flex justify-start items-center mt-1">
                             <input
-                             
                               type="radio"
                               value={JSON.stringify(item)}
                               name="choice"
                               className="accent-navyblack h-4 w-4 cursor-pointer mr-1"
-                              onChange={(e) => handleSelected(e.target.value)}
+                              onClick={(e) => {
+                                if (
+                                  !(
+                                    inputData?.singleRoom > 0 ||
+                                    inputData?.twinRoom > 0 ||
+                                    inputData?.tripleRoom > 0 ||
+                                    inputData?.quardRoom > 0
+                                  )
+                                ) {
+                                  e.preventDefault(); // Prevent default behavior of the radio button
+                                  setRoomError("Please select a room first.");
+                                } else {
+                                  setRoomError(""); // Clear the error if the condition is met
+                                  handleSelected(e.target.value)
+                                }
+                              }}
                             />
-                            <label
-                              
-                              className="text-para text-gray-500 font-medium"
-                            >
+                            <label className="text-para text-gray-800 font-medium">
                               Select Vehicle
                             </label>
                           </div>
+                          {roomError && (
+                            <p className="text-red-500 text-xxs ml-5">{roomError}</p>
+                          )}
                         </div>
                         <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
                           {item?.capacity - selectedDataOfCar === 0 && <p></p>}
@@ -1136,7 +1152,8 @@ const Addguest = ({
                 </div>
                 <button
                   onClick={(e) => handleSubmit(e)}
-                  className="bg-gradient-to-r from-orange-500 to-red-500 md:text-base text-sm text-white rounded-md hover:bg-slate-400 md:px-5 md:py-2 px-4 py-1.5"
+                  className={`${selectedCarBool ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
+                                     md:text-base text-sm text-white rounded-md md:px-5 md:py-2 px-4 py-1.5 hover:opacity-90`}
                 >
                   Submit
                 </button>

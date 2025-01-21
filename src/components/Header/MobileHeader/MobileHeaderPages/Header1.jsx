@@ -3,17 +3,29 @@ import Data from './Data';
 import {
   DownArrow, WhatAppIcon,
 } from "@/components/icons/index"
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faAngleUp,faAngleDown,faClock, faPhone, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp, faAngleDown, faClock, faPhone, faXmark, faUser } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
+import Cookies from "js-cookie";
+
 const Header1 = ({ setTogle, togle }) => {
+
+  const { setLoginPopup } = useCarPopupContext();
   const [isVisible, setIsVisible] = useState(true);
   const [openClose, setOpenClose] = useState(false);
   const [renderedComponent, setRenderedComponent] = useState(null);
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [isVisible1, setIsVisible1] = useState(true);
   const [travel, setTravel] = useState(false);
+  const { data: session } = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    setIsLoggedIn(!!token);
+  }, [isLoggedIn]);
 
   const handleScroll = useCallback(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -32,21 +44,62 @@ const Header1 = ({ setTogle, togle }) => {
     };
   }, [handleScroll]);
 
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/authentication/logout", { method: "POST" });
+      const data = await res.json();
+      if (data?.success) {
+        Cookies.remove("token");
+        setIsLoggedIn(false); // Update login state
+        alert("User Logout Successfully");
+      } else {
+        alert("Something went wrong");
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+      alert("Something went wrong during logout");
+    }
+  };
+
+  const handleLogin = () => {
+    setLoginPopup(true); // Open login popup
+  };
+
   return (
     <div
       className={`fixed top-0 right-0 w-full h-full bg-white shadow-sm border transition-transform duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
         }`} style={{ zIndex: 1000 }}>
       <div className={`fixed top-0 right-0 h-full w-full  transform transition-transform duration-1000 ease-in-out ${togle ? 'translate-x-0' : 'translate-x-full'} `}>
         <div className="h-[10vh] w-full px-2 sm:px-4 bg-[#0e1e2c] flex items-center justify-between">
-          <div className="text-2xl cursor-pointer text-white" onClick={() => {
-            setIsVisible(false);
-            setTimeout(() => setTogle(false), 300); // Ensure this matches the duration of the transition
-          }}>
-
-            <FontAwesomeIcon icon={faXmark} className=' font1' />
+          <div className=""
+            onClick={() => {
+              setIsVisible(false);
+              setTimeout(() => setTogle(false), 300); // Ensure this matches the duration of the transition
+            }}>
+            <FontAwesomeIcon icon={faXmark} className='text-xl cursor-pointer text-white ml-2' />
+          </div>
+          <div className="flex px-2">
+            {(session !== null || Cookies.get("token") !== undefined || isLoggedIn) ? (
+              <div className="flex px-2">
+                <button className="items-center flex justify-center gap-2 px-2 py-2 text-md font-semibold text-white"
+                  onClick={session === null ? handleLogout : signOut}
+                >
+                  <FontAwesomeIcon icon={faUser} className='font' />
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex px-2">
+                <button className="items-center flex justify-center gap-2 px-2 py-2 text-md font-semibold text-white"
+                  onClick={handleLogin}
+                >
+                  <FontAwesomeIcon icon={faUser} className='font' />
+                  Login
+                </button>
+              </div>
+            )}
           </div>
         </div>
-
         {openClose ? (
           <div onMouseLeave={() => setOpenClose(false)}>
             {Data[renderedComponent] && Data[renderedComponent]({ setOpenClose })}
@@ -55,56 +108,87 @@ const Header1 = ({ setTogle, togle }) => {
           <div>
             <div className="  ml-1 h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
               <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
-                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="/">Home</Link>
+                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                  onClick={() => setTogle(false)} href="/">
+                  Home
+                </Link>
                 <div className="flex justify-between">
-
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>Destination</h3>
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                    onClick={() => { setOpenClose(true); setRenderedComponent(0) }}
+                  >
+                    Destination
+                  </h3>
                   <div className="cursor-pointer">
-
-                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(0) }}>
-                      <DownArrow />
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(1) }}>World</h3>
-                  <div className="cursor-pointer">
-                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(1) }} >
-                      <DownArrow />
-                    </div>
-
-                  </div>
-                </div> */}
-                <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>Speciality Tours</h3>
-                  <div className="cursor-pointer">
-
-                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(2) }} >
+                    <div className=' text-2xl rotate-[270deg]'
+                      onClick={() => { setOpenClose(true); setRenderedComponent(0) }}
+                    >
                       <DownArrow />
                     </div>
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setOpenClose(true); setRenderedComponent(3) }}>Holidays</h3>
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                    onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>
+                    Speciality Tours
+                  </h3>
                   <div className="cursor-pointer">
-                    <div className=' text-2xl rotate-[270deg]' onClick={() => { setOpenClose(true); setRenderedComponent(3) }} >
+                    <div className=' text-2xl rotate-[270deg]'
+                      onClick={() => { setOpenClose(true); setRenderedComponent(2) }}
+                    >
                       <DownArrow />
                     </div>
                   </div>
                 </div>
-                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="/car-rental"> Car Hire</Link>
+                <div className="flex justify-between">
+                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                    onClick={() => { setOpenClose(true); setRenderedComponent(3) }}
+                  >
+                    Holidays
+                  </h3>
+                  <div className="cursor-pointer">
+                    <div className=' text-2xl rotate-[270deg]'
+                      onClick={() => { setOpenClose(true); setRenderedComponent(3) }}
+                    >
+                      <DownArrow />
+                    </div>
+                  </div>
+                </div>
+                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                  onClick={() => setTogle(false)} href="/car-rental">
+                  Car Hire
+                </Link>
                 <div>
-                  <div className='flex justify-between'>
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold" onClick={() => { setTravel(true) }} >Travel</h3>
-                   {travel?<FontAwesomeIcon icon={faAngleUp} onClick={()=>setTravel(false)}/>:<FontAwesomeIcon icon={faAngleDown} onClick={()=>setTravel(true)}/>}
+                  <div className='flex justify-between pr-2'
+                    onClick={() => setTravel((prev) => !prev)}
+                  >
+                    <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold">
+                      Travel
+                    </h3>
+                    {travel ?
+                      <FontAwesomeIcon icon={faAngleUp} />
+                      : <FontAwesomeIcon icon={faAngleDown} />
+                    }
                   </div>
-                  {travel && <div className=' flex flex-col gap-2 mx-4 mt-2' ><Link className="cursor-pointer  sm:text-[16px] md:text-xl " onClick={() => { setTogle(false); setTravel(false) }} href="/travel/blog"> Blog</Link>
-                    <Link className="cursor-pointer  sm:text-[16px] md:text-xl" onClick={() => { setTogle(false); setTravel(false) }} href="/travel/travel-guide"> Travel Guide</Link>
-                    <Link className="cursor-pointer  sm:text-[16px] md:text-xl " onClick={() => { setTogle(false); setTravel(false) }} href="/travel/news"> News</Link>
-                  </div>}
+                  {travel &&
+                    <div className='flex flex-col gap-2 mx-4 mt-2' >
+                      <Link className="cursor-pointer  sm:text-[16px] md:text-xl "
+                        onClick={() => { setTogle(false); setTravel(false) }} href="/travel/blog">
+                        Blog
+                      </Link>
+                      <Link className="cursor-pointer  sm:text-[16px] md:text-xl"
+                        onClick={() => { setTogle(false); setTravel(false) }} href="/travel/travel-guide">
+                        Travel Guide
+                      </Link>
+                      <Link className="cursor-pointer  sm:text-[16px] md:text-xl "
+                        onClick={() => { setTogle(false); setTravel(false) }} href="/travel/news">
+                        News
+                      </Link>
+                    </div>}
                 </div>
-
-                <h3 className="cursor-pointer md: sm:text-[16px] md:text-xl font-semibold" onClick={() => setTogle(false)} href="#">Contact Us</h3>
+                <h3 className="cursor-pointer sm:text-[16px] md:text-xl font-semibold"
+                  onClick={() => setTogle(false)} href="#">
+                  Contact Us
+                </h3>
               </div>
               <hr className="mx-1" />
               <div className="w-full flex flex-col gap-4 px-2 sm:px-4 my-2">
@@ -112,51 +196,57 @@ const Header1 = ({ setTogle, togle }) => {
                 <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Career</h6>
               </div>
               <hr className="mx-1" />
-              <div className="w-full flex flex-col gap-6 px-2 sm:px-4 my-2">
-                <div className="flex gap-2 items-center">
-                  <div>
-                    {/* <Image src="" className=" sm:text-[16px] md:text-2xl" alt='pic' width="125"
-                    height="150" /> */}
+              <div className="w-full flex flex-col gap-3 px-2 sm:px-4 my-3">
+                <div className="flex gap-2">
+                  <div className="">
+                    <FontAwesomeIcon icon={faPhone} className='text-sm mr-2' />
                   </div>
-                  <div className="flex gap-1 flex-col">
+                  <div className="flex gap-0.5 flex-col">
                     <h6 className=' font-semibold'>Toll free number</h6>
                     <p className="cursor-pointer">1800 22 7979</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <div className="pt-2 sm:text-[10px] md:text-2xl">
-
-                    <FontAwesomeIcon icon={faPhone} className='font' />
-
+                  <div className="">
+                    <FontAwesomeIcon icon={faPhone} className='text-sm mr-2' />
                   </div>
-                  <div className="flex gap-1 flex-col">
+                  <div className="flex gap-0.5 flex-col">
                     <h6 className=' font-semibold'>You can also call on:</h6>
                     <p className="cursor-pointer ">+91 22 2101 7979</p>
                     <p className="cursor-pointer ">+91 22 2101 6969</p>
                   </div>
                 </div>
-                <div className="flex gap-2 items-center">
-                  <div><WhatAppIcon className=" sm:text-[10px] md:text-2xl text-green-500" /></div>
-                  <div className="flex gap-1 flex-col">
-                    <h6 className='  font-semibold'>Chat on WhatsApp</h6>
+                <div className="flex gap-2">
+                  <div className="pt-2 ">
+                    <WhatAppIcon className="text-sm text-green-500" />
+                  </div>
+                  <div className="flex gap-0.5 flex-col">
+                    <h6 className='font-semibold'>Chat on WhatsApp</h6>
                     <p className="cursor-pointer ">+91 88799 00414</p>
                   </div>
                 </div>
-                <div className="flex gap-2 items-center sm:text-[10px] md:text-2xl">
-                  <FontAwesomeIcon icon={faClock} className='font' />
-                  <div>
-
+                <div className="flex gap-2 ">
+                  <div className=''>
+                    <FontAwesomeIcon icon={faClock} className='text-sm mr-2' />
                   </div>
-                  <div className="flex gap-1 flex-col">
+                  <div className="flex gap-0.5 flex-col">
                     <h6 className="font-semibold">Business hours</h6>
                     <p>10am - 6pm</p>
                   </div>
                 </div>
               </div>
               <hr className="mx-1" />
-              <div className="flex gap-4 flex-col px-2 sm:mx-4 my-2">
-                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl" onClick={() => setTogle(false)} href="#">Nearest office</p>
-                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl" onClick={() => setTogle(false)} href="#">Leave your feedback here</p>
+              <div className="flex gap-2 flex-col px-2 sm:mx-4 my-3">
+                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl"
+                  onClick={() => setTogle(false)} href="#"
+                >
+                  Nearest office
+                </p>
+                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl"
+                  onClick={() => setTogle(false)} href="#"
+                >
+                  Leave your feedback here
+                </p>
               </div>
             </div>
             <div className="h-[10vh] w-full"></div>
