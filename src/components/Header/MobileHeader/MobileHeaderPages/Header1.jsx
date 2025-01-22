@@ -65,6 +65,10 @@ const Header1 = ({ setTogle, togle }) => {
     setLoginPopup(true); // Open login popup
   };
 
+  const handleWhatsApp = () => {
+    window.open(`https://wa.me/919897581113`, "_blank");
+  };
+
   return (
     <div
       className={`fixed top-0 right-0 w-full h-full bg-white shadow-sm border transition-transform duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
@@ -107,18 +111,18 @@ const Header1 = ({ setTogle, togle }) => {
         ) : (
           <div>
             <div className="  ml-1 h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
-              <div className="flex w-full gap-4  flex-col px-2 sm:px-4 my-2">
-                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+              <div className="flex w-full gap-3     flex-col px-2 sm:px-4 my-2">
+                <Link className="cursor-pointer font-semibold"
                   onClick={() => setTogle(false)} href="/">
                   Home
                 </Link>
                 <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                  <h3 className="cursor-pointer font-semibold"
                     onClick={() => { setOpenClose(true); setRenderedComponent(0) }}
                   >
                     Destination
                   </h3>
-                  <div className="cursor-pointer">
+                  <div className="cursor-pointer ">
                     <div className=' text-2xl rotate-[270deg]'
                       onClick={() => { setOpenClose(true); setRenderedComponent(0) }}
                     >
@@ -127,7 +131,7 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                  <h3 className="cursor-pointer font-semibold"
                     onClick={() => { setOpenClose(true); setRenderedComponent(2) }}>
                     Speciality Tours
                   </h3>
@@ -140,28 +144,28 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                  <h3 className="cursor-pointer font-semibold"
                     onClick={() => { setOpenClose(true); setRenderedComponent(3) }}
                   >
                     Holidays
                   </h3>
                   <div className="cursor-pointer">
-                    <div className=' text-2xl rotate-[270deg]'
+                    <div className=' text-2xl rotate-[270deg] '
                       onClick={() => { setOpenClose(true); setRenderedComponent(3) }}
                     >
                       <DownArrow />
                     </div>
                   </div>
                 </div>
-                <Link className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold"
+                <Link className="cursor-pointer font-semibold"
                   onClick={() => setTogle(false)} href="/car-rental">
                   Car Hire
                 </Link>
                 <div>
-                  <div className='flex justify-between pr-2'
+                  <div className='flex justify-between pr-2 cursor-pointer'
                     onClick={() => setTravel((prev) => !prev)}
                   >
-                    <h3 className="cursor-pointer  sm:text-[16px] md:text-xl font-semibold">
+                    <h3 className="font-semibold">
                       Travel
                     </h3>
                     {travel ?
@@ -171,29 +175,35 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                   {travel &&
                     <div className='flex flex-col gap-2 mx-4 mt-2' >
-                      <Link className="cursor-pointer  sm:text-[16px] md:text-xl "
+                      <Link className="cursor-pointer text-para font-medium"
                         onClick={() => { setTogle(false); setTravel(false) }} href="/travel/blog">
                         Blog
                       </Link>
-                      <Link className="cursor-pointer  sm:text-[16px] md:text-xl"
+                      <Link className="cursor-pointer text-para font-medium"
                         onClick={() => { setTogle(false); setTravel(false) }} href="/travel/travel-guide">
                         Travel Guide
                       </Link>
-                      <Link className="cursor-pointer  sm:text-[16px] md:text-xl "
+                      <Link className="cursor-pointer text-para font-medium"
                         onClick={() => { setTogle(false); setTravel(false) }} href="/travel/news">
                         News
                       </Link>
                     </div>}
                 </div>
-                <h3 className="cursor-pointer sm:text-[16px] md:text-xl font-semibold"
-                  onClick={() => setTogle(false)} href="#">
-                  Contact Us
-                </h3>
               </div>
               <hr className="mx-1" />
-              <div className="w-full flex flex-col gap-4 px-2 sm:px-4 my-2">
-                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">About Us</h6>
-                <h6 className="cursor-pointer" onClick={() => setTogle(false)} href="#">Career</h6>
+              <div className="w-full flex flex-col gap-3 px-2 sm:px-4 my-2">
+                <Link className="cursor-pointer font-semibold"
+                  onClick={() => setTogle(false)} href="/contact">
+                  Contact Us
+                </Link>
+                <Link className="cursor-pointer font-semibold"
+                  onClick={() => setTogle(false)} href="/about">
+                  About Us
+                </Link>
+                <Link className="cursor-pointer font-semibold"
+                  onClick={() => setTogle(false)} href="/career">
+                  Career
+                </Link>
               </div>
               <hr className="mx-1" />
               <div className="w-full flex flex-col gap-3 px-2 sm:px-4 my-3">
@@ -202,8 +212,8 @@ const Header1 = ({ setTogle, togle }) => {
                     <FontAwesomeIcon icon={faPhone} className='text-sm mr-2' />
                   </div>
                   <div className="flex gap-0.5 flex-col">
-                    <h6 className=' font-semibold'>Toll free number</h6>
-                    <p className="cursor-pointer">1800 22 7979</p>
+                    <h6 className=' font-semibold'>Customer Support Number</h6>
+                    <Link href="tel:+919873152953" className="cursor-pointer text-blue-500 hover:underline">+91-98731-52953</Link>
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -211,23 +221,25 @@ const Header1 = ({ setTogle, togle }) => {
                     <FontAwesomeIcon icon={faPhone} className='text-sm mr-2' />
                   </div>
                   <div className="flex gap-0.5 flex-col">
-                    <h6 className=' font-semibold'>You can also call on:</h6>
-                    <p className="cursor-pointer ">+91 22 2101 7979</p>
-                    <p className="cursor-pointer ">+91 22 2101 6969</p>
+                    <h6 className=' font-semibold'>You can also call on :</h6>
+                    <Link href="tel:+917252885525" className="cursor-pointer text-blue-500 hover:underline">+91-7252-885-525</Link>
+                    <Link href="tel:+919897581113" className="cursor-pointer text-blue-500 hover:underline">+91-9897-581-113</Link>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <div className="pt-2 ">
-                    <WhatAppIcon className="text-sm text-green-500" />
+                  <div className="pt-1.5 ">
+                    <WhatAppIcon onClick={handleWhatsApp} />
                   </div>
-                  <div className="flex gap-0.5 flex-col">
-                    <h6 className='font-semibold'>Chat on WhatsApp</h6>
-                    <p className="cursor-pointer ">+91 88799 00414</p>
+                  <div className="flex gap-0.5 flex-col cursor-pointer"
+                    onClick={handleWhatsApp}
+                  >
+                    <h6 className='font-semibold'>Chat on Whatsapp</h6>
+                    <p className="cursor-pointer text-blue-500 hover:underline">+91-9897-581-113</p>
                   </div>
                 </div>
                 <div className="flex gap-2 ">
                   <div className=''>
-                    <FontAwesomeIcon icon={faClock} className='text-sm mr-2' />
+                    <FontAwesomeIcon icon={faClock} className='text-para mr-1.5' />
                   </div>
                   <div className="flex gap-0.5 flex-col">
                     <h6 className="font-semibold">Business hours</h6>
@@ -235,8 +247,8 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                 </div>
               </div>
-              <hr className="mx-1" />
-              <div className="flex gap-2 flex-col px-2 sm:mx-4 my-3">
+              {/* <hr className="mx-1" /> */}
+              {/* <div className="flex gap-2 flex-col px-2 sm:mx-4 my-3">
                 <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl"
                   onClick={() => setTogle(false)} href="#"
                 >
@@ -247,7 +259,7 @@ const Header1 = ({ setTogle, togle }) => {
                 >
                   Leave your feedback here
                 </p>
-              </div>
+              </div> */}
             </div>
             <div className="h-[10vh] w-full"></div>
           </div>

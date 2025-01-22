@@ -8,15 +8,13 @@ import Create from "@/components/login-sinup/login/create";
 function Header2() {
   const [togle, setTogle] = useState(false);
   const { loginPopup } = useCarPopupContext();
-  
+
   return (
     <>
-      {loginPopup && <Create/>}
+      {loginPopup && <Create />}
       {togle ? (
         <Header1 setTogle={setTogle} togle={togle} />
-
       ) : (
-
         <div
           className="text-2xl -my-4 text-white flex justify-end items-center  cursor-pointer"
           onClick={() => {
@@ -26,8 +24,6 @@ function Header2() {
             <FontAwesomeIcon icon={faBars} className='font1' />
           </div>
         </div>
-
-
       )}
     </>
   );

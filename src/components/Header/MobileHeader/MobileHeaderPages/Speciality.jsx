@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
 RoadIcon,DownArrow 
 } from "@/components/icons/index"
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot} from '@fortawesome/free-solid-svg-icons';
 import Link from "next/link";
@@ -28,21 +26,18 @@ const Speciality = ({ setOpenClose }) => {
   }, [])
   const data = popularCatogories?.filter(item => item.category === "category6");
   return (
-    <div className="flex h-[90vh] flex-col sm:p-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
+    <div className="flex h-[90vh] flex-col overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">
       <div className="flex justify-between mt-3">
-        <div
-          className="flex items-center cursor-pointer "
-          onClick={() => setOpenClose(false)}
-        >
-
-          <div className="rotate-90 mt-2"> <DownArrow /></div>
-        
+        <div className="flex items-center cursor-pointer " onClick={() => setOpenClose(false)}>
+          <div className="rotate-90 mt-2 mr-1">
+            <DownArrow />
+          </div>
           <h5 className="font-semibold text-md">Speciality Tours</h5>
         </div>
         <div>
-          <p className="underline px-2 font-bold text-[15px] text-blue-600">
+          <Link onClick={() => setOpenClose(false)} href="/india" className="underline font-bold text-para text-blue-600">
             View All Tours
-          </p>
+          </Link>
         </div>
       </div>
       <hr className="border-b mt-3 border-gray-400 w-90 overflow-hidden" />
