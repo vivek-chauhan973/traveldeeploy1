@@ -5,7 +5,7 @@ import Link from "next/link";
 
 
 const ItinerarySideCard = ({ highlightedPackage1 }) => {
-    console.log("Rakesh Side card", highlightedPackage1);
+    // console.log("Rakesh Side card", highlightedPackage1);
 
 
 

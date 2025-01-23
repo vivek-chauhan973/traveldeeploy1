@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect,useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { useAppContext } from "./admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +18,7 @@ const fetchCarById = async (id) => {
   const data = await fetch(`/api/cars/car/${id}`);
   return await data.json();
 };
-const Addguest = ({
+const Pradhumn = ({
   guestPrice,
   inputData,
   setInputData,
@@ -26,7 +26,6 @@ const Addguest = ({
   addPackage,
   setShowPopup1,
 }) => {
-  const prevAdultRef = useRef();
   const date = new Date();
   const date2 = new Date();
   const date3 = new Date(date2);
@@ -61,6 +60,7 @@ const Addguest = ({
   const [firstSelectedCar, setFirstSelectedCar] = useState(null);
   const [firstSelectedCarPrice, setFirstSelectedCarPrice] = useState(0);
   const [roomError, setRoomError] = useState("");
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -76,6 +76,18 @@ const Addguest = ({
     .toISOString()
     .split("T")[0];
 
+  const handleClickOpen = () => {
+    if (showAddguest) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setClose1(!close1);
+  };
   useEffect(() => {
     if (!open) {
       setInputData(initialData);
@@ -302,103 +314,68 @@ const Addguest = ({
         break;
     }
   };
+
   useEffect(() => {
-    // Ensure prices are reset when adult count is z
-    const currentAdult = inputData?.adult;
-    // Access the previous value of inputData.adult
-    const previousAdult = prevAdultRef.current;
-    // Update the ref with the current value for the next render
-    prevAdultRef.current = currentAdult;
-    if (currentAdult !== previousAdult) {
-      if (currentAdult) {
-        setInputData({
-          ...inputData,
-          singleRoom: 0,
-          twinRoom: 0,
-          quardRoom: 0,
-          tripleRoom: 0,
-        });
-      }
-    }
-    if (addPackage?.addguest === "addGuest" && addPackage?.prices) {
-      const {
-        childOverFive,
-        childUnderFive,
-        misc,
-        markup,
-        singleRoom,
-        twinSharingRoom,
-        tripleSharingRoom,
-        quadSharingRoom,
-      } = addPackage.prices;
+    if (addPackage?.addguest === "addGuest") {
+      if (addPackage && addPackage?.prices) {
+        const {
+          childOverFive,
+          childUnderFive,
+          misc,
+          singleRoom,
+          twinSharingRoom,
+          tripleSharingRoom,
+          quadSharingRoom,
+        } = addPackage?.prices;
 
-      const { hike } = departureSectionData;
+        const calculatedPrice =
+          childOverFive * inputData?.child * (days - 1) +
+          childUnderFive * inputData?.infant * (days - 1) +
+          singleRoom * inputData?.singleRoom * (days - 1) +
+          twinSharingRoom * inputData?.twinRoom * (days - 1) +
+          tripleSharingRoom * inputData?.tripleRoom * (days - 1) +
+          quadSharingRoom * inputData?.quardRoom * (days - 1) +
+          misc * days;
 
-      let calculatedPrice = 0; // Reset calculatedPrice at the start
-
-      const calculateRoomPrice = (roomPrice, count, adults) => {
-        let basePrice = roomPrice * count * (days - 1);
-        let totalPrice = basePrice + (basePrice * markup) / 100;
-
-        if (hike > 0) {
-          totalPrice += (totalPrice * hike) / 100;
-        } else {
-          totalPrice -= (totalPrice * Math.abs(hike)) / 100;
-        }
-        return totalPrice;
-      };
-      // Calculate price for each category
-      calculatedPrice += calculateRoomPrice(childOverFive, inputData?.child || 0, inputData?.adult);
-      // console.log("markup data is 1", calculateRoomPrice(childOverFive, inputData?.child || 0, inputData?.adult))
-
-      calculatedPrice += calculateRoomPrice(childUnderFive, inputData?.infant || 0, inputData?.adult);
-      // console.log("markup data is 2 ", calculateRoomPrice(childUnderFive, inputData?.infant || 0, inputData?.adult))
-
-      calculatedPrice += calculateRoomPrice(singleRoom, inputData?.singleRoom || 0, inputData?.adult);
-      // console.log("markup data is 3", calculateRoomPrice(singleRoom, inputData?.singleRoom || 0, inputData?.adult))
-
-      calculatedPrice += calculateRoomPrice(twinSharingRoom, inputData?.twinRoom || 0, inputData?.adult);
-      // console.log("markup data is 4 ", calculateRoomPrice(twinSharingRoom, inputData?.twinRoom || 0, inputData?.adult))
-
-      calculatedPrice += calculateRoomPrice(tripleSharingRoom, inputData?.tripleRoom || 0, inputData?.adult);
-      // console.log("markup data is 5 ", calculateRoomPrice(tripleSharingRoom, inputData?.tripleRoom || 0, inputData?.adult))
-
-      calculatedPrice += calculateRoomPrice(quadSharingRoom, inputData?.quardRoom || 0, inputData?.adult);
-      // console.log("markup data is 6 ", calculateRoomPrice(quadSharingRoom, inputData?.quardRoom || 0, inputData?.adult))
-
-      // Miscellaneous price
-      let miscBasePrice = misc * days;
-      let miscTotalPrice = miscBasePrice + (miscBasePrice * markup) / 100;
-      if (hike > 0) {
-        miscTotalPrice += (miscTotalPrice * hike) / 100;
-      } else {
-        miscTotalPrice -= (miscTotalPrice * Math.abs(hike)) / 100;
-      }
-      calculatedPrice += miscTotalPrice;
-      // setGuestPrice(calculatedPrice);
-      if (
-        (inputData?.singleRoom > 0 ||
+        if (
+          inputData?.singleRoom > 0 ||
           inputData?.twinRoom > 0 ||
           inputData?.tripleRoom > 0 ||
-          inputData?.quardRoom > 0)
-      ) {
-        setGuestPrice(calculatedPrice);
+          inputData?.quardRoom > 0
+        ) {
+          setGuestPrice(calculatedPrice);
+          setFinal(calculatedPrice);
+        }
       }
-      else {
-        setGuestPrice(0);
-      }
-      
     }
-  }, [inputData, addPackage, departureSectionData, days]);
+  }, [inputData, addPackage]);
 
-  useEffect(()=>{
-    if (inputData?.adult === 0) {
-      setInputData(initialData);
-    }
-  },[inputData?.adult === 0])
   useEffect(() => {
-    console.log("selected fetch car here pradhumn 123 ------> ", selectedCarIdFetchApi);
-  }, [selectedCarIdFetchApi])
+    const { markup } = addPackage?.prices;
+    const newCalculatedPrice =
+      finalPrice + Math.floor((finalPrice * markup) / 100);
+    if (departureSectionData?.hike) {
+      if (departureSectionData?.hike > 0) {
+        const newCalculatedPrice1 =
+          newCalculatedPrice +
+          Math.floor((newCalculatedPrice * departureSectionData?.hike) / 100);
+        setGuestPrice(newCalculatedPrice1);
+      } else if (departureSectionData?.hike < 0) {
+        const newDiskHike = Math.abs(departureSectionData?.hike);
+        const newCalculatedPrice1 =
+          newCalculatedPrice -
+          Math.floor((newCalculatedPrice * newDiskHike) / 100);
+        setGuestPrice(newCalculatedPrice1);
+      }
+    } else {
+      setGuestPrice(newCalculatedPrice);
+    }
+  }, [finalPrice]);
+
+  const handleToggle = (e) => {
+    e.preventDefault();
+    setIsAC((prevIsAC) => !prevIsAC);
+  };
   useEffect(() => {
     const newarr = [];
     const filteredData = cars?.find(
@@ -437,6 +414,94 @@ const Addguest = ({
     }
     setCarWithCapacity(newarr);
   }, [inputData?.adult]);
+
+  useEffect(() => {
+    const { markup } = addPackage?.prices;
+    const farePrice = firstSelectedCar?.capacity * days;
+    const data1 = firstSelectedCar?.ac * days;
+    let price = farePrice + data1;
+
+    if (departureSectionData?.hike) {
+      const data1 = Math.floor(
+        firstSelectedCar?.ac * days +
+        (firstSelectedCar?.ac * days * markup) / 100
+      );
+      if (departureSectionData?.hike > 0) {
+        const data2 = Math.floor(
+          data1 + (data1 * departureSectionData?.hike) / 100
+        );
+        // console.log("price is of non selecting default car is as ",data2);
+        price = (price + data2);
+      } else {
+        const data2 = Math.floor(
+          data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100
+        );
+        // console.log("price is of non selecting default car is as ",data2);
+
+        price = (price + data2);
+      }
+    } else {
+      const data1 = Math.floor(
+        firstSelectedCar?.ac * days +
+        (firstSelectedCar?.ac * days * markup) / 100
+      );
+      price = (price + data1);
+    }
+    setFirstSelectedCarPrice(price);
+  }, [firstSelectedCar, final]);
+
+  useEffect(() => {
+    const farePrice = final + selectedCarIdFetchApi?.capacity * days;
+    const data1 = selectedCarIdFetchApi?.ac * days;
+    setFinalPrice(farePrice + data1);
+  }, [selectedCarIdFetchApi]);
+  // useEffect(() => {
+  //   const { markup } = addPackage?.prices;
+  //   if (departureSectionData?.hike) {
+  //     const data1 = Math.floor(
+  //       selectedCarIdFetchApi?.ac * days +
+  //       (selectedCarIdFetchApi?.ac * days * markup) / 100
+  //     );
+  //     if (departureSectionData?.hike > 0) {
+  //       const data2 = Math.floor(
+  //         data1 + (data1 * departureSectionData?.hike) / 100
+  //       );
+  //       if (isAC) {
+  //         // console.log("calculated price -1 ",data2)
+  //         setGuestPrice(guestPrice + data2);
+  //       } else {
+  //         // console.log("calculated price -1 ",data2)
+  //         setGuestPrice(guestPrice - data2);
+  //       }
+  //     } else {
+  //       const data2 = Math.floor(
+  //         data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100
+  //       );
+  //       if (isAC) {
+  //         console.log("calculated price -1 ",data2)
+  //         setGuestPrice(guestPrice + data2);
+  //       } else {
+  //         // console.log("calculated price -1 ",data2)
+
+  //         setGuestPrice(guestPrice - data2);
+  //       }
+  //     }
+  //   } else {
+  //     const data1 = Math.floor(
+  //       selectedCarIdFetchApi?.ac * days +
+  //       (selectedCarIdFetchApi?.ac * days * markup) / 100
+  //     );
+  //     if (isAC) {
+  //       // console.log("calculated price -1 ",data1)
+
+  //       setGuestPrice(guestPrice + data1);
+  //     } else {
+  //       // console.log("calculated price -1 ",data1)
+
+  //       setGuestPrice(guestPrice - data1);
+  //     }
+  //   }
+  // }, [isAC]);
   const handleSelected = (item) => {
     const parsedItem = JSON.parse(item);
     setSelectedCarIdFetchApi(parsedItem);
@@ -446,7 +511,10 @@ const Addguest = ({
     setIsAC(true);
     // console.log("item",parsedItem);
   };
-  // console.log("selected Car Price---> ",selectedDataOfCar)
+// console.log("selected Car Price---> ",selectedDataOfCar)
+  useEffect(() => {
+    // console.log("selected Car Of Price ", selectedDataOfCar);
+  }, [selectedDataOfCar]);
 
   useEffect(() => {
     const date1 = new Date();
@@ -463,10 +531,6 @@ const Addguest = ({
     const minFormatted = min.toISOString().split("T")[0];
     setMinDate(minFormatted);
   }, [minDate, maxDate]);
-
-
-
- 
 
   // console.log("CarWithCapacity",carWithCapacity?.vehicleType);
 
@@ -530,7 +594,6 @@ const Addguest = ({
                       name="adult"
                       value={inputData?.adult}
                       id="Adultsdropdown"
-                      ref={prevAdultRef}
                       className="border w-full py-1 rounded-md"
                       onChange={handleChange}
                     >
@@ -1091,4 +1154,4 @@ const Addguest = ({
     </div>
   );
 };
-export default Addguest;
+export default Pradhumn;

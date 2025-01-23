@@ -165,7 +165,6 @@ export default function Package1() {
     const currentUrl = encodeURIComponent(window.location.href);
     window.open(
       `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`,
-      // `https://www.linkedin.com/sharing/share-offsite/?url=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
       "_blank"
     );
   };
@@ -173,14 +172,12 @@ export default function Package1() {
     const currentUrl = encodeURIComponent(window.location.href);
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`, // Constructs the Facebook share dialog URL with the encoded current page URL
-      // `https://www.facebook.com/sharer/sharer.php?u=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
       "_blank"
     );
   };
   const handleWhatsApp = () => {
     const message = encodeURIComponent("Check this out!");
     const url = encodeURIComponent(window.location.href);
-    // const url = encodeURIComponent("https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"); 
     window.open(`https://wa.me/?text=${message}%20${url}`, "_blank");
   };
 
@@ -546,7 +543,6 @@ export default function Package1() {
       <div className=" mt-12 pb-6">
         <TestingCard addPackage={addPackage} />
       </div>
-
       {/* FAQ section --- when data is not available then all content will hide */}
       {addPackage?.faqs?.days && addPackage.faqs.days.length > 0 ? (
         <div className=" mt-7 mb-16 md:p-0 px-4">
@@ -567,7 +563,6 @@ export default function Package1() {
       ) : null}
       <Footer />
       {/* bottom pricing */}
-      {/* <BottomLink locationId={addPackage?.state} addPackage={addPackage} /> */}
       <div className=" flex xl:hidden z-30  sticky bottom-0 bg-white border-t-2 border-primary">
         <div className=" container-wrapper sm:grid grid-cols-[1fr,2fr]">
           <div className="hidden sm:flex items-center">

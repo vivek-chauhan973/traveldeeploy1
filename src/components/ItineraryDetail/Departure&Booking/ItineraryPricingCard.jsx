@@ -25,11 +25,8 @@ const ItineraryPricingCard = () => {
   } = useAppContext();
 
   const [gst, setGst] = useState(0);
-  // const [displayPrice,setDisplayPrice]=useState(0);
   const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
-
-
 
   useEffect(() => {
 
@@ -159,29 +156,6 @@ const ItineraryPricingCard = () => {
               </p>
             </div>
           </div>
-          {/* {closeBtn && (
-            <div className="flex justify-center gap-10 my-3">
-              <label className=" inline-flex items-center">
-                <input
-                  type="radio"
-                  className=" form-radio text-primary"
-                  name="radio-group"
-                />
-                <p className="ml-2 font-semibold text-graytext">Pay 25% Now</p>
-              </label>
-
-              <label className=" inline-flex items-center">
-                <input
-                  type="radio"
-                  className="form-radio text-primary"
-                  name="radio-group"
-                />
-                <p className="ml-2 font-semibold text-graytext">
-                  Pay Full Online
-                </p>
-              </label>
-            </div>
-          )} */}
           <div className="grid grid-cols-2 gap-3 my-3">
             <CustomiseTour>
               <button className=" border-primary w-full border text-primary flex-flow   flex justify-center px-5 py-2 text-para rounded-md">
@@ -198,7 +172,6 @@ const ItineraryPricingCard = () => {
           </div>
         </div>
       </div>
-
       {/* Show Popup when 'Book Now' is clicked */}
       {showPopup && (
         <FixedDeparturePopup />

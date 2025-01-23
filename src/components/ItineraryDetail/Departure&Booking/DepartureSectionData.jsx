@@ -114,7 +114,7 @@ const useMyCustomHook = () => {
         currentDate.setDate(currentDate.getDate() + 1);
       }
     }
-    console.log("result111", result);
+    // console.log("result111", result);
 
     if (addPackage?.addguest === "fixedDeparture") {
       const data=fixedDepartureData?.filter(item => {
