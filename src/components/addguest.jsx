@@ -445,25 +445,14 @@ const Addguest = ({
         firstSelectedCar?.ac * days +
         (firstSelectedCar?.ac * days * markup) / 100
       );
-      // console.log("price is of non selecting default car is as ",data1);
-
       price = (price + data1);
     }
     setFirstSelectedCarPrice(price);
-    // setGuestPrice(final+price);
-    // console.log("deparsection data is here 12345---final>",price)
-
   }, [firstSelectedCar, final]);
-
-  // console.log("deparsection data is here 12345---final>",final)
-  // console.log("deparsection data is here 12345--- guestprice>",guestPrice)
 
   useEffect(() => {
     const farePrice = final + selectedCarIdFetchApi?.capacity * days;
-    const farePrice1 = selectedCarIdFetchApi?.capacity * days;
     const data1 = selectedCarIdFetchApi?.ac * days;
-    // console.log("deparsection data is here 12345---final>",farePrice1 + data1)
-
     setFinalPrice(farePrice + data1);
   }, [selectedCarIdFetchApi]);
   useEffect(() => {
@@ -489,7 +478,7 @@ const Addguest = ({
           data1 - (data1 * Math.abs(departureSectionData?.hike)) / 100
         );
         if (isAC) {
-          // console.log("calculated price -1 ",data2)
+          console.log("calculated price -1 ",data2)
           setGuestPrice(guestPrice + data2);
         } else {
           // console.log("calculated price -1 ",data2)
@@ -522,7 +511,7 @@ const Addguest = ({
     setIsAC(true);
     // console.log("item",parsedItem);
   };
-
+// console.log("selected Car Price---> ",selectedDataOfCar)
   useEffect(() => {
     // console.log("selected Car Of Price ", selectedDataOfCar);
   }, [selectedDataOfCar]);
