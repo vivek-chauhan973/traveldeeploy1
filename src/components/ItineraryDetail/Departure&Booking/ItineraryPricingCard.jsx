@@ -36,11 +36,11 @@ const ItineraryPricingCard = () => {
     setGst(addPackage?.addguestPrices?.gst || 0);
   }, [addPackage])
   useEffect(() => {
-    setCalculatedPrizeOfGst(((((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price) * 5) / 100)
-  }, [gst, (((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price)])
+    setCalculatedPrizeOfGst(((((submitButtonOfPricingCalculation && Math.floor(guestPrice)) || price2) || addPackage?.price) * 5) / 100)
+  }, [gst, (((submitButtonOfPricingCalculation && Math.floor(guestPrice)) || price2) || addPackage?.price)])
   useEffect(() => {
-    setGrandTotal(((((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price) + calculatedPrizeOfGst));
-    setFixedDeparturePopupPrice(((((submitButtonOfPricingCalculation && Math.floor(guestPrice / 2)) || price2) || addPackage?.price) + calculatedPrizeOfGst))
+    setGrandTotal(((((submitButtonOfPricingCalculation && Math.floor(guestPrice)) || price2) || addPackage?.price) + calculatedPrizeOfGst));
+    setFixedDeparturePopupPrice(((((submitButtonOfPricingCalculation && Math.floor(guestPrice)) || price2) || addPackage?.price) + calculatedPrizeOfGst))
   }, [calculatedPrizeOfGst, grandTotal])
 
   const handleBookNowClick = () => {
@@ -119,15 +119,15 @@ const ItineraryPricingCard = () => {
                 )}
             </div>
           </div>
-          <div className="flex justify-between  pt-3 pb-3 ">
+          <div className="grid grid-cols-2 py-3">
             <div>
-              <p className="text-sm ">Basic Price</p>
+              <p className="text-sm ">Basic Price : </p>
             </div>
             <div className="">
-              <p className="text-lg font-medium text-graytext text-center">
-                {Math.floor(((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+              <p className="text-lg font-medium text-graytext">
+                {Math.floor(((submitButtonOfPricingCalculation && (guestPrice)) || price2) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
               </p>
-              <p className="text-xxs">per person on twin sharing</p>
+              {(guestPrice ? "" : <p className="text-xxs">per person on twin sharing</p> )}
             </div>
           </div>
           <hr className="border-dashed my-2" />
@@ -136,7 +136,7 @@ const ItineraryPricingCard = () => {
             <div className="grid grid-cols-2">
               <p>Total Cost</p>
               <p className="">
-                {Math.floor((((submitButtonOfPricingCalculation && (guestPrice / 2)) || price2)) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                {Math.floor((((submitButtonOfPricingCalculation && (guestPrice)) || price2)) || addPackage?.price).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
               </p>
             </div>
           </div>

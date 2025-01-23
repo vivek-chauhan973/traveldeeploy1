@@ -158,8 +158,8 @@ export default function Package1() {
   const handleTwitter = () => {
     const currentUrl = encodeURIComponent(window.location.href);
     window.open(`https://twitter.com/intent/tweet?url=${currentUrl}`,
-    // window.open(`https://twitter.com/intent/tweet?url=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
-     "_blank");
+      // window.open(`https://twitter.com/intent/tweet?url=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
+      "_blank");
   };
   const handleLinkedIn = () => {
     const currentUrl = encodeURIComponent(window.location.href);
@@ -170,18 +170,18 @@ export default function Package1() {
     );
   };
   const handleFacebook = () => {
-      const currentUrl = encodeURIComponent(window.location.href);
-      window.open(
-        `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`, // Constructs the Facebook share dialog URL with the encoded current page URL
-        // `https://www.facebook.com/sharer/sharer.php?u=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
-        "_blank"
-      );
+    const currentUrl = encodeURIComponent(window.location.href);
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`, // Constructs the Facebook share dialog URL with the encoded current page URL
+      // `https://www.facebook.com/sharer/sharer.php?u=${"https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"}`,
+      "_blank"
+    );
   };
   const handleWhatsApp = () => {
     const message = encodeURIComponent("Check this out!");
-    const url = encodeURIComponent(window.location.href); 
+    const url = encodeURIComponent(window.location.href);
     // const url = encodeURIComponent("https://youtu.be/wTGVHLyV09M?si=qdwwlVkFQM3U5pDy"); 
-    window.open(`https://wa.me/?text=${message}%20${url}`,"_blank");
+    window.open(`https://wa.me/?text=${message}%20${url}`, "_blank");
   };
 
   return (
@@ -577,7 +577,7 @@ export default function Package1() {
             </div>
           </div>
           <div className="flex gap-1 md:justify-end justify-around  items-center">
-            <div className="text-right flex flex-col items-end justify-center ">
+            <div className="text-right flex flex-col items-center justify-center py-1">
               <p className="text-base leading-5 text-green-600 font-semibold uppercase">
                 best deal price
               </p>
@@ -592,28 +592,34 @@ export default function Package1() {
                   {addPackage?.prices?.diskHike}% Off
                 </button>
               </div>
-              <p className="text-sm leading-5">
-                Starts From{" "}
-                {addPackage?.addguest === "addGuest" && (
-                  <span className="text-lg text-graytext font-medium">
+              {addPackage?.addguest === "addGuest" && (
+                <div>
+                  <p className="text-sm leading-5">
+                    Without GST{" "}
+                  </p>
+                  <p className="text-lg text-graytext font-medium">
                     {Math.floor(
-                      (submitButtonOfPricingCalculation && guestPrice / 2) ||
+                      (submitButtonOfPricingCalculation && guestPrice) ||
                       price2 ||
                       addPackage?.price
                     ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                  </span>
-                )}
-                {addPackage?.addguest === "fixedDeparture" && (
-                  <span className="text-lg text-graytext font-medium">
+                  </p>
+                </div>
+              )}
+              {addPackage?.addguest === "fixedDeparture" && (
+                <div>
+                  <p className="text-sm leading-5">
+                    Starts From{" "}
+                  </p>
+                  <p className="text-lg text-graytext font-medium">
                     {Math.floor(
                       guestPrice || addPackage?.price
                     ).toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                  </span>
-                )}
-              </p>
-              <p className="text-xxs leading-5">per person on twin sharing</p>
+                  </p>
+                </div>
+              )}
+              {(guestPrice ? "" : <p className="text-xxs leading-5 text-center">per person on twin sharing</p>)}
             </div>
-
             <div className="flex-col align-middle my-auto pl-2 gap-2 py-2">
               {addPackage?.prices?.addguest === "addGuest" && (
                 <p
