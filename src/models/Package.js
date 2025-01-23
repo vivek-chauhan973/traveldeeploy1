@@ -153,7 +153,6 @@ const packageSchema = new Schema({
     toJSON: { virtuals: true },
   }
 );
-
 packageSchema.pre(/^find/, function (next) {
   this.populate("addguestPrices");
   next();
