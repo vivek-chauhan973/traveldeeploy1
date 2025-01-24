@@ -43,6 +43,7 @@ const SearchPagePackageList = ({ locationId }) => {
   if(packages?.[0]==="not found"){
     return <p className="font-semibold text-2xl mt-10 text-center">No Packages Available According To filter</p>
   }
+  console.log("currentItems---> 12345p->>>",currentItems)
   return (
     <div>
       
@@ -164,9 +165,9 @@ const SearchPagePackageList = ({ locationId }) => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-cols">
+            <div className="flex flex-cols">
                 <Link
-                  href={"/package/" + packageData.pageUrl}
+                  href={"/package/" + packageData?.url}
                   className="mt-3 block w-full select-none rounded-lg bg-gradient-to-r from-orange-500 to-red-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
                   type="button"
                 >
