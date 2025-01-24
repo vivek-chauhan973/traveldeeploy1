@@ -41,29 +41,20 @@ const Addguest = ({
     departureSectionData,
   } = useAppContext() ?? { showAddguest: false };
   const [cars, setCars] = useState([]);
-  const [selectedCar, setSelectedCar] = useState("");
   const [selectedCarIdFetchApi, setSelectedCarIdFetchApi] = useState("");
-  const infantMaxDate = date.toISOString().split("T")[0];
+  // const infantMaxDate = date.toISOString().split("T")[0];
   const [isAC, setIsAC] = useState(true);
   const [carWithCapacity, setCarWithCapacity] = useState([]);
-  const [finalPrice, setFinalPrice] = useState(0);
   const [acDisable, setAcDisable] = useState(false);
-  const [transportPrice, setTransportPrice] = useState(0);
-  const [final, setFinal] = useState(0);
-  const [selectedDataOfCar, setSelectedDataOfCar] = useState(0);
   const [days, setDays] = useState(0);
   const [open, setOpen] = useState(false);
-  const [close1, setClose1] = useState(false);
   const [countSingleRoom, setCountSingleRoom] = useState(0);
   const [countTwinRoom, setCountTwinRoom] = useState(0);
   const [countTripleRoom, setCountTripleRoom] = useState(0);
   const [countQuardRoom, setCountQuardRoom] = useState(0);
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
-  const [selectedCarBool, setSelectedCarBool] = useState(false);
-  const [firstSelectedCar, setFirstSelectedCar] = useState(null);
-  const [firstSelectedCarPrice, setFirstSelectedCarPrice] = useState(0);
-  const [roomError, setRoomError] = useState("");
+  const [selectedCarBool, setSelectedCarBool] = useState(false); 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -306,8 +297,8 @@ const Addguest = ({
     }
   };
 
- 
-// <---------calculation of addguest and packages according to availabilty of room sharing--------->
+
+  // <---------calculation of addguest and packages according to availabilty of room sharing--------->
 
   useEffect(() => {
     // Ensure prices are reset when adult count is z
@@ -319,6 +310,7 @@ const Addguest = ({
     if (currentAdult !== previousAdult) {
       carpricingRef.current = 0;
       acpriceRef.current = 0;
+      setSelectedCarIdFetchApi(null)
       if (currentAdult) {
         setInputData({
           ...inputData,
@@ -394,18 +386,20 @@ const Addguest = ({
         setGuestPrice(calculatedPrice);
       }
       else {
+        setSelectedCarIdFetchApi(null)
         setGuestPrice(0);
       }
 
     }
   }, [inputData, addPackage, departureSectionData, days]);
 
- // <-------reset calculation here------->
+  // <-------reset calculation here------->
 
   useEffect(() => {
     if (inputData?.adult === 0) {
       carpricingRef.current = 0;
       acpriceRef.current = 0;
+      setSelectedCarIdFetchApi(null)
       setInputData(initialData);
     }
   }, [inputData?.adult === 0])
@@ -417,8 +411,6 @@ const Addguest = ({
     const filteredData = cars?.find(
       (item) => item?.seatingCapacity >= inputData?.adult
     );
-    setSelectedDataOfCar(filteredData?.capacity);
-    setFirstSelectedCar(filteredData);
     newarr.push(filteredData);
     const filteredData3 = cars?.filter(
       (item) =>
@@ -481,11 +473,13 @@ const Addguest = ({
     carpricingRef.current = carcost * days;
     acpriceRef.current = acprice * days;
     setSelectedCarIdFetchApi(parsedItem);
-    setSelectedDataOfCar(parsedItem?.capacity);
     setAcDisable(true);
     setSelectedCarBool(true);
     setIsAC(true);
   };
+  useEffect(()=>{
+    setCarWithCapacity(carWithCapacity)
+  },[inputData?.singleRoom,inputData?.twinRoom,inputData?.tripleRoom,inputData?.quardRoom])
   // useEffect(() => {
   //   if(isAC){
   //     setGuestPrice(guestPrice+acpriceRef.current)
@@ -508,6 +502,12 @@ const Addguest = ({
     const minFormatted = min.toISOString().split("T")[0];
     setMinDate(minFormatted);
   }, [minDate, maxDate]);
+
+
+  console.log("ref current ------> ", acpriceRef)
+
+
+  // console.log("CarWithCapacity",carWithCapacity?.vehicleType);
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
@@ -948,142 +948,160 @@ const Addguest = ({
                   </div>
                 </div>
                 {/* here is display all cars */}
-
-                <div className="mt-8 ">
-                  <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center p-2">
-                    <p className="font-semibold text-base md:text-md">
-                      Choose Transport Options
-                    </p>
-                    <div className="flex items-center space-x-2">
-                      {/* AC Option / Non AC Option toggle */}
-                      <p
-                        className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-black" : "text-gray-400 blur-none"
-                          }`}
-                      >
-                        AC
-                      </p>
-                      <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
-                        <div
-                          className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC
-                            ? "bg-navyblack shadow-md"
-                            : "bg-white text-gray-500"
-                            }`}
-                          onClick={() => {
-                            if (acDisable) {
-                              setIsAC(true);
-                            }
-                          }}
-                        ></div>
-                        <div
-                          className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC
-                            ? "bg-navyblack  shadow-md"
-                            : "bg-white text-red-500"
-                            }`}
-                          onClick={() => {
-                            if (acDisable) {
-                              setIsAC(false);
-                            }
-                          }}
-                        ></div>
-                      </div>
-                      <p
-                        className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-black" : "text-gray-400 blur-none"
-                          }`}
-                      >
-                        Non AC
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* All listed Cars is here */}
-
-                {inputData?.adult &&
-                  carWithCapacity?.map((item) => (
-                    <div
-                      key={item?._id}
-                      // onClick={() => handleSelected(item)}
-                      className="flex-col md:flex-row flex flex-1 gap-5 border-b py-3"
-                    >
-                      <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
-                        <Image
-                          className="w-40 h-28 object-cover rounded-md"
-                          src={item?.imageDetails?.[0]?.url}
-                          alt=""
-                          width="160"
-                          height="180"
-                        />
-                      </div>
-                      <div className=" flex flex-1 mb-3">
-                        <div className="flex flex-col flex-1 justify-start md:justify-center md:pl-0 pl-4">
-                          <p className="font-bold capitalize text-md ">
-                            {item?.vehicleType}
+                {(inputData?.singleRoom > 0 ||
+                  inputData?.twinRoom > 0 ||
+                  inputData?.tripleRoom > 0 ||
+                  inputData?.quardRoom > 0) && <div>
+                    <div className="mt-8 ">
+                      <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center p-2">
+                        <p className="font-semibold text-base md:text-md">
+                          Choose Transport Options
+                        </p>
+                        <div className="flex items-center space-x-2">
+                          {/* AC Option / Non AC Option toggle */}
+                          <p
+                            className={`md:text-sm text-xxs transition duration-300 ${isAC ? "text-black" : "text-gray-400 blur-none"
+                              }`}
+                          >
+                            AC
                           </p>
-                          <p className="text-[10px] font-medium text-gray-500 capitalize">
-                            {item?.seatingCapacity} passenger seating capacity
-                          </p>
-                          <div ref={radioGroupRef} className="cursor-pointer flex justify-start items-center mt-1">
-                            <input
-                              type="radio"
-                              value={JSON.stringify(item)}
-                              name="choice"
-                              className="accent-navyblack h-4 w-4 cursor-pointer mr-1"
-                              onClick={(e) => {
-                                if (
-                                  !(
-                                    inputData?.singleRoom > 0 ||
-                                    inputData?.twinRoom > 0 ||
-                                    inputData?.tripleRoom > 0 ||
-                                    inputData?.quardRoom > 0
-                                  )
-                                ) {
-                                  e.preventDefault(); // Prevent default behavior of the radio button
-                                  setRoomError("Please select a room first.");
-                                } else {
-                                  setRoomError(""); // Clear the error if the condition is met
-                                  handleSelected(e.target.value)
+                          <div className=" w-10 h-5 flex justify-between items-center rounded-full bg-white border border-black">
+                            <div
+                              className={`flex items-center justify-center  w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${isAC
+                                ? "bg-navyblack shadow-md"
+                                : "bg-white text-gray-500"
+                                }`}
+                              onClick={() => {
+                                if (acDisable) {
+                                  setIsAC(true);
                                 }
                               }}
-                            />
-                            <label className="text-para text-gray-800 font-medium">
-                              Select Vehicle
-                            </label>
+                            ></div>
+                            <div
+                              className={`flex items-center justify-center w-5 h-4 cursor-pointer rounded-full transition-all duration-300 ${!isAC
+                                ? "bg-navyblack  shadow-md"
+                                : "bg-white text-red-500"
+                                }`}
+                              onClick={() => {
+                                if (acDisable) {
+                                  setIsAC(false);
+                                }
+                              }}
+                            ></div>
                           </div>
-                          {roomError && (
-                            <p className="text-red-500 text-xxs ml-5">{roomError}</p>
-                          )}
-                        </div>
-                        <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
-                          {item?.capacity - selectedDataOfCar === 0 && <p></p>}
-                          {item?.capacity - selectedDataOfCar > 0 && (
-                            <p>
-                              +
-                              {(
-                                item?.capacity - selectedDataOfCar
-                              ).toLocaleString("en-IN", {
-                                style: "currency",
-                                currency: "INR",
-                                minimumFractionDigits: 0,
-                                maximumFractionDigits: 0,
-                              })}
-                            </p>
-                          )}
-                          {item?.capacity - selectedDataOfCar < 0 && (
-                            <p>
-                              {(
-                                item?.capacity - selectedDataOfCar
-                              ).toLocaleString("en-IN", {
-                                style: "currency",
-                                currency: "INR",
-                                minimumFractionDigits: 0,
-                                maximumFractionDigits: 0,
-                              })}
-                            </p>
-                          )}
+                          <p
+                            className={`md:text-sm text-xxs transition duration-300 ${!isAC ? "text-black" : "text-gray-400 blur-none"
+                              }`}
+                          >
+                            Non AC
+                          </p>
                         </div>
                       </div>
                     </div>
-                  ))}
+
+                    {/* All listed Cars is here */}
+
+                    {inputData?.adult && (inputData?.singleRoom > 0 ||
+                      inputData?.twinRoom > 0 ||
+                      inputData?.tripleRoom > 0 ||
+                      inputData?.quardRoom > 0) &&
+                      carWithCapacity?.map((item) => {
+
+                        let calculatedAcPrice = 0;
+                        const { markup } = addPackage?.prices;
+                        const { hike } = departureSectionData;
+
+                        calculatedAcPrice = (item?.capacity + item?.ac) * days;
+                        calculatedAcPrice += calculatedAcPrice * markup / 100;
+
+                        if (hike >= 0) {
+                          calculatedAcPrice += calculatedAcPrice * hike / 100;
+                        }
+                        else {
+                          calculatedAcPrice -= calculatedAcPrice * hike / 100;
+                        }
+
+                        return (
+                          <div
+                            key={item?._id}
+                            // onClick={() => handleSelected(item)}
+                            className="flex-col md:flex-row flex flex-1 gap-5 border-b py-3"
+                          >
+                            <div className="flex flex-2 justify-center items-center w-full md:w-auto md:justify-normal">
+                              <Image
+                                className="w-40 h-28 object-cover rounded-md"
+                                src={item?.imageDetails?.[0]?.url}
+                                alt=""
+                                width="160"
+                                height="180"
+                              />
+                            </div>
+                            <div className=" flex flex-1 mb-3">
+                              <div className="flex flex-col flex-1 justify-start md:justify-center md:pl-0 pl-4">
+                                <p className="font-bold capitalize text-md ">
+                                  {item?.vehicleType}
+                                </p>
+                                <p className="text-[10px] font-medium text-gray-500 capitalize">
+                                  {item?.seatingCapacity} passenger seating capacity
+                                </p>
+                                <div ref={radioGroupRef} className="cursor-pointer flex justify-start items-center mt-1">
+                                  <input
+                                    type="radio"
+                                    value={JSON.stringify(item)}
+                                    name="choice"
+                                    className="accent-navyblack h-4 w-4 cursor-pointer mr-1"
+                                    onClick={(e) => {
+                                      if (
+                                        !(
+                                          inputData?.singleRoom > 0 ||
+                                          inputData?.twinRoom > 0 ||
+                                          inputData?.tripleRoom > 0 ||
+                                          inputData?.quardRoom > 0
+                                        )
+                                      ) {
+                                        e.preventDefault(); // Prevent default behavior of the radio button
+                                        ;
+                                      } else {
+                                         // Clear the error if the condition is met
+                                        handleSelected(e.target.value)
+                                      }
+                                    }}
+                                  />
+                                  <label className="text-para text-gray-800 font-medium">
+                                    Select Vehicle
+                                  </label>
+                                </div>
+                                
+                              </div>
+                              {selectedCarIdFetchApi && <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
+                                {(calculatedAcPrice - carpricingRef?.current) === 0 && <p></p>}
+                                {(calculatedAcPrice - carpricingRef?.current) > 0 && (
+                                  <p>
+                                    +
+                                    {(calculatedAcPrice - carpricingRef?.current).toLocaleString("en-IN", {
+                                      style: "currency",
+                                      currency: "INR",
+                                      minimumFractionDigits: 0,
+                                      maximumFractionDigits: 0,
+                                    })}
+                                  </p>
+                                )}
+                                {(calculatedAcPrice - carpricingRef?.current) < 0 && (
+                                  <p>
+                                    {(calculatedAcPrice - carpricingRef?.current).toLocaleString("en-IN", {
+                                      style: "currency",
+                                      currency: "INR",
+                                      minimumFractionDigits: 0,
+                                      maximumFractionDigits: 0,
+                                    })}
+                                  </p>
+                                )}
+                              </div>}
+                            </div>
+                          </div>
+                        )
+                      })}
+                  </div>}
               </div>
               <div className=" bottom-0 sticky bg-slate-50 rounded-b-lg border-t mt-3 py-2 md:px-7 px-5 flex justify-between items-center">
                 <div>
