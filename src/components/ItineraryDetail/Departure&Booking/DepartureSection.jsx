@@ -201,7 +201,7 @@ const DepartureSection = ({ addPackage }) => {
                 addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 2 && (
                   <div className="ml-5">
-                    {AllDataRelatedCity?.[0]?.[0] && (
+                    {AllDataRelatedCity?.[0]?.[0]?.length>0 && (
                       <div className="my-5">
                         <div className="flex gap-3 flex-wrap">
                           {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
@@ -398,7 +398,7 @@ const DepartureSection = ({ addPackage }) => {
                     {AllDataRelatedCity?.[0]?.[0] && (
                       <div className="my-5">
                         <div className="flex gap-3 flex-wrap">
-                          {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
+                          {AllDataRelatedCity?.[0]?.[0]?.length>0&&AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {
                             const dateObj = new Date(item.Date);
                             const dayOfWeek = dateObj.toLocaleString(
                               "default",
@@ -438,7 +438,7 @@ const DepartureSection = ({ addPackage }) => {
               {addPackage?.addguest === "fixedDeparture" &&
                 addPackage?.fixedfixeddepartureweightedprice === 2 && (
                   <div className=" ml-5">
-                    {AllDataRelatedCity?.[0]?.[0] && (
+                    {AllDataRelatedCity?.[0]?.[0]?.length>0 && (
                       <div className="my-5">
                         <div className="flex gap-3 flex-wrap">
                           {AllDataRelatedCity?.[0]?.[0]?.map((item, i) => {

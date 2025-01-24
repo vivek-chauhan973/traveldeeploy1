@@ -43,7 +43,7 @@ const SearchPagePackageList = ({ locationId }) => {
   if(packages?.[0]==="not found"){
     return <p className="font-semibold text-2xl mt-10 text-center">No Packages Available According To filter</p>
   }
-  console.log("currentItems---> 12345p->>>",currentItems)
+  // console.log("currentItems---> 12345p->>>",currentItems)
   return (
     <div>
       
