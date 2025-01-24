@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect,useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useAppContext } from "./admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,6 +27,9 @@ const Addguest = ({
   setShowPopup1,
 }) => {
   const prevAdultRef = useRef();
+  const carpricingRef = useRef(0);
+  const acpriceRef = useRef(0);
+  const radioGroupRef = useRef(null);
   const date = new Date();
   const date2 = new Date();
   const date3 = new Date(date2);
@@ -302,6 +305,10 @@ const Addguest = ({
         break;
     }
   };
+
+ 
+// <---------calculation of addguest and packages according to availabilty of room sharing--------->
+
   useEffect(() => {
     // Ensure prices are reset when adult count is z
     const currentAdult = inputData?.adult;
@@ -310,6 +317,8 @@ const Addguest = ({
     // Update the ref with the current value for the next render
     prevAdultRef.current = currentAdult;
     if (currentAdult !== previousAdult) {
+      carpricingRef.current = 0;
+      acpriceRef.current = 0;
       if (currentAdult) {
         setInputData({
           ...inputData,
@@ -330,13 +339,13 @@ const Addguest = ({
         twinSharingRoom,
         tripleSharingRoom,
         quadSharingRoom,
-      } = addPackage.prices;
+      } = addPackage?.prices;
 
       const { hike } = departureSectionData;
 
       let calculatedPrice = 0; // Reset calculatedPrice at the start
 
-      const calculateRoomPrice = (roomPrice, count, adults) => {
+      const calculateRoomPrice = (roomPrice, count) => {
         let basePrice = roomPrice * count * (days - 1);
         let totalPrice = basePrice + (basePrice * markup) / 100;
 
@@ -348,22 +357,22 @@ const Addguest = ({
         return totalPrice;
       };
       // Calculate price for each category
-      calculatedPrice += calculateRoomPrice(childOverFive, inputData?.child || 0, inputData?.adult);
+      calculatedPrice += calculateRoomPrice(childOverFive, inputData?.child || 0);
       // console.log("markup data is 1", calculateRoomPrice(childOverFive, inputData?.child || 0, inputData?.adult))
 
-      calculatedPrice += calculateRoomPrice(childUnderFive, inputData?.infant || 0, inputData?.adult);
+      calculatedPrice += calculateRoomPrice(childUnderFive, inputData?.infant || 0);
       // console.log("markup data is 2 ", calculateRoomPrice(childUnderFive, inputData?.infant || 0, inputData?.adult))
 
-      calculatedPrice += calculateRoomPrice(singleRoom, inputData?.singleRoom || 0, inputData?.adult);
+      calculatedPrice += calculateRoomPrice(singleRoom, inputData?.singleRoom || 0);
       // console.log("markup data is 3", calculateRoomPrice(singleRoom, inputData?.singleRoom || 0, inputData?.adult))
 
-      calculatedPrice += calculateRoomPrice(twinSharingRoom, inputData?.twinRoom || 0, inputData?.adult);
+      calculatedPrice += calculateRoomPrice(twinSharingRoom, inputData?.twinRoom || 0);
       // console.log("markup data is 4 ", calculateRoomPrice(twinSharingRoom, inputData?.twinRoom || 0, inputData?.adult))
 
-      calculatedPrice += calculateRoomPrice(tripleSharingRoom, inputData?.tripleRoom || 0, inputData?.adult);
+      calculatedPrice += calculateRoomPrice(tripleSharingRoom, inputData?.tripleRoom || 0);
       // console.log("markup data is 5 ", calculateRoomPrice(tripleSharingRoom, inputData?.tripleRoom || 0, inputData?.adult))
 
-      calculatedPrice += calculateRoomPrice(quadSharingRoom, inputData?.quardRoom || 0, inputData?.adult);
+      calculatedPrice += calculateRoomPrice(quadSharingRoom, inputData?.quardRoom || 0);
       // console.log("markup data is 6 ", calculateRoomPrice(quadSharingRoom, inputData?.quardRoom || 0, inputData?.adult))
 
       // Miscellaneous price
@@ -387,18 +396,22 @@ const Addguest = ({
       else {
         setGuestPrice(0);
       }
-      
+
     }
   }, [inputData, addPackage, departureSectionData, days]);
 
-  useEffect(()=>{
+ // <-------reset calculation here------->
+
+  useEffect(() => {
     if (inputData?.adult === 0) {
+      carpricingRef.current = 0;
+      acpriceRef.current = 0;
       setInputData(initialData);
     }
-  },[inputData?.adult === 0])
-  useEffect(() => {
-    console.log("selected fetch car here pradhumn 123 ------> ", selectedCarIdFetchApi);
-  }, [selectedCarIdFetchApi])
+  }, [inputData?.adult === 0])
+
+  // <-------Handle Car filter according to choosing adults--------> 
+
   useEffect(() => {
     const newarr = [];
     const filteredData = cars?.find(
@@ -437,20 +450,52 @@ const Addguest = ({
     }
     setCarWithCapacity(newarr);
   }, [inputData?.adult]);
+
+  //<-----handle selection of car here---->
+
   const handleSelected = (item) => {
     const parsedItem = JSON.parse(item);
+    acpriceRef.current = 0;
+    const {
+      markup,
+    } = addPackage?.prices;
+    const { hike } = departureSectionData;
+    if (parsedItem === null || parsedItem === undefined) {
+      return
+    }
+    let carcost = 0;
+    const { capacity, ac } = parsedItem;
+    let acprice = 0;
+    carcost = capacity + ac;
+    carcost = carcost + carcost * markup / 100;
+    acprice = ac + ac * markup / 100;
+    if (hike >= 0) {
+      acprice = acprice + acprice * hike / 100;
+      carcost = carcost + carcost * hike / 100;
+    }
+    else {
+      acprice = acprice - acprice * hike / 100;
+      carcost = carcost - carcost * hike / 100;
+    }
+    setGuestPrice(guestPrice + carcost * days - carpricingRef.current);
+    carpricingRef.current = carcost * days;
+    acpriceRef.current = acprice * days;
     setSelectedCarIdFetchApi(parsedItem);
     setSelectedDataOfCar(parsedItem?.capacity);
     setAcDisable(true);
     setSelectedCarBool(true);
     setIsAC(true);
-    // console.log("item",parsedItem);
   };
-  // console.log("selected Car Price---> ",selectedDataOfCar)
-
+  // useEffect(() => {
+  //   if(isAC){
+  //     setGuestPrice(guestPrice+acpriceRef.current)
+  //   }
+  //   else{
+  //     setGuestPrice(guestPrice-acpriceRef.current)
+  //   }
+  // }, [isAC]);
   useEffect(() => {
     const date1 = new Date();
-
     // Calculate max date (1 year from current date)
     const max = new Date(date1);
     max.setFullYear(date1.getFullYear());
@@ -463,12 +508,6 @@ const Addguest = ({
     const minFormatted = min.toISOString().split("T")[0];
     setMinDate(minFormatted);
   }, [minDate, maxDate]);
-
-
-
- 
-
-  // console.log("CarWithCapacity",carWithCapacity?.vehicleType);
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
@@ -983,7 +1022,7 @@ const Addguest = ({
                           <p className="text-[10px] font-medium text-gray-500 capitalize">
                             {item?.seatingCapacity} passenger seating capacity
                           </p>
-                          <div className="cursor-pointer flex justify-start items-center mt-1">
+                          <div ref={radioGroupRef} className="cursor-pointer flex justify-start items-center mt-1">
                             <input
                               type="radio"
                               value={JSON.stringify(item)}
