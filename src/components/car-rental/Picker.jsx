@@ -225,7 +225,7 @@ const Picker = ({ setCarSelectionPopup }) => {
                     className="text-para w-[40%] px-3 py-2 h-10 outline-none border-none"
                     onChange={(e) => setUserTimeLocal(e.target.value)}
                   >
-                    <option value="" disabled>Select Time</option>
+                    <option value="">Select Time</option>
                     {localTime?.length > 0 &&
                       localTime?.map((item, i) => (
                         <option key={i} value={item?.groupName}>
@@ -244,7 +244,7 @@ const Picker = ({ setCarSelectionPopup }) => {
                     className="text-para w-full px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                     onChange={(e) => setUserPlanLocal(e.target.value)}
                   >
-                    <option value="Choose Plan" disabled>
+                    <option value="">
                       Choose Your Plan
                     </option>
                     <option value="BY KMs">

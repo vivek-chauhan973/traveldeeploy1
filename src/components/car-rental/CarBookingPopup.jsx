@@ -78,7 +78,6 @@ const CarBookingPopup = () => {
         })
     }, []);
 
-
     const handleSubmit = () => {
         setLoginPopup(true);
     };

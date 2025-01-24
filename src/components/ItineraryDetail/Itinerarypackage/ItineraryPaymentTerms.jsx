@@ -12,7 +12,7 @@ const ItineraryPaymentTerms = () => {
   };
   return (
     <>
-      <div>
+      <div id="NeedToKnowSection">
         <p className="md:text-lg text-md font-semibold text-graytext">
           Payment Terms
         </p>
@@ -28,7 +28,7 @@ const ItineraryPaymentTerms = () => {
       </div>
 
       <div>
-        <div id="TourDetailsSection">
+        <div >
           <div className="flex justify-between mt-2  gap-2 border-b-2 border-navyblack">
             <div
               onClick={() => handleTabClick("tab1")}

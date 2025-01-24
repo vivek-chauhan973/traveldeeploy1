@@ -286,7 +286,7 @@ export default function Package1() {
             </div>
             <div>
               <ScrollLink
-                to="TourInformationSection"
+                to="TourDetailsSection"
                 spy={true}
                 smooth={true}
                 offset={-70}
@@ -299,7 +299,7 @@ export default function Package1() {
             </div>
             <div>
               <ScrollLink
-                to="NeedToKnowSection"
+                to="TourDetailsSection"
                 spy={true}
                 smooth={true}
                 offset={-70}
@@ -326,7 +326,7 @@ export default function Package1() {
             </div>
             <div>
               <ScrollLink
-                to="UpgradesSection"
+                to="NeedToKnowSection"
                 spy={true}
                 smooth={true}
                 offset={-70}
