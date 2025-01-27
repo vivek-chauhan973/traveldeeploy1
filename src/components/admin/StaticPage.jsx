@@ -115,15 +115,15 @@ const StaticPage = () => {
             value={selectedPage}
           >
             <option value="">Select Page Type</option>
-            <option value="about-us">About Us</option>
+            {/* <option value="about-us">About Us</option>
             <option value="contact-us">Contact Us</option>
             <option value="privacy-policy">Privacy Policy</option>
             <option value="terms-and-conditions">Terms and Conditions</option>
-            <option value="payment-policy">Payment Policy</option>
+            <option value="payment-policy">Payment Policy</option> */}
             <option value="jobs">Jobs</option>
-            <option value="refunds-and-cancellations">
+            {/* <option value="refunds-and-cancellations">
               Refunds and Cancellations
-            </option>
+            </option> */}
           </select>
         </div>
         {selectedPage && (
