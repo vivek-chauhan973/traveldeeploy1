@@ -87,37 +87,6 @@ const About = () => {
       <Breadcrumbs />
       <div>
         {/* herosection start */}
-        {/* <div className="relative flex justify-center items-center overflow-hidden w-full md:h-[450px] h-72">
-          <div className="h-full w-full ">
-            <div>
-              <Image className="relative object-cover h-full w-full"
-                layout='fill'
-                src="/assets/staticimage/aboutUs.jpg"
-                alt="images"
-              />
-              <div
-                className="absolute bg-gradient-to-r from-black to-gray"
-              >
-                <div className='w-[50%] h-full md:h-[450px] flex justify-center items-center'>
-                  <div className='w-[85%] flex flex-col justify-center items-center'>
-                    <h2 className="xl:text-[50px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-primary text-center">
-                      About us <span className='text-white'>Excellence Defined</span>
-                    </h2>
-                    <p className="my-5 md:text-para text-sm  text-white text-center">
-                      At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
-                      we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
-                    </p>
-                    <Link href="#">
-                      <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
-                        Eexplore Now
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
         {/* medium devices */}
         <div className='md:block hidden'>
           <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
@@ -131,15 +100,15 @@ const About = () => {
             <div className='w-full h-full absolute'>
               <div className='w-[60%] h-full flex items-center justify-end px-16'>
                 <div className='w-full flex flex-col justify-center items-center'>
-                  <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                  <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
                     About us <br /> <span className='text-white'>Excellence Defined</span>
                   </h2>
-                  <p className="my-5 md:text-base text-sm  text-white text-center">
+                  <p className="my-5 text-base text-white text-center">
                     At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
                     we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
                   </p>
                   <Link href="#">
-                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                       Explore Now
                     </button>
                   </Link>
@@ -152,15 +121,15 @@ const About = () => {
         <div className='md:hidden'>
           <div className='w-full flex items-center justify-center bg-black p-5'>
             <div className='w-full flex flex-col justify-center items-center'>
-              <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+              <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
                 About us <br /> <span className='text-white'>Excellence Defined</span>
               </h2>
-              <p className="my-5 md:text-base text-sm  text-white text-center">
+              <p className="my-5 text-sm  text-white text-center">
                 At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
                 we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
               </p>
               <Link href="#">
-                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold  py-1.5 px-3 rounded text-sm">
                   Explore Now
                 </button>
               </Link>

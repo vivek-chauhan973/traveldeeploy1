@@ -6,11 +6,11 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
-const fetchJobsPage = async () => {
-    const res = await fetch(`/api/static-page/static-page-type?name=jobs`);
+const fetchPaymentPloicyPage = async () => {
+    const res = await fetch(`/api/static-page/static-page-type?name=payment-policy`);
     return await res.json();
   };
-const Jobs = () => {
+const Payment = () => {
 
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -85,23 +85,22 @@ const Jobs = () => {
                         <div className='w-[30%] h-full bg-black flex items-center justify-end'>
                         </div>
                         <div className='relative w-[80%] h-full flex'>
-                            <img src="/assets/staticimage/jobs.jpg" alt="" className='relative w-full h-full' />
+                            <img src="/assets/staticimage/paymentPolicy.jpg" alt="" className='relative w-full h-full' />
                             <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
                             </div>
                         </div>
                         <div className='w-full h-full absolute'>
                             <div className='w-[60%] h-full flex items-center justify-end px-16'>
                                 <div className='w-full flex flex-col justify-center items-center'>
-                                    <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
-                                        Jobs <br /> <span className='text-white'>Grow With Us</span>
+                                    <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                        Payments<br /> <span className='text-white'>How To Process Payments</span>
                                     </h2>
-                                    <p className="my-5 md:text-base text-sm  text-white text-center">
-                                        At BizareXpedition, we are always looking for passionate and motivavated individuals to join our growing team.
-                                        we believe in fostering a posiytive work environment that encourages creativity, collaboration, and the love for travel.
-                                        If you are looking for a dynamic career you can make a difference, you have come to the right place.
+                                    <p className="my-5 text-base text-white text-center">
+                                        At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
+                                        Below, you will find important details about our payment process.
                                     </p>
                                     <Link href="#">
-                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                                             Explore Now
                                         </button>
                                     </Link>
@@ -114,16 +113,14 @@ const Jobs = () => {
                 <div className='md:hidden'>
                     <div className='w-full flex items-center justify-center bg-black p-5'>
                         <div className='w-full flex flex-col justify-center items-center'>
-                            <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
-                                Jobs <br /> <span className='text-white'>Grow With Us</span>
+                            <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                Payments<br /> <span className='text-white'>How To Process Payments</span>
                             </h2>
-                            <p className="my-5 md:text-base text-sm  text-white text-center">
-                                At BizareXpedition, we are always looking for passionate and motivavated individuals to join our growing team.
-                                we believe in fostering a posiytive work environment that encourages creativity, collaboration, and the love for travel.
-                                If you are looking for a dynamic career you can make a difference, you have come to the right place.
-                            </p>
+                            <p className="my-5 text-sm  text-white text-center">
+                                At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
+                                Below, you will find important details about our payment process.                            </p>
                             <Link href="#">
-                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                                     Explore Now
                                 </button>
                             </Link>
@@ -138,7 +135,7 @@ const Jobs = () => {
                     <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
                         <div className="">
                             <div className="sticky top-40 z-10 bg-white shadow-xl rounded-xl md:p-7 p-5">
-                                <h4 className="text-md font-semibold mb-4 capitalize pl-3">Jobs</h4>
+                                <h4 className="text-md font-semibold mb-4 capitalize pl-3">Payments</h4>
                                 <div>
                                     {paragraphs.map((item, index) => (
                                         <ScrollLink
@@ -196,4 +193,4 @@ const Jobs = () => {
     )
 }
 
-export default Jobs;
+export default Payment;

@@ -91,15 +91,15 @@ const TermsAndCondition = () => {
             <div className='w-full h-full absolute'>
               <div className='w-[63%] h-full flex items-center justify-end px-16'>
                 <div className='w-full flex flex-col justify-center items-center'>
-                  <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                  <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
                     Terms and Conditions <br /> <span className='text-white'>Need tpo know before you go</span>
                   </h2>
-                  <p className="my-5 md:text-base text-sm  text-white text-center">
+                  <p className="my-5 text-base text-white text-center">
                     Welcome to BizareXpedtion! By using our website and services, you agree to comply with the following terms and conditions.
                     Please read them carefullly before proceeding.
                   </p>
                   <Link href="#">
-                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                    <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                       Explore Now
                     </button>
                   </Link>
@@ -112,15 +112,15 @@ const TermsAndCondition = () => {
         <div className='md:hidden'>
           <div className='w-full flex items-center justify-center bg-black p-5'>
             <div className='w-full flex flex-col justify-center items-center'>
-              <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+              <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
                 About us <br /> <span className='text-white'>Excellence Defined</span>
               </h2>
-              <p className="my-5 md:text-base text-sm  text-white text-center">
+              <p className="my-5 text-sm  text-white text-center">
                 At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
                 we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
               </p>
               <Link href="#">
-                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                   Explore Now
                 </button>
               </Link>

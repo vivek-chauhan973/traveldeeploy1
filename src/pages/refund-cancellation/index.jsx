@@ -37,15 +37,15 @@ const RefundCancellation = () => {
                         <div className='w-full h-full absolute'>
                             <div className='w-[60%] h-full flex items-center justify-end px-16'>
                                 <div className='w-full flex flex-col justify-center items-center'>
-                                    <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                                    <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
                                         Refunds and Cancellations <br /> <span className='text-white'>understanding Your Refund Rights</span>
                                     </h2>
-                                    <p className="my-5 md:text-base text-sm  text-white text-center">
+                                    <p className="my-5 text-base text-white text-center">
                                         At BizareXpedition, We understand that plans can change. Below are the terms and conditions regarding
                                         cancellations and refuns for booking made through our website and Agents.
                                     </p>
                                     <Link href="#">
-                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                                             Explore Now
                                         </button>
                                     </Link>
@@ -58,14 +58,14 @@ const RefundCancellation = () => {
                 <div className='md:hidden'>
                     <div className='w-full flex items-center justify-center bg-black p-5'>
                         <div className='w-full flex flex-col justify-center items-center'>
-                            <h2 className="text-[29px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
+                            <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
                                 Refunds and Cancellations <br /> <span className='text-white'>How To Process Payments</span>
                             </h2>
-                            <p className="my-5 md:text-base text-sm  text-white text-center">
+                            <p className="my-5 text-sm  text-white text-center">
                                 At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
                                 Below, you will find important details about our payment process.                            </p>
                             <Link href="#">
-                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2.5 py-1.5 md:px-4 px-3 rounded text-sm">
+                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                                     Explore Now
                                 </button>
                             </Link>

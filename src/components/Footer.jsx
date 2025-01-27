@@ -104,8 +104,8 @@ export default function Footer() {
                                         <div className="flex flex-col space-y-2 ">
                                             <h2 className=" font-semibold text-base">Company</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                <Link rel="noopener noreferrer" href="about" className="footer-content2">About Us</Link>
-                                                <Link rel="noopener noreferrer" href="contact" className="footer-content2">Contact Us</Link>
+                                                <Link rel="noopener noreferrer" href="/about" className="footer-content2">About Us</Link>
+                                                <Link rel="noopener noreferrer" href="/contact" className="footer-content2">Contact Us</Link>
                                                 <Link rel="noopener noreferrer" href="#" className="footer-content2">Blog</Link>
                                             </div>
                                         </div>
@@ -114,10 +114,9 @@ export default function Footer() {
                                         <div className="flex flex-col space-y-2">
                                             <h2 className="font-semibold text-base">Help</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                {/* <Link rel="noopener noreferrer" href="#" className="footer-content2">FAQs</Link> */}
-                                                <Link rel="noopener noreferrer" href="refund-cancellation" className="footer-content2">Cancellations & Returns</Link>
-                                                <Link rel="noopener noreferrer" href="#" className="footer-content2">Careers</Link>
-                                                <Link rel="noopener noreferrer" href="/jobs" className="footer-content2">Jobs</Link>
+                                                <Link rel="noopener noreferrer" href="/refund-cancellation" className="footer-content2">Refunds & Cancellations</Link>
+                                                <Link rel="noopener noreferrer" href="/careers" className="footer-content2">Careers</Link>
+                                                <Link rel="noopener noreferrer" href="/payments" className="footer-content2">Payments</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -148,30 +147,30 @@ export default function Footer() {
                                     <hr className="container-wrapper" />
                                     <div className=" py-2 ">
                                         <p className="text-xs">
-                                            *Caution: Beware of Fake Promotions or Offers *Please be cautious and do not engage with any promotional emails, SMS, or web links that ask you to click on a link and provide your personal details. All authorized communications from BizareXpedition™️ Services will come exclusively from our registered domains: @bizarexpedition.com, @bizarexpedition.online, or @bizarexpedition.in.For any inquiries, you can also reach us through our official WhatsApp channel at 9897581113. *BizareXpedition™️ Services is not liable for any fraudulent or misleading communications that do not originate from our official domains.
+                                            *Caution: Beware of Fake Promotions or Offers *Please be cautious and do not engage with any promotional emails, SMS, or web links that ask you to click on a link and provide your personal details. All authorized communications from BizareXpedition™️ Services will come exclusively from our registered domains: @bizarexpedition.com, @bizarexpedition.online, or @bizarexpedition.in. For any inquiries, you can also reach us through our official WhatsApp channel at 9897581113. *BizareXpedition™️ Services is not liable for any fraudulent or misleading communications that do not originate from our official domains.
                                         </p>
                                     </div>
                                     <hr className="container-wrapper" />
 
                                     <div className="md:flex md:items-center md:justify-between py-1 ">
-                                        <ul className="flex items-center  flex-wrap ">
+                                        <ul className="flex items-center justify-center  flex-wrap ">
                                             <li className=" list-none">
-                                                <Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                <Link href="/terms-and-conditions" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
                                                     Terms and conditions
                                                 </Link>
                                             </li>
                                             <li className=" list-none">
-                                                <Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                <Link href="/privacy-policy" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
                                                     Privacy Policy
                                                 </Link>
                                             </li>
                                             <li className=" list-none">
-                                                <Link href="#" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                <Link href="/sitemap" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
                                                     Site Map
                                                 </Link>
                                             </li>
                                         </ul>
-                                        <div className="flex sm:justify-center md:space-x-6 space-x-8 md:ml-0 ml-2 md:mb-0 mb-2">
+                                        <div className="flex justify-center md:space-x-6 space-x-8  md:mb-0 mb-2">
                                             <svg
                                                 onClick={handleWhatsApp}
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -235,11 +234,11 @@ export default function Footer() {
                                             <span className="dark:text-gray-400 md:text-sm text-xs">© Copyright 1986. All Rights Reserved.</span>
                                             <span className="dark:text-gray-400 md:text-sm text-xs md:block hidden ml-1">| Country India</span>
                                             <Image width={5} height={5} src="/assets/India.png"
-                                                className="h-6 w-6 object-cover ml-1"
+                                                className="h-6 w-6 object-cover ml-2"
                                                 alt=""
                                             />
                                             <Image width={5} height={5} src="/assets/swastik.png"
-                                                className="h-6 w-6 object-cover ml-1"
+                                                className="h-6 w-6 object-cover ml-2"
                                                 alt=""
                                             />
                                         </div>
