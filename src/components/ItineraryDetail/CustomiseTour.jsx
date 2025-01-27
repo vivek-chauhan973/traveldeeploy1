@@ -106,10 +106,10 @@ export default function CustomiseTour({ children }) {
         e.preventDefault();
         if (validateForm()) {
             console.log("Form submitted:", formData);
+            setOpen(false);
+            setLoginPopup(true);
         };
         console.log("formData",formData);  
-        setOpen(false);
-        setLoginPopup(true);
     };
 
     return (
@@ -131,7 +131,7 @@ export default function CustomiseTour({ children }) {
                             <FontAwesomeIcon icon={faGear} className='font1' />
                             <h3 className='text-md font-semibold'>Customise Your Tour</h3>
                         </div>
-                        <form onSubmit={handleSubmit}>
+                        <form>
                             <div className='py-3'>
                                 <div className='grid grid-cols-1 md:grid-cols-2 md:gap-5 gap-3'>
                                     <div className='flex flex-col gap-3'>
@@ -159,7 +159,6 @@ export default function CustomiseTour({ children }) {
                                                 name="checkOut"
                                                 value={formData.checkOut}
                                                 onChange={handleInputChange}
-                                                // min={new Date().toISOString().split("T")[0]}
                                                 min={formData?.checkIn ? formData?.checkIn : new Date().toISOString().split("T")[0]}
                                                 disabled={!formData?.checkIn}
                                             />

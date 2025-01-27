@@ -93,7 +93,7 @@ const PaymentPloicy = () => {
                             <div className='w-[60%] h-full flex items-center justify-end px-16'>
                                 <div className='w-full flex flex-col justify-center items-center'>
                                     <h2 className="xl:text-[55px] md:text-[35px] text-[26px] leading-tight uppercase text-lg font-bold text-[#D45426] text-center">
-                                        Payment Ploicy <br /> <span className='text-white'>How To Process Payments</span>
+                                        Payment Policy <br /> <span className='text-white'>How To Process Payments</span>
                                     </h2>
                                     <p className="my-5 md:text-base text-sm  text-white text-center">
                                         At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.

@@ -231,14 +231,19 @@ export default function Footer() {
                                     </div>
                                     <hr className="container-wrapper" />
                                     <div className="flex md:flex-row flex-col md:items-center justify-between gap-2 py-1">
-                                        <div className="flex">
-                                            <span className="dark:text-gray-400 md:text-sm text-xs">© Copyright 1986. All Rights Reserved. | Country India</span>
+                                        <div className="flex justify-center items-center">
+                                            <span className="dark:text-gray-400 md:text-sm text-xs">© Copyright 1986. All Rights Reserved.</span>
+                                            <span className="dark:text-gray-400 md:text-sm text-xs md:block hidden ml-1">| Country India</span>
                                             <Image width={5} height={5} src="/assets/India.png"
-                                                className="h-6 w-6 object-cover md:block hidden"
+                                                className="h-6 w-6 object-cover ml-1"
+                                                alt=""
+                                            />
+                                            <Image width={5} height={5} src="/assets/swastik.png"
+                                                className="h-6 w-6 object-cover ml-1"
                                                 alt=""
                                             />
                                         </div>
-                                        <div className="flex md:justify-center items-center md:gap-2 gap-3">
+                                        <div className="flex justify-center items-center md:gap-2 gap-3">
                                             <Image width={5} height={5} src="/assets/Affiliation 1.png"
                                                 className="md:h-10 md:w-10 w-8 h-8 object-cover"
                                                 alt=""

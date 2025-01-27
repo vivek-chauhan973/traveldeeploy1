@@ -122,6 +122,10 @@ const fetchCarousel = async () => {
   const data = await fetch("/api/cars/carhome/carCrousel");
   return await data.json();
 };
+const fetchStaticCarousel = async () => {
+  const data = await fetch("/api/cars/carhome/carCrouselStatic");
+  return await data.json();
+};
 
 const fetchAllCities = async () => {
   const res = await fetch("/api/location/city");
@@ -168,6 +172,9 @@ export default function App() {
 
     fetchCarousel().then((res) => {
       setCarCarousel(res?.data || []);
+    });
+    fetchStaticCarousel().then((res) => {
+      setStaticBanner(res?.data || []);
     });
     fetchAllCities().then((res) => {
       setCities(res?.result || []);
