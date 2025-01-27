@@ -54,7 +54,9 @@ const Addguest = ({
   const [countQuardRoom, setCountQuardRoom] = useState(0);
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
-  const [selectedCarBool, setSelectedCarBool] = useState(false); 
+  const [selectedCarBool, setSelectedCarBool] = useState(false);
+  const [isSelectedCar, setIsSelectedCar] = useState(false);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -447,7 +449,9 @@ const Addguest = ({
 
   const handleSelected = (item) => {
     const parsedItem = JSON.parse(item);
-    acpriceRef.current = 0;
+    // setGuestPrice(guestPrice+acpriceRef.current)
+    console.log("ref current ------> ",carpricingRef.current)
+    console.log("ref current 123456 ------> ", guestPrice)
     const {
       markup,
     } = addPackage?.prices;
@@ -476,18 +480,21 @@ const Addguest = ({
     setAcDisable(true);
     setSelectedCarBool(true);
     setIsAC(true);
+    setIsSelectedCar(true);
   };
-  useEffect(()=>{
+  useEffect(() => {
     setCarWithCapacity(carWithCapacity)
-  },[inputData?.singleRoom,inputData?.twinRoom,inputData?.tripleRoom,inputData?.quardRoom])
-  // useEffect(() => {
-  //   if(isAC){
-  //     setGuestPrice(guestPrice+acpriceRef.current)
-  //   }
-  //   else{
-  //     setGuestPrice(guestPrice-acpriceRef.current)
-  //   }
-  // }, [isAC]);
+  }, [inputData?.singleRoom, inputData?.twinRoom, inputData?.tripleRoom, inputData?.quardRoom])
+  useEffect(() => {
+    if(!isAC){
+      setGuestPrice(guestPrice-acpriceRef.current)
+    }
+    else{
+      setGuestPrice(guestPrice+acpriceRef.current)
+    }
+  }, [isAC]);
+
+  console.log("Guest Price ------> ", guestPrice)
   useEffect(() => {
     const date1 = new Date();
     // Calculate max date (1 year from current date)
@@ -504,10 +511,18 @@ const Addguest = ({
   }, [minDate, maxDate]);
 
 
-  console.log("ref current ------> ", acpriceRef)
 
 
-  // console.log("CarWithCapacity",carWithCapacity?.vehicleType);
+
+  // <------Reset All the data logic here clicking on Reset Button ----->
+
+  const handleReset = (e) => {
+    e.preventDefault()
+    setInputData(initialData);
+    setIsSelectedCar(false)
+    setSelectedCarBool(false)
+    setCountSingleRoom(0); setCountTwinRoom(0); setCountTripleRoom(0); setCountQuardRoom(0);
+  }
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
@@ -567,6 +582,7 @@ const Addguest = ({
                   <div className=" w-14">
                     <select
                       name="adult"
+                      disabled={isSelectedCar}
                       value={inputData?.adult}
                       id="Adultsdropdown"
                       ref={prevAdultRef}
@@ -612,7 +628,7 @@ const Addguest = ({
                           "opacity-50"
                           }`}
                         onChange={handleChange}
-                        disabled={inputData?.adult === 0} // Disable if adult count is 0
+                        disabled={inputData?.adult === 0||isSelectedCar} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -689,7 +705,7 @@ const Addguest = ({
                           "opacity-50"
                           }`}
                         onChange={handleChange1}
-                        disabled={inputData?.adult === 0} // Disable if adult count is 0
+                        disabled={inputData?.adult === 0||isSelectedCar} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -758,7 +774,7 @@ const Addguest = ({
                           "opacity-50"
                           }`}
                         onChange={handleChange1}
-                        disabled={inputData?.adult === 0} // Disable if adult count is 0
+                        disabled={inputData?.adult === 0||isSelectedCar} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -814,8 +830,11 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1 ">
-                        <div
-                          onClick={() => handleDecrement("singleRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            handleDecrement("singleRoom")}}
                           size={18}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
@@ -823,15 +842,16 @@ const Addguest = ({
                             icon={faCircleMinus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button>
                         <p
                           className="text-para w-3 mr-1 text-center"
                           onChange={(e) => handleChange}
                         >
                           {countSingleRoom}
                         </p>
-                        <div
-                          onClick={() => handleIncrement("singleRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={(e) =>{ e.preventDefault(); handleIncrement("singleRoom")}}
                           size={19}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
@@ -839,7 +859,7 @@ const Addguest = ({
                             icon={faCirclePlus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button>
                       </div>
                     </div>
                     <hr className="my-2" />
@@ -850,30 +870,32 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1">
-                        <div
-                          onClick={() => handleDecrement("twinRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={(e) =>{e.preventDefault(); handleDecrement("twinRoom")}}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
                             icon={faCircleMinus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button>
                         <p
                           onChange={(e) => handleChange}
                           className="text-para w-3 mr-1 text-center"
                         >
                           {countTwinRoom}
                         </p>
-                        <div
-                          onClick={() => handleIncrement("twinRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={(e) =>{e.preventDefault(); handleIncrement("twinRoom")}}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
                             icon={faCirclePlus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button>
                       </div>
                     </div>
                     <hr className="my-2" />
@@ -884,15 +906,16 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1">
-                        <div
-                          onClick={() => handleDecrement("tripleRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={(e) =>{e.preventDefault(); handleDecrement("tripleRoom")}}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
                             icon={faCircleMinus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button>
 
                         <p
                           onChange={(e) => handleChange}
@@ -900,15 +923,16 @@ const Addguest = ({
                         >
                           {countTripleRoom}
                         </p>
-                        <div
-                          onClick={() => handleIncrement("tripleRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={(e) => {e.preventDefault();handleIncrement("tripleRoom")}}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
                             icon={faCirclePlus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button>
                       </div>
                     </div>
                     <hr className="my-2" />
@@ -919,30 +943,33 @@ const Addguest = ({
                         </p>
                       </div>
                       <div className="flex gap-1">
-                        <div
-                          onClick={() => handleDecrement("quardRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={() => {e.preventDefault();handleDecrement("quardRoom")}}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
                             icon={faCircleMinus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button>
                         <p
                           onChange={(e) => handleChange}
                           className="text-para w-3 mr-1 text-center"
                         >
                           {countQuardRoom}
                         </p>
-                        <div
-                          onClick={() => handleIncrement("quardRoom")}
+                        <button
+                        disabled={isSelectedCar}
+                          onClick={(e) => {e.preventDefault();handleIncrement("quardRoom")}}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
                             icon={faCirclePlus}
                             className="font1 cursor-pointer"
                           />
-                        </div>
+                        </button
+                        >
                       </div>
                     </div>
                   </div>
@@ -954,7 +981,7 @@ const Addguest = ({
                   inputData?.quardRoom > 0) && <div>
                     <div className="mt-8 ">
                       <div className="w-full gap-2 border-t-2 border-gray-600 flex justify-between items-center p-2">
-                        <p className="font-semibold text-base md:text-md">
+                        <p className="font-semibold text-para md:text-md">
                           Choose Transport Options
                         </p>
                         <div className="flex items-center space-x-2">
@@ -1062,7 +1089,7 @@ const Addguest = ({
                                         e.preventDefault(); // Prevent default behavior of the radio button
                                         ;
                                       } else {
-                                         // Clear the error if the condition is met
+                                        // Clear the error if the condition is met
                                         handleSelected(e.target.value)
                                       }
                                     }}
@@ -1071,7 +1098,7 @@ const Addguest = ({
                                     Select Vehicle
                                   </label>
                                 </div>
-                                
+
                               </div>
                               {selectedCarIdFetchApi && <div className="flex flex-2 justify-center items-center w-20 md:w-24  md:text-lg text-md font-bold">
                                 {(calculatedAcPrice - carpricingRef?.current) === 0 && <p></p>}
@@ -1133,6 +1160,14 @@ const Addguest = ({
                     </div>
                   </div>
                 </div>
+                <div className=" gap-3 hidden md:flex ">
+                <button
+                  onClick={(e) => handleReset(e)}
+                  className={`${selectedCarBool ? "bg-gradient-to-r from-navyblack to-red-500" : "bg-gradient-to-r from-navyblack to-red-300 cursor-not-allowed"}
+                                     md:text-base text-sm text-white rounded-md md:px-5 md:py-2 px-4 py-1.5 hover:opacity-90`}
+                >
+                  Reset
+                </button>
                 <button
                   onClick={(e) => handleSubmit(e)}
                   className={`${selectedCarBool ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
@@ -1140,7 +1175,26 @@ const Addguest = ({
                 >
                   Submit
                 </button>
+              
+                </div>
               </div>
+              <div className="flex md:hidden justify-around mb-4 ">
+                <button
+                  onClick={(e) => handleReset(e)}
+                  className={`${selectedCarBool ? "bg-gradient-to-r from-navyblack to-red-500" : "bg-gradient-to-r from-navyblack to-red-300 cursor-not-allowed"}
+                                     md:text-base text-sm text-white rounded-md md:px-5 md:py-2 px-10 py-1.5 hover:opacity-90`}
+                >
+                  Reset
+                </button>
+                <button
+                  onClick={(e) => handleSubmit(e)}
+                  className={`${selectedCarBool ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
+                                     md:text-base text-sm text-white rounded-md md:px-5 md:py-2 px-10 py-1.5 hover:opacity-90`}
+                >
+                  Submit
+                </button>
+              
+                </div>
             </div>
           </form>
         )}
