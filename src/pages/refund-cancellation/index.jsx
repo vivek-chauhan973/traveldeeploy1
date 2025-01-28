@@ -1,23 +1,329 @@
-import React, { useEffect, useState } from 'react'
+// import React, { useEffect, useState } from 'react'
+// import "../../app/globals.css";
+// import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
+// import Image from 'next/image';
+// import { Link as ScrollLink } from "react-scroll";
+// import Footer from '@/components/Footer';
+// import Breadcrumbs from '@/components/Breadcrumbs';
+// import Link from 'next/link';
+// const fetchRefundCancellationPage = async () => {
+//     const res = await fetch(`/api/static-page/static-page-type?name=refunds-and-cancellations`);
+//     return await res.json();
+//   };
+// const RefundCancellation = () => {
+
+//     const [activeIndex, setActiveIndex] = useState(0);
+
+//     const [data,setData]=useState([])
+//     useEffect(()=>{
+//         fetchRefundCancellationPage().then(res=>setData(res?.data))
+//     },[])
+//     return (
+//         <div>
+//             <DesktopHeader />
+//             <Breadcrumbs />
+//             <div>
+//                 {/* herosection start */}
+//                 {/* medium devices */}
+//                 <div className='md:block hidden'>
+//                     <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+//                         <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+//                         </div>
+//                         <div className='relative w-[80%] h-full flex'>
+//                             <img src="/assets/staticimage/refundCancellation.jpg" alt="" className='relative w-full h-full' />
+//                             <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+//                             </div>
+//                         </div>
+//                         <div className='w-full h-full absolute'>
+//                             <div className='w-[60%] h-full flex items-center justify-end px-16'>
+//                                 <div className='w-full flex flex-col justify-center items-center'>
+//                                     <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
+//                                         Refunds and Cancellations <br /> <span className='text-white'>understanding Your Refund Rights</span>
+//                                     </h2>
+//                                     <p className="my-5 text-base text-white text-center">
+//                                         At BizareXpedition, We understand that plans can change. Below are the terms and conditions regarding
+//                                         cancellations and refuns for booking made through our website and Agents.
+//                                     </p>
+//                                     <Link href="#">
+//                                         <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+//                                             Explore Now
+//                                         </button>
+//                                     </Link>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </  div>
+//                 {/* small devices */}
+//                 <div className='md:hidden'>
+//                     <div className='w-full flex items-center justify-center bg-black p-5'>
+//                         <div className='w-full flex flex-col justify-center items-center'>
+//                             <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
+//                                 Refunds and Cancellations <br /> <span className='text-white'>How To Process Payments</span>
+//                             </h2>
+//                             <p className="my-5 text-sm  text-white text-center">
+//                                 At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
+//                                 Below, you will find important details about our payment process.                            </p>
+//                             <Link href="#">
+//                                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
+//                                     Explore Now
+//                                 </button>
+//                             </Link>
+//                         </div>
+//                     </div>
+//                     <div className='relative w-full h-72'>
+//                         <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
+//                     </div>
+//                 </div>
+//                 {/* herosection end */}
+//                 <div className="container-wrapper py-10">
+//                     <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
+//                         <div className="">
+//                             <div className="sticky top-40 z-10 bg-white w-full xl:w-80 shadow-xl rounded-xl md:p-7 p-5">
+//                                 <h4 className="text-md font-semibold mb-4 capitalize pl-3">Refunds and Cancellations</h4>
+//                                 <div>
+//                                     {data?.topics?.map((item, index) => (
+//                                         <ScrollLink
+//                                             key={`${index+1}id`}
+//                                             to={`${index+1}id`}
+//                                             spy={true}
+//                                             smooth={true}
+//                                             offset={-100}
+//                                             duration={500}
+//                                             onClick={() => setActiveIndex(index)}
+//                                         >
+//                                             <p
+//                                                 className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === index
+//                                                     ? "border-l-4 border-l-primary text-black"
+//                                                     : " text-gray-400"
+//                                                     }`}
+//                                             >
+//                                                 {item.title}
+//                                             </p>
+//                                         </ScrollLink>
+//                                     ))}
+//                                 </div>
+//                             </div>
+//                         </div>
+//                         <div className="md:p-10 p-5 bg-white shadow-xl rounded-xl">
+//                             <div id="ItinerarySubSection" className="mt-5 pb-5 border-b-2">
+//                                 <p className="text-base leading-relaxed">
+//                                     We are all looking for productivity hacks to help us get
+//                                     organized and reduce stress, and with an app for trip planning
+//                                     you can get business travel booked in no time. Whether you are
+//                                     after a streamlined way to track expenses, stick to a budget,
+//                                     pack more efficiently, or plan your route, business travel apps
+//                                     tackle all the above.
+//                                 </p>
+//                             </div>
+//                             {data?.topics?.map((item, index) => (
+//                                 <div key={`${index+1}id`} className="pt-7 " id={`${index+1}id`}>
+//                                     <h3 className="md:text-2xl text-xl font-medium mb-2">
+//                                         {item.title}
+//                                     </h3>
+//                                     <p className="text-base leading-relaxed">
+//                                         <div  dangerouslySetInnerHTML={{ __html: item.description }}/>
+//                                     </p>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </div>
+//                 </div>
+//                 {/* footer is here */}
+//                 <div className='mt-10'>
+//                     <Footer />
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
+
+// export default RefundCancellation;
+
+// ================================================================================
+
+// import "../../app/globals.css";
+// import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
+// import Image from 'next/image';
+// import Footer from '@/components/Footer';
+// import Breadcrumbs from '@/components/Breadcrumbs';
+// import Link from 'next/link';
+
+// const RefundCancellation = () => {
+
+//     return (
+//         <div>
+//             <DesktopHeader />
+//             <Breadcrumbs />
+//             <div>
+// {/* herosection start */}
+// {/* medium devices */}
+// <div className='md:block hidden'>
+//     <div className='w-full md:h-[450px] xl:h-[500px] flex relative'>
+//         <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+//         </div>
+//         <div className='relative w-[80%] h-full flex'>
+//             <img src="/assets/staticimage/refundCancellation.jpg" alt="" className='relative w-full h-full' />
+//             <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+//             </div>
+//         </div>
+//         <div className='w-full h-full absolute'>
+//             <div className='w-[70%] h-full flex items-center justify-end px-16'>
+//                 <div className='w-full flex flex-col justify-center items-center'>
+//                     <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
+//                         Cancellation and Refund <br /> <span className='text-white'>understanding Your Refund Rights</span>
+//                     </h2>
+//                     <p className="my-5 text-base text-white text-center">
+//                         At BizareXpedition, We understand that plans can change. Below are the terms and conditions regarding
+//                         cancellations and refuns for booking made through our website and Agents.
+//                     </p>
+//                     <Link href="#">
+//                         <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+//                             Explore Now
+//                         </button>
+//                     </Link>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>
+// </  div>
+// {/* small devices */}
+// <div className='md:hidden'>
+//     <div className='w-full flex items-center justify-center bg-black p-5'>
+//         <div className='w-full flex flex-col justify-center items-center'>
+//             <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
+//                 Refunds and Cancellations <br /> <span className='text-white'>How To Process Payments</span>
+//             </h2>
+//             <p className="my-5 text-sm  text-white text-center">
+//                 At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
+//                 Below, you will find important details about our payment process.                            </p>
+//             <Link href="#">
+//                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
+//                     Explore Now
+//                 </button>
+//             </Link>
+//         </div>
+//     </div>
+//     <div className='relative w-full h-72'>
+//         <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
+//     </div>
+// </div>
+// {/* herosection end */}
+//                 <div className="container-wrapper py-10">
+//                     <div className="md:px-5 px-3">
+//                         <h1 className="md:text-2xl text-xl font-semibold">Cancellation and Refund Policy</h1>
+//                         <p className="mb-5 mt-3 md:text-base text-para">
+//                             At BizarreXpedition Services Pvt. Ltd., we strive to provide a seamless and enriching travel
+//                             experience. However, we understand that unforeseen circumstances may arise, leading to
+//                             cancellations. The following policy outlines the terms and conditions for cancellations and refunds.
+//                         </p>
+//                         <h2 className="md:text-lg text-md font-semibold mt-5 mb-2">1. Cancellation by Guests</h2>
+//                         <ul className="list-disc ml-8 md:text-base text-para">
+//                             <li>All cancellation requests must be submitted in writing via email or through our customer support team.</li>
+//                             <li>Refunds will be processed based on the date of cancellation and the applicable deductions as follows:</li>
+//                             <ul className="list-circle ml-8 ">
+//                                 <li><span className="font-semibold">More than 46 days before departure : </span> 10% of the booking amount will be deducted.</li>
+//                                 <li><span className="font-semibold">31-45 days before departure : </span> 25% of the booking amount will be deducted.</li>
+//                                 <li><span className="font-semibold">15-30 days before departure : </span> 50% of the booking amount will be deducted.</li>
+//                                 <li><span className="font-semibold">Less than 14 days before departure or no-show : </span> No refund will be issued.</li>
+//                             </ul>
+//                         </ul>
+//                         <h2 className="md:text-lg text-md font-semibold mt-5 mb-2">2. Force Majeure</h2>
+//                         <ul className="list-disc ml-8 md:text-base text-para">
+//                             <li>In the event of unforeseen circumstances, including but not limited to natural disasters, weather conditions, government restrictions, or other extraordinary events:</li>
+//                             <ul className="list-circle ml-8">
+//                                 <li>Certain activities or arrangements may be cancelled or rescheduled.</li>
+//                                 <li>Refunds will not be issued for such cancellations.</li>
+//                                 <li>Wherever possible, alternative arrangements will be made to minimize inconvenience.</li>
+//                             </ul>
+//                         </ul>
+//                         <h2 className="md:text-lg text-md font-semibold mt-5 mb-2">3. Processing Refunds</h2>
+//                         <ul className="list-disc ml-8 md:text-base text-para">
+//                             <li>Refunds, if applicable, will be processed within <span className="font-semibold">10-15 working days</span > after receiving written cancellation confirmation.</li>
+//                             <li>Refunds will be made to the original payment method used during booking.</li>
+//                         </ul>
+//                     </div>
+//                 </div>
+//                 {/* footer is here */}
+//                 <div className='mt-5'>
+//                     <Footer />
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
+
+// export default RefundCancellation;
+
+
+
+// =============================================================================================================
+
+
+
 import "../../app/globals.css";
-import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
-import Image from 'next/image';
-import { Link as ScrollLink } from "react-scroll";
+import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
-const fetchRefundCancellationPage = async () => {
-    const res = await fetch(`/api/static-page/static-page-type?name=refunds-and-cancellations`);
-    return await res.json();
-  };
+import { useState } from 'react';
+import { Link as ScrollLink } from "react-scroll";
+
 const RefundCancellation = () => {
+    const [activeIndex, setActiveIndex] = useState("policy");
 
-    const [activeIndex, setActiveIndex] = useState(0);
+    const refundSections = [
+        {
+            id: "policy",
+            title: "Cancellation & Refund Policy",
+            content: (
+                <p className="mb-5 mt-3 md:text-base text-para">
+                    At BizarreXpedition Services Pvt. Ltd., we strive to provide a seamless and enriching travel experience. However, we understand that unforeseen circumstances may arise, leading to cancellations. The following policy outlines the terms and conditions for cancellations and refunds.
+                </p>
+            ),
+        },
+        {
+            id: "cancellation",
+            title: "1. Cancellation by Guests",
+            content: (
+                <ul className="list-disc ml-8 md:text-base text-para">
+                    <li>All cancellation requests must be submitted in writing via email or through our customer support team.</li>
+                    <li>Refunds will be processed based on the date of cancellation and the applicable deductions as follows:</li>
+                    <ul className="list-circle ml-8">
+                        <li><span className="font-semibold">More than 46 days before departure: </span> 10% of the booking amount will be deducted.</li>
+                        <li><span className="font-semibold">31-45 days before departure: </span> 25% of the booking amount will be deducted.</li>
+                        <li><span className="font-semibold">15-30 days before departure: </span> 50% of the booking amount will be deducted.</li>
+                        <li><span className="font-semibold">Less than 14 days before departure or no-show: </span> No refund will be issued.</li>
+                    </ul>
+                </ul>
+            ),
+        },
+        {
+            id: "forceMajeure",
+            title: "2. Force Majeure",
+            content: (
+                <ul className="list-disc ml-8 md:text-base text-para">
+                    <li>In the event of unforeseen circumstances, including but not limited to natural disasters, weather conditions, government restrictions, or other extraordinary events:</li>
+                    <ul className="list-circle ml-8">
+                        <li>Certain activities or arrangements may be cancelled or rescheduled.</li>
+                        <li>Refunds will not be issued for such cancellations.</li>
+                        <li>Wherever possible, alternative arrangements will be made to minimize inconvenience.</li>
+                    </ul>
+                </ul>
+            ),
+        },
+        {
+            id: "processing",
+            title: "3. Processing Refunds",
+            content: (
+                <ul className="list-disc ml-8 md:text-base text-para">
+                    <li>Refunds, if applicable, will be processed within <span className="font-semibold">10-15 working days</span> after receiving written cancellation confirmation.</li>
+                    <li>Refunds will be made to the original payment method used during booking.</li>
+                </ul>
+            ),
+        },
+    ];
 
-    const [data,setData]=useState([])
-    useEffect(()=>{
-        fetchRefundCancellationPage().then(res=>setData(res?.data))
-    },[])
     return (
         <div>
             <DesktopHeader />
@@ -26,7 +332,7 @@ const RefundCancellation = () => {
                 {/* herosection start */}
                 {/* medium devices */}
                 <div className='md:block hidden'>
-                    <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+                    <div className='w-full md:h-[450px] xl:h-[500px] flex relative'>
                         <div className='w-[30%] h-full bg-black flex items-center justify-end'>
                         </div>
                         <div className='relative w-[80%] h-full flex'>
@@ -35,10 +341,10 @@ const RefundCancellation = () => {
                             </div>
                         </div>
                         <div className='w-full h-full absolute'>
-                            <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                            <div className='w-[70%] h-full flex items-center justify-end px-16'>
                                 <div className='w-full flex flex-col justify-center items-center'>
                                     <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
-                                        Refunds and Cancellations <br /> <span className='text-white'>understanding Your Refund Rights</span>
+                                        Cancellation and Refund <br /> <span className='text-white'>understanding Your Refund Rights</span>
                                     </h2>
                                     <p className="my-5 text-base text-white text-center">
                                         At BizareXpedition, We understand that plans can change. Below are the terms and conditions regarding
@@ -53,7 +359,7 @@ const RefundCancellation = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </  div>
                 {/* small devices */}
                 <div className='md:hidden'>
                     <div className='w-full flex items-center justify-center bg-black p-5'>
@@ -76,66 +382,47 @@ const RefundCancellation = () => {
                     </div>
                 </div>
                 {/* herosection end */}
+                {/* Content Section */}
                 <div className="container-wrapper py-10">
-                    <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
-                        <div className="">
-                            <div className="sticky top-40 z-10 bg-white w-full xl:w-80 shadow-xl rounded-xl md:p-7 p-5">
-                                <h4 className="text-md font-semibold mb-4 capitalize pl-3">Refunds and Cancellations</h4>
-                                <div>
-                                    {data?.topics?.map((item, index) => (
-                                        <ScrollLink
-                                            key={`${index+1}id`}
-                                            to={`${index+1}id`}
-                                            spy={true}
-                                            smooth={true}
-                                            offset={-100}
-                                            duration={500}
-                                            onClick={() => setActiveIndex(index)}
+                    <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
+                        <div>
+                            <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
+                                {refundSections.map((section) => (
+                                    <ScrollLink
+                                        key={section.id}
+                                        to={section.id}
+                                        spy={true}
+                                        smooth={true}
+                                        offset={-100}
+                                        duration={500}
+                                        onClick={() => setActiveIndex(section.id)}
+                                    >
+                                        <p
+                                            className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                                                ? "border-l-4 border-l-primary text-black"
+                                                : "text-gray-400"
+                                                }`}
                                         >
-                                            <p
-                                                className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === index
-                                                    ? "border-l-4 border-l-primary text-black"
-                                                    : " text-gray-400"
-                                                    }`}
-                                            >
-                                                {item.title}
-                                            </p>
-                                        </ScrollLink>
-                                    ))}
-                                </div>
+                                            {section.title}
+                                        </p>
+                                    </ScrollLink>
+                                ))}
                             </div>
                         </div>
-                        <div className="md:p-10 p-5 bg-white shadow-xl rounded-xl">
-                            <div id="ItinerarySubSection" className="mt-5 pb-5 border-b-2">
-                                <p className="text-base leading-relaxed">
-                                    We are all looking for productivity hacks to help us get
-                                    organized and reduce stress, and with an app for trip planning
-                                    you can get business travel booked in no time. Whether you are
-                                    after a streamlined way to track expenses, stick to a budget,
-                                    pack more efficiently, or plan your route, business travel apps
-                                    tackle all the above.
-                                </p>
-                            </div>
-                            {data?.topics?.map((item, index) => (
-                                <div key={`${index+1}id`} className="pt-7 " id={`${index+1}id`}>
-                                    <h3 className="md:text-2xl text-xl font-medium mb-2">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-base leading-relaxed">
-                                        <div  dangerouslySetInnerHTML={{ __html: item.description }}/>
-                                    </p>
+                        <div className="md:p-10 p-5 shadow-md rounded-md">
+                            {refundSections.map((section) => (
+                                <div key={section.id} id={section.id} className="mb-6">
+                                    <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
+                                    {section.content}
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-                {/* footer is here */}
-                <div className='mt-10'>
-                    <Footer />
-                </div>
+                <Footer />
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default RefundCancellation;
