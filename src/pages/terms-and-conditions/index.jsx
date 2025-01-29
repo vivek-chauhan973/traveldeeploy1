@@ -12,64 +12,226 @@ const fetchTermsAndConditionPage = async () => {
 };
 const TermsAndCondition = () => {
 
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState("Introduction");
 
-  const paragraphs = [
+  const PrivacyPolicySections = [
     {
-      id: "1st",
-      text: "What is a business travel app?",
-      desc: `What do we mean by corporate travel app, exactly, and what can
-             these business travel apps do? Whether accessed via a desktop or
-             downloaded to your smartphone or tablet, travel apps lighten the
-             load of trip planning. Use general travel apps to find and book
-             flights, hotels, and car rentals, or plan your itinerary. With
-             business-specific apps, you can also track expenses and find
-             meeting facilities.`
+      id: "Introduction",
+      title: "Terms and Conditions",
+      content: (
+        <div>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            Welcome to <span className='font-semibold'>BizareXpedition Services Pvt. Ltd.!</span>  We are committed to delivering
+            exceptional travel experiences. Before booking any tour, holiday package, or service with
+            us—whether through our website or directly at our offices—please carefully read and accept these
+            <span className='font-semibold'> Terms and Conditions</span>.
+          </p>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            By confirming your booking with BizareXpedition, you agree to abide by these <span className='font-semibold'> Terms and Conditions</span>. If you do not agree with any part of these terms, you are requested not to
+            proceed with the booking
+          </p>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            These terms apply to all group tours, customized holidays, corporate packages, and
+            independent services provided by <span className='font-semibold'> BizareXpedition Services Pvt. Ltd</span>.
+          </p>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            BizareXpedition reserves the right to amend, revise, or waive any part of these <span className='font-semibold'> Terms and Conditions</span> without prior notice.
+          </p>
+        </div>
+      ),
     },
     {
-      id: "2nd",
-      text: "How long does it take the average person to plan a trip?",
-      desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated they had be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
+      id: "Definitions",
+      title: "Definitions",
+      content: (
+        <div>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            <span className='font-semibold'>BizareXpedition Services Pvt. Ltd</span>., hereafter referred to as "the Company," "we," "us,"
+            or "our."
+          </p>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            <span className='font-semibold'>Guest(s)</span> refers to clients, customers, tourists, or travellers booking or participating in
+            tours or services provided by BizareXpedition
+          </p>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            <span className='font-semibold'>Force Majeure</span> includes events beyond the Companys control, such as natural disasters,
+            pandemics, government restrictions, political unrest, or other unforeseeable circumstances.
+          </p>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            <span className='font-semibold'>Customized Holidays</span> refer to travel itineraries tailored to the specific needs of individual
+            travellers or groups.
+          </p>
+          <p className="mb-5 mt-3 md:text-base text-para">
+            <span className='font-semibold'>Tour Price</span> refers to the total cost of the services provided, including inclusions as
+            specified at the time of booking.
+          </p>
+        </div>
+      ),
     },
     {
-      id: "3rd",
-      text: "Business travel tips: how do you plan a trip like a professional?",
-      desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated theyd be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
+      id: "Booking",
+      title: "Booking Policy",
+      content: (
+        <ul className="ml-8 md:text-base text-para">
+          <li className="font-semibold list-decimal">Booking Confirmation :</li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>A booking is considered confirmed upon receipt of a <span className='font-semibold'>25% advance payment.</span></li>
+            <li>The remaining <span className='font-semibold'>75% payment</span> is required <span className='font-semibold'>one day prior to the departure date.</span></li>
+          </ul>
+          <li className="font-semibold list-decimal">Guest Responsibilities : </li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>Guests must provide accurate information at the time of booking.</li>
+            <li>Any incorrect or incomplete details may result in cancellation or additional charges.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Payment Options : </li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>Online payments : UPI, net banking, and debit/credit cards.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Payment Security : </li>
+          <ul className="ml-8 md:text-base text-para mb-5">
+            <li>All transactions are securely encrypted and processed through trusted gateways.</li>
+          </ul>
+        </ul>
+      ),
     },
     {
-      id: "4th",
-      text: "How can a corporate travel app simplify the planning process?",
-      desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated theyd be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
+      id: "Cancellation",
+      title: "Cancellation and Refund Policy",
+      content: (
+        <ul className="ml-8 md:text-base text-para">
+          <li className="font-semibold list-decimal">Cancellation by Guests :</li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>Cancellation requests must be submitted in writing via email or through our customer
+              support.</li>
+            <li>Refunds will be processed based on the cancellation date and applicable charges : </li>
+              <ul className="list-disc ml-8 md:text-base text-para">
+                <li>More than 46 days before departure : <span className="font-semibold">10% deduction.</span></li>
+                <li>31-45 days before departure : <span className="font-semibold">25% deduction.</span></li>
+                <li>15-30 days before departure : <span className="font-semibold">50% deduction.</span></li>
+                <li>Less than 14 days or no-show : <span className="font-semibold">No refund.</span></li>
+              </ul>  
+          </ul>
+          <li className="font-semibold list-decimal"> Force Majeure : </li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>In case of unforeseen events (e.g., weather, government restrictions), certain activities
+              may be cancelled or rescheduled. No refunds will be issued for such cancellations;
+              however, alternative arrangements will be made where possible.</li>
+            {/* <li>Any incorrect or incomplete details may result in cancellation or additional charges.</li> */}
+          </ul>
+          <li className="font-semibold list-decimal">Processing Refunds : </li>
+          <ul className="ml-8 md:text-base text-para mb-5">
+            <li>Refunds, if applicable, will be processed within <span className='font-semibold'>10-15 working days</span> after
+              cancellation confirmation.</li>
+          </ul>
+        </ul>
+      ),
     },
     {
-      id: "5th",
-      text: "Corporate travel tools: you'll be able to put all our business travel.",
-      desc: `With these apps, youll be able to put all our business travel
-             tips into action for fuss-free planning. youll be able to put all our business travel corporate travel.`
+      id: "Requirements",
+      title: "Travel Requirements",
+      content: (
+        <ul className="ml-8 md:text-base text-para">
+          <li className="font-semibold list-decimal">Documentation :</li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>Guests must carry valid identification (e.g., Aadhar card, passport, visa if applicable).</li>
+            <li>International travellers must ensure that passports are valid for at least six months
+              from the travel date.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Health and Safety : </li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>Guests are responsible for their physical and mental fitness to travel. Any pre-existing
+              medical conditions should be disclosed at the time of booking.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Insurance : </li>
+          <ul className="ml-8 md:text-base text-para mb-5">
+            <li>Travel insurance is strongly recommended for all guests to cover medical
+              emergencies, trip cancellations, or unforeseen expenses.</li>
+          </ul>
+        </ul>
+      ),
+    },
+    {
+      id: "Operations",
+      title: "Tour Operations",
+      content: (
+        <ul className="ml-8 md:text-base text-para">
+          <li className="font-semibold list-decimal">Itinerary Changes :</li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>The Company reserves the right to modify itineraries due to operational reasons,
+            weather conditions, or other unforeseen circumstances.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Missed Services : </li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>No refunds will be provided for missed services due to guest delays or failure to
+            adhere to the schedule.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Group Tours : </li>
+          <ul className="ml-8 md:text-base text-para mb-5">
+            <li>Guests are expected to adhere to the itinerary and cooperate with the tour manager
+            and other participants.</li>
+          </ul>
+        </ul>
+      ),
+    },
+    {
+      id: "Liabilities",
+      title: "Liabilities and Limitations",
+      content: (
+        <ul className="ml-8 md:text-base text-para">
+          <li className="font-semibold list-decimal">Company Responsibilities :</li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>BizareXpedition acts as a facilitator, coordinating services with third-party providers
+              such as airlines, hotels, and transport companies. While we strive for excellence, we
+              are not liable for operational issues beyond our control.
+            </li>
+          </ul>
+          <li className="font-semibold list-decimal">Guest Responsibilities : </li>
+          <ul className="ml-8 md:text-base text-para mb-5">
+            <li>Guests must exercise caution and ensure the safety of their belongings. The Company
+              will not be liable for loss, theft, or damage to personal property.
+            </li>
+          </ul>
+        </ul>
+      ),
+    },
+    {
+      id: "Privacy",
+      title: "Privacy Policy",
+      content: (
+        <ul className="ml-8 md:text-base text-para">
+          <li className="font-semibold list-decimal">Data Collection :</li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>Personal information, including contact details and identification, will be collected for
+            booking and operational purposes.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Data Usage : </li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>Information may be shared with third-party service providers (e.g., airlines, hotels) as required to fulfill bookings.</li>
+          </ul>
+          <li className="font-semibold list-decimal">Confidentiality : </li>
+          <ul className="ml-8 md:text-base text-para mb-5">
+            <li>BizareXpedition will not sell or share guest data with unauthorized entities.</li>
+          </ul>
+        </ul>
+      ),
+    },
+    {
+      id: "Resolution",
+      title: "Dispute Resolution",
+      content: (
+        <ul className="ml-8 md:text-base text-para">
+          <li className="font-semibold list-decimal">Jurisdiction  :</li>
+          <ul className="ml-8 md:text-base text-para">
+            <li>All disputes will be subject to the jurisdiction of the courts in <span className="font-semibold">Haridwar,
+            Uttarakhand.</span></li>
+          </ul>
+          <li className="font-semibold list-decimal">Complaint Handling : </li>
+          <ul className="ml-8 md:text-base text-para mb-5">
+            <li>Guests are encouraged to report any grievances during the trip to our customer
+            support team for immediate resolution.</li>
+          </ul>
+        </ul>
+      ),
     },
   ];
 
@@ -89,7 +251,7 @@ const TermsAndCondition = () => {
               </div>
             </div>
             <div className='w-full h-full absolute'>
-              <div className='w-[63%] h-full flex items-center justify-end px-16'>
+              <div className='w-[60%] h-full flex items-center justify-end px-16'>
                 <div className='w-full flex flex-col justify-center items-center'>
                   <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
                     Terms and Conditions <br /> <span className='text-white'>Need tpo know before you go</span>
@@ -113,11 +275,11 @@ const TermsAndCondition = () => {
           <div className='w-full flex items-center justify-center bg-black p-5'>
             <div className='w-full flex flex-col justify-center items-center'>
               <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
-                About us <br /> <span className='text-white'>Excellence Defined</span>
+                Terms and Conditions <br /> <span className='text-white'>Need tpo know before you go</span>
               </h2>
               <p className="my-5 text-sm  text-white text-center">
-                At BizareXpedtion, we believe that travel should be an experience that transcends ordinary expectaions.
-                we do not just plan trips; we craft unforgeetable journeys that embody the highest standard of service, comfort, and luxury.
+                Welcome to BizareXpedtion! By using our website and services, you agree to comply with the following terms and conditions.
+                Please read them carefullly before proceeding.
               </p>
               <Link href="#">
                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
@@ -131,59 +293,41 @@ const TermsAndCondition = () => {
           </div>
         </div>
         <div className="container-wrapper py-10">
-          <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
-            <div className="">
-              <div className="sticky top-40 z-10 bg-white shadow-xl rounded-xl md:p-7 p-5">
-                <h4 className="text-md font-semibold mb-4 capitalize pl-3">Terms & condition</h4>
-                <div>
-                  {paragraphs.map((item, index) => (
-                    <ScrollLink
-                      key={item.id}
-                      to={item.id}
-                      spy={true}
-                      smooth={true}
-                      offset={-100}
-                      duration={500}
-                      onClick={() => setActiveIndex(index)}
+          <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
+            <div>
+              <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
+                {PrivacyPolicySections.map((section) => (
+                  <ScrollLink
+                    key={section.id}
+                    to={section.id}
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                    onClick={() => setActiveIndex(section.id)}
+                  >
+                    <p
+                      className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                        ? "border-l-4 border-l-primary text-black"
+                        : "text-gray-400"
+                        }`}
                     >
-                      <p
-                        className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === index
-                          ? "border-l-4 border-l-primary text-black"
-                          : " text-gray-400"
-                          }`}
-                      >
-                        {item.text}
-                      </p>
-                    </ScrollLink>
-                  ))}
-                </div>
+                      {section.title}
+                    </p>
+                  </ScrollLink>
+                ))}
               </div>
             </div>
-            <div className="md:p-10 p-5 bg-white shadow-xl rounded-xl">
-              <div id="ItinerarySubSection" className="mt-5 pb-5 border-b-2">
-                <p className="text-base leading-relaxed">
-                  We are all looking for productivity hacks to help us get
-                  organized and reduce stress, and with an app for trip planning
-                  you can get business travel booked in no time. Whether you are
-                  after a streamlined way to track expenses, stick to a budget,
-                  pack more efficiently, or plan your route, business travel apps
-                  tackle all the above.
-                </p>
-              </div>
-              {paragraphs.map((item, index) => (
-                <div key={item.id} className="pt-7 " id={item.id}>
-                  <h3 className="md:text-2xl text-xl font-medium mb-2">
-                    {item.text}
-                  </h3>
-                  <p className="text-base leading-relaxed">
-                    {item.desc}
-                  </p>
+            <div className="md:p-10 p-5 shadow-md rounded-md">
+              {PrivacyPolicySections.map((section) => (
+                <div key={section.id} id={section.id} className="mb-6 border-b">
+                  <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
+                  {section.content}
                 </div>
               ))}
             </div>
           </div>
         </div>
-        {/* footer is here */}
         <Footer />
       </div>
     </div>

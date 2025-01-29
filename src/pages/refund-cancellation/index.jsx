@@ -341,7 +341,7 @@ const RefundCancellation = () => {
                             </div>
                         </div>
                         <div className='w-full h-full absolute'>
-                            <div className='w-[70%] h-full flex items-center justify-end px-16'>
+                            <div className='lg:w-[65%] md:w-[70%] h-full flex items-center justify-end px-16'>
                                 <div className='w-full flex flex-col justify-center items-center'>
                                     <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
                                         Cancellation and Refund <br /> <span className='text-white'>understanding Your Refund Rights</span>
@@ -359,7 +359,7 @@ const RefundCancellation = () => {
                             </div>
                         </div>
                     </div>
-                </  div>
+                </div>
                 {/* small devices */}
                 <div className='md:hidden'>
                     <div className='w-full flex items-center justify-center bg-black p-5'>

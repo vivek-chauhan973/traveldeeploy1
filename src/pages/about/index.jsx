@@ -12,72 +12,166 @@ const fetchAboutUsPage = async () => {
   return await res.json();
 };
 const About = () => {
-  const [aboutData,setAboutData]=useState();
+  const [aboutData, setAboutData] = useState();
 
-  useEffect(()=>{
-    fetchAboutUsPage().then(res=>{
-      console.log("about page is here ---> ",res)
+  useEffect(() => {
+    fetchAboutUsPage().then(res => {
+      console.log("about page is here ---> ", res)
     })
-  },[])
+  }, [])
 
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState("Ideology");
 
-  const paragraphs = [
+  const paymentPolicySections = [
     {
-      id: "1st",
-      text: "What is a business travel app?",
-      desc: `What do we mean by corporate travel app, exactly, and what can
-             these business travel apps do? Whether accessed via a desktop or
-             downloaded to your smartphone or tablet, travel apps lighten the
-             load of trip planning. Use general travel apps to find and book
-             flights, hotels, and car rentals, or plan your itinerary. With
-             business-specific apps, you can also track expenses and find
-             meeting facilities.`
+      id: "Ideology",
+      title: "Brand Ideology",
+      content: (
+        <p className="mb-5 md:text-base text-para">
+          At <span className='font-semibold'>BizareXpedition™</span>, we believe that travel should be an experience that transcends
+          ordinary expectations. We don't just plan trips; we craft unforgettable journeys that
+          embody the highest standards of service, comfort, and luxury. Our mission is simple: Quality
+          first, always.
+        </p>
+      ),
     },
     {
-      id: "2nd",
-      text: "How long does it take the average person to plan a trip?",
-      desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated they had be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
+      id: "Excellence",
+      title: "We Deliver Excellence, Not Just Low Prices",
+      content: (
+        <p className="mb-5 md:text-base text-para">
+          While we recognize that price plays a significant role in decision-making, we firmly believe
+          that true value comes from the experiences we deliver. We offer premium travel services at
+          competitive prices, ensuring that every penny spent contributes to an exceptional
+          experience. Whether you are traveling for business or leisure, our priority is providing you
+          with the finest service, unmatched by any competitor.
+        </p>
+      ),
     },
     {
-      id: "3rd",
-      text: "Business travel tips: how do you plan a trip like a professional?",
-      desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated theyd be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
+      id: "Price",
+      title: "Quality First, Price Second.",
+      content: (
+        <p className="mb-5 md:text-base text-para">
+          At <span className='font-semibold'>BizareXpedition™</span>, we do not cut corners. Every aspect of your journey—whether it is
+          the accommodations, transportation, personalized concierge service, or curated
+          experiences-is meticulously designed to meet the highest standards. We understand that
+          great memories are made from details, which is why we place quality at the heart of
+          everything we do.
+        </p>
+      ),
     },
     {
-      id: "4th",
-      text: "How can a corporate travel app simplify the planning process?",
-      desc: `The study found that trip plannings not only time-consuming, but
-             stressful. Over a fifth (22%) of adults surveyed found the
-             planning process to be frustrating. Separate research
-             commissioned by Hotels.com confirmed this with over 25% of those
-             surveyed stating they found trip planning to be one of lifes
-             biggest stressors. And roughly 40% stated theyd be willing to
-             pay more to avoid the planning and research. These are just a
-             few reasons to use apps for trip planning to cut down on the
-             stress.`
+      id: "Service",
+      title: "Best Price for Unmatched Service",
+      content: (
+        <p className="mb-5 md:text-base text-para">
+          Our commitment is to deliver more than just a trip; we deliver an experience that is second
+          to none. We offer the best prices in terms of value, ensuring that you get the most out of
+          your travel investment. With us, you don't have to choose between affordable pricing and
+          exceptional quality-we provide both.
+        </p>
+      ),
     },
     {
-      id: "5th",
-      text: "Corporate travel tools: you'll be able to put all our business travel.",
-      desc: `With these apps, youll be able to put all our business travel
-             tips into action for fuss-free planning. youll be able to put all our business travel corporate travel.`
+      id: "Promise",
+      title: "Our Promise",
+      content: (
+        <div>
+          <p className="mb-5 md:text-base text-para">
+            When you choose <span className='font-semibold'>BizareXpedition™</span>, you are not just booking a vacation or business trip;
+            you are investing in a transformative experience that will leave you with memories to last a
+            lifetime. We bring the world to your doorstep, with a promise to deliver not just a service,
+            but a world-class experience every time.
+          </p>
+          <p className="text-gray-500 font-bold">---</p>
+        </div>
+      ),
+    },
+    {
+      id: "Values",
+      title: "Core Values",
+      content: (
+        <ul className="list-disc ml-8 md:text-base text-para">
+          <li><span className="font-semibold">Excellence : </span>We strive to exceed expectations at every turn.</li>
+          <li><span className="font-semibold">Integrity : </span>We operate with transparency and honesty in everything we do.</li>
+          <li><span className="font-semibold">Customer-Centric : </span>Our customers' needs are at the heart of our service.</li>
+          <li><span className="font-semibold">Value-Driven : </span>We provide the best experiences at the most competitive prices.</li>
+          <li><span className="font-semibold">Passion for Travel : </span>We are passionate about creating remarkable experiences that enrich our clients' lives.</li>
+        </ul>
+      ),
+    },
+    {
+      id: "Story",
+      title: "Brand Story",
+      content: (
+        <div>
+          <p className="mb-5 md:text-base text-para">
+            <span className='font-semibold'>BizareXpedition™</span> was founded on a simple idea: to redefine travel with a focus on luxury,
+            quality, and value. The founders saw a gap in the market for a travel company that could
+            combine top-tier service with competitive pricing, making luxury accessible without
+            compromising on the exceptional experiences that travellers deserve.
+          </p>
+          <p className="mb-5 md:text-base text-para">
+            From the very beginning, the team at BizareXpedition™ set out to build a brand that would
+            put <span className='font-semibold'>quality first</span>. Whether it's a private charter in the spiritual trip or a cozy stay at a
+            boutique hotel in the heart of a vibrant city, our goal has always been to provide an
+            unforgettable experience for every traveller.
+          </p>
+          <p className="mb-5 md:text-base text-para">
+            Our commitment to <span className='font-semibold'>unmatched service</span> means that no matter the destination, we ensure
+            that each detail of your journey is personalized to your needs. From business retreats to
+            family vacations, we bring together the best resources to craft <span className='font-semibold'>experiences that reflect the
+              values of luxury, attention to detail, and genuine care for our customers.</span>
+          </p>
+          <p className="mb-5 md:text-base text-para">
+            We do not believe in choosing between price and quality—we deliver both. That is why our
+            tagline, <span className="font-semibold italic">“BizareXpedition™ - A signature of Excellence”</span>, speaks to the very heart of what we
+            offer : value, quality, and an experience that will leave you coming back for more.
+          </p>
+          <p className="mb-5 md:text-base text-para">
+            Thus, “BizareXpedition™” was born-a travel company with a mission to redefine
+            the way we perceive exploration. It was not just about visiting destinations; it was
+            about commencing on unconventional quests, uncovering hidden gems, and
+            embracing the oddities that make each place special.
+          </p>
+          <p className="mb-5 md:text-base text-para">
+            The team at BizareXpedition™ curated trips that promised not only the thrill of
+            adventure but also the joy of discovering the unusual. From mystical encounters in
+            the spiritual heart of Uttarakhand to the wild and wondrous landscapes of Himachal
+            Pradesh, from the enchanting valleys of Kashmir to the vibrant tapestry of Rajasthan,
+            every journey with <span className="font-semibold">BizareXpedition™</span> was a story waiting to unfold.
+          </p>
+        </div>
+      ),
+    },
+    {
+      id: "Vision",
+      title: "Vision Statement",
+      content: (
+        <div>
+          <p className="mb-5 md:text-base text-para">
+            To be the leading travel service provider known for delivering <span className="font-semibold">Exceptional Experiences</span> and
+            <span className="font-semibold"> Uncompromising quality</span>, where every journey is a seamless fusion of <span className="font-semibold">Luxury, Value, and
+              Personalized service</span>. We envision a world where travel is not just about the destination-it is
+            about the unforgettable moments we create along the way.
+          </p>
+          <p className="text-gray-500 font-bold">---</p>
+        </div>
+      ),
+    },
+    {
+      id: "Mission",
+      title: "Mission Statement",
+      content: (
+        <p className="md:text-base text-para">
+          At <span className='font-semibold'>BizareXpedition™</span>, our mission is to redefine travel by offering <span className='font-semibold'>Premium, bespoke
+            journeys that prioritize quality, excellence, and value</span>. We are committed to providing our customers with unparalleled service, ensuring every trip is tailored to their individual needs
+          and desires. By combining exceptional service with competitive pricing, we aim to make
+          luxury travel accessible to all, delivering experiences that exceed expectations, foster lasting
+          memories, and inspire new adventures
+        </p>
+      ),
     },
   ];
 
@@ -141,59 +235,41 @@ const About = () => {
         </div>
         {/* herosection end */}
         <div className="container-wrapper py-10">
-          <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
-            <div className="">
-              <div className="sticky top-40 z-10 bg-white shadow-xl rounded-xl md:p-7 p-5">
-                <h4 className="text-md font-semibold mb-4 capitalize pl-3">About US</h4>
-                <div>
-                  {paragraphs.map((item, index) => (
-                    <ScrollLink
-                      key={item.id}
-                      to={item.id}
-                      spy={true}
-                      smooth={true}
-                      offset={-100}
-                      duration={500}
-                      onClick={() => setActiveIndex(index)}
+          <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
+            <div>
+              <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
+                {paymentPolicySections.map((section) => (
+                  <ScrollLink
+                    key={section.id}
+                    to={section.id}
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                    onClick={() => setActiveIndex(section.id)}
+                  >
+                    <p
+                      className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                        ? "border-l-4 border-l-primary text-black"
+                        : "text-gray-400"
+                        }`}
                     >
-                      <p
-                        className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === index
-                          ? "border-l-4 border-l-primary text-black"
-                          : " text-gray-400"
-                          }`}
-                      >
-                        {item.text}
-                      </p>
-                    </ScrollLink>
-                  ))}
-                </div>
+                      {section.title}
+                    </p>
+                  </ScrollLink>
+                ))}
               </div>
             </div>
-            <div className="md:p-10 p-5 bg-white shadow-xl rounded-xl">
-              <div id="ItinerarySubSection" className="mt-5 pb-5 border-b-2">
-                <p className="text-base leading-relaxed">
-                  We are all looking for productivity hacks to help us get
-                  organized and reduce stress, and with an app for trip planning
-                  you can get business travel booked in no time. Whether you are
-                  after a streamlined way to track expenses, stick to a budget,
-                  pack more efficiently, or plan your route, business travel apps
-                  tackle all the above.
-                </p>
-              </div>
-              {paragraphs.map((item, index) => (
-                <div key={item.id} className="pt-7 " id={item.id}>
-                  <h3 className="md:text-2xl text-xl font-medium mb-2">
-                    {item.text}
-                  </h3>
-                  <p className="text-base leading-relaxed">
-                    {item.desc}
-                  </p>
+            <div className="md:p-10 p-5 shadow-md rounded-md">
+              {paymentPolicySections.map((section) => (
+                <div key={section.id} id={section.id} className="mb-6">
+                  <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
+                  {section.content}
                 </div>
               ))}
             </div>
           </div>
         </div>
-        {/* footer is here */}
         <Footer />
       </div>
     </div>

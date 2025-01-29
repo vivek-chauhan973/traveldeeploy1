@@ -21,7 +21,6 @@ const PrivacyPolicy = () => {
       title: "Privacy Policy",
       content: (
         <div>
-          <p className='md:text-lg text-md font-semibold'>Introduction</p>
           <p className="mb-5 mt-3 md:text-base text-para">
             <span className='font-semibold'>BizareXpedition Services Pvt. Ltd.</span> (hereinafter referred to as "BizareXpedition," "we,"
             "us," or "our") values and respects the privacy of its customers (hereinafter referred to as

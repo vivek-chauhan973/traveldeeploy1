@@ -238,7 +238,7 @@ export default function Footer() {
                                                 alt=""
                                             />
                                             <Image width={5} height={5} src="/assets/swastik.png"
-                                                className="h-6 w-6 object-cover ml-2"
+                                                className="h-6 w-6 object-contain ml-2"
                                                 alt=""
                                             />
                                         </div>
