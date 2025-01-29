@@ -297,7 +297,7 @@ const PrivacyPolicy = () => {
                     This Privacy Policy outlines how we collect, use, and safe-guard your personel information when you visit
                     our website or use our services.
                   </p>
-                  <Link href="#">
+                  <Link href="/">
                     <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                       Explore Now
                     </button>
@@ -319,7 +319,7 @@ const PrivacyPolicy = () => {
                 This Privacy Policy outlines how we collect, use, and safe-guard your personel information when you visit
                 our website or use our services.
               </p>
-              <Link href="#">
+              <Link href="/">
                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                   Explore Now
                 </button>
@@ -346,7 +346,7 @@ const PrivacyPolicy = () => {
                     onClick={() => setActiveIndex(section.id)}
                   >
                     <p
-                      className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                      className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
                         ? "border-l-4 border-l-primary text-black"
                         : "text-gray-400"
                         }`}

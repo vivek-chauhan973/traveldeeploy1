@@ -114,7 +114,7 @@ const PaymentPloicy = () => {
                                         At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
                                         Below, you will find important details about our payment process.
                                     </p>
-                                    <Link href="#">
+                                    <Link href="/">
                                         <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                                             Explore Now
                                         </button>
@@ -134,7 +134,7 @@ const PaymentPloicy = () => {
                             <p className="my-5 text-sm text-white text-center">
                                 At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
                                 Below, you will find important details about our payment process.                            </p>
-                            <Link href="#">
+                            <Link href="/">
                                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                                     Explore Now
                                 </button>
@@ -161,7 +161,7 @@ const PaymentPloicy = () => {
                                         onClick={() => setActiveIndex(section.id)}
                                     >
                                         <p
-                                            className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                                            className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
                                                 ? "border-l-4 border-l-primary text-black"
                                                 : "text-gray-400"
                                                 }`}

@@ -11,8 +11,8 @@ const fetchJobsPage = async () => {
     return await res.json();
   };
 const Careers = () => {
-    const [activeIndex, setActiveIndex] = useState(null);
-    const [careersData, setCareersData ] = useState(null);
+    const [careersData, setCareersData ] = useState();
+    const [activeIndex, setActiveIndex] = useState(0);
     useEffect(()=>{
         fetchJobsPage().then(res =>{
             console.log("res is here ====>",res?.data);
@@ -49,7 +49,7 @@ const Careers = () => {
                                         we believe in fostering a posiytive work environment that encourages creativity, collaboration, and the love for travel.
                                         If you are looking for a dynamic career you can make a difference, you have come to the right place.
                                     </p>
-                                    <Link href="#">
+                                    <Link href="/">
                                         <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                                             Explore Now
                                         </button>
@@ -71,7 +71,7 @@ const Careers = () => {
                                 we believe in fostering a posiytive work environment that encourages creativity, collaboration, and the love for travel.
                                 If you are looking for a dynamic career you can make a difference, you have come to the right place.
                             </p>
-                            <Link href="#">
+                            <Link href="/">
                                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                                     Explore Now
                                 </button>
@@ -100,7 +100,7 @@ const Careers = () => {
                                             onClick={() => setActiveIndex(index)}
                                         >
                                             <p
-                                                className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === index
+                                                className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === index
                                                     ? "border-l-4 border-l-primary text-black"
                                                     : " text-gray-400"
                                                     }`}
@@ -118,7 +118,7 @@ const Careers = () => {
                             </div>
                             {careersData?.topics?.map((item, index) => (
                                 <div key={index} className="pt-7 " id={index}>
-                                    <h3 className="md:text-2xl text-xl font-medium mb-2">
+                                    <h3 className="md:text-lg text-md font-medium mb-2">
                                         {item?.title}
                                     </h3>
                                     <p className="text-base leading-relaxed about-margin" dangerouslySetInnerHTML={{__html:item?.description}}></p>

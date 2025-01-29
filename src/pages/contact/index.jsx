@@ -1,200 +1,3 @@
-// import "../../app/globals.css";
-// import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
-// import Image from 'next/image';
-// import Footer from '@/components/Footer';
-// import Breadcrumbs from '@/components/Breadcrumbs';
-// import Link from 'next/link';
-// import { useState } from 'react';
-// import { Link as ScrollLink } from "react-scroll";
-
-// const Contact = () => {
-//   const [activeIndex, setActiveIndex] = useState(null);
-
-//   return (
-//     <div>
-//       <DesktopHeader />
-//       <Breadcrumbs />
-//       <div>
-// {/* herosection start */}
-// {/* medium devices */}
-// <div className='md:block hidden'>
-//   <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
-//     <div className='w-[30%] h-full bg-black flex items-center justify-end'>
-//     </div>
-//     <div className='relative w-[80%] h-full flex'>
-//       <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
-//       <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
-//       </div>
-//     </div>
-//     <div className='w-full h-full absolute'>
-//       <div className='w-[60%] h-full flex items-center justify-end px-16'>
-//         <div className='w-full flex flex-col justify-center items-center'>
-//           <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
-//             Contact us <br /> <span className='text-white'>We are here to help</span>
-//           </h2>
-//           <p className="my-5 text-base text-white text-center">
-//             we are here to help! Whether you have a question about your booking, need assistance with your travel plans, or just want to know
-//             more about our services, feel free to get in touch with us.
-//           </p>
-//           <Link href="#">
-//             <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
-//               Explore Now
-//             </button>
-//           </Link>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// </div>
-// {/* small devices */}
-// <div className='md:hidden'>
-//   <div className='w-full flex items-center justify-center bg-black p-5'>
-//     <div className='w-full flex flex-col justify-center items-center'>
-//       <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
-//         Contact us <br /> <span className='text-white'>We are here to help</span>
-//       </h2>
-//       <p className="my-5 text-sm text-white text-center">
-//         we are here to help! Whether you have a question about your booking, need assistance with your travel plans, or just want to know
-//         more about our services, feel free to get in touch with us.
-//       </p>
-//       <Link href="#">
-//         <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
-//           Explore Now
-//         </button>
-//       </Link>
-//     </div>
-//   </div>
-//   <div className='relative w-full h-72'>
-//     <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
-//   </div>
-// </div>
-// {/* herosection end */}
-//         <div className="container-wrapper py-10">
-//           <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
-//             <div className="">
-//               <div className="sticky top-40 z-10 bg-white shadow-xl rounded-xl md:p-7 p-5">
-//                 <h4 className="text-md font-semibold mb-4 capitalize pl-3">Contact US</h4>
-//                 <div>
-//                     <ScrollLink
-//                       key="Address"
-//                       to="Address"
-//                       spy={true}
-//                       smooth={true}
-//                       offset={-100}
-//                       duration={500}
-//                       onClick={() => setActiveIndex("Address")}
-//                     >
-//                       <p
-//                         className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === "Address"
-//                           ? "border-l-4 border-l-primary text-black"
-//                           : " text-gray-400"
-//                           }`}
-//                       >
-//                         Office Address
-//                       </p>
-//                     </ScrollLink>
-//                     <ScrollLink
-//                       key="Numbers"
-//                       to="Numbers"
-//                       spy={true}
-//                       smooth={true}
-//                       offset={-100}
-//                       duration={500}
-//                       onClick={() => setActiveIndex("Numbers")}
-//                     >
-//                       <p
-//                         className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === "Numbers"
-//                           ? "border-l-4 border-l-primary text-black"
-//                           : " text-gray-400"
-//                           }`}
-//                       >
-//                         Phone Numbers
-//                       </p>
-//                     </ScrollLink>
-//                 </div>
-//               </div>
-//             </div>
-//             <div className="md:p-10 p-5 bg-white shadow-xl rounded-xl">
-//               <h1 className="md:text-2xl text-xl font-semibold">Contact Us</h1>
-//               <p className="mb-5 mt-3 md:text-base text-para">
-//                 We’re here to help! Whether you have questions, need assistance, or want to book your next
-//                 unforgettable journey, feel free to get in touch with us. Our team is always ready to assist you.
-//               </p>
-//               <h2 className="md:text-lg text-md font-semibold mt-5 mb-1" id="rakesh">Office Address</h2>
-//               <p className="md:text-base text-para">
-//                 <span className="font-semibold">BizarreXpedition™ Services Pvt. Ltd.</span>
-//                 <br /> 13A/4, THDC Near Shivalik Mart,
-//                 <br /> Near Ram Mandir, Ranipur, Haridwar
-//                 <br /> Uttarakhand, India - 249407
-//               </p>
-//               <h2 className="md:text-lg text-md font-semibold mt-5 mb-1" id="Numbers">Phone Numbers</h2>
-//               <ul className="list-disc ml-8 md:text-base text-para">
-//                 <li><span className="font-semibold">Customer Support:</span> +91-98731-52953</li>
-//                 <li><span className="font-semibold">Booking Assistance:</span> +91-7252-885-525</li>
-//                 <li><span className="font-semibold">General Inquiries:</span> +91-9897-581-113</li>
-//               </ul>
-//               <h2 className="md:text-lg text-md font-semibold mt-5 mb-1">Email</h2>
-//               <p><span className="font-semibold md:text-base text-para">General Inquiries : </span>
-//                 <Link href="mailto: info@bizarexpedition.com" target="_blank" className="text-blue-600 md:text-base text-para">info@bizarrexpedition.com</Link>
-//               </p>
-//               <h2 className="md:text-lg text-md font-semibold mt-5 mb-1">WhatsApp</h2>
-//               <p><span className="font-semibold md:text-base text-para">Chat with us directly on WhatsApp : </span>
-//                 <Link href="https://api.whatsapp.com/send/?phone=919897581113" target="_blank" className="text-blue-600 md:text-base text-para">+91-9897-581-113</Link>
-//               </p>
-//               <h2 className="md:text-lg text-md font-semibold mt-5 mb-1">Follow Us on Social Media</h2>
-//               <p className='mb-3 md:text-base text-para'>Stay connected with us on social media for the latest updates, offers, and travel inspiration:</p>
-//               <ul className="list-disc ml-8 md:text-base text-para">
-//                 <li>
-//                   <span className="font-semibold">Instagram : </span>
-//                   <Link href="https://www.instagram.com/bizarexpedition" target="_blank" className="text-blue-600">@bizarrexpedition</Link>
-//                 </li>
-//                 <li>
-//                   <span className="font-semibold">Facebook : </span>
-//                   <Link href="https://www.facebook.com/bizareX" target="_blank" className="text-blue-600">BizareX</Link>
-//                 </li>
-//                 <li>
-//                   <span className="font-semibold">Twitter : </span>
-//                   <Link href="https://twitter.com/bizarexpedition" target="_blank" className="text-blue-600">@BizareXpedition</Link>
-//                 </li>
-//                 <li>
-//                   <span className="font-semibold">LinkedIn : </span>
-//                   <Link href="https://www.linkedin.com/company/13630320/" target="_blank" className="text-blue-600">BizareXpedition</Link>
-//                 </li>
-//                 <li>
-//                   <span className="font-semibold">Youtube : </span>
-//                   <Link href="https://youtube.com" target="_blank" className="text-blue-600">@BizarexpeditionInn</Link>
-//                 </li>
-//                 <li>
-//                   <span className="font-semibold">Vimeo : </span>
-//                   <Link href="#" target="_blank" className="text-blue-600">BizareXpedition</Link>
-//                 </li>
-//               </ul>
-//               <h2 className="md:text-lg text-md font-semibold mt-5 mb-1">Office Hours</h2>
-//               <ul className="list-disc ml-8 md:text-base text-para">
-//                 <li><span className="font-semibold">Monday to Saturday : </span> 9:00 AM – 7:00 PM</li>
-//                 <li><span className="font-semibold">Sunday : </span> Closed</li>
-//               </ul>
-//             </div>
-//           </div>
-//         </div>
-//         {/* footer is here */}
-//         <div className='mt-5'>
-//           <Footer />
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Contact;
-
-
-
-// ====================================================================================================================
-
-
-
-
 import "../../app/globals.css";
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Footer from '@/components/Footer';
@@ -340,7 +143,7 @@ const Contact = () => {
                     we are here to help! Whether you have a question about your booking, need assistance with your travel plans, or just want to know
                     more about our services, feel free to get in touch with us.
                   </p>
-                  <Link href="#">
+                  <Link href="/">
                     <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
                       Explore Now
                     </button>
@@ -361,7 +164,7 @@ const Contact = () => {
                 we are here to help! Whether you have a question about your booking, need assistance with your travel plans, or just want to know
                 more about our services, feel free to get in touch with us.
               </p>
-              <Link href="#">
+              <Link href="/">
                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                   Explore Now
                 </button>
@@ -389,7 +192,7 @@ const Contact = () => {
                     onClick={() => setActiveIndex(section.id)}
                   >
                     <p
-                      className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                      className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
                         ? "border-l-4 border-l-primary text-black"
                         : "text-gray-400"
                         }`}
