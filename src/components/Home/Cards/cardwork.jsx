@@ -112,7 +112,7 @@ const Cardwork = () => {
       })
       .catch(err => console.log("err------ > ", err))
   }, [])
-  console.log("bannerData", bannerData);
+  // console.log("bannerData", bannerData);
 
   const carouselRef = useRef(null);
 

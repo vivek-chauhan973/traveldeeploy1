@@ -47,6 +47,9 @@ export const CarPopupProvider = ({ children }) => {
     );
     setSearchedData(data || []);
   },[searchQuery,pacakgeData])
+  // console.log("pacakgeData global",pacakgeData);
+  // console.log("searchedData global",searchedData);
+  
   const contextFun = {
     userFormData, setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal,
     setUserDateLocal, setUserTimeLocal, setUserPlanLocal,

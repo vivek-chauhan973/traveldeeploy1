@@ -55,7 +55,6 @@ const Card4 = ({ packages }) => {
                 <div className="carousel gap-5" ref={carouselRef}>
                     {packages?.length > 0 && packages.map((items, i) => {
                         const imageSrc = items?.uploads?.[0]; // Ensure that image exists
-
                         return (
                             <div key={i} className="carousel-item w-60 md:w-80 mb-11 rounded-md">
                                 <div className="shadow-md rounded-lg overflow-hidden">

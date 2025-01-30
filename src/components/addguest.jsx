@@ -450,7 +450,7 @@ const Addguest = ({
   const handleSelected = (item) => {
     const parsedItem = JSON.parse(item);
     // setGuestPrice(guestPrice+acpriceRef.current)
-    console.log("ref current ------> ",carpricingRef.current)
+    console.log("ref current ------> ", carpricingRef.current)
     console.log("ref current 123456 ------> ", guestPrice)
     const {
       markup,
@@ -486,11 +486,11 @@ const Addguest = ({
     setCarWithCapacity(carWithCapacity)
   }, [inputData?.singleRoom, inputData?.twinRoom, inputData?.tripleRoom, inputData?.quardRoom])
   useEffect(() => {
-    if(!isAC){
-      setGuestPrice(guestPrice-acpriceRef.current)
+    if (!isAC) {
+      setGuestPrice(guestPrice - acpriceRef.current)
     }
-    else{
-      setGuestPrice(guestPrice+acpriceRef.current)
+    else {
+      setGuestPrice(guestPrice + acpriceRef.current)
     }
   }, [isAC]);
 
@@ -628,7 +628,7 @@ const Addguest = ({
                           "opacity-50"
                           }`}
                         onChange={handleChange}
-                        disabled={inputData?.adult === 0||isSelectedCar} // Disable if adult count is 0
+                        disabled={inputData?.adult === 0 || isSelectedCar} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -705,7 +705,7 @@ const Addguest = ({
                           "opacity-50"
                           }`}
                         onChange={handleChange1}
-                        disabled={inputData?.adult === 0||isSelectedCar} // Disable if adult count is 0
+                        disabled={inputData?.adult === 0 || isSelectedCar} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -774,7 +774,7 @@ const Addguest = ({
                           "opacity-50"
                           }`}
                         onChange={handleChange1}
-                        disabled={inputData?.adult === 0||isSelectedCar} // Disable if adult count is 0
+                        disabled={inputData?.adult === 0 || isSelectedCar} // Disable if adult count is 0
                       >
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -831,10 +831,11 @@ const Addguest = ({
                       </div>
                       <div className="flex gap-1 ">
                         <button
-                        disabled={isSelectedCar}
+                          disabled={isSelectedCar}
                           onClick={(e) => {
                             e.preventDefault()
-                            handleDecrement("singleRoom")}}
+                            handleDecrement("singleRoom")
+                          }}
                           size={18}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
@@ -850,8 +851,8 @@ const Addguest = ({
                           {countSingleRoom}
                         </p>
                         <button
-                        disabled={isSelectedCar}
-                          onClick={(e) =>{ e.preventDefault(); handleIncrement("singleRoom")}}
+                          disabled={isSelectedCar}
+                          onClick={(e) => { e.preventDefault(); handleIncrement("singleRoom") }}
                           size={19}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
@@ -871,8 +872,8 @@ const Addguest = ({
                       </div>
                       <div className="flex gap-1">
                         <button
-                        disabled={isSelectedCar}
-                          onClick={(e) =>{e.preventDefault(); handleDecrement("twinRoom")}}
+                          disabled={isSelectedCar}
+                          onClick={(e) => { e.preventDefault(); handleDecrement("twinRoom") }}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
@@ -887,8 +888,8 @@ const Addguest = ({
                           {countTwinRoom}
                         </p>
                         <button
-                        disabled={isSelectedCar}
-                          onClick={(e) =>{e.preventDefault(); handleIncrement("twinRoom")}}
+                          disabled={isSelectedCar}
+                          onClick={(e) => { e.preventDefault(); handleIncrement("twinRoom") }}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
@@ -907,8 +908,8 @@ const Addguest = ({
                       </div>
                       <div className="flex gap-1">
                         <button
-                        disabled={isSelectedCar}
-                          onClick={(e) =>{e.preventDefault(); handleDecrement("tripleRoom")}}
+                          disabled={isSelectedCar}
+                          onClick={(e) => { e.preventDefault(); handleDecrement("tripleRoom") }}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
@@ -924,8 +925,8 @@ const Addguest = ({
                           {countTripleRoom}
                         </p>
                         <button
-                        disabled={isSelectedCar}
-                          onClick={(e) => {e.preventDefault();handleIncrement("tripleRoom")}}
+                          disabled={isSelectedCar}
+                          onClick={(e) => { e.preventDefault(); handleIncrement("tripleRoom") }}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
@@ -944,8 +945,8 @@ const Addguest = ({
                       </div>
                       <div className="flex gap-1">
                         <button
-                        disabled={isSelectedCar}
-                          onClick={() => {e.preventDefault();handleDecrement("quardRoom")}}
+                          disabled={isSelectedCar}
+                          onClick={() => { e.preventDefault(); handleDecrement("quardRoom") }}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
@@ -960,8 +961,8 @@ const Addguest = ({
                           {countQuardRoom}
                         </p>
                         <button
-                        disabled={isSelectedCar}
-                          onClick={(e) => {e.preventDefault();handleIncrement("quardRoom")}}
+                          disabled={isSelectedCar}
+                          onClick={(e) => { e.preventDefault(); handleIncrement("quardRoom") }}
                           className="cursor-pointer text-navyblack hover:text-slate-700"
                         >
                           <FontAwesomeIcon
@@ -1161,27 +1162,27 @@ const Addguest = ({
                   </div>
                 </div>
                 <div className=" gap-3 hidden md:flex ">
-                <button
-                  onClick={(e) => handleReset(e)}
-                  className={`${selectedCarBool ? "bg-gradient-to-r from-navyblack to-red-500" : "bg-gradient-to-r from-navyblack to-red-300 cursor-not-allowed"}
+                  <button
+                    onClick={(e) => handleReset(e)}
+                    className={`${selectedCarBool ? "bg-navyblack" : "bg-gradient-to-r from-gray-400 to-navyblack cursor-not-allowed"}
                                      md:text-base text-sm text-white rounded-md md:px-5 md:py-2 px-4 py-1.5 hover:opacity-90`}
-                >
-                  Reset
-                </button>
-                <button
-                  onClick={(e) => handleSubmit(e)}
-                  className={`${selectedCarBool ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
+                  >
+                    Reset
+                  </button>
+                  <button
+                    onClick={(e) => handleSubmit(e)}
+                    className={`${selectedCarBool ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-gradient-to-r from-orange-300 to-red-300 cursor-not-allowed"}
                                      md:text-base text-sm text-white rounded-md md:px-5 md:py-2 px-4 py-1.5 hover:opacity-90`}
-                >
-                  Submit
-                </button>
-              
+                  >
+                    Submit
+                  </button>
+
                 </div>
               </div>
               <div className="flex md:hidden justify-around mb-4 ">
                 <button
                   onClick={(e) => handleReset(e)}
-                  className={`${selectedCarBool ? "bg-gradient-to-r from-navyblack to-red-500" : "bg-gradient-to-r from-navyblack to-red-300 cursor-not-allowed"}
+                  className={`${selectedCarBool ? "bg-navyblack" : "bg-gradient-to-r from-gray-400 to-navyblack cursor-not-allowed"}
                                      md:text-base text-sm text-white rounded-md md:px-5 md:py-2 px-10 py-1.5 hover:opacity-90`}
                 >
                   Reset
@@ -1193,8 +1194,8 @@ const Addguest = ({
                 >
                   Submit
                 </button>
-              
-                </div>
+
+              </div>
             </div>
           </form>
         )}

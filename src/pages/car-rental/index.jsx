@@ -205,7 +205,7 @@ export default function App() {
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
-
+  
   return (
     <AppProvider>
       <div>

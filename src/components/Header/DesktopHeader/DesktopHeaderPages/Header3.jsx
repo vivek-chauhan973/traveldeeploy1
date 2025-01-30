@@ -105,7 +105,7 @@ const Header3 = () => {
             )}
             {(session!==null||Cookies.get("token")!==undefined||isLoggedIn) ? (
               <div className="hidden md:flex gap-3">
-              <button className="items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg"
+              <button className="items-center flex justify-center gap-2 px-2 py-2 text-sm text-white rounded-lg"
                   onClick={session===null?handleLogout:signOut}
                 >
                   <FontAwesomeIcon icon={faUser} className='font' />
@@ -114,7 +114,7 @@ const Header3 = () => {
               </div>
             ) : (
               <div className="hidden md:flex gap-3">
-                <button className="items-center flex justify-center gap-2 px-2 py-2 text-sm border-white border text-white rounded-lg"
+                <button className="items-center flex justify-center gap-2 px-2 py-2 text-sm text-white rounded-lg"
                   onClick={handleLogin}
                 >
                   <FontAwesomeIcon icon={faUser} className='font' />
