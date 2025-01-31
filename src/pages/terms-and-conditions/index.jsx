@@ -289,7 +289,7 @@ const TermsAndCondition = () => {
             </div>
           </div>
           <div className='relative w-full h-72'>
-            <img src="/assets/staticimage/aboutUs.jpg" alt="" className='relative w-full h-full' />
+            <img src="/assets/staticimage/t&c.jpg" alt="" className='relative w-full h-full' />
           </div>
         </div>
         <div className="container-wrapper py-10">

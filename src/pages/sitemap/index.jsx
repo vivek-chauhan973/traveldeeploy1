@@ -85,7 +85,7 @@ const Sitemap = () => {
           <div className="grid md:grid-cols-4 grid-cols-1 md:gap-10 gap-5">
             {Object.keys(groupedTours).map((letter) => (
               <div key={letter} className=''>
-                <h4 className="md:text-[30px] text-xl text-gray-400 border-b mb-3 pb-1">{letter}</h4>
+                <h4 className="md:text-[30px] text-xl text-gray-400 border-b mb-3 pb-3">{letter}</h4>
                 <div className="grid grid-cols-1">
                   {groupedTours[letter].map((tour, index) => (
                     <Link
@@ -105,7 +105,7 @@ const Sitemap = () => {
           <div className="grid md:grid-cols-4 grid-cols-1 md:gap-10 gap-5">
             {Object.keys(groupedTours2).map((letter) => (
               <div key={letter} className=''>
-                <h4 className="md:text-[30px] text-xl text-gray-400 border-b mb-3 pb-1">{letter}</h4>
+                <h4 className="md:text-[30px] text-xl text-gray-400 border-b mb-3 pb-3">{letter}</h4>
                 <div className="grid grid-cols-1">
                   {groupedTours2[letter].map((tour, index) => (
                     <Link
@@ -120,12 +120,12 @@ const Sitemap = () => {
             ))}
           </div>
         </div>
-        <div className="bg-white shadow-lg rounded-lg px-8 py-5">
+        {/* <div className="bg-white shadow-lg rounded-lg px-8 py-5">
           <h1 className="md:text-xl text-lg text-blue-800 mb-4">Speciality Tours</h1>
           <div className="grid md:grid-cols-4 grid-cols-1 md:gap-10 gap-5">
             {Object.keys(groupedTours3).map((letter) => (
               <div key={letter} className=''>
-                <h4 className="md:text-[30px] text-xl text-gray-400 border-b mb-3 pb-1">{letter}</h4>
+                <h4 className="md:text-[30px] text-xl text-gray-400 border-b mb-3 pb-3">{letter}</h4>
                 <div className="grid grid-cols-1">
                   {groupedTours3[letter].map((tour, index) => (
                     <Link
@@ -139,7 +139,7 @@ const Sitemap = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
       <div className='mt-5'>
         <Footer />

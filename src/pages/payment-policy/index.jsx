@@ -142,7 +142,7 @@ const PaymentPloicy = () => {
                         </div>
                     </div>
                     <div className='relative w-full h-72'>
-                        <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
+                        <img src="/assets/staticimage/paymentPolicy.jpg" alt="" className='relative w-full h-full' />
                     </div>
                 </div>
                 {/* herosection end */}
