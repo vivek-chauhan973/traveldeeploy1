@@ -5,9 +5,12 @@ import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculati
 import { signIn, useSession } from "next-auth/react";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 const Create = () => {
   const { setLoginPopup } = useCarPopupContext();
+  const {fixedDeparturePopupPrice}=useAppContext();
+  // console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice)
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -23,6 +26,10 @@ const Create = () => {
   const [mobileError, setMobileError] = useState("");
   const [otpError, setOtpError] = useState("");
   const [resendOtpError, setResendOtpError] = useState("");
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const [orderId, setOrderId] = useState('');
+  const [paymentLink, setPaymentLink] = useState('');
   const validateMobile = (mobileNumber) => {
     const isValid = /^[0-9]{10}$/.test(mobileNumber);
     if (!isValid) {
@@ -145,7 +152,33 @@ const Create = () => {
 
   const handleMobileVerifiedAndGetMoreDetail = () => {
 
-    setLoginPopup(false);
+    // setLoginPopup(false);
+  }
+
+  const handleProceed=async ()=>{
+    const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
+
+     const data1={name:session?.user.name,email:session?.user.email,phoneNumber,customer_id:`customer_${Date.now()}`, orderId: `order_${Date.now()}`,amount:fixedDeparturePopupPrice1}
+     try {
+      const response = await fetch('/api/payments/createOrder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data1),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setOrderId(data.orderId);
+        window.location.href =data.paymentLink;
+        setLoginPopup(false);
+      } else {
+        console.error('Error creating order:', data.error);
+      }
+    } catch (error) {
+      console.error('Error creating order:', error);
+    }
   }
 
   return (
@@ -244,15 +277,11 @@ const Create = () => {
                   <h1 className="text-sm font-medium text-center"> Provide Details</h1>
                   <div className="flex flex-col ">
                     <label htmlFor="firstname" className="text-sm">Name</label>
-                    <input type="text" id="firstname" placeholder="Enter Name" required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
+                    <input type="text" id="firstname" value={name} onChange={(e)=setName(e.target.value)} placeholder="Enter Name" required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
                   </div>
-                  {/* <div className="flex flex-col">
-                    <label htmlFor="lastname" className="text-sm ">Last Name</label>
-                    <input type="text"  id="lastname" placeholder="Enter Last Name"  className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 "/>
-                  </div> */}
                   <div className="flex flex-col">
                     <label htmlFor="email" required className="text-sm">Email</label>
-                    <input type="email" id="email" placeholder="Enter Email Address" className=" text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
+                    <input type="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Email Address" className=" text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
                   </div>
                   <button onClick={handleMobileVerifiedAndGetMoreDetail} className="w-full mb-5 bg-navyblack text-white px-5 py-2 rounded-full mt-2.5">Proceed</button>
                 </div>}
@@ -260,9 +289,12 @@ const Create = () => {
                   <h1 className="text-para font-semibold text-center"> Provide Details</h1>
                   <div className="flex flex-col mt-3 ">
                     <label htmlFor="firstname" className="text-sm">Mobile No.</label>
-                    <input type="text" id="firstname" placeholder="Enter Mobile No." required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
+                    <input type="text" id="firstname" value={phoneNumber}  onChange={(e) => {
+                          setPhoneNumber(e.target.value);
+                          validateMobile(e.target.value);
+                        }} placeholder="Enter Mobile No." required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
                   </div>
-                  <button className="w-full bg-navyblack text-white px-5 mb-10 mt-5 py-2 rounded-full ">Proceed</button>
+                  <button onClick={handleProceed} className="w-full bg-navyblack text-white px-5 mb-10 mt-5 py-2 rounded-full ">Proceed</button>
                 </div>}
               </div>
             </div>

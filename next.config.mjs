@@ -17,4 +17,10 @@ export default {
     };
     return config;
   },
+  async rewrites() {
+    return [
+      { source: '/api/:path*', destination: '/api/:path*' },
+      { source: '/admin/:path*', destination: '/admin/:path*' },
+    ];
+  },
 };

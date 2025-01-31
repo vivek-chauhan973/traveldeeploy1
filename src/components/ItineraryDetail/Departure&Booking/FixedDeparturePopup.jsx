@@ -65,8 +65,8 @@ const FixedDeparturePopup = () => {
     setShowPopup(false);
     setLoginPopup(true);
   };
-  console.log("departure section data is here ---> ", departureSectionData)
-
+  // console.log("departure section data is here ---> ", departureSectionData)
+  console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice)
   return (
     <>
       <div 
