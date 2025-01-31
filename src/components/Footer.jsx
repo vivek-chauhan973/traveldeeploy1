@@ -144,13 +144,13 @@ export default function Footer() {
                                     </div>
                                 </div>
                                 <div className="container-wrapper">
-                                    <hr className="container-wrapper" />
+                                    <hr  />
                                     <div className=" py-2 ">
                                         <p className="text-xs">
                                             *Caution: Beware of Fake Promotions or Offers *Please be cautious and do not engage with any promotional emails, SMS, or web links that ask you to click on a link and provide your personal details. All authorized communications from BizareXpedition™️ Services will come exclusively from our registered domains: @bizarexpedition.com, @bizarexpedition.online, or @bizarexpedition.in. For any inquiries, you can also reach us through our official WhatsApp channel at 9897581113. *BizareXpedition™️ Services is not liable for any fraudulent or misleading communications that do not originate from our official domains.
                                         </p>
                                     </div>
-                                    <hr className="container-wrapper" />
+                                    <hr  />
 
                                     <div className="md:flex md:items-center md:justify-between py-1 ">
                                         <ul className="flex items-center justify-center  flex-wrap ">
@@ -228,7 +228,7 @@ export default function Footer() {
                                             </svg>                            
                                         </div>
                                     </div>
-                                    <hr className="container-wrapper" />
+                                    <hr />
                                     <div className="flex md:flex-row flex-col md:items-center justify-between gap-2 py-1">
                                         <div className="flex justify-center items-center">
                                             <span className="dark:text-gray-400 md:text-sm text-xs">© Copyright 1986. All Rights Reserved.</span>
