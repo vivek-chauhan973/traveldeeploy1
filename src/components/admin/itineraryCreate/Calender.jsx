@@ -6,7 +6,7 @@ const fetchPriceHikeData = async (itinerary) => {
   return await (await fetch(`/api/package/price-hike?packageId=${itinerary?._id}`)).json()
 }
 
-const Calendar = ({ itinerary, setActiveTab }) => {
+const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [priceIncrease, setPriceIncrease] = useState("");
@@ -33,6 +33,7 @@ const Calendar = ({ itinerary, setActiveTab }) => {
       });
       if (response.ok) {
         setActiveTab("Tab1");
+
       }
     } catch (error) {
       console.log("Something went wrong");
@@ -83,7 +84,13 @@ const Calendar = ({ itinerary, setActiveTab }) => {
     const updatedArr = calenderArr.filter((_, i) => i !== index);
     setCalenderArr(updatedArr);
   };
-  // console.log("calender array --> ",calenderArr)
+  console.log("calender array --> ", calenderArr);
+
+  useEffect(() => {
+    if (calenderArr.length > 0) {
+      setCalenderDot(true);
+    }
+  }, [calenderArr]);
   return (
     <>
       <div className="bg-white rounded p-3">
@@ -113,34 +120,34 @@ const Calendar = ({ itinerary, setActiveTab }) => {
               id="endDate"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
+              min={startDate ? startDate : new Date().toISOString().split("T")[0]}
+              disabled={!startDate}
               className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-para"
               placeholder="Enter End Date"
             />
           </div>
-          <div className="sm:flex items-center mb-2">
-            <div className="flex items-center justify-center gap-6">
-              <div className="flex items-center mb-2">
-                <label htmlFor="price" className="font-semibold w-36 text-para">
-                  Price Hike % :
-                </label>
-                <input
-                  type="number"
-                  id="price"
-                  value={priceIncrease}
-                  onChange={(e) => setPriceIncrease(e.target.value)}
-                  className="border w-full rounded-md h-8 ml-9 px-2 focus:border-primary outline-none text-para"
-                  placeholder="Enter Price"
-                />
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="checkbox"
-                  className="scale-150"
-                  checked={isActive}
-                  onChange={handleCheckBox}
-                />
-              </div>
+          <div className="flex items-center justify-start md:gap-6 gap-2 md:mb-4 mb-2">
+            <div className="md:flex md:items-center ">
+              <label htmlFor="price" className="font-semibold lg:w-48 md:w-40 w-full text-para">
+                Price Hike % :
+              </label>
+              <input
+                type="number"
+                id="price"
+                value={priceIncrease}
+                onChange={(e) => setPriceIncrease(e.target.value)}
+                className="border w-full rounded-md h-8 px-2 focus:border-primary outline-none text-sm"
+                placeholder="Enter Hike/DisHike (10 = 10%)"
+              />
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name="checkbox"
+                className="w-4 h-4 accent-navyblack md:mt-0 mt-5"
+                checked={isActive}
+                onChange={handleCheckBox}
+              />
             </div>
           </div>
           <div className="sm:flex items-center">
@@ -167,7 +174,7 @@ const Calendar = ({ itinerary, setActiveTab }) => {
           >
             {editIndex !== null ? "Update" : "Add"}
           </button>
-        </div>       
+        </div>
         <div >
           {calenderArr.length !== 0 &&
             <table className="w-full border-collapse border border-gray-300 text-center text-para">
@@ -193,7 +200,7 @@ const Calendar = ({ itinerary, setActiveTab }) => {
                       <p className=" font-medium">{item?.priceIncrease}</p>
                     </td>
                     <td className=" border-l border-r px-2 py-2 overflow-hidden border-gray-300">
-                    <p className="">{item?.svg}</p>
+                      <p className="">{item?.svg}</p>
                     </td>
                     <td className="flex justify-center items-center gap-4 border-l border-r px-2 py-2 overflow-hidden border-gray-300">
                       <FontAwesomeIcon

@@ -76,12 +76,12 @@ const ItineraryPricingCard = () => {
         <div className=" overflow-y-auto">
         <div className="flex mb-2.5 mt-3 text-sm">
               <p className=" w-20">Dept. City : </p>
-              <p className="font-semibold text-graytext">{showAddguest||"Mumbai"}</p>
+              <p className="font-semibold text-graytext capitalize">{showAddguest||" -- "}</p>
             </div>
             <div className="flex mb-2.5 text-sm">
               <p className=" w-20">Dept. Date :</p>
               <p className=" font-bold text-graytext">
-               {departureSectionData?.date||" 10 Mar 2024 - 17 Mar 2024"}
+               {departureSectionData?.date||" -- "}
               </p>
             </div>
           <div className="flex mb-2.5 text-sm">

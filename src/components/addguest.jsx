@@ -335,7 +335,7 @@ const Addguest = ({
         quadSharingRoom,
       } = addPackage?.prices;
 
-      const { hike } = departureSectionData;
+      const hike = departureSectionData?.hike;
 
       let calculatedPrice = 0; // Reset calculatedPrice at the start
 

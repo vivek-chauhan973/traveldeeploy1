@@ -85,11 +85,20 @@ export default function CreatePackage() {
                 },
                 body: JSON.stringify({ tableData, tableColumn })
             });
+            if (reponse.ok) {
+                setActiveTab("Tab12");
+              }
         } catch (error) {
             console.log("error :: ", error);
         }
 
-    }
+    };
+    // console.log("tableData is here ------> ",tableData);
+    useEffect(()=>{
+        if(tableData.length > 0){
+            setTableDot(true);
+        }
+    },[tableData]);
 
     const handleTabClick = (tabname) => {
         setActiveTab(tabname);
@@ -130,6 +139,7 @@ export default function CreatePackage() {
 
     useEffect(() => { }, [select]);
 // console.log("itinary is here ------> ",itinerary);
+
     return (
         <AppProvider>
             <Layout>
