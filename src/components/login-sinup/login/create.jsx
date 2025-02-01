@@ -160,7 +160,7 @@ const Create = () => {
 
      const data1={name:session?.user.name,email:session?.user.email,phoneNumber,customer_id:`customer_${Date.now()}`, orderId: `order_${Date.now()}`,amount:fixedDeparturePopupPrice1}
      try {
-      const response = await fetch('/api/payments/createOrder', {
+      const response = await fetch('/api/cashfree/initiate-payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
