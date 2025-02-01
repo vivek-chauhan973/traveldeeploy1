@@ -100,7 +100,7 @@ const PaymentPloicy = () => {
                         <div className='w-[30%] h-full bg-black flex items-center justify-end'>
                         </div>
                         <div className='relative w-[80%] h-full flex'>
-                            <img src="/assets/staticimage/paymentPolicy.jpg" alt="" className='relative w-full h-full' />
+                            <Image src="/assets/staticimage/paymentPolicy.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                             <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
                             </div>
                         </div>
@@ -142,7 +142,7 @@ const PaymentPloicy = () => {
                         </div>
                     </div>
                     <div className='relative w-full h-72'>
-                        <img src="/assets/staticimage/paymentPolicy.jpg" alt="" className='relative w-full h-full' />
+                        <Image src="/assets/staticimage/paymentPolicy.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                     </div>
                 </div>
                 {/* herosection end */}

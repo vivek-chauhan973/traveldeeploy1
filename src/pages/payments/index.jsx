@@ -21,7 +21,7 @@ const Payment = () => {
             content: (
                 <p className="mb-5 mt-3 md:text-base text-para">
                     Ensuring a smooth and reliable booking experience is our top priority at <span className='font-semibold'> BizareXpedition. </span>
-                    We offer multiple payment methods to make your transactions effortless, whether you're
+                    We offer multiple payment methods to make your transactions effortless, whether you are
                     planning an adventure trip, a pilgrimage tour, or booking accommodations. Our secure
                     payment process guarantees safety and convenience, so you can focus on your journey
                     without any worries.
@@ -120,7 +120,7 @@ const Payment = () => {
                         <div className='w-[30%] h-full bg-black flex items-center justify-end'>
                         </div>
                         <div className='relative w-[80%] h-full flex'>
-                            <img src="/assets/staticimage/refundCancellation.jpg" alt="" className='relative w-full h-full' />
+                            <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                             <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
                             </div>
                         </div>
@@ -132,7 +132,7 @@ const Payment = () => {
                                     </h2>
                                     <p className="my-5 text-base text-white text-center">
                                         At BizareXpedition, we ensure a hassle-free and secure payment process for all our customers.
-                                        Whether you're booking a customized tour, adventure package, or hotel stay, our multiple payment options make transactions quick and easy.
+                                        Whether you are booking a customized tour, adventure package, or hotel stay, our multiple payment options make transactions quick and easy.
                                     </p>
                                     <Link href="/">
                                         <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
@@ -153,7 +153,7 @@ const Payment = () => {
                             </h2>
                             <p className="my-5 text-sm  text-white text-center">
                                 At BizareXpedition, we ensure a hassle-free and secure payment process for all our customers.
-                                Whether you're booking a customized tour, adventure package, or hotel stay, our multiple payment options make transactions quick and easy.
+                                Whether you are booking a customized tour, adventure package, or hotel stay, our multiple payment options make transactions quick and easy.
                             </p>
                             <Link href="/">
                                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
@@ -163,7 +163,7 @@ const Payment = () => {
                         </div>
                     </div>
                     <div className='relative w-full h-72'>
-                        <img src="/assets/staticimage/refundCancellation.jpg" alt="" className='relative w-full h-full' />
+                        <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                     </div>
                 </div>
                 {/* herosection end */}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import Image from "next/image";
 
 const fetchPackgesTerm = async () => {
   const response = await fetch("/api/package/terms-condition/packageTerm/get");
@@ -78,46 +79,60 @@ const FixedDeparturePopup = () => {
               <div className="bg-primary rounded-l-lg shadow-lg text-white  hidden md:block">
                 <div className="w-full h-[25%]"></div>
                 <div className="flex gap-5 justify-center">
-                  <img
+                  <Image
                     className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 1.png"
                     alt=""
+                    width={200}
+                    height={200}
                   />
-                  <img
+                  <Image
                     className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 2.png"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <div className="flex gap-5 justify-center">
-                  <img
+                  <Image
                     className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 3.png"
                     alt=""
+                    width={200}
+                    height={200}
                   />
-                  <img
+                  <Image
                     className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 4.png"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <div className="flex gap-5 justify-center">
-                  <img
+                  <Image
                     className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 5.png"
                     alt=""
+                    width={200}
+                    height={200}
                   />
-                  <img
+                  <Image
                     className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 6.png"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <div className="flex gap-5 justify-start pl-7">
-                  <img
+                  <Image
                     className="object-cover rounded-full w-16 h-16"
                     src="/assets/Affiliation 7.png"
                     alt=""
+                    width={200}
+                    height={200}
                   />
                 </div>
               </div>

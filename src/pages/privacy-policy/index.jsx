@@ -11,9 +11,10 @@ import Link from 'next/link';
 //   const res = await fetch(`/api/static-page/static-page-type?name=privacy-policy`);
 //   return await res.json();
 // };
+
 const PrivacyPolicy = () => {
 
-  const [activeIndex, setActiveIndex] = useState("PrivacyPolicy");
+  const [activeIndex, setActiveIndex] = useState('PrivacyPolicy');
 
   const PrivacyPolicySections = [
     {
@@ -22,9 +23,9 @@ const PrivacyPolicy = () => {
       content: (
         <div>
           <p className="mb-5 mt-3 md:text-base text-para">
-            <span className='font-semibold'>BizareXpedition Services Pvt. Ltd.</span> (hereinafter referred to as "BizareXpedition," "we,"
-            "us," or "our") values and respects the privacy of its customers (hereinafter referred to as
-            "you" or "your"). This Privacy Policy outlines how we collect, use, disclose, and protect your
+            <span className='font-semibold'>BizareXpedition Services Pvt. Ltd.</span> (hereinafter referred to as &quot;BizareXpedition,&quot; &quot;we,&quot;
+              &quot;us,&quot; or &quot;our&quot;) values and respects the privacy of its customers (hereinafter referred to as
+                &quot;you&quot; or &quot;your&quot;). This Privacy Policy outlines how we collect, use, disclose, and protect your
             personal information provided through our website, offices, and other communication
             channels.
           </p>
@@ -282,7 +283,7 @@ const PrivacyPolicy = () => {
             <div className='w-[30%] h-full bg-black flex items-center justify-end'>
             </div>
             <div className='relative w-[80%] h-full flex'>
-              <img src="/assets/staticimage/privacyPolicy1.jpg" alt="" className='relative w-full h-full' />
+              <Image src="/assets/staticimage/privacyPolicy1.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
               <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
               </div>
             </div>
@@ -327,7 +328,7 @@ const PrivacyPolicy = () => {
             </div>
           </div>
           <div className='relative w-full h-72'>
-            <img src="/assets/staticimage/privacyPolicy1.jpg" alt="" className='relative w-full h-full' />
+            <Image src="/assets/staticimage/privacyPolicy1.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
           </div>
         </div>
         {/* herosection end */}

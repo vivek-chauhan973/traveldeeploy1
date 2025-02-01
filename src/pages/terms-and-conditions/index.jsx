@@ -46,8 +46,7 @@ const TermsAndCondition = () => {
       content: (
         <div>
           <p className="mb-5 mt-3 md:text-base text-para">
-            <span className='font-semibold'>BizareXpedition Services Pvt. Ltd</span>., hereafter referred to as "the Company," "we," "us,"
-            or "our."
+            <span className='font-semibold'>BizareXpedition Services Pvt. Ltd</span>., hereafter referred to as &quot;the Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;
           </p>
           <p className="mb-5 mt-3 md:text-base text-para">
             <span className='font-semibold'>Guest(s)</span> refers to clients, customers, tourists, or travellers booking or participating in
@@ -246,7 +245,7 @@ const TermsAndCondition = () => {
             <div className='w-[30%] h-full bg-black flex items-center justify-end'>
             </div>
             <div className='relative w-[80%] h-full flex'>
-              <img src="/assets/staticimage/t&c.jpg" alt="" className='relative w-full h-full' />
+              <Image src="/assets/staticimage/t&c.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
               <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
               </div>
             </div>
@@ -289,7 +288,7 @@ const TermsAndCondition = () => {
             </div>
           </div>
           <div className='relative w-full h-72'>
-            <img src="/assets/staticimage/t&c.jpg" alt="" className='relative w-full h-full' />
+            <Image src="/assets/staticimage/t&c.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
           </div>
         </div>
         <div className="container-wrapper py-10">

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
 import Create from "../login-sinup/login/create";
+import Image from "next/image";
 
 const fetchGroupDepartureTerm = async () => {
     const response = await fetch("/api/cars/package/terms-condition/GroupDepartureTerm/get");
@@ -146,46 +147,60 @@ const CarBookingPopup = () => {
                             <div className="bg-primary rounded-l-lg shadow-lg text-white md:h-[650px] xl:h-[650px] md:max-h-[700px] max-h-[650px] hidden md:block">
                                 <div className="w-full h-[25%]"></div>
                                 <div className="flex gap-5 justify-center">
-                                    <img
+                                    <Image
                                         className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 1.png"
                                         alt=""
+                                        width={200}
+                                        height={200}
                                     />
-                                    <img
+                                    <Image
                                         className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 2.png"
                                         alt=""
+                                        width={200}
+                                        height={200}
                                     />
                                 </div>
                                 <div className="flex gap-5 justify-center">
-                                    <img
+                                    <Image
                                         className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 3.png"
                                         alt=""
+                                        width={200}
+                                        height={200}
                                     />
-                                    <img
+                                    <Image
                                         className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 4.png"
                                         alt=""
+                                        width={200}
+                                        height={200}
                                     />
                                 </div>
                                 <div className="flex gap-5 justify-center">
-                                    <img
+                                    <Image
                                         className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 5.png"
                                         alt=""
+                                        width={200}
+                                        height={200}
                                     />
-                                    <img
+                                    <Image
                                         className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 6.png"
                                         alt=""
+                                        width={200}
+                                        height={200}
                                     />
                                 </div>
                                 <div className="flex gap-5 justify-start pl-7">
-                                    <img
+                                    <Image
                                         className="object-cover rounded-full w-16 h-16"
                                         src="/assets/Affiliation 7.png"
                                         alt=""
+                                        width={200}
+                                        height={200}
                                     />
                                 </div>
                             </div>

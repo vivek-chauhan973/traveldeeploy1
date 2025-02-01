@@ -6,10 +6,12 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
+
 const fetchJobsPage = async () => {
     const res = await fetch(`/api/static-page/static-page-type?name=jobs`);
     return await res.json();
   };
+
 const Careers = () => {
     const [careersData, setCareersData ] = useState();
     const [activeIndex, setActiveIndex] = useState(0);
@@ -34,7 +36,7 @@ const Careers = () => {
                         <div className='w-[30%] h-full bg-black flex items-center justify-end'>
                         </div>
                         <div className='relative w-[80%] h-full flex'>
-                            <img src="/assets/staticimage/jobs.jpg" alt="" className='relative w-full h-full' />
+                            <Image src="/assets/staticimage/jobs.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                             <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
                             </div>
                         </div>
@@ -79,7 +81,7 @@ const Careers = () => {
                         </div>
                     </div>
                     <div className='relative w-full h-72'>
-                        <img src="/assets/staticimage/jobs.jpg" alt="" className='relative w-full h-full' />
+                        <Image src="/assets/staticimage/jobs.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                     </div>
                 </div>
                 {/* herosection end */}

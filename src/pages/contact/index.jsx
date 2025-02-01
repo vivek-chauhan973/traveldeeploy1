@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Link as ScrollLink } from "react-scroll";
+import Image from "next/image";
 
 const Contact = () => {
   const [activeIndex, setActiveIndex] = useState("contact");
@@ -129,7 +130,7 @@ const Contact = () => {
             <div className='w-[30%] h-full bg-black flex items-center justify-end'>
             </div>
             <div className='relative w-[80%] h-full flex'>
-              <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
+              <Image src="/assets/staticimage/contactUs.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
               <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
               </div>
             </div>
@@ -172,7 +173,7 @@ const Contact = () => {
             </div>
           </div>
           <div className='relative w-full h-72'>
-            <img src="/assets/staticimage/contactUs.jpg" alt="" className='relative w-full h-full' />
+            <Image src="/assets/staticimage/contactUs.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
           </div>
         </div>
         {/* herosection end */}

@@ -29,7 +29,7 @@ const About = () => {
       content: (
         <p className="mb-5 md:text-base text-para">
           At <span className='font-semibold'>BizareXpedition™</span>, we believe that travel should be an experience that transcends
-          ordinary expectations. We don't just plan trips; we craft unforgettable journeys that
+          ordinary expectations. We do not just plan trips; we craft unforgettable journeys that
           embody the highest standards of service, comfort, and luxury. Our mission is simple: Quality
           first, always.
         </p>
@@ -68,7 +68,7 @@ const About = () => {
         <p className="mb-5 md:text-base text-para">
           Our commitment is to deliver more than just a trip; we deliver an experience that is second
           to none. We offer the best prices in terms of value, ensuring that you get the most out of
-          your travel investment. With us, you don't have to choose between affordable pricing and
+          your travel investment. With us, you do not have to choose between affordable pricing and
           exceptional quality-we provide both.
         </p>
       ),
@@ -95,9 +95,9 @@ const About = () => {
         <ul className="list-disc ml-8 md:text-base text-para">
           <li><span className="font-semibold">Excellence : </span>We strive to exceed expectations at every turn.</li>
           <li><span className="font-semibold">Integrity : </span>We operate with transparency and honesty in everything we do.</li>
-          <li><span className="font-semibold">Customer-Centric : </span>Our customers' needs are at the heart of our service.</li>
+          <li><span className="font-semibold">Customer-Centric : </span>Our customers needs are at the heart of our service.</li>
           <li><span className="font-semibold">Value-Driven : </span>We provide the best experiences at the most competitive prices.</li>
-          <li><span className="font-semibold">Passion for Travel : </span>We are passionate about creating remarkable experiences that enrich our clients' lives.</li>
+          <li><span className="font-semibold">Passion for Travel : </span>We are passionate about creating remarkable experiences that enrich our clients lives.</li>
         </ul>
       ),
     },
@@ -114,7 +114,7 @@ const About = () => {
           </p>
           <p className="mb-5 md:text-base text-para">
             From the very beginning, the team at BizareXpedition™ set out to build a brand that would
-            put <span className='font-semibold'>quality first</span>. Whether it's a private charter in the spiritual trip or a cozy stay at a
+            put <span className='font-semibold'>quality first</span>. Whether it is a private charter in the spiritual trip or a cozy stay at a
             boutique hotel in the heart of a vibrant city, our goal has always been to provide an
             unforgettable experience for every traveller.
           </p>
@@ -187,7 +187,7 @@ const About = () => {
             <div className='w-[30%] h-full bg-black flex items-center justify-end'>
             </div>
             <div className='relative w-[80%] h-full flex'>
-              <img src="/assets/staticimage/aboutUs.jpg" alt="" className='relative w-full h-full' />
+              <Image src="/assets/staticimage/aboutUs.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
               <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
               </div>
             </div>
@@ -230,7 +230,7 @@ const About = () => {
             </div>
           </div>
           <div className='relative w-full h-72'>
-            <img src="/assets/staticimage/aboutUs.jpg" alt="" className='relative w-full h-full' />
+            <Image src="/assets/staticimage/aboutUs.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
           </div>
         </div>
         {/* herosection end */}
