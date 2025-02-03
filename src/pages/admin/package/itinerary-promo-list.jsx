@@ -85,7 +85,7 @@ const YourComponent = () => {
               <div className="flex flex-col pb-3">
                 <div className="flex items-center gap-5 text-primary pb-3">
                   <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                  <p className="text-[24px] text-black">Package Promo List1</p>
+                  <p className="text-[24px] text-black">Package Promo List</p>
                   <FontAwesomeIcon
                     icon={faArrowRightLong}
                     className=" text-teal-700 text-xl"
@@ -96,7 +96,7 @@ const YourComponent = () => {
                   <select className="ml-2 h-7 w-32 rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                     onChange={(e) => setSelectType(e.target.value)}
                   >
-                    <option value="">Select</option>v
+                    <option value="">All</option>
                     <option value="category">Category wise</option>
                     <option value="state">State wise</option>
                     <option value="country">Country wise</option>

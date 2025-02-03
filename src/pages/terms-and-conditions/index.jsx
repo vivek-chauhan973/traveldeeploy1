@@ -6,10 +6,12 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
-const fetchTermsAndConditionPage = async () => {
-  const res = await fetch(`/api/static-page/static-page-type?name=terms-and-conditions`);
-  return await res.json();
-};
+
+// const fetchTermsAndConditionPage = async () => {
+//   const res = await fetch(`/api/static-page/static-page-type?name=terms-and-conditions`);
+//   return await res.json();
+// };
+
 const TermsAndCondition = () => {
 
   const [activeIndex, setActiveIndex] = useState("Introduction");
@@ -23,7 +25,7 @@ const TermsAndCondition = () => {
           <p className="mb-5 mt-3 md:text-base text-para">
             Welcome to <span className='font-semibold'>BizareXpedition Services Pvt. Ltd.!</span>  We are committed to delivering
             exceptional travel experiences. Before booking any tour, holiday package, or service with
-            us—whether through our website or directly at our offices—please carefully read and accept these
+            us-whether through our website or directly at our offices-please carefully read and accept these
             <span className='font-semibold'> Terms and Conditions</span>.
           </p>
           <p className="mb-5 mt-3 md:text-base text-para">
@@ -103,19 +105,18 @@ const TermsAndCondition = () => {
             <li>Cancellation requests must be submitted in writing via email or through our customer
               support.</li>
             <li>Refunds will be processed based on the cancellation date and applicable charges : </li>
-              <ul className="list-disc ml-8 md:text-base text-para">
-                <li>More than 46 days before departure : <span className="font-semibold">10% deduction.</span></li>
-                <li>31-45 days before departure : <span className="font-semibold">25% deduction.</span></li>
-                <li>15-30 days before departure : <span className="font-semibold">50% deduction.</span></li>
-                <li>Less than 14 days or no-show : <span className="font-semibold">No refund.</span></li>
-              </ul>  
+            <ul className="list-disc ml-8 md:text-base text-para">
+              <li>More than 46 days before departure : <span className="font-semibold">10% deduction.</span></li>
+              <li>31-45 days before departure : <span className="font-semibold">25% deduction.</span></li>
+              <li>15-30 days before departure : <span className="font-semibold">50% deduction.</span></li>
+              <li>Less than 14 days or no-show : <span className="font-semibold">No refund.</span></li>
+            </ul>
           </ul>
           <li className="font-semibold list-decimal"> Force Majeure : </li>
           <ul className="ml-8 md:text-base text-para">
             <li>In case of unforeseen events (e.g., weather, government restrictions), certain activities
               may be cancelled or rescheduled. No refunds will be issued for such cancellations;
               however, alternative arrangements will be made where possible.</li>
-            {/* <li>Any incorrect or incomplete details may result in cancellation or additional charges.</li> */}
           </ul>
           <li className="font-semibold list-decimal">Processing Refunds : </li>
           <ul className="ml-8 md:text-base text-para mb-5">
@@ -157,17 +158,17 @@ const TermsAndCondition = () => {
           <li className="font-semibold list-decimal">Itinerary Changes :</li>
           <ul className="ml-8 md:text-base text-para">
             <li>The Company reserves the right to modify itineraries due to operational reasons,
-            weather conditions, or other unforeseen circumstances.</li>
+              weather conditions, or other unforeseen circumstances.</li>
           </ul>
           <li className="font-semibold list-decimal">Missed Services : </li>
           <ul className="ml-8 md:text-base text-para">
             <li>No refunds will be provided for missed services due to guest delays or failure to
-            adhere to the schedule.</li>
+              adhere to the schedule.</li>
           </ul>
           <li className="font-semibold list-decimal">Group Tours : </li>
           <ul className="ml-8 md:text-base text-para mb-5">
             <li>Guests are expected to adhere to the itinerary and cooperate with the tour manager
-            and other participants.</li>
+              and other participants.</li>
           </ul>
         </ul>
       ),
@@ -201,7 +202,7 @@ const TermsAndCondition = () => {
           <li className="font-semibold list-decimal">Data Collection :</li>
           <ul className="ml-8 md:text-base text-para">
             <li>Personal information, including contact details and identification, will be collected for
-            booking and operational purposes.</li>
+              booking and operational purposes.</li>
           </ul>
           <li className="font-semibold list-decimal">Data Usage : </li>
           <ul className="ml-8 md:text-base text-para">
@@ -222,12 +223,12 @@ const TermsAndCondition = () => {
           <li className="font-semibold list-decimal">Jurisdiction  :</li>
           <ul className="ml-8 md:text-base text-para">
             <li>All disputes will be subject to the jurisdiction of the courts in <span className="font-semibold">Haridwar,
-            Uttarakhand.</span></li>
+              Uttarakhand.</span></li>
           </ul>
           <li className="font-semibold list-decimal">Complaint Handling : </li>
           <ul className="ml-8 md:text-base text-para mb-5">
             <li>Guests are encouraged to report any grievances during the trip to our customer
-            support team for immediate resolution.</li>
+              support team for immediate resolution.</li>
           </ul>
         </ul>
       ),
