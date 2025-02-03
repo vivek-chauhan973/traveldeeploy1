@@ -66,7 +66,7 @@ export default function PromoManage() {
                     const res = await fetch('/api/location?type=country', { method: 'GET' });
                     const data = await res.json();
                     setStatePackages(data?.result);
-                    console.log("all countries is here",data);
+                    console.log("all countries is here", data);
                 } catch (err) {
                     console.log(err);
                     return [];
@@ -135,7 +135,7 @@ export default function PromoManage() {
         setAlt(promoTxt?.alt || "");
         setFile(promoTxt?.image || "");
         setPosterAlt(promoTxt?.posterAlt || "")
-        setPosterTitle(promoTxt?.posterTitle||"")
+        setPosterTitle(promoTxt?.posterTitle || "")
         setFile1(promoTxt?.posterPath || "");
         setTableData(promoTxt?.tableData || []);
         setSeoData(promoTxt?.seoField || {});
@@ -148,7 +148,7 @@ export default function PromoManage() {
     const handleSelectChange = async (e) => {
         const selectedData = (e.target.value)?.split(",");
         setSelectedLocation(selectedData?.[1]);
-        setSelectedItem(selectedData?.[0])  
+        setSelectedItem(selectedData?.[0])
     };
 
     const handleFaqChange = (faqs) => {
@@ -157,7 +157,7 @@ export default function PromoManage() {
     const handleEditorChange = (content) => {
         setEditorContent(content);
     };
-    console.log("selected location --- > ",selectedLocation)
+    console.log("selected location --- > ", selectedLocation)
     const handleSubmit = async (e) => {
         // if (selectedLocation.length === 0) {
         //     return alert("select state or category or state");
@@ -198,7 +198,7 @@ export default function PromoManage() {
         }
     };
     // poster logic is here
-    const handlePosterUpload=async ()=>{
+    const handlePosterUpload = async () => {
         const formData1 = new FormData();
         formData1.append('file', posterImage1);
         formData1.append('posterTitle', posterTitle);
@@ -218,7 +218,7 @@ export default function PromoManage() {
             setFile1(null);
             setPosterTitle("");
             setPosterAlt("");
-           
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -230,7 +230,7 @@ export default function PromoManage() {
                 <div>
                     <div className="flex items-center md:gap-5 gap-3 text-primary pb-5">
                         <FontAwesomeIcon icon={faCube} className="text-2xl" />
-                        <p className="md:text-[28px] text-xl text-black">Promo Management</p>
+                        <p className="md:text-[28px] text-xl text-black">Car Promo Management</p>
                         <FontAwesomeIcon
                             icon={faArrowRightLong}
                             className=" text-teal-700 text-xl"
@@ -239,7 +239,7 @@ export default function PromoManage() {
                     <div>
                         <div className="flex flex-col mx-1 ">
                             <div className="flex flex-col sm:flex-row md:items-center gap-2 mb-4 w-full">
-                                <label htmlFor="cityBages" 
+                                <label htmlFor="cityBages"
                                     className="font-semibold text-para md:text-base">
                                     Select :
                                 </label>
@@ -284,7 +284,7 @@ export default function PromoManage() {
                                                 Select city
                                             </option>
                                         )}
-                                        
+
                                         {/* Conditionally render options based on selected category/state/country */}
                                         {selectCatagoryOrState === "country" &&
                                             statePackages?.map((state, i) => (
@@ -320,8 +320,8 @@ export default function PromoManage() {
                                                     {state.category}
                                                 </option>
                                             ))}
-                                            
-                                            {selectCatagoryOrState === "city" &&
+
+                                        {selectCatagoryOrState === "city" &&
                                             statePackages?.map((state, i) => (
                                                 <option
                                                     key={i}
@@ -332,15 +332,13 @@ export default function PromoManage() {
                                                     {state.name}
                                                 </option>
                                             ))}
-                                            
-                                            
                                     </select>
                                 )}
                                 <button
-                                    className="mt-1 md:ml-2  bg-green-300 py-1 px-5 rounded-md hover:bg-green-500"
+                                    className="mt-1 md:ml-2  bg-navyblack py-1 px-4 rounded-md text-white text-sm"
                                     onClick={() => setSeofieldpopup(true)}
                                 >
-                                    Add Seo field
+                                    Add Seo Field
                                 </button>
                             </div>
                             <div></div>
@@ -358,84 +356,97 @@ export default function PromoManage() {
                                 <div>
                                     <p className="text-[15px] font-semibold">Package Image Upload</p>
                                 </div>
-                                <div className=" flex">
-                                <div className="p-7 flex-1 border border-slate-500/45 rounded">
-                                    <div className="w-2/3">
-                                        {file && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file} alt="Preview" />}
+                                <div className="lg:flex gap-5">
+                                    <div className="p-7 flex-1 border border-slate-500/45 rounded">
+                                        <div className="w-2/3">
+                                            {file && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file} alt="Preview" />}
 
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="file"
-                                            onChange={handleChange}
-                                            // value={file}
-                                            ref={ref}
-                                            className="file:mr-4 file:py-2 file:px-4
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="file"
+                                                onChange={handleChange}
+                                                // value={file}
+                                                ref={ref}
+                                                className="file:mr-4 file:py-2 file:px-4
                                                 file:rounded-full file:border-0
                                                 file:text-sm file:font-semibold
                                                 file:bg-black/20 file:text-black/50
                                                 hover:file:bg-black/75 hover:file:text-white cursor-pointer"
-                                        />
+                                            />
+                                        </div>
+                                        <div className="my-3">
+                                            <p>Title</p>
+                                            <input
+                                                className="border px-2 rounded-sm"
+                                                type="text"
+                                                value={title}
+                                                onChange={(e) => setTitle(e.target.value)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <p>Alt</p>
+                                            <input
+                                                className="border px-2 rounded-sm"
+                                                type="text"
+                                                value={alt}
+                                                onChange={(e) => setAlt(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="flex mt-8">
+                                            <span className="md:text-sm text-xs">Upload Image (1300 X 450px)</span>
+                                            <sup className="text-red-600 text-para">*</sup>
+                                        </div>
                                     </div>
-                                    <div className="my-3">
-                                        <p>Title</p>
-                                        <input
-                                            className="border px-2 rounded-sm"
-                                            type="text"
-                                            value={title}
-                                            onChange={(e) => setTitle(e.target.value)}
-                                        />
-                                    </div>
-                                    <div>
-                                        <p>Alt</p>
-                                        <input
-                                            className="border px-2 rounded-sm"
-                                            type="text"
-                                            value={alt}
-                                            onChange={(e) => setAlt(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="p-7 mx-5 flex-1 border border-slate-500/45 rounded">
-                                    <div className="w-2/3">
-                                        {file1 && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file1} alt="Preview" />}
-
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="file"
-                                            onChange={handleChange1}
-                                            // value={file}
-                                            ref={ref}
-                                            className="file:mr-4 file:py-2 file:px-4
+                                    <div className="p-7 flex-1 border border-slate-500/45 rounded lg:mt-0 mt-5">
+                                        <div className="w-2/3">
+                                            {file1 && <Image className="w-28 h-28 shadow-md mb-2" width="123" height="150" src={file1} alt="Preview" />}
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="file"
+                                                onChange={handleChange1}
+                                                // value={file}
+                                                ref={ref}
+                                                className="file:mr-4 file:py-2 file:px-4
                                                 file:rounded-full file:border-0
                                                 file:text-sm file:font-semibold
                                                 file:bg-black/20 file:text-black/50
                                                 hover:file:bg-black/75 hover:file:text-white cursor-pointer"
-                                        />
+                                            />
+                                        </div>
+                                        <div className="my-3">
+                                            <p>Title</p>
+                                            <input
+                                                className="border px-2 rounded-sm"
+                                                type="text"
+                                                value={posterTitle}
+                                                onChange={(e) => setPosterTitle(e.target.value)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <p>Alt</p>
+                                            <input
+                                                className="border px-2 rounded-sm"
+                                                type="text"
+                                                value={posterAlt}
+                                                onChange={(e) => setPosterAlt(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="my-3">
+                                            <button
+                                                onClick={handlePosterUpload}
+                                                className=" bg-navyblack text-white px-2 py-1 rounded "
+                                            >
+                                                Upload
+                                            </button>
+                                        </div>
+                                        <div className="flex">
+                                            <span className="md:text-sm text-xs">Upload Image (600 X 390px)</span>
+                                            <sup className="text-red-600 text-para">*</sup>
+                                        </div>
                                     </div>
-                                    <div className="my-3">
-                                        <p>Title</p>
-                                        <input
-                                            className="border px-2 rounded-sm"
-                                            type="text"
-                                            value={posterTitle}
-                                            onChange={(e) => setPosterTitle(e.target.value)}
-                                        />
-                                    </div>
-                                    <div>
-                                        <p>Alt</p>
-                                        <input
-                                            className="border px-2 rounded-sm"
-                                            type="text"
-                                            value={posterAlt}
-                                            onChange={(e) => setPosterAlt(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="my-3"><button onClick={handlePosterUpload} className=" bg-orange-500 px-2 mx-3 py-1 rounded-lg">upload</button></div>
                                 </div>
-                                </div>
-                                
                             </div>
                             <div className="bg-white rounded p-5 mt-5">
                                 <div>

@@ -505,8 +505,8 @@ export default function PromoManage() {
                       </button>
                     </div>
                     <div className="flex">
-                    <span className="md:text-sm text-xs">Upload Image (600 X 390px)</span>
-                    <sup className="text-red-600 text-para">*</sup>
+                      <span className="md:text-sm text-xs">Upload Image (600 X 390px)</span>
+                      <sup className="text-red-600 text-para">*</sup>
                     </div>
                   </div>
                 </div>
