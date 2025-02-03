@@ -1,5 +1,5 @@
 import Image from "next/image";
-import '../app/globals.css'
+import "../app/globals.css";
 import HeroSection from "@/components/Home/HeroSection";
 import HorizontalCard from "@/components/Home/Cards/HorizontalCard";
 import Card4 from "@/components/Home/Cards/Card4";
@@ -18,25 +18,43 @@ import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 import TravelGuideCarousel from "@/components/TravelGuideCarousel";
 import BlogsCarousel from "@/components/BlogsCarousel";
 import Cookies from "js-cookie";
-const fetchAllSingleSction = async () => {
-  const res = await fetch("/api/home/homefooter");
-  return await res.json();
-}
-const fetchAllMultiSction = async () => {
-  const res = await fetch("/api/homefooter");
-  return await res.json();
-}
-const fetchState = async () => {
-  const response = await fetch("/api/public/states");
-  return await response.json();
-};
+export async function getServerSideProps() {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/home/homefooter`
+  );
+  const data1 = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/homefooter`
+  );
+  const multipost = await data1?.json();
 
-export default function Home() {
+  const post = await data?.json();
+  return {
+    props: {
+      post: post?.data,
+      multipost: multipost?.data,
+    },
+  };
+}
+// const fetchAllSingleSction = async () => {
+//   const res = await fetch("/api/home/homefooter");
+//   return await res.json();
+// }
+// const fetchAllMultiSction = async () => {
+//   const res = await fetch("/api/homefooter");
+//   return await res.json();
+// }
+// const fetchState = async () => {
+//   const response = await fetch("/api/public/states");
+//   return await response.json();
+// };
+
+export default function Home({ post, multipost }) {
+  console.log("post----> is here ", multipost);
   const [states, setStates] = useState([]);
-  const [homePackages, SetHomePackages] = useState([]);
-  const [homeSinglePackages, setSingleHomePackages] = useState([]);
+  const [homePackages, SetHomePackages] = useState(multipost || []);
+  const [homeSinglePackages, setSingleHomePackages] = useState(post || []);
   const [packages, setPackages] = useState([]);
-  const [cityPackages, setCityPackages] = useState([])
+  const [cityPackages, setCityPackages] = useState([]);
   const [category1, setCategory1] = useState([]);
   const [category2, setCategory2] = useState([]);
   const [category3, setCategory3] = useState([]);
@@ -47,50 +65,60 @@ export default function Home() {
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
+  // useEffect(() => {
+  //   fetchAllMultiSction().then(res => {
+  //     SetHomePackages(res?.data)
+  //     // console.log("all section is here----> ", res?.data)
+  //   })
+  //   fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
+  // }, []);
   useEffect(() => {
-    fetchAllMultiSction().then(res => {
-      SetHomePackages(res?.data)
-      // console.log("all section is here----> ", res?.data)
-    })
-    fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
-  }, []);
-
-  // const token=Cookies.get('token');
-
-  // console.log(" cookies of token is here -----> ",token)
-
-  useEffect(() => {
-    const data = homePackages?.filter(item => item?.category === "category1");
+    const data = homePackages?.filter((item) => item?.category === "category1");
     setStates(data?.[0]?.options || []);
-    const data1 = homePackages?.filter(item => item?.category === "category5");
+    const data1 = homePackages?.filter(
+      (item) => item?.category === "category5"
+    );
     setPackages(data1?.[0]?.options || []);
-    const data2 = homePackages?.filter(item => item?.category === "category2");
-    const data4 = homePackages?.filter(item => item?.category === "category4");
-    const data5 = homePackages?.filter(item => item?.category === "category6");
-    const data6 = homePackages?.filter(item => item?.category === "category8");
-    const data7 = homePackages?.filter(item => item?.category === "category9");
+    const data2 = homePackages?.filter(
+      (item) => item?.category === "category2"
+    );
+    const data4 = homePackages?.filter(
+      (item) => item?.category === "category4"
+    );
+    const data5 = homePackages?.filter(
+      (item) => item?.category === "category6"
+    );
+    const data6 = homePackages?.filter(
+      (item) => item?.category === "category8"
+    );
+    const data7 = homePackages?.filter(
+      (item) => item?.category === "category9"
+    );
 
-    setCarPackages(data4?.[0]?.options || [])
-    setCityPackages(data2?.[0]?.options || [])
-    setCarCityPromo(data5?.[0]?.options || [])
-    setTravelGuidePackage(data6?.[0]?.options || [])
-    setBlogsPackages(data7?.[0]?.options || [])
-
+    setCarPackages(data4?.[0]?.options || []);
+    setCityPackages(data2?.[0]?.options || []);
+    setCarCityPromo(data5?.[0]?.options || []);
+    setTravelGuidePackage(data6?.[0]?.options || []);
+    setBlogsPackages(data7?.[0]?.options || []);
   }, [homePackages]);
-  // console.log("travel guide section is here----> ", travelGuidePackage)
-  // console.log("blogs section is here----> ", blogsPackages)
   useEffect(() => {
-    const data = homeSinglePackages?.filter(item => item?.category === "category1");
+    const data = homeSinglePackages?.filter(
+      (item) => item?.category === "category1"
+    );
     setCategory1(data);
-    const data1 = homeSinglePackages?.filter(item => item?.category === "category5");
+    const data1 = homeSinglePackages?.filter(
+      (item) => item?.category === "category5"
+    );
     setCategory2(data1);
-    const data2 = homeSinglePackages?.filter(item => item?.category === "category2");
-    setCategory3(data2)
+    const data2 = homeSinglePackages?.filter(
+      (item) => item?.category === "category2"
+    );
+    setCategory3(data2);
   }, [homeSinglePackages]);
 
   return (
     <>
-      <DesktopHeader />
+      <DesktopHeader multipost={multipost} />
       <HeroSection />
       {/* First image and text */}
       <div className="container-wrapper  md:py-11 py-5">
@@ -99,23 +127,41 @@ export default function Home() {
             <p className=" text-amber-600   font-semibold mb-0.5">
               {category1?.[0]?.subtitle}
             </p>
-            <h1 className=" md:text-[25px] text-xl  font-medium ">{category1?.[0]?.title}</h1>
+            <h1 className=" md:text-[25px] text-xl  font-medium ">
+              {category1?.[0]?.title}
+            </h1>
             <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
               {category1?.[0]?.description}
             </h1>
-            <Link href={`/speciality-tours/` + category1?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+            <Link
+              href={
+                `/speciality-tours/` +
+                category1?.[0]?.options?.[0]?.selectedItem +
+                "-tour-packages"
+              }
+            >
               <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                 Know more
               </button>
             </Link>
           </div>
           <div className=" md:ml-28">
-            <Link href={`/speciality-tours/` + category1?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+            <Link
+              href={
+                `/speciality-tours/` +
+                category1?.[0]?.options?.[0]?.selectedItem +
+                "-tour-packages"
+              }
+            >
               <Image
                 width={400}
                 height={200}
                 className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
-                src={"public/" + category1?.[0]?.options?.[0]?.posterPath ? category1?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                src={
+                  "public/" + category1?.[0]?.options?.[0]?.posterPath
+                    ? category1?.[0]?.options?.[0]?.posterPath
+                    : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                }
                 alt=""
               />
             </Link>
@@ -133,23 +179,41 @@ export default function Home() {
             <p className=" text-amber-600 font-semibold mb-0.5">
               {category3?.[0]?.subtitle}
             </p>
-            <h1 className=" md:text-[25px] text-xl  font-medium">{category3?.[0]?.title}</h1>
+            <h1 className=" md:text-[25px] text-xl  font-medium">
+              {category3?.[0]?.title}
+            </h1>
             <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
               {category3?.[0]?.description}
             </h1>
-            <Link href={`/speciality-tours/` + category3?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+            <Link
+              href={
+                `/speciality-tours/` +
+                category3?.[0]?.options?.[0]?.selectedItem +
+                "-tour-packages"
+              }
+            >
               <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                 Know more
               </button>
             </Link>
           </div>
           <div className="md:ml-28 ">
-            <Link href={`/speciality-tours/` + category3?.[0]?.options?.[0]?.selectedItem + '-tour-packages'}>
+            <Link
+              href={
+                `/speciality-tours/` +
+                category3?.[0]?.options?.[0]?.selectedItem +
+                "-tour-packages"
+              }
+            >
               <Image
                 className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
                 width={400}
                 height={200}
-                src={category3?.[0]?.options?.[0]?.posterPath ? category3?.[0]?.options?.[0]?.posterPath : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                src={
+                  category3?.[0]?.options?.[0]?.posterPath
+                    ? category3?.[0]?.options?.[0]?.posterPath
+                    : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                }
                 alt=""
               />
             </Link>
@@ -171,7 +235,9 @@ export default function Home() {
             </Link>
           </div>
           <div className="">
-            <p className=" text-amber-600  font-semibold mb-0.5">{category2?.[0]?.subtitle}</p>
+            <p className=" text-amber-600  font-semibold mb-0.5">
+              {category2?.[0]?.subtitle}
+            </p>
             <h1 className="md:text-[25px] text-xl font-medium">
               {category2?.[0]?.title}
             </h1>
@@ -194,17 +260,16 @@ export default function Home() {
       </div>
       {/* horizontal card */}
       <div className="">
-        {cityPackages?.length > 0 &&
+        {cityPackages?.length > 0 && (
           <div className="container-wrapper text-center pb-2">
-            <p className='md:text-[25px] text-xl font-medium mb-1'>
+            <p className="md:text-[25px] text-xl font-medium mb-1">
               Your Next Remarkable Adventure Awaits
             </p>
           </div>
-        }
+        )}
         <div className="container-wrapper justify-center  flex flex-wrap">
           {cityPackages?.map((item, i) => (
             <HorizontalCard key={i} item={item} />
-
           ))}
         </div>
       </div>
@@ -223,13 +288,9 @@ export default function Home() {
         <State />
       </div>
       {/* Our Promise */}
-      <div>
-        {/* <Promises /> */}
-      </div>
+      <div>{/* <Promises /> */}</div>
       {/* Country card  */}
-      <div>
-        {/* <Card2 /> */}
-      </div>
+      <div>{/* <Card2 /> */}</div>
       <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
         <div className=" md:mt-4 mt-4">
           <CarArrowSection carCityPromos={carCityPromos} />
@@ -238,10 +299,10 @@ export default function Home() {
       <div>
         <CarPackageCarousel carPackageData={carPackages} />
       </div>
-      <div >
+      <div>
         <TravelGuideCarousel carPackageData={travelGuidePackage} />
       </div>
-      <div >
+      <div>
         <BlogsCarousel carPackageData={blogsPackages} />
       </div>
       <div>
@@ -251,4 +312,3 @@ export default function Home() {
     </>
   );
 }
-
