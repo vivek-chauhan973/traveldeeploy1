@@ -10,6 +10,7 @@ import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Ske
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
+import Footer from '@/components/Footer';
 
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};
@@ -134,6 +135,7 @@ useEffect(()=>{
         {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
         </div> */}
+        <Footer/>
       </div>
     </AppProvider>
   );

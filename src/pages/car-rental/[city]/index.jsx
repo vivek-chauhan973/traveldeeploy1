@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import Modal from '@mui/material/Modal';
 import { CancelIcon } from "@/components/icons/index"
 import { AppProvider, useAppContext } from "@/components/admin/context/Package/AddGuest";
+import Footer from "@/components/Footer";
 
 
 const fetchLocationAccordingToCity=async (city)=>{
@@ -152,6 +153,7 @@ useEffect(() => {
                 {/* <div className="border-t border">
                     <BottomLink/>
                 </div> */}
+                <Footer/>
             </div>
             </AppProvider>
         </>

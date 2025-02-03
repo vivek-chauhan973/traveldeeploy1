@@ -11,6 +11,7 @@ import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import mongoose from 'mongoose';
 import { useRouter } from 'next/router';
+import Footer from '@/components/Footer';
 const fetchPromoManagementData = async () => {
   const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
   const response = await fetch(`/api/public/package-state/spacialitypromo?id=${objectId}`);
@@ -98,6 +99,7 @@ useEffect(()=>{
         {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
         </div> */}
+        <Footer/>
       </div>
     </AppProvider>
   );

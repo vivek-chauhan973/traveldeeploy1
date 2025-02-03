@@ -10,6 +10,7 @@ import { PromoBanner} from '@/components/Skeleton/Package/promo';
 import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
+import Footer from '@/components/Footer';
 
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};
@@ -85,7 +86,7 @@ const SpacilityTour=()=> {
 
   useEffect(() => {
     if (selectedLocation?._id) {
-      fetchPromoManagementData(selectedLocation?._id).then(res => setPromoData(res?.data || {}));
+      fetchPromoManagementData(selectedLocation?._id).then(res => {setPromoData(res?.data || {})});
     } else {
       setPromoData({});
     }
@@ -130,6 +131,7 @@ const SpacilityTour=()=> {
         {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
         </div> */}
+        <Footer/>
       </div>
     </AppProvider>
   );
