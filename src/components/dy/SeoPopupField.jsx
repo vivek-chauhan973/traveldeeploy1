@@ -1,66 +1,93 @@
 import react, { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const SeoPopupField=({setSeofieldpopup,selectedItem,setSeoData,seoData})=>{
-const [seoTags,setSeoTags]=useState("");
-const [seoTitle,setSeoTitle]=useState("")
-const [seoDescription,setSeoDescription]=useState("");
-const [seoKeywords,setSeoKeywords]=useState('');
-const ref=useRef(null);
-const data={seoTags,seoTitle,seoDescription,seoKeywords};
-const handleSaveSeo=()=>{
-    if([seoTags,seoTitle,seoDescription,seoKeywords].some(item=>item.length===0)){
-        return alert("please fill all the field first");
-    }
-    if(selectedItem.length===0){
-        return alert("please select first categories")
-    }
-    setSeoData(data);
-  
-    setSeofieldpopup(false);
-}
-useEffect(()=>{
-    setSeoTags(seoData?.seoTags||"");
-    setSeoTitle(seoData?.seoTitle||"");
-    setSeoDescription(seoData?.seoDescription||"");
-    setSeoKeywords(seoData?.seoKeywords||"")
+const SeoPopupField = ({ setSeofieldpopup, selectedItem, setSeoData, seoData }) => {
+    const [seoTags, setSeoTags] = useState("");
+    const [seoTitle, setSeoTitle] = useState("")
+    const [seoDescription, setSeoDescription] = useState("");
+    const [seoKeywords, setSeoKeywords] = useState('');
+    const ref = useRef(null);
+    const data = { seoTags, seoTitle, seoDescription, seoKeywords };
+    const handleSaveSeo = () => {
+        if ([seoTags, seoTitle, seoDescription, seoKeywords].some(item => item.length === 0)) {
+            return alert("please fill all the field first");
+        }
+        if (selectedItem.length === 0) {
+            return alert("please select first categories")
+        }
+        setSeoData(data);
 
-},[seoData])
+        setSeofieldpopup(false);
+    }
+    useEffect(() => {
+        setSeoTags(seoData?.seoTags || "");
+        setSeoTitle(seoData?.seoTitle || "");
+        setSeoDescription(seoData?.seoDescription || "");
+        setSeoKeywords(seoData?.seoKeywords || "")
+    }, [seoData])
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
-          document.body.style.overflow = "auto";
+            document.body.style.overflow = "auto";
         };
-      }, []);
+    }, []);
+
     return (
-        <div className="absolute inset-0 flex justify-center items-center w-full top-7">
-            
-            <div className="bg-slate-100 py-2 px-5 flex flex-col shadow-lg rounded-md w-1/2 xl:w-1/3">
-                <div className="flex justify-between">
-                    <div><h1>{selectedItem}</h1></div>
-                    <h2  onClick={()=>setSeofieldpopup(false)} className=" cursor-pointer">X</h2>
+
+        <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
+            <div className="absolute inset-0 bg-black opacity-50"></div>
+            <div className="bg-white rounded-xl shadow-lg z-50 md:w-96 w-full h-auto max-h-[500px] px-5 py-3">
+                <div className=" flex justify-between items-center">
+                    <h4 className="font-semibold md:text-xl text-lg capitalize">{selectedItem || "Add Seo Field"}</h4>
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="h-4 w-4 hover:bg-gray-100 rounded-full cursor-pointer p-1"
+                        onClick={() => setSeofieldpopup(false)}
+                    />
                 </div>
                 <div>
-                    <div className="text-md mt-2">Tags( comma separated)</div>
-                    <div><input type="text" onChange={(e)=>setSeoTags(e.target.value)} value={seoTags} className=" focus:border-green-400 w-full mt-1 py-2 px-1 outline-none border rounded-md"/></div>
+                    <p className="md:text-para text-sm mt-3">Tags( Comma Separated)</p>
+                    <input
+                        type="text"
+                        onChange={(e) => setSeoTags(e.target.value)}
+                        value={seoTags}
+                        className=" focus:border-primary w-full py-2 px-1 outline-none border rounded-md"
+                    />
                 </div>
                 <div>
-                <div className="text-md mt-2">Seo Title</div>
-                <div><input type="text" onChange={(e)=>setSeoTitle(e.target.value)} value={seoTitle} className=" focus:border-green-400 w-full mt-1 py-2 px-1 outline-none border rounded-md"/></div>
+                    <p className="md:text-para text-sm mt-3">Seo Title</p>
+                    <input type="text"
+                        onChange={(e) => setSeoTitle(e.target.value)}
+                        value={seoTitle}
+                        className=" focus:border-primary w-full py-2 px-1 outline-none border rounded-md"
+                    />
                 </div>
                 <div>
-                <div className="text-md mt-2">Seo Description</div>
-                <textarea onChange={(e)=>setSeoDescription(e.target.value)} value={seoDescription} name="" id="" className=" focus:border-green-400 w-full mt-1 py-2 px-1 outline-none border rounded-md"></textarea>
+                    <p className="md:text-para text-sm mt-3">Seo Description</p>
+                    <textarea
+                        onChange={(e) => setSeoDescription(e.target.value)}
+                        value={seoDescription} name="" id=""
+                        className=" focus:border-primary w-full py-2 px-1 outline-none border rounded-md">
+
+                    </textarea>
                 </div>
                 <div>
-                <div className="text-md mt-2"> Seo Keywords</div>
-                <div><input type="text" onChange={(e)=>setSeoKeywords(e.target.value)} value={seoKeywords} className=" focus:border-green-400 w-full mt-1 py-2 px-1 outline-none border rounded-md" /></div>
+                    <p className="md:text-para text-sm mt-3"> Seo Keywords</p>
+                    <input
+                        type="text"
+                        onChange={(e) => setSeoKeywords(e.target.value)}
+                        value={seoKeywords}
+                        className=" focus:border-primary w-full py-2 px-1 outline-none border rounded-md"
+                    />
                 </div>
-                <button className="bg-green-300 mt-2 hover:bg-green-500 py-2 px-1 rounded-md text-md" onClick={handleSaveSeo}>save</button>
+                <button className="bg-navyblack text-white mt-5 mb-2 w-full py-2 px-1 rounded-md text-sm md:text-para"
+                    onClick={handleSaveSeo}>
+                    Save
+                </button>
             </div>
-            
         </div>
-        
     )
 }
 

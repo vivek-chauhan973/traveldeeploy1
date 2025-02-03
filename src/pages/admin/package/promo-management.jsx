@@ -154,11 +154,14 @@ export default function PromoManage() {
   useEffect(() => {
     setFile(image1);
   }, [image1]);
+
   const handleSelectChange = async (e) => {
     if (e.target.value !== "spaciality") {
       const selectedData = e.target.value?.split(",");
       setSelectedLocation(selectedData?.[1]);
       setSelectedItem(selectedData?.[0]);
+      console.log("selectedData", selectedData);
+
     } else {
       const objectId = new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
       setSelectedLocation(objectId);
@@ -246,6 +249,9 @@ export default function PromoManage() {
     }
   };
 
+  console.log("selectedLocation", selectedLocation);
+
+
   return (
     <AppProvider>
       <Layout>
@@ -286,7 +292,7 @@ export default function PromoManage() {
                 {catoryorstate && (
                   <select
                     id="packageCategory"
-                    className="mt-1 md:ml-2  h-7 md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
+                    className="mt-1 md:ml-2 capitalize h-7 md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
                     onChange={(e) => {
                       handleSelectChange(e);
                     }}
@@ -375,10 +381,10 @@ export default function PromoManage() {
                   </select>
                 )}
                 <button
-                  className="mt-1 md:ml-2  bg-green-300 py-1 px-5 rounded-md hover:bg-green-500"
+                  className="mt-1 md:ml-2  bg-navyblack py-1 px-4 rounded-md text-white text-sm"
                   onClick={() => setSeofieldpopup(true)}
                 >
-                  Add Seo field
+                  Add Seo Field
                 </button>
               </div>
               <div></div>
@@ -398,7 +404,7 @@ export default function PromoManage() {
                     Package Image Upload
                   </p>
                 </div>
-                <div className=" flex">
+                <div className="lg:flex gap-5">
                   <div className="p-7 flex-1 border border-slate-500/45 rounded">
                     <div className="w-2/3">
                       {file && (
@@ -443,11 +449,11 @@ export default function PromoManage() {
                       />
                     </div>
                     <div className="flex mt-8">
-                      <sup className="text-red-600 text-xl">*</sup>
-                      <span>upload w=1300px and h=450px image</span>
+                      <span className="md:text-sm text-xs">Upload Image (1300 X 450px)</span>
+                      <sup className="text-red-600 text-para">*</sup>
                     </div>
                   </div>
-                  <div className="p-7 mx-5 flex-1 border border-slate-500/45 rounded">
+                  <div className="p-7 flex-1 border border-slate-500/45 rounded lg:mt-0 mt-5">
                     <div className="w-2/3">
                       {file1 && (
                         <Image
@@ -493,14 +499,14 @@ export default function PromoManage() {
                     <div className="my-3">
                       <button
                         onClick={handlePosterUpload}
-                        className=" bg-orange-500 px-2 mx-3 py-1 rounded-lg"
+                        className=" bg-navyblack text-white px-2 py-1 rounded "
                       >
-                        upload
+                        Upload
                       </button>
                     </div>
                     <div className="flex">
-                      <sup className="text-red-600 text-xl">*</sup>
-                      <span>upload w=600px and h-390px image</span>
+                    <span className="md:text-sm text-xs">Upload Image (600 X 390px)</span>
+                    <sup className="text-red-600 text-para">*</sup>
                     </div>
                   </div>
                 </div>

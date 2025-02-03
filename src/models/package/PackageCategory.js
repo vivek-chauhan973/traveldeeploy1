@@ -5,7 +5,8 @@ mongoose.connect(process.env.MONGODB_URI);
 const packageMasterCategorySchema = new mongoose.Schema({
     category: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
 },
     {
