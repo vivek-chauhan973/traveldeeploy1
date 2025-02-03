@@ -10,14 +10,13 @@ import ArrowSection from "@/components/Home/Cards/ArrowSection";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import State from "@/components/Home/Cards/State";
 import { useEffect, useState } from "react";
-import Promises from "@/components/Home/Cards/Promises";
 import CarArrowSection from "@/components/Home/Cards/CarArrowSection";
 import StateCard from "@/components/Home/Cards/StateCard";
 import Link from "next/link";
 import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 import TravelGuideCarousel from "@/components/TravelGuideCarousel";
 import BlogsCarousel from "@/components/BlogsCarousel";
-import Cookies from "js-cookie";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 export async function getServerSideProps() {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/home/homefooter`
@@ -25,13 +24,17 @@ export async function getServerSideProps() {
   const data1 = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/homefooter`
   );
+  const data2= await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/package-setting/category/get-categories`
+  );
   const multipost = await data1?.json();
-
+const category=await data2.json()
   const post = await data?.json();
   return {
     props: {
       post: post?.data,
       multipost: multipost?.data,
+      category:category?.data,
     },
   };
 }
@@ -48,8 +51,8 @@ export async function getServerSideProps() {
 //   return await response.json();
 // };
 
-export default function Home({ post, multipost }) {
-  console.log("post----> is here ", multipost);
+export default function Home({ post, multipost ,category}) {
+  // console.log("post----> is here ", multipost);
   const [states, setStates] = useState([]);
   const [homePackages, SetHomePackages] = useState(multipost || []);
   const [homeSinglePackages, setSingleHomePackages] = useState(post || []);
@@ -72,6 +75,13 @@ export default function Home({ post, multipost }) {
   //   })
   //   fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
   // }, []);
+
+  const {setServerSideProps}=useCarPopupContext()
+
+  useEffect(()=>{
+    const data={post,multipost,category}
+    setServerSideProps(data||{})
+  },[post,multipost,category])
   useEffect(() => {
     const data = homePackages?.filter((item) => item?.category === "category1");
     setStates(data?.[0]?.options || []);

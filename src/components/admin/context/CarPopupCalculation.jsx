@@ -47,8 +47,9 @@ export const CarPopupProvider = ({ children }) => {
     );
     setSearchedData(data || []);
   },[searchQuery,pacakgeData])
+  const [serverSideProps,setServerSideProps]=useState({});
   // console.log("pacakgeData global",pacakgeData);
-  // console.log("searchedData global",searchedData);
+  console.log("serverSideProps------->",serverSideProps);
   
   const contextFun = {
     userFormData, setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal,
@@ -56,7 +57,7 @@ export const CarPopupProvider = ({ children }) => {
     pickupDateOutstation, returnDateOutstation, pickupTimeOutstation, returnTimeOutstation, planOutstation,
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation,
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
-    activeBookingProcess, setActiveBookingProcess,searchedData, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery
+    activeBookingProcess,setServerSideProps,serverSideProps, setActiveBookingProcess,searchedData, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery
   };
 
   return (

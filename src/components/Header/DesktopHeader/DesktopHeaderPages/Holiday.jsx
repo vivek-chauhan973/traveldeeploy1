@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-const fetchCategory = async () => {
-  const res = await fetch("/api/homefooter");
-  return await res.json();
-}
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+
+// const fetchCategory = async () => {
+//   const res = await fetch("/api/homefooter");
+//   return await res.json();
+// }
 const Holiday = () => {
 
+  // const [catogories, setCatagories] = useState([]);
+  // useEffect(() => {
+  //   fetchCategory().then(res => { ; setCatagories(res?.data || []) });
+  // }, [])
+  const {serverSideProps}=useCarPopupContext()
+  
   const [catogories, setCatagories] = useState([]);
   useEffect(() => {
-    fetchCategory().then(res => { ; setCatagories(res?.data || []) });
-  }, [])
+    if(serverSideProps){
+      setCatagories(serverSideProps.multipost || [])
+    }
+  }, [serverSideProps])
 
   const data = catogories?.filter(item => item.category === "category3");
   console.log("catories is here", data?.[0]?.options)
