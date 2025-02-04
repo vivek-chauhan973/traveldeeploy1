@@ -277,7 +277,7 @@ const Create = () => {
                   <h1 className="text-sm font-medium text-center"> Provide Details</h1>
                   <div className="flex flex-col ">
                     <label htmlFor="firstname" className="text-sm">Name</label>
-                    <input type="text" id="firstname" value={name} onChange={(e)=setName(e.target.value)} placeholder="Enter Name" required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
+                    <input type="text" id="firstname" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Enter Name" required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="email" required className="text-sm">Email</label>
