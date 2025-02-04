@@ -1,31 +1,36 @@
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import React, { useEffect, useState } from "react";
-// import { data1, stateData } from "./Data";
-const fetchDestinationSates = async () => {
-  const data = await fetch("/api/home/destinationHeader");
-  return await data.json();
-}
 const fetchHeaderCities = async (id) => {
   const data = await fetch(`/api/home/headerCity?id=${id}`);
   return await data.json();
 }
 const Show = () => {
+  const {serverSideProps}=useCarPopupContext()
   const [change, setChange] = useState(0);
   const [destinationState, setDestinationState] = useState([]);
   const [changedState, setChangedState] = useState('');
-  const [changedStateId, setChangedStateId] = useState('');
+  const [changedStateId, setChangedStateId] = useState(serverSideProps?.firstStateId||'');
   const [cities, setCities] = useState([]);
   const [showBg, setShowBg] = useState(true);
-  useEffect(() => {
-    fetchDestinationSates().then(res => { setDestinationState(res?.data?.[0]?.options || []) })
-  }, [])
 
   useEffect(() => {
-    setChangedState(destinationState[0]?.name)
-    fetchHeaderCities(destinationState[0]?._id).then(res => { console.log('fetch state Cities here ----> ', res); setCities(res?.data || []); })
+    if(serverSideProps){
+      setDestinationState(serverSideProps?.state?.[0]?.options|| []) ;
+      setCities(serverSideProps?.initialCity || []);
+    }
+    
+  }, [serverSideProps])
+
+
+  useEffect(() => {
+    if(destinationState?.length>0){
+      setChangedState(destinationState[0]?.name)
+      fetchHeaderCities(destinationState[0]?._id).then(res => { setCities(res?.data || []); })
+    }
   }, [destinationState])
 
   useEffect(() => {
-    fetchHeaderCities(changedStateId).then(res => { console.log('fetch state Cities here ----> ', res?.data); setCities(res?.data || []) })
+    fetchHeaderCities(changedStateId).then(res => {setCities(res?.data || []) })
   }, [changedStateId])
 
   return (
@@ -47,11 +52,11 @@ const Show = () => {
             ))}
           </div>
         </div>
-        <div className="ml-4 px-4 pt-3 h-[400px] w-full">
+        <div className="ml-4 px-4 pt-3 h-[350px] w-full">
           <h4 className="font-semibold text-base mb-3 text-[#595959]">{changedState}</h4>
           <div className="w-full h-full">
             <div className="grid grid-cols-4 gap-x-10">
-              {cities.length > 0 && cities?.map((city, i) =>
+              {cities?.length > 0 && cities?.map((city, i) =>
                 // <p key={i} className='text-para mb-2'>{city?.name}</p>
                 <a
                 href={`/india/` + city?.url + "-tour-packages"}

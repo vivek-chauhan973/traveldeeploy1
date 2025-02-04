@@ -21,20 +21,37 @@ export async function getServerSideProps() {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/home/homefooter`
   );
+  const data3 = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/home/destinationHeader`
+  );
   const data1 = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/homefooter`
   );
-  const data2= await fetch(
+  const data2 = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/package-setting/category/get-categories`
   );
+  const state=await data3?.json();
+
+  const firstStateId=state?.data?.[0]?.options?.[0]?._id||"";
+
+  // Fetch cities for the first state
+
+    const citiesRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home/headerCity?id=${firstStateId}`);
+    const citiesData = await citiesRes.json();
+
+  
   const multipost = await data1?.json();
-const category=await data2.json()
+  const category = await data2.json();
   const post = await data?.json();
+  
   return {
     props: {
       post: post?.data,
       multipost: multipost?.data,
-      category:category?.data,
+      category: category?.data,
+      state:state?.data,
+      initialCity:citiesData?.data || [],
+      firstStateId
     },
   };
 }
@@ -51,8 +68,8 @@ const category=await data2.json()
 //   return await response.json();
 // };
 
-export default function Home({ post, multipost ,category}) {
-  // console.log("post----> is here ", multipost);
+export default function Home({ post, multipost, category,state,initialCity,firstStateId }) {
+  // console.log("initialCity----> is here ", initialCity);
   const [states, setStates] = useState([]);
   const [homePackages, SetHomePackages] = useState(multipost || []);
   const [homeSinglePackages, setSingleHomePackages] = useState(post || []);
@@ -76,12 +93,12 @@ export default function Home({ post, multipost ,category}) {
   //   fetchAllSingleSction().then(res => { setSingleHomePackages(res?.data) })
   // }, []);
 
-  const {setServerSideProps}=useCarPopupContext()
+  const { setServerSideProps } = useCarPopupContext();
 
-  useEffect(()=>{
-    const data={post,multipost,category}
-    setServerSideProps(data||{})
-  },[post,multipost,category])
+  useEffect(() => {
+    const data = { post, multipost,category,state,initialCity};
+    setServerSideProps(data || {});
+  }, [post, multipost, category,state]);
   useEffect(() => {
     const data = homePackages?.filter((item) => item?.category === "category1");
     setStates(data?.[0]?.options || []);
