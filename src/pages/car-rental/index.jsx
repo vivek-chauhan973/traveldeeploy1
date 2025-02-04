@@ -85,14 +85,18 @@ const CarHireSection = ({ title, services, url }) => {
               </li>
             </a>
           ))}
-          <div className="flex justify-end pb-2">
-            <a
-              href={`/car-rental/${url}-car-hire`}
-              className="py-1 px-5 rounded-md text-xs bg-navyblack text-white"
-            >
-              More.....
-            </a>
-          </div>
+          {carCTPackages?.length > 0  ?
+            <div className="flex justify-end pb-2">
+              <a
+                href={`/car-rental/${url}-car-hire`}
+                className="py-1 px-5 rounded-md text-xs bg-navyblack text-white"
+              >
+                More.....
+              </a>
+            </div>
+            :
+            ""}
+
         </ul>
       )}
       <hr />
@@ -205,7 +209,7 @@ export default function App() {
   const boxShadowStyle = {
     boxShadow: "inset 0px -50px 20px  rgba(0, 0, 0, 0.8)",
   };
-  
+
   return (
     <AppProvider>
       <div>

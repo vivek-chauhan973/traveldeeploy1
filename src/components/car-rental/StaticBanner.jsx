@@ -61,7 +61,7 @@ const CarCarousel = ({ staticBanner, carCarousel }) => {
                       <a href={items?.url}>
                         <div className="w-full md:h-96 h-60">
                           <Image
-                            className="relative  object-cover md:rounded-none rounded-lg"
+                            className="relative  object-cover md:rounded-md rounded-lg"
                             layout="fill"
                             src={items?.path}
                             alt="images"

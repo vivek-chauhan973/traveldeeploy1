@@ -164,7 +164,7 @@ const Cardwork = () => {
                       <a href={items?.url}>
                         <div className="w-full md:h-96 h-60">
                           <Image
-                            className="relative  object-cover md:rounded-md rounded"
+                            className="relative object-cover rounded-md"
                             layout="fill"
                             src={items?.path}
                             alt="images"

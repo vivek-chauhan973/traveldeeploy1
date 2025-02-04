@@ -149,8 +149,8 @@ export default function Home({ post, multipost, category,state,initialCity,first
       <HeroSection />
       {/* First image and text */}
       <div className="container-wrapper  md:py-11 py-5">
-        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
-          <div className=" md:shrink-0">
+        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center ">
+          <div className=" md:shrink-0 md:mt-0 mt-5 lg:ml-0 ml-2">
             <p className=" text-amber-600   font-semibold mb-0.5">
               {category1?.[0]?.subtitle}
             </p>
@@ -201,8 +201,8 @@ export default function Home({ post, multipost, category,state,initialCity,first
       </div>
       {/* Second image and text */}
       <div className="container-wrapper  md:py-11 py-5">
-        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full md:gap-16 text-wrap md:items-center ">
-          <div className=" md:shrink-0">
+        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center ">
+          <div className=" md:shrink-0 md:my-0 my-5 lg:ml-0 ml-2">
             <p className=" text-amber-600 font-semibold mb-0.5">
               {category3?.[0]?.subtitle}
             </p>
@@ -261,7 +261,7 @@ export default function Home({ post, multipost, category,state,initialCity,first
               />
             </Link>
           </div>
-          <div className="">
+          <div className="md:my-0 my-5 lg:ml-0 ml-2">
             <p className=" text-amber-600  font-semibold mb-0.5">
               {category2?.[0]?.subtitle}
             </p>
