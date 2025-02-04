@@ -494,7 +494,7 @@ const Addguest = ({
     }
   }, [isAC]);
 
-  console.log("Guest Price ------> ", guestPrice)
+  // console.log("Guest Price ------> ", guestPrice)
   useEffect(() => {
     const date1 = new Date();
     // Calculate max date (1 year from current date)

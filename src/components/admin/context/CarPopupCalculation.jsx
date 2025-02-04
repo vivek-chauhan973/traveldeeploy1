@@ -36,6 +36,8 @@ export const CarPopupProvider = ({ children }) => {
   const [activeBookingProcess, setActiveBookingProcess] = useState();
   const [activeInactivePopup, setActiveInactivePopup] = useState(false);
   const [searchQuery,setSearchQuery]=useState("");
+  const [crmData, setCrmData] = useState({});
+
   useEffect(()=>{
     fetchSearchedData().then(res=>{
       setPackageData(res?.data||[])
@@ -49,15 +51,16 @@ export const CarPopupProvider = ({ children }) => {
   },[searchQuery,pacakgeData])
   const [serverSideProps,setServerSideProps]=useState({});
   // console.log("pacakgeData global",pacakgeData);
-  console.log("serverSideProps------->",serverSideProps);
-  
+  // console.log("serverSideProps------->",serverSideProps);
+  console.log("crmData global",crmData);
   const contextFun = {
     userFormData, setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal,
     setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
     pickupDateOutstation, returnDateOutstation, pickupTimeOutstation, returnTimeOutstation, planOutstation,
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation,
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
-    activeBookingProcess,setServerSideProps,serverSideProps, setActiveBookingProcess,searchedData, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery
+    activeBookingProcess,setServerSideProps,serverSideProps, setActiveBookingProcess,searchedData, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery,
+    crmData, setCrmData
   };
 
   return (

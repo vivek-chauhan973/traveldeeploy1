@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 const Create = () => {
-  const { setLoginPopup } = useCarPopupContext();
+  const { setLoginPopup, crmData, setCrmData } = useCarPopupContext();
   const {fixedDeparturePopupPrice}=useAppContext();
   // console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice)
   useEffect(() => {
@@ -169,8 +169,11 @@ const Create = () => {
       });
 
       const data = await response.json();
+      console.log("data",data);
+      
       if (response.ok) {
         setOrderId(data.orderId);
+        setCrmData(data?.data)
         window.location.href =data.paymentLink;
         setLoginPopup(false);
       } else {
@@ -180,6 +183,7 @@ const Create = () => {
       console.error('Error creating order:', error);
     }
   }
+  
 
   return (
     <>

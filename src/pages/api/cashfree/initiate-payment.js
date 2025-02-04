@@ -47,8 +47,9 @@ export default async function handler(req, res) {
       if (!response.ok) {
         throw new Error(data.message || "Error initiating payment");
       }
-  
-      return res.status(200).json({ paymentLink: data.payment_link });
+      // console.log("Data from api ===> ", data);
+      
+      return res.status(200).json({ paymentLink: data.payment_link , data});
     } catch (error) {
       return res.status(500).json({ error: error.message || "Internal Server Error" });
     }

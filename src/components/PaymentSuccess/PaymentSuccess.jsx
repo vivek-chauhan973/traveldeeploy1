@@ -1,30 +1,57 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import "../../app/globals.css";
+import Link from "next/link";
+import { useAppContext } from "../admin/context/Package/AddGuest";
+import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
+
 const PaymentSuccess = () => {
+    const {fixedDeparturePopupPrice}=useAppContext();
+    const {crmData} = useCarPopupContext();
+  console.log("crmData payments",crmData);
+  console.log("fixedDeparturePopupPrice",fixedDeparturePopupPrice);
+  
   const router = useRouter();
   const { order_id } = router.query;
   const [status, setStatus] = useState("Checking...");
+
   useEffect(() => {
     if (order_id) {
       checkPaymentStatus();
     }
   }, [order_id]);
+
   const checkPaymentStatus = async () => {
     try {
-      const response = await fetch(`/api/cashfree/check-payment?order_id=${order_id}`,{method:"GET"});
-      
-      const data=await response.json();
+      const response = await fetch(`/api/cashfree/check-payment?order_id=${order_id}`, { method: "GET" });
+      const data = await response.json();
       setStatus(data?.payment_status);
-      console.log("response of status---->",data)
+      console.log("response of status---->", data)
     } catch (error) {
       console.error("Payment Status Error:", error);
       setStatus("Failed to fetch status");
     }
   };
+  const handleOk = () => {
+
+  }
+
   return (
-    <div className="text-center p-6">
-      <h1 className="text-xl font-bold">Payment Status 1</h1>
-      <p className="mt-4">{status}</p>
+    <div>
+      <div className="flex justify-center items-center pt-72">
+        <div className="flex flex-col justify-center items-center gap-5 border shadow-md rounded-md w-72 px-10 py-5">
+          <h1 className="text-lg font-semibold">Payment Status</h1>
+          <p className="text-base font-semibold">{status}</p>
+          <Link href="/">
+            <button
+              className="bg-primary text-white py-1 px-5  rounded"
+              onClick={handleOk}
+            >
+              OK
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
