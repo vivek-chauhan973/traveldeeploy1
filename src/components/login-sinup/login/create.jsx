@@ -9,8 +9,11 @@ import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 const Create = () => {
   const { setLoginPopup, crmData, setCrmData } = useCarPopupContext();
-  const {fixedDeparturePopupPrice}=useAppContext();
-  // console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice)
+  const {fixedDeparturePopupPrice, departureSectionData, showAddguest, inputData}=useAppContext();
+  // console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice);
+  // console.log("departureSectionData----->",departureSectionData);
+  // console.log("showAddguest----->",showAddguest);
+  // console.log("inputData----->",inputData);
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -173,7 +176,7 @@ const Create = () => {
       
       if (response.ok) {
         setOrderId(data.orderId);
-        setCrmData(data?.data)
+        setCrmData(data?.data);
         window.location.href =data.paymentLink;
         setLoginPopup(false);
       } else {

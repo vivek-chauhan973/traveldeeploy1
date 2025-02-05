@@ -6,11 +6,15 @@ import { useAppContext } from "../admin/context/Package/AddGuest";
 import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
 
 const PaymentSuccess = () => {
-    const {fixedDeparturePopupPrice}=useAppContext();
-    const {crmData} = useCarPopupContext();
-  console.log("crmData payments",crmData);
-  console.log("fixedDeparturePopupPrice",fixedDeparturePopupPrice);
-  
+  const { fixedDeparturePopupPrice, departureSectionData, showAddguest, inputData } = useAppContext();
+  console.log("fixedDeparturePopupPrice----->", fixedDeparturePopupPrice);
+  console.log("departureSectionData----->", departureSectionData);
+  console.log("showAddguest----->", showAddguest);
+  console.log("inputData----->", inputData);
+
+  const { crmData } = useCarPopupContext();
+  console.log("crmData payments", crmData);
+
   const router = useRouter();
   const { order_id } = router.query;
   const [status, setStatus] = useState("Checking...");
