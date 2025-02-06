@@ -11,7 +11,7 @@ const fetchPackgesTerm = async () => {
 };
 
 const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDetails }) => {
-    const { loginPopup, setLoginPopup } = useCarPopupContext();
+    const { loginPopup, setLoginPopup, summaryCarPackage, setSummaryCarPackage} = useCarPopupContext();
 
     const [check, setCheck] = useState(false);
     const [CarPackageTerm, setCarPackageTerm] = useState([]);
@@ -35,6 +35,11 @@ const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDeta
     };
     //   console.log("departure section data is here ---> ", departureSectionData) 
     // console.log("CarPackageTerm is here ---> ", CarPackageTerm)
+    // console.log("carDepartureDetails is here ---> ", carDepartureDetails)
+
+    useEffect(()=>{
+        setSummaryCarPackage(carDepartureDetails);
+    },[carDepartureDetails])
 
     return (
         <>
@@ -120,25 +125,25 @@ const CarDeptBookingPopup = ({ carPackage, setShowPopupBooking, carDepartureDeta
                                     <div className="flex mb-2.5 mt-1 text-sm border-t ">
                                         <p className=" w-28 mt-2 font-medium">Dept. City : </p>
                                         <p className="font-semibold text-graytext mt-2 capitalize">
-                                            {carDepartureDetails?.departureCity}
+                                            {carDepartureDetails?.departureCity ? carDepartureDetails?.departureCity : "--"}
                                         </p>
                                     </div>
                                     <div className="flex mb-2 text-sm">
                                         <p className=" w-28 font-medium">Dept. Date :</p>
                                         <p className=" font-bold text-graytext">
-                                            {carDepartureDetails?.Date}
+                                            {carDepartureDetails?.Date ? carDepartureDetails?.Date : "--"}
                                         </p>
                                     </div>
                                     <div className="flex mb-2 text-sm">
                                         <p className="w-28 font-medium">No. Of Travellers :</p>
                                         <p className=" font-semibold text-graytext">
-                                            {carDepartureDetails?.travellers}
+                                            {carDepartureDetails?.travellers ? carDepartureDetails?.travellers : "--"}
                                         </p>
                                     </div>
                                     <div className="flex">
                                         <p className="w-28 font-semibold">Grand Total :</p>
                                         <p className="font-semibold text-graytext">
-                                            {carDepartureDetails?.grandTotal?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                            {carDepartureDetails?.grandTotal ? carDepartureDetails?.grandTotal?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : "--"}
                                         </p>
                                     </div>
                                 </div>

@@ -16,9 +16,9 @@ export const CarPopupProvider = ({ children }) => {
   const [userDateLocal, setUserDateLocal] = useState({});
   const [userTimeLocal, setUserTimeLocal] = useState({});
   const [userPlanLocal, setUserPlanLocal] = useState({});
-  // console.log("userDateLocal global",userDateLocal);
-  // console.log("userTimeLocal global",userTimeLocal);
-  // console.log("userPlanLocal global",userPlanLocal);
+  console.log("userDateLocal global",userDateLocal);
+  console.log("userTimeLocal global",userTimeLocal);
+  console.log("userPlanLocal global",userPlanLocal);
   
   // Outstation
   const [pickupDateOutstation, setPickupDateOutstation] = useState({});
@@ -69,7 +69,11 @@ export const CarPopupProvider = ({ children }) => {
   // console.log("pacakgeData global",pacakgeData);
   // console.log("serverSideProps------->",serverSideProps);
   // console.log("crmData global",crmData);
- 
+
+  // Car Package 
+  const [summaryCarPackage, setSummaryCarPackage] = useState({});
+  // console.log("summaryCarPackage global",summaryCarPackage);
+
   const contextFun = {
     userFormData, setUserFormData, getDetail, userDateLocal, userTimeLocal, userPlanLocal,
     setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
@@ -77,7 +81,7 @@ export const CarPopupProvider = ({ children }) => {
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation,
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
     activeBookingProcess,setServerSideProps,serverSideProps, setActiveBookingProcess,searchedData, activeInactivePopup, setActiveInactivePopup,searchQuery,setSearchQuery,
-    crmData, setCrmData, grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData
+    crmData, setCrmData, grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData, summaryCarPackage, setSummaryCarPackage
   };
 
   return (

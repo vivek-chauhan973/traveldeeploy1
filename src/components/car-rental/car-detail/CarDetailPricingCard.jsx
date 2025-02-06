@@ -43,7 +43,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                                 <FontAwesomeIcon
                                     icon={faPenToSquare}
                                     className="font1 cursor-pointer"
-                                    onClick={handleEdit}
+                                    onClick={handleEdit}  
                                 />
                             </div>
                         </div>
@@ -79,7 +79,8 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                                     onChange={(e) => {
                                         setTravellers(e.target.value);
                                     }}
-                                    disabled={!seatingCapacity}  // Disable if seating capacity is 0 or not set
+                                    // disabled={!seatingCapacity}  // Disable if seating capacity is 0 or not set
+                                    disabled={!carDepartureDetails?.Date}  // Disable if seating capacity is 0 or not set
                                 >
                                     <option value="" className="cursor-pointer">
                                         Select Person
@@ -91,7 +92,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                                     ))}
                                 </select>
                             </div>
-                            {carDepartureDetails?.departureCity ? null : (
+                            {travellers > 0 ? null : (
                                 <p className="md:text-xxs text-[10px] text-red-600 xl:text-end md:text-center text-end xl:pr-10 md:pl-28">
                                     Please Select Person First
                                 </p>
@@ -156,6 +157,7 @@ const CardDetailPricingCard = ({ carPackage, carDepartureDetails, setShowPopupBo
                                     ? "bg-gradient-to-r from-orange-500 to-red-500  cursor-pointer"
                                     : "bg-gradient-to-r from-orange-200 to-red-200"
                                     } px-5 py-2 rounded-md text-white text-center text-para`}
+                                disabled={travellers === 0}
                             >
                                 Book Now
                             </button>
