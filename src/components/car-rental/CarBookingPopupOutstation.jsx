@@ -25,8 +25,10 @@ const CarBookingPopupOutsation = () => {
     // console.log("gstDateWise ", gstDateWise);
 
     const { userFormData, pickupDateOutstation, returnDateOutstation, pickupTimeOutstation,
-        returnTimeOutstation, planOutstation, setLoginPopup,
-        setShowPopupOutstation, activeBookingProcess } = useCarPopupContext();
+        returnTimeOutstation, planOutstation,setPlanOutstation, setLoginPopup,
+        setShowPopupOutstation, activeBookingProcess,
+        grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData
+     } = useCarPopupContext();
 
     // console.log("userFormData", userFormData);
 
@@ -99,7 +101,7 @@ const CarBookingPopupOutsation = () => {
     let rate = userFormData?.selectedCar?.[0]?.outStationBasePrice ?? 0;
     // console.log("rate here ---> ", rate);
     let rate2 = userFormData?.selectedCar?.[0]?.capacity ?? 0;
-    console.log("rate2 here ---> ", rate2);
+    // console.log("rate2 here ---> ", rate2);
     let misc = userFormData?.selectedCar?.[0]?.misc ?? 0;
     let ac = userFormData?.selectedCar?.[0]?.ac ?? 0;
     let markup = userFormData?.selectedCar?.[0]?.markup ?? 0;
@@ -147,15 +149,22 @@ const CarBookingPopupOutsation = () => {
     }, [isActive, basePrice, basePrice2])
 
     let gstPrice = Math.floor((price1 * selectedGST) / 100);
-    let grandTotalByKm = price1 + gstPrice;
+    // let grandTotalByKm = price1 + gstPrice;
 
     let gstPrice2 = Math.floor((price2 * selectedGST) / 100);
-    let grandTotalPerDay = price2 + gstPrice2;
+    // let grandTotalPerDay = price2 + gstPrice2;
 
     // console.log("price1",price1);
     // console.log("price2",price2);
 
-
+    useEffect(()=>{
+        if(planOutstation === "By Kms"){
+            setGrandTotalCar( price1 + gstPrice);         
+        }else{
+            setGrandTotalCar(price2 + gstPrice2);
+            }
+            setSummaryCarData({costPerKm,isActive, selectedGST});
+    },[gstPrice, price1, price2, gstPrice2, selectedGST, isActive]);
     return (
         <>
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[50]">
@@ -374,7 +383,7 @@ const CarBookingPopupOutsation = () => {
                                             <div className="flex items-center gap-0">
                                                 <p className="font-semibold">Grand Total :</p>
                                                 <p className="font-semibold text-graytext ml-1">
-                                                    {grandTotalByKm?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {grandTotalCar?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                     {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
@@ -412,7 +421,7 @@ const CarBookingPopupOutsation = () => {
                                             <div className="flex items-center gap-0">
                                                 <p className="font-semibold">Grand Total :</p>
                                                 <p className="font-bold text-graytext ml-1">
-                                                    {grandTotalPerDay?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {grandTotalCar?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
                                             </div>
                                         </div>

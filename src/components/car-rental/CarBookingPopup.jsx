@@ -25,7 +25,8 @@ const CarBookingPopup = () => {
     // console.log("gstDateWise ", gstDateWise);
 
     const { userFormData, userDateLocal, userTimeLocal, userPlanLocal,
-        setLoginPopup, setShowPopup, activeBookingProcess
+        setLoginPopup, setShowPopup, activeBookingProcess,
+        grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData
     } = useCarPopupContext();
     // console.log("userFormData", userFormData);
 
@@ -130,13 +131,22 @@ const CarBookingPopup = () => {
     }, [isActive, basePrice, basePrice2]);
 
     let gstPrice1 = Math.floor((price1 * selectedGST) / 100);
-    let grandTotalByKm = price1 + gstPrice1;
-
     let gstPrice2 = Math.floor((price2 * selectedGST) / 100);
-    let grandTotalFixedPlan = price2 + gstPrice2;
 
     // console.log("price1 here ---> ", price1);
     // console.log("price2 here ---> ", price2);
+
+  
+    useEffect(()=>{
+        if(userPlanLocal === "BY KMs"){
+            setGrandTotalCar( price1 + gstPrice1);         
+        }else{
+            setGrandTotalCar(price2 + gstPrice2);
+            }
+            setSummaryCarData({costPerKm,isActive, selectedGST});
+    },[gstPrice1, price1, price2, gstPrice2, selectedGST, isActive]);
+
+  
 
     return (
         <>
@@ -332,7 +342,7 @@ const CarBookingPopup = () => {
                                             <div className="flex items-center gap-0">
                                                 <p className="font-semibold">Grand Total :</p>
                                                 <p className="font-semibold text-graytext ml-1">
-                                                    {grandTotalByKm?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {grandTotalCar?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                     {" "}<span className="text-xxs font-semibold ml-1">{"(Tentative Price)"}</span>
                                                 </p>
                                             </div>
@@ -361,7 +371,7 @@ const CarBookingPopup = () => {
                                             <div className="flex items-center gap-0">
                                                 <p className="font-semibold">Grand Total :</p>
                                                 <p className="font-bold text-graytext ml-1">
-                                                    {grandTotalFixedPlan?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {grandTotalCar?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
                                             </div>
                                         </div>

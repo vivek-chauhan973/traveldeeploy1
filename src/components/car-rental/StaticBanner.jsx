@@ -10,7 +10,7 @@ const CarCarousel = ({ staticBanner, carCarousel }) => {
   useEffect(() => {
     setBannerData(carCarousel || []);
   }, [carCarousel]);
-  console.log("staticBanner", staticBanner);
+  // console.log("staticBanner", staticBanner); 
   const carouselRef = useRef(null);
 
   const scrollNext = () => {

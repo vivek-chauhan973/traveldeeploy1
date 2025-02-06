@@ -237,7 +237,7 @@ const MobilePicker = ({ setCarSelectionPopup }) => {
                                 className="text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                                 onChange={(e) => setUserPlanLocal(e.target.value)}
                             >
-                                <option value="" disabled>Choose Your Plan</option>
+                                <option value="">Choose Your Plan</option>
                                 <option value="BY KMs">By Kms</option>
                                 {planKM?.length > 0 &&
                                     planKM.map((item, i) => (
@@ -332,7 +332,7 @@ const MobilePicker = ({ setCarSelectionPopup }) => {
                                 className="text-para w-full px-3 h-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                                 onChange={(e) => setPlanOutstation(e.target.value)}
                             >
-                                <option value="" disabled>Choose Plan</option>
+                                <option value="" >Choose Plan</option>
                                 <option value="By Kms">BY KMs</option>
                                 <option value="Per Days">Per Days</option>
                             </select>

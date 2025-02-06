@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const CarCarousel = ({ carCarousel }) => {
-  console.log("carCarousel", carCarousel);
+  // console.log("carCarousel", carCarousel);
   const carouselRef = useRef(null);
 
   const scrollNext = () => {

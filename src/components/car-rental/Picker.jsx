@@ -141,7 +141,7 @@ const Picker = ({ setCarSelectionPopup }) => {
     { value: "100KM-10HRS", label: "100KM - 10HRS" },
   ];
 
-  console.log("userFormData picker", userFormData);
+  // console.log("userFormData picker", userFormData);
 
   const handleLocal = () => {
     if (activeBookingProcess === false) {
@@ -313,7 +313,7 @@ const Picker = ({ setCarSelectionPopup }) => {
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
                     onChange={(e) => setPickupTimeOutstation(e.target.value)}
                   >
-                    <option value="" disabled>Select Time</option>
+                    <option value="">Select Time</option>
                     {flexibleTime?.length > 0 &&
                       flexibleTime?.map((item, i) => (
                         <option key={i} value={item?.groupName}>
@@ -328,7 +328,7 @@ const Picker = ({ setCarSelectionPopup }) => {
                 <div className=" border-2 flex gap-0 my-1 rounded-lg">
                   <input
                     type="date"
-                    className=" outline-none text-start py-1 px-1 border-r-2 w-32"
+                    className=" outline-none text-start py-1 px-1 border-r-2 w-32 "
                     onChange={(e) => setReturnDateOutstation(e.target.value)}
                     min={pickupDateOutstation} // Ensure return date is after pick-up date
                   />
@@ -336,7 +336,7 @@ const Picker = ({ setCarSelectionPopup }) => {
                     className="text-para w-20 px-1 py-2 h-10 outline-none border-none"
                     onChange={(e) => setReturnTimeOutstation(e.target.value)}
                   >
-                    <option value="" disabled>Select Time</option>
+                    <option value="">Select Time</option>
                     {flexibleTime?.length > 0 &&
                       flexibleTime?.map((item, i) => (
                         <option key={i} value={item?.groupName}>
@@ -355,7 +355,7 @@ const Picker = ({ setCarSelectionPopup }) => {
                     className="text-para w-32 px-3 py-2 h-10 border border-gray-300 rounded-md focus:ring-1 focus:ring-orange-500 focus:outline-none transition ease-in-out"
                     onChange={(e) => setPlanOutstation(e.target.value)}
                   >
-                    <option value="Choose Plan" disabled>
+                    <option value="">
                       Choose Plan
                     </option>
                     <option value="By Kms">
