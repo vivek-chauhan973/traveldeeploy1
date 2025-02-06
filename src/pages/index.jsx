@@ -68,7 +68,13 @@ export async function getServerSideProps() {
 //   return await response.json();
 // };
 
-export default function Home({ post, multipost, category,state,initialCity,firstStateId }) {
+const getStetes=async ()=>{
+  const res=await fetch("/api/cars/package/get-packages");
+  const states=await res.json();
+  return states
+}
+
+export default function Home({ post, multipost, category,state,initialCity}) {
   // console.log("initialCity----> is here ", initialCity);
   const [states, setStates] = useState([]);
   const [homePackages, SetHomePackages] = useState(multipost || []);
@@ -142,6 +148,9 @@ export default function Home({ post, multipost, category,state,initialCity,first
     );
     setCategory3(data2);
   }, [homeSinglePackages]);
+  useEffect(()=>{
+    getStetes().then(res=>console.log("satets site map ",res))
+  },[])
 
   return (
     <>
