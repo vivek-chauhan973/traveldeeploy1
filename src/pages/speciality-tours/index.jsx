@@ -12,6 +12,7 @@ import Faq1 from '@/components/Faq/Faq1';
 import mongoose from 'mongoose';
 import { useRouter } from 'next/router';
 import Footer from '@/components/Footer';
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 const fetchPromoManagementData = async () => {
   const objectId =new mongoose.Types.ObjectId("64db5b8f60a6a2145f56e39d");
   const response = await fetch(`/api/public/package-state/spacialitypromo?id=${objectId}`);
@@ -23,7 +24,15 @@ const fetchAllPackages=async ()=>{
   const res=await fetch("/api/findAllPackages");
    return await res.json();
 }
-export default function India() {
+export default function India(pageprops) {
+  const { setServerSideProps } = useCarPopupContext();
+          
+            useEffect(() => {
+              if(pageprops){
+                setServerSideProps(pageprops || {});
+              }
+              
+            }, [pageprops]);
   const router=useRouter();
   // console.log("..........router ",router)
   const [promoData, setPromoData] = useState({});

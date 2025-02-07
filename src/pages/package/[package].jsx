@@ -1,7 +1,9 @@
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import "../../app/globals.css";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import TimeOf from "@/components/car-rental/TimeOf";
 import Package1 from "@/components/ItineraryDetail/Departure&Booking/package1";
+import { useEffect } from "react";
 // import FAQSchema from "@/components/seo/FAQSchema";
 // import Head from "next/head";
 // export async function getServerSideProps(context) {
@@ -17,7 +19,15 @@ import Package1 from "@/components/ItineraryDetail/Departure&Booking/package1";
 //     },
 //   };
 // }
-export default function TourPackage() {
+export default function TourPackage(pageprops) {
+     const { setServerSideProps } = useCarPopupContext();
+      
+        useEffect(() => {
+          if(pageprops){
+            setServerSideProps(pageprops || {});
+          }
+          
+        }, [pageprops]);
   return (
     <>
       {/* <Head>

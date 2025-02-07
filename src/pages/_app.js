@@ -1,7 +1,47 @@
 import { CarPopupProvider } from "@/components/admin/context/CarPopupCalculation";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
+import App from "next/app";
+
+APP.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+
+  try {
+    const [data, data1, data2, data3] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home/homefooter`).then((res) => res.json()),
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/homefooter`).then((res) => res.json()),
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/package-setting/category/get-categories`).then((res) => res.json()),
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home/destinationHeader`).then((res) => res.json()),
+    ]);
+
+    const state = data3?.data || [];
+    const firstStateId = state?.[0]?.options?.[0]?._id || "";
+
+    // Fetch cities for the first state
+    const citiesRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home/headerCity?id=${firstStateId}`);
+    const citiesData = await citiesRes.json();
+
+    return {
+      ...appProps,
+      pageProps: {
+        ...appProps.pageProps,
+        post: data?.data || [],
+        multipost: data1?.data || [],
+        category: data2?.data || [],
+        state,
+        initialCity: citiesData?.data || [],
+        firstStateId,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data in _app.js:", error);
+    return { ...appProps, pageProps: { ...appProps.pageProps } };
+  }
+};
+
 export default function APP({ Component, pageProps }) {
+
+  // console.log("content of _app.js props is here ------> ",pageProps)
   return (
     <SessionProvider session={pageProps.session}>
       <CarPopupProvider>

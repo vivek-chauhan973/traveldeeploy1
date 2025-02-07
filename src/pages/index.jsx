@@ -17,68 +17,13 @@ import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 import TravelGuideCarousel from "@/components/TravelGuideCarousel";
 import BlogsCarousel from "@/components/BlogsCarousel";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
-export async function getServerSideProps() {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/home/homefooter`
-  );
-  const data3 = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/home/destinationHeader`
-  );
-  const data1 = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/homefooter`
-  );
-  const data2 = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/package-setting/category/get-categories`
-  );
-  const state=await data3?.json();
 
-  const firstStateId=state?.data?.[0]?.options?.[0]?._id||"";
 
-  // Fetch cities for the first state
-
-    const citiesRes = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home/headerCity?id=${firstStateId}`);
-    const citiesData = await citiesRes.json();
-
-  
-  const multipost = await data1?.json();
-  const category = await data2.json();
-  const post = await data?.json();
-  
-  return {
-    props: {
-      post: post?.data,
-      multipost: multipost?.data,
-      category: category?.data,
-      state:state?.data,
-      initialCity:citiesData?.data || [],
-      firstStateId
-    },
-  };
-}
-// const fetchAllSingleSction = async () => {
-//   const res = await fetch("/api/home/homefooter");
-//   return await res.json();
-// }
-// const fetchAllMultiSction = async () => {
-//   const res = await fetch("/api/homefooter");
-//   return await res.json();
-// }
-// const fetchState = async () => {
-//   const response = await fetch("/api/public/states");
-//   return await response.json();
-// };
-
-const getStetes=async ()=>{
-  const res=await fetch("/api/cars/package/get-packages");
-  const states=await res.json();
-  return states
-}
-
-export default function Home({ post, multipost, category,state,initialCity}) {
-  // console.log("initialCity----> is here ", initialCity);
+export default function Home(props) {
+  // console.log("initialCity----> is here ", props);
   const [states, setStates] = useState([]);
-  const [homePackages, SetHomePackages] = useState(multipost || []);
-  const [homeSinglePackages, setSingleHomePackages] = useState(post || []);
+  const [homePackages, SetHomePackages] = useState(props?.multipost || []);
+  const [homeSinglePackages, setSingleHomePackages] = useState(props?.post || []);
   const [packages, setPackages] = useState([]);
   const [cityPackages, setCityPackages] = useState([]);
   const [category1, setCategory1] = useState([]);
@@ -102,9 +47,11 @@ export default function Home({ post, multipost, category,state,initialCity}) {
   const { setServerSideProps } = useCarPopupContext();
 
   useEffect(() => {
-    const data = { post, multipost,category,state,initialCity};
-    setServerSideProps(data || {});
-  }, [post, multipost, category,state]);
+    if(props){
+      setServerSideProps(props || {});
+    }
+    
+  }, [props]);
   useEffect(() => {
     const data = homePackages?.filter((item) => item?.category === "category1");
     setStates(data?.[0]?.options || []);
@@ -148,13 +95,13 @@ export default function Home({ post, multipost, category,state,initialCity}) {
     );
     setCategory3(data2);
   }, [homeSinglePackages]);
-  useEffect(()=>{
-    getStetes().then(res=>console.log("satets site map ",res))
-  },[])
+  // useEffect(()=>{
+  //   getStetes().then(res=>console.log("satets site map ",res))
+  // },[])
 
   return (
     <>
-      <DesktopHeader multipost={multipost} />
+      <DesktopHeader multipost={props?.multipost} />
       <HeroSection />
       {/* First image and text */}
       <div className="container-wrapper  md:py-11 py-5">

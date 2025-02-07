@@ -11,6 +11,7 @@ import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import Footer from '@/components/Footer';
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};
@@ -28,7 +29,15 @@ const fetchCategoryPackages = async (locationId) => {
   const data = await response.json();
   return data;
 };
-const SpacilityTour=()=> {
+const SpacilityTour=(pageprops)=> {
+    const { setServerSideProps } = useCarPopupContext();
+        
+          useEffect(() => {
+            if(pageprops){
+              setServerSideProps(pageprops || {});
+            }
+            
+          }, [pageprops]);
   const router = useRouter();
   // console.log("..........router ",router)
   const state = router.query.spacilityTour?.replace("-tour-packages", "");

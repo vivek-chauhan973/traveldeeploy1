@@ -12,6 +12,7 @@ import { AppProvider, useAppContext } from '@/components/admin/context/Package/A
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import Footer from '@/components/Footer';
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};
   const response = await fetch(`/api/public/package-state/${stateId}`);
@@ -30,7 +31,15 @@ const fetchPackages = async (locationId) => {
   return data?.packages;
 };
 
-export default function India() {
+export default function India(pageprops) {
+   const { setServerSideProps } = useCarPopupContext();
+    
+      useEffect(() => {
+        if(pageprops){
+          setServerSideProps(pageprops || {});
+        }
+        
+      }, [pageprops]);
   const router = useRouter();
   const state = router?.query?.india;
   const [selectedLocation, setSelectedLocation] = useState(null);
