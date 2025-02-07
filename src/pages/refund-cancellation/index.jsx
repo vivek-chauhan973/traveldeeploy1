@@ -7,15 +7,16 @@ import { useEffect, useState } from 'react';
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import Head from "next/head";
 
 const RefundCancellation = (pageprops) => {
-     const { setServerSideProps} = useCarPopupContext();       
-          useEffect(() => {
-            if(pageprops){
-              setServerSideProps(pageprops || {});
-            }
-            
-          }, [pageprops]);
+    const { setServerSideProps } = useCarPopupContext();
+    useEffect(() => {
+        if (pageprops) {
+            setServerSideProps(pageprops || {});
+        }
+
+    }, [pageprops]);
     const [activeIndex, setActiveIndex] = useState("policy");
 
     const refundSections = [
@@ -71,103 +72,132 @@ const RefundCancellation = (pageprops) => {
     ];
 
     return (
-        <div>
-            <DesktopHeader />
-            <Breadcrumbs />
-            <div>
-                {/* herosection start */}
-                {/* medium devices */}
-                <div className='md:block hidden'>
-                    <div className='w-full md:h-[450px] xl:h-[500px] flex relative'>
-                        <div className='w-[30%] h-full bg-black flex items-center justify-end'>
-                        </div>
-                        <div className='relative w-[80%] h-full flex'>
-                            <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
-                            <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+        <>
+            <Head>
+                {/* Meta Title/Description/Keywords */}
+                <title>Cancellation and Refund Policy | BizareXpedition™ - Hassle-Free Processes</title>
+                <meta
+                    name="description"
+                    content="Learn about our cancellation and refund policies for a transparent booking experience. 
+                            Understand our procedures, timelines, and applicable charges."
+                />
+                <meta
+                    name="keywords"
+                    content="Cancellation policy, refund policy, BizareXpedition™, travel cancellation, refund process, booking policies"
+                />
+                {/* Author and Robots */}
+                <meta name="author" content="BizareXpedition" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="robots" content="index, follow" />
+                {/* Open Graph for Social Media */}
+                <meta property="og:title" content="Cancellation and Refund Policy | BizareXpedition™ - Hassle-Free Processes" />
+                <meta property="og:description" content="Learn about our cancellation and refund policies for a transparent booking experience. 
+                            Understand our procedures, timelines, and applicable charges." />
+                <meta property="og:image" content="https://www.bizarexpedition.com/refund-cancellation.jpg" />
+                <meta property="og:url" content="https://www.bizarexpedition.com/refund-cancellation" />
+                <meta property="og:type" content="website" />
+            </Head>
+            <main>
+                <div>
+                    <DesktopHeader />
+                    <Breadcrumbs />
+                    <div>
+                        {/* herosection start */}
+                        {/* medium devices */}
+                        <div className='md:block hidden'>
+                            <div className='w-full md:h-[450px] xl:h-[500px] flex relative'>
+                                <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+                                </div>
+                                <div className='relative w-[80%] h-full flex'>
+                                    <Image src="/assets/staticimage/refund-cancellation.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
+                                    <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+                                    </div>
+                                </div>
+                                <div className='w-full h-full absolute'>
+                                    <div className='lg:w-[65%] md:w-[70%] h-full flex items-center justify-end px-16'>
+                                        <div className='w-full flex flex-col justify-center items-center'>
+                                            <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                                Cancellation and Refund <br /> <span className='text-white'>understanding Your Refund Rights</span>
+                                            </h2>
+                                            <p className="my-5 text-base text-white text-center">
+                                                At BizareXpedition, We understand that plans can change. Below are the terms and conditions regarding
+                                                cancellations and refuns for booking made through our website and Agents.
+                                            </p>
+                                            <Link href="/">
+                                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+                                                    Explore Now
+                                                </button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className='w-full h-full absolute'>
-                            <div className='lg:w-[65%] md:w-[70%] h-full flex items-center justify-end px-16'>
+                        {/* small devices */}
+                        <div className='md:hidden'>
+                            <div className='w-full flex items-center justify-center bg-black p-5'>
                                 <div className='w-full flex flex-col justify-center items-center'>
-                                    <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
-                                        Cancellation and Refund <br /> <span className='text-white'>understanding Your Refund Rights</span>
+                                    <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                        Refunds and Cancellations <br /> <span className='text-white'>How To Process Payments</span>
                                     </h2>
-                                    <p className="my-5 text-base text-white text-center">
-                                        At BizareXpedition, We understand that plans can change. Below are the terms and conditions regarding
-                                        cancellations and refuns for booking made through our website and Agents.
-                                    </p>
+                                    <p className="my-5 text-sm  text-white text-center">
+                                        At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
+                                        Below, you will find important details about our payment process.                            </p>
                                     <Link href="/">
-                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                                             Explore Now
                                         </button>
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                {/* small devices */}
-                <div className='md:hidden'>
-                    <div className='w-full flex items-center justify-center bg-black p-5'>
-                        <div className='w-full flex flex-col justify-center items-center'>
-                            <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
-                                Refunds and Cancellations <br /> <span className='text-white'>How To Process Payments</span>
-                            </h2>
-                            <p className="my-5 text-sm  text-white text-center">
-                                At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
-                                Below, you will find important details about our payment process.                            </p>
-                            <Link href="/">
-                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
-                                    Explore Now
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className='relative w-full h-72'>
-                        <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
-                    </div>
-                </div>
-                {/* herosection end */}
-                {/* Content Section */}
-                <div className="container-wrapper py-10">
-                    <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
-                        <div>
-                            <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
-                                {refundSections.map((section) => (
-                                    <ScrollLink
-                                        key={section.id}
-                                        to={section.id}
-                                        spy={true}
-                                        smooth={true}
-                                        offset={-100}
-                                        duration={500}
-                                        onClick={() => setActiveIndex(section.id)}
-                                    >
-                                        <p
-                                            className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
-                                                ? "border-l-4 border-l-primary text-black"
-                                                : "text-gray-400"
-                                                }`}
-                                        >
-                                            {section.title}
-                                        </p>
-                                    </ScrollLink>
-                                ))}
+                            <div className='relative w-full h-72'>
+                                <Image src="/assets/staticimage/refund-cancellation.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
                             </div>
                         </div>
-                        <div className="md:p-10 p-5 shadow-md rounded-md">
-                            {refundSections.map((section) => (
-                                <div key={section.id} id={section.id} className="mb-6">
-                                    <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
-                                    {section.content}
+                        {/* herosection end */}
+                        {/* Content Section */}
+                        <div className="container-wrapper py-10">
+                            <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
+                                <div>
+                                    <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
+                                        {refundSections.map((section) => (
+                                            <ScrollLink
+                                                key={section.id}
+                                                to={section.id}
+                                                spy={true}
+                                                smooth={true}
+                                                offset={-100}
+                                                duration={500}
+                                                onClick={() => setActiveIndex(section.id)}
+                                            >
+                                                <p
+                                                    className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                                                        ? "border-l-4 border-l-primary text-black"
+                                                        : "text-gray-400"
+                                                        }`}
+                                                >
+                                                    {section.title}
+                                                </p>
+                                            </ScrollLink>
+                                        ))}
+                                    </div>
                                 </div>
-                            ))}
+                                <div className="md:p-10 p-5 shadow-md rounded-md">
+                                    {refundSections.map((section) => (
+                                        <div key={section.id} id={section.id} className="mb-6">
+                                            <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
+                                            {section.content}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
+                        <Footer />
                     </div>
                 </div>
-                <Footer />
-            </div>
-        </div>
+            </main>
+        </>
+
     );
 };
 

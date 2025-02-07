@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
+import Head from 'next/head';
 
 // const fetchPaymentPloicyPage = async () => {
 //     const res = await fetch(`/api/static-page/static-page-type?name=payment-policy`);
@@ -14,13 +15,13 @@ import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculati
 // };
 
 const PaymentPloicy = (pageprops) => {
- const { setServerSideProps} = useCarPopupContext();       
-      useEffect(() => {
-        if(pageprops){
-          setServerSideProps(pageprops || {});
+    const { setServerSideProps } = useCarPopupContext();
+    useEffect(() => {
+        if (pageprops) {
+            setServerSideProps(pageprops || {});
         }
-        
-      }, [pageprops]);
+
+    }, [pageprops]);
     const [activeIndex, setActiveIndex] = useState("PaymentPolicy");
 
     const paymentPolicySections = [
@@ -89,109 +90,137 @@ const PaymentPloicy = (pageprops) => {
                     <li>In the event of unforeseen circumstances such as adverse weather conditions or
                         government restrictions, certain activities may need to be cancelled.</li>
                     <li>Our team will make every effort to arrange an alternate feasible activity. However, <span className='font-semibold'>no
-                    refunds will be provided</span> for such cancellations.</li>
+                        refunds will be provided</span> for such cancellations.</li>
                 </ul>
             ),
         },
     ];
 
     return (
-        <div>
-            <DesktopHeader />
-            <Breadcrumbs />
-            <div>
-                {/* herosection start */}
-                {/* medium devices */}
-                <div className='md:block hidden'>
-                    <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
-                        <div className='w-[30%] h-full bg-black flex items-center justify-end'>
-                        </div>
-                        <div className='relative w-[80%] h-full flex'>
-                            <Image src="/assets/staticimage/paymentPolicy.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
-                            <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+        <>
+            <Head>
+                {/* Meta Title/Description/Keywords */}
+                <title>Payment Policy | BizareXpedition™ - Secure and Simple Transactions</title>
+                <meta
+                    name="description"
+                    content=" Review the payment terms, options, and security measures at BizareXpedition™. 
+                    Ensuring a smooth, hassle-free booking process for all your journeys."
+                />
+                <meta
+                    name="keywords"
+                    content="Payment policy, BizareXpedition™, payment terms, secure transactions, online payment, booking guidelines"
+                />
+                {/* Author and Robots */}
+                <meta name="author" content="BizareXpedition" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="robots" content="index, follow" />
+                {/* Open Graph for Social Media */}
+                <meta property="og:title" content="Payment Policy | BizareXpedition™ - Secure and Simple Transactions" />
+                <meta property="og:description" content="" />
+                <meta property="og:image" content="https://www.bizarexpedition.com/payment-policy.jpg" />
+                <meta property="og:url" content="https://www.bizarexpedition.com/payment-policy" />
+                <meta property="og:type" content="website" />
+            </Head>
+            <main>
+                <div>
+                    <DesktopHeader />
+                    <Breadcrumbs />
+                    <div>
+                        {/* herosection start */}
+                        {/* medium devices */}
+                        <div className='md:block hidden'>
+                            <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+                                <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+                                </div>
+                                <div className='relative w-[80%] h-full flex'>
+                                    <Image src="/assets/staticimage/payment-policy.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
+                                    <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+                                    </div>
+                                </div>
+                                <div className='w-full h-full absolute'>
+                                    <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                                        <div className='w-full flex flex-col justify-center items-center'>
+                                            <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                                Payment Policy <br /> <span className='text-white'>How To Process Payments</span>
+                                            </h2>
+                                            <p className="my-5 text-base text-white text-center">
+                                                At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
+                                                Below, you will find important details about our payment process.
+                                            </p>
+                                            <Link href="/">
+                                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+                                                    Explore Now
+                                                </button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className='w-full h-full absolute'>
-                            <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                        {/* small devices */}
+                        <div className='md:hidden'>
+                            <div className='w-full flex items-center justify-center bg-black p-5'>
                                 <div className='w-full flex flex-col justify-center items-center'>
-                                    <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
-                                        Payment Policy <br /> <span className='text-white'>How To Process Payments</span>
+                                    <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                        Payment Ploicy <br /> <span className='text-white'>How To Process Payments</span>
                                     </h2>
-                                    <p className="my-5 text-base text-white text-center">
+                                    <p className="my-5 text-sm text-white text-center">
                                         At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
-                                        Below, you will find important details about our payment process.
-                                    </p>
+                                        Below, you will find important details about our payment process.                            </p>
                                     <Link href="/">
-                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                                             Explore Now
                                         </button>
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                {/* small devices */}
-                <div className='md:hidden'>
-                    <div className='w-full flex items-center justify-center bg-black p-5'>
-                        <div className='w-full flex flex-col justify-center items-center'>
-                            <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
-                                Payment Ploicy <br /> <span className='text-white'>How To Process Payments</span>
-                            </h2>
-                            <p className="my-5 text-sm text-white text-center">
-                                At BizareXpedition, We strive to make your booking experience as seamless and convenient as possible.
-                                Below, you will find important details about our payment process.                            </p>
-                            <Link href="/">
-                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
-                                    Explore Now
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className='relative w-full h-72'>
-                        <Image src="/assets/staticimage/paymentPolicy.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
-                    </div>
-                </div>
-                {/* herosection end */}
-                <div className="container-wrapper py-10">
-                    <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
-                        <div>
-                            <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
-                                {paymentPolicySections.map((section) => (
-                                    <ScrollLink
-                                        key={section.id}
-                                        to={section.id}
-                                        spy={true}
-                                        smooth={true}
-                                        offset={-100}
-                                        duration={500}
-                                        onClick={() => setActiveIndex(section.id)}
-                                    >
-                                        <p
-                                            className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
-                                                ? "border-l-4 border-l-primary text-black"
-                                                : "text-gray-400"
-                                                }`}
-                                        >
-                                            {section.title}
-                                        </p>
-                                    </ScrollLink>
-                                ))}
+                            <div className='relative w-full h-72'>
+                                <Image src="/assets/staticimage/payment-policy.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                             </div>
                         </div>
-                        <div className="md:p-10 p-5 shadow-md rounded-md">
-                            {paymentPolicySections.map((section) => (
-                                <div key={section.id} id={section.id} className="mb-6">
-                                    <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
-                                    {section.content}
+                        {/* herosection end */}
+                        <div className="container-wrapper py-10">
+                            <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
+                                <div>
+                                    <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
+                                        {paymentPolicySections.map((section) => (
+                                            <ScrollLink
+                                                key={section.id}
+                                                to={section.id}
+                                                spy={true}
+                                                smooth={true}
+                                                offset={-100}
+                                                duration={500}
+                                                onClick={() => setActiveIndex(section.id)}
+                                            >
+                                                <p
+                                                    className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                                                        ? "border-l-4 border-l-primary text-black"
+                                                        : "text-gray-400"
+                                                        }`}
+                                                >
+                                                    {section.title}
+                                                </p>
+                                            </ScrollLink>
+                                        ))}
+                                    </div>
                                 </div>
-                            ))}
+                                <div className="md:p-10 p-5 shadow-md rounded-md">
+                                    {paymentPolicySections.map((section) => (
+                                        <div key={section.id} id={section.id} className="mb-6">
+                                            <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
+                                            {section.content}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
+                        <Footer />
                     </div>
                 </div>
-                <Footer />
-            </div>
-        </div>
+            </main>
+        </>
+
     )
 }
 

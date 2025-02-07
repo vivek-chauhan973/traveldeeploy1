@@ -13,13 +13,13 @@ const fetchPaymentPloicyPage = async () => {
     return await res.json();
 };
 const Payment = (pageprops) => {
- const { setServerSideProps} = useCarPopupContext();       
-      useEffect(() => {
-        if(pageprops){
-          setServerSideProps(pageprops || {});
+    const { setServerSideProps } = useCarPopupContext();
+    useEffect(() => {
+        if (pageprops) {
+            setServerSideProps(pageprops || {});
         }
-        
-      }, [pageprops]);
+
+    }, [pageprops]);
     const [activeIndex, setActiveIndex] = useState("Payments");
 
     const PrivacyPolicySections = [
@@ -119,14 +119,12 @@ const Payment = (pageprops) => {
     return (
         <>
             <Head>
-                {/* Meta Title */}
+                {/* Meta Title/Description/Keywords */}
                 <title>Secure Payment Options | BizareXpedition™️</title>
-                {/* Meta Description */}
                 <meta
                     name="description"
                     content="Make safe and hassle-free payments for your travel bookings with BizareXpedition. We accept credit/debit cards, UPI, net banking, and bank transfers. Secure transactions, multiple payment options, and instant booking confirmation."
                 />
-                {/* Meta Keywords (Not used for SEO but can be included) */}
                 <meta
                     name="keywords"
                     content="payments, secure payments, travel payments, online payment, BizareXpedition payments, UPI payments, net banking, bank transfer, safe transactions, tour booking payment"
@@ -138,7 +136,7 @@ const Payment = (pageprops) => {
                 {/* Open Graph for Social Media */}
                 <meta property="og:title" content="Secure Payment Options | BizareXpedition" />
                 <meta property="og:description" content="Make safe and hassle-free payments for your travel bookings with BizareXpedition. We offer multiple payment options including UPI, net banking, and card payments." />
-                <meta property="og:image" content="https://www.bizarexpedition.com/payment-page-image.jpg" />
+                <meta property="og:image" content="https://www.bizarexpedition.com/payments.jpg" />
                 <meta property="og:url" content="https://www.bizarexpedition.com/payments" />
                 <meta property="og:type" content="website" />
             </Head>
@@ -154,7 +152,7 @@ const Payment = (pageprops) => {
                                 <div className='w-[30%] h-full bg-black flex items-center justify-end'>
                                 </div>
                                 <div className='relative w-[80%] h-full flex'>
-                                    <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
+                                    <Image src="/assets/staticimage/payments.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                                     <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
                                     </div>
                                 </div>
@@ -197,7 +195,7 @@ const Payment = (pageprops) => {
                                 </div>
                             </div>
                             <div className='relative w-full h-72'>
-                                <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
+                                <Image src="/assets/staticimage/payments.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                             </div>
                         </div>
                         {/* herosection end */}

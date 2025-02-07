@@ -24,7 +24,7 @@ const handleLogout=async ()=>{
   } else {
     console.error('Failed to log out');
   }
-  window.location.href = '/account/login';
+  window.location.href = '/admin/login';
 }
   const sidebarTabs = useMemo(() => [
     {
@@ -39,7 +39,7 @@ const handleLogout=async ()=>{
         { label: "Country-state-city", href: "/admin/website-function/country-state-city" },
         // { label: "Website Schema", href: "/admin/website-function/website-schema" },
         { label: "Logo Management", href: "/admin/website-function/logo-management" },
-        { label: "Color Management", href: "/admin/website-function/color-management" },
+        // { label: "Color Management", href: "/admin/website-function/color-management" },
         { label: "Icon Management", href: "/admin/website-function/icon-management" }
       ]
     },

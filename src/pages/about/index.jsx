@@ -15,13 +15,13 @@ const fetchAboutUsPage = async () => {
 };
 const About = (pageprops) => {
   const [aboutData, setAboutData] = useState();
- const { setServerSideProps} = useCarPopupContext();       
-      useEffect(() => {
-        if(pageprops){
-          setServerSideProps(pageprops || {});
-        }
-        
-      }, [pageprops]);
+  const { setServerSideProps } = useCarPopupContext();
+  useEffect(() => {
+    if (pageprops) {
+      setServerSideProps(pageprops || {});
+    }
+
+  }, [pageprops]);
   useEffect(() => {
     fetchAboutUsPage().then(res => {
       console.log("about page is here ---> ", res)
@@ -186,15 +186,13 @@ const About = (pageprops) => {
   return (
     <>
       <Head>
-        {/* Meta Title */}
+        {/* Meta Title/Description/Keywords */}
         <title>About Us | BizareXpedition™ - A Signature of Excellence</title>
-        {/* Meta Description */}
         <meta
           name="description"
           content="Discover the story behind BizareXpedition™, a travel brand dedicated to crafting unforgettable journeys 
           with unparalleled quality and value. Learn about our vision, mission, and commitment to redefining travel experiences."
         />
-        {/* Meta Keywords (Not used for SEO but can be included) */}
         <meta
           name="keywords"
           content="BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"
@@ -207,7 +205,7 @@ const About = (pageprops) => {
         <meta property="og:title" content="About Us | BizareXpedition™ - A Signature of Excellence" />
         <meta property="og:description" content="Discover the story behind BizareXpedition™, a travel brand dedicated to crafting unforgettable journeys 
           with unparalleled quality and value. Learn about our vision, mission, and commitment to redefining travel experiences." />
-        <meta property="og:image" content="https://www.bizarexpedition.com/about-us-page-image.jpg" />
+        <meta property="og:image" content="https://www.bizarexpedition.com/about-us.jpg" />
         <meta property="og:url" content="https://www.bizarexpedition.com/about-us" />
         <meta property="og:type" content="website" />
       </Head>
@@ -223,7 +221,7 @@ const About = (pageprops) => {
                 <div className='w-[30%] h-full bg-black flex items-center justify-end'>
                 </div>
                 <div className='relative w-[80%] h-full flex'>
-                  <Image src="/assets/staticimage/aboutUs.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
+                  <Image src="/assets/staticimage/about-us.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
                   <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
                   </div>
                 </div>
@@ -266,7 +264,7 @@ const About = (pageprops) => {
                 </div>
               </div>
               <div className='relative w-full h-72'>
-                <Image src="/assets/staticimage/aboutUs.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
+                <Image src="/assets/staticimage/about-us.jpg" width={200} height={200} alt="" className='relative w-full h-full' />
               </div>
             </div>
             {/* herosection end */}

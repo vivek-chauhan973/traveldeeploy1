@@ -7,11 +7,11 @@ export function middleware(request) {
     if (token && !request.nextUrl.pathname.startsWith('/admin')) {
         return NextResponse.redirect(new URL('/admin', request.url));
     }
-    if (!token && !request.nextUrl.pathname.startsWith('/account/login')) {
-        return NextResponse.redirect(new URL('/account/login', request.url));
+    if (!token && !request.nextUrl.pathname.startsWith('/admin/login')) {
+        return NextResponse.redirect(new URL('/admin/login', request.url));
     }
     return NextResponse.next();
 }
 export const config = {
-    matcher: ['/admin/:path*',"/account/login",],
+    matcher: ['/admin/:path*',"/admin/login",],
 };
