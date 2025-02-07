@@ -6,6 +6,7 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
+import Head from 'next/head';
 const fetchPaymentPloicyPage = async () => {
     const res = await fetch(`/api/static-page/static-page-type?name=payment-policy`);
     return await res.json();
@@ -109,103 +110,132 @@ const Payment = () => {
     ];
 
     return (
-        <div>
-            <DesktopHeader />
-            <Breadcrumbs />
-            <div>
-                {/* herosection start */}
-                {/* medium devices */}
-                <div className='md:block hidden'>
-                    <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
-                        <div className='w-[30%] h-full bg-black flex items-center justify-end'>
-                        </div>
-                        <div className='relative w-[80%] h-full flex'>
-                            <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
-                            <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+        <>
+            <Head>
+                {/* Meta Title */}
+                <title>Secure Payment Options | BizareXpedition™️</title>
+                {/* Meta Description */}
+                <meta
+                    name="description"
+                    content="Make safe and hassle-free payments for your travel bookings with BizareXpedition. We accept credit/debit cards, UPI, net banking, and bank transfers. Secure transactions, multiple payment options, and instant booking confirmation."
+                />
+                {/* Meta Keywords (Not used for SEO but can be included) */}
+                <meta
+                    name="keywords"
+                    content="payments, secure payments, travel payments, online payment, BizareXpedition payments, UPI payments, net banking, bank transfer, safe transactions, tour booking payment"
+                />
+                {/* Author and Robots */}
+                <meta name="author" content="BizareXpedition" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="robots" content="index, follow" />
+                {/* Open Graph for Social Media */}
+                <meta property="og:title" content="Secure Payment Options | BizareXpedition" />
+                <meta property="og:description" content="Make safe and hassle-free payments for your travel bookings with BizareXpedition. We offer multiple payment options including UPI, net banking, and card payments." />
+                <meta property="og:image" content="https://www.bizarexpedition.com/payment-page-image.jpg" />
+                <meta property="og:url" content="https://www.bizarexpedition.com/payments" />
+                <meta property="og:type" content="website" />
+            </Head>
+            <main>
+                <div>
+                    <DesktopHeader />
+                    <Breadcrumbs />
+                    <div>
+                        {/* herosection start */}
+                        {/* medium devices */}
+                        <div className='md:block hidden'>
+                            <div className='w-full md:h-[400px] xl:h-[500px] flex relative'>
+                                <div className='w-[30%] h-full bg-black flex items-center justify-end'>
+                                </div>
+                                <div className='relative w-[80%] h-full flex'>
+                                    <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
+                                    <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray">
+                                    </div>
+                                </div>
+                                <div className='w-full h-full absolute'>
+                                    <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                                        <div className='w-full flex flex-col justify-center items-center'>
+                                            <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                                Payments<br /> <span className='text-white'>Secure & Convenient Payment Options</span>
+                                            </h2>
+                                            <p className="my-5 text-base text-white text-center">
+                                                At BizareXpedition, we ensure a hassle-free and secure payment process for all our customers.
+                                                Whether you are booking a customized tour, adventure package, or hotel stay, our multiple payment options make transactions quick and easy.
+                                            </p>
+                                            <Link href="/">
+                                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+                                                    Explore Now
+                                                </button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className='w-full h-full absolute'>
-                            <div className='w-[60%] h-full flex items-center justify-end px-16'>
+                        {/* small devices */}
+                        <div className='md:hidden'>
+                            <div className='w-full flex items-center justify-center bg-black p-5'>
                                 <div className='w-full flex flex-col justify-center items-center'>
-                                    <h2 className="xl:text-[55px] md:text-[35px] leading-tight uppercase font-bold text-[#D45426] text-center">
+                                    <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
                                         Payments<br /> <span className='text-white'>Secure & Convenient Payment Options</span>
                                     </h2>
-                                    <p className="my-5 text-base text-white text-center">
+                                    <p className="my-5 text-sm  text-white text-center">
                                         At BizareXpedition, we ensure a hassle-free and secure payment process for all our customers.
                                         Whether you are booking a customized tour, adventure package, or hotel stay, our multiple payment options make transactions quick and easy.
                                     </p>
                                     <Link href="/">
-                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2.5 px-4 rounded text-sm">
+                                        <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
                                             Explore Now
                                         </button>
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                {/* small devices */}
-                <div className='md:hidden'>
-                    <div className='w-full flex items-center justify-center bg-black p-5'>
-                        <div className='w-full flex flex-col justify-center items-center'>
-                            <h2 className="text-[29px] leading-tight uppercase font-bold text-[#D45426] text-center">
-                                Payments<br /> <span className='text-white'>Secure & Convenient Payment Options</span>
-                            </h2>
-                            <p className="my-5 text-sm  text-white text-center">
-                                At BizareXpedition, we ensure a hassle-free and secure payment process for all our customers.
-                                Whether you are booking a customized tour, adventure package, or hotel stay, our multiple payment options make transactions quick and easy.
-                            </p>
-                            <Link href="/">
-                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-1.5 px-3 rounded text-sm">
-                                    Explore Now
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className='relative w-full h-72'>
-                        <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
-                    </div>
-                </div>
-                {/* herosection end */}
-                <div className="container-wrapper py-10">
-                    <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
-                        <div>
-                            <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
-                                {PrivacyPolicySections.map((section) => (
-                                    <ScrollLink
-                                        key={section.id}
-                                        to={section.id}
-                                        spy={true}
-                                        smooth={true}
-                                        offset={-100}
-                                        duration={500}
-                                        onClick={() => setActiveIndex(section.id)}
-                                    >
-                                        <p
-                                            className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
-                                                ? "border-l-4 border-l-primary text-black"
-                                                : "text-gray-400"
-                                                }`}
-                                        >
-                                            {section.title}
-                                        </p>
-                                    </ScrollLink>
-                                ))}
+                            <div className='relative w-full h-72'>
+                                <Image src="/assets/staticimage/refundCancellation.jpg" width={200} height={100} alt="" className='relative w-full h-full' />
                             </div>
                         </div>
-                        <div className="md:p-10 p-5 shadow-md rounded-md">
-                            {PrivacyPolicySections.map((section) => (
-                                <div key={section.id} id={section.id} className="mb-6 border-b">
-                                    <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
-                                    {section.content}
+                        {/* herosection end */}
+                        <div className="container-wrapper py-10">
+                            <div className="grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-7">
+                                <div>
+                                    <div className="sticky top-40 z-10 bg-white shadow-md rounded-md md:p-10 p-5">
+                                        {PrivacyPolicySections.map((section) => (
+                                            <ScrollLink
+                                                key={section.id}
+                                                to={section.id}
+                                                spy={true}
+                                                smooth={true}
+                                                offset={-100}
+                                                duration={500}
+                                                onClick={() => setActiveIndex(section.id)}
+                                            >
+                                                <p
+                                                    className={`pl-3 md:text-md text-base font-medium mb-4 hover:cursor-pointer ${activeIndex === section.id
+                                                        ? "border-l-4 border-l-primary text-black"
+                                                        : "text-gray-400"
+                                                        }`}
+                                                >
+                                                    {section.title}
+                                                </p>
+                                            </ScrollLink>
+                                        ))}
+                                    </div>
                                 </div>
-                            ))}
+                                <div className="md:p-10 p-5 shadow-md rounded-md">
+                                    {PrivacyPolicySections.map((section) => (
+                                        <div key={section.id} id={section.id} className="mb-6 border-b">
+                                            <h2 className="md:text-lg text-md font-semibold mb-2">{section.title}</h2>
+                                            {section.content}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
+                        <Footer />
                     </div>
                 </div>
-                <Footer />
-            </div>
-        </div>
+            </main>
+        </>
+
     )
 }
 
