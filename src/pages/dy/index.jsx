@@ -1,10 +1,18 @@
 import { HomeIcon,ShareIcon,PencilSquareIcon,TrashIcon,XCircleIcon,XMarkIcon,CakeIcon,UserCircleIcon,MagnifyingGlassIcon , PhoneIcon,ArrowRightCircleIcon,PrinterIcon,ChevronDownIcon,StarIcon,ChevronLeftIcon,ChevronRightIcon,} from '@heroicons/react/24/outline';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../app/globals.css";
 
 import "../../app/globals.css";
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 
-const DynamicTable = () => {
+const DynamicTable = (pageprops) => {
+     const { setServerSideProps} = useCarPopupContext();       
+          useEffect(() => {
+            if(pageprops){
+              setServerSideProps(pageprops || {});
+            }
+            
+          }, [pageprops]);
     const [columns, setColumns] = useState(['Name', 'Age']);
     const [rows, setRows] = useState([{ id: Date.now(), Name: '', Age: '' }]);
     const [submitted, setSubmitted] = useState(false);

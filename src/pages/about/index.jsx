@@ -7,14 +7,21 @@ import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 
 const fetchAboutUsPage = async () => {
   const res = await fetch(`/api/static-page/static-page-type?name=about-us`);
   return await res.json();
 };
-const About = () => {
+const About = (pageprops) => {
   const [aboutData, setAboutData] = useState();
-
+ const { setServerSideProps} = useCarPopupContext();       
+      useEffect(() => {
+        if(pageprops){
+          setServerSideProps(pageprops || {});
+        }
+        
+      }, [pageprops]);
   useEffect(() => {
     fetchAboutUsPage().then(res => {
       console.log("about page is here ---> ", res)

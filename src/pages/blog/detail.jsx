@@ -37,7 +37,7 @@
 // </div> 
 
 
-import React from "react";
+import React, { useEffect } from "react";
 import "../../app/globals.css";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import Image from "next/image";
@@ -45,8 +45,16 @@ import Footer from "@/components/Footer";
 import SuggestedBlog from "@/components/Blog/Blog-Deatil/SuggestedBlog";
 import { Link as ScrollLink } from "react-scroll";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 
-const Detail = () => {
+const Detail = (pageprops) => {
+   const { setServerSideProps} = useCarPopupContext();       
+        useEffect(() => {
+          if(pageprops){
+            setServerSideProps(pageprops || {});
+          }
+          
+        }, [pageprops]);
   return (
     <div>
       <DesktopHeader />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../app/globals.css";
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
 import Image from 'next/image';
@@ -6,14 +6,21 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 
 // const fetchPaymentPloicyPage = async () => {
 //     const res = await fetch(`/api/static-page/static-page-type?name=payment-policy`);
 //     return await res.json();
 // };
 
-const PaymentPloicy = () => {
-
+const PaymentPloicy = (pageprops) => {
+ const { setServerSideProps} = useCarPopupContext();       
+      useEffect(() => {
+        if(pageprops){
+          setServerSideProps(pageprops || {});
+        }
+        
+      }, [pageprops]);
     const [activeIndex, setActiveIndex] = useState("PaymentPolicy");
 
     const paymentPolicySections = [

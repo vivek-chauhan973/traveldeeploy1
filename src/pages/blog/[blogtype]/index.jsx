@@ -5,9 +5,17 @@ import Footer from "@/components/Footer";
 import Image from 'next/image';
 import BlogPromoFilter from "@/components/Blog/Blog-Promo/BlogPromoFilter";
 import BlogPromoPackageList from "@/components/Blog/Blog-Promo/BlogPromoPackageList";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import { useEffect } from "react";
 
-export default function Promo() {
-
+export default function Promo(pageprops) {
+ const { setServerSideProps} = useCarPopupContext();       
+      useEffect(() => {
+        if(pageprops){
+          setServerSideProps(pageprops || {});
+        }
+        
+      }, [pageprops]);
     return (
         <>
             {/* CarPromoSkeleton */}

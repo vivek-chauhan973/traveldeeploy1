@@ -17,8 +17,14 @@ const fetchCatagories = async () => {
   return data;
 }
 
-const Sitemap = () => {
-  const { searchedData } = useCarPopupContext();
+const Sitemap = (pageprops) => {
+  const { setServerSideProps,searchedData} = useCarPopupContext();       
+  useEffect(() => {
+    if(pageprops){
+      setServerSideProps(pageprops || {});
+    }
+    
+  }, [pageprops]);
 // India our package
   const tours = searchedData?.map(item => item.name) || [];
 

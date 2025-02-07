@@ -6,13 +6,21 @@ import { Link as ScrollLink } from "react-scroll";
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
+import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 
 const fetchJobsPage = async () => {
     const res = await fetch(`/api/static-page/static-page-type?name=jobs`);
     return await res.json();
   };
 
-const Careers = () => {
+const Careers = (pageprops) => {
+     const { setServerSideProps} = useCarPopupContext();       
+          useEffect(() => {
+            if(pageprops){
+              setServerSideProps(pageprops || {});
+            }
+            
+          }, [pageprops]);
     const [careersData, setCareersData ] = useState();
     const [activeIndex, setActiveIndex] = useState(0);
     useEffect(()=>{

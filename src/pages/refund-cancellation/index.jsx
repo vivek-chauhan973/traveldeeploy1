@@ -3,11 +3,19 @@ import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 
-const RefundCancellation = () => {
+const RefundCancellation = (pageprops) => {
+     const { setServerSideProps} = useCarPopupContext();       
+          useEffect(() => {
+            if(pageprops){
+              setServerSideProps(pageprops || {});
+            }
+            
+          }, [pageprops]);
     const [activeIndex, setActiveIndex] = useState("policy");
 
     const refundSections = [

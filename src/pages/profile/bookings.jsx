@@ -1,5 +1,5 @@
 import "../../app/globals.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
 import Book from "@/components/Bokings/Book";
@@ -12,11 +12,19 @@ import { GiWorld } from "react-icons/gi";
 import { BsHandbag } from "react-icons/bs";
 import { TbCalendarCancel } from "react-icons/tb";
 import { CiCamera } from "react-icons/ci";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 // import Homecomp from "@/components/ui/Homecomp";
 // import Userloginotp from "@/components/ui/Userloginotp";
 // import Enquiryform from "@/components/ui/Enquiryform";
 
-const Bookings = () => {
+const Bookings = (pageprops) => {
+   const { setServerSideProps} = useCarPopupContext();       
+        useEffect(() => {
+          if(pageprops){
+            setServerSideProps(pageprops || {});
+          }
+          
+        }, [pageprops]);
   const [plus, setplus] = useState(false);
   const [travel, setTravel] = useState(false);
 

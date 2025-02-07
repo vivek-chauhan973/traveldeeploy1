@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import BlogSuggestedCardPackages from "@/components/Blog/BlogSuggestedCardPackages";
 import Navigation from "@/components/Blog/BlogNavigation";
 import BlogBredcrumb from "@/components/Blog/BlogBredcrumb";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 const fetchPost = async (id) => {
   const data = await fetch(`/api/blog/posttitle?title=${id}`, {
     method: "GET",
@@ -19,7 +20,14 @@ const fetchNavLinkPackages=async (type,location,id)=>{
   const data = await fetch(`/api/blog/navlink-travel-guide?blogType=${type}&location=${location}&id=${id}`);
   return await data.json();
 }
-const Detail = () => {
+const Detail = (pageprops) => {
+   const { setServerSideProps} = useCarPopupContext();       
+    useEffect(() => {
+      if(pageprops){
+        setServerSideProps(pageprops || {});
+      }
+      
+    }, [pageprops]);
   const router = useRouter();
   const [detailData, setDetailData] = useState({});
   const { post, detail } = router.query;
@@ -28,7 +36,7 @@ const Detail = () => {
   useEffect(() => {
     if (detail) {
       fetchPost(detail).then((res) => {
-        console.log("res====> ",res)
+        // console.log("res====> ",res)
         setDetailData(res?.data || {});
       });
       
@@ -44,7 +52,7 @@ const Detail = () => {
       })
     }
   },[detailData?.location])
-  console.log("travel-guide packages",detail)
+  // console.log("travel-guide packages",detail)
 
   // useEffect(()=>{
   //   if(navLinkData?.length>0){

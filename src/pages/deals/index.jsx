@@ -1,9 +1,17 @@
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import "../../app/globals.css";
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
 import Image from "next/image";
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const Deals = () => {
+const Deals = (pageprops) => {
+   const { setServerSideProps} = useCarPopupContext();       
+        useEffect(() => {
+          if(pageprops){
+            setServerSideProps(pageprops || {});
+          }
+          
+        }, [pageprops]);
   return (
     <div>
       <DesktopHeader />

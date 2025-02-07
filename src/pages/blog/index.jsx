@@ -9,13 +9,21 @@ import BlogPromoFilter from "@/components/Blog/Blog-Promo/BlogPromoFilter";
 import BlogPromoPackageList from "@/components/Blog/Blog-Promo/BlogPromoPackageList";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PhoneFilter from "@/components/Blog/Blog-Promo/PhoneFilter";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 const fetchBlogPromoBanner=async ()=>{
     return (await(await fetch("/api/blog",{method:"GET"})).json())
 }
 const fetchBlogs=async ()=>{
     return (await(await fetch("/api/blog/getallblogs")).json())
 }
-export default function Promo() {
+export default function Promo(pageprops) {
+     const { setServerSideProps} = useCarPopupContext();       
+          useEffect(() => {
+            if(pageprops){
+              setServerSideProps(pageprops || {});
+            }
+            
+          }, [pageprops]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 const [blogHero,setBlogHero]=useState({});
 const [blogs,setBlogs]=useState([]);

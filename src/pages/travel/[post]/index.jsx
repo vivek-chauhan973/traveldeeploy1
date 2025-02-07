@@ -10,6 +10,7 @@ import BlogPromoPackageList from "@/components/Blog/Blog-Promo/BlogPromoPackageL
 import PhoneFilter from "@/components/Blog/Blog-Promo/PhoneFilter";
 import { useRouter } from "next/router";
 import BlogBredcrumb from "@/components/Blog/BlogBredcrumb";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 const fetchBlogPromoBanner=async (id)=>{
     return (await(await fetch(`/api/blog?selectType=${id}`,{method:"GET"})).json())
 }
@@ -20,7 +21,14 @@ const fetchBlogs=async (id)=>{
 const fetchFilteredBlogs=async (id,category)=>{
     return (await(await fetch(`/api/blog/blog-filter?selectType=${id}&category=${category}`)).json())
 }
-export default function Promo() {
+export default function Promo(pageprops) {
+     const { setServerSideProps} = useCarPopupContext();       
+      useEffect(() => {
+        if(pageprops){
+          setServerSideProps(pageprops || {});
+        }
+        
+      }, [pageprops]);
     const router=useRouter();
     // console.log("router .........................",router?.query?.post)
     const [isModalOpen, setIsModalOpen] = useState(false);
