@@ -42,8 +42,14 @@ const getAllPackages = async () => {
     const data = await response.json()
     return data;
 }
-export default function CarDetail() {
-
+export default function CarDetail(pageprops) {
+    const { setServerSideProps,loginPopup, setLoginPopup } = useCarPopupContext();       
+    useEffect(() => {
+      if(pageprops){
+        setServerSideProps(pageprops || {});
+      }
+      
+    }, [pageprops]);
     const router = useRouter();
     const { detail } = router.query
     const package1 = detail?.replace("-tour-package", "")
@@ -54,8 +60,6 @@ export default function CarDetail() {
     // For departure city pop up
     const [showPopup, setShowPopup] = useState(false);
     const [showPopupBooking, setShowPopupBooking] = useState(false);
-    const { loginPopup, setLoginPopup } = useCarPopupContext();
-
     // console.log("package1", package1);
     const [carAllPackages, setCarAllPackages] = useState([])
 

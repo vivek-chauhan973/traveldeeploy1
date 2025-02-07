@@ -136,7 +136,15 @@ const fetchAllCities = async () => {
   return await res.json();
 };
 
-export default function App() {
+export default function App(pageprops) {
+  const { loginPopup, showPopup, setShowPopup,
+    showPopupOutstation, activeInactivePopup,setServerSideProps } = useCarPopupContext();       
+  useEffect(() => {
+    if(pageprops){
+      setServerSideProps(pageprops || {});
+    }
+    
+  }, [pageprops]);
   const [cityPromoData, setCityPromoData] = useState([]);
   const [carPackageData, seCarPackageData] = useState([]);
   const [carBanner, setCarBanner] = useState({});
@@ -147,8 +155,7 @@ export default function App() {
   const [staticBanner, setStaticBanner] = useState([]);
   const [cities, setCities] = useState([]);
 
-  const { loginPopup, showPopup, setShowPopup,
-    showPopupOutstation, activeInactivePopup } = useCarPopupContext();
+ 
   useEffect(() => {
     // Fetch itinerary data
     const fetchItineraryData = async () => {

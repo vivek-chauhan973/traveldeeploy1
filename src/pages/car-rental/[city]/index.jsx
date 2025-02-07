@@ -13,6 +13,7 @@ import Modal from '@mui/material/Modal';
 import { CancelIcon } from "@/components/icons/index"
 import { AppProvider, useAppContext } from "@/components/admin/context/Package/AddGuest";
 import Footer from "@/components/Footer";
+import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 
 
 const fetchLocationAccordingToCity=async (city)=>{
@@ -28,7 +29,14 @@ const fetchCarPackageList=async (cityId)=>{
     const res=await fetch(`/api/cars/location/get-citypackage?cityId=${cityId}`);
     return await res.json()
 }
-export default function CarPromo() {
+export default function CarPromo(pageprops) {
+     const { setServerSideProps } = useCarPopupContext();       
+      useEffect(() => {
+        if(pageprops){
+          setServerSideProps(pageprops || {});
+        }
+        
+      }, [pageprops]);
 const router=useRouter();
 const city=router?.query?.city?.replace("-car-hire","")?.split(" ")?.join("-");
 // console.log("citty",city)
