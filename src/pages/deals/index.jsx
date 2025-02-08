@@ -3,6 +3,7 @@ import "../../app/globals.css";
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader'
 import Image from "next/image";
 import React, { useEffect } from 'react'
+import StaticBreadcrumbs from "@/components/StaticBreadcrumbs";
 
 const Deals = (pageprops) => {
    const { setServerSideProps} = useCarPopupContext();       
@@ -15,6 +16,7 @@ const Deals = (pageprops) => {
   return (
     <div>
       <DesktopHeader />
+      <StaticBreadcrumbs/>
       <div>
         <div className="relative w-full h-80 md:h-96 lg:h-[32rem] overflow-hidden">
           <Image

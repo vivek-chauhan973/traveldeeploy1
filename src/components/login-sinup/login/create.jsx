@@ -8,12 +8,13 @@ import Image from "next/image";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 
 const Create = () => {
-  const { setLoginPopup, crmData, setCrmData } = useCarPopupContext();
+  const { setLoginPopup, crmData, setCrmData, customiseData } = useCarPopupContext();
   const {fixedDeparturePopupPrice, departureSectionData, showAddguest, inputData}=useAppContext();
   // console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice);
   // console.log("departureSectionData----->",departureSectionData);
   // console.log("showAddguest----->",showAddguest);
   // console.log("inputData----->",inputData);
+  // console.log("customiseData----->",customiseData);
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {

@@ -104,8 +104,8 @@ export default function Footer() {
                                         <div className="flex flex-col space-y-2 ">
                                             <h2 className=" font-semibold text-base">Company</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
-                                                <Link rel="noopener noreferrer" href="/about" className="footer-content2">About Us</Link>
-                                                <Link rel="noopener noreferrer" href="/contact" className="footer-content2">Contact Us</Link>
+                                                <Link rel="noopener noreferrer" href="/about-us" className="footer-content2">About Us</Link>
+                                                <Link rel="noopener noreferrer" href="/contact-us" className="footer-content2">Contact Us</Link>
                                                 <Link rel="noopener noreferrer" href="#" className="footer-content2">Blog</Link>
                                             </div>
                                         </div>

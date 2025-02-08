@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const Breadcrumbs = () => {
+const StaticBreadcrumbs = () => {
     const router = useRouter();
     const pathnames = router.asPath.split("/").filter((x) => x);
     return (
@@ -21,7 +21,7 @@ const Breadcrumbs = () => {
                             <li key={index} className="flex items-center capitalize">
                                 <span className="mr-2">{">"}</span>
                                 {isLast ? (
-                                    <span className="font-semibold text-gray-900 ">{name?.replace("-tour-packages", " ")?.replace("-"," ")} Tour Packages</span>
+                                    <span className="font-semibold text-gray-900 ">{name}</span>
                                 ) : (
                                     <a href={routeTo} className="hover:underline">
                                         {name.replace("-", " ")}
@@ -36,8 +36,4 @@ const Breadcrumbs = () => {
     );
 }
 
-export default Breadcrumbs;
-
-
-
-
+export default StaticBreadcrumbs;

@@ -163,7 +163,7 @@ const Header3 = () => {
             </Link>
           </li> */}
           <li className="capitalize flex items-center gap-1 cursor-pointer hover:text-primary">
-            <Link href='/contact'>
+            <Link href='/contact-us'>
               <FontAwesomeIcon
                 icon={faAddressBook}
                 className="text-sm mr-0.5 hover:text-primary cursor-pointer"

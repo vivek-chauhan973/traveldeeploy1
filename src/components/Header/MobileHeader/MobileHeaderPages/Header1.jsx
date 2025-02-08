@@ -193,15 +193,15 @@ const Header1 = ({ setTogle, togle }) => {
               <hr className="mx-1" />
               <div className="w-full flex flex-col gap-3 px-2 sm:px-4 my-2">
                 <Link className="cursor-pointer font-semibold"
-                  onClick={() => setTogle(false)} href="/contact">
+                  onClick={() => setTogle(false)} href="/contact-us">
                   Contact Us
                 </Link>
                 <Link className="cursor-pointer font-semibold"
-                  onClick={() => setTogle(false)} href="/about">
+                  onClick={() => setTogle(false)} href="/about-us">
                   About Us
                 </Link>
                 <Link className="cursor-pointer font-semibold"
-                  onClick={() => setTogle(false)} href="/career">
+                  onClick={() => setTogle(false)} href="/careers">
                   Career
                 </Link>
               </div>
@@ -246,20 +246,7 @@ const Header1 = ({ setTogle, togle }) => {
                     <p>10am - 6pm</p>
                   </div>
                 </div>
-              </div>
-              {/* <hr className="mx-1" /> */}
-              {/* <div className="flex gap-2 flex-col px-2 sm:mx-4 my-3">
-                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl"
-                  onClick={() => setTogle(false)} href="#"
-                >
-                  Nearest office
-                </p>
-                <p className="cursor-pointer text-blue-600  sm:text-[10px] md:text-xl"
-                  onClick={() => setTogle(false)} href="#"
-                >
-                  Leave your feedback here
-                </p>
-              </div> */}
+              </div> 
             </div>
             <div className="h-[10vh] w-full"></div>
           </div>

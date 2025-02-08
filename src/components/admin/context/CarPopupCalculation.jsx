@@ -49,6 +49,8 @@ export const CarPopupProvider = ({ children }) => {
   // Car Package 
   const [summaryCarPackage, setSummaryCarPackage] = useState({});
   // console.log("summaryCarPackage global",summaryCarPackage);
+  const [customiseData, setCustomiseData] = useState({});
+  // console.log("customiseData global",customiseData);
 
   const [loginPopup, setLoginPopup] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -81,7 +83,8 @@ export const CarPopupProvider = ({ children }) => {
     setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation, setPlanOutstation,
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
     activeBookingProcess, setServerSideProps, serverSideProps, setActiveBookingProcess, searchedData, activeInactivePopup, setActiveInactivePopup, searchQuery, setSearchQuery,
-    crmData, setCrmData, grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData, summaryCarPackage, setSummaryCarPackage
+    crmData, setCrmData, grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData, summaryCarPackage, setSummaryCarPackage,
+    customiseData, setCustomiseData
   };
 
   return (

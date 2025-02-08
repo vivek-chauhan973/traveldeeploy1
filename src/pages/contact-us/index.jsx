@@ -1,13 +1,13 @@
 import "../../app/globals.css";
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Footer from '@/components/Footer';
-import Breadcrumbs from '@/components/Breadcrumbs';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import Head from "next/head";
+import StaticBreadcrumbs from "@/components/StaticBreadcrumbs";
 
 const Contact = (pageprops) => {
   const { setServerSideProps } = useCarPopupContext();
@@ -156,7 +156,7 @@ const Contact = (pageprops) => {
       <main>
         <div>
           <DesktopHeader />
-          <Breadcrumbs />
+          <StaticBreadcrumbs />
           <div>
             {/* herosection start */}
             {/* medium devices */}

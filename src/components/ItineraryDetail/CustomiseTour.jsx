@@ -25,7 +25,7 @@ const style = {
 };
 
 export default function CustomiseTour({ children }) {
-    const {setLoginPopup} = useCarPopupContext();
+    const {setLoginPopup, customiseData, setCustomiseData} = useCarPopupContext();
     const [open, setOpen] = React.useState(false);
     const [check, setCheck] = React.useState(false);
     const [formErrors, setFormErrors] = useState({});
@@ -105,11 +105,11 @@ export default function CustomiseTour({ children }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            console.log("Form submitted:", formData);
+            // console.log("Form submitted:", formData);
+            setCustomiseData(formData);
             setOpen(false);
             setLoginPopup(true);
         };
-        console.log("formData",formData);  
     };
 
     return (
