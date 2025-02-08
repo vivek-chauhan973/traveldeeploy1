@@ -74,7 +74,7 @@ const CarHireSection = ({ title, services, url }) => {
       {isOpen && (
         <ul className="py-1 pl-2">
           {carCTPackages?.slice(0, 3)?.map((service, index) => (
-            <a
+            <Link
               href={
                 "/car-rental/" + service.location.url + "/" + service.pageUrl
               }
@@ -83,16 +83,16 @@ const CarHireSection = ({ title, services, url }) => {
               <li className="capitalize text-sm hover:underline cursor-pointer text-gray-600">
                 {service?.name}
               </li>
-            </a>
+            </Link>
           ))}
           {carCTPackages?.length > 0  ?
             <div className="flex justify-end pb-2">
-              <a
+              <Link
                 href={`/car-rental/${url}-car-hire`}
                 className="py-1 px-5 rounded-md text-xs bg-navyblack text-white"
               >
                 More.....
-              </a>
+              </Link>
             </div>
             :
             ""}

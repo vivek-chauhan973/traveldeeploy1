@@ -42,31 +42,7 @@ const CarDepartureSection = ({ carPackage, showPopup, carDepartureDetails,
                                     setCarPrice1={setCarPrice1}
                                 />
                             )}
-                            {/* Calendar Slider with Previous and Next Buttons */}
-                            {/* <div className="flex pr-5 justify-end gap-2 items-center mt-2">
-                                <button
-                                    className="bg-gray-200 hover:bg-gray-300"
-                                // className={`p-2 rounded-full ${currentMonthIndex === 0
-                                //     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                //     : "bg-gray-200 hover:bg-gray-300"
-                                //     }`}
-                                // onClick={handlePreviousMonth}
-                                // disabled={currentMonthIndex === 0}
-                                >
-                                    <FontAwesomeIcon icon={faAngleLeft} className="font1" />
-                                </button>
-                                <button
-                                    className="bg-gray-200 hover:bg-gray-300"
-                                // className={`p-2 rounded-full ${currentMonthIndex === monthKeys.length - 1
-                                //     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                //     : "bg-gray-200 hover:bg-gray-300"
-                                //     }`}
-                                // onClick={handleNextMonth}
-                                // disabled={currentMonthIndex === monthKeys.length - 1}
-                                >
-                                    <FontAwesomeIcon icon={faAngleRight} className="font1" />
-                                </button>
-                            </div> */}
+                          
                             {/* Display the current month's calendar */}
                             {
                                 carDepartureDetails?.departureCity &&

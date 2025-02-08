@@ -23,9 +23,9 @@ const StaticBreadcrumbs = () => {
                                 {isLast ? (
                                     <span className="font-semibold text-gray-900 ">{name}</span>
                                 ) : (
-                                    <a href={routeTo} className="hover:underline">
+                                    <Link href={routeTo} className="hover:underline">
                                         {name.replace("-", " ")}
-                                    </a>
+                                    </Link>
                                 )}
                             </li>
                         );

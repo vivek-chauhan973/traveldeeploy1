@@ -84,9 +84,9 @@ const CarPackageCarousel = ({ carPackageData }) => {
                                                     {items?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
                                                 {/* <Link href={"/package/"+items?.pageUrl}> */}
-                                                <a href={"/car-rental/" + items.location.url + "/" + items.pageUrl} className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
+                                                <Link href={"/car-rental/" + items.location.url + "/" + items.pageUrl} className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
                                                     Know More
-                                                </a>
+                                                </Link>
                                                 {/* </Link> */}
                                             </div>
                                         </div>

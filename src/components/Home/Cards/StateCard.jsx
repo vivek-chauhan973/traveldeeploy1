@@ -51,7 +51,7 @@ const StateCard = ({ states }) => {
                         return (
                             <div key={i} className="carousel-item md:w-[280px] w-64 mb-11  rounded-[17px]">
                                 <div className="shadow-md  rounded-[17px] overflow-hidden">
-                                    <a href={"/india/"+data+"-tour-packages"}>
+                                    <Link href={"/india/"+data+"-tour-packages"}>
                                     <div className="relative">
                                         <div className=" w-full h-64">
                                             <Image className=" relative  object-cover rounded-[17px]" layout="fill"
@@ -66,7 +66,7 @@ const StateCard = ({ states }) => {
                                             </div>
                                         </div>
                                     </div> 
-                                    </a>                                
+                                    </Link>                                
                                 </div>
                             </div>
                         )

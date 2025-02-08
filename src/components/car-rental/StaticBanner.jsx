@@ -58,7 +58,7 @@ const CarCarousel = ({ staticBanner, carCarousel }) => {
                 <div key={i} className="carousel-item md:w-full w-[92%]">
                   <div className="shadow-md overflow-hidden">
                     <div className="relative">
-                      <a href={items?.url}>
+                      <Link href={items?.url}>
                         <div className="w-full md:h-96 h-60">
                           <Image
                             className="relative  object-cover md:rounded-md rounded-lg"
@@ -86,7 +86,7 @@ const CarCarousel = ({ staticBanner, carCarousel }) => {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
