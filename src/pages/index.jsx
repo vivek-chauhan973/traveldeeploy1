@@ -17,7 +17,12 @@ import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
 import TravelGuideCarousel from "@/components/TravelGuideCarousel";
 import BlogsCarousel from "@/components/BlogsCarousel";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import Head from "next/head";
 
+const dynamicSchema = async () => {
+  const res = await fetch('/api/rating');
+  return await res.json();
+}
 
 export default function Home(props) {
   // console.log("initialCity----> is here ", props);
@@ -47,10 +52,10 @@ export default function Home(props) {
   const { setServerSideProps } = useCarPopupContext();
 
   useEffect(() => {
-    if(props){
+    if (props) {
       setServerSideProps(props || {});
     }
-    
+
   }, [props]);
   useEffect(() => {
     const data = homePackages?.filter((item) => item?.category === "category1");
@@ -99,199 +104,241 @@ export default function Home(props) {
   //   getStetes().then(res=>console.log("satets site map ",res))
   // },[])
 
+  useEffect(()=>{
+    dynamicSchema().then(res => {
+      console.log("res of dynamic schema ===> ", res);  
+    })
+  },[])
+
   return (
     <>
-      <DesktopHeader multipost={props?.multipost} />
-      <HeroSection />
-      {/* First image and text */}
-      <div className="container-wrapper  md:py-11 py-5">
-        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center ">
-          <div className=" md:shrink-0 md:mt-0 mt-5 lg:ml-0 ml-2">
-            <p className=" text-amber-600   font-semibold mb-0.5">
-              {category1?.[0]?.subtitle}
-            </p>
-            <h1 className=" md:text-[25px] text-xl  font-medium ">
-              {category1?.[0]?.title}
-            </h1>
-            <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
-              {category1?.[0]?.description}
-            </h1>
-            <Link
-              href={
-                `/speciality-tours/` +
-                category1?.[0]?.options?.[0]?.selectedItem +
-                "-tour-packages"
-              }
-            >
-              <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
-                Know more
-              </button>
-            </Link>
-          </div>
-          <div className=" md:ml-28">
-            <Link
-              href={
-                `/speciality-tours/` +
-                category1?.[0]?.options?.[0]?.selectedItem +
-                "-tour-packages"
-              }
-            >
-              <Image
-                width={400}
-                height={200}
-                className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
-                src={
-                  "public/" + category1?.[0]?.options?.[0]?.posterPath
-                    ? category1?.[0]?.options?.[0]?.posterPath
-                    : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      <Head>
+        <title>BizareXpedition™️ - A Signature of Excellence</title>
+        <meta name="description" content="Plan your perfect trip with BizareXpedition™️." />
+        {/* JSON-LD Schema Markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "BizareXpedition™",
+              "alternateName": "BX",
+              "url": "https://www.bizarexpedition.com/",
+              "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-9897581113",
+                "contactType": "sales",
+                "areaServed": "IN",
+                "availableLanguage": ["en", "Hindi"]
+              },
+              "sameAs": [
+                "https://www.facebook.com/bizareX/",
+                "https://x.com/bizarexpedition",
+                "https://www.instagram.com/bizarexpedition/",
+                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
+                "https://in.linkedin.com/company/bizare-xpedition",
+                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
+                "https://www.bizarexpedition.com/"
+              ]
+            })
+          }}
+        />
+      </Head>
+      <main>
+        <DesktopHeader multipost={props?.multipost} />
+        <HeroSection />
+        {/* First image and text */}
+        <div className="container-wrapper  md:py-11 py-5">
+          <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center ">
+            <div className=" md:shrink-0 md:mt-0 mt-5 lg:ml-0 ml-2">
+              <p className=" text-amber-600   font-semibold mb-0.5">
+                {category1?.[0]?.subtitle}
+              </p>
+              <h1 className=" md:text-[25px] text-xl  font-medium ">
+                {category1?.[0]?.title}
+              </h1>
+              <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
+                {category1?.[0]?.description}
+              </h1>
+              <Link
+                href={
+                  `/speciality-tours/` +
+                  category1?.[0]?.options?.[0]?.selectedItem +
+                  "-tour-packages"
                 }
-                alt=""
-              />
-            </Link>
-          </div>
-        </div>
-      </div>
-      {/* carousel all state card*/}
-      <div>
-        <StateCard states={states} />
-      </div>
-      {/* Second image and text */}
-      <div className="container-wrapper  md:py-11 py-5">
-        <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center ">
-          <div className=" md:shrink-0 md:my-0 my-5 lg:ml-0 ml-2">
-            <p className=" text-amber-600 font-semibold mb-0.5">
-              {category3?.[0]?.subtitle}
-            </p>
-            <h1 className=" md:text-[25px] text-xl  font-medium">
-              {category3?.[0]?.title}
-            </h1>
-            <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
-              {category3?.[0]?.description}
-            </h1>
-            <Link
-              href={
-                `/speciality-tours/` +
-                category3?.[0]?.options?.[0]?.selectedItem +
-                "-tour-packages"
-              }
-            >
-              <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
-                Know more
-              </button>
-            </Link>
-          </div>
-          <div className="md:ml-28 ">
-            <Link
-              href={
-                `/speciality-tours/` +
-                category3?.[0]?.options?.[0]?.selectedItem +
-                "-tour-packages"
-              }
-            >
-              <Image
-                className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
-                width={400}
-                height={200}
-                src={
-                  category3?.[0]?.options?.[0]?.posterPath
-                    ? category3?.[0]?.options?.[0]?.posterPath
-                    : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                }
-                alt=""
-              />
-            </Link>
-          </div>
-        </div>
-      </div>
-      {/* Third first image and text */}
-      <div className="container-wrapper md:pb-10 pb-5">
-        <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
-          <div className="">
-            <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
-              <Image
-                className=" object-cover rounded-[17px] w-[600px] h-[265px] md:w-[420px] md:h-[265px]"
-                width={450}
-                height={450}
-                src={category2?.[0]?.options?.[0]?.uploads?.[0]}
-                alt=""
-              />
-            </Link>
-          </div>
-          <div className="md:my-0 my-5 lg:ml-0 ml-2">
-            <p className=" text-amber-600  font-semibold mb-0.5">
-              {category2?.[0]?.subtitle}
-            </p>
-            <h1 className="md:text-[25px] text-xl font-medium">
-              {category2?.[0]?.title}
-            </h1>
-            <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
-              {category2?.[0]?.description}
-            </h1>
-            <div className="flex md:justify-between gap-3">
-              <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
+              >
                 <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                   Know more
                 </button>
               </Link>
             </div>
+            <div className=" md:ml-28">
+              <Link
+                href={
+                  `/speciality-tours/` +
+                  category1?.[0]?.options?.[0]?.selectedItem +
+                  "-tour-packages"
+                }
+              >
+                <Image
+                  width={400}
+                  height={200}
+                  className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
+                  src={
+                    "public/" + category1?.[0]?.options?.[0]?.posterPath
+                      ? category1?.[0]?.options?.[0]?.posterPath
+                      : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
+                  alt=""
+                />
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-      {/* Carousel Banner Images */}
-      <div className="md:pb-10 pb-5 xl:mx-16 md:mx-3">
-        <Cardwork />
-      </div>
-      {/* horizontal card */}
-      <div className="">
-        {cityPackages?.length > 0 && (
-          <div className="container-wrapper text-center pb-2">
-            <p className="md:text-[25px] text-xl font-medium mb-1">
-              Your Next Remarkable Adventure Awaits
-            </p>
-          </div>
-        )}
-        <div className="container-wrapper justify-center  flex flex-wrap">
-          {cityPackages?.map((item, i) => (
-            <HorizontalCard key={i} item={item} />
-          ))}
+        {/* carousel all state card*/}
+        <div>
+          <StateCard states={states} />
         </div>
-      </div>
-      <div>
-        <Card4 packages={packages} />
-      </div>
-      {/* Card Kuoni copy */}
+        {/* Second image and text */}
+        <div className="container-wrapper  md:py-11 py-5">
+          <div className=" md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center ">
+            <div className=" md:shrink-0 md:my-0 my-5 lg:ml-0 ml-2">
+              <p className=" text-amber-600 font-semibold mb-0.5">
+                {category3?.[0]?.subtitle}
+              </p>
+              <h1 className=" md:text-[25px] text-xl  font-medium">
+                {category3?.[0]?.title}
+              </h1>
+              <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
+                {category3?.[0]?.description}
+              </h1>
+              <Link
+                href={
+                  `/speciality-tours/` +
+                  category3?.[0]?.options?.[0]?.selectedItem +
+                  "-tour-packages"
+                }
+              >
+                <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+                  Know more
+                </button>
+              </Link>
+            </div>
+            <div className="md:ml-28 ">
+              <Link
+                href={
+                  `/speciality-tours/` +
+                  category3?.[0]?.options?.[0]?.selectedItem +
+                  "-tour-packages"
+                }
+              >
+                <Image
+                  className="object-cover rounded-[17px] w-[600px] h-[265px] md:w-[500px] md:h-[265px]"
+                  width={400}
+                  height={200}
+                  src={
+                    category3?.[0]?.options?.[0]?.posterPath
+                      ? category3?.[0]?.options?.[0]?.posterPath
+                      : "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
+                  alt=""
+                />
+              </Link>
+            </div>
+          </div>
+        </div>
+        {/* Third first image and text */}
+        <div className="container-wrapper md:pb-10 pb-5">
+          <div className=" md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5  text-wrap md:items-center ">
+            <div className="">
+              <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
+                <Image
+                  className=" object-cover rounded-[17px] w-[600px] h-[265px] md:w-[420px] md:h-[265px]"
+                  width={450}
+                  height={450}
+                  src={category2?.[0]?.options?.[0]?.uploads?.[0]}
+                  alt=""
+                />
+              </Link>
+            </div>
+            <div className="md:my-0 my-5 lg:ml-0 ml-2">
+              <p className=" text-amber-600  font-semibold mb-0.5">
+                {category2?.[0]?.subtitle}
+              </p>
+              <h1 className="md:text-[25px] text-xl font-medium">
+                {category2?.[0]?.title}
+              </h1>
+              <h1 className="md:text-[16px] text-para line-clamp-3 mt-2.5 mb-5">
+                {category2?.[0]?.description}
+              </h1>
+              <div className="flex md:justify-between gap-3">
+                <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
+                  <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
+                    Know more
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Carousel Banner Images */}
+        <div className="md:pb-10 pb-5 xl:mx-16 md:mx-3">
+          <Cardwork />
+        </div>
+        {/* horizontal card */}
+        <div className="">
+          {cityPackages?.length > 0 && (
+            <div className="container-wrapper text-center pb-2">
+              <p className="md:text-[25px] text-xl font-medium mb-1">
+                Your Next Remarkable Adventure Awaits
+              </p>
+            </div>
+          )}
+          <div className="container-wrapper justify-center  flex flex-wrap">
+            {cityPackages?.map((item, i) => (
+              <HorizontalCard key={i} item={item} />
+            ))}
+          </div>
+        </div>
+        <div>
+          <Card4 packages={packages} />
+        </div>
+        {/* Card Kuoni copy */}
 
-      <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
-        <div className=" md:mt-4 mt-4">
-          <ArrowSection />
+        <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
+          <div className=" md:mt-4 mt-4">
+            <ArrowSection />
+          </div>
         </div>
-      </div>
-      {/* state code start  */}
-      <div>
-        <State />
-      </div>
-      {/* Our Promise */}
-      <div>{/* <Promises /> */}</div>
-      {/* Country card  */}
-      <div>{/* <Card2 /> */}</div>
-      <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
-        <div className=" md:mt-4 mt-4">
-          <CarArrowSection carCityPromos={carCityPromos} />
+        {/* state code start  */}
+        <div>
+          <State />
         </div>
-      </div>
-      <div>
-        <CarPackageCarousel carPackageData={carPackages} />
-      </div>
-      <div>
-        <TravelGuideCarousel carPackageData={travelGuidePackage} />
-      </div>
-      <div>
-        <BlogsCarousel carPackageData={blogsPackages} />
-      </div>
-      <div>
-        <ReviewsCard />
-      </div>
-      <Footer />
+        {/* Our Promise */}
+        <div>{/* <Promises /> */}</div>
+        {/* Country card  */}
+        <div>{/* <Card2 /> */}</div>
+        <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
+          <div className=" md:mt-4 mt-4">
+            <CarArrowSection carCityPromos={carCityPromos} />
+          </div>
+        </div>
+        <div>
+          <CarPackageCarousel carPackageData={carPackages} />
+        </div>
+        <div>
+          <TravelGuideCarousel carPackageData={travelGuidePackage} />
+        </div>
+        <div>
+          <BlogsCarousel carPackageData={blogsPackages} />
+        </div>
+        <div>
+          <ReviewsCard />
+        </div>
+        <Footer />
+      </main>
     </>
   );
 }

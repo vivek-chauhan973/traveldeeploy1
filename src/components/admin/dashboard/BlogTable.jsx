@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 const BlogTable = ({ item }) => {
-  console.log("blogpost item is here -------> ", item);
+  // console.log("blogpost item is here -------> ", item);
   return (
     <div className="m-2 ">
       <div className="flex justify-between gap-3 items-center bg-white rounded">

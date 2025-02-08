@@ -85,7 +85,8 @@ const RatingForm = () => {
             console.error('Error saving data:', error);
         }
     };
-
+    // console.log("formData ", formData);
+    
     return (
         <div>
             <Head>
