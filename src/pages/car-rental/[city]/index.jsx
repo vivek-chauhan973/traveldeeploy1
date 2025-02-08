@@ -3,7 +3,6 @@ import "../../../app/globals.css";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CraPromoFaq from "@/components/car-rental/car-promo/CarPromoFaq";
-import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarPromoSearchPageFilter from "@/components/car-rental/car-promo/CarPromoSearchPageFilter";
 import CarPromoPhoneFilter from "@/components/car-rental/car-promo/CarPromoPhoneFilter";
 import SearchCarPagePackageList from "@/components/car-rental/car-promo/SearchCarPackageList";

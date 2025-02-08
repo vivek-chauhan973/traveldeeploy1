@@ -22,6 +22,7 @@ import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculati
 import CarBookingPopup from "@/components/car-rental/CarBookingPopup";
 import CarBookingPopupOutsation from "@/components/car-rental/CarBookingPopupOutstation";
 import ActiveInactive from "@/components/car-rental/ActiveInactive";
+import Link from "next/link";
 
 const fetchPromoList = async () => {
   const response = await fetch(
