@@ -38,12 +38,12 @@ const SpacialityTour = () => {
         <h4 className='font-bold text-md text-[#29499A]'>POPULAR & AVAILABLE TOURS</h4>
         <div className=" grid grid-cols-4 pt-2" >
             {categories?.map((item, i) =>
-              <a
+              <Link
                 href={`/speciality-tours/` + item.category + '-tour-packages'}
                 key={i} className='text-para font-semibold mb-2'
               >
                 {item?.category}
-              </a>
+              </Link>
             )}
         </div>
       </div>

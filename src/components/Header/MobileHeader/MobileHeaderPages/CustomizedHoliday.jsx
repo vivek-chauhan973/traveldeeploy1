@@ -57,12 +57,12 @@ const CustomizedHoliday = ({ setOpenClose }) => {
         </h4>
         <div className="flex flex-col pt-2">
           {data?.[0]?.options?.map((item, i) =>
-            <a
+            <Link
               key={i} className='text-para font-semibold mb-2'
               href={'/speciality-tours/' + item.category + '-tour-packages'}
             >
                 {item.category}
-            </a>
+            </Link>
           )}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 const fetchHeaderCities = async (id) => {
   const data = await fetch(`/api/home/headerCity?id=${id}`);
@@ -58,12 +59,12 @@ const Show = () => {
             <div className="grid grid-cols-4 gap-x-10">
               {cities?.length > 0 && cities?.map((city, i) =>
                 // <p key={i} className='text-para mb-2'>{city?.name}</p>
-                <a
+                <Link
                 href={`/india/` + city?.url + "-tour-packages"}
                 key={i} className='text-para font-semibold mb-2'
               >
                {city?.name}
-              </a>
+              </Link>
               )}
             </div>
           </div>
