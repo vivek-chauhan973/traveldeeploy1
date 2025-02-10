@@ -13,6 +13,9 @@ const PackageSeoSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  keyword:{
+    type: String,
+  },
   canonicalUrl: {
     type: String,
     default: function() {
@@ -28,4 +31,5 @@ const PackageSeoSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.models.SeoData || mongoose.model('SeoData', PackageSeoSchema);
+const SeoData= mongoose.models.SeoData || mongoose.model('SeoData', PackageSeoSchema);
+export default SeoData

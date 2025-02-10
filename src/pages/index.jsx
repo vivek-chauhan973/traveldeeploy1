@@ -19,11 +19,6 @@ import BlogsCarousel from "@/components/BlogsCarousel";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import Head from "next/head";
 
-const dynamicSchema = async () => {
-  const res = await fetch('/api/rating');
-  return await res.json();
-}
-
 export default function Home(props) {
   // console.log("initialCity----> is here ", props);
   const [states, setStates] = useState([]);
@@ -104,12 +99,6 @@ export default function Home(props) {
   //   getStetes().then(res=>console.log("satets site map ",res))
   // },[])
 
-  useEffect(()=>{
-    dynamicSchema().then(res => {
-      console.log("res of dynamic schema ===> ", res);  
-    })
-  },[])
-
   return (
     <>
       <Head>
@@ -131,7 +120,7 @@ export default function Home(props) {
                 "telephone": "+91-9897581113",
                 "contactType": "sales",
                 "areaServed": "IN",
-                "availableLanguage": ["en", "Hindi"]
+                "availableLanguage": ["en","Hindi"]
               },
               "sameAs": [
                 "https://www.facebook.com/bizareX/",

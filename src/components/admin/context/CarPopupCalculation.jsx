@@ -8,6 +8,13 @@ const fetchSearchedData = async () => {
   );
   return await data.json()
 }
+
+const dynamicSchema = async () => {
+  const res = await fetch('/api/rating');
+  return await res.json();
+}
+
+
 export const CarPopupProvider = ({ children }) => {
   const [userFormData, setUserFormData] = useState({});
   const [pacakgeData, setPackageData] = useState([]);
@@ -70,7 +77,17 @@ export const CarPopupProvider = ({ children }) => {
       item?.name?.includes(searchQuery)
     );
     setSearchedData(data || []);
-  }, [searchQuery, pacakgeData])
+  }, [searchQuery, pacakgeData]);
+
+  const [schemaData, setSchemaData] = useState({})
+   useEffect(()=>{
+      dynamicSchema().then(res => {
+        // console.log("res of dynamic schema ===> ", res);
+        setSchemaData(res)  
+      })
+    },[]);
+  // console.log("schemaData of dynamic schema ===> ", schemaData);
+
   const [serverSideProps, setServerSideProps] = useState({});
   // console.log("pacakgeData global",pacakgeData);
   // console.log("serverSideProps------->",serverSideProps);
@@ -84,7 +101,7 @@ export const CarPopupProvider = ({ children }) => {
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
     activeBookingProcess, setServerSideProps, serverSideProps, setActiveBookingProcess, searchedData, activeInactivePopup, setActiveInactivePopup, searchQuery, setSearchQuery,
     crmData, setCrmData, grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData, summaryCarPackage, setSummaryCarPackage,
-    customiseData, setCustomiseData
+    customiseData, setCustomiseData, schemaData, setSchemaData
   };
 
   return (

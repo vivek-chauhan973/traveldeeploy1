@@ -7,7 +7,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
         description: '',
         canonicalUrl: '',
         keyword: '',
-        priceValid: ''
+        priceValid: '',
     });
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
                         description: '',
                         canonicalUrl: '',
                         keyword: '',
-                        priceValid: ''
+                        priceValid: '',
                     });
                 } else {
                     throw new Error('Failed to fetch SEO data');
@@ -42,7 +42,8 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
         title: '',
         description: '',
         keyword: '',
-        priceValid: ''
+        priceValid: '',
+        keyword: ''
     });
 
     const handleMetaTag = (e) => {
@@ -55,7 +56,9 @@ const SeoPage = ({ itinerary,setActiveTab, setSeoDot }) => {
 
     const handleSubmitSeoField = async (e) => {
         e.preventDefault();
-        const { title, description, keyword , priceValid } = isSEOField;
+        const { title, description } = isSEOField;
+        console.log("isSEOField",isSEOField);
+        
 
         if (title.trim() === '') {
             setValidationErrors(prevErrors => ({

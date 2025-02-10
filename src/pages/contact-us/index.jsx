@@ -152,6 +152,36 @@ const Contact = (pageprops) => {
         <meta property="og:image" content="https://www.bizarexpedition.com/contact-us.jpg" />
         <meta property="og:url" content="https://www.bizarexpedition.com/contact-us" />
         <meta property="og:type" content="website" />
+         {/* JSON-LD Schema Markup */}
+         <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "BizareXpedition™",
+              "alternateName": "BX",
+              "url": "https://www.bizarexpedition.com/",
+              "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-9897581113",
+                "contactType": "sales",
+                "areaServed": "IN",
+                "availableLanguage": ["en", "Hindi"]
+              },
+              "sameAs": [
+                "https://www.facebook.com/bizareX/",
+                "https://x.com/bizarexpedition",
+                "https://www.instagram.com/bizarexpedition/",
+                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
+                "https://in.linkedin.com/company/bizare-xpedition",
+                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
+                "https://www.bizarexpedition.com/"
+              ]
+            })
+          }}
+        />
       </Head>
       <main>
         <div>
