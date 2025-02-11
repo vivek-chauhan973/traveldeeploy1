@@ -11,7 +11,7 @@ const verifyOtpApi = async (req, res) => {
             if (!data) {
                 return res.status(404).json({ success: false, message: 'No OTP found for this mobile number' });
             }
-            const token=jwt.sign({user:data},process.env.Secret_key);
+            const token=jwt.sign({user:data?._id},process.env.Secret_key);
             if (parseInt(otp) === data.otp) {
                 const verifiedUser = await OTPModel.findOneAndUpdate(
                     { _id:data?._id},

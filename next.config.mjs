@@ -1,26 +1,41 @@
+
 export default {
   reactStrictMode: true,
   images: {
     unoptimized: true,
-    remotePatterns: [{
-      protocol: 'https',
-      hostname: '**',
-    }],
+    domains: ["localhost"], // Allow images from localhost
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3000",
+        pathname: "/uploads/**", // Allow images from your uploads directory
+      },
+      {
+        protocol: "https",
+        hostname: "**", // Allow all external domains (Optional)
+      },
+    ],
   },
+  // experimental: {
+  //   outputFileTracingRoot: path.join(__dirname, '../../'),
+  // },
   webpack(config) {
     // Custom Webpack configuration for splitChunks
     config.optimization.splitChunks = {
-      chunks: 'all',  // Apply splitChunks to all types of chunks (async, sync, etc.)
-      automaticNameDelimiter: '.',  // Delimiter for naming chunks
-      minSize: 30000,  // Minimum size (in bytes) for a chunk to be split
-      maxSize: 50000,  // Maximum size (in bytes) for a chunk before it's split further
+      chunks: "all",
+      automaticNameDelimiter: ".",
+      minSize: 30000,
+      maxSize: 50000,
     };
     return config;
   },
   async rewrites() {
     return [
-      { source: '/api/:path*', destination: '/api/:path*' },
-      { source: '/admin/:path*', destination: '/admin/:path*' },
+      { source: "/api/:path*", destination: "/api/:path*" },
+      { source: "/admin/:path*", destination: "/admin/:path*" },
+      { source: "/uploads/:path*", destination: "/uploads/:path*" }, // Rewrite for serving uploads
     ];
   },
 };
+

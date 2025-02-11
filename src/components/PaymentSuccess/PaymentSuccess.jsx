@@ -2,23 +2,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import "../../app/globals.css";
 import Link from "next/link";
-import { useAppContext } from "../admin/context/Package/AddGuest";
-import { useCarPopupContext } from "../admin/context/CarPopupCalculation";
-
 const PaymentSuccess = () => {
-  const { fixedDeparturePopupPrice, departureSectionData, showAddguest, inputData } = useAppContext();
-  console.log("fixedDeparturePopupPrice----->", fixedDeparturePopupPrice);
-  console.log("departureSectionData----->", departureSectionData);
-  console.log("showAddguest----->", showAddguest);
-  console.log("inputData----->", inputData);
-
-  const { crmData } = useCarPopupContext();
-  console.log("crmData payments", crmData);
-
   const router = useRouter();
   const { order_id } = router.query;
   const [status, setStatus] = useState("Checking...");
-
+const [link,setLink]=useState("")
   useEffect(() => {
     if (order_id) {
       checkPaymentStatus();
@@ -29,7 +17,8 @@ const PaymentSuccess = () => {
     try {
       const response = await fetch(`/api/cashfree/check-payment?order_id=${order_id}`, { method: "GET" });
       const data = await response.json();
-      setStatus(data?.payment_status);
+      setStatus(data?.data?.order_status);
+      setLink(data?.data?.order_tags?.package_url)
       console.log("response of status---->", data)
     } catch (error) {
       console.error("Payment Status Error:", error);
@@ -46,7 +35,7 @@ const PaymentSuccess = () => {
         <div className="flex flex-col justify-center items-center gap-5 border shadow-md rounded-md w-72 px-10 py-5">
           <h1 className="text-lg font-semibold">Payment Status</h1>
           <p className="text-base font-semibold">{status}</p>
-          <Link href="/">
+          <Link href={link}>
             <button
               className="bg-primary text-white py-1 px-5  rounded"
               onClick={handleOk}

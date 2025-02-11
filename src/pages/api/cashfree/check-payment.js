@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         const cashfreeUrl =
         process.env.NODE_ENV === "production"
           ? `https://api.cashfree.com/pg/orders/${order_id}`
-          : `https://sandbox.cashfree.com/pg/orders/${order_id}`;  
+          :` https://sandbox.cashfree.com/pg/orders/${order_id}`;  
       const response = await fetch(cashfreeUrl, {
         method: "GET",
         headers: {
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         throw new Error(data.message || "Error fetching payment status");
       }
   
-      return res.status(200).json({ payment_status: data.order_status });
+      return res.status(200).json({ data });
     } catch (error) {
       return res.status(500).json({ error: error.message || "Internal Server Error" });
     }

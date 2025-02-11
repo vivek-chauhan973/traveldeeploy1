@@ -2,7 +2,6 @@ import "../../app/globals.css";
 import { useEffect, useState } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { FaGlobe, FaCar, FaHandsHelping } from "react-icons/fa";
-import Carousel from "@/components/car-rental/CarouselCard";
 import Image from "next/image";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import { IoMdArrowDropdown } from "react-icons/io";

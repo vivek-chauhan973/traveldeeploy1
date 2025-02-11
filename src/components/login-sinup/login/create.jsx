@@ -6,21 +6,26 @@ import { signIn, useSession } from "next-auth/react";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
-
+import { useRouter } from "next/router";
 const Create = () => {
-  const { setLoginPopup, crmData, setCrmData, customiseData } = useCarPopupContext();
-  const {fixedDeparturePopupPrice, departureSectionData, showAddguest, inputData}=useAppContext();
-  // console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice);
-  // console.log("departureSectionData----->",departureSectionData);
-  // console.log("showAddguest----->",showAddguest);
-  // console.log("inputData----->",inputData);
-  // console.log("customiseData----->",customiseData);
+  const { setLoginPopup} =
+    useCarPopupContext();
+  const {
+    fixedDeparturePopupPrice,
+    departureSectionData,
+    showAddguest,
+    inputData,
+  } = useAppContext();
+  const packageCashfree = { departureSectionData, showAddguest, inputData };
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
+  // console.log("cash free account details--> ",packageCashfree);
+  const router = useRouter();
+
   const token = Cookies.get("token");
   const { data: session } = useSession();
   const [step, setStep] = useState(1);
@@ -30,10 +35,9 @@ const Create = () => {
   const [mobileError, setMobileError] = useState("");
   const [otpError, setOtpError] = useState("");
   const [resendOtpError, setResendOtpError] = useState("");
-  const [name,setName]=useState("");
-  const [email,setEmail]=useState("");
-  const [orderId, setOrderId] = useState('');
-  const [paymentLink, setPaymentLink] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [orderId, setOrderId] = useState("");
   const validateMobile = (mobileNumber) => {
     const isValid = /^[0-9]{10}$/.test(mobileNumber);
     if (!isValid) {
@@ -154,40 +158,99 @@ const Create = () => {
     }
   };
 
-  const handleMobileVerifiedAndGetMoreDetail = () => {
-
-    // setLoginPopup(false);
-  }
-
-  const handleProceed=async ()=>{
-    const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
-
-     const data1={name:session?.user.name,email:session?.user.email,phoneNumber,customer_id:`customer_${Date.now()}`, orderId: `order_${Date.now()}`,amount:fixedDeparturePopupPrice1}
-     try {
-      const response = await fetch('/api/cashfree/initiate-payment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data1),
-      });
-
-      const data = await response.json();
-      console.log("data",data);
-      
-      if (response.ok) {
-        setOrderId(data.orderId);
-        setCrmData(data?.data);
-        window.location.href =data.paymentLink;
-        setLoginPopup(false);
-      } else {
-        console.error('Error creating order:', data.error);
-      }
-    } catch (error) {
-      console.error('Error creating order:', error);
+  const handleMobileVerifiedAndGetMoreDetail = async () => {
+    if (!token) {
+      alert("something went wrong");
     }
-  }
-  
+    const fetchdata = await fetch(
+      `/api/authentication/get-user?token=${token}`
+    );
+    const data = await fetchdata.json();
+
+    if (fetchdata?.ok) {
+      if (router?.route?.split("/")?.includes("package")) {
+        const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
+        const data1 = {
+          package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+          packageCashfree,
+          name: name,
+          email: email,
+          phoneNumber: data?.data?.mobile,
+          customer_id: `customer_${Date.now()}`,
+          orderId: `order_${Date.now()}`,
+          amount: fixedDeparturePopupPrice1,
+        };
+        try {
+          const response = await fetch("/api/cashfree/initiate-payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data1),
+          });
+
+          const data = await response.json();
+          console.log("data", data);
+
+          if (response.ok) {
+            setOrderId(data.orderId);
+            setCrmData(data?.data);
+            window.location.href = data.paymentLink;
+            setLoginPopup(false);
+          } else {
+            console.error("Error creating order:", data.error);
+          }
+        } catch (error) {
+          console.error("Error creating order:", error);
+        }
+      }
+      if(router?.route?.split("/")?.includes("car-rental")){
+        console.log("hi bro kaise ho")
+      }
+    }
+  };
+
+  const handleProceed = async () => {
+    if (router?.route?.split("/")?.includes("package")) {
+      const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
+      const data1 = {
+        package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+        packageCashfree,
+        name: session?.user.name,
+        email: session?.user.email,
+        phoneNumber,
+        customer_id: `customer_${Date.now()}`,
+        orderId: `order_${Date.now()}`,
+        amount: fixedDeparturePopupPrice1,
+      };
+      try {
+        const response = await fetch("/api/cashfree/initiate-payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data1),
+        });
+
+        const data = await response.json();
+        console.log("data", data);
+
+        if (response.ok) {
+          setOrderId(data.orderId);
+          setCrmData(data?.data);
+          window.location.href = data.paymentLink;
+          setLoginPopup(false);
+        } else {
+          console.error("Error creating order:", data.error);
+        }
+      } catch (error) {
+        console.error("Error creating order:", error);
+      }
+    }
+    if(router?.route?.split("/")?.includes("car-rental")){
+      console.log("hi bro kaise ho")
+    }
+  };
 
   return (
     <>
@@ -222,88 +285,139 @@ const Create = () => {
                     height={200}
                   />
                 </div>
-                {(token === undefined && session === null) && <div>
-                  <div className="flex flex-col justify-center mt-5">
-                    <p className="text-center mb-3 font-medium capitalize">
-                      Create an Account
-                    </p>
-                    <div
-                      tabindex="1"
-                      className="flex w-full px-1 py-2 border border-gray-300 rounded-full focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400"
-                    >
-                      <p className=" border-r px-1 border-grey-500">+91</p>
+                {token === undefined && session === null && (
+                  <div>
+                    <div className="flex flex-col justify-center mt-5">
+                      <p className="text-center mb-3 font-medium capitalize">
+                        Create an Account
+                      </p>
+                      <div
+                        tabindex="1"
+                        className="flex w-full px-1 py-2 border border-gray-300 rounded-full focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400"
+                      >
+                        <p className=" border-r px-1 border-grey-500">+91</p>
+                        <input
+                          type="text"
+                          value={phoneNumber}
+                          onChange={(e) => {
+                            setPhoneNumber(e.target.value);
+                            validateMobile(e.target.value);
+                          }}
+                          placeholder="XXXXXXXXXX"
+                          className=" outline-none px-1"
+                          required
+                        />
+                      </div>
+                    </div>
+                    {mobileError && (
+                      <p className="text-red-500 text-xxs text-center">
+                        {mobileError}
+                      </p>
+                    )}
+                    <div className="flex flex-col justify-center items-center my-5">
+                      <button
+                        onClick={handlePhoneSubmit}
+                        className="w-full bg-navyblack text-white px-5 py-2 rounded-full"
+                      >
+                        Continue
+                      </button>
+                    </div>
+                    <div class="flex items-center justify-between my-5">
+                      <span class="border-b w-1/5 lg:w-1/4 ml-2"></span>
+                      <p class="text-xxs text-center text-gray-500 uppercase">
+                        or continue with
+                      </p>
+                      <span class="border-b w-1/5 lg:w-1/4 mr-2"></span>
+                    </div>
+                    <div className="flex justify-center gap-2 mt-5 mb-7">
+                      <button
+                        onClick={() => signIn("google")}
+                        className="w-full bg-gray-200 text-navyblack px-5 py-2 rounded-full flex justify-center gap-2 items-center"
+                      >
+                        <Image
+                          src="/assets/Google.png"
+                          className="h-5 w-5 object-cover"
+                          alt=""
+                          width={200}
+                          height={200}
+                        />
+                        Google
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {token !== undefined && (
+                  <div className="flex flex-col gap-2">
+                    <h1 className="text-sm font-medium text-center">
+                      {" "}
+                      Provide Details
+                    </h1>
+                    <div className="flex flex-col ">
+                      <label htmlFor="firstname" className="text-sm">
+                        Name
+                      </label>
                       <input
                         type="text"
+                        id="firstname"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Enter Name"
+                        required
+                        className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 "
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label htmlFor="email" required className="text-sm">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter Email Address"
+                        className=" text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 "
+                      />
+                    </div>
+                    <button
+                      onClick={handleMobileVerifiedAndGetMoreDetail}
+                      className="w-full mb-5 bg-navyblack text-white px-5 py-2 rounded-full mt-2.5"
+                    >
+                      Proceed
+                    </button>
+                  </div>
+                )}
+                {session !== null && (
+                  <div className="flex flex-col gap-2">
+                    <h1 className="text-para font-semibold text-center">
+                      {" "}
+                      Provide Details
+                    </h1>
+                    <div className="flex flex-col mt-3 ">
+                      <label htmlFor="firstname" className="text-sm">
+                        Mobile No.
+                      </label>
+                      <input
+                        type="text"
+                        id="firstname"
                         value={phoneNumber}
                         onChange={(e) => {
                           setPhoneNumber(e.target.value);
                           validateMobile(e.target.value);
                         }}
-                        placeholder="XXXXXXXXXX"
-                        className=" outline-none px-1"
+                        placeholder="Enter Mobile No."
                         required
+                        className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 "
                       />
                     </div>
-                  </div>
-                  {mobileError && (
-                    <p className="text-red-500 text-xxs text-center">
-                      {mobileError}
-                    </p>
-                  )}
-                  <div className="flex flex-col justify-center items-center my-5">
                     <button
-                      onClick={handlePhoneSubmit}
-                      className="w-full bg-navyblack text-white px-5 py-2 rounded-full"
+                      onClick={handleProceed}
+                      className="w-full bg-navyblack text-white px-5 mb-10 mt-5 py-2 rounded-full "
                     >
-                      Continue
+                      Proceed
                     </button>
                   </div>
-                  <div class="flex items-center justify-between my-5">
-                    <span class="border-b w-1/5 lg:w-1/4 ml-2"></span>
-                    <p class="text-xxs text-center text-gray-500 uppercase">
-                      or continue with
-                    </p>
-                    <span class="border-b w-1/5 lg:w-1/4 mr-2"></span>
-                  </div>
-                  <div className="flex justify-center gap-2 mt-5 mb-7">
-                    <button
-                      onClick={() => signIn("google")}
-                      className="w-full bg-gray-200 text-navyblack px-5 py-2 rounded-full flex justify-center gap-2 items-center"
-                    >
-                      <Image 
-                        src="/assets/Google.png"
-                        className="h-5 w-5 object-cover"
-                        alt=""
-                        width={200}
-                        height={200}
-                      />
-                      Google
-                    </button>
-                  </div>
-                </div>}
-                {token !== undefined && <div className="flex flex-col gap-2">
-                  <h1 className="text-sm font-medium text-center"> Provide Details</h1>
-                  <div className="flex flex-col ">
-                    <label htmlFor="firstname" className="text-sm">Name</label>
-                    <input type="text" id="firstname" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Enter Name" required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
-                  </div>
-                  <div className="flex flex-col">
-                    <label htmlFor="email" required className="text-sm">Email</label>
-                    <input type="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Email Address" className=" text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
-                  </div>
-                  <button onClick={handleMobileVerifiedAndGetMoreDetail} className="w-full mb-5 bg-navyblack text-white px-5 py-2 rounded-full mt-2.5">Proceed</button>
-                </div>}
-                {session !== null && <div className="flex flex-col gap-2">
-                  <h1 className="text-para font-semibold text-center"> Provide Details</h1>
-                  <div className="flex flex-col mt-3 ">
-                    <label htmlFor="firstname" className="text-sm">Mobile No.</label>
-                    <input type="text" id="firstname" value={phoneNumber}  onChange={(e) => {
-                          setPhoneNumber(e.target.value);
-                          validateMobile(e.target.value);
-                        }} placeholder="Enter Mobile No." required className="text-sm outline-none flex w-full px-1 py-1.5 border border-gray-300 rounded-md focus-within:outline-none focus-within: ring-0 focus-within:ring-orange-400 focus-within:border-orange-400 " />
-                  </div>
-                  <button onClick={handleProceed} className="w-full bg-navyblack text-white px-5 mb-10 mt-5 py-2 rounded-full ">Proceed</button>
-                </div>}
+                )}
               </div>
             </div>
           ) : (
