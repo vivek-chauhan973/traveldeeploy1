@@ -126,10 +126,10 @@ const ItinaryFixedDepartureCard = () => {
   }, [totalSum]);
   const WeightPropertyPresentedOrNot =
     departureSectionData?.hasOwnProperty("Weight");
-    console.log("Rakesh", departureSectionData);
+    // console.log("Rakesh", departureSectionData);
     
     const newDate = new Date(departureSectionData?.Date+"-2024")
-    console.log("Rikki",newDate);
+    // console.log("Rikki",newDate);
     
   return (
     <>

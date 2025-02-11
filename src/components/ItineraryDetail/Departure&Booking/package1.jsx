@@ -67,8 +67,11 @@ const getAllPackags = async () => {
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 import Footer from "@/components/Footer";
 import Head from "next/head";
+import { useRouter } from "next/router";
+
 
 export default function Package1() {
+
   const {
     addPackage,
     guestPrice,
@@ -88,7 +91,29 @@ export default function Package1() {
     showPopup,
     submitButtonOfPricingCalculation,
   } = useAppContext();
-  const { loginPopup, setLoginPopup, schemaData } = useCarPopupContext();
+
+  const { loginPopup, setLoginPopup, schemaData, serverSideProps } = useCarPopupContext();
+  console.log("serverSideProps", serverSideProps);
+  const [matchedPackages, setMatchedPackages] = useState([]);
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!router) return;
+    // Extract package slug from URL
+    const path = window.location.pathname; // e.g., "/package/darbhanga-tour-package"
+    const slug = path.split("/").pop(); // "darbhanga-tour-package"
+    if (slug) {
+      const title = slug.replace(/-tour-package/, "").split("-") // Remove "tour-package" and split words
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize
+        .join(" ");
+      // Filter packages based on extracted title
+      const filtered = serverSideProps?.server_Packages?.
+      filter(pkg => {
+        return pkg.name.toLowerCase().includes(title.toLowerCase())
+      });
+      setMatchedPackages(filtered);
+    }
+  }, [serverSideProps.server_Packages]);
 
   const [images, setImages] = useState(null);
   const [allPackages, setAllPackages] = useState([]);
@@ -182,19 +207,19 @@ export default function Package1() {
     window.open(`https://wa.me/?text=${message}%20${url}`, "_blank");
   };
 
-  // console.log("addPackage", addPackage);
+  console.log("addPackage", addPackage);
   // console.log("schemaData", schemaData);
-
+  console.log("matchedPackages", matchedPackages);
   // Product Schema JSON-LD
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": addPackage?.seoData?.title,
-    "description": addPackage?.seoData?.description ,
+    "description": addPackage?.seoData?.description,
     "sku": "BX1234",
-    "image": addPackage?.uploads && addPackage?.uploads?.length > 0 ?
-     addPackage?.uploads?.map(upload => `https://www.bizarexpedition.com/${upload}`): " "
-      ,
+    "image": matchedPackages?.uploads && matchedPackages?.uploads?.length > 0 ?
+    matchedPackages?.uploads?.map(upload => `https://www.bizarexpedition.com/${upload}`) : " "
+    ,
     "brand": {
       "@type": "Brand",
       "name": "BizareXpedition"
@@ -206,9 +231,9 @@ export default function Package1() {
     },
     "offers": {
       "@type": "Offer",
-      "url": `https://www.bizarexpedition.com/package/${addPackage?.url}-tour-package`,
+      "url": `https://www.bizarexpedition.com/package/${matchedPackages?.pageUrl}`,
       "priceCurrency": "INR",
-      "price": addPackage?.price,
+      "price": matchedPackages?.price,
       "priceValidUntil": addPackage?.seoData?.priceValid,
       "seller": {
         "@type": "Organization",
@@ -227,7 +252,7 @@ export default function Package1() {
         />
         <meta
           name="keywords"
-          content= {addPackage?.seoData?.keyword || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
+          content={addPackage?.seoData?.keyword || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
         />
         {/* Author and Robots */}
         <meta name="author" content="BizareXpedition" />
@@ -255,7 +280,7 @@ export default function Package1() {
                 "telephone": "+91-9897581113",
                 "contactType": "sales",
                 "areaServed": "IN",
-                "availableLanguage": ["en","Hindi"]
+                "availableLanguage": ["en", "Hindi"]
               },
               "sameAs": [
                 "https://www.facebook.com/bizareX/",

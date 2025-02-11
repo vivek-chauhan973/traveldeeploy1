@@ -5,13 +5,16 @@ import App from "next/app";
 
 APP.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
+  // const res = await fetch("/api/search-api");
+  // const data = await res.json();
 
   try {
-    const [data, data1, data2, data3] = await Promise.all([
+    const [data, data1, data2, data3,data4] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home/homefooter`).then((res) => res.json()),
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/homefooter`).then((res) => res.json()),
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/package-setting/category/get-categories`).then((res) => res.json()),
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home/destinationHeader`).then((res) => res.json()),
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/search-api`).then((res) => res.json()),
     ]);
 
     const state = data3?.data || [];
@@ -31,6 +34,7 @@ APP.getInitialProps = async (appContext) => {
         state,
         initialCity: citiesData?.data || [],
         firstStateId,
+        server_Packages : data4?.data||[]
       },
     };
   } catch (error) {
