@@ -8,11 +8,22 @@ import Image from "next/image";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useRouter } from "next/router";
 const Create = () => {
-  const { setLoginPopup, summaryCarPackage, customiseData,
-    userFormData, userDateLocal, userTimeLocal, userPlanLocal, grandTotalCar, summaryCarData,
-    pickupDateOutstation, pickupTimeOutstation, returnDateOutstation, returnTimeOutstation, planOutstation
-  } =
-    useCarPopupContext();
+  const {
+    setLoginPopup,
+    summaryCarPackage,
+    customiseData,
+    userFormData,
+    userDateLocal,
+    userTimeLocal,
+    userPlanLocal,
+    grandTotalCar,
+    summaryCarData,
+    pickupDateOutstation,
+    pickupTimeOutstation,
+    returnDateOutstation,
+    returnTimeOutstation,
+    planOutstation,
+  } = useCarPopupContext();
   const {
     fixedDeparturePopupPrice,
     departureSectionData,
@@ -28,7 +39,7 @@ const Create = () => {
   }, []);
   // console.log("cash free account details--> ",packageCashfree);
   const router = useRouter();
-
+console.log("router in login popup--> ",router?.route?.split("/"))
   const token = Cookies.get("token");
   const { data: session } = useSession();
   const [step, setStep] = useState(1);
@@ -92,7 +103,6 @@ const Create = () => {
         alert("OTP sent successfully!");
         sendOtp();
         setStep(2);
-        //   setSentOtp(true);
       } else {
         alert("Failed to send OTP. Please try again.");
       }
@@ -114,7 +124,6 @@ const Create = () => {
         const data = await response.json();
         if (data.success) {
           Cookies.set("token", data?.data?.token, { expires: 1, secure: true });
-          // setLoginPopup(true);
           setStep(1);
           setPhoneNumber("");
           setOtp("");
@@ -148,7 +157,6 @@ const Create = () => {
           alert("Again OTP sent successfully!");
           sendOtp();
           setStep(2);
-          //   setSentOtp(true);
         } else {
           alert("Failed to send OTP. Please try again.");
         }
@@ -193,11 +201,11 @@ const Create = () => {
           });
 
           const data = await response.json();
-          console.log("data", data);
+          // console.log("data", data);
 
           if (response.ok) {
             setOrderId(data.orderId);
-            setCrmData(data?.data);
+            // setCrmData(data?.data);
             window.location.href = data.paymentLink;
             setLoginPopup(false);
           } else {
@@ -207,8 +215,78 @@ const Create = () => {
           console.error("Error creating order:", error);
         }
       }
-      if(router?.route?.split("/")?.includes("car-rental")){
-        console.log("hi bro kaise ho")
+      if (router?.route?.split("/")?.includes("car-rental")) {
+        const fixedDeparturePopupPrice1 = Math.floor(
+          summaryCarPackage?.grandTotal
+        );
+        const data1 = {
+          package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+          summaryCarPackage,
+          name: name,
+          email: email,
+          phoneNumber:data?.data?.mobile,
+          customer_id: `customer_${Date.now()}`,
+          orderId: `order_${Date.now()}`,
+          amount: fixedDeparturePopupPrice1,
+        };
+        try {
+          const response = await fetch("/api/cashfree/initiate-payment1", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data1),
+          });
+  
+          const data = await response.json();
+          // console.log("data", data);
+  
+          if (response.ok) {
+            setOrderId(data.orderId);
+            // setCrmData(data?.data);
+            window.location.href = data.paymentLink;
+            setLoginPopup(false);
+          } else {
+            console.error("Error creating order:", data.error);
+          }
+        } catch (error) {
+          console.error("Error creating order:", error);
+        }
+      }
+      if (router?.route?.split("/")?.includes("car-rental")&&router?.route?.split("/")?.length<=2) {
+        const fixedDeparturePopupPrice1 = Math.floor(
+          summaryCarPackage?.grandTotal
+        );
+        const data1 = {
+          package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+          summaryCarPackage,
+          name: name,
+          email: email,
+          phoneNumber:data?.data?.mobile,
+          customer_id: `customer_${Date.now()}`,
+          orderId: `order_${Date.now()}`,
+          amount: fixedDeparturePopupPrice1,
+        };
+        try {
+          const response = await fetch("/api/cashfree/initiate-payment1", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data1),
+          });
+  
+          const data = await response.json();
+          if (response.ok) {
+            setOrderId(data.orderId);
+            window.location.href = data.paymentLink;
+            setLoginPopup(false);
+          } else {
+            console.error("Error creating order:", data.error);
+          }
+        } catch (error) {
+          console.error("Error creating order:", error);
+        }
       }
     }
   };
@@ -236,11 +314,11 @@ const Create = () => {
         });
 
         const data = await response.json();
-        console.log("data", data);
+        // console.log("data", data);
 
         if (response.ok) {
           setOrderId(data.orderId);
-          setCrmData(data?.data);
+          // setCrmData(data?.data);
           window.location.href = data.paymentLink;
           setLoginPopup(false);
         } else {
@@ -250,27 +328,104 @@ const Create = () => {
         console.error("Error creating order:", error);
       }
     }
-    if(router?.route?.split("/")?.includes("car-rental")){
-      console.log("hi bro kaise ho")
+    if (router?.route?.split("/")?.includes("car-rental")) {
+      // console.log("summaryCarPackage", summaryCarPackage);
+      const fixedDeparturePopupPrice1 = Math.floor(
+        summaryCarPackage?.grandTotal
+      );
+      const data1 = {
+        package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+        summaryCarPackage,
+        name: session?.user.name,
+        email: session?.user.email,
+        phoneNumber,
+        customer_id: `customer_${Date.now()}`,
+        orderId: `order_${Date.now()}`,
+        amount: fixedDeparturePopupPrice1,
+      };
+      try {
+        const response = await fetch("/api/cashfree/initiate-payment1", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data1),
+        });
+
+        const data = await response.json();
+        // console.log("data", data);
+
+        if (response.ok) {
+          setOrderId(data.orderId);
+          // setCrmData(data?.data);
+          window.location.href = data.paymentLink;
+          setLoginPopup(false);
+        } else {
+          console.error("Error creating order:", data.error);
+        }
+      } catch (error) {
+        console.error("Error creating order:", error);
+      }
+    }
+    if (router?.route?.split("/")?.includes("car-rental")&&router?.route?.split("/")?.length<=2) {
+      // console.log("summaryCarPackage", summaryCarPackage);
+      const fixedDeparturePopupPrice1 = Math.floor(
+        summaryCarPackage?.grandTotal
+      );
+      const data1 = {
+        package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+        summaryCarPackage,
+        name: session?.user.name,
+        email: session?.user.email,
+        phoneNumber,
+        customer_id: `customer_${Date.now()}`,
+        orderId: `order_${Date.now()}`,
+        amount: fixedDeparturePopupPrice1,
+      };
+      try {
+        const response = await fetch("/api/cashfree/initiate-payment1", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data1),
+        });
+
+        const data = await response.json();
+        // console.log("data", data);
+
+        if (response.ok) {
+          setOrderId(data.orderId);
+          // setCrmData(data?.data);
+          window.location.href = data.paymentLink;
+          setLoginPopup(false);
+        } else {
+          console.error("Error creating order:", data.error);
+        }
+      } catch (error) {
+        console.error("Error creating order:", error);
+      }
     }
   };
-  
-  // All Summary of Car Package
-  // console.log("summaryCarPackage", summaryCarPackage)
-  //  All Summary of customise Data
-  // console.log("customiseData ",customiseData);
-  // All data of local car booking
+
   const carLocalData = {
-    userFormData, userDateLocal, userTimeLocal, userPlanLocal, grandTotalCar, summaryCarData
+    userFormData,
+    userDateLocal,
+    userTimeLocal,
+    userPlanLocal,
+    grandTotalCar,
+    summaryCarData,
   };
-  // All data of outstation car booking
   const carOutstationData = {
-    userFormData, pickupDateOutstation, pickupTimeOutstation, returnDateOutstation, returnTimeOutstation, 
-    planOutstation, grandTotalCar, summaryCarData
+    userFormData,
+    pickupDateOutstation,
+    pickupTimeOutstation,
+    returnDateOutstation,
+    returnTimeOutstation,
+    planOutstation,
+    grandTotalCar,
+    summaryCarData,
   };
-  // console.log("carLocalData ",carLocalData);
-  // console.log("carOutstationData ",carOutstationData);
-  
   return (
     <>
       <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
