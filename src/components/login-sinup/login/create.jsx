@@ -8,7 +8,10 @@ import Image from "next/image";
 import { useAppContext } from "@/components/admin/context/Package/AddGuest";
 import { useRouter } from "next/router";
 const Create = () => {
-  const { setLoginPopup} =
+  const { setLoginPopup, summaryCarPackage, customiseData,
+    userFormData, userDateLocal, userTimeLocal, userPlanLocal, grandTotalCar, summaryCarData,
+    pickupDateOutstation, pickupTimeOutstation, returnDateOutstation, returnTimeOutstation, planOutstation
+  } =
     useCarPopupContext();
   const {
     fixedDeparturePopupPrice,
@@ -251,7 +254,23 @@ const Create = () => {
       console.log("hi bro kaise ho")
     }
   };
-
+  
+  // All Summary of Car Package
+  // console.log("summaryCarPackage", summaryCarPackage)
+  //  All Summary of customise Data
+  // console.log("customiseData ",customiseData);
+  // All data of local car booking
+  const carLocalData = {
+    userFormData, userDateLocal, userTimeLocal, userPlanLocal, grandTotalCar, summaryCarData
+  };
+  // All data of outstation car booking
+  const carOutstationData = {
+    userFormData, pickupDateOutstation, pickupTimeOutstation, returnDateOutstation, returnTimeOutstation, 
+    planOutstation, grandTotalCar, summaryCarData
+  };
+  // console.log("carLocalData ",carLocalData);
+  // console.log("carOutstationData ",carOutstationData);
+  
   return (
     <>
       <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">

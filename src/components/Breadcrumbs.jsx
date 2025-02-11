@@ -5,7 +5,7 @@ import Head from 'next/head';
 
 const Breadcrumbs = () => {
     const router = useRouter();
-    console.log("router", router)
+    // console.log("router", router)
     const pathnames = router.asPath.split("/").filter((x) => x);
 
     // Generate Breadcrumbs Schema
