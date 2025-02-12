@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 import StaticBreadcrumbs from '@/components/StaticBreadcrumbs';
+import OrganizationSchema from '@/components/seo/OrganizationSchema';
 
 const fetchAboutUsPage = async () => {
   const res = await fetch(`/api/static-page/static-page-type?name=about-us`);
@@ -208,36 +209,14 @@ const About = (pageprops) => {
         <meta property="og:image" content="https://www.bizarexpedition.com/about-us.jpg" />
         <meta property="og:url" content="https://www.bizarexpedition.com/about-us" />
         <meta property="og:type" content="website" />
-         {/* JSON-LD Schema Markup */}
-         <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "BizareXpedition™",
-              "alternateName": "BX",
-              "url": "https://www.bizarexpedition.com/",
-              "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-9897581113",
-                "contactType": "sales",
-                "areaServed": "IN",
-                "availableLanguage": ["en", "Hindi"]
-              },
-              "sameAs": [
-                "https://www.facebook.com/bizareX/",
-                "https://x.com/bizarexpedition",
-                "https://www.instagram.com/bizarexpedition/",
-                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
-                "https://in.linkedin.com/company/bizare-xpedition",
-                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
-                "https://www.bizarexpedition.com/"
-              ]
-            })
-          }}
-        />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us | BizareXpedition™ - A Signature of Excellence" />
+        <meta name="twitter:description" content="Discover the story behind BizareXpedition™, a travel brand dedicated to crafting unforgettable journeys 
+          with unparalleled quality and value. Learn about our vision, mission, and commitment to redefining travel experiences." />
+        <meta name="twitter:image" content="https://www.bizarexpedition.com/about-us.jpg" />
+         {/* Organization Schema */}
+         <OrganizationSchema/>
       </Head>
       <main>
         <div>

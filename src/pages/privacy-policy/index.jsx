@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 import Head from 'next/head';
 import StaticBreadcrumbs from '@/components/StaticBreadcrumbs';
+import OrganizationSchema from '@/components/seo/OrganizationSchema';
 
 // const fetchPrivacyPolicyPage = async () => {
 //   const res = await fetch(`/api/static-page/static-page-type?name=privacy-policy`);
@@ -291,8 +292,7 @@ const PrivacyPolicy = (pageprops) => {
         />
         <meta
           name="keywords"
-          content="Privacy policy, BizareXpedition™, personal data, data protection,
-                  secure browsing, user privacy, data security"
+          content="Privacy policy, BizareXpedition™, personal data, data protection, secure browsing, user privacy, data security"
         />
         {/* Author and Robots */}
         <meta name="author" content="BizareXpedition" />
@@ -305,36 +305,14 @@ const PrivacyPolicy = (pageprops) => {
         <meta property="og:image" content="https://www.bizarexpedition.com/privacy-policy.jpg" />
         <meta property="og:url" content="https://www.bizarexpedition.com/privacy-policy" />
         <meta property="og:type" content="website" />
-        {/* JSON-LD Schema Markup */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "BizareXpedition™",
-              "alternateName": "BX",
-              "url": "https://www.bizarexpedition.com/",
-              "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-9897581113",
-                "contactType": "sales",
-                "areaServed": "IN",
-                "availableLanguage": ["en", "Hindi"]
-              },
-              "sameAs": [
-                "https://www.facebook.com/bizareX/",
-                "https://x.com/bizarexpedition",
-                "https://www.instagram.com/bizarexpedition/",
-                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
-                "https://in.linkedin.com/company/bizare-xpedition",
-                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
-                "https://www.bizarexpedition.com/"
-              ]
-            })
-          }}
-        />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Privacy Policy | BizareXpedition™ - Your Privacy Matters" />
+        <meta name="twitter:description" content="Read the comprehensive privacy policy of BizareXpedition™ to understand how we protect your 
+          personal data, ensure confidentiality, and provide a secure user experience." />
+        <meta name="twitter:image" content="https://www.bizarexpedition.com/privacy-policy.jpg" />
+       {/* Organization Schema */}
+       <OrganizationSchema />
       </Head>
       <main>
         <div>

@@ -7,8 +7,10 @@ const StaticBreadcrumbs = () => {
     const router = useRouter();
     const pathnames = router.asPath.split("/").filter((x) => x);
 
+    // Ensure site URL is defined
+    const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.bizarexpedition.com/";
     // Generate Breadcrumb Schema dynamically
-    const breadcrumbsSchema = {
+    const breadcrumbSchema = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": pathnames.map((name, index) => {
@@ -17,7 +19,7 @@ const StaticBreadcrumbs = () => {
                 "@type": "ListItem",
                 "position": index + 1,
                 "name": name.replace("-", " "),
-                "item": `${process.env.NEXT_PUBLIC_SITE_URL}${routeTo}`,
+                "item": `${siteUrl}${routeTo}`,
             };
         }),
     };
@@ -27,7 +29,7 @@ const StaticBreadcrumbs = () => {
             {/* Inject Breadcrumb Schema JSON-LD */}
             <Head>
                 <script type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
                 />
             </Head>
             <main>

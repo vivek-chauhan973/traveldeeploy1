@@ -18,6 +18,7 @@ import TravelGuideCarousel from "@/components/TravelGuideCarousel";
 import BlogsCarousel from "@/components/BlogsCarousel";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import Head from "next/head";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
 
 export default function Home(props) {
   // console.log("initialCity----> is here ", props);
@@ -104,36 +105,8 @@ export default function Home(props) {
       <Head>
         <title>BizareXpedition™️ - A Signature of Excellence</title>
         <meta name="description" content="Plan your perfect trip with BizareXpedition™️." />
-        {/* JSON-LD Schema Markup */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "BizareXpedition™",
-              "alternateName": "BX",
-              "url": "https://www.bizarexpedition.com/",
-              "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-9897581113",
-                "contactType": "sales",
-                "areaServed": "IN",
-                "availableLanguage": ["en","Hindi"]
-              },
-              "sameAs": [
-                "https://www.facebook.com/bizareX/",
-                "https://x.com/bizarexpedition",
-                "https://www.instagram.com/bizarexpedition/",
-                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
-                "https://in.linkedin.com/company/bizare-xpedition",
-                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
-                "https://www.bizarexpedition.com/"
-              ]
-            })
-          }}
-        />
+         {/* Organization Schema */}
+         <OrganizationSchema/>
       </Head>
       <main>
         <DesktopHeader multipost={props?.multipost} />

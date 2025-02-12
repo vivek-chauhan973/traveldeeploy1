@@ -68,7 +68,7 @@ import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculati
 import Footer from "@/components/Footer";
 import Head from "next/head";
 import { useRouter } from "next/router";
-
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
 
 export default function Package1() {
 
@@ -93,10 +93,10 @@ export default function Package1() {
   } = useAppContext();
 
   const { loginPopup, setLoginPopup, schemaData, serverSideProps } = useCarPopupContext();
-  console.log("serverSideProps", serverSideProps);
-  const [matchedPackages, setMatchedPackages] = useState([]);
+  // console.log("serverSideProps", serverSideProps);
+  const [matchedPackages, setMatchedPackages] = useState();
   const router = useRouter();
-  
+
   useEffect(() => {
     if (!router) return;
     // Extract package slug from URL
@@ -108,10 +108,10 @@ export default function Package1() {
         .join(" ");
       // Filter packages based on extracted title
       const filtered = serverSideProps?.server_Packages?.
-      filter(pkg => {
-        return pkg.name.toLowerCase().includes(title.toLowerCase())
-      });
-      setMatchedPackages(filtered);
+        filter(pkg => {
+          return pkg.name.toLowerCase().includes(title.toLowerCase())
+        });
+      setMatchedPackages(filtered?.[0]);
     }
   }, [serverSideProps.server_Packages]);
 
@@ -208,14 +208,15 @@ export default function Package1() {
   };
 
   console.log("addPackage", addPackage);
-  // console.log("schemaData", schemaData);
-  console.log("matchedPackages", matchedPackages);
+  console.log("schemaData", schemaData);
+  // console.log("matchedPackages", matchedPackages);
+  
   // Product Schema JSON-LD
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": addPackage?.seoData?.title,
-    "description": addPackage?.seoData?.description,
+    "name": matchedPackages?.seo?.title || addPackage?.seoData?.title,
+    "description": matchedPackages?.seo?.description || addPackage?.seoData?.description,
     "sku": "BX1234",
     "image": matchedPackages?.uploads && matchedPackages?.uploads?.length > 0 ?
     matchedPackages?.uploads?.map(upload => `https://www.bizarexpedition.com/${upload}`) : " "
@@ -231,10 +232,10 @@ export default function Package1() {
     },
     "offers": {
       "@type": "Offer",
-      "url": `https://www.bizarexpedition.com/package/${matchedPackages?.pageUrl}`,
+      "url": `https://www.bizarexpedition.com/package/${matchedPackages?.pageUrl}` || `https://www.bizarexpedition.com/package/${addPackage?.pageUrl}`,
       "priceCurrency": "INR",
-      "price": matchedPackages?.price,
-      "priceValidUntil": addPackage?.seoData?.priceValid,
+      "price": matchedPackages?.price || addPackage?.price,
+      "priceValidUntil": matchedPackages?.seo?.priceValid || addPackage?.seoData?.priceValid,
       "seller": {
         "@type": "Organization",
         "name": "BizareXpedition Services Private Limited"
@@ -246,53 +247,35 @@ export default function Package1() {
     <>
       {/* Head Section with Organization Schema */}
       <Head>
-        <title>{addPackage?.seoData?.title} | BizareXpedition™️</title>
+        <title>{matchedPackages?.seo?.title || addPackage?.seoData?.title} | BizareXpedition™️</title>
         <meta name="description"
-          content={addPackage?.seoData?.description}
+          content={matchedPackages?.seo?.description || addPackage?.seoData?.description}
         />
         <meta
           name="keywords"
-          content={addPackage?.seoData?.keyword || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
+          content={matchedPackages?.seo?.keyword || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
         />
         {/* Author and Robots */}
         <meta name="author" content="BizareXpedition" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         {/* Open Graph for Social Media */}
-        <meta property="og:title" content={addPackage?.seoData?.title || addPackage?.name} />
-        <meta property="og:description" content={addPackage?.seoData?.description || "Discover unforgettable journeys with BizareXpedition™️."} />
-        <meta property="og:image" content={`https://www.bizarexpedition.com/${addPackage?.uploads?.[0] || ''}`} />
-        <meta property="og:url" content={`https://www.bizarexpedition.com/package/${addPackage?.url}-tour-package`} />
+        <meta property="og:title" content={matchedPackages?.seo?.title || addPackage?.seoData.title} />
+        <meta property="og:description" content={matchedPackages?.seo?.description || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta property="og:image" content={`https://www.bizarexpedition.com/${matchedPackages?.uploads?.[0] || 'https://www.bizarexpedition.com/default-meta-image.jpg          '}`} />
+        <meta property="og:url" content={`https://www.bizarexpedition.com/package/${matchedPackages?.url || addPackage?.url}-tour-package`} />
         <meta property="og:type" content="website" />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${matchedPackages?.seo?.title || addPackage?.seoData.title} | BizareXpedition™️`} />
+        <meta name="twitter:description" content={matchedPackages?.seo?.description || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta name="twitter:image" content={`https://www.bizarexpedition.com/${matchedPackages?.uploads?.[0] || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
         {/* Organization Schema */}
+        <OrganizationSchema />
+        {/* Product Schema */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "BizareXpedition™",
-              "alternateName": "BX",
-              "url": "https://www.bizarexpedition.com/",
-              "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-9897581113",
-                "contactType": "sales",
-                "areaServed": "IN",
-                "availableLanguage": ["en", "Hindi"]
-              },
-              "sameAs": [
-                "https://www.facebook.com/bizareX/",
-                "https://x.com/bizarexpedition",
-                "https://www.instagram.com/bizarexpedition/",
-                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
-                "https://in.linkedin.com/company/bizare-xpedition",
-                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
-                "https://www.bizarexpedition.com/"
-              ]
-            })
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
         />
       </Head>
       <main>
@@ -769,12 +752,6 @@ export default function Package1() {
             </div>
           </div>
         </div>
-
-        {/* Product Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-        />
       </main>
       <Footer />
     </>

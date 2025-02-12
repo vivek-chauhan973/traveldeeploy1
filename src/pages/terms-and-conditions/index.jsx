@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 import Head from 'next/head';
 import StaticBreadcrumbs from '@/components/StaticBreadcrumbs';
+import OrganizationSchema from '@/components/seo/OrganizationSchema';
 
 // const fetchTermsAndConditionPage = async () => {
 //   const res = await fetch(`/api/static-page/static-page-type?name=terms-and-conditions`);
@@ -251,7 +252,7 @@ const TermsAndCondition = (pageprops) => {
         <meta
           name="description"
           content="Familiarize yourself with the terms and conditions of BizareXpedition™, 
-                  detailing our services, user responsibilities, and policies for a seamless travel experience."
+            detailing our services, user responsibilities, and policies for a seamless travel experience."
         />
         <meta
           name="keywords"
@@ -264,40 +265,18 @@ const TermsAndCondition = (pageprops) => {
         {/* Open Graph for Social Media */}
         <meta property="og:title" content="Terms and Conditions | BizareXpedition™ - Transparency in Travel" />
         <meta property="og:description" content="Familiarize yourself with the terms and conditions of BizareXpedition™, 
-                  detailing our services, user responsibilities, and policies for a seamless travel experience." />
+          detailing our services, user responsibilities, and policies for a seamless travel experience." />
         <meta property="og:image" content="https://www.bizarexpedition.com/terms-and-conditions.jpg" />
         <meta property="og:url" content="https://www.bizarexpedition.com/terms-and-conditions" />
         <meta property="og:type" content="website" />
-        {/* JSON-LD Schema Markup */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "BizareXpedition™",
-              "alternateName": "BX",
-              "url": "https://www.bizarexpedition.com/",
-              "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-9897581113",
-                "contactType": "sales",
-                "areaServed": "IN",
-                "availableLanguage": ["en", "Hindi"]
-              },
-              "sameAs": [
-                "https://www.facebook.com/bizareX/",
-                "https://x.com/bizarexpedition",
-                "https://www.instagram.com/bizarexpedition/",
-                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
-                "https://in.linkedin.com/company/bizare-xpedition",
-                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
-                "https://www.bizarexpedition.com/"
-              ]
-            })
-          }}
-        />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Terms and Conditions | BizareXpedition™ - Transparency in Travel" />
+        <meta name="twitter:description" content="Familiarize yourself with the terms and conditions of BizareXpedition™, 
+          detailing our services, user responsibilities, and policies for a seamless travel experience." />
+        <meta name="twitter:image" content="https://www.bizarexpedition.com/terms-and-conditions.jpg" />
+        {/* Organization Schema */}
+        <OrganizationSchema />
       </Head>
       <main>
         <div>

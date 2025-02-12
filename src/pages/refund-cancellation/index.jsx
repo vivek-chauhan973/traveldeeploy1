@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import Head from "next/head";
 import StaticBreadcrumbs from "@/components/StaticBreadcrumbs";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
 
 const RefundCancellation = (pageprops) => {
     const { setServerSideProps } = useCarPopupContext();
@@ -92,40 +93,18 @@ const RefundCancellation = (pageprops) => {
                 {/* Open Graph for Social Media */}
                 <meta property="og:title" content="Cancellation and Refund Policy | BizareXpedition™ - Hassle-Free Processes" />
                 <meta property="og:description" content="Learn about our cancellation and refund policies for a transparent booking experience. 
-                            Understand our procedures, timelines, and applicable charges." />
+                    Understand our procedures, timelines, and applicable charges." />
                 <meta property="og:image" content="https://www.bizarexpedition.com/refund-cancellation.jpg" />
                 <meta property="og:url" content="https://www.bizarexpedition.com/refund-cancellation" />
                 <meta property="og:type" content="website" />
-                {/* JSON-LD Schema Markup */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@type": "Organization",
-                            "name": "BizareXpedition™",
-                            "alternateName": "BX",
-                            "url": "https://www.bizarexpedition.com/",
-                            "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
-                            "contactPoint": {
-                                "@type": "ContactPoint",
-                                "telephone": "+91-9897581113",
-                                "contactType": "sales",
-                                "areaServed": "IN",
-                                "availableLanguage": ["en", "Hindi"]
-                            },
-                            "sameAs": [
-                                "https://www.facebook.com/bizareX/",
-                                "https://x.com/bizarexpedition",
-                                "https://www.instagram.com/bizarexpedition/",
-                                "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
-                                "https://in.linkedin.com/company/bizare-xpedition",
-                                "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
-                                "https://www.bizarexpedition.com/"
-                            ]
-                        })
-                    }}
-                />
+                {/* Twitter Card Meta Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Cancellation and Refund Policy | BizareXpedition™ - Hassle-Free Processes" />
+                <meta name="twitter:description" content="Learn about our cancellation and refund policies for a transparent booking experience. 
+                    Understand our procedures, timelines, and applicable charges." />
+                <meta name="twitter:image" content="https://www.bizarexpedition.com/refund-cancellation.jpg" />
+                {/* Organization Schema */}
+                <OrganizationSchema />
             </Head>
             <main>
                 <div>

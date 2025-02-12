@@ -1,4 +1,5 @@
 // Import necessary modules and models
+import Package from '@/models/Package';
 import SeoData from '@/models/package/PackageSeo';
 import dbConnect from '@/utils/db';
 
@@ -51,6 +52,9 @@ export default async function handler(req, res) {
 
       // Save SEO data
       await seoData.save();
+      if(seoData){
+        await Package.findOneAndUpdate({_id:packageId},{$set:{seo:seoData?._id}});
+      }
 
       return res.status(201).json(seoData);
     } catch (error) {

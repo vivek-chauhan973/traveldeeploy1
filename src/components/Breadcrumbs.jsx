@@ -7,9 +7,11 @@ const Breadcrumbs = () => {
     const router = useRouter();
     // console.log("router", router)
     const pathnames = router.asPath.split("/").filter((x) => x);
-
+    
+    // Ensure site URL is defined
+    const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.bizarexpedition.com/";
     // Generate Breadcrumbs Schema
-    const breadcrumbsSchema = {
+    const breadcrumbSchema = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": pathnames.map((name, index) => {
@@ -18,7 +20,7 @@ const Breadcrumbs = () => {
                 "@type": "ListItem",
                 "position": index + 1,
                 "name": name.replace("-", " ").replace("-tour-packages", " Tour Packages"),
-                "item": `${process.env.NEXT_PUBLIC_SITE_URL}${routeTo}`,
+                "item": `${siteUrl}${routeTo}`,
             };
         }),
     };
@@ -28,7 +30,7 @@ const Breadcrumbs = () => {
             {/* Inject Breadcrumb Schema JSON-LD */}
             <Head>
                 <script type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
                 />
             </Head>
             <main>

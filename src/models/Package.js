@@ -14,8 +14,7 @@ import "@/models/package/PriceHike";
 import "@/models/package/PackageDeparture";
 import Counter from "./Counter";
 import  "./selectedIcon/SelectedIcon";
-
-
+import  "./package/PackageSeo";
 async function getNextSequenceValueWithPrefix(sequenceName, prefix = 'BXP', padding = 3) {
   const sequenceDocument = await Counter.findOneAndUpdate(
     { _id: sequenceName },
@@ -96,6 +95,10 @@ const packageSchema = new Schema({
      type:mongoose.Schema.Types.ObjectId,
       ref:"PackageDeparture"
     },
+    seo:{
+      type:mongoose.Schema.Types.ObjectId,
+       ref:"SeoData"
+     },
     icons:{
       type:mongoose.Schema.Types.ObjectId,
        ref:"SelectedIcon"
