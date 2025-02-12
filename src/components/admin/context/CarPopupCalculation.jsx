@@ -89,6 +89,7 @@ export const CarPopupProvider = ({ children }) => {
   // console.log("schemaData of dynamic schema ===> ", schemaData);
 
   const [serverSideProps, setServerSideProps] = useState({});
+  const [activeTab, setActiveTab] = useState("Tab1");
   // console.log("pacakgeData global",pacakgeData);
   // console.log("serverSideProps------->",serverSideProps);
   // console.log("crmData global",crmData);
@@ -101,7 +102,7 @@ export const CarPopupProvider = ({ children }) => {
     loginPopup, setLoginPopup, showPopup, setShowPopup, showPopupOutstation, setShowPopupOutstation,
     activeBookingProcess, setServerSideProps, serverSideProps, setActiveBookingProcess, searchedData, activeInactivePopup, setActiveInactivePopup, searchQuery, setSearchQuery,
     crmData, setCrmData, grandTotalCar, setGrandTotalCar, summaryCarData, setSummaryCarData, summaryCarPackage, setSummaryCarPackage,
-    customiseData, setCustomiseData, schemaData, setSchemaData
+    customiseData, setCustomiseData, schemaData, setSchemaData,activeTab, setActiveTab
   };
 
   return (

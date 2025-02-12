@@ -23,6 +23,7 @@ const Create = () => {
     returnDateOutstation,
     returnTimeOutstation,
     planOutstation,
+    activeTab,
   } = useCarPopupContext();
   const {
     fixedDeparturePopupPrice,
@@ -39,7 +40,7 @@ const Create = () => {
   }, []);
   // console.log("cash free account details--> ",packageCashfree);
   const router = useRouter();
-console.log("router in login popup--> ",router?.route?.split("/"))
+  console.log("router in login popup--> ", router?.route?.split("/"));
   const token = Cookies.get("token");
   const { data: session } = useSession();
   const [step, setStep] = useState(1);
@@ -215,7 +216,10 @@ console.log("router in login popup--> ",router?.route?.split("/"))
           console.error("Error creating order:", error);
         }
       }
-      if (router?.route?.split("/")?.includes("car-rental")) {
+      if (
+        router?.route?.split("/")?.includes("car-rental") &&
+        router?.route?.split("/")?.length > 2
+      ) {
         const fixedDeparturePopupPrice1 = Math.floor(
           summaryCarPackage?.grandTotal
         );
@@ -224,7 +228,7 @@ console.log("router in login popup--> ",router?.route?.split("/"))
           summaryCarPackage,
           name: name,
           email: email,
-          phoneNumber:data?.data?.mobile,
+          phoneNumber: data?.data?.mobile,
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
           amount: fixedDeparturePopupPrice1,
@@ -237,10 +241,10 @@ console.log("router in login popup--> ",router?.route?.split("/"))
             },
             body: JSON.stringify(data1),
           });
-  
+
           const data = await response.json();
           // console.log("data", data);
-  
+
           if (response.ok) {
             setOrderId(data.orderId);
             // setCrmData(data?.data);
@@ -253,39 +257,95 @@ console.log("router in login popup--> ",router?.route?.split("/"))
           console.error("Error creating order:", error);
         }
       }
-      if (router?.route?.split("/")?.includes("car-rental")&&router?.route?.split("/")?.length<=2) {
-        const fixedDeparturePopupPrice1 = Math.floor(
-          summaryCarPackage?.grandTotal
-        );
-        const data1 = {
-          package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
-          summaryCarPackage,
-          name: name,
-          email: email,
-          phoneNumber:data?.data?.mobile,
-          customer_id: `customer_${Date.now()}`,
-          orderId: `order_${Date.now()}`,
-          amount: fixedDeparturePopupPrice1,
-        };
-        try {
-          const response = await fetch("/api/cashfree/initiate-payment1", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data1),
-          });
-  
-          const data = await response.json();
-          if (response.ok) {
-            setOrderId(data.orderId);
-            window.location.href = data.paymentLink;
-            setLoginPopup(false);
-          } else {
-            console.error("Error creating order:", data.error);
+      if (
+        router?.route?.split("/")?.includes("car-rental") &&
+        router?.route?.split("/")?.length <= 2
+      ) {
+        if (activeTab === "Tab1") {
+    
+          const data1 = {
+            package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+            name: name,
+            email: email,
+            phoneNumber: data?.data?.mobile,
+            customer_id: `customer_${Date.now()}`,
+            orderId: `order_${Date.now()}`,
+            amount: grandTotalCar,
+            dep_date: userDateLocal,
+            dep_time: userTimeLocal,
+            plan: userPlanLocal,
+            cost_per_km: summaryCarData?.costPerKm,
+            ac_option: summaryCarData?.isActive,
+            car_gst: summaryCarData?.selectedGST,
+            no_of_person: userFormData?.persons,
+            vehicleType: userFormData?.selectedCar?.[0]?.vehicleType,
+            pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+            location: userFormData?.selectedlocation?.[0]?.location,
+          };
+          try {
+            const response = await fetch(
+              "/api/cashfree/initiate-payment-carlocal",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data1),
+              }
+            );
+
+            const data = await response.json();
+            if (response.ok) {
+              setOrderId(data.orderId);
+              window.location.href = data.paymentLink;
+              setLoginPopup(false);
+            } else {
+              console.error("Error creating order:", data.error);
+            }
+          } catch (error) {
+            console.error("Error creating order:", error);
           }
-        } catch (error) {
-          console.error("Error creating order:", error);
+        }
+        if (activeTab === "Tab2") {
+          const carOutstationData = {
+            userFormData,
+            pickupDateOutstation,
+            pickupTimeOutstation,
+            returnDateOutstation,
+            returnTimeOutstation,
+            planOutstation,
+            grandTotalCar,
+            summaryCarData,
+          };
+          const data1 = {
+            package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+            name: name,
+            email: email,
+            phoneNumber: data?.data?.mobile,
+            customer_id: `customer_${Date.now()}`,
+            orderId: `order_${Date.now()}`,
+            carOutstationData,
+          };
+          try {
+            const response = await fetch("/api/cashfree/initiate-payment1", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data1),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+              setOrderId(data.orderId);
+              window.location.href = data.paymentLink;
+              setLoginPopup(false);
+            } else {
+              console.error("Error creating order:", data.error);
+            }
+          } catch (error) {
+            console.error("Error creating order:", error);
+          }
         }
       }
     }
@@ -328,7 +388,10 @@ console.log("router in login popup--> ",router?.route?.split("/"))
         console.error("Error creating order:", error);
       }
     }
-    if (router?.route?.split("/")?.includes("car-rental")) {
+    if (
+      router?.route?.split("/")?.includes("car-rental") &&
+      router?.route?.split("/")?.length > 2
+    ) {
       // console.log("summaryCarPackage", summaryCarPackage);
       const fixedDeparturePopupPrice1 = Math.floor(
         summaryCarPackage?.grandTotal
@@ -367,65 +430,55 @@ console.log("router in login popup--> ",router?.route?.split("/"))
         console.error("Error creating order:", error);
       }
     }
-    if (router?.route?.split("/")?.includes("car-rental")&&router?.route?.split("/")?.length<=2) {
-      // console.log("summaryCarPackage", summaryCarPackage);
-      const fixedDeparturePopupPrice1 = Math.floor(
-        summaryCarPackage?.grandTotal
-      );
-      const data1 = {
-        package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
-        summaryCarPackage,
-        name: session?.user.name,
-        email: session?.user.email,
-        phoneNumber,
-        customer_id: `customer_${Date.now()}`,
-        orderId: `order_${Date.now()}`,
-        amount: fixedDeparturePopupPrice1,
-      };
-      try {
-        const response = await fetch("/api/cashfree/initiate-payment1", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data1),
-        });
+    if (
+      router?.route?.split("/")?.includes("car-rental") &&
+      router?.route?.split("/")?.length <= 2
+    ) {
+      if (activeTab === "Tab1") {
+        const data1 = {
+          package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+          name: session?.user.name,
+          email: session?.user.email,
+          phoneNumber,
+          customer_id: `customer_${Date.now()}`,
+          orderId: `order_${Date.now()}`,
+          amount:grandTotalCar,
+          dep_date:userDateLocal,
+          dep_time:userTimeLocal,
+          plan:userPlanLocal,
+          cost_per_km:summaryCarData?.costPerKm,
+          ac_option:summaryCarData?.isActive,
+          car_gst:summaryCarData?.selectedGST,
+          no_of_person:userFormData?.persons,
+          vehicleType:userFormData?.selectedCar?.[0]?.vehicleType,
+          pickup_point:userFormData?.selectedPickupPoint?.[0]?.name,
+          location:userFormData?.selectedlocation?.[0]?.location
+        };
+        try {
+          const response = await fetch("/api/cashfree/initiate-payment-carlocal", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data1),
+          });
 
-        const data = await response.json();
-        // console.log("data", data);
-
-        if (response.ok) {
-          setOrderId(data.orderId);
-          // setCrmData(data?.data);
-          window.location.href = data.paymentLink;
-          setLoginPopup(false);
-        } else {
-          console.error("Error creating order:", data.error);
+          const data = await response.json();
+          if (response.ok) {
+            setOrderId(data.orderId);
+            window.location.href = data.paymentLink;
+            setLoginPopup(false);
+          } else {
+            console.error("Error creating order:", data.error);
+          }
+        } catch (error) {
+          console.error("Error creating order:", error);
         }
-      } catch (error) {
-        console.error("Error creating order:", error);
       }
     }
   };
 
-  const carLocalData = {
-    userFormData,
-    userDateLocal,
-    userTimeLocal,
-    userPlanLocal,
-    grandTotalCar,
-    summaryCarData,
-  };
-  const carOutstationData = {
-    userFormData,
-    pickupDateOutstation,
-    pickupTimeOutstation,
-    returnDateOutstation,
-    returnTimeOutstation,
-    planOutstation,
-    grandTotalCar,
-    summaryCarData,
-  };
+  // console.log("active tab------> ",activeTab)
   return (
     <>
       <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">

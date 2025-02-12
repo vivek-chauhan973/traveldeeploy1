@@ -29,7 +29,6 @@ const fetchBookingProcess = async () => {
 const MobilePicker = ({ setCarSelectionPopup }) => {
 
     const [activeItem, setActiveItem] = useState(null);
-    const [activeTab, setActiveTab] = useState("Tab1");
     const [isShowDateTimePicker, setShowDateTimePicker] = useState(false);
     const [localData, setLocalData] = useState({
         location: "",
@@ -46,7 +45,7 @@ const MobilePicker = ({ setCarSelectionPopup }) => {
     const [localTime, setLocalTime] = useState();
     const [flexibleTime, setFlexibleTime] = useState();
 
-    const { setUserDateLocal, setUserTimeLocal, setUserPlanLocal,
+    const { setUserDateLocal, activeTab, setActiveTab,setUserTimeLocal, setUserPlanLocal,
         setPickupDateOutstation, setReturnDateOutstation, setPickupTimeOutstation, setReturnTimeOutstation,
         setPlanOutstation, userFormData,
         activeBookingProcess, setActiveBookingProcess, setShowPopup, setShowPopupOutstation,
