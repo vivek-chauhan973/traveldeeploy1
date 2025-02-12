@@ -2,7 +2,7 @@ export default async function handler(req, res) {
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Method Not Allowed" });
     }
-    const { name, orderId, email, customer_id, package_type,phoneNumber ,amount,package_url,dep_date,dep_time,plan,cost_per_km,ac_option,car_gst,no_of_person,vehicleType,pickup_point,location} = req.body;
+    const { name, orderId, email,package_type, arrival_date,customer_id, phoneNumber,arrival_time ,amount,package_url,dep_date,dep_time,choose_car_plan,cost_per_km,ac_option,car_gst,no_of_persons,vehicle_type,pickup_point,pickup_location} = req.body;
     if (!name ||  !orderId || !email || !customer_id || !phoneNumber||!amount||!package_url||!dep_date||!dep_time) {
         return res.status(400).json({ error: 'Missing required fields' });
       }
@@ -37,14 +37,16 @@ export default async function handler(req, res) {
           order_tags: {
             depature_date:`${ dep_date}`,
             depature_time:`${ dep_time}`,
-            no_of_person:`${no_of_person}`,
-            car_plan:`${plan}`,
+            arrival_date:`${ arrival_date}`,
+            arrival_time:`${ arrival_time}`,
+            no_of_person:`${no_of_persons}`,
+            car_plan:`${choose_car_plan}`,
             cost_per_km:`${cost_per_km}`,
             car_gst:`${car_gst===0?"All inclusive":car_gst}`,
             ac_option:`${ac_option}`,
-            vehicle_type:`${vehicleType}`,
+            vehicle_type:`${vehicle_type}`,
             pickup_point:`${pickup_point}`,
-            location_point:`${location}`,
+            location_point:`${pickup_location}`,
             package_url:`${package_url}`,
             package_type:`${package_type}`
           },

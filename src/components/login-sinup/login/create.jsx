@@ -267,6 +267,7 @@ const Create = () => {
             package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
             name: name,
             email: email,
+            package_type:"Local-Car-Hire",
             phoneNumber: data?.data?.mobile,
             customer_id: `customer_${Date.now()}`,
             orderId: `order_${Date.now()}`,
@@ -307,27 +308,30 @@ const Create = () => {
           }
         }
         if (activeTab === "Tab2") {
-          const carOutstationData = {
-            userFormData,
-            pickupDateOutstation,
-            pickupTimeOutstation,
-            returnDateOutstation,
-            returnTimeOutstation,
-            planOutstation,
-            grandTotalCar,
-            summaryCarData,
-          };
           const data1 = {
             package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
             name: name,
             email: email,
+            package_type:"Out_Sation_Hire",
             phoneNumber: data?.data?.mobile,
             customer_id: `customer_${Date.now()}`,
             orderId: `order_${Date.now()}`,
-            carOutstationData,
+            amount:grandTotalCar,
+            no_of_persons:userFormData?.persons,
+            vehicle_type:userFormData?.selectedCar?.[0]?.vehicleType,
+            pickup_location:userFormData?.selectedlocation?.[0]?.location,
+            pickup_point:userFormData?.selectedPickupPoint?.[0]?.name,
+            car_gst:summaryCarData?.selectedGST,
+            choose_car_plan:planOutstation,
+            cost_per_km:summaryCarData?.costPerKm,
+            ac_option:summaryCarData?.isActive,
+            dep_date:pickupDateOutstation,
+            dep_time:pickupTimeOutstation,
+            arrival_date:returnDateOutstation,
+            arrival_time:returnTimeOutstation,
           };
           try {
-            const response = await fetch("/api/cashfree/initiate-payment1", {
+            const response = await fetch("/api/cashfree/initiate-payment-caroutstaion", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -440,6 +444,7 @@ const Create = () => {
           name: session?.user.name,
           email: session?.user.email,
           phoneNumber,
+          package_type:"Local-Car-Hire",
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
           amount:grandTotalCar,
@@ -475,10 +480,52 @@ const Create = () => {
           console.error("Error creating order:", error);
         }
       }
+      if (activeTab === "Tab2") {
+        const data1 = {
+          package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+          name: session?.user.name,
+          email: session?.user.email,
+          phoneNumber,
+          package_type:"Out_Station_Hire",
+          customer_id: `customer_${Date.now()}`,
+          orderId: `order_${Date.now()}`,
+          amount:grandTotalCar,
+          no_of_persons:userFormData?.persons,
+          vehicle_type:userFormData?.selectedCar?.[0]?.vehicleType,
+          pickup_location:userFormData?.selectedlocation?.[0]?.location,
+          pickup_point:userFormData?.selectedPickupPoint?.[0]?.name,
+          car_gst:summaryCarData?.selectedGST,
+          choose_car_plan:planOutstation,
+          cost_per_km:summaryCarData?.costPerKm,
+          ac_option:summaryCarData?.isActive,
+          dep_date:pickupDateOutstation,
+          dep_time:pickupTimeOutstation,
+          arrival_date:returnDateOutstation,
+          arrival_time:returnTimeOutstation,
+        };
+        try {
+          const response = await fetch("/api/cashfree/initiate-payment-caroutstaion", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data1),
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            setOrderId(data.orderId);
+            window.location.href = data.paymentLink;
+            setLoginPopup(false);
+          } else {
+            console.error("Error creating order:", data.error);
+          }
+        } catch (error) {
+          console.error("Error creating order:", error);
+        }
+      }
     }
   };
-
-  // console.log("active tab------> ",activeTab)
   return (
     <>
       <div className="fixed inset-0 flex items-center h-[100vh] justify-center z-50">
