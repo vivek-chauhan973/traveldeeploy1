@@ -25,8 +25,11 @@ const [link,setLink]=useState("")
       setStatus("Failed to fetch status");
     }
   };
-  const handleOk = () => {
-
+  const handleOk =async () => {
+    
+    const res=await fetch(`/api/zoho/login`);
+    const data=await res.json()
+    console.log("data is here zoho ---> ",data)
   }
 
   return (
@@ -35,14 +38,14 @@ const [link,setLink]=useState("")
         <div className="flex flex-col justify-center items-center gap-5 border shadow-md rounded-md w-72 px-10 py-5">
           <h1 className="text-lg font-semibold">Payment Status</h1>
           <p className="text-base font-semibold">{status}</p>
-          <Link href={link}>
+          {/* <Link href={link}> */}
             <button
               className="bg-primary text-white py-1 px-5  rounded"
               onClick={handleOk}
             >
               OK
             </button>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
     </div>

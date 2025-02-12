@@ -2,7 +2,7 @@ export default async function handler(req, res) {
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Method Not Allowed" });
     }
-    const { name, amount, orderId, email, customer_id, phoneNumber ,summaryCarPackage,package_url} = req.body;
+    const { name, amount, orderId,package_type, email, customer_id, phoneNumber ,summaryCarPackage,package_url} = req.body;
     // console.log("cashfree account is that ----> ",packageCashfree)
     if (!name || !amount || !orderId || !email || !customer_id || !phoneNumber||!summaryCarPackage||!package_url) {
         return res.status(400).json({ error: 'Missing required fields' });
@@ -40,6 +40,7 @@ export default async function handler(req, res) {
             depature_city: `${summaryCarPackage?.departureCity}`,
             depature_traveller:`${summaryCarPackage?.travellers}`,
             package_url:`${package_url}`,
+            package_type:`${package_type}`
           },
           payment_methods: 'upi,wallet,card,netbanking',
         }),
