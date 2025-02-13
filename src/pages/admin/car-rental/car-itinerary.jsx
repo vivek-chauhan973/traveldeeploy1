@@ -1,7 +1,5 @@
 import Layout from "@/components/admin/Layout"
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarPrimaryItinerary from "@/components/admin/itineraryCreate/CarPrimaryItinerary";
-import PrimaryItinerary from "@/components/admin/itineraryCreate/PrimaryItinerary";
 import { useState } from "react";
 
 export default function Itinerary() {
@@ -11,7 +9,7 @@ export default function Itinerary() {
         setActiveTab(tabname)
     }
     return (
-        <AppProvider>
+
             <Layout>
                 <h3 className="text-lg font-medium">Add Car Itinerary</h3>
                 <div className="border-b border-slate-300 mb-5">
@@ -24,6 +22,5 @@ export default function Itinerary() {
                 </div>
 
             </Layout>
-        </AppProvider>
     )
 }

@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Modal from '@mui/material/Modal';
 import { CancelIcon } from "@/components/icons/index"
-import { AppProvider, useAppContext } from "@/components/admin/context/Package/AddGuest";
 import Footer from "@/components/Footer";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 
@@ -93,7 +92,7 @@ useEffect(() => {
     return (
         <>
             {/* CarPromoSkeleton */}
-            <AppProvider>
+           
             <div className='bg-slate-100'>
                 <DesktopHeader />
                 <Breadcrumbs />
@@ -162,7 +161,6 @@ useEffect(() => {
                 </div> */}
                 <Footer/>
             </div>
-            </AppProvider>
         </>
     );
 }

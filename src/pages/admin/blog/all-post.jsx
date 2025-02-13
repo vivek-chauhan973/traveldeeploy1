@@ -4,7 +4,6 @@ import Layout from "@/components/admin/Layout";
 import Pagination from "react-js-pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
 const getAllPost=async ()=>{
   return await((await fetch('/api/blog/blogdetail',{method:"GET"})).json())
@@ -57,7 +56,7 @@ const AllPosts = () => {
   );
   // console.log("Rakesh2", currentItems);
   return (
-    <AppProvider>
+ 
       <Layout>
         <div>
         </div>
@@ -174,7 +173,7 @@ const AllPosts = () => {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 };
 

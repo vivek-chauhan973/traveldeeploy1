@@ -1,5 +1,5 @@
 import Layout from "@/components/admin/Layout"
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import PrimaryItinerary from "@/components/admin/itineraryCreate/PrimaryItinerary";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ export default function Itinerary() {
     }
 
     return (
-        <AppProvider>
+     
             <Layout>
                 <h3 className="text-lg font-medium">Add Itinerary</h3>
                 <div className="border-b border-slate-300 mb-5">
@@ -24,6 +24,6 @@ export default function Itinerary() {
                 </div>
 
             </Layout>
-        </AppProvider>
+    
     )
 }

@@ -1,6 +1,6 @@
 import Layout from "@/components/admin/Layout";
 import { useEffect, useState } from "react";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCube,
@@ -98,7 +98,7 @@ export default function BlogMaster() {
 
   return (
     <>
-      <AppProvider>
+
         <Layout>
           <div>
             <div className="flex items-center gap-5 text-primary py-5">
@@ -216,7 +216,7 @@ export default function BlogMaster() {
             {/* Listing table end */}
           </div>
         </Layout>
-      </AppProvider>
+    
     </>
   );
 }

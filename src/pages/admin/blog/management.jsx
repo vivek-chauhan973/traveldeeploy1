@@ -1,4 +1,4 @@
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import Layout from "@/components/admin/Layout";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -102,40 +102,9 @@ export default function Management() {
     }
   }
 
-  // Function to handle image removal
-  // async function handleRemove() {
-  //   if (!selectedImageId) {
-  //     alert("No Video selected for removal.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const res = await fetch(`/api/blog?id=${selectedImageId}`, {
-  //       method: "DELETE",
-  //     });
-
-  //     if (res.ok) {
-  //       alert("Video removed successfully");
-  //       // Reset state after successful removal
-  //       setFile(null);
-  //       // setPreview(null);
-  //       setTitle("");
-  //       setDescription("");
-  //       setIsUpdating(false);
-  //       setSelectedImageId(null);
-  //       fetchImage(); // Fetch updated image list
-  //     } else {
-  //       alert("Failed to remove Video");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error removing video:", error);
-  //     alert("Failed to remove video");
-  //   }
-  // }
-  // console.log("preview the image", preview);
 
   return (
-    <AppProvider>
+  
       <Layout>
         <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
           <FontAwesomeIcon icon={faCube} className="text-2xl" />
@@ -237,6 +206,5 @@ export default function Management() {
           {isUpdating&&<BlogPromoSeo selectedPromoId={selectedPromoId} />}
         </div>
       </Layout>
-    </AppProvider>
   );
 }

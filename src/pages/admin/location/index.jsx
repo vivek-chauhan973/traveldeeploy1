@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import '../../../app/globals.css'
 import Link from 'next/link';
 import Layout from '@/components/admin/Layout';
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
+
 
 
 
@@ -30,7 +30,7 @@ export default function TourLocation() {
     };
 
     return (
-        <AppProvider>
+        
         <Layout>
             <div className="w-full  ">
                 <div className=" mx-auto">
@@ -66,6 +66,6 @@ export default function TourLocation() {
                 </div>
             </div>
         </Layout>
-        </AppProvider>
+       
     );
 }

@@ -3,11 +3,9 @@ import Layout from "@/components/admin/Layout";
 import Pagination from "react-js-pagination";
 import Link from "next/link";
 import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
-import dynamic from "next/dynamic";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-import Image from "next/image";
 
 const YourComponent = () => {
   const [itineraries, setItineraries] = useState([]);
@@ -69,7 +67,7 @@ const YourComponent = () => {
   );
   // console.log("Rakesh2", currentItems);
   return (
-    <AppProvider>
+
       <Layout>
         <div>
           <DeleteModal
@@ -210,7 +208,7 @@ const YourComponent = () => {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 };
 

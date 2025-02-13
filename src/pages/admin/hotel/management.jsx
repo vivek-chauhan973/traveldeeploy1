@@ -1,18 +1,9 @@
 import Layout from "@/components/admin/Layout";
-import { Tab } from "@mui/base";
 import { useState } from "react";
-import { MdOutlineAddCircle } from "react-icons/md";
-
-import { MdDeleteForever } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
 import FaqSection from "@/components/admin/ItineraryPromo/FaqSection";
 import Editor from "@/components/admin/ItineraryPromo/Editor";
-
-import { FaLongArrowAltRight } from "react-icons/fa";
-
 import { LuPackagePlus } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image'
 
 
@@ -30,7 +21,6 @@ export default function Management () {
 
     return (
         <>
-        <AppProvider>
             <Layout>
                 <div>
                     <div className="flex items-center gap-5 text-primary pb-3">
@@ -99,7 +89,7 @@ export default function Management () {
                     </div>
                 </div>
             </Layout>
-            </AppProvider>
+
         </>
     )
 }

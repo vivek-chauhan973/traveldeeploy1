@@ -10,7 +10,7 @@ import {
 import Layout from "@/components/admin/Layout";
 
 import { useEffect, useState } from "react";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 
 const fetchCountries = async () => {
   try {
@@ -284,7 +284,7 @@ export default function FetchCars() {
 
 
   return (
-    <AppProvider>
+ 
       <Layout>
         <div>
           <div>
@@ -482,6 +482,6 @@ export default function FetchCars() {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   )
 }

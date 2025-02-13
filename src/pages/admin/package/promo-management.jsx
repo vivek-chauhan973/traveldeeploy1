@@ -2,7 +2,7 @@ import Layout from "@/components/admin/Layout";
 import { useEffect, useRef, useState } from "react";
 import FaqSection from "@/components/admin/ItineraryPromo/FaqSection";
 import Editor from "@/components/admin/ItineraryPromo/Editor";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import Image from "next/image";
 import Index from "@/components/dy/Index";
 import SeoPopupField from "@/components/dy/SeoPopupField";
@@ -253,7 +253,7 @@ export default function PromoManage() {
 
 
   return (
-    <AppProvider>
+
       <Layout>
         <div>
           <div className="flex items-center md:gap-5 gap-3 text-primary pb-5">
@@ -552,6 +552,6 @@ export default function PromoManage() {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+ 
   );
 }

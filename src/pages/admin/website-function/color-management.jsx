@@ -1,4 +1,4 @@
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import Layout from "@/components/admin/Layout";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -78,7 +78,7 @@ export default function ColorManagement() {
 
 
     return (
-        <AppProvider>
+      
             <Layout>
                 <div>
                     <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10 md:px-5">
@@ -256,6 +256,6 @@ export default function ColorManagement() {
                     <button className=" text-white bg-primary rounded-md py-2 md:w-auto w-full px-10 my-5" >Submt</button>
                 </div>
             </Layout>
-        </AppProvider>
+        
     )
 }

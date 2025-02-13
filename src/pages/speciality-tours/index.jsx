@@ -6,7 +6,6 @@ import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { PromoBanner } from '@/components/Skeleton/Package/promo';
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import mongoose from 'mongoose';
@@ -76,7 +75,7 @@ useEffect(()=>{
     return <PromoBanner />;
   }
   return (
-    <AppProvider>
+  
       <div className='bg-slate-100'>
         <DesktopHeader />
         <Breadcrumbs/>
@@ -110,6 +109,6 @@ useEffect(()=>{
         </div> */}
         <Footer/>
       </div>
-    </AppProvider>
+
   );
 }

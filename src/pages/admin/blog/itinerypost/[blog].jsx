@@ -1,6 +1,5 @@
 import { useState,useEffect } from "react";
 import { useRouter } from "next/router";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBanner";
 import BlogDetailSeo from "@/components/admin/blog/Blog Detail/BlogDetailSeo";
@@ -33,7 +32,7 @@ export default function CreateWebinar() {
   },[blog])
 
   return (
-    <AppProvider>
+
         <Layout>
       <div className="flex items-center gap-5 text-primary pb-3">
         <p className="md:text-[28px] text-2xl text-black">Create Post</p>
@@ -122,6 +121,6 @@ export default function CreateWebinar() {
         </>
         </Layout>
     
-    </AppProvider>
+
   );
 }

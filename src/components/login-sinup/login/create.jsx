@@ -40,7 +40,7 @@ const Create = () => {
   }, []);
   // console.log("cash free account details--> ",packageCashfree);
   const router = useRouter();
-  console.log("router in login popup--> ", router?.route?.split("/"));
+  // console.log("router in login popup--> ", router?.route?.split("/"));
   const token = Cookies.get("token");
   const { data: session } = useSession();
   const [step, setStep] = useState(1);

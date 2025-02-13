@@ -1,6 +1,5 @@
 import Layout from "@/components/admin/Layout";
 import { useEffect, useState } from "react";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube, faEdit, faFloppyDisk, faTrash, faXmark, } from "@fortawesome/free-solid-svg-icons";
 
@@ -131,7 +130,7 @@ export default function WebsiteSchema() {
     };
 
     return (
-        <AppProvider>
+   
             <Layout>
                 <div className="flex items-center gap-5 text-primary xl:mt-5 mb-7 ">
                     <FontAwesomeIcon icon={faCube} className="text-2xl" />
@@ -196,6 +195,6 @@ export default function WebsiteSchema() {
                     </div>
                 </div>
             </Layout>
-        </AppProvider>
+       
     );
 }

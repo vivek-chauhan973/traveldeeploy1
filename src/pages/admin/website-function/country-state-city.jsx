@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCirclePlus, faCube, faEdit, faFloppyDisk, faTrash, faXmark, } from "@fortawesome/free-solid-svg-icons";
 import Layout from "@/components/admin/Layout";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 
 const fetchCountries = async () => {
   try {
@@ -276,7 +276,7 @@ export default function CountryStateCity() {
 
 
   return (
-    <AppProvider>
+   
       <Layout>
         <div>
           <div className="flex items-center gap-5 text-primary xl:mb-10 mb-7 xl:mt-5">
@@ -493,7 +493,6 @@ export default function CountryStateCity() {
           </div>
         </div>
       </Layout>
-    </AppProvider>
   )
 }
 

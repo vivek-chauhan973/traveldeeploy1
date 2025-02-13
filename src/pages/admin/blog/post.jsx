@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import BlogDetailBanner from "@/components/admin/blog/Blog Detail/BlogDetailBanner";
 
@@ -7,7 +6,7 @@ export default function CreateWebinar() {
   const [blogData, setBlogData] = useState(null);
   const [activeTab, setActiveTab] = useState("Tab1")
   return (
-    <AppProvider>
+  
         <Layout>
       <div className="flex items-center gap-5 text-primary pb-3">
         <p className="md:text-[28px] text-2xl text-black">Create Webinar</p>
@@ -35,7 +34,7 @@ export default function CreateWebinar() {
       </div>
       </Layout>
      
-    </AppProvider>
+
   );
 }
 

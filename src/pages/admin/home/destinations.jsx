@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 import Layout from '@/components/admin/Layout';
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
+
 
 const fetchStates = async () => {
   const response = await fetch("/api/public/states");
@@ -84,7 +84,7 @@ const Destinations = () => {
   if (!isClient) return null;
 //   console.log("options is here----> ",selectedOptions)
   return (
-    <AppProvider>
+
       <Layout>
         <div className=''>
           <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
@@ -167,7 +167,7 @@ const Destinations = () => {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 };
 

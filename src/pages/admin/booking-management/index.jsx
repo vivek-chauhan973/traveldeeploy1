@@ -1,10 +1,7 @@
 import Layout from "@/components/admin/Layout";
 import "../../../app/globals.css";
 import { useEffect, useState } from "react";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from 'next/image';
-import Booking from "@/models/Booking";
-
 const FetchBookingData = async () => {
     const response = await fetch("/api/booking");
     const data = await response.json();
@@ -24,7 +21,6 @@ const Index = () => {
     }, []); // Empty dependency array means this effect runs only once after initial render
 
     return (
-        <AppProvider>
             <Layout>
                 <div className="w-full pb-5 sm:flex justify-between items-center ">
                     <div className="font-semibold text-2xl">Booking Management</div>
@@ -75,10 +71,7 @@ const Index = () => {
 
                                         <div className="border-l pl-5">
                                             <div className="font-semibold text-[16px] pb-2">Package</div>
-                                            {/* <h2 className="">Name: <span className="font-semibold">{item.package.name}</span></h2>
-                                            <h2 className="capitalize">Start Date: <span className="font-semibold">{item.package.start_date}</span></h2>
-                                            <h2 className="capitalize">End date: <span className="font-semibold">{item.package.end_date}</span></h2>
-                                            <h2 className="">Code: <span className="font-semibold">{item.package.code}</span></h2> */}
+                                           
                                         </div>
                                         <div className="border-l pl-5">
                                             <h2 className="font-semibold text-[16px] pb-2">No. of People: <span
@@ -109,7 +102,6 @@ const Index = () => {
                     <p>No data available</p>
                 )}
             </Layout>
-        </AppProvider>
     );
 };
 

@@ -17,7 +17,7 @@ const IoIosSave = dynamic(() =>
 const MdCancel = dynamic(() =>
   import("react-icons/md").then((mod) => mod.MdCancel)
 );
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,7 +33,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CarItineraryTour from "@/components/admin/itineraryMaster/CarItineraryTour";
 import CarTermsAndCondition from "@/components/admin/itineraryMaster/Car/CarTermsAndCondition";
-import CarGst from "@/components/admin/dashboard/CarGst";
 import CarTime from "@/components/admin/itineraryMaster/Car/CarTime";
 import CarLocation from "@/components/admin/itineraryMaster/Car/CarLocation";
 import CarPricingManagement from "@/components/admin/itineraryMaster/Car/CarPricingManagement";
@@ -179,7 +178,7 @@ export default function Category() {
 
   return (
     <>
-      <AppProvider>
+  
         <Layout>
           {/* <SmartTabel/> */}
           {/* <DynamicTable/> */}
@@ -365,7 +364,7 @@ export default function Category() {
             </div>
           </div>
         </Layout>
-      </AppProvider>
+    
     </>
   );
 }

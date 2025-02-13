@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "@/components/admin/Layout";
 import Pagination from "react-js-pagination";
-import Link from "next/link";
+
 import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
 
 import dynamic from "next/dynamic";
@@ -22,7 +22,6 @@ const HiOutlineArrowNarrowRight = dynamic(() =>
   import("react-icons/hi").then((mod) => mod.HiOutlineArrowNarrowRight)
 );
 
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Image from "next/image";
 
 const YourComponent = () => {
@@ -103,7 +102,7 @@ else{
   );
   console.log("current items", currentItems);
   return (
-    <AppProvider>
+
       <Layout>
         <div>
           <DeleteModal
@@ -238,7 +237,7 @@ else{
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 };
 

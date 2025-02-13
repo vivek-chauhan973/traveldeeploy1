@@ -3,10 +3,6 @@ import { useEffect, useState } from 'react';
 import '../../../app/globals.css'
 import Link from 'next/link';
 import Layout from '@/components/admin/Layout';
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
-
-
-
 
 const fetchPackages = async () => {
     const response = await fetch('/api/package/get-packages');
@@ -30,7 +26,7 @@ export default function TourPackage() {
     };
 
     return (
-        <AppProvider>
+      
         <Layout>
         <div className="  ">
             <div className="container mx-auto">
@@ -68,6 +64,5 @@ export default function TourPackage() {
             </div>
         </div>
         </Layout>
-        </AppProvider>
     );
 }

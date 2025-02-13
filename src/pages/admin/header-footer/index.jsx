@@ -5,11 +5,11 @@ import { faArrowRightLong, faCirclePlus, faCube, faEdit, faFloppyDisk, faTrash, 
 
 const MdDeleteForever = dynamic(() => import('react-icons/md').then(mod => mod.MdDeleteForever));
 const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 
 export default function Index() {
     return (
-        <AppProvider>
+     
             <Layout>
                 <div>
                     <div className="flex items-center gap-5 text-primary mb-12 mt-5">
@@ -269,6 +269,6 @@ export default function Index() {
                     </div>
                 </div>
             </Layout>
-        </AppProvider>
+    
     )
 }

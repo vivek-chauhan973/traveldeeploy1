@@ -20,10 +20,8 @@ const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuP
 const HiOutlineArrowNarrowRight = dynamic(() => import('react-icons/hi').then(mod => mod.HiOutlineArrowNarrowRight));
 
 import FixedDeparture from "@/components/admin/itineraryCreate/FixedDeparture";
-import { AppProvider, useAppContext } from "@/components/admin/context/Package/AddGuest";
-import PriceRange from "@/components/admin/itineraryCreate/PriceRange";
 import ImageUploading from "@/components/admin/itineraryCreate/ImageUploading";
-import SelectedDatePrice from "@/components/admin/itineraryCreate/SelectedDatePrice";
+
 
 
 export default function CreatePackage() {
@@ -141,7 +139,7 @@ export default function CreatePackage() {
 // console.log("itinary is here ------> ",itinerary);
 
     return (
-        <AppProvider>
+        
             <Layout>
                 <div className="flex items-center gap-5 text-primary pb-3">
                     <LuPackagePlus size={28} className="font-semibold" />
@@ -254,6 +252,6 @@ export default function CreatePackage() {
                 )}
                
             </Layout>
-        </AppProvider>
+       
     );
 }

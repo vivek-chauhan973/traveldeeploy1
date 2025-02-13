@@ -6,8 +6,6 @@ import Image from "next/image";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import Picker from "@/components/car-rental/Picker";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarSelectionPopup from "@/components/car-rental/CarSelectionPopup";
 import CarCities from "@/components/car-rental/CarCities";
 import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
@@ -218,7 +216,7 @@ export default function App(pageprops) {
   };
 
   return (
-    <AppProvider>
+
       <div>
         {/* CarRentalHomeSkelton  */}
         {activeInactivePopup && <ActiveInactive />}
@@ -386,6 +384,6 @@ export default function App(pageprops) {
           <Footer />
         </div>
       </div>
-    </AppProvider>
+
   );
 }

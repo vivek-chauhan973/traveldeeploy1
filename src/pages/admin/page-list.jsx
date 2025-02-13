@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "@/components/admin/Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 const getAllPost=async ()=>{
   return await((await fetch('/api/static-page')).json())
 } 
@@ -24,7 +24,7 @@ const Pagelist = () => {
      }
   }
   return (
-    <AppProvider>
+
         <Layout>
         <div>
         </div>
@@ -75,7 +75,7 @@ const Pagelist = () => {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   )
 }
 

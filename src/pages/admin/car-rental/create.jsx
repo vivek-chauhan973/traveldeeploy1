@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Layout from "@/components/admin/Layout";
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -173,7 +173,7 @@ export default function AddCar() {
   };
 
   return (
-    <AppProvider>
+  
       <Layout>
         <div className="flex items-center gap-5 text-primary xl:mb-10 mb-7 xl:mt-5">
           <FontAwesomeIcon icon={faCube} className="text-2xl" />
@@ -386,7 +386,7 @@ export default function AddCar() {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 }
 

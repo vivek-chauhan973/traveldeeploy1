@@ -2,6 +2,7 @@ import { CarPopupProvider } from "@/components/admin/context/CarPopupCalculation
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 import App from "next/app";
+import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 
 APP.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
@@ -48,9 +49,12 @@ export default function APP({ Component, pageProps }) {
   // console.log("content of _app.js props is here ------> ",pageProps)
   return (
     <SessionProvider session={pageProps.session}>
+      <AppProvider>
       <CarPopupProvider>
         <Component {...pageProps} />
       </CarPopupProvider>
+      </AppProvider>
     </SessionProvider>
+    
   );
 }

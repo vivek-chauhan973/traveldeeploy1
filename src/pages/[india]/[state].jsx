@@ -7,7 +7,6 @@ import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import Footer from '@/components/Footer';
@@ -123,7 +122,7 @@ export default function SearchPage(pageprops) {
   console.log("promoData", promoData);
 
   return (
-    <AppProvider>
+    <>
       <Head>
         <title>{selectedLocation?.name} | BizareXpedition™️</title>
         <meta name="description"
@@ -186,6 +185,6 @@ export default function SearchPage(pageprops) {
         </div>
       </main>
       <Footer />
-    </AppProvider>
+      </>
   );
 }

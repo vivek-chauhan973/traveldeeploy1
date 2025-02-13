@@ -7,7 +7,6 @@ import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { PromoBanner} from '@/components/Skeleton/Package/promo';
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import Footer from '@/components/Footer';
@@ -108,7 +107,7 @@ const SpacilityTour=(pageprops)=> {
 
 
   return (
-    <AppProvider>
+   
       <div className='bg-slate-100'>
         <DesktopHeader/>
         <Breadcrumbs/>
@@ -142,7 +141,7 @@ const SpacilityTour=(pageprops)=> {
         </div> */}
         <Footer/>
       </div>
-    </AppProvider>
+   
   );
 }
 export default SpacilityTour;

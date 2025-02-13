@@ -8,10 +8,8 @@ const FaEdit = dynamic(() => import('react-icons/fa').then(mod => mod.FaEdit));
 const IoIosSave = dynamic(() => import('react-icons/io').then(mod => mod.IoIosSave));
 const MdCancel = dynamic(() => import('react-icons/md').then(mod => mod.MdCancel));
 import ItineraryTour from "@/components/admin/itineraryMaster/ItineraryTour";
-import { LuPackagePlus } from "react-icons/lu";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-import { ToastContainer, toast } from 'react-toastify';
+
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Gst from "@/components/admin/dashboard/Gst";
 import TermsAndCondition from "@/components/admin/itineraryMaster/TermsAndCondition";
@@ -236,7 +234,7 @@ export default function Category() {
 
     return (
         <>
-            <AppProvider>
+
                 <Layout>
                     {/* <SmartTabel/> */}
                     {/* <DynamicTable/> */}
@@ -407,7 +405,7 @@ export default function Category() {
 
                     </div>
                 </Layout>
-            </AppProvider>
+   
         </>
     )
 }

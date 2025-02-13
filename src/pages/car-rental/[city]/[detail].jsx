@@ -18,7 +18,6 @@ import CarDetailFaq from "@/components/car-rental/car-detail/CarDetailFaq";
 import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarItineraryTourDetails from "@/components/car-rental/car-detail/CarItineraryTourDetails";
 import { useRouter } from "next/router";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarDeptBookingPopup from "@/components/car-rental/car-detail/CarDeparture & booking/CarDeptBookingPopup";
 import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 import Footer from "@/components/Footer";
@@ -130,7 +129,7 @@ export default function CarDetail(pageprops) {
     // console.log("carSidePackages----==>  ", carPrice1);
     
     return (
-        <AppProvider>
+        <>
             {/* CarDetailSkeleton  */}
             {showPopupBooking && (
                 <CarDeptBookingPopup
@@ -559,6 +558,6 @@ export default function CarDetail(pageprops) {
                     </div>
                 </div>
             </div>
-        </AppProvider>
+        </>
     )
 };

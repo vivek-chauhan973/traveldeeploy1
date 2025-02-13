@@ -9,8 +9,6 @@ import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
 import Pagination from "react-js-pagination";
 import { LuPackagePlus } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
-
 const CarList = () => {
     const [carsList, setCarsList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +61,6 @@ const CarList = () => {
     const currentItems = filteredCarsList.slice(indexOfFirstItem, indexOfLastItem);
 
     return (
-        <AppProvider>
         <Layout>
             <div>
                 <DeleteModal
@@ -150,7 +147,6 @@ const CarList = () => {
                 </div>
             </div>
         </Layout>
-        </AppProvider>
     );
 };
 

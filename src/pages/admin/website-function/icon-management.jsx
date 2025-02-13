@@ -1,4 +1,4 @@
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import Layout from "@/components/admin/Layout";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -99,7 +99,7 @@ export default function IconManagement() {
   }
   // console.log("preview the image", preview);
   return (
-    <AppProvider>
+ 
       <Layout>
         <div className="flex items-center gap-5 text-primary xl:mb-10 mb-7 xl:mt-5">
           <FontAwesomeIcon icon={faCube} className="text-2xl" />
@@ -197,6 +197,6 @@ export default function IconManagement() {
           </div>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 }

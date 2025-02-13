@@ -3,7 +3,6 @@ import Layout from '@/components/admin/Layout';
 import { IoIosSearch } from 'react-icons/io';
 import { BsPatchCheckFill } from "react-icons/bs";
 import { LiaBarsSolid } from "react-icons/lia";
-import { AppProvider } from '@/components/admin/context/Package/AddGuest';
 import Image from 'next/image'
 
 const Itinerary = () => {
@@ -64,7 +63,7 @@ const Itinerary = () => {
     );
 
     return (
-        <AppProvider>
+  
         <Layout>
             <div className="overflow-hidden">
                 <label className="relative block mb-5">
@@ -224,7 +223,7 @@ const Itinerary = () => {
                 </div>
             </div>
         </Layout>
-        </AppProvider>
+       
     );
 }
 

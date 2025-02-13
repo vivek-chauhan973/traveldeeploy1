@@ -1,11 +1,11 @@
-import { AppProvider } from '@/components/admin/context/Package/AddGuest'
+
 import Layout from '@/components/admin/Layout'
 import React from 'react'
 import Image from 'next/image'
 
 const index = () => {
   return (
-    <AppProvider>
+
     <Layout>
       <div>
         <h1 className="text-xl font-bold mb-4">Setting</h1>
@@ -110,7 +110,7 @@ const index = () => {
 
       </div>
     </Layout>
-    </AppProvider>
+
   )
 }
 

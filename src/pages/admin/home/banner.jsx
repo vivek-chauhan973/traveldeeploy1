@@ -1,4 +1,4 @@
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
+
 import Layout from "@/components/admin/Layout";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -128,7 +128,7 @@ export default function Banner() {
   // console.log("preview the image", preview);
   
   return (
-    <AppProvider>
+
       <Layout>
         <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
           <FontAwesomeIcon icon={faCube} className="text-2xl" />
@@ -198,6 +198,6 @@ export default function Banner() {
           <CarouselBanner/>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 }

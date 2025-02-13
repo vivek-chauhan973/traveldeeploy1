@@ -8,7 +8,6 @@ import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
 import dynamic from 'next/dynamic';
 const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuPackagePlus));
 const HiOutlineArrowNarrowRight = dynamic(() => import('react-icons/hi').then(mod => mod.HiOutlineArrowNarrowRight));
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import Layout from "@/components/admin/Layout";
 import CarPrimaryItinerary from "@/components/admin/itineraryCreate/CarPrimaryItinerary";
 import CarImageUploading from "@/components/admin/itineraryCreate/CarImageUploading";
@@ -115,7 +114,7 @@ export default function CreatePackage() {
     useEffect(() => { }, [select]);
 // console.log("itinary is here ------> ",itinerary);
     return (
-        <AppProvider>
+    
             <Layout>
                 <div className="flex items-center gap-5 text-primary pb-3">
                     <LuPackagePlus size={28} className="font-semibold" />
@@ -215,6 +214,6 @@ export default function CreatePackage() {
                 )}
                
             </Layout>
-        </AppProvider>
+    
     );
 }

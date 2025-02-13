@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong, faCube } from "@fortawesome/free-solid-svg-icons";
 import Layout from "@/components/admin/Layout";
-import { AppProvider } from "@/components/admin/context/Package/AddGuest";
 import CarBanner from "@/components/car-rental/CarHome/Banner";
 import HeadingDesc from "@/components/car-rental/CarHome/HeadingDesc";
 import CarCarouselBanner from "@/components/car-rental/CarHome/CarCarouselBanner";
@@ -153,7 +152,7 @@ const Home = () => {
   };
   //   console.log("options is here----> ",selectedOptions)
   return (
-    <AppProvider>
+
       <Layout>
         <div className="">
           <div className="flex items-center gap-5 text-primary xl:mt-5 mb-10">
@@ -322,7 +321,7 @@ const Home = () => {
           <CarStaticBanner/>
         </div>
       </Layout>
-    </AppProvider>
+
   );
 };
 
