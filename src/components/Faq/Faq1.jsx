@@ -17,7 +17,7 @@ const Faq1 = ({ data }) => {
             const faqData = {
                 "@context": "https://schema.org",
                 "@type": "FAQPage",
-                "mainEntity": data.map((item) => ({
+                "mainEntity": data?.map((item) => ({
                     "@type": "Question",
                     "name": item.title,
                     "acceptedAnswer": {

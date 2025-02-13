@@ -210,7 +210,7 @@ export default function Package1() {
   // console.log("addPackage", addPackage);
   // console.log("schemaData", schemaData);
   // console.log("matchedPackages", matchedPackages);
-  
+
   // Product Schema JSON-LD
   const productSchema = {
     "@context": "https://schema.org",
@@ -243,6 +243,27 @@ export default function Package1() {
     }
   };
 
+  // Event Schema JSON-LD
+  const eventSchema = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": matchedPackages?.seo?.title,
+    "image": matchedPackages?.uploads?.[0],
+    "startDate": schemaData?.startDate,
+    "endDate": schemaData?.endDate,
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name":  "BizareXpedition™ Office",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress":"13A/4, THDC Near Shivalik Mart, Ranipur, Haridwar Near, near Ram Mandir, Ranipur, Uttarakhand",
+        "addressLocality": "Haridwar",
+        "postalCode": "249407",
+        "addressCountry": "IN"
+      }
+    }
+  };
   return (
     <>
       {/* Head Section with Organization Schema */}
@@ -273,6 +294,10 @@ export default function Package1() {
         {/* Organization Schema */}
         <OrganizationSchema />
         {/* Product Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
@@ -315,7 +340,8 @@ export default function Package1() {
                   tour.
                 </h1>
                 <p className="italic  text-sm">
-                  Hurry, as seats fill up, prices rise! Book now!
+                  Hurry, as seats fill up, prices rise! Book now! 
+                  {schemaData?.startDate}
                 </p>
               </div>
               <div className="grid grid-cols-1 xl:grid-cols-[2fr,1fr] gap-x-3 ">

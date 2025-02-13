@@ -104,7 +104,7 @@ export default function SearchPage(pageprops) {
   useEffect(() => {
     if (selectedLocation?._id) {
       fetchPromoManagementData(selectedLocation._id).then(res => {
-        console.log("res ====>", res);
+        console.log("res ====>", res); 
         setPromoData(res?.data || {})
       });
     } else {
@@ -117,36 +117,35 @@ export default function SearchPage(pageprops) {
     return <PromoBanner />;
   }
   // console.log("priorityPackage packages is here --> ",priorityPackage)
-  // console.log("selectedLocation",selectedLocation);
-  console.log("selectedLocation", selectedLocation._id);
-  console.log("promoData", promoData);
+  // console.log("promoData", promoData);
+
 
   return (
     <>
       <Head>
-        <title>{selectedLocation?.name} | BizareXpedition™️</title>
+        <title>{promoData?.seoField?.seoTitle || selectedLocation?.name} | BizareXpedition™️</title>
         <meta name="description"
-          content=""
+          content={promoData?.seoField?.seoDescription}
         />
         <meta
           name="keywords"
-          content={"" || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
+          content={ promoData?.seoField?.seoKeywords || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
         />
         {/* Author and Robots */}
         <meta name="author" content="BizareXpedition" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         {/* Open Graph for Social Media */}
-        <meta property="og:title" content="" />
-        <meta property="og:description" content={"" || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta property="og:title" content={promoData?.seoField?.seoTitle || selectedLocation?.name} />
+        <meta property="og:description" content={promoData?.seoField?.seoDescription || "Discover unforgettable journeys with BizareXpedition™️."} />
         <meta property="og:image" content={`https://www.bizarexpedition.com/ || 'https://www.bizarexpedition.com/default-meta-image.jpg          '}`} />
-        <meta property="og:url" content={`https://www.bizarexpedition.com/package/${selectedLocation?.pageUrl}-tour-package`} />
+        <meta property="og:url" content={`https://www.bizarexpedition.com/india/${selectedLocation?.pageUrl}`} />
         <meta property="og:type" content="website" />
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="" />
-        <meta name="twitter:description" content={"" || "Discover unforgettable journeys with BizareXpedition™️."} />
-        <meta name="twitter:image" content={`https://www.bizarexpedition.com/ || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
+        <meta name="twitter:title" content={promoData?.seoField?.seoTitle || selectedLocation?.name} />
+        <meta name="twitter:description" content={promoData?.seoField?.seoDescription || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta name="twitter:image" content={`https://www.bizarexpedition.com/${promoData?.image} || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
         {/* Organization Schema */}
         <OrganizationSchema />
       </Head>

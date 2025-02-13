@@ -7,13 +7,13 @@ import SearchPageFilter from '@/components/SearchPageFilter';
 import SearchPagePackageList from '@/components/SearchPagePackageList';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
-
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import Footer from '@/components/Footer';
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 import OrganizationSchema from '@/components/seo/OrganizationSchema';
 import Head from 'next/head';
+
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};
   const response = await fetch(`/api/public/package-state/${stateId}`);
@@ -94,7 +94,11 @@ export default function India(pageprops) {
   }, [state, router]);
   useEffect(() => {
     if (selectedLocation?._id) {
-      fetchPromoManagementData(selectedLocation._id).then(res => setPromoData(res?.data || {}));
+      fetchPromoManagementData(selectedLocation._id).then(res => {
+        // console.log("res======>", res)
+        setPromoData(res?.data || {})
+      }
+      );
     } else {
       setPromoData({});
     }
@@ -103,40 +107,40 @@ export default function India(pageprops) {
     return <PromoBanner />;
   }
 
-  console.log("selectedLocation",selectedLocation);
+  // console.log("selectedLocation", selectedLocation);
+  // console.log("promoData", promoData);
 
-  
   return (
     <>
       <Head>
-        <title>{selectedLocation?.name} | BizareXpedition™️</title>
+        <title>{promoData?.seoField?.seoTitle || selectedLocation?.name} | BizareXpedition™️</title>
         <meta name="description"
-          content=""
+          content={promoData?.seoField?.seoDescription}
         />
         <meta
           name="keywords"
-          content={"" || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
+          content={promoData?.seoField?.seoKeywords || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
         />
         {/* Author and Robots */}
         <meta name="author" content="BizareXpedition" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         {/* Open Graph for Social Media */}
-        <meta property="og:title" content={`${selectedLocation?.name} | BizareXpedition™️`}/>
-        <meta property="og:description" content={"" || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta property="og:title" content={promoData?.seoField?.seoTitle || selectedLocation?.name} />
+        <meta property="og:description" content={promoData?.seoField?.seoDescription || "Discover unforgettable journeys with BizareXpedition™️."} />
         <meta property="og:image" content={`https://www.bizarexpedition.com/ || 'https://www.bizarexpedition.com/default-meta-image.jpg          '}`} />
-        <meta property="og:url" content={`https://www.bizarexpedition.com/package/${selectedLocation?.url}-tour-package`} />
+        <meta property="og:url" content={`https://www.bizarexpedition.com/${selectedLocation?.url}`} />
         <meta property="og:type" content="website" />
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${selectedLocation?.name} | BizareXpedition™️`} />
-        <meta name="twitter:description" content={"" || "Discover unforgettable journeys with BizareXpedition™️."} />
-        <meta name="twitter:image" content={`https://www.bizarexpedition.com/ || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
+        <meta name="twitter:title" content={promoData?.seoField?.seoTitle || selectedLocation?.name} />
+        <meta name="twitter:description" content={promoData?.seoField?.seoDescription || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta name="twitter:image" content={`https://www.bizarexpedition.com/${promoData?.image} || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
         {/* Organization Schema */}
         <OrganizationSchema />
       </Head>
       <main>
-        <div className='bg-slate-100'>
+        <div className='bg-slate-100 '>
           <DesktopHeader />
           <Breadcrumbs />
           <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} priorityPackage={priorityPackage} />
@@ -164,10 +168,6 @@ export default function India(pageprops) {
               <Faq1 data={promoData.faq} />
             </div>
           </div>
-
-          {/* <div className="border-t border">
-          <BottomLink locationId={selectedLocation} />
-        </div> */}
         </div>
       </main>
       <Footer />

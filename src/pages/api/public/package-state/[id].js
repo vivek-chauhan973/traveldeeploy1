@@ -37,7 +37,7 @@ const handler = async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const packageState = await PackageState.findOne({ relatedId: id });
+                const packageState = await PackageState.findOne({ relatedId: id }).populate("seoField");
                 if (!packageState) {
                     return res.status(404).json({ success: false, message: 'Package state not found' });
                 }
