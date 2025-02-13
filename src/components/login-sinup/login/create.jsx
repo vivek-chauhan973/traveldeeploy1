@@ -191,6 +191,7 @@ const Create = () => {
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
           amount: fixedDeparturePopupPrice1,
+          package_type:"tour-package"
         };
         try {
           const response = await fetch("/api/cashfree/initiate-payment", {
@@ -232,6 +233,7 @@ const Create = () => {
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
           amount: fixedDeparturePopupPrice1,
+          package_type:"car-package"
         };
         try {
           const response = await fetch("/api/cashfree/initiate-payment1", {
@@ -367,6 +369,7 @@ const Create = () => {
         customer_id: `customer_${Date.now()}`,
         orderId: `order_${Date.now()}`,
         amount: fixedDeparturePopupPrice1,
+        package_type:"tour-package"
       };
       try {
         const response = await fetch("/api/cashfree/initiate-payment", {
@@ -409,6 +412,7 @@ const Create = () => {
         customer_id: `customer_${Date.now()}`,
         orderId: `order_${Date.now()}`,
         amount: fixedDeparturePopupPrice1,
+        package_type:"car-package"
       };
       try {
         const response = await fetch("/api/cashfree/initiate-payment1", {
@@ -486,7 +490,7 @@ const Create = () => {
           name: session?.user.name,
           email: session?.user.email,
           phoneNumber,
-          package_type:"Out_Station_Hire",
+          package_type:"OutStation-Car-Hire",
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
           amount:grandTotalCar,
