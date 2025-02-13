@@ -13,6 +13,8 @@ import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
 import Footer from '@/components/Footer';
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
+import OrganizationSchema from '@/components/seo/OrganizationSchema';
+import Head from 'next/head';
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};
   const response = await fetch(`/api/public/package-state/${stateId}`);
@@ -32,14 +34,14 @@ const fetchPackages = async (locationId) => {
 };
 
 export default function India(pageprops) {
-   const { setServerSideProps } = useCarPopupContext();
-    
-      useEffect(() => {
-        if(pageprops){
-          setServerSideProps(pageprops || {});
-        }
-        
-      }, [pageprops]);
+  const { setServerSideProps } = useCarPopupContext();
+
+  useEffect(() => {
+    if (pageprops) {
+      setServerSideProps(pageprops || {});
+    }
+
+  }, [pageprops]);
   const router = useRouter();
   const state = router?.query?.india;
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -47,7 +49,7 @@ export default function India(pageprops) {
   const [loading, setLoading] = useState(true);
   const [clearAll, setClearAll] = useState(false);
   const [priorityPackage, setPriorityPackage] = useState([]);
-  const [packages,setPackages]=useState([]);
+  const [packages, setPackages] = useState([]);
   useEffect(() => {
     const fetchPackages1 = async () => {
       try {
@@ -67,10 +69,10 @@ export default function India(pageprops) {
     }
   }, [selectedLocation]);
 
-useEffect(()=>{
-  fetchPackages(selectedLocation?._id).then(res=>{setPackages(res)});
-},[selectedLocation])
-// console.log("..........router ",router)
+  useEffect(() => {
+    fetchPackages(selectedLocation?._id).then(res => { setPackages(res) });
+  }, [selectedLocation])
+  // console.log("..........router ",router)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -101,41 +103,75 @@ useEffect(()=>{
   if (loading) {
     return <PromoBanner />;
   }
+
+  console.log("selectedLocation",selectedLocation);
+
+  
   return (
     <AppProvider>
-      <div className='bg-slate-100'>
-        <DesktopHeader />
-        <Breadcrumbs/>
-        <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} priorityPackage={priorityPackage} />
-        <SearchHeaderWpr  />
-        <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
-          <div className='relative'>
-            <div className='hidden xl:block'>
-              <SearchPageFilter  setClearAll={setClearAll} />
+      <Head>
+        <title>{selectedLocation?.name} | BizareXpedition™️</title>
+        <meta name="description"
+          content=""
+        />
+        <meta
+          name="keywords"
+          content={"" || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
+        />
+        {/* Author and Robots */}
+        <meta name="author" content="BizareXpedition" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index, follow" />
+        {/* Open Graph for Social Media */}
+        <meta property="og:title" content={`${selectedLocation?.name} | BizareXpedition™️`}/>
+        <meta property="og:description" content={"" || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta property="og:image" content={`https://www.bizarexpedition.com/ || 'https://www.bizarexpedition.com/default-meta-image.jpg          '}`} />
+        <meta property="og:url" content={`https://www.bizarexpedition.com/package/${selectedLocation?.url}-tour-package`} />
+        <meta property="og:type" content="website" />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${selectedLocation?.name} | BizareXpedition™️`} />
+        <meta name="twitter:description" content={"" || "Discover unforgettable journeys with BizareXpedition™️."} />
+        <meta name="twitter:image" content={`https://www.bizarexpedition.com/ || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
+        {/* Organization Schema */}
+        <OrganizationSchema />
+      </Head>
+      <main>
+        <div className='bg-slate-100'>
+          <DesktopHeader />
+          <Breadcrumbs />
+          <SearchPageTopSeoContent state={selectedLocation} promoData={promoData} priorityPackage={priorityPackage} />
+          <SearchHeaderWpr />
+          <div className="container-wrapper grid grid-cols-1 xl:grid-cols-[320px,2fr] gap-5 relative">
+            <div className='relative'>
+              <div className='hidden xl:block'>
+                <SearchPageFilter setClearAll={setClearAll} />
+              </div>
             </div>
-          </div>
-          <div>
             <div>
-              <SearchPagePackageList locationId={packages}  />
+              <div>
+                <SearchPagePackageList locationId={packages} />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="border-t border">
-          <div className="w-full md:w-3/4 m-auto px-2 pb-5">
-            <div className="text-center mt-5 mb-10">
-              <p className="md:text-[22px] text-[20px] font-semibold mb-2 capitalize">Frequently Asked Questions (FAQs) <span className='lowercase'>for</span> {state?.split("-")?.join(" ")} {" Tour Packages"}</p>
-              <p className="text-para md:text-base">
-                We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
-              </p>
+          <div className="border-t border">
+            <div className="w-full md:w-3/4 m-auto px-2 pb-5">
+              <div className="text-center mt-5 mb-10">
+                <p className="md:text-[22px] text-[20px] font-semibold mb-2 capitalize">Frequently Asked Questions (FAQs) <span className='lowercase'>for</span> {state?.split("-")?.join(" ")} {" Tour Packages"}</p>
+                <p className="text-para md:text-base">
+                  We help you prepare for your trip and ensure an effortless and enjoyable travel experience.
+                </p>
+              </div>
+              <Faq1 data={promoData.faq} />
             </div>
-            <Faq1 data={promoData.faq} />
           </div>
-        </div>
-        <Footer/>
-        {/* <div className="border-t border">
+
+          {/* <div className="border-t border">
           <BottomLink locationId={selectedLocation} />
         </div> */}
-      </div>
+        </div>
+      </main>
+      <Footer />
     </AppProvider>
   );
 }
