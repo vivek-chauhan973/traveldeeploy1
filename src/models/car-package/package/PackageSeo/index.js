@@ -9,6 +9,9 @@ const PackageSeoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  keyword:{
+    type: String,
+  },
   priceValid: {
     type: Date,
     required: true,

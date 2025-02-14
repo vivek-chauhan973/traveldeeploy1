@@ -34,7 +34,7 @@ const SearchCarPagePackageList = ({ carPackageList,setCarPackageList }) => {
     if(CarFilteredPackages?.[0]==="not found"){
         return <p className=" text-center mt-20 font-semibold">No Car Packages found</p>
     }
-console.log("carPackageList------------> ",carPackageList);
+// console.log("carPackageList------------> ",carPackageList);
     return (
         <div>
             {currentItems?.length > 0 && currentItems?.map((items, i) => {

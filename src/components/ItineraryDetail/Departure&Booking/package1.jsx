@@ -264,6 +264,7 @@ export default function Package1() {
       }
     }
   };
+  
   return (
     <>
       {/* Head Section with Organization Schema */}
@@ -293,11 +294,12 @@ export default function Package1() {
         <meta name="twitter:image" content={`https://www.bizarexpedition.com/${matchedPackages?.uploads?.[0] || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
         {/* Organization Schema */}
         <OrganizationSchema />
-        {/* Product Schema */}
+        {/* Event Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
         />
+        {/* Product Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}

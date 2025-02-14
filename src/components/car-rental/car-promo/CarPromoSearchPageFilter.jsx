@@ -21,7 +21,7 @@ const fetchCategories = async () => {
       "/api/package-setting/category/get-categories"
     );
     const categories = await categoriesList.json();
-    console.log("Categories fetched:", categories);
+    // console.log("Categories fetched:", categories);
     return categories;
   } catch (err) {
     console.log("Error fetching categories:", err);
