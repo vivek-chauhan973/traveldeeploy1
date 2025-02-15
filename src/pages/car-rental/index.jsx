@@ -5,7 +5,6 @@ import { FaGlobe, FaCar, FaHandsHelping } from "react-icons/fa";
 import Image from "next/image";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
 import { IoMdArrowDropdown } from "react-icons/io";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import CarSelectionPopup from "@/components/car-rental/CarSelectionPopup";
 import CarCities from "@/components/car-rental/CarCities";
 import CarPackageCarousel from "@/components/car-rental/CarPackageCarouel";
@@ -23,7 +22,7 @@ import Link from "next/link";
 import Picker from "@/components/car-rental/Picker";
 import Head from "next/head";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
-
+import CarHomeBreadCrumb from "@/components/CarHomeBreadCrumb";
 const fetchPromoList = async () => {
   const response = await fetch(
     `/api/public/package-state/carpromo/fetchpromocat?selectType=city`
@@ -256,7 +255,7 @@ export default function App(pageprops) {
           {showPopupOutstation && <CarBookingPopupOutsation />}
           {loginPopup && <Create />}
           <DesktopHeader />
-          <Breadcrumbs />
+          <CarHomeBreadCrumb/>
           <div className="container-wrapper"></div>
           <div className="mb-2 md:mb-5">
             <div className="overflow-hidden relative xl:h-[83vh] h-[80vh]">

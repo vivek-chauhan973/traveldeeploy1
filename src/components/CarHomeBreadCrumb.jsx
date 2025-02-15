@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from 'next/head';
 
-const CarBreadcrumbs = () => {
+const CarHomeBreadCrumb = () => {
     const router = useRouter();
     // console.log("router", router)
     const pathnames = router.asPath.split("/").filter((x) => x);
@@ -49,7 +49,7 @@ const CarBreadcrumbs = () => {
                                     <li key={index} className="flex items-center capitalize">
                                         <span className="mr-2">{">"}</span>
                                         {isLast ? (
-                                            <span className="font-semibold text-gray-900 ">{name?.replace("-car-hire", " ")?.replace("-", " ")} Car Hire</span>
+                                            <span className="font-semibold text-gray-900 ">{name?.replace("-car-hire", " ")?.replace("-", " ")}</span>
                                         ) : (
                                             <Link href={routeTo} className="hover:underline">
                                                 {name.replace("-", " ")}
@@ -67,7 +67,7 @@ const CarBreadcrumbs = () => {
     );
 }
 
-export default CarBreadcrumbs;
+export default CarHomeBreadCrumb;
 
 
 

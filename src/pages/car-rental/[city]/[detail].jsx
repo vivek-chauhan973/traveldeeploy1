@@ -1,8 +1,6 @@
 import { useEffect, useState, } from "react";
 import "../../../app/globals.css";
 import DesktopHeader from "@/components/Header/DesktopHeader/desktopHeader";
-import Image from 'next/image';
-import Breadcrumbs from "@/components/Breadcrumbs";
 import CarDetailHeroSection from "@/components/car-rental/car-detail/CarDetailHeroSection";
 import CarDepartureSection from "@/components/car-rental/car-detail/CarDepartureSection";
 import CardDetailPricingCard from "@/components/car-rental/car-detail/CarDetailPricingCard";
@@ -15,19 +13,18 @@ import CarItinerarymap from "@/components/car-rental/car-detail/CarItineraryMap"
 import CarItineraryPaymentTerms from "@/components/car-rental/car-detail/CarItineraryPaymentterms";
 import CarItinerarySideCard from "@/components/car-rental/car-detail/CarItinerarySideCard";
 import CarDetailFaq from "@/components/car-rental/car-detail/CarDetailFaq";
-import BottomLink from "@/components/ItineraryDetail/BottomLink";
 import CarItineraryTourDetails from "@/components/car-rental/car-detail/CarItineraryTourDetails";
 import { useRouter } from "next/router";
 import CarDeptBookingPopup from "@/components/car-rental/car-detail/CarDeparture & booking/CarDeptBookingPopup";
 import CarReviewCard from "@/components/car-rental/CarHome/CarReviewCard";
 import Footer from "@/components/Footer";
 import CustomiseTour from "@/components/ItineraryDetail/CustomiseTour";
-import TestingCard from "@/components/ItineraryDetail/TestingCard";
 import CarTestingCard from "@/components/car-rental/car-detail/CarTestingCard";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import Create from "@/components/login-sinup/login/create";
 import Head from "next/head";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import CarBreadcrumbs from "@/components/CarBreadCrumb";
 
 const fetchCarPackage = async (packageUrl) => {
     // console.log("page url :: ",packageUrl)
@@ -238,7 +235,7 @@ export default function CarDetail(pageprops) {
                 <div>
                     {/* <div className="bg-gradient-to-r from-indigo-50 from-10% via-green-50 via-30% to-indigo-50 to-90%"> */}
                     <DesktopHeader />
-                    <Breadcrumbs />
+                    <CarBreadcrumbs />
                     {/* Car-rental Banner section */}
                     <CarDetailHeroSection
                         carPackage={carPackage}

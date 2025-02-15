@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import Head from "next/head";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import CarBreadcrumbs from "@/components/CarBreadCrumb";
 
 
 const fetchLocationAccordingToCity = async (city) => {
@@ -121,7 +122,7 @@ export default function CarPromo(pageprops) {
                 {/* CarPromoSkeleton */}
                 <div className='bg-slate-100'>
                     <DesktopHeader />
-                    <Breadcrumbs />
+                    <CarBreadcrumbs />
                     <CarPromoHeroSection cityPromoData={cityPromoData} cityId={cityId} />
                     {/* <SearchHeaderWpr /> */}
                     <div className="container-wrapper flex justify-between pb-5 items-center">
