@@ -1,11 +1,11 @@
 import User from "@/models/User";
 import connectToDatabase from "@/utils/db";
 import jwt from 'jsonwebtoken';
-import { NextApiRequest, NextApiResponse } from "next"
-import cookie from 'cookie';
-connectToDatabase()
+
 
 export default async function handler(req, res) {
+    await connectToDatabase()
+    console.log("database is connected here as-----> ",process.env.MONGODB_URI)
     if (req.method === 'POST') {
         const { username, password } = req.body;
         if (!username || !password) {
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
             return res.status(200).json({ message: 'User logged in successfully', token, user });
         } catch (error) {
             console.error(error);
-           return  res.status(500).json({ message: 'Internal server error' });
+           return  res.status(500).json({ message: 'Internal server error' ,error});
         }
     } else {
         return res.status(405).json({ message: 'Method not allowed' });
