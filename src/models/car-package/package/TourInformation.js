@@ -10,7 +10,7 @@ const TourDetailSchema = new Schema({
 });
 
 const TourInformationSchema = new Schema({
-  package: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true },
+  package: { type: mongoose.Schema.Types.ObjectId, ref: 'CarPackage1', required: true },
   cancellation: { type: TourDetailSchema, required: true },
   paymentTerm: { type: TourDetailSchema, required: true },
   inclusion: { type: TourDetailSchema, required: true },

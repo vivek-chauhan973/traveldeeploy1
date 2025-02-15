@@ -24,7 +24,7 @@ const PackageSeoSchema = new mongoose.Schema({
   },
   package: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Package',
+    ref: 'CarPackage1',
     required: true,
   }
 }, {
@@ -33,3 +33,9 @@ const PackageSeoSchema = new mongoose.Schema({
 
 const CarSeoData= mongoose.models.CarSeoData || mongoose.model('CarSeoData', PackageSeoSchema);
 export default CarSeoData
+
+
+
+
+
+// other function

@@ -1,6 +1,4 @@
-
-import CarPackage from "../../../../models/CarPackage";
-import { NextApiRequest, NextApiResponse } from "next";
+import CarPackage1 from "@/models/CarPackage";
 
 const deletePackage= async (req, res) => {
     try {
@@ -17,7 +15,7 @@ const deletePackage= async (req, res) => {
         console.log("Deleting package with ID: ", packageList_id);
         
         // Use findByIdAndDelete with the correct ID
-        const result = await CarPackage.findByIdAndDelete(packageList_id);
+        const result = await CarPackage1.findByIdAndDelete(packageList_id);
 
         if (!result) {
             return res.status(404).json({ message: 'Package not found' });

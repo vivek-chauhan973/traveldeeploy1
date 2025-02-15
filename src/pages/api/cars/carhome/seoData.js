@@ -1,7 +1,4 @@
 import SeoCarHomeData from "@/models/car-package/CarHome/SeoData";
-import SeoData from "@/models/car-package/CarHome/SeoData";
-
-
 const seoDataApi=async (req,res)=>{
 
     if(req.method==="POST"){    

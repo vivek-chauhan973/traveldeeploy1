@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const fixedDeparturePriceSchema=new mongoose.Schema({
     packageId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Package"
+        ref:"CarPackage1"
     },
     datePriceArray:[{
         date:{

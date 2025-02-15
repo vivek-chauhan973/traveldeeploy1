@@ -1,6 +1,4 @@
 import CarNeedToKnow from "@/models/car-package/package/TourInfo/NeedToKnow";
-import { NextApiRequest, NextApiResponse } from "next";
-
 const packageTourinfoInNeedDelete= async (req, res) => {
     try {
         if (req.method !== 'POST') {

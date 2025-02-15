@@ -1,5 +1,6 @@
+import CarPackage1 from "@/models/CarPackage";
 import CarSelectedIcon from "@/models/selectedIcon/CarSelectedIcon";
-import CarPackage from "../../../../../models/CarPackage";
+
 
 const selectedIconApi=async (req,res)=>{
 
@@ -15,7 +16,7 @@ const selectedIconApi=async (req,res)=>{
             if(!data1){
                 return res.status(301).json({message:"Something went wrong"});
             }
-            await CarPackage.findByIdAndUpdate({_id:iconId},{$set:{icons:data1?._id}});
+            await CarPackage1.findByIdAndUpdate({_id:iconId},{$set:{icons:data1?._id}});
             return res.status(201).json({message:"data is successfully created",data1});
         }
 
@@ -23,7 +24,7 @@ const selectedIconApi=async (req,res)=>{
         if(!data2){
             return res.status(301).json({message:"Something went wrong"});
         }
-        await CarPackage.findByIdAndUpdate({_id:iconId},{$set:{icons:data2?._id}});
+        await CarPackage1.findByIdAndUpdate({_id:iconId},{$set:{icons:data2?._id}});
         return res.status(201).json({message:"data is successfully created",data2});
     } catch (error) {
         return res.status(500).json({message:"Internal Server Error"});

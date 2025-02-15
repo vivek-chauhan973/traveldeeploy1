@@ -1,4 +1,5 @@
-import CarPackage from "@/models/car-package/carPackage";
+import CarPackage1 from "@/models/CarPackage";
+
 
 const CarPackages = async (req, res) => {
   const {
@@ -30,7 +31,7 @@ const CarPackages = async (req, res) => {
   }
   if (req.method === "POST") {
     try {
-      const data = await CarPackage.create({
+      const data = await CarPackage1.create({
         id: packageId,
         location: location,
         title: title,
@@ -52,7 +53,7 @@ const CarPackages = async (req, res) => {
     }
   } else {
     try {
-      const data = await CarPackage.find({}).populate("id");
+      const data = await CarPackage1.find({}).populate("id");
       if (!data) {
         res.status(404).json({ message: "data not found" });
       }

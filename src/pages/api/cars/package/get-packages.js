@@ -1,6 +1,4 @@
 import CarPackage1 from "@/models/CarPackage";
-
-
  const packageGet= async (req, res) => {
 
     try {

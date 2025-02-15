@@ -1,8 +1,4 @@
 import CarPackage1 from "@/models/CarPackage";
-import Package from "@/models/Package";
-
-
-
  const packagePublicSuggestedPackage= async (req, res) => {
     // console.log("req parasmdkjnkdjnkerbfhesbfs ejhbfehjbsd     ehfdbhejbfe  ejhrhf",req.params)
     try {

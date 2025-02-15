@@ -1,6 +1,4 @@
 import CarInclusion from "@/models/car-package/package/TourInfo/Inclusion";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoInGet=async (req, res) => {
     try {
         const inclusionGroupData = await CarInclusion.find();

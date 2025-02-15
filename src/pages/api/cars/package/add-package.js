@@ -1,6 +1,4 @@
-
-import CarPackage from "../../../../models/CarPackage";
-import { NextApiRequest, NextApiResponse } from "next";
+import CarPackage1 from "@/models/CarPackage";
 
  const addPackage= async (req, res) => {
     try {
@@ -14,14 +12,11 @@ import { NextApiRequest, NextApiResponse } from "next";
         const missingFields = [];
         if (!name) missingFields.push('name');
         if (!price) missingFields.push('price');
-        // if (!status) missingFields.push('status');
-        // if (!location) missingFields.push('location');
-        // if (!category) missingFields.push('category');
         if (missingFields.length > 0) {
             return res.status(400).json({ message: `Missing required fields: ${missingFields.join(',')}` });
         }
         const url = name.replace(/[^\w\s]/gi, '-').toLowerCase().replace(/\s+/g, '-');
-        const packageBasic = await CarPackage.create({priority, name,selectedVicle, price, status, url, location, category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState,packageRating, highlightedPackage})
+        const packageBasic = await CarPackage1.create({priority, name,selectedVicle, price, status, url, location, category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState,packageRating, highlightedPackage})
         // console.log('Package created', packageBasic)
         return res.status(201).json({ message: 'Package created', packageBasic });
     } catch (error) {

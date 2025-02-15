@@ -1,8 +1,3 @@
-//inclusion code is here
-
-import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
-import CarPackage from "../../../../models/CarPackage";
-import { NextApiRequest, NextApiResponse } from "next";
 import CarPackageHighlight from "@/models/car-package/package/PackageHighlight";
 import CarPackageDayWise from "@/models/car-package/package/PackageDayWise";
 import CarPackageFaqWise from "@/models/car-package/package/PackageFaq";
@@ -10,6 +5,7 @@ import CarInclusion from "@/models/car-package/package/TourInfo/Inclusion";
 import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
 import Country from "@/models/Country";
 import State from "@/models/State";
+import CarPackage1 from "../../../../models/CarPackage";
 // find By Id And Update
  const packageIds= async (req, res) => {
     try {
@@ -24,7 +20,7 @@ import State from "@/models/State";
                     selectedCountry,packageRating, highlightedPackage} = req.body;
                 const startcity1=startcity.split(",");
                 const images=uploads?.data?.map(item=>item?.path)
-                updatedPackage = await CarPackage.findByIdAndUpdate(packageId, {priority, name,selectedVicle, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState,packageRating,highlightedPackage }, { new: true });
+                updatedPackage = await CarPackage1.findByIdAndUpdate(packageId, {priority, name,selectedVicle, price, status, location,category,badges,startcity:startcity1,uploads:images,country:selectedCountry,state:selectedState,packageRating,highlightedPackage }, { new: true });
            
                 if (!updatedPackage) {
                     return res.status(404).json({ message: 'Package not found' });
@@ -32,7 +28,7 @@ import State from "@/models/State";
                 break;
 
             default:
-                updatedPackage = await CarPackage.findById(packageId).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
+                updatedPackage = await CarPackage1.findById(packageId).populate('location').populate('state').populate('country').populate('tourinfo.tourInclusion')
                 .populate('tourinfo.tourExclusion')
                 .populate('tourinfo.tourPayment').populate('tourinfo.tourCancelationPolicy')
                 .populate('tourinfo.tourNeedToKonow').populate("icons").populate("selectedVicle");

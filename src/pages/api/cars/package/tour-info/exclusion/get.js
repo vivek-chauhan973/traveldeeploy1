@@ -1,6 +1,4 @@
 import CarExclusion from "@/models/car-package/package/TourInfo/Exclusion";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoExGet= async (req, res) => {
     try {
         const ExclusionGroupData = await CarExclusion.find();

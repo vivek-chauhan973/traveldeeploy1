@@ -1,15 +1,12 @@
 import CarPackageHighlight from "@/models/car-package/package/PackageHighlight";
-import CarPackage from "../../../../../models/CarPackage";
-
-import { NextApiRequest, NextApiResponse } from "next";
-
+import CarPackage1 from "@/models/CarPackage";
 const packageInfoIds= async (req, res) => {
     const { packageId } = req.query;
     const { highlights, about } = req.body;
 
     try {
         const [tourPackage, packageHighlights] = await Promise.all([
-            CarPackage.findByIdAndUpdate(packageId, { about }),
+            CarPackage1.findByIdAndUpdate(packageId, { about }),
             CarPackageHighlight.findOneAndUpdate({ package: packageId }, { highlights }, { upsert: true, new: true })
         ]);
         // console.log(highlights, about)

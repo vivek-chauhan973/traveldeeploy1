@@ -1,6 +1,4 @@
 import CarLimitedTime from "@/models/car-package/package/TermsCondition/LimitedTime";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoCanGet= async (req, res) => {
     try {
         const CancellationGroupData = await CarLimitedTime.find();

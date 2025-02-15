@@ -1,6 +1,4 @@
 import CarPaymentTerm from "@/models/car-package/package/TourInfo/PaymentTerm";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoInPaymentGet= async (req, res) => {
     try {
         const PaymentTermGroupData = await CarPaymentTerm.find();

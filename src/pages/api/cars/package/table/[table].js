@@ -1,4 +1,4 @@
-import CarPackage from "../../../../../models/CarPackage";
+import CarPackage1 from "@/models/CarPackage";
 
 const tableDataApi=async (req,res)=>{
 
@@ -10,7 +10,7 @@ const tableDataApi=async (req,res)=>{
     }
     try {
 
-        const response=await CarPackage.findByIdAndUpdate({_id:table},{$set:{tableData,tableColumn}},{new:true,upsert:true});
+        const response=await CarPackage1.findByIdAndUpdate({_id:table},{$set:{tableData,tableColumn}},{new:true,upsert:true});
 
         if(!response){
           return res.status(404).json({message:"data not round "});

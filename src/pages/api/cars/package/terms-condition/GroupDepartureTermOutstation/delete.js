@@ -1,6 +1,4 @@
 import Outstation from "@/models/car-package/package/TermsCondition/Outstation";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoCanDelete= async (req, res) => {
     try {
         if (req.method !== 'POST') {

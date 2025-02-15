@@ -8,7 +8,7 @@ const hikeSchema=new mongoose.Schema({
   svg:{type:String}
 })
 const priceHikeSchema = new mongoose.Schema({
-  packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true },
+  packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'CarPackage1', required: true },
  priceHiKe:[hikeSchema]
 }, {
   timestamps: true 

@@ -19,7 +19,7 @@ const packageDepartureSchema = new Schema(
    departureData:[departureSchema],
     package: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Package",
+      ref: "CarPackage1",
       required: true,
       unique: true,
     },

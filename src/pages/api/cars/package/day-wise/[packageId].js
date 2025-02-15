@@ -6,7 +6,8 @@
  */
 
 import CarPackageDayWise from "@/models/car-package/package/PackageDayWise";
-import CarPackage from "../../../../../models/CarPackage";
+import CarPackage1 from "@/models/CarPackage";
+
 
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -18,11 +19,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 //  console.log("days aaa",days);
     try {
         const [tourPackage, packageDays] = await Promise.all([
-            CarPackage.findByIdAndUpdate(packageId, { dayWiseInformation: information}),
+            CarPackage1.findByIdAndUpdate(packageId, { dayWiseInformation: information}),
             CarPackageDayWise.findOneAndUpdate({ package: packageId }, { days }, { upsert: true, new: true }),
             // console.log("days destruct",{days})
         ]);
-        const updatedPackage = await CarPackage.findOneAndUpdate(
+        const updatedPackage = await CarPackage1.findOneAndUpdate(
             {_id:packageId},
             { $set:{days:day}  },
             { new: true }

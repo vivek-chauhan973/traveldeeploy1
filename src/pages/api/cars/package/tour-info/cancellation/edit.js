@@ -1,5 +1,4 @@
 import CarCancellation from "@/models/car-package/package/TourInfo/Cancellation";
-import { NextApiRequest, NextApiResponse } from "next";
  const packageTourinfoCanEdit= async (req, res) => {
     try {
         if (req.method !== 'POST') {

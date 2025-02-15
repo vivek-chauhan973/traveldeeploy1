@@ -1,5 +1,4 @@
 import Car from "@/models/car-package/cars";
-import { NextApiRequest, NextApiResponse } from "next";
 import multer from 'multer';
 import nextConnect from 'next-connect';
 

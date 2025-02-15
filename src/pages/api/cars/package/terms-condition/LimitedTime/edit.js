@@ -1,5 +1,4 @@
 import CarLimitedTime from "@/models/car-package/package/TermsCondition/LimitedTime";
-import { NextApiRequest, NextApiResponse } from "next";
  const packageTourinfoCanEdit= async (req, res) => {
     try {
         if (req.method !== 'POST') {

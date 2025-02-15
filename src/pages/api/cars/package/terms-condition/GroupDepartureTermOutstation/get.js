@@ -1,6 +1,4 @@
 import Outstation from "@/models/car-package/package/TermsCondition/Outstation";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoCanGet= async (req, res) => {
     try {
         const CancellationGroupData = await Outstation.find();

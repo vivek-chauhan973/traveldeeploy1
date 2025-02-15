@@ -1,5 +1,4 @@
 import CarNeedToKnow from "@/models/car-package/package/TourInfo/NeedToKnow";
-import { NextApiRequest, NextApiResponse } from "next";
  const packageTourinfoInNeedGet= async (req, res) => {
     try {
         const NeedToKnowGroupData = await CarNeedToKnow.find();

@@ -1,4 +1,5 @@
-import CarPackage from "@/models/car-package/carPackage";
+import CarPackage1 from "@/models/CarPackage";
+
 
 const CarPackages = async (req, res) => {
   const { id1 } = req.query;
@@ -34,7 +35,7 @@ const CarPackages = async (req, res) => {
   }
   if (req.method === "POST") {
     try {
-      const data = await CarPackage.findByIdAndUpdate(
+      const data = await CarPackage1.findByIdAndUpdate(
         { _id: id1 },
         {
           id: packageId,
@@ -60,7 +61,7 @@ const CarPackages = async (req, res) => {
     }
   } else if (req.method === "DELETE") {
     try {
-      const data = await CarPackage.findByIdAndDelete(id1); // Use the ID directly
+      const data = await CarPackage1.findByIdAndDelete(id1); // Use the ID directly
       if (!data) {
         return res.status(404).json({ message: "Item not found" });
       }
@@ -72,7 +73,7 @@ const CarPackages = async (req, res) => {
     }
   } else {
     try {
-      const data = await CarPackage.find({ _id: id1 }).populate("id").populate({
+      const data = await CarPackage1.find({ _id: id1 }).populate("id").populate({
         path: "location",
         select:"name",
         populate: {

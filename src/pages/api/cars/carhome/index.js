@@ -1,7 +1,6 @@
 import CarHome from "@/models/car-package/CarHome";
 import CarPackageState from "@/models/car-package/package/PackageState";
 import CarPackage1 from "@/models/CarPackage";
-import City from "@/models/City";
 const destinationHeader=async (req,res)=>{
   const {category,selectedOptions}=req.body;
   if(req.method==="POST"){

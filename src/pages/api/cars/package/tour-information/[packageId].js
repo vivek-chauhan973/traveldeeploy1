@@ -1,7 +1,5 @@
-
-// import dbConnect from "@/utils/db.ts";
 import CarTourInformation from "@/models/car-package/package/TourInformation";
-import CarPackage from "../../../../../models/CarPackage";
+import CarPackage1 from "@/models/CarPackage";
  const packageTourinformationIds= async (req, res) => {
   const { packageId } = req.query;
   // await dbConnect();
@@ -20,7 +18,7 @@ import CarPackage from "../../../../../models/CarPackage";
         { inclusion, exclusion, cancellation, paymentTerm, needToKnow },
         { upsert: true, new: true }
       );
-    const tourInfo1=await CarPackage.findByIdAndUpdate({_id:packageId},{tourinfo:tourinfo2},{ upsert: true, new: true })
+    const tourInfo1=await CarPackage1.findByIdAndUpdate({_id:packageId},{tourinfo:tourinfo2},{ upsert: true, new: true })
       // console.log("Saved tour information:", tourInfo);
 
       return res.status(201).json({ tourInfo ,tourInfo1});

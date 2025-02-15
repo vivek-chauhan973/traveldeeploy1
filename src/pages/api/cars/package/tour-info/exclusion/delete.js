@@ -1,6 +1,4 @@
 import CarExclusion from "@/models/car-package/package/TourInfo/Exclusion";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoExDelete= async (req, res) => {
     try {
         if (req.method !== 'POST') {

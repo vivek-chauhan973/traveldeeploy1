@@ -1,6 +1,4 @@
 import CarPaymentTerm from "@/models/car-package/package/TourInfo/PaymentTerm";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoInPaymentDelete= async (req, res) => {
     try {
         if (req.method !== 'POST') {

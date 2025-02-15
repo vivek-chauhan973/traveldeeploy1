@@ -4,7 +4,7 @@ mongoose.connect(process.env.MONGODB_URI).then(res=>console.log("db connected"))
 const packageImageSchema = new mongoose.Schema({
   packageId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Package',
+    ref: 'CarPackage1',
     required: true,
   },
   uploads: [{

@@ -9,7 +9,7 @@ const packageDayWiseSchema = new Schema({
     ],
     package: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Package',
+        ref: 'CarPackage1',
         required: true
     }
 }, {

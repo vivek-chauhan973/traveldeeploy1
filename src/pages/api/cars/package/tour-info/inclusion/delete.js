@@ -1,6 +1,4 @@
 import CarInclusion from "@/models/car-package/package/TourInfo/Inclusion";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoInDelete= async (req, res) => {
     try {
         if (req.method !== 'POST') {

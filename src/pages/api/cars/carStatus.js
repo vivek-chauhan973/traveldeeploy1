@@ -1,5 +1,4 @@
 import CarStatus from "@/models/car-package/CarStatus";
-
 const carStatus = async (req, res) => {
   if (req.method === "POST") {
     try {

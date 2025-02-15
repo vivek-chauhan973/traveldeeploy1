@@ -1,6 +1,4 @@
 import Car from "@/models/car-package/cars";
-import { NextApiRequest, NextApiResponse } from "next";
-
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {

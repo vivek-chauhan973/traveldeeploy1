@@ -10,7 +10,7 @@ const PriceSchema = new Schema({
 });
 
 const PriceRangeSchema = new Schema({
-  packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true },
+  packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'CarPackage1', required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   basePrice: { type: Number, required: true },

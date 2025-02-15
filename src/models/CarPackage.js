@@ -153,7 +153,7 @@ const packageSchema = new Schema({
 // Virtual field to calculate display price based on addguestPrices
 
 packageSchema.virtual("pageUrl").get(function () {
-  return `${this.url}-tour-package`;
+  return `${this.url}-car-hire`;
 });
 packageSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("name")) {

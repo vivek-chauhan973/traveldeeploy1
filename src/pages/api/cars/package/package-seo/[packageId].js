@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    const { title, description, canonicalUrl, priceValid } = req.body;
+    const { title, description, canonicalUrl, priceValid,keyword } = req.body;
 
     if (!title || !description) {
       return res.status(400).json({ message: 'Title and description are required' });
@@ -37,7 +37,8 @@ export default async function handler(req, res) {
           description,
           canonicalUrl: canonicalUrl || `https://example.com/${title.replace(/\s+/g, '-').toLowerCase()}`,
           package: packageId,
-          priceValid
+          priceValid,
+          keyword
         });
       } else {
         // Update existing SEO data
@@ -45,6 +46,7 @@ export default async function handler(req, res) {
         seoData.description = description;
         seoData.canonicalUrl = canonicalUrl || `https://example.com/${title.replace(/\s+/g, '-').toLowerCase()}`;
         seoData.priceValid = priceValid;
+        seoData.keyword=keyword;
       }
 
       // Save SEO data

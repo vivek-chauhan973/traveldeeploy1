@@ -128,7 +128,7 @@ export default function CarDetail(pageprops) {
     };
     // console.log("CarDepartureDetails----==>  ", carDepartureDetails);
     console.log("carPackage----==>  ", carPackage);
-    console.log("schemaData----==>  ", schemaData);
+    // console.log("schemaData----==>  ", schemaData);
     // console.log("carSidePackages----==>  ", carPrice1);
 
     // Product Schema JSON-LD
@@ -163,7 +163,6 @@ export default function CarDetail(pageprops) {
         }
     };
 
-
     // Event Schema JSON-LD
     const eventSchema = {
         "@context": "https://schema.org",
@@ -196,7 +195,7 @@ export default function CarDetail(pageprops) {
                 />
                 <meta
                     name="keywords"
-                    content={"" || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
+                    content={carPackage?.seoData?.keyword || "BizareXpedition™, about us, travel excellence, quality journeys, luxury travel, travel service, brand story"}
                 />
                 {/* Author and Robots */}
                 <meta name="author" content="BizareXpedition" />

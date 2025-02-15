@@ -2,9 +2,9 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db'; // Adjust path as per your project structure
-// Adjust path as per your project structure
-import CarPackage from "../../../../../models/CarPackage";
+
 import CarPackageImage from '@/models/car-package/package/ImageUploading';
+import CarPackage1 from '@/models/CarPackage';
 
 
 const uploadDirectory = './public/uploads/cars/carpackage'; // Updated upload directory
@@ -63,7 +63,7 @@ const apiRoute = async (req, res) => {
         );
         const imagesArray=files?.map(item=>item.path)
         // console.log()
-        await CarPackage.updateOne({_id:packageId},{
+        await CarPackage1.updateOne({_id:packageId},{
           $set:{uploads:imagesArray}
         },{
           new:true,

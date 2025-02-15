@@ -1,7 +1,5 @@
 
 import CarGroupDepartureTerms from "@/models/car-package/package/TermsCondition/GroupDepartureTerms";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoCanGet= async (req, res) => {
     try {
         const CancellationGroupData = await CarGroupDepartureTerms.find();

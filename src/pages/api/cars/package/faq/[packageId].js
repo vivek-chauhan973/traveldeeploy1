@@ -5,8 +5,6 @@
  * @returns {Promise<void>} - Promise representing the asynchronous operation.
  */
 
-// /api/package/faq/[packageId].js
-// import PackageFaqWise from "@/models/package/PackageFaqWise";
 import CarPackageFaqWise from "@/models/car-package/package/PackageFaq";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageFaq= async (req, res) => {

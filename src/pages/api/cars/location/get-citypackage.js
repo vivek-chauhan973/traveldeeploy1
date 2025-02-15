@@ -1,4 +1,3 @@
-import CarPackage from "@/models/car-package/carPackage";
 import CarPackage1 from "@/models/CarPackage";
 const fetchPromoDataApi = async (req, res) => {
   const { cityId } = req.query;

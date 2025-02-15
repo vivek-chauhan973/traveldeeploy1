@@ -1,10 +1,5 @@
-// pages/api/pricerange/[packageId].js
-
-
 import CarPriceRange from '@/models/car-package/package/PriceRange';
 import { eachDayOfInterval, format } from 'date-fns';
-import { NextApiRequest, NextApiResponse } from 'next';
-
 export default async function handler(req, res) {
   const { packageId } = req.query;
 

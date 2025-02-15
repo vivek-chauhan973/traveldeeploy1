@@ -1,5 +1,4 @@
 import CarFlexibleTime from "@/models/car-package/package/TermsCondition/FlexibleTime";
-import { NextApiRequest, NextApiResponse } from "next";
   const packageTourinfoCanAdd= async (req, res) => {
     try {
         if (req.method !== 'POST') {

@@ -1,6 +1,5 @@
 
 import CarPackageTerms from "@/models/car-package/package/TermsCondition/PackageTerms";
-import { NextApiRequest, NextApiResponse } from "next";
  const packageTourinfoCanEdit= async (req, res) => {
     try {
         if (req.method !== 'POST') {

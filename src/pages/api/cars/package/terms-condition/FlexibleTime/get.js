@@ -1,7 +1,5 @@
 
 import CarFlexibleTime from "@/models/car-package/package/TermsCondition/FlexibleTime";
-import { NextApiRequest, NextApiResponse } from "next";
-
  const packageTourinfoCanGet= async (req, res) => {
     try {
         const CancellationGroupData = await CarFlexibleTime.find();
