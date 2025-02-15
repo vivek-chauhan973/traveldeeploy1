@@ -10,8 +10,6 @@ const fetchSuggestedData = async (addPackage) => {
   return data;
 };
 
-
-
 const BlogSuggestedCardPackages = ({ addPackage }) => {
   const [suggestedPackage, setSuggestedPackage] = useState([]);
   const carouselRef = useRef(null);
@@ -21,12 +19,12 @@ const BlogSuggestedCardPackages = ({ addPackage }) => {
   useEffect(() => {
     if (addPackage) {
       fetchSuggestedData(addPackage).then(res => {
-        console.log("res---> suggested pacakge--> ",res)
+        // console.log("res---> suggested pacakge--> ",res)
         setSuggestedPackage(res?.suggestedPackages || []);
       });
     }
   }, [addPackage]);
-  console.log("Aparana Raj",suggestedPackage);
+  // console.log("Aparana Raj",suggestedPackage);
   const scrollNext = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({ left: carouselRef.current.clientWidth, behavior: 'smooth' });
