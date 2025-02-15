@@ -1,5 +1,5 @@
 import { CarPopupProvider } from "@/components/admin/context/CarPopupCalculation";
-import React from "react";
+import React, { useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import App from "next/app";
 import { AppProvider } from "@/components/admin/context/Package/AddGuest";
@@ -43,10 +43,15 @@ APP.getInitialProps = async (appContext) => {
     return { ...appProps, pageProps: { ...appProps.pageProps } };
   }
 };
-
+async function loginToZoho() {
+  const res = await fetch("/api/zoho/auth");
+  return res.json();
+}
 export default function APP({ Component, pageProps }) {
-
-  // console.log("content of _app.js props is here ------> ",pageProps)
+ 
+  useEffect(()=>{
+    loginToZoho().then(res=>console.log("zoho token is here ---> ",res))
+  },[])
   return (
     <SessionProvider session={pageProps.session}>
       <AppProvider>
