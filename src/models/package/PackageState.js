@@ -17,6 +17,9 @@ const seoSchema=new mongoose.Schema({
   },
   seoKeywords:{
     type:String
+  },
+  seoCanonical:{
+    type:String
   }
 })
 const packageStateSchema = new mongoose.Schema({

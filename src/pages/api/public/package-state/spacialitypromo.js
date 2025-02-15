@@ -3,7 +3,6 @@ import PackageState from '@/models/package/PackageState';
 
 
 const handler = async (req, res) => {
-    const { method } = req;
     const { id } = req.query;
     try {
         const packageState = await PackageState.findOne({ relatedId: id });
