@@ -78,8 +78,7 @@ export default function India(pageprops) {
     return <PromoBanner />;
   }
 
-  console.log("promoData", promoData);
-  console.log("selectedLocation", selectedLocation);
+  // console.log("promoData", promoData);
 
   return (
     <>
@@ -114,7 +113,7 @@ export default function India(pageprops) {
         />
         <meta
           property="og:url"
-          content={`https://www.bizarexpedition.com/india/${selectedLocation?.pageUrl}`}
+          content={`https://www.bizarexpedition.com/speciality-tours`}
         />
         <meta property="og:type" content="website" />
         {/* Twitter Card Meta Tags */}
@@ -132,7 +131,7 @@ export default function India(pageprops) {
         />
         <meta
           name="twitter:image"
-          content={`https://www.bizarexpedition.com/${promoData?.image} || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`}
+          content={`https://www.bizarexpedition.com/${promoData?.posterPath} || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`}
         />
         {/* Organization Schema */}
         <OrganizationSchema />
