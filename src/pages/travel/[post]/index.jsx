@@ -102,33 +102,41 @@ export default function Promo(pageprops) {
       setBlogs(filteredBlog);
     }
   }, [filteredBlog]);
-//   console.log("blogs", blogs);
-  console.log("blogHero", blogHero);
+
+  // console.log("blogs", blogs);
+  // console.log("blogHero", blogHero);
+
+  const path = router?.asPath; // Assuming this is '/travel/travel-guide'
+  const lastSegment = path?.split('/').pop(); // This gets the last segment
+  const formattedSegment = lastSegment?.replace(/-/g, ' '); // Replace dashes with spaces and capitalize
+  const capitalizedSegment = formattedSegment.split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   return (
     <>
-        <Head>
-        <title>{blogHero?.title || blogHero?.seo?.title} | BizareXpedition™️</title>
+      <Head>
+        <title>{capitalizedSegment || blogHero?.title || blogHero?.seo?.title} | BizareXpedition™️</title>
         <meta name="description"
           content={blogHero?.seo?.description || "Your go-to source for travel inspiration, expert guides, and the latest travel news. Join BizareXpedition™️ to explore unforgettable destinations and stay updated on travel trends."}
         />
         <meta
           name="keywords"
-          content={ blogHero?.seo?.keyword || "travel blog, travel guide, travel news, destination tips, travel insights, BizareXpedition, adventure travel, cultural exploration, travel excellence"}
+          content={blogHero?.seo?.keyword || "travel blog, travel guide, travel news, destination tips, travel insights, BizareXpedition, adventure travel, cultural exploration, travel excellence"}
         />
         {/* Author and Robots */}
         <meta name="author" content="BizareXpedition" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         {/* Open Graph for Social Media */}
-        <meta property="og:title" content={blogHero?.title || blogHero?.seo?.title} />
+        <meta property="og:title" content={capitalizedSegment || blogHero?.title || blogHero?.seo?.title} />
         <meta property="og:description" content={blogHero?.seo?.description || "Your go-to source for travel inspiration, expert guides, and the latest travel news. Join BizareXpedition™️ to explore unforgettable destinations and stay updated on travel trends."} />
         <meta property="og:image" content={`https://www.bizarexpedition.com/${blogHero?.filename} || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
         <meta property="og:url" content={`https://www.bizarexpedition.com/travel/${blogHero?.selectType}`} />
         <meta property="og:type" content="website" />
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blogHero?.title || blogHero?.seo?.title} />
+        <meta name="twitter:title" content={capitalizedSegment || blogHero?.title || blogHero?.seo?.title} />
         <meta name="twitter:description" content={blogHero?.seo?.description || "Your go-to source for travel inspiration, expert guides, and the latest travel news. Join BizareXpedition™️ to explore unforgettable destinations and stay updated on travel trends."} />
         <meta name="twitter:image" content={`https://www.bizarexpedition.com/${blogHero?.filename} || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
         {/* Organization Schema */}
@@ -151,8 +159,8 @@ export default function Promo(pageprops) {
               width={100}
               height={100}
               onError={(e) =>
-                (e.target.src =
-                  "https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+              (e.target.src =
+                "https://images.unsplash.com/photo-1719937050640-71cfd3d851be?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
               }
             />
           </div>

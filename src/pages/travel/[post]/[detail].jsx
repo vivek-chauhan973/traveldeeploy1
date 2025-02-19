@@ -155,23 +155,23 @@ const Detail = (pageprops) => {
                   />
                 </div>
                 <div className="p-5 flex flex-col justify-between items-start w-full h-80 md:h-96 lg:h-[24rem] overflow-hidden rounded-lg shadow-lg bg-white">
-                  <div className="flex justify-between w-full text-xs text-gray-500">
+                  <div className="flex justify-between gap-2 w-full text-xs text-gray-500">
                     {post === "blog" && (
-                      <div className=" flex gap-3">
+                      <div className=" flex gap-3 ">
                         <div>
                           <Image
                             src={detailData?.writer?.path}
                             height={70}
                             width={70}
-                            className="rounded-full w-[65px] h-[70px]"
+                            className="rounded-full md:w-[70px] md:h-[70px] w-[50px] h-[50px]"
                             alt="Writer's image"
                           />
                         </div>
                         <div>
-                          <h2 className=" font-bold">
+                          <h2 className="md:text-xl text-base font-bold">
                             {detailData?.writer?.blogwriter}
                           </h2>
-                          <p className="pl-4">writer</p>
+                          <p className="md:pl-4">writer</p>
                         </div>
                       </div>
                     )}
@@ -196,7 +196,7 @@ const Detail = (pageprops) => {
                       </div>
                     )}
                   </div>
-                  <h1 className="xl:text-[37px] text-xl leading-tight text-para font-semibold">
+                  <h1 className="xl:text-[35px] text-xl leading-tight font-semibold">
                     {detailData?.title}
                   </h1>
                   <p className="md:text-para text-sm line-clamp-3">
@@ -234,8 +234,8 @@ const Detail = (pageprops) => {
           </div>
           {/* Blog Detail section start*/}
           <div className="container-wrapper py-10">
-            <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr]">
-              <div className="pt-5 pr-5 ">
+            <div className="  grid grid-cols-1 xl:grid-cols-[1fr,2fr] gap-5">
+              <div className="md:p-7 px-5 pb-5 bg-white shadow-md rounded-md">
                 <div className="sticky top-40 z-10">
                   <div className="">
                     {detailData?.blogQuestions?.map((item, i) => (
@@ -247,7 +247,7 @@ const Detail = (pageprops) => {
                         offset={-100}
                         duration={500}
                       >
-                        <p className="text-md font-medium mb-2 hover:cursor-pointer hover:text-primary">
+                        <p className="text-md font-medium mb-4 hover:cursor-pointer hover:text-primary">
                           {item?.title}
                         </p>
                         {item?.blogSubQuestion?.questions?.length > 0 && (
@@ -256,7 +256,7 @@ const Detail = (pageprops) => {
                               (item1, k) => (
                                 <li
                                   key={i}
-                                  className="hover:cursor-pointer hover:text-primary"
+                                  className="hover:cursor-pointer hover:text-primary "
                                 >
                                   <ScrollLink
                                     to={`${item?._id}st${k}`}
@@ -277,15 +277,15 @@ const Detail = (pageprops) => {
                   </div>
                 </div>
               </div>
-              <div className="pl-5">
-                <div id="ItinerarySubSection" className="mt-5">
+              <div className="pt-5 pb-10 md:px-10 px-5 bg-white shadow-md rounded-md">
+                <div id="ItinerarySubSection" className="mt-5 about-margin">
                   <p
                     dangerouslySetInnerHTML={{
                       __html: detailData?.contentsummary,
                     }}
                   ></p>
                 </div>
-                <div class="overflow-x-auto border rounded-t-md mt-7 ">
+                <div class="overflow-x-auto border rounded-t-md mt-7">
                   <table class="min-w-full table-auto border">
                     <thead>
                       <tr class="bg-gray-100">
@@ -310,11 +310,11 @@ const Detail = (pageprops) => {
                   </table>
                 </div>
                 {detailData?.blogQuestions?.map((item, i) => (
-                  <div className="pt-7" id={`${item?._id}st`} key={i}>
-                    <h3 className="text-[30px] font-medium mb-2">
+                  <div className="pt-7 about-margin" id={`${item?._id}st`} key={i}>
+                    <h3 className="md:text-xl text-md font-semibold mb-2">
                       {item?.title}
                     </h3>
-                    <p className="text-base leading-relaxed">
+                    <p className="md:text-base text-para leading-relaxed">
                       <div
                         dangerouslySetInnerHTML={{ __html: item?.information }}
                         className="blog-travel-news"
@@ -323,11 +323,11 @@ const Detail = (pageprops) => {
                     {item?.blogSubQuestion?.questions?.length > 0 &&
                       item?.blogSubQuestion?.questions?.map((item1, k) => (
                         <div className="pt-7" id={`${item?._id}st${k}`} key={i}>
-                          <h3 className="text-[30px] font-medium mb-2">
+                          <h3 className="md:text-xl text-md font-semibold mb-2">
                             {k + 1}
                             {"."} {item1?.title}
                           </h3>
-                          <p className="text-base leading-relaxed">
+                          <p className="md:text-base text-para leading-relaxed">
                             <div
                               dangerouslySetInnerHTML={{
                                 __html: item1?.information,
