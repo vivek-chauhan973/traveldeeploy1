@@ -8,7 +8,7 @@ const OrganizationSchema = () => {
       "name": "BizareXpedition™",
       "alternateName": "BX",
       "url": "https://www.bizarexpedition.com/",
-      "logo": "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
+      "logo": "https://www.bizarexpedition.com/public/logo.png" || "https://www.bizarexpedition.com/bx/images/logo/15903060991.png",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+91-9897581113",
@@ -23,7 +23,7 @@ const OrganizationSchema = () => {
         "https://www.youtube.com/channel/UCppSMWFpy0e4SECyYVwiStg",
         "https://in.linkedin.com/company/bizare-xpedition",
         "https://en.everybodywiki.com/BizareXpedition_Service_Pvt_Ltd",
-        "https://www.bizarexpedition.com/"
+        "https://www.bizarexpedition.com/",
       ]
     }
 

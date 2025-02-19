@@ -84,7 +84,7 @@ export default function Login({ page }) {
             >
               Username
             </label>
-            <div className="mt-2">
+            <div className="mt-0.5">
               <input
                 id="username"
                 name="username"
@@ -92,16 +92,16 @@ export default function Login({ page }) {
                 autoComplete="username"
                 required
                 onChange={handleChange}
-                className={` px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                className={`block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
                   errors.username ? "border-red-500" : ""
                 }`}
+                placeholder="Enter Username"
               />
               {errors.username && (
                 <p className="mt-2 text-sm text-red-500">{errors.username}</p>
               )}
             </div>
           </div>
-
           <div>
             <div className="flex items-center justify-between">
               <label
@@ -110,16 +110,8 @@ export default function Login({ page }) {
               >
                 Password
               </label>
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className=" px-2 font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
             </div>
-            <div className="mt-2">
+            <div className="mt-0.5">
               <input
                 id="password"
                 name="password"
@@ -127,14 +119,23 @@ export default function Login({ page }) {
                 autoComplete="current-password"
                 required
                 onChange={handleChange}
-                className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                className={`block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
                   errors.password ? "border-red-500" : ""
                 }`}
+                placeholder="Enter Password"
               />
               {errors.password && (
                 <p className="mt-2 text-sm text-red-500">{errors.password}</p>
               )}
             </div>
+            <div className="text-sm flex items-center justify-end mt-2">
+                <a
+                  href="#"
+                  className="px-2 font-semibold text-indigo-600 hover:text-indigo-500"
+                >
+                  Forgot password?
+                </a>
+              </div>
           </div>
 
           <div>
