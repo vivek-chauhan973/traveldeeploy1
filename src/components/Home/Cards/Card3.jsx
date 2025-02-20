@@ -65,7 +65,7 @@ const Card3 = ({ statePackage }) => {
                       width={300}
                       height={100}
                       // layout="fill"
-                      src="uploads/package/details/files-1723871955303.jpg" //{data?.uploads?.[0]}
+                      src={data?.uploads?.[0]}
                       alt="ui/ux review check"
                     />
                   </div>
