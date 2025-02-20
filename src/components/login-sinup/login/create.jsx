@@ -180,6 +180,185 @@ const Create = () => {
     const data = await fetchdata.json();
 
     if (fetchdata?.ok) {
+      // if (router?.route?.split("/")?.includes("package")) {
+      //   const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
+      //   const data1 = {
+      //     package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+      //     packageCashfree,
+      //     name: name,
+      //     email: email,
+      //     phoneNumber: data?.data?.mobile,
+      //     customer_id: `customer_${Date.now()}`,
+      //     orderId: `order_${Date.now()}`,
+      //     amount: fixedDeparturePopupPrice1,
+      //     package_type: "tour-package",
+      //   };
+      //   try {
+      //     const response = await fetch("/api/cashfree/initiate-payment", {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify(data1),
+      //     });
+
+      //     const data = await response.json();
+      //     // console.log("data", data);
+
+      //     if (response.ok) {
+      //       setOrderId(data.orderId);
+      //       // setCrmData(data?.data);
+      //       window.location.href = data.paymentLink;
+      //       setLoginPopup(false);
+      //     } else {
+      //       console.error("Error creating order:", data.error);
+      //     }
+      //   } catch (error) {
+      //     console.error("Error creating order:", error);
+      //   }
+      // }
+      // if (
+      //   router?.route?.split("/")?.includes("car-rental") &&
+      //   router?.route?.split("/")?.length > 2
+      // ) {
+      //   const fixedDeparturePopupPrice1 = Math.floor(
+      //     summaryCarPackage?.grandTotal
+      //   );
+      //   const data1 = {
+      //     package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+      //     summaryCarPackage,
+      //     name: name,
+      //     email: email,
+      //     phoneNumber: data?.data?.mobile,
+      //     customer_id: `customer_${Date.now()}`,
+      //     orderId: `order_${Date.now()}`,
+      //     amount: fixedDeparturePopupPrice1,
+      //     package_type: "car-package",
+      //   };
+      //   try {
+      //     const response = await fetch("/api/cashfree/initiate-payment1", {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify(data1),
+      //     });
+
+      //     const data = await response.json();
+      //     // console.log("data", data);
+
+      //     if (response.ok) {
+      //       setOrderId(data.orderId);
+      //       // setCrmData(data?.data);
+      //       window.location.href = data.paymentLink;
+      //       setLoginPopup(false);
+      //     } else {
+      //       console.error("Error creating order:", data.error);
+      //     }
+      //   } catch (error) {
+      //     console.error("Error creating order:", error);
+      //   }
+      // }
+      // if (
+      //   router?.route?.split("/")?.includes("car-rental") &&
+      //   router?.route?.split("/")?.length <= 2
+      // ) {
+      //   if (activeTab === "Tab1") {
+      //     const data1 = {
+      //       package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+      //       name: name,
+      //       email: email,
+      //       package_type: "Local-Car-Hire",
+      //       phoneNumber: data?.data?.mobile,
+      //       customer_id: `customer_${Date.now()}`,
+      //       orderId: `order_${Date.now()}`,
+      //       amount: grandTotalCar,
+      //       dep_date: userDateLocal,
+      //       dep_time: userTimeLocal,
+      //       plan: userPlanLocal,
+      //       cost_per_km: summaryCarData?.costPerKm,
+      //       ac_option: summaryCarData?.isActive,
+      //       car_gst: summaryCarData?.selectedGST,
+      //       no_of_person: userFormData?.persons,
+      //       vehicleType: userFormData?.selectedCar?.[0]?.vehicleType,
+      //       pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+      //       location: userFormData?.selectedlocation?.[0]?.location,
+      //     };
+      //     try {
+      //       const response = await fetch(
+      //         "/api/cashfree/initiate-payment-carlocal",
+      //         {
+      //           method: "POST",
+      //           headers: {
+      //             "Content-Type": "application/json",
+      //           },
+      //           body: JSON.stringify(data1),
+      //         }
+      //       );
+
+      //       const data = await response.json();
+      //       if (response.ok) {
+      //         setOrderId(data.orderId);
+      //         window.location.href = data.paymentLink;
+      //         setLoginPopup(false);
+      //       } else {
+      //         console.error("Error creating order:", data.error);
+      //       }
+      //     } catch (error) {
+      //       console.error("Error creating order:", error);
+      //     }
+      //   }
+      //   if (activeTab === "Tab2") {
+      //     const data1 = {
+      //       package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+      //       name: name,
+      //       email: email,
+      //       package_type: "Out_Sation_Hire",
+      //       phoneNumber: data?.data?.mobile,
+      //       customer_id: `customer_${Date.now()}`,
+      //       orderId: `order_${Date.now()}`,
+      //       amount: grandTotalCar,
+      //       no_of_persons: userFormData?.persons,
+      //       vehicle_type: userFormData?.selectedCar?.[0]?.vehicleType,
+      //       pickup_location: userFormData?.selectedlocation?.[0]?.location,
+      //       pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+      //       car_gst: summaryCarData?.selectedGST,
+      //       choose_car_plan: planOutstation,
+      //       cost_per_km: summaryCarData?.costPerKm,
+      //       ac_option: summaryCarData?.isActive,
+      //       dep_date: pickupDateOutstation,
+      //       dep_time: pickupTimeOutstation,
+      //       arrival_date: returnDateOutstation,
+      //       arrival_time: returnTimeOutstation,
+      //     };
+      //     try {
+      //       const response = await fetch(
+      //         "/api/cashfree/initiate-payment-caroutstaion",
+      //         {
+      //           method: "POST",
+      //           headers: {
+      //             "Content-Type": "application/json",
+      //           },
+      //           body: JSON.stringify(data1),
+      //         }
+      //       );
+
+      //       const data = await response.json();
+      //       if (response.ok) {
+      //         setOrderId(data.orderId);
+      //         window.location.href = data.paymentLink;
+      //         setLoginPopup(false);
+      //       } else {
+      //         console.error("Error creating order:", data.error);
+      //       }
+      //     } catch (error) {
+      //       console.error("Error creating order:", error);
+      //     }
+      //   }
+      // }
+
+      // logic for rajor pay free account
+
       if (router?.route?.split("/")?.includes("package")) {
         const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
         const data1 = {
@@ -187,14 +366,13 @@ const Create = () => {
           packageCashfree,
           name: name,
           email: email,
+          currency: "INR",
           phoneNumber: data?.data?.mobile,
-          customer_id: `customer_${Date.now()}`,
-          orderId: `order_${Date.now()}`,
           amount: fixedDeparturePopupPrice1,
-          package_type:"tour-package"
+          package_type: "tour-package",
         };
         try {
-          const response = await fetch("/api/cashfree/initiate-payment", {
+          const res = await fetch("/api/razorpay/initiate-payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -202,28 +380,67 @@ const Create = () => {
             body: JSON.stringify(data1),
           });
 
-          const data = await response.json();
+          const order = await res.json();
           // console.log("data", data);
 
-          if (response.ok) {
-            setOrderId(data.orderId);
-            // setCrmData(data?.data);
-            window.location.href = data.paymentLink;
-            setLoginPopup(false);
-          } else {
-            console.error("Error creating order:", data.error);
+          if (!order.id) {
+            alert("Failed to create order");
+            setLoading(false);
+            return;
           }
+          const script = document.createElement("script");
+          script.src = "https://checkout.razorpay.com/v1/checkout.js";
+          script.async = true;
+          document.body.appendChild(script);
+
+          script.onload = () => {
+            const razorpay = new window.Razorpay({
+              key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+              amount: order.amount,
+              currency: order.currency,
+              name: "BizareExpendition.com",
+              description: "Test Transaction",
+              order_id: order.id,
+              notes: order.notes, // Pass additional data to Razorpay
+              handler: async function (response) {
+                const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(response),
+                });
+
+                const verifyData = await verifyRes.json();
+                if(verifyData?.orderId){
+                  const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                  if(res?.ok){
+                    const data=await orderData?.json();
+                    // console.log("verified payment data as---of razorpay ---> ",data)
+                  }
+                }
+                
+                alert(verifyData.message);
+                setLoginPopup(false);
+              },
+              prefill: {
+                name: order.notes?.name,
+                email: order.notes?.email,
+                contact: order.notes?.phoneNumber,
+              },
+              theme: {
+                color: "#3399cc",
+              },
+            });
+
+            razorpay.open();
+            // setLoading(false);
+          };
         } catch (error) {
           console.error("Error creating order:", error);
         }
       }
-      if (
-        router?.route?.split("/")?.includes("car-rental") &&
-        router?.route?.split("/")?.length > 2
-      ) {
-        const fixedDeparturePopupPrice1 = Math.floor(
-          summaryCarPackage?.grandTotal
-        );
+      if ( router?.route?.split("/")?.includes("car-rental") &&
+      router?.route?.split("/")?.length > 2) {
+        const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
         const data1 = {
           package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
           summaryCarPackage,
@@ -233,10 +450,10 @@ const Create = () => {
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
           amount: fixedDeparturePopupPrice1,
-          package_type:"car-package"
+          package_type: "car-package",
         };
         try {
-          const response = await fetch("/api/cashfree/initiate-payment1", {
+          const res = await fetch("/api/razorpay/initiate-payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -244,35 +461,73 @@ const Create = () => {
             body: JSON.stringify(data1),
           });
 
-          const data = await response.json();
+          const order = await res.json();
           // console.log("data", data);
 
-          if (response.ok) {
-            setOrderId(data.orderId);
-            // setCrmData(data?.data);
-            window.location.href = data.paymentLink;
-            setLoginPopup(false);
-          } else {
-            console.error("Error creating order:", data.error);
+          if (!order.id) {
+            alert("Failed to create order");
+            setLoading(false);
+            return;
           }
+          const script = document.createElement("script");
+          script.src = "https://checkout.razorpay.com/v1/checkout.js";
+          script.async = true;
+          document.body.appendChild(script);
+
+          script.onload = () => {
+            const razorpay = new window.Razorpay({
+              key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+              amount: order.amount,
+              currency: order.currency,
+              name: "BizareExpendition.com",
+              description: "Test Transaction",
+              order_id: order.id,
+              notes: order.notes, // Pass additional data to Razorpay
+              handler: async function (response) {
+                const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(response),
+                });
+
+                const verifyData = await verifyRes.json();
+                if(verifyData?.orderId){
+                  const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                  if(res?.ok){
+                    const data=await orderData?.json();
+                    // console.log("verified payment data as---of razorpay ---> ",data)
+                  }
+                }
+                
+                alert(verifyData.message);
+                setLoginPopup(false);
+              },
+              prefill: {
+                name: order.notes?.name,
+                email: order.notes?.email,
+                contact: order.notes?.phoneNumber,
+              },
+              theme: {
+                color: "#3399cc",
+              },
+            });
+
+            razorpay.open();
+            // setLoading(false);
+          };
         } catch (error) {
           console.error("Error creating order:", error);
         }
       }
-      if (
-        router?.route?.split("/")?.includes("car-rental") &&
-        router?.route?.split("/")?.length <= 2
-      ) {
+      if (router?.route?.split("/")?.includes("car-rental") &&
+      router?.route?.split("/")?.length <= 2) {
         if (activeTab === "Tab1") {
-    
           const data1 = {
             package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
             name: name,
             email: email,
-            package_type:"Local-Car-Hire",
+            package_type: "Local-Car-Hire",
             phoneNumber: data?.data?.mobile,
-            customer_id: `customer_${Date.now()}`,
-            orderId: `order_${Date.now()}`,
             amount: grandTotalCar,
             dep_date: userDateLocal,
             dep_time: userTimeLocal,
@@ -285,79 +540,350 @@ const Create = () => {
             pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
             location: userFormData?.selectedlocation?.[0]?.location,
           };
-          try {
-            const response = await fetch(
-              "/api/cashfree/initiate-payment-carlocal",
-              {
+            try {
+              const res = await fetch("/api/razorpay/initiate-payment-carlocal", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data1),
+              });
+    
+              const order = await res.json();
+              // console.log("data", data);
+    
+              if (!order.id) {
+                alert("Failed to create order");
+                setLoading(false);
+                return;
               }
-            );
-
-            const data = await response.json();
-            if (response.ok) {
-              setOrderId(data.orderId);
-              window.location.href = data.paymentLink;
-              setLoginPopup(false);
-            } else {
-              console.error("Error creating order:", data.error);
+              const script = document.createElement("script");
+              script.src = "https://checkout.razorpay.com/v1/checkout.js";
+              script.async = true;
+              document.body.appendChild(script);
+    
+              script.onload = () => {
+                const razorpay = new window.Razorpay({
+                  key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                  amount: order.amount,
+                  currency: order.currency,
+                  name: "BizareExpendition.com",
+                  description: "Test Transaction",
+                  order_id: order.id,
+                  notes: order.notes, // Pass additional data to Razorpay
+                  handler: async function (response) {
+                    const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(response),
+                    });
+    
+                    const verifyData = await verifyRes.json();
+                    if(verifyData?.orderId){
+                      const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                      if(res?.ok){
+                        const data=await orderData?.json();
+                        // console.log("verified payment data as---of razorpay ---> ",data)
+                      }
+                    }
+                    
+                    alert(verifyData.message);
+                    setLoginPopup(false);
+                  },
+                  prefill: {
+                    name: order.notes?.name,
+                    email: order.notes?.email,
+                    contact: order.notes?.phoneNumber,
+                  },
+                  theme: {
+                    color: "#3399cc",
+                  },
+                });
+    
+                razorpay.open();
+                // setLoading(false);
+              };
+            } catch (error) {
+              console.error("Error creating order:", error);
             }
-          } catch (error) {
-            console.error("Error creating order:", error);
-          }
         }
         if (activeTab === "Tab2") {
           const data1 = {
             package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
             name: name,
             email: email,
-            package_type:"Out_Sation_Hire",
+            package_type: "Out_Sation_Hire",
             phoneNumber: data?.data?.mobile,
-            customer_id: `customer_${Date.now()}`,
-            orderId: `order_${Date.now()}`,
-            amount:grandTotalCar,
-            no_of_persons:userFormData?.persons,
-            vehicle_type:userFormData?.selectedCar?.[0]?.vehicleType,
-            pickup_location:userFormData?.selectedlocation?.[0]?.location,
-            pickup_point:userFormData?.selectedPickupPoint?.[0]?.name,
-            car_gst:summaryCarData?.selectedGST,
-            choose_car_plan:planOutstation,
-            cost_per_km:summaryCarData?.costPerKm,
-            ac_option:summaryCarData?.isActive,
-            dep_date:pickupDateOutstation,
-            dep_time:pickupTimeOutstation,
-            arrival_date:returnDateOutstation,
-            arrival_time:returnTimeOutstation,
+            amount: grandTotalCar,
+            no_of_persons: userFormData?.persons,
+            vehicle_type: userFormData?.selectedCar?.[0]?.vehicleType,
+            pickup_location: userFormData?.selectedlocation?.[0]?.location,
+            pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+            car_gst: summaryCarData?.selectedGST,
+            choose_car_plan: planOutstation,
+            cost_per_km: summaryCarData?.costPerKm,
+            ac_option: summaryCarData?.isActive,
+            dep_date: pickupDateOutstation,
+            dep_time: pickupTimeOutstation,
+            arrival_date: returnDateOutstation,
+            arrival_time: returnTimeOutstation,me,
+            location: userFormData?.selectedlocation?.[0]?.location,
           };
-          try {
-            const response = await fetch("/api/cashfree/initiate-payment-caroutstaion", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data1),
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-              setOrderId(data.orderId);
-              window.location.href = data.paymentLink;
-              setLoginPopup(false);
-            } else {
-              console.error("Error creating order:", data.error);
+            try {
+              const res = await fetch("/api/razorpay/initiate-payment-caroutstaion", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data1),
+              });
+    
+              const order = await res.json();
+              // console.log("data", data);
+    
+              if (!order.id) {
+                alert("Failed to create order");
+                setLoading(false);
+                return;
+              }
+              const script = document.createElement("script");
+              script.src = "https://checkout.razorpay.com/v1/checkout.js";
+              script.async = true;
+              document.body.appendChild(script);
+    
+              script.onload = () => {
+                const razorpay = new window.Razorpay({
+                  key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                  amount: order.amount,
+                  currency: order.currency,
+                  name: "BizareExpendition.com",
+                  description: "Test Transaction",
+                  order_id: order.id,
+                  notes: order.notes, // Pass additional data to Razorpay
+                  handler: async function (response) {
+                    const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(response),
+                    });
+    
+                    const verifyData = await verifyRes.json();
+                    if(verifyData?.orderId){
+                      const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                      if(res?.ok){
+                        const data=await orderData?.json();
+                        // console.log("verified payment data as---of razorpay ---> ",data)
+                      }
+                    }
+                    
+                    alert(verifyData.message);
+                    setLoginPopup(false);
+                  },
+                  prefill: {
+                    name: order.notes?.name,
+                    email: order.notes?.email,
+                    contact: order.notes?.phoneNumber,
+                  },
+                  theme: {
+                    color: "#3399cc",
+                  },
+                });
+    
+                razorpay.open();
+                // setLoading(false);
+              };
+            } catch (error) {
+              console.error("Error creating order:", error);
             }
-          } catch (error) {
-            console.error("Error creating order:", error);
-          }
         }
       }
     }
   };
 
   const handleProceed = async () => {
+    // if (router?.route?.split("/")?.includes("package")) {
+    //   const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
+    //   const data1 = {
+    //     package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+    //     packageCashfree,
+    //     name: session?.user.name,
+    //     email: session?.user.email,
+    //     phoneNumber,
+    //     customer_id: `customer_${Date.now()}`,
+    //     orderId: `order_${Date.now()}`,
+    //     amount: fixedDeparturePopupPrice1,
+    //     package_type: "tour-package",
+    //   };
+    //   try {
+    //     const response = await fetch("/api/cashfree/initiate-payment", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(data1),
+    //     });
+
+    //     const data = await response.json();
+    //     // console.log("data", data);
+
+    //     if (response.ok) {
+    //       setOrderId(data.orderId);
+    //       // setCrmData(data?.data);
+    //       window.location.href = data.paymentLink;
+    //       setLoginPopup(false);
+    //     } else {
+    //       console.error("Error creating order:", data.error);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error creating order:", error);
+    //   }
+    // }
+    // if (
+    //   router?.route?.split("/")?.includes("car-rental") &&
+    //   router?.route?.split("/")?.length > 2
+    // ) {
+    //   // console.log("summaryCarPackage", summaryCarPackage);
+    //   const fixedDeparturePopupPrice1 = Math.floor(
+    //     summaryCarPackage?.grandTotal
+    //   );
+    //   const data1 = {
+    //     package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+    //     summaryCarPackage,
+    //     name: session?.user.name,
+    //     email: session?.user.email,
+    //     phoneNumber,
+    //     customer_id: `customer_${Date.now()}`,
+    //     orderId: `order_${Date.now()}`,
+    //     amount: fixedDeparturePopupPrice1,
+    //     package_type: "car-package",
+    //   };
+    //   try {
+    //     const response = await fetch("/api/cashfree/initiate-payment1", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(data1),
+    //     });
+
+    //     const data = await response.json();
+    //     // console.log("data", data);
+
+    //     if (response.ok) {
+    //       setOrderId(data.orderId);
+    //       // setCrmData(data?.data);
+    //       window.location.href = data.paymentLink;
+    //       setLoginPopup(false);
+    //     } else {
+    //       console.error("Error creating order:", data.error);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error creating order:", error);
+    //   }
+    // }
+    // if (
+    //   router?.route?.split("/")?.includes("car-rental") &&
+    //   router?.route?.split("/")?.length <= 2
+    // ) {
+    //   if (activeTab === "Tab1") {
+    //     const data1 = {
+    //       package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+    //       name: session?.user.name,
+    //       email: session?.user.email,
+    //       phoneNumber,
+    //       package_type: "Local-Car-Hire",
+    //       customer_id: `customer_${Date.now()}`,
+    //       orderId: `order_${Date.now()}`,
+    //       amount: grandTotalCar,
+    //       dep_date: userDateLocal,
+    //       dep_time: userTimeLocal,
+    //       plan: userPlanLocal,
+    //       cost_per_km: summaryCarData?.costPerKm,
+    //       ac_option: summaryCarData?.isActive,
+    //       car_gst: summaryCarData?.selectedGST,
+    //       no_of_person: userFormData?.persons,
+    //       vehicleType: userFormData?.selectedCar?.[0]?.vehicleType,
+    //       pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+    //       location: userFormData?.selectedlocation?.[0]?.location,
+    //     };
+    //     try {
+    //       const response = await fetch(
+    //         "/api/cashfree/initiate-payment-carlocal",
+    //         {
+    //           method: "POST",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //           body: JSON.stringify(data1),
+    //         }
+    //       );
+
+    //       const data = await response.json();
+    //       if (response.ok) {
+    //         setOrderId(data.orderId);
+    //         window.location.href = data.paymentLink;
+    //         setLoginPopup(false);
+    //       } else {
+    //         console.error("Error creating order:", data.error);
+    //       }
+    //     } catch (error) {
+    //       console.error("Error creating order:", error);
+    //     }
+    //   }
+    //   if (activeTab === "Tab2") {
+    //     const data1 = {
+    //       package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
+    //       name: session?.user.name,
+    //       email: session?.user.email,
+    //       phoneNumber,
+    //       package_type: "OutStation-Car-Hire",
+    //       customer_id: `customer_${Date.now()}`,
+    //       orderId: `order_${Date.now()}`,
+    //       amount: grandTotalCar,
+    //       no_of_persons: userFormData?.persons,
+    //       vehicle_type: userFormData?.selectedCar?.[0]?.vehicleType,
+    //       pickup_location: userFormData?.selectedlocation?.[0]?.location,
+    //       pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+    //       car_gst: summaryCarData?.selectedGST,
+    //       choose_car_plan: planOutstation,
+    //       cost_per_km: summaryCarData?.costPerKm,
+    //       ac_option: summaryCarData?.isActive,
+    //       dep_date: pickupDateOutstation,
+    //       dep_time: pickupTimeOutstation,
+    //       arrival_date: returnDateOutstation,
+    //       arrival_time: returnTimeOutstation,
+    //     };
+    //     try {
+    //       const response = await fetch(
+    //         "/api/cashfree/initiate-payment-caroutstaion",
+    //         {
+    //           method: "POST",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //           body: JSON.stringify(data1),
+    //         }
+    //       );
+
+    //       const data = await response.json();
+    //       if (response.ok) {
+    //         setOrderId(data.orderId);
+    //         window.location.href = data.paymentLink;
+    //         setLoginPopup(false);
+    //       } else {
+    //         console.error("Error creating order:", data.error);
+    //       }
+    //     } catch (error) {
+    //       console.error("Error creating order:", error);
+    //     }
+    //   }
+    // }
+
+    
+    
+    // razor pay code 
+
+
     if (router?.route?.split("/")?.includes("package")) {
       const fixedDeparturePopupPrice1 = Math.floor(fixedDeparturePopupPrice);
       const data1 = {
@@ -369,10 +895,10 @@ const Create = () => {
         customer_id: `customer_${Date.now()}`,
         orderId: `order_${Date.now()}`,
         amount: fixedDeparturePopupPrice1,
-        package_type:"tour-package"
+        package_type: "tour-package",
       };
       try {
-        const response = await fetch("/api/cashfree/initiate-payment", {
+        const res = await fetch("/api/razorpay/initiate-payment", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -380,26 +906,66 @@ const Create = () => {
           body: JSON.stringify(data1),
         });
 
-        const data = await response.json();
+        const order = await res.json();
         // console.log("data", data);
 
-        if (response.ok) {
-          setOrderId(data.orderId);
-          // setCrmData(data?.data);
-          window.location.href = data.paymentLink;
-          setLoginPopup(false);
-        } else {
-          console.error("Error creating order:", data.error);
+        if (!order.id) {
+          alert("Failed to create order");
+          setLoading(false);
+          return;
         }
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        document.body.appendChild(script);
+
+        script.onload = () => {
+          const razorpay = new window.Razorpay({
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency,
+            name: "BizareExpendition.com",
+            description: "Test Transaction",
+            order_id: order.id,
+            notes: order.notes, // Pass additional data to Razorpay
+            handler: async function (response) {
+              const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(response),
+              });
+
+              const verifyData = await verifyRes.json();
+              if(verifyData?.orderId){
+                const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                if(res?.ok){
+                  const data=await orderData?.json();
+                  // console.log("verified payment data as---of razorpay ---> ",data)
+                }
+              }
+              
+              alert(verifyData.message);
+              setLoginPopup(false);
+            },
+            prefill: {
+              name: order.notes?.name,
+              email: order.notes?.email,
+              contact: order.notes?.phoneNumber,
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          });
+
+          razorpay.open();
+          // setLoading(false);
+        };
       } catch (error) {
         console.error("Error creating order:", error);
       }
     }
-    if (
-      router?.route?.split("/")?.includes("car-rental") &&
-      router?.route?.split("/")?.length > 2
-    ) {
-      // console.log("summaryCarPackage", summaryCarPackage);
+    if ( router?.route?.split("/")?.includes("car-rental") &&
+    router?.route?.split("/")?.length > 2) {
       const fixedDeparturePopupPrice1 = Math.floor(
         summaryCarPackage?.grandTotal
       );
@@ -412,10 +978,10 @@ const Create = () => {
         customer_id: `customer_${Date.now()}`,
         orderId: `order_${Date.now()}`,
         amount: fixedDeparturePopupPrice1,
-        package_type:"car-package"
+        package_type: "car-package",
       };
       try {
-        const response = await fetch("/api/cashfree/initiate-payment1", {
+        const res = await fetch("/api/razorpay/initiate-payment", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -423,66 +989,153 @@ const Create = () => {
           body: JSON.stringify(data1),
         });
 
-        const data = await response.json();
+        const order = await res.json();
         // console.log("data", data);
 
-        if (response.ok) {
-          setOrderId(data.orderId);
-          // setCrmData(data?.data);
-          window.location.href = data.paymentLink;
-          setLoginPopup(false);
-        } else {
-          console.error("Error creating order:", data.error);
+        if (!order.id) {
+          alert("Failed to create order");
+          setLoading(false);
+          return;
         }
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        document.body.appendChild(script);
+
+        script.onload = () => {
+          const razorpay = new window.Razorpay({
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency,
+            name: "BizareExpendition.com",
+            description: "Test Transaction",
+            order_id: order.id,
+            notes: order.notes, // Pass additional data to Razorpay
+            handler: async function (response) {
+              const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(response),
+              });
+
+              const verifyData = await verifyRes.json();
+              if(verifyData?.orderId){
+                const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                if(res?.ok){
+                  const data=await orderData?.json();
+                  // console.log("verified payment data as---of razorpay ---> ",data)
+                }
+              }
+              
+              alert(verifyData.message);
+              setLoginPopup(false);
+            },
+            prefill: {
+              name: order.notes?.name,
+              email: order.notes?.email,
+              contact: order.notes?.phoneNumber,
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          });
+
+          razorpay.open();
+          // setLoading(false);
+        };
       } catch (error) {
         console.error("Error creating order:", error);
       }
     }
-    if (
-      router?.route?.split("/")?.includes("car-rental") &&
-      router?.route?.split("/")?.length <= 2
-    ) {
+    if (router?.route?.split("/")?.includes("car-rental") &&
+    router?.route?.split("/")?.length <= 2) {
       if (activeTab === "Tab1") {
         const data1 = {
           package_url: `${process.env.NEXT_PUBLIC_BASE_URL}${router?.asPath}`,
           name: session?.user.name,
           email: session?.user.email,
           phoneNumber,
-          package_type:"Local-Car-Hire",
+          package_type: "Local-Car-Hire",
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
-          amount:grandTotalCar,
-          dep_date:userDateLocal,
-          dep_time:userTimeLocal,
-          plan:userPlanLocal,
-          cost_per_km:summaryCarData?.costPerKm,
-          ac_option:summaryCarData?.isActive,
-          car_gst:summaryCarData?.selectedGST,
-          no_of_person:userFormData?.persons,
-          vehicleType:userFormData?.selectedCar?.[0]?.vehicleType,
-          pickup_point:userFormData?.selectedPickupPoint?.[0]?.name,
-          location:userFormData?.selectedlocation?.[0]?.location
+          amount: grandTotalCar,
+          dep_date: userDateLocal,
+          dep_time: userTimeLocal,
+          plan: userPlanLocal,
+          cost_per_km: summaryCarData?.costPerKm,
+          ac_option: summaryCarData?.isActive,
+          car_gst: summaryCarData?.selectedGST,
+          no_of_person: userFormData?.persons,
+          vehicleType: userFormData?.selectedCar?.[0]?.vehicleType,
+          pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+          location: userFormData?.selectedlocation?.[0]?.location,
         };
-        try {
-          const response = await fetch("/api/cashfree/initiate-payment-carlocal", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data1),
-          });
-
-          const data = await response.json();
-          if (response.ok) {
-            setOrderId(data.orderId);
-            window.location.href = data.paymentLink;
-            setLoginPopup(false);
-          } else {
-            console.error("Error creating order:", data.error);
+          try {
+            const res = await fetch("/api/razorpay/initiate-payment-carlocal", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data1),
+            });
+  
+            const order = await res.json();
+            // console.log("data", data);
+  
+            if (!order.id) {
+              alert("Failed to create order");
+              setLoading(false);
+              return;
+            }
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.async = true;
+            document.body.appendChild(script);
+  
+            script.onload = () => {
+              const razorpay = new window.Razorpay({
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                amount: order.amount,
+                currency: order.currency,
+                name: "BizareExpendition.com",
+                description: "Test Transaction",
+                order_id: order.id,
+                notes: order.notes, // Pass additional data to Razorpay
+                handler: async function (response) {
+                  const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(response),
+                  });
+  
+                  const verifyData = await verifyRes.json();
+                  if(verifyData?.orderId){
+                    const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                    if(res?.ok){
+                      const data=await orderData?.json();
+                      // console.log("verified payment data as---of razorpay ---> ",data)
+                    }
+                  }
+                  
+                  alert(verifyData.message);
+                  setLoginPopup(false);
+                },
+                prefill: {
+                  name: order.notes?.name,
+                  email: order.notes?.email,
+                  contact: order.notes?.phoneNumber,
+                },
+                theme: {
+                  color: "#3399cc",
+                },
+              });
+  
+              razorpay.open();
+              // setLoading(false);
+            };
+          } catch (error) {
+            console.error("Error creating order:", error);
           }
-        } catch (error) {
-          console.error("Error creating order:", error);
-        }
       }
       if (activeTab === "Tab2") {
         const data1 = {
@@ -490,45 +1143,92 @@ const Create = () => {
           name: session?.user.name,
           email: session?.user.email,
           phoneNumber,
-          package_type:"OutStation-Car-Hire",
+          package_type: "OutStation-Car-Hire",
           customer_id: `customer_${Date.now()}`,
           orderId: `order_${Date.now()}`,
-          amount:grandTotalCar,
-          no_of_persons:userFormData?.persons,
-          vehicle_type:userFormData?.selectedCar?.[0]?.vehicleType,
-          pickup_location:userFormData?.selectedlocation?.[0]?.location,
-          pickup_point:userFormData?.selectedPickupPoint?.[0]?.name,
-          car_gst:summaryCarData?.selectedGST,
-          choose_car_plan:planOutstation,
-          cost_per_km:summaryCarData?.costPerKm,
-          ac_option:summaryCarData?.isActive,
-          dep_date:pickupDateOutstation,
-          dep_time:pickupTimeOutstation,
-          arrival_date:returnDateOutstation,
-          arrival_time:returnTimeOutstation,
+          amount: grandTotalCar,
+          no_of_persons: userFormData?.persons,
+          vehicle_type: userFormData?.selectedCar?.[0]?.vehicleType,
+          pickup_location: userFormData?.selectedlocation?.[0]?.location,
+          pickup_point: userFormData?.selectedPickupPoint?.[0]?.name,
+          car_gst: summaryCarData?.selectedGST,
+          choose_car_plan: planOutstation,
+          cost_per_km: summaryCarData?.costPerKm,
+          ac_option: summaryCarData?.isActive,
+          dep_date: pickupDateOutstation,
+          dep_time: pickupTimeOutstation,
+          arrival_date: returnDateOutstation,
+          arrival_time: returnTimeOutstation,
         };
-        try {
-          const response = await fetch("/api/cashfree/initiate-payment-caroutstaion", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data1),
-          });
-
-          const data = await response.json();
-          if (response.ok) {
-            setOrderId(data.orderId);
-            window.location.href = data.paymentLink;
-            setLoginPopup(false);
-          } else {
-            console.error("Error creating order:", data.error);
+          try {
+            const res = await fetch("/api/razorpay/initiate-payment-caroutstaion", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data1),
+            });
+  
+            const order = await res.json();
+            // console.log("data", data);
+  
+            if (!order.id) {
+              alert("Failed to create order");
+              setLoading(false);
+              return;
+            }
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.async = true;
+            document.body.appendChild(script);
+  
+            script.onload = () => {
+              const razorpay = new window.Razorpay({
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                amount: order.amount,
+                currency: order.currency,
+                name: "BizareExpendition.com",
+                description: "Test Transaction",
+                order_id: order.id,
+                notes: order.notes, // Pass additional data to Razorpay
+                handler: async function (response) {
+                  const verifyRes = await fetch("/api/razorpay/verify-payment", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(response),
+                  });
+  
+                  const verifyData = await verifyRes.json();
+                  if(verifyData?.orderId){
+                    const orderData=await fetch(`/api/razorpay/get-order?order_id=${verifyData?.orderId}`)
+                    if(res?.ok){
+                      const data=await orderData?.json();
+                      // console.log("verified payment data as---of razorpay ---> ",data)
+                    }
+                  }
+                  
+                  alert(verifyData.message);
+                  setLoginPopup(false);
+                },
+                prefill: {
+                  name: order.notes?.name,
+                  email: order.notes?.email,
+                  contact: order.notes?.phoneNumber,
+                },
+                theme: {
+                  color: "#3399cc",
+                },
+              });
+  
+              razorpay.open();
+              // setLoading(false);
+            };
+          } catch (error) {
+            console.error("Error creating order:", error);
           }
-        } catch (error) {
-          console.error("Error creating order:", error);
-        }
       }
     }
+
   };
   return (
     <>
