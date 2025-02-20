@@ -7,7 +7,6 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 const Card3 = ({ statePackage }) => {
-
   const carouselRef = useRef(null);
 
   const scrollNext = () => {
@@ -52,7 +51,7 @@ const Card3 = ({ statePackage }) => {
         <div className="carousel gap-5" ref={carouselRef}>
           {/* start is here code  */}
           {statePackage?.length > 0 &&
-            statePackage?.slice(0,6).map((data, i) => {
+            statePackage?.slice(0, 6).map((data, i) => {
               // console.log("Rakesh data of state", data);
 
               return (
@@ -66,7 +65,7 @@ const Card3 = ({ statePackage }) => {
                       width={300}
                       height={100}
                       // layout="fill"
-                      src={data?.uploads?.[0]}
+                      src="uploads/package/details/files-1723871955303.jpg" //{data?.uploads?.[0]}
                       alt="ui/ux review check"
                     />
                   </div>
@@ -85,9 +84,13 @@ const Card3 = ({ statePackage }) => {
                     <div className="items-center mt-2">
                       <div className="text-right">
                         <p className="text-base leading-snug text-green-700 font-semibold">
-                          {((data?.addguest === "addGuest") && "Awesome Price")}
-                          {((data?.addguest === "fixedDeparture") && (data?.fixedfixeddepartureweightedprice === 1)) && "Premium Value Deal"}
-                          {((data?.addguest === "fixedDeparture") && (data?.fixedfixeddepartureweightedprice === 2)) && "Unmatched Price"}
+                          {data?.addguest === "addGuest" && "Awesome Price"}
+                          {data?.addguest === "fixedDeparture" &&
+                            data?.fixedfixeddepartureweightedprice === 1 &&
+                            "Premium Value Deal"}
+                          {data?.addguest === "fixedDeparture" &&
+                            data?.fixedfixeddepartureweightedprice === 2 &&
+                            "Unmatched Price"}
                         </p>
                         <p className="text-[12px] leading-5">
                           Starts From{" "}
