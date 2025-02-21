@@ -160,7 +160,7 @@ const Sitemap = (pageprops) => {
                 ))}
               </div>
             </div>
-            <div className="bg-white shadow-lg rounded-lg px-8 py-5">
+            <div className="bg-white shadow-lg rounded-lg px-8 py-5 mb-5">
               <h1 className="md:text-xl text-lg text-blue-800 mb-4">Speciality Tours</h1>
               <div className="grid md:grid-cols-4 grid-cols-1 md:gap-10 gap-5">
                 {Object.keys(groupedTours3).map((letter) => (
@@ -183,7 +183,7 @@ const Sitemap = (pageprops) => {
           </div>
         </div>
       </main>
-      <Footer className='mt-5' />
+      <Footer />
     </>
   )
 }

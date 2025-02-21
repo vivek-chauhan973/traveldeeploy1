@@ -50,19 +50,19 @@ const Contact = (pageprops) => {
         <ul className="list-disc ml-8 md:text-base text-para">
           <li>
             <span className="font-semibold">Customer Support : </span>
-            <Link href="mailto: info@bizarexpedition.com" target="_blank" className="text-blue-600 md:text-base text-para ">
+            <Link href="tel:+919873152953" target="_blank" className="text-blue-600 md:text-base text-para ">
               +91-98731-52953
             </Link>
           </li>
           <li>
             <span className="font-semibold">Booking Assistance : </span>
-            <Link href="mailto: info@bizarexpedition.com" target="_blank" className="text-blue-600 md:text-base text-para ">
+            <Link href="tel:+917252885525" target="_blank" className="text-blue-600 md:text-base text-para ">
               +91-7252-885-525
             </Link>
           </li>
           <li>
             <span className="font-semibold">General Inquiries : </span>
-            <Link href="mailto: info@bizarexpedition.com" target="_blank" className="text-blue-600 md:text-base text-para ">
+            <Link href="tel:+919897581113" target="_blank" className="text-blue-600 md:text-base text-para ">
               +91-9897-581-113
             </Link>
           </li>

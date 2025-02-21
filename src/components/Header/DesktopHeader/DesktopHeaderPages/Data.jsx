@@ -63,7 +63,7 @@ const header=[
   icon:<FontAwesomeIcon icon={faCake}  className='font'  />
 },
 {
-  name:"Spaciality Tour",
+  name:"Speciality Tour",
   element:SpacialityTour,
    icon:<FontAwesomeIcon icon={faDiamond}  className='font'  />
 },

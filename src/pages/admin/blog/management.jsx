@@ -128,7 +128,7 @@ export default function Management() {
             onChange={(e) => setSelectType(e.target.value)}
             className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md outline-none border-slate-500/45 cursor-pointer border text-para"
           >
-            <option>select type </option>
+            <option>Select Type </option>
 
             <option value="blog">Blog</option>
             <option value="travel-guide">Travel Guide</option>

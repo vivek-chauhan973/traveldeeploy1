@@ -64,7 +64,7 @@ const FlyoutLink = ({ children, href, FlyoutContent }) => {
             <FlyoutContent />
           </motion.div>
         )}
-        {children === "Spaciality Tour"  && showFlyout && (
+        {children === "Speciality Tour"  && showFlyout && (
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}

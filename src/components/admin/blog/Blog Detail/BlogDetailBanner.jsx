@@ -287,13 +287,13 @@ export default function BlogDetailBanner({ setActiveTab, blogData }) {
                 <select
                   id="postTypes"
                   onChange={(e) => setSelectType(e.target.value)}
-                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md focus:border-primary outline-none cursor-pointer border text-para"
+                  className="mt-1 md:ml-2 h-8  md:w-32 w-full rounded-md focus:border-primary outline-none cursor-pointer border text-para capitalize"
                   defaultValue={blogData?.blogType}
                 >
                   {blogData ? (
                     <option disabled >{blogData?.blogType}</option>
                   ) : (
-                    <option >Select type </option>
+                    <option >Select Type </option>
                   )}
                   <option value="blog">Blog</option>
                   <option value="travel-guide">Travel Guide</option>
