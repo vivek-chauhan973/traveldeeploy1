@@ -90,7 +90,7 @@ export default function Footer() {
                                 <div className="container-wrapper grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
                                     {categoryArray?.map((item, i) => <div key={i} className="flex flex-col gap-y-5">
                                         <div className="flex flex-col space-y-2 ">
-                                            <h2 className="font-semibold text-base">{item?.category}</h2>
+                                            <h2 className="font-semibold text-base capitalize">{item?.category}</h2>
                                             <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
                                                 {item?.result?.map((subItem, i) => <Link key={i} href={`/package/` + subItem.pageUrl}><p rel="noopener noreferrer" href="#" className="footer-content">{subItem?.name}</p></Link>)}
                                             </div>
