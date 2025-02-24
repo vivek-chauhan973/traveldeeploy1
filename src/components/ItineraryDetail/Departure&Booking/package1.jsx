@@ -207,15 +207,15 @@ export default function Package1() {
     window.open(`https://wa.me/?text=${message}%20${url}`, "_blank");
   };
 
-  // console.log("addPackage", addPackage);
+  console.log("addPackage", addPackage);
   // console.log("schemaData", schemaData);
-  // console.log("matchedPackages", matchedPackages);
+  console.log("matchedPackages", matchedPackages);
 
   // Product Schema JSON-LD
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": matchedPackages?.seo?.title || addPackage?.seoData?.title,
+    "name": matchedPackages?.seo?.title || addPackage?.seoData?.title || addPackage?.name,
     "description": matchedPackages?.seo?.description || addPackage?.seoData?.description,
     "sku": "BX1234",
     "image": matchedPackages?.uploads && matchedPackages?.uploads?.length > 0 ?
@@ -247,7 +247,7 @@ export default function Package1() {
   const eventSchema = {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": matchedPackages?.seo?.title,
+    "name": matchedPackages?.seo?.title || addPackage?.seoData?.title || addPackage?.name,
     "image": matchedPackages?.uploads?.[0],
     "startDate": schemaData?.startDate,
     "endDate": schemaData?.endDate,
@@ -269,7 +269,7 @@ export default function Package1() {
     <>
       {/* Head Section with Organization Schema */}
       <Head>
-        <title>{matchedPackages?.seo?.title || addPackage?.seoData?.title} | BizareXpedition™️</title>
+        <title>{matchedPackages?.seo?.title || addPackage?.seoData?.title || addPackage?.name} | BizareXpedition™️</title>
         <meta name="description"
           content={matchedPackages?.seo?.description || addPackage?.seoData?.description}
         />
@@ -282,14 +282,14 @@ export default function Package1() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         {/* Open Graph for Social Media */}
-        <meta property="og:title" content={matchedPackages?.seo?.title || addPackage?.seoData?.title} />
+        <meta property="og:title" content={matchedPackages?.seo?.title || addPackage?.seoData?.title || addPackage?.name} />
         <meta property="og:description" content={matchedPackages?.seo?.description || "Discover unforgettable journeys with BizareXpedition™️."} />
         <meta property="og:image" content={`https://www.bizarexpedition.com/${matchedPackages?.uploads?.[0] || 'https://www.bizarexpedition.com/default-meta-image.jpg          '}`} />
         <meta property="og:url" content={`https://www.bizarexpedition.com/package/${matchedPackages?.url || addPackage?.url}-tour-package`} />
         <meta property="og:type" content="website" />
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${matchedPackages?.seo?.title || addPackage?.seoData?.title } | BizareXpedition™️`} />
+        <meta name="twitter:title" content={`${matchedPackages?.seo?.title || addPackage?.seoData?.title || addPackage?.name} | BizareXpedition™️`} />
         <meta name="twitter:description" content={matchedPackages?.seo?.description || "Discover unforgettable journeys with BizareXpedition™️."} />
         <meta name="twitter:image" content={`https://www.bizarexpedition.com/${matchedPackages?.uploads?.[0] || 'https://www.bizarexpedition.com/default-meta-image.jpg'}`} />
         {/* Organization Schema */}
