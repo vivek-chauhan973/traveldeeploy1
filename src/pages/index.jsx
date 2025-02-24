@@ -50,6 +50,8 @@ export default function Home(props) {
   useEffect(() => {
     if (props) {
       setServerSideProps(props || {});
+      setSingleHomePackages(props?.post || [])
+      SetHomePackages(props?.multipost || [])
     }
 
   }, [props]);

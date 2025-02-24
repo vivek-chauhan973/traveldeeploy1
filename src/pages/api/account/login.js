@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
     await connectToDatabase()
-    console.log("database is connected here as-----> ",process.env.MONGODB_URI)
+    // console.log("database is connected here as-----> ",process.env.MONGODB_URI)
     if (req.method === 'POST') {
         const { username, password } = req.body;
         if (!username || !password) {
