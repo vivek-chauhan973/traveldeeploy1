@@ -39,7 +39,7 @@ const PackageBreadcrums = ({ addPackage }) => {
             <main>
                 <div className="container mx-auto py-2 px-4">
                     <div className="text-sm breadcrumbs">
-                        <ul className="flex space-x-2 text-gray-500 breadCrumbs">
+                        <ul className="flex space-x-2 text-gray-500 breadCrumbs flex-wrap">
                             <li>
                                 <Link href="/" className="hover:underline">
                                     Home
@@ -48,18 +48,20 @@ const PackageBreadcrums = ({ addPackage }) => {
                             <span className="mr-2">{">"}</span>
                             <li>
                                 <Link href={`/${addPackage?.country?.url}`} className="hover:underline text-nowrap">
-                                    {addPackage?.country?.name}
+                                    <span>{addPackage?.country?.name}</span>
                                 </Link>
                             </li>
                             <span className="mr-2">{">"}</span>
                             <li>
                                 <Link href={`/${addPackage?.country?.url}/${addPackage?.state?.pageUrl}`} className="hover:underline text-nowrap">
-                                    {addPackage?.state?.name}
+                                <span>{addPackage?.state?.name}</span>
+                                    
                                 </Link>
                             </li>
                             <span className="mr-2">{">"}</span>
-                            <li className="font-semibold text-gray-900 ">
-                                {addPackage?.name} Tour Pacakge
+                            <li className="font-semibold text-gray-900  text-nowrap">
+
+                                <span>  {addPackage?.name} Tour Pacakge</span>
                             </li>
 
                         </ul>
