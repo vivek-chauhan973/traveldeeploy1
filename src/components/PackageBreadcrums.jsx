@@ -47,13 +47,13 @@ const PackageBreadcrums = ({ addPackage }) => {
                             </li>
                             <span className="mr-2">{">"}</span>
                             <li>
-                                <Link href={`/${addPackage?.country?.url}`} className="hover:underline">
+                                <Link href={`/${addPackage?.country?.url}`} className="hover:underline text-nowrap">
                                     {addPackage?.country?.name}
                                 </Link>
                             </li>
                             <span className="mr-2">{">"}</span>
                             <li>
-                                <Link href={`/${addPackage?.country?.url}/${addPackage?.state?.pageUrl}`} className="hover:underline">
+                                <Link href={`/${addPackage?.country?.url}/${addPackage?.state?.pageUrl}`} className="hover:underline text-nowrap">
                                     {addPackage?.state?.name}
                                 </Link>
                             </li>
