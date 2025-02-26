@@ -38,12 +38,27 @@ jobs:
           restore-keys: |
             npm-${{ runner.os }}-${{ matrix.node-version }}-
 
+      - name: Restore Next.js Cache
+        id: cache-next
+        uses: actions/cache@v3
+        with:
+          path: .next/cache
+          key: nextjs-build-${{ github.sha }}
+          restore-keys: |
+            nextjs-build-
+
       - name: Install Dependencies
         if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm ci --prefer-offline --no-audit
 
       - name: Build Next.js App
         run: npm run build --if-present
+
+      - name: Save Next.js Cache
+        uses: actions/cache@v3
+        with:
+          path: .next/cache
+          key: nextjs-build-${{ github.sha }}
 
       # - name: Change Directory
       #   run: cd /home/shishir/actions-runner/_work/traveldeeploy1/traveldeeploy1
