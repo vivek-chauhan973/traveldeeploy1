@@ -26,7 +26,7 @@ jobs:
       #     cache: "npm"
 
       - name: Move to Project Directory
-        run: cd /root/traveldeeploy1
+        run: cd /home/shishir/traveldeeploy1
 
       - name: Pull latest code
         run: |
