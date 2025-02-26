@@ -32,6 +32,9 @@ jobs:
         run: |
           git pull origin main
 
+      - name: Install Dependencies
+        run: npm ci
+
       - name: Build Applications
         run: npm run build
 
