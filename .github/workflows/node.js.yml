@@ -29,36 +29,36 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - name: Restore Cached Dependencies
-        id: cache-npm
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: npm-${{ runner.os }}-${{ matrix.node-version }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-${{ matrix.node-version }}-
+      - name: Restore Next.js Pre-Built Cache
+        run: |
+          if [ -f /home/shishir/next-cache.tar.gz ]; then
+            tar -xzf /home/shishir/next-cache.tar.gz -C .
+            echo "Next.js cache restored."
+          else
+            echo "No Next.js cache found. Running fresh build."
+          fi
 
-      - name: Restore Next.js Cache
-        id: cache-next
-        uses: actions/cache@v3
-        with:
-          path: .next/cache
-          key: nextjs-build-${{ github.sha }}
-          restore-keys: |
-            nextjs-build-
+      - name: Restore Node Modules Cache
+        run: |
+          if [ -f /home/shishir/node_modules_cache.tar.gz ]; then
+            tar -xzf /home/shishir/node_modules_cache.tar.gz -C .
+            echo "Node modules cache restored."
+          else
+            echo "No cache found, installing dependencies."
+          fi
 
       - name: Install Dependencies
         if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm ci --prefer-offline --no-audit
 
+      - name: Save Node Modules Cache
+        run: tar -czf /home/shishir/node_modules_cache.tar.gz node_modules
+
       - name: Build Next.js App
         run: npm run build --if-present
 
       - name: Save Next.js Cache
-        uses: actions/cache@v3
-        with:
-          path: .next/cache
-          key: nextjs-build-${{ github.sha }}
+        run: tar -czf /home/shishir/next-cache.tar.gz .next/cache
 
       # - name: Change Directory
       #   run: cd /home/shishir/actions-runner/_work/traveldeeploy1/traveldeeploy1
