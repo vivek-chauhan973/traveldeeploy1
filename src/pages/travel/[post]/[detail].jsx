@@ -35,6 +35,7 @@ const Detail = (pageprops) => {
   const [detailData, setDetailData] = useState({});
   const { post, detail } = router.query;
   const [navLinkData, setNavLinkData] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     if (detail) {
@@ -246,9 +247,16 @@ const Detail = (pageprops) => {
                         smooth={true}
                         offset={-100}
                         duration={500}
+                        onClick={() => setActiveIndex(i)}
                       >
-                        <p className="text-md font-medium mb-4 hover:cursor-pointer hover:text-primary">
-                          {item?.title}
+                        <p 
+                        // className=""
+                        className={`pl-3 text-md font-medium mb-4 hover:cursor-pointer hover:text-primary ${activeIndex === i
+                          ? "border-l-4 border-l-primary text-black"
+                          : " text-gray-400"
+                          }`}
+                        >
+                          {item?.title}1
                         </p>
                         {item?.blogSubQuestion?.questions?.length > 0 && (
                           <ol className="text-para font-medium ml-10">
@@ -264,6 +272,7 @@ const Detail = (pageprops) => {
                                     smooth={true}
                                     offset={-100}
                                     duration={500}
+                                    onClick={() => setActiveIndex(i)}
                                   >
                                     <p> {item1?.title}</p>
                                   </ScrollLink>

@@ -164,7 +164,7 @@ export default function Package1() {
   }, [allPackages, addPackage]);
   const handleSendItinerary = () => {
     const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919897581113&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;
-    window.location.href = whatsAppUrl;
+    window.open(whatsAppUrl, '_blank');
   };
   const handleEmailRedirect = () => {
     const currentUrl = window.location.href; // Get the current URL

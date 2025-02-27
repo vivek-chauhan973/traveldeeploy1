@@ -70,10 +70,12 @@ export default function CarDetail(pageprops) {
 
     useEffect(() => {
         if (package1) {
-            fetchCarPackage(package1).then(res => { setCarPackage(res || {}) })
+            fetchCarPackage(package1).then(res => {
+                console.log("res carPackage ==>",res);
+                setCarPackage(res || {});
+            })
         }
     }, [package1])
-    // console.log("car Rental package detail response ---->", carPackage);
 
     const handleSendItinerary = () => {
         const whatsAppUrl = `https://api.whatsapp.com/send/?phone=919897581113&text=Hello+I+want+to+know+more+about+Chardham+4Nights+and+5Days+Charter+booking.%0A%0A%E2%9E%A4+Travel+Date++%0A%E2%9E%A4+No.+of+seats+a+%0A%E2%9E%A4+Total+Weight+of+pax+a+%0A&type=phone_number&app_absent=0`;

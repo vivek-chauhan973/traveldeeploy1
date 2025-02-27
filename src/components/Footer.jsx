@@ -103,7 +103,7 @@ export default function Footer() {
                                     <div>
                                         <div className="flex flex-col space-y-2 ">
                                             <h2 className=" font-semibold text-base">Company</h2>
-                                            <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
+                                            <div className="flex flex-col space-y-2 text-sm font-extralight text-gray-700">
                                                 <Link rel="noopener noreferrer" href="/about-us" className="footer-content2">About Us</Link>
                                                 <Link rel="noopener noreferrer" href="/contact-us" className="footer-content2">Contact Us</Link>
                                                 <Link rel="noopener noreferrer" href="#" className="footer-content2">Blog</Link>
@@ -113,7 +113,7 @@ export default function Footer() {
                                     <div>
                                         <div className="flex flex-col space-y-2">
                                             <h2 className="font-semibold text-base">Help</h2>
-                                            <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
+                                            <div className="flex flex-col space-y-2 text-sm font-extralight text-gray-700">
                                                 <Link rel="noopener noreferrer" href="/refund-cancellation" className="footer-content2">Refunds & Cancellations</Link>
                                                 <Link rel="noopener noreferrer" href="/careers" className="footer-content2">Careers</Link>
                                                 <Link rel="noopener noreferrer" href="/payments" className="footer-content2">Payments</Link>
@@ -123,7 +123,7 @@ export default function Footer() {
                                     <div>
                                         <div className="flex flex-col space-y-2">
                                             <h2 className="font-semibold text-base">Support</h2>
-                                            <div className="flex flex-col space-y-2 text-sm font-extralight dark:text-gray-400">
+                                            <div className="flex flex-col space-y-2 text-sm font-extralight text-gray-700">
                                                 <Link rel="noopener noreferrer" href="/privacy-policy" className="footer-content2">Privacy Policy</Link>
                                                 <Link rel="noopener noreferrer" href="/payment-policy" className="footer-content2">Payment Policy</Link>
                                                 <Link rel="noopener noreferrer" href="/terms-and-conditions" className="footer-content2">Terms & Conditions</Link>
@@ -155,17 +155,17 @@ export default function Footer() {
                                     <div className="md:flex md:items-center md:justify-between py-1 ">
                                         <ul className="flex items-center justify-center  flex-wrap ">
                                             <li className=" list-none">
-                                                <Link href="/terms-and-conditions" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                <Link href="/terms-and-conditions" className="text-sm font-normal text-gray-700 hover:underline mr-4 md:mr-6">
                                                     Terms and conditions
                                                 </Link>
                                             </li>
                                             <li className=" list-none">
-                                                <Link href="/privacy-policy" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                <Link href="/privacy-policy" className="text-sm font-normal text-gray-700 hover:underline mr-4 md:mr-6">
                                                     Privacy Policy
                                                 </Link>
                                             </li>
                                             <li className=" list-none">
-                                                <Link href="/sitemap" className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6">
+                                                <Link href="/sitemap" className="text-sm font-normal text-gray-700 hover:underline mr-4 md:mr-6">
                                                     Site Map
                                                 </Link>
                                             </li>
@@ -231,7 +231,7 @@ export default function Footer() {
                                     <hr />
                                     <div className="flex md:flex-row flex-col md:items-center justify-between gap-2 py-1">
                                         <div className="flex justify-center items-center">
-                                            <span className="dark:text-gray-400 md:text-sm text-xs">© Copyright 1986. All Rights Reserved.</span>
+                                            <span className="dark:text-gray-400 md:text-sm text-xs">© 2014-{new Date().getFullYear()} Copyright 1986. All Rights Reserved.</span>
                                             <span className="dark:text-gray-400 md:text-sm text-xs md:block hidden ml-1">| Country India</span>
                                             <Image width={5} height={5} src="/assets/India.png"
                                                 className="h-6 w-6 object-cover ml-2"

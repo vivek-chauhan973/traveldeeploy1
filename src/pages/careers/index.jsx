@@ -32,7 +32,7 @@ const Careers = (pageprops) => {
         })
     }, [])
 
-    console.log("careersData", careersData);
+    // console.log("careersData", careersData);
 
     return (
         <>
