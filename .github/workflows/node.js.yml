@@ -54,6 +54,9 @@ jobs:
       - name: Save Node Modules Cache
         run: tar -czf /home/shishir/node_modules_cache.tar.gz node_modules
 
+      - name: Copy Configurations
+        run: cp /home/shishir/.env /home/shishir/actions-runner/_work/traveldeeploy1/traveldeeploy1/.env
+
       - name: Build Next.js App
         run: npm run build --if-present
 
