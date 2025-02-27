@@ -16,9 +16,9 @@ export default {
       },
     ],
   },
-  experimental: {
-    outputFileTracingRoot: true,
-  },
+  // experimental: {
+  //   outputFileTracingRoot: path.join(__dirname, '../../'),
+  // },
   webpack(config) {
     // Custom Webpack configuration for splitChunks
     config.optimization.splitChunks = {
