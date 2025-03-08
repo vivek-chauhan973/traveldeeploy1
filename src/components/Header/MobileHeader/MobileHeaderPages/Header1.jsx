@@ -111,9 +111,9 @@ const Header1 = ({ setTogle, togle }) => {
         ) : (
           <div>
             <div className="  ml-1 h-[80vh] w-full overflow-y-scroll   scrollbar-thin scrollbar-thumb-gray-400">
-              <div className="flex w-full gap-3     flex-col px-2 sm:px-4 my-2">
+              <div href="/" className="flex w-full gap-3     flex-col px-2 sm:px-4 my-2">
                 <Link className="cursor-pointer font-semibold"
-                  onClick={() => setTogle(false)} href="/">
+                  onClick={() => setTogle(false)} >
                   Home
                 </Link>
                 <div className="flex justify-between">
@@ -175,16 +175,16 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                   {travel &&
                     <div className='flex flex-col gap-2 mx-4 mt-2' >
-                      <Link className="cursor-pointer text-para font-medium"
-                        onClick={() => { setTogle(false); setTravel(false) }} href="/travel/blog">
+                      <Link href="/travel/blog" className="cursor-pointer text-para font-medium"
+                        onClick={() => { setTogle(false); setTravel(false) }} >
                         Blog
                       </Link>
-                      <Link className="cursor-pointer text-para font-medium"
-                        onClick={() => { setTogle(false); setTravel(false) }} href="/travel/travel-guide">
+                      <Link href="/travel/travel-guide" className="cursor-pointer text-para font-medium"
+                        onClick={() => { setTogle(false); setTravel(false) }}>
                         Travel Guide
                       </Link>
-                      <Link className="cursor-pointer text-para font-medium"
-                        onClick={() => { setTogle(false); setTravel(false) }} href="/travel/news">
+                      <Link href="/travel/news" className="cursor-pointer text-para font-medium"
+                        onClick={() => { setTogle(false); setTravel(false) }} >
                         News
                       </Link>
                     </div>}
@@ -192,16 +192,16 @@ const Header1 = ({ setTogle, togle }) => {
               </div>
               <hr className="mx-1" />
               <div className="w-full flex flex-col gap-3 px-2 sm:px-4 my-2">
-                <Link className="cursor-pointer font-semibold"
-                  onClick={() => setTogle(false)} href="/contact-us">
+                <Link href="/contact-us" className="cursor-pointer font-semibold"
+                  onClick={() => setTogle(false)} >
                   Contact Us
                 </Link>
-                <Link className="cursor-pointer font-semibold"
-                  onClick={() => setTogle(false)} href="/about-us">
+                <Link href="/about-us" className="cursor-pointer font-semibold"
+                  onClick={() => setTogle(false)} >
                   About Us
                 </Link>
-                <Link className="cursor-pointer font-semibold"
-                  onClick={() => setTogle(false)} href="/careers">
+                <Link href="/careers" className="cursor-pointer font-semibold"
+                  onClick={() => setTogle(false)} >
                   Career
                 </Link>
               </div>
@@ -213,7 +213,7 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                   <div className="flex gap-0.5 flex-col">
                     <h6 className=' font-semibold'>Customer Support Number</h6>
-                    <Link href="tel:+919873152953" className="cursor-pointer text-blue-500 hover:underline">+91-98731-52953</Link>
+                    <p  className="cursor-pointer text-blue-500 hover:underline">+91-98731-52953</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -222,8 +222,8 @@ const Header1 = ({ setTogle, togle }) => {
                   </div>
                   <div className="flex gap-0.5 flex-col">
                     <h6 className=' font-semibold'>You can also call on :</h6>
-                    <Link href="tel:+917252885525" className="cursor-pointer text-blue-500 hover:underline">+91-7252-885-525</Link>
-                    <Link href="tel:+919897581113" className="cursor-pointer text-blue-500 hover:underline">+91-9897-581-113</Link>
+                    <p  className="cursor-pointer text-blue-500 hover:underline">+91-7252-885-525</p>
+                    <p  className="cursor-pointer text-blue-500 hover:underline">+91-9897-581-113</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
