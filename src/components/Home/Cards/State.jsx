@@ -32,8 +32,8 @@ const State = () => {
         setStatePackage(stateData || []);
 
     }
-    useEffect(() => { }, [statePackage])
-    // console.log("data",statePackage)
+    // useEffect(() => { }, [statePackage])
+    console.log("data---->",statePackage)
     return (
         <div>
             <div className="my-1 mt-6 md:mt-10 ">
@@ -47,7 +47,7 @@ const State = () => {
                 </div>
                 <div className="container-wrapper grid grid-cols-5 lg:gap-5 gap-3 overflow-hidden">
                     <div className="flex xl:flex-col lg:mt-32 mt-5  md:gap-5 gap-2 py-5 xl:col-auto col-span-5 xl:overflow-x-hidden overflow-x-scroll">
-                        {data?.states?.slice(0, 5).map((title) => (
+                        {data?.states?.length>0 && data?.states?.slice(0, 5).map((title) => (
                             <div key={title._id}>
                                 <div className=''>
                                     <button
@@ -62,7 +62,7 @@ const State = () => {
                     </div>
                     <div className="relative xl:col-span-4 col-span-5 w-full overflow-auto">
                         <div className="flex gap-4">
-                            <Card3 statePackage={statePackage} />
+                           {statePackage?.length>0 && <Card3 statePackage={statePackage} />}
                         </div>
                         <div className=" bg-gradient-to-l from-white opacity-100 w-10 h-full right-0 absolute z-30 top-0"></div>
                     </div>

@@ -300,10 +300,9 @@
 //   );
 // }
 
-
 import Image from "next/image";
 import "../app/globals.css";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import { useEffect, useState, Suspense } from "react";
 import { useCarPopupContext } from "@/components/admin/context/CarPopupCalculation";
 import Head from "next/head";
@@ -312,76 +311,122 @@ import OrganizationSchema from "@/components/seo/OrganizationSchema";
 
 // Dynamically import components with lazy loading
 const HeroSection = dynamic(() => import("@/components/Home/HeroSection"), {
-  loading: () => <div className="loading-placeholder h-[400px] bg-gray-200 animate-pulse"></div>,
-  ssr: true
+  loading: () => (
+    <div className="loading-placeholder h-[400px] bg-gray-200 animate-pulse"></div>
+  ),
+  ssr: true,
 });
 
-const HorizontalCard = dynamic(() => import("@/components/Home/Cards/HorizontalCard"), {
-  ssr: true
-});
+const HorizontalCard = dynamic(
+  () => import("@/components/Home/Cards/HorizontalCard"),
+  {
+    ssr: true,
+  }
+);
 
 const Card4 = dynamic(() => import("@/components/Home/Cards/Card4"), {
-  loading: () => <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>,
-  ssr: true
+  loading: () => (
+    <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+  ),
+  ssr: true,
 });
 
 const ReviewsCard = dynamic(() => import("@/components/ReviewsCard"), {
-  loading: () => <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>,
-  ssr: false
+  loading: () => (
+    <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+  ),
+  ssr: false,
 });
 
 const Footer = dynamic(() => import("@/components/Footer"), {
-  ssr: true
+  ssr: true,
 });
 
 const Cardwork = dynamic(() => import("@/components/Home/Cards/cardwork"), {
-  loading: () => <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>,
-  ssr: false
+  loading: () => (
+    <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+  ),
+  ssr: false,
 });
 
-const ArrowSection = dynamic(() => import("@/components/Home/Cards/ArrowSection"), {
-  ssr: false
-});
+const ArrowSection = dynamic(
+  () => import("@/components/Home/Cards/ArrowSection"),
+  {
+    ssr: false,
+  }
+);
 
-const DesktopHeader = dynamic(() => import("@/components/Header/DesktopHeader/desktopHeader"), {
-  ssr: true
-});
+const DesktopHeader = dynamic(
+  () => import("@/components/Header/DesktopHeader/desktopHeader"),
+  {
+    ssr: true,
+  }
+);
 
 const State = dynamic(() => import("@/components/Home/Cards/State"), {
-  loading: () => <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>,
-  ssr: false
+  loading: () => (
+    <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+  ),
+  ssr: false,
 });
 
-const CarArrowSection = dynamic(() => import("@/components/Home/Cards/CarArrowSection"), {
-  ssr: false
-});
+const CarArrowSection = dynamic(
+  () => import("@/components/Home/Cards/CarArrowSection"),
+  {
+    ssr: false,
+  }
+);
 
 const StateCard = dynamic(() => import("@/components/Home/Cards/StateCard"), {
-  loading: () => <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>,
-  ssr: false
+  loading: () => (
+    <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+  ),
+  ssr: false,
 });
 
-const CarPackageCarousel = dynamic(() => import("@/components/car-rental/CarPackageCarouel"), {
-  loading: () => <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>,
-  ssr: false
-});
+const CarPackageCarousel = dynamic(
+  () => import("@/components/car-rental/CarPackageCarouel"),
+  {
+    loading: () => (
+      <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+    ),
+    ssr: false,
+  }
+);
 
-const TravelGuideCarousel = dynamic(() => import("@/components/TravelGuideCarousel"), {
-  loading: () => <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>,
-  ssr: false
-});
+const TravelGuideCarousel = dynamic(
+  () => import("@/components/TravelGuideCarousel"),
+  {
+    loading: () => (
+      <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+    ),
+    ssr: false,
+  }
+);
 
 const BlogsCarousel = dynamic(() => import("@/components/BlogsCarousel"), {
-  loading: () => <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>,
-  ssr: false
+  loading: () => (
+    <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+  ),
+  ssr: false,
 });
 
 // Create a lazy-loaded Image component
-const LazyImage = ({ src, alt, width, height, className, priority = false }) => {
+const LazyImage = ({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  priority = false,
+}) => {
   return (
     <div className="relative">
       <Image
-        src={src || "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+        src={
+          src ||
+          "https://images.unsplash.com/photo-1565402170291-8491f14678db?q=80&w=1417&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        }
         alt={alt || "BizareXpedition image"}
         width={width || 400}
         height={height || 200}
@@ -397,7 +442,9 @@ const LazyImage = ({ src, alt, width, height, className, priority = false }) => 
 export default function Home(props) {
   const [states, setStates] = useState([]);
   const [homePackages, SetHomePackages] = useState(props?.multipost || []);
-  const [homeSinglePackages, setSingleHomePackages] = useState(props?.post || []);
+  const [homeSinglePackages, setSingleHomePackages] = useState(
+    props?.post || []
+  );
   const [packages, setPackages] = useState([]);
   const [cityPackages, setCityPackages] = useState([]);
   const [category1, setCategory1] = useState([]);
@@ -422,27 +469,27 @@ export default function Home(props) {
   useEffect(() => {
     // Implement Intersection Observer for lazy loading
     const handleLazyLoad = () => {
-      if ('IntersectionObserver' in window) {
+      if ("IntersectionObserver" in window) {
         const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-        
+
         const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const img = entry.target;
               img.src = img.dataset.src;
-              img.classList.remove('lazy');
+              img.classList.remove("lazy");
               imageObserver.unobserve(img);
             }
           });
         });
-        
-        lazyImages.forEach(img => {
+
+        lazyImages.forEach((img) => {
           imageObserver.observe(img);
         });
       } else {
         // Fallback for browsers that don't support IntersectionObserver
         const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-        lazyImages.forEach(img => {
+        lazyImages.forEach((img) => {
           img.src = img.dataset.src;
         });
       }
@@ -506,16 +553,21 @@ export default function Home(props) {
     <>
       <Head>
         <title>BizareXpedition™️ - A Signature of Excellence</title>
-        <meta name="description" content="Plan your perfect trip with BizareXpedition™️." />
-        {/* Organization Schema */}
+        <meta
+          name="description"
+          content="Plan your perfect trip with BizareXpedition™️."
+        />
         <OrganizationSchema />
       </Head>
       <main>
         <DesktopHeader multipost={props?.multipost} />
-        <Suspense fallback={<div className="loading-placeholder h-[400px] bg-gray-200 animate-pulse"></div>}>
+        <Suspense
+          fallback={
+            <div className="loading-placeholder h-[400px] bg-gray-200 animate-pulse"></div>
+          }
+        >
           <HeroSection />
         </Suspense>
-        {/* First image and text */}
         <div className="container-wrapper md:py-11 py-5">
           <div className="md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center">
             <div className="md:shrink-0 md:mt-0 mt-5 lg:ml-0 ml-2">
@@ -554,19 +606,23 @@ export default function Home(props) {
                   height={265}
                   src={category1?.[0]?.options?.[0]?.posterPath || ""}
                   alt="Featured tour"
-                  priority={true} // Load this image early as it's above the fold
+                  priority={true}
                 />
               </Link>
             </div>
           </div>
         </div>
-        {/* carousel all state card*/}
+
         <div>
-          <Suspense fallback={<div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>}>
+          <Suspense
+            fallback={
+              <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+            }
+          >
             <StateCard states={states} />
           </Suspense>
         </div>
-        {/* Second image and text */}
+
         <div className="container-wrapper md:py-11 py-5">
           <div className="md:grid flex md:flex-col flex-col-reverse md:grid-cols-2 w-full lg:gap-16 text-wrap md:items-center">
             <div className="md:shrink-0 md:my-0 my-5 lg:ml-0 ml-2">
@@ -610,7 +666,7 @@ export default function Home(props) {
             </div>
           </div>
         </div>
-        {/* Third first image and text */}
+
         <div className="container-wrapper md:pb-10 pb-5">
           <div className="md:grid flex md:flex-col flex-col md:grid-cols-2 w-full md:gap-5 text-wrap md:items-center">
             <div className="">
@@ -635,7 +691,9 @@ export default function Home(props) {
                 {category2?.[0]?.description}
               </h1>
               <div className="flex md:justify-between gap-3">
-                <Link href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}>
+                <Link
+                  href={"/package/" + category2?.[0]?.options?.[0]?.pageUrl}
+                >
                   <button className="shadow-md bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 md:px-[50px] px-5 rounded-full">
                     Know more
                   </button>
@@ -644,13 +702,16 @@ export default function Home(props) {
             </div>
           </div>
         </div>
-        {/* Carousel Banner Images */}
         <div className="md:pb-10 pb-5 xl:mx-16 md:mx-3">
-          <Suspense fallback={<div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>}>
+          <Suspense
+            fallback={
+              <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+            }
+          >
             <Cardwork />
           </Suspense>
         </div>
-        {/* horizontal card */}
+
         <div className="">
           {cityPackages?.length > 0 && (
             <div className="container-wrapper text-center pb-2">
@@ -660,54 +721,92 @@ export default function Home(props) {
             </div>
           )}
           <div className="container-wrapper justify-center flex flex-wrap">
-            {cityPackages?.length > 0 && cityPackages?.map((item, i) => (
-              <Suspense key={i} fallback={<div className="loading-placeholder h-[200px] w-[300px] bg-gray-200 animate-pulse m-2"></div>}>
-                <HorizontalCard key={i} item={item} />
-              </Suspense>
-            ))}
+            {cityPackages?.length > 0 &&
+              cityPackages?.map((item, i) => (
+                <Suspense
+                  key={i}
+                  fallback={
+                    <div className="loading-placeholder h-[200px] w-[300px] bg-gray-200 animate-pulse m-2"></div>
+                  }
+                >
+                  <HorizontalCard key={i} item={item} />
+                </Suspense>
+              ))}
           </div>
         </div>
-        
-        <Suspense fallback={<div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>}>
+
+        <Suspense
+          fallback={
+            <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+          }
+        >
           <Card4 packages={packages} />
         </Suspense>
-        
+
         <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
           <div className="md:mt-4 mt-4">
-            <Suspense fallback={<div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>}>
+            <Suspense
+              fallback={
+                <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+              }
+            >
               <ArrowSection />
             </Suspense>
           </div>
         </div>
-        
-        <Suspense fallback={<div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>}>
+{/* error component */}
+        <Suspense
+          fallback={
+            <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+          }
+        >
           <State />
         </Suspense>
-        
+
         <div className="container-wrapper md:mt-10 md:pb-2 md:pt-10">
           <div className="md:mt-4 mt-4">
-            <Suspense fallback={<div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>}>
+            <Suspense
+              fallback={
+                <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+              }
+            >
               <CarArrowSection carCityPromos={carCityPromos} />
             </Suspense>
           </div>
         </div>
-        
-        <Suspense fallback={<div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>}>
+
+        <Suspense
+          fallback={
+            <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+          }
+        >
           <CarPackageCarousel carPackageData={carPackages} />
         </Suspense>
-        
-        <Suspense fallback={<div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>}>
+
+        <Suspense
+          fallback={
+            <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+          }
+        >
           <TravelGuideCarousel carPackageData={travelGuidePackage} />
         </Suspense>
-        
-        <Suspense fallback={<div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>}>
+
+        <Suspense
+          fallback={
+            <div className="loading-placeholder h-[300px] bg-gray-200 animate-pulse"></div>
+          }
+        >
           <BlogsCarousel carPackageData={blogsPackages} />
         </Suspense>
-        
-        <Suspense fallback={<div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>}>
+
+        <Suspense
+          fallback={
+            <div className="loading-placeholder h-[200px] bg-gray-200 animate-pulse"></div>
+          }
+        >
           <ReviewsCard />
         </Suspense>
-        
+
         <Footer />
       </main>
     </>

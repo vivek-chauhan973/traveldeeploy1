@@ -26,7 +26,7 @@ const Card3 = ({ statePackage }) => {
       });
     }
   };
-
+console.log("state packages is here ------> ",statePackage)
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
@@ -60,7 +60,7 @@ const Card3 = ({ statePackage }) => {
                   className=" border relative flex-shrink-0 max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg my-2"
                 >
                   <div className="mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-                    <Image
+                    <img
                       className="h-[10rem] object-cover"
                       width={300}
                       height={100}
@@ -122,7 +122,6 @@ const Card3 = ({ statePackage }) => {
                 </div>
               );
             })}
-          {/* end is here code */}
         </div>
         <div className=" hidden md:block relative -top-[450px]  -translate-y-[60px] justify-between w-full">
           <div className=" absolute right-8 gap-3  flex pl-2 ">
