@@ -15,6 +15,17 @@ export default {
         hostname: "**", // Allow all external domains (Optional)
       },
     ],
+    headers: async () => [
+      {
+        source: "/uploads/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, must-revalidate",
+          },
+        ],
+      },
+    ],
   },
   // experimental: {
   //   outputFileTracingRoot: path.join(__dirname, '../../'),
