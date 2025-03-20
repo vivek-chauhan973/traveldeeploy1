@@ -57,6 +57,10 @@ jobs:
       - name: Copy Configurations
         run: cp /home/shishir/.env /home/shishir/actions-runner/_work/traveldeeploy1/traveldeeploy1/.env
 
+      - name: Preserve Uploads Directory
+        run: |
+          ln -s /home/shishir/actions-runner/uploads /home/shishir/actions-runner/_work/traveldeeploy1/traveldeeploy1/public/uploads
+
       - name: Build Next.js App
         run: npm run build --if-present
 
