@@ -59,7 +59,7 @@ jobs:
 
       - name: Preserve Uploads Directory
         run: |
-          ln -s /home/shishir/actions-runner/uploads /home/shishir/actions-runner/_work/traveldeeploy1/traveldeeploy1/public/uploads
+          ln -s /home/shishir/actions-runner/uploads /home/shishir/actions-runner/_work/traveldeeploy1/traveldeeploy1/uploads
 
       - name: Build Next.js App
         run: npm run build --if-present
