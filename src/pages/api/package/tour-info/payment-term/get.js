@@ -1,7 +1,9 @@
 import PaymentTerm from "@/models/package/TourInfo/PaymentTerm";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinfoInPaymentGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const PaymentTermGroupData = await PaymentTerm.find();
 

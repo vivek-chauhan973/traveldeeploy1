@@ -1,6 +1,8 @@
 import CarPackageState from "@/models/car-package/package/PackageState";
+import connectToDatabase from "@/utils/db";
 
 const fetchPromoDataApi = async (req, res) => {
+  await connectToDatabase()
   const { cityId } = req.query;
 
   try {

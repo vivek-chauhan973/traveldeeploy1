@@ -5,13 +5,14 @@
  * @returns {Promise<void>} - Promise representing the asynchronous operation.
  */
 import PackageFaqWise from "@/models/package/PackageFaq";
+import connectToDatabase from "@/utils/db";
 // /api/package/faq/[packageId].js
 // import PackageFaqWise from "@/models/package/PackageFaqWise";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageFaq= async (req, res) => {
   const { packageId } = req.query;
   // await dbConnect();
-
+  await connectToDatabase()
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
   }

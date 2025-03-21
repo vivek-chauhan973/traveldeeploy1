@@ -1,8 +1,10 @@
 import City from "@/models/City";
 import Package from "@/models/Package";
 import State from "@/models/State";
+import connectToDatabase from "@/utils/db";
 import mongoose from "mongoose";
 const packagePublicFilter = async (req, res) => {
+  await connectToDatabase()
   try {
     const { id, price, days, category } = req.query;
     if (!id) {

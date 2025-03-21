@@ -1,8 +1,10 @@
 
 import PackageState from '@/models/package/PackageState';
+import connectToDatabase from '@/utils/db';
 
 
 const handler = async (req, res) => {
+    await connectToDatabase()
     const { id } = req.query;
     try {
         const packageState = await PackageState.findOne({ relatedId: id });

@@ -1,7 +1,9 @@
 import Package from "@/models/Package"
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const addPackage= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

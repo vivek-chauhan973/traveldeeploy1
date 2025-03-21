@@ -1,5 +1,7 @@
 import CarStatus from "@/models/car-package/CarStatus";
+import connectToDatabase from "@/utils/db";
 const carStatus = async (req, res) => {
+  await connectToDatabase()
   if (req.method === "POST") {
     try {
       const { isActive, preventedDays } = req.body;

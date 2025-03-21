@@ -1,13 +1,12 @@
-import HomeFooter from "@/models/Home";
 import PackageMasterCategory from "@/models/package/PackageCategory";
-import State from "@/models/State";
 import Car from "@/models/car-package/cars";
 import Package from "@/models/Package";
 import HomeOnePackageSelected from "@/models/Home/HomeOnePackageSelected";
-import City from "@/models/City";
 import PackageState from "@/models/package/PackageState";
+import connectToDatabase from "@/utils/db";
 
 const homeFooterApi=async (req,res)=>{
+  await connectToDatabase()
   const {category,selectedOptions,formData}=req.body;
   if(req.method==="POST"){
     if(category==="" || selectedOptions?.length===0){

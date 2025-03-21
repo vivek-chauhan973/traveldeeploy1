@@ -1,7 +1,9 @@
 import BlogDetail from "@/models/blog/BlogDetail";
 import BlogTable from "@/models/blog/Table";
+import connectToDatabase from "@/utils/db";
 
 const blogTableApi=async (req,res)=>{
+    await connectToDatabase()
     // console.log("table data is here -----> ",req?.body);
     const {blog,rows,columns}=req.body;
     try {

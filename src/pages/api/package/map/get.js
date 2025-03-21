@@ -1,7 +1,9 @@
 import PackageMap from "@/models/package/PackageMap";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageMapGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const PackageGet = await PackageMap.find();
 

@@ -1,4 +1,5 @@
 import Car from "@/models/car-package/cars";
+import connectToDatabase from "@/utils/db";
 import multer from 'multer';
 import nextConnect from 'next-connect';
 
@@ -8,6 +9,7 @@ const upload = multer({ dest: 'public/uploads/' });
 const handler = nextConnect()
   .use(upload.array('images'))
   .post(async (req, res) => {
+    await connectToDatabase()
     try {
       // Create a car with image URLs
       const carData = req.body;
@@ -23,6 +25,7 @@ const handler = nextConnect()
     }
   })
   .put(async (req, res) => {
+    await connectToDatabase()
     try {
       const { id } = req.query;
       const carData = req.body;
@@ -43,6 +46,7 @@ const handler = nextConnect()
     }
   })
   .delete(async (req, res) => {
+    await connectToDatabase()
     try{
       const { id } = req.query;
       const car = await Car.findByIdAndDelete(id);

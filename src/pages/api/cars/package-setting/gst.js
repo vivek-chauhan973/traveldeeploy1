@@ -1,6 +1,8 @@
 import CarGstRate from "@/models/CarGstRate";
+import connectToDatabase from "@/utils/db";
 
 export default async function handler(req, res) {
+    await connectToDatabase()
     try {
         if (req.method === 'GET') {
             const gstList = await CarGstRate.find({});

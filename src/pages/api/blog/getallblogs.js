@@ -1,5 +1,7 @@
 import BlogDetail from "@/models/blog/BlogDetail";
+import connectToDatabase from "@/utils/db";
 const fetchAllBlogApi=async (req,res)=>{
+    await connectToDatabase()
 const {selectType}=req.query;
     try {
         const data=await BlogDetail.find({blogType:selectType}).populate("blogQuestions category");

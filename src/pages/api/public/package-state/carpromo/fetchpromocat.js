@@ -1,8 +1,9 @@
 import CarPackageState from "@/models/car-package/package/PackageState";
+import connectToDatabase from "@/utils/db";
 const fetchpromocat=async (req,res)=>{
     // console.log("req12329u92y4732y7843593484984y5934y",req.query)
    const {selectType}= req?.query;
-
+await connectToDatabase()
    if(selectType==="all"||selectType===""){
       
     try {

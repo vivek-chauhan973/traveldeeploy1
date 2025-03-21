@@ -1,8 +1,10 @@
 import Package from "@/models/Package";
 import PackagePrice from "@/models/package/PackagePrice";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePrice= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

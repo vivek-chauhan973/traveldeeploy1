@@ -1,6 +1,8 @@
 import CarPriceHike from "@/models/car-package/package/PriceHike";
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 const handler=async(req, res)=> {
+  await connectToDatabase()
   const {packageId}=req.query;
   // console.log("packageId---------------------> ",packageId) ;
   if (req.method === 'POST') {

@@ -1,7 +1,9 @@
 import ItineraryFaqHeading from "@/models/package/ItineraryHeading/heading";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageItineraryGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const FaqHeading = await ItineraryFaqHeading.find();
 

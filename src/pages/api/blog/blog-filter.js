@@ -1,6 +1,8 @@
 import BlogDetail from "@/models/blog/BlogDetail";
+import connectToDatabase from "@/utils/db";
 import mongoose from "mongoose";
 const blogFilter = async (req, res) => {
+    await connectToDatabase()
     try {
         const { selectType, category } = req.query;
         if (!selectType) {

@@ -1,7 +1,9 @@
 import City from "@/models/City";
 import Package from "@/models/Package"; // Import your Package model
+import connectToDatabase from "@/utils/db";
 
 const filterStateCategory = async (req, res) => {
+    await connectToDatabase()
     try {
         const { locationId, categoryId } = req.query;
 

@@ -1,10 +1,9 @@
 import City from "@/models/City";
 import Country from "@/models/Country";
 import State from "@/models/State"
-import { middleware } from "@/middleware";
-import { NextApiRequest, NextApiResponse } from "next";
-
+import connectToDatabase from "@/utils/db";
  const locationIndex= async (req, res) => {
+    await connectToDatabase()
     try {
         
         let result

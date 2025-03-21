@@ -1,8 +1,10 @@
 import City from "@/models/City";
 import Package from "@/models/Package"; // Import your Category model
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePublicTour= async (req, res) => {
+    await connectToDatabase()
     try {
         const { locationId } = req.query;
         const cities = await City.find({ state: locationId }).populate('state').exec();

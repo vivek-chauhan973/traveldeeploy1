@@ -1,6 +1,8 @@
 import BlogDetail from "@/models/blog/BlogDetail";
 import BlogQuestion from "@/models/blog/BlogQuestion";
+import connectToDatabase from "@/utils/db";
 const blogquestionApi = async (req, res) => {
+  await connectToDatabase()
   if (req.method === "POST") {
     const { questions, blog ,filename} = req.body;
     const { title, information } = questions;

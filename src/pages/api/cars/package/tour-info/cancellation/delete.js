@@ -1,5 +1,7 @@
 import CarCancellation from "@/models/car-package/package/TourInfo/Cancellation";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoCanDelete= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

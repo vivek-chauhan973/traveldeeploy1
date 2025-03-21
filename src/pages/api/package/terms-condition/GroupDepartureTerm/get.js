@@ -1,7 +1,9 @@
 import GroupDepartureTerms from "@/models/package/TermsCondition/GroupDepartureTerms";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinfoCanGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const CancellationGroupData = await GroupDepartureTerms.find();
 

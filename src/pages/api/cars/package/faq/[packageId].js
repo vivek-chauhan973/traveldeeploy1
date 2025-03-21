@@ -6,11 +6,12 @@
  */
 
 import CarPackageFaqWise from "@/models/car-package/package/PackageFaq";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageFaq= async (req, res) => {
   const { packageId } = req.query;
   // await dbConnect();
-
+  await connectToDatabase()
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
   }

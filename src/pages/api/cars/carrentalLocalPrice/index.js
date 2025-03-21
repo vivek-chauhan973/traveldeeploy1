@@ -1,7 +1,9 @@
 import LocalPickupPoint from "@/models/car-package/CarLocationPricePopup/LocalPickupPoint";
 import LocalPrice from "@/models/car-package/CarLocationPricePopup/LocalPrice";
+import connectToDatabase from "@/utils/db";
 
 const carApi = async (req, res) => {
+  await connectToDatabase()
   if (req.method === "POST") {
     try {
       const { localLocation } = req.body;

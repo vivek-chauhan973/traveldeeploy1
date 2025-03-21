@@ -1,5 +1,7 @@
 import BlogDetail from "@/models/blog/BlogDetail"; 
+import connectToDatabase from "@/utils/db";
 const packageNavLink = async (req, res) => {
+    await connectToDatabase()
     try {
         const { blogType, location, id } = req.query;
 

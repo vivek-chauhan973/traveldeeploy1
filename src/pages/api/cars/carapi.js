@@ -2,6 +2,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import Car from '@/models/car-package/cars'; // Adjust the path as needed
+import connectToDatabase from '@/utils/db';
 
 const uploadDirectory = path.join(process.cwd(), 'public/uploads/cars');
 
@@ -28,7 +29,7 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  
+  await connectToDatabase()
   switch (req.method) {
     case 'POST':
       return handlePost(req, res);

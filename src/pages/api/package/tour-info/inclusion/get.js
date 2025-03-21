@@ -1,7 +1,9 @@
 import Inclusion from "@/models/package/TourInfo/Inclusion";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinfoInGet=async (req, res) => {
+    await connectToDatabase()
     try {
         const inclusionGroupData = await Inclusion.find();
 

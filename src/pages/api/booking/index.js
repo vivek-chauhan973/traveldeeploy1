@@ -1,6 +1,8 @@
 import Booking from "@/models/Booking"
+import connectToDatabase from "@/utils/db";
 
  const Index= async (req, res) => {
+    await connectToDatabase()
     try {
         const bookings = await Booking.find()
         return res.status(200).json({ bookings });

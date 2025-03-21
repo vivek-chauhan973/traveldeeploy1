@@ -1,10 +1,12 @@
 // pages/api/applyPriceHike.js
 import Package from '@/models/Package';
 import PriceHike from '@/models/package/PriceHike';
+import connectToDatabase from '@/utils/db';
 
 const handler=async(req, res)=> {
+  await connectToDatabase()
   const {packageId}=req.query;
-  console.log("packageId---------------------> ",packageId) ;
+  // console.log("packageId---------------------> ",packageId) ;
   if (req.method === 'POST') {
    
     if (!packageId) {

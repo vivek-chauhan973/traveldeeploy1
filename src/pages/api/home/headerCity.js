@@ -1,5 +1,7 @@
 import City from "@/models/City";
+import connectToDatabase from "@/utils/db";
 const headerCityApi=async (req,res)=>{
+    await connectToDatabase()
     const {id}=req.query;
     try {
         if(!id){

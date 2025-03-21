@@ -8,8 +8,10 @@ import SeoData from '@/models/package/PackageSeo';
 import PackageMap from "@/models/package/PackageMap";
 import TourInformation from "@/models/package/TourInformation";
 import FlightBookingSchema from "@/models/package/FlightBooking";
+import connectToDatabase from "@/utils/db";
 
 const packagePublicPackageUrl = async (req, res) => {
+  await connectToDatabase()
   const { method, query } = req;
   const newPackageUrl = query?.packageUrl.replace("-tour-package", " ");
 

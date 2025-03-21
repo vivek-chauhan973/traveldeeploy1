@@ -1,8 +1,9 @@
 // pages/api/review.js
 import Review from "@/models/Review";
+import connectToDatabase from "@/utils/db";
 
 export default async function handler(req, res) {
-
+await connectToDatabase()
   if (req.method === 'GET') {
     try {
       const reviews = await Review.find({});

@@ -1,7 +1,7 @@
 import websiteSchemaModel from "@/models/website-function/websiteSchema";
-import { NextApiRequest, NextApiResponse } from "next";
-
+import connectToDatabase from "@/utils/db";
 const UpdateSchema= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'PUT') {
             return res.status(405).json({ message: 'Method Not Allowed' });

@@ -1,5 +1,7 @@
 import CarPaymentTerm from "@/models/car-package/package/TourInfo/PaymentTerm";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoInPaymentGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const PaymentTermGroupData = await CarPaymentTerm.find();
 

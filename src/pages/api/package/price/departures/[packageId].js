@@ -1,8 +1,9 @@
 import Package from "@/models/Package";
 import PackageDeparture from "@/models/package/PackageDeparture";
-import dbConnect from "@/utils/db";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
  const packagePriceAddguestDepartureIds= async (req, res) => {
+  await connectToDatabase()
   const { packageId } = req?.query;
   const {departure1,data}=req.body;
   const data1=data?.filter(item=>item.hasOwnProperty("Weight")==true);
@@ -13,8 +14,6 @@ if(data1?.length!==0){
 else{
   Weight=1;
 }
-// console.log("data18345634278948790353879438673489 -->",departure1)
-  await dbConnect();
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
   }

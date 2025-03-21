@@ -1,9 +1,8 @@
-
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import dbConnect from '@/utils/db';
 import Crousel from '@/models/Home/Crousel';
+import connectToDatabase from '@/utils/db';
 const uploadDirectory = './public/uploads/Crousel';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
@@ -20,7 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const apiRoute1 = async (req, res) => {
-  await dbConnect();
+  await connectToDatabase()
 
   if (req.method === 'POST'||req.method === 'PUT') {
     upload.single('file')(req, File, async (err) => {

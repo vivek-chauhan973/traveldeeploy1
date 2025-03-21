@@ -1,5 +1,7 @@
 import Car from "@/models/car-package/cars";
+import connectToDatabase from "@/utils/db";
 export default async function handler(req, res) {
+  await connectToDatabase()
   if (req.method === 'GET') {
     try {
       const cars = await Car.find({});

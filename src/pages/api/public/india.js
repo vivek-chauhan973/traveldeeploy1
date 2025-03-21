@@ -1,7 +1,8 @@
 import Country from "@/models/Country";
+import connectToDatabase from "@/utils/db";
 
 const india=async (req,res)=>{
-    
+    await connectToDatabase()
     try {
         const  state=await Country.findOne({ url: req.query.locationUrl })
         return res.status(200).json(state);

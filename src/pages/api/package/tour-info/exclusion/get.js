@@ -1,7 +1,9 @@
 import Exclusion from "@/models/package/TourInfo/Exclusion";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinfoExGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const ExclusionGroupData = await Exclusion.find();
 

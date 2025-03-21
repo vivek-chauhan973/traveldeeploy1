@@ -1,8 +1,10 @@
 
 import Car from "@/models/car-package/cars";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const CarListGett= async (req, res) => {
+    await connectToDatabase()
     try {
         const cars = await Car.find();
 

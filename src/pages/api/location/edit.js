@@ -1,9 +1,9 @@
 import City from "@/models/City";
 import Country from "@/models/Country";
 import State from "@/models/State";
-import { NextApiRequest, NextApiResponse } from "next";
-
+import connectToDatabase from "@/utils/db";
 const locationEdit= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'PUT') {
             return res.status(405).json({ message: 'Method Not Allowed' });

@@ -1,9 +1,10 @@
 import BlogPromo from "@/models/blog/BlogPromo";
 import BlogPromoBanner from "@/models/blog/BlogPromoBanner";
+import connectToDatabase from "@/utils/db";
 
 
 const bogpromoApi=async (req,res)=>{
-   
+    await connectToDatabase()
    if(req.method==="POST"){ 
     const {title,canonicalUrl,description,keyword,promoId}=req.body;
     try {

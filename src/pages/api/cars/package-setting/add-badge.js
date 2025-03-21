@@ -1,8 +1,10 @@
 
 import CarPackageMasterBadge from "@/models/car-package/package/PackageBadge";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageSettingAdd= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

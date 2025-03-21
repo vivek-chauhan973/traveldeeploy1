@@ -1,6 +1,8 @@
 import PackageTerms from "@/models/package/TermsCondition/PackageTerms";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageTourinfoCanEdit= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

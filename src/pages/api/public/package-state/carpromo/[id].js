@@ -2,6 +2,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import CarPackageState from '@/models/car-package/package/PackageState';
+import connectToDatabase from '@/utils/db';
 
 const uploadDirectory = path.join(process.cwd(), 'public/uploads');
 
@@ -31,6 +32,7 @@ export const config = {
 };
 
 const handler = async (req, res) => {
+    await connectToDatabase()
     const { method } = req;
     const { id } = req.query;
 

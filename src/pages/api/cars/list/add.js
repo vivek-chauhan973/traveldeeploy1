@@ -1,8 +1,10 @@
 import Car from "@/models/car-package/cars";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const CarListAdd= async (req, res) => {
-    console.log("req body -----> ",req.body);
+    await connectToDatabase()
+    // console.log("req body -----> ",req.body);
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

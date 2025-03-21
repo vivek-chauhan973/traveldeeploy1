@@ -1,8 +1,9 @@
 
 import SiteColor from "@/models/Sitecolor";
-import { NextApiRequest, NextApiResponse } from "next";
+import connectToDatabase from "@/utils/db";
 
 const websiteColor= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

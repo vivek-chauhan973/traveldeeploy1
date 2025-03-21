@@ -1,10 +1,12 @@
 import City from "@/models/City";
 import Country from "@/models/Country";
 import State from "@/models/State";
+import connectToDatabase from "@/utils/db";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
  const locationDelete= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'PATCH') {
             return res.status(405).json({ message: 'Method Not Allowed' });

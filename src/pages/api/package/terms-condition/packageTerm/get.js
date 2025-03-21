@@ -1,7 +1,9 @@
 import PackageTerms from "@/models/package/TermsCondition/PackageTerms";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinfoCanGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const CancellationGroupData = await PackageTerms.find();
 

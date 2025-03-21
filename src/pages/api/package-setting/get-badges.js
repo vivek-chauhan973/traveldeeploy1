@@ -1,7 +1,9 @@
 import PackageMasterBadge from "@/models/package/PackageBadge";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageSettingGet=async (req, res) => {
+    await connectToDatabase()
     try {
         const PackageBadges = await PackageMasterBadge.find();
 

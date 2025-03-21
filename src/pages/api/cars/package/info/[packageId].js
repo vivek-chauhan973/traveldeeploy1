@@ -1,6 +1,8 @@
 import CarPackageHighlight from "@/models/car-package/package/PackageHighlight";
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 const packageInfoIds= async (req, res) => {
+    await connectToDatabase()
     const { packageId } = req.query;
     const { highlights, about } = req.body;
 

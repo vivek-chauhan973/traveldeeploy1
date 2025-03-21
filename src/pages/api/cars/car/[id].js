@@ -1,5 +1,7 @@
 import Car from "@/models/car-package/cars";
+import connectToDatabase from "@/utils/db";
 const carApi=async (req,res)=>{
+   await connectToDatabase()
    const {id}=req.query;
    // console.log("id28329432746782534856982798409-9438729---> ",id)
 try {

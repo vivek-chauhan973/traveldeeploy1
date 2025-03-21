@@ -1,6 +1,8 @@
 
 import CarFlexibleTime from "@/models/car-package/package/TermsCondition/FlexibleTime";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoCanGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const CancellationGroupData = await CarFlexibleTime.find();
 

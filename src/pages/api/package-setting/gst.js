@@ -1,7 +1,9 @@
 
 import GstRate from '@/models/GstRate';
+import connectToDatabase from '@/utils/db';
 
 export default async function handler(req, res) {
+    await connectToDatabase()
     try {
         if (req.method === 'GET') {
             const gstList = await GstRate.find({});

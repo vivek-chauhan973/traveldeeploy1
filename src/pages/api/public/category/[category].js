@@ -1,7 +1,9 @@
 
 import Package from "@/models/Package";
+import connectToDatabase from "@/utils/db";
 
 const PriorityPackageList = async (req, res) => {
+    await connectToDatabase()
     const { category } = req.query;
     const categoryArray = Array.isArray(category) ? category : [category];
     try {

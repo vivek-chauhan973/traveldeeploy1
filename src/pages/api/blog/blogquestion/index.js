@@ -1,6 +1,8 @@
 import BlogQuestion from "@/models/blog/BlogQuestion";
 import SubQuestions from "@/models/blog/SubQuestions";
+import connectToDatabase from "@/utils/db";
 const blogquestionApi = async (req, res) => {
+  await connectToDatabase()
   if (req.method === "POST") {
     const { questions, blog } = req.body;
     try {

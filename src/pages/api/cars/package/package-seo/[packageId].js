@@ -1,6 +1,6 @@
 // Import necessary modules and models
 import CarSeoData from '@/models/car-package/package/PackageSeo';
-import dbConnect from '@/utils/db';
+import connectToDatabase from '@/utils/db';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -11,7 +11,7 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  await dbConnect();
+  await connectToDatabase()
 
   const { packageId } = req.query;
 

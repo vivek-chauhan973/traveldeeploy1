@@ -1,10 +1,12 @@
 import StaticPage from "@/models/Static/Static";
 import path from "path";
 import fs from "fs";
+import connectToDatabase from "@/utils/db";
 
 const uploadDirectory = "./public/uploads/images";
 
 const staticPageApi = async (req, res) => {
+  await connectToDatabase()
   if (req.method === "POST") {
     const { topics, name ,contentSummary} = req.body;
 

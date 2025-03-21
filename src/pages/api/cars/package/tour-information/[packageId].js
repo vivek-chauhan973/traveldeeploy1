@@ -1,9 +1,10 @@
 import CarTourInformation from "@/models/car-package/package/TourInformation";
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
  const packageTourinformationIds= async (req, res) => {
   const { packageId } = req.query;
   // await dbConnect();
-
+  await connectToDatabase()
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
   }

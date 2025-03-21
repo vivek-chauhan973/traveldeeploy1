@@ -1,6 +1,9 @@
+import connectToDatabase from "@/utils/db";
+
 const { default: City } = require("@/models/City")
 
 const cityFindApi=async (req,res)=>{
+    await connectToDatabase()
      const {city}=req.query;
     try {
         const result=await City.find({url:city});

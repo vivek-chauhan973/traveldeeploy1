@@ -1,5 +1,7 @@
 import Outstation from "@/models/car-package/package/TermsCondition/Outstation";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoCanGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const CancellationGroupData = await Outstation.find();
 

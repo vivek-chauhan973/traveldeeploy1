@@ -1,7 +1,8 @@
 import PackageMasterCategory from "@/models/package/PackageCategory";
+import connectToDatabase from "@/utils/db";
 
 const fetchCategory=async (req,res)=>{
-
+await connectToDatabase()
     try {
         const data=await PackageMasterCategory.find();
         if(!data){

@@ -1,8 +1,8 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import PackageState from '@/models/package/PackageState';
 import CarPackageState from '@/models/car-package/package/PackageState';
+import connectToDatabase from '@/utils/db';
 const uploadDirectory = path.join(process.cwd(), 'public/uploads/packagestate/carposter');
 // const packageStateUploadDir = path.join(uploadDirectory, 'poster');
 if (!fs.existsSync(uploadDirectory)) {
@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 const posterHandler = async (req, res) => {
+    await connectToDatabase()
     const { method } = req;
     const { id } = req.query;
     switch (method) {

@@ -1,9 +1,10 @@
 import CarPackage1 from "@/models/CarPackage";
 import CarSelectedIcon from "@/models/selectedIcon/CarSelectedIcon";
+import connectToDatabase from "@/utils/db";
 
 
 const selectedIconApi=async (req,res)=>{
-
+    await connectToDatabase()
     const {iconId}=req.query;
     
     try {

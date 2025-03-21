@@ -1,5 +1,7 @@
 import CarLimitedTime from "@/models/car-package/package/TermsCondition/LimitedTime";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoCanGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const CancellationGroupData = await CarLimitedTime.find();
 

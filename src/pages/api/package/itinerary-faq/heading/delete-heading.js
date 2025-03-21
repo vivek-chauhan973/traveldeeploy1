@@ -1,7 +1,9 @@
 import ItineraryFaqHeading from "@/models/package/ItineraryHeading/heading";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageItineraryDelete= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

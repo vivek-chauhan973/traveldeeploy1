@@ -1,6 +1,8 @@
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageMap= async (req, res) => {
+    await connectToDatabase()
 
     const { itineraryMap } = req.body;
 

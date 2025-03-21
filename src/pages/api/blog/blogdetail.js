@@ -8,6 +8,7 @@ import BlogSeoDetail from '@/models/blog/BlogSeoDetail';
 import BlogQuestion from '@/models/blog/BlogQuestion';
 import SubQuestions from '@/models/blog/SubQuestions';
 import BlogTable from '@/models/blog/Table';
+import connectToDatabase from '@/utils/db';
 
 const uploadDirectory = './public/uploads/blogdetail';
 const uploadDirectory1 = './public/uploads/images';
@@ -30,7 +31,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const apiRoute = async (req, res) => {
-  await dbConnect();
+  await connectToDatabase()
 
   if (req.method === 'POST') {
     upload.single('file')(req, res, async (err) => {

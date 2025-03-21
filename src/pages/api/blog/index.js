@@ -1,8 +1,8 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import dbConnect from '@/utils/db';
 import BlogPromoBanner from '@/models/blog/BlogPromoBanner';
+import connectToDatabase from '@/utils/db';
 
 // Set up the upload directory
 const uploadDirectory = './public/uploads/blogpromo';
@@ -24,7 +24,7 @@ const upload = multer({ storage });
 
 // API route handler
 const apiRoute = async (req, res) => {
-  await dbConnect();
+  await connectToDatabase()
 
   if (req.method === 'POST') {
     // Use multer middleware to handle the file upload

@@ -1,8 +1,9 @@
 import Booking from "@/models/Booking";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const Booking1= async (req, res) => {
-
+    await connectToDatabase()
     try {
 
         const bookings = await Booking.find()

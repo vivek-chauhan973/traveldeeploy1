@@ -6,8 +6,10 @@ import CarPackageMap from "@/models/car-package/package/PackageMap";
 import CarSeoData from "@/models/car-package/package/PackageSeo";
 import CarTourInformation from "@/models/car-package/package/TourInformation";
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 
 const packagePublicPackageUrl = async (req, res) => {
+  await connectToDatabase()
   const { method, query } = req;
   const newPackageUrl = query?.packageUrl.replace("-tour-package", " ");
 // console.log("newPackageURL======. >>>   ",newPackageUrl);

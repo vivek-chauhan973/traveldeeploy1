@@ -1,9 +1,11 @@
 import BlogDetail from "@/models/blog/BlogDetail";
 import Package from "@/models/Package";
+import connectToDatabase from "@/utils/db";
 
 
 
  const packagePublicSuggestedPackage= async (req, res) => {
+    await connectToDatabase()
     // console.log("req parasmdkjnkdjnkerbfhesbfs ejhbfehjbsd     ehfdbhejbfe  ejhrhf",req.params)
     try {
         const { packageId} = req.query;

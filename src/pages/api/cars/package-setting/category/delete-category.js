@@ -1,6 +1,8 @@
 import CarPackageMasterCategory from "@/models/car-package/package/PackageCategory";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageSettingCategoryDelete =async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

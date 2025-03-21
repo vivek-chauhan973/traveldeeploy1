@@ -1,9 +1,11 @@
 import City from "@/models/City";
 import Country from "@/models/Country";
 import State from "@/models/State"
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePublicUrl= async (req, res) => {
+    await connectToDatabase()
     try {
         let state = await State.findOne({ url: req.query.locationUrl })
         if(!state){

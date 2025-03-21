@@ -1,9 +1,11 @@
 import Package from "@/models/Package";
 import TourInformation from "@/models/package/TourInformation";
+import connectToDatabase from "@/utils/db";
 // import dbConnect from "@/utils/db.ts";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageTourinformationIds= async (req, res) => {
+  await connectToDatabase()
   const { packageId } = req.query;
   // await dbConnect();
 

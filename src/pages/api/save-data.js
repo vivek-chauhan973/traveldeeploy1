@@ -1,8 +1,9 @@
 import FixedDeparturePrice from "@/models/package/FixedDeparturePrice";
+import connectToDatabase from "@/utils/db";
 
 
 const FixedDeparturePriceApi=async (req,res)=>{
-
+ await connectToDatabase()
     const {packageId}=req.query;
 
     const {entries,limit}=req.body

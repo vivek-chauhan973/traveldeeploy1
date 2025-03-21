@@ -1,6 +1,8 @@
 
 import CarPackageTerms from "@/models/car-package/package/TermsCondition/PackageTerms";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoCanGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const CancellationGroupData = await CarPackageTerms.find();
 

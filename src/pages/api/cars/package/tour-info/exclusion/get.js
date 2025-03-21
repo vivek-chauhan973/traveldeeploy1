@@ -1,5 +1,7 @@
 import CarExclusion from "@/models/car-package/package/TourInfo/Exclusion";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoExGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const ExclusionGroupData = await CarExclusion.find();
 

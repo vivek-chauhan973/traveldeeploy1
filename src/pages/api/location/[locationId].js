@@ -1,8 +1,9 @@
 import State from "@/models/State"
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const locationIds= async (req, res) => {
-
+    await connectToDatabase()
     try {
 
         const { locationId } = req.query;

@@ -1,7 +1,9 @@
 
 import CarItineraryFaqHeading from "@/models/car-package/package/ItineraryHeading/heading";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageItineraryAdd= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

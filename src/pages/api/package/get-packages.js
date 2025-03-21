@@ -1,8 +1,9 @@
 import Package from "@/models/Package"
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageGet= async (req, res) => {
-
+await connectToDatabase()
     try {
         const packages = await Package.find().populate({path:"location"}).populate({path:"country"}).populate({path:"state"}).populate('tourinfo.tourInclusion')
         .populate('tourinfo.tourExclusion')

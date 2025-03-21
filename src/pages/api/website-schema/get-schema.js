@@ -1,7 +1,7 @@
 import websiteSchemaModel from "@/models/website-function/websiteSchema";
-import { NextApiRequest, NextApiResponse } from "next";
-
+import connectToDatabase from "@/utils/db";
 const GetSchema=async (req, res) => {
+    await connectToDatabase()
     try {
         const websiteSchema = await websiteSchemaModel.find();
 

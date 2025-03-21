@@ -1,9 +1,9 @@
-import dbConnect from "@/utils/db";
 import CarPackageMap from "@/models/car-package/package/PackageMap";
+import connectToDatabase from "@/utils/db";
 
  const packageMapIds= async (req, res) => {
   const { packageId } = req.query;
-  await dbConnect();
+  await connectToDatabase()
 
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });

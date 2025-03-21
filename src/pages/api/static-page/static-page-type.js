@@ -1,7 +1,9 @@
 import StaticPage from "@/models/Static/Static";
+import connectToDatabase from "@/utils/db";
 
 
 const staticPageApi=async (req,res)=>{
+    await connectToDatabase()
     const {name}=req.query;
 // console.log("item data is here are as------> ",name)
         try {

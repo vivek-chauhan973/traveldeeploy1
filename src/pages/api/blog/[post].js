@@ -1,9 +1,9 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import dbConnect from '@/utils/db';
 import BlogDetail from '@/models/blog/BlogDetail';
 import mongoose from 'mongoose';
+import connectToDatabase from '@/utils/db';
 
 const uploadDirectory = './public/uploads/blogdetail';
 
@@ -26,7 +26,7 @@ const upload = multer({ storage });
 
 // API Route Handler
 const apiRoute = async (req, res) => {
-  await dbConnect();
+  await connectToDatabase()
   const { post } = req.query;
 
   if (req.method === 'PUT') {

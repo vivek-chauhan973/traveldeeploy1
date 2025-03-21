@@ -1,9 +1,11 @@
 
 
 import State from "@/models/State";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePublicState=async (req, res) => {
+    await connectToDatabase()
     try {
         const states = await State.find()
         

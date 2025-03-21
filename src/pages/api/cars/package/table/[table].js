@@ -1,7 +1,8 @@
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 
 const tableDataApi=async (req,res)=>{
-
+    await connectToDatabase()
     const {table}=req.query;
     const {tableData,tableColumn}=req.body;
     

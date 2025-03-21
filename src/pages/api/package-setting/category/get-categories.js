@@ -1,7 +1,9 @@
 import PackageMasterCategory from "@/models/package/PackageCategory";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageSettingCategoryGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const packageCategories = await PackageMasterCategory.find();
 

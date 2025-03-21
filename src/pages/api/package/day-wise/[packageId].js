@@ -7,9 +7,11 @@
 
 import Package from "@/models/Package";
 import PackageDayWise from "@/models/package/PackageDayWise";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageDayWise= async (req, res) => {
+    await connectToDatabase()
     const { packageId } = req.query;
     const { days, information } = req.body;
     const day=days?.length;

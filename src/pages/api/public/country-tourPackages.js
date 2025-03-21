@@ -1,9 +1,11 @@
 import City from "@/models/City";
 import Package from "@/models/Package"; // Import your Category model
 import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const CountryPackagePublicTour= async (req, res) => {
+    await connectToDatabase()
     try {
         const { locationId } = req.query;
            const packages=await Package.find({ country:locationId })

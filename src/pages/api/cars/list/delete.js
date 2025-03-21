@@ -1,9 +1,10 @@
 
 import Car from "@/models/car-package/cars";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const CarListDelete=async (req, res) => {
-
+  await connectToDatabase()
 
   const { method } = req;
   const { id } = req.query;

@@ -1,7 +1,9 @@
 import City from "@/models/City";
 import Package from "@/models/Package";
+import connectToDatabase from "@/utils/db";
 
 const PriorityPackageList = async (req, res) => {
+    await connectToDatabase()
     try {
         const {id}=req.query;
 

@@ -1,5 +1,7 @@
 import CarNeedToKnow from "@/models/car-package/package/TourInfo/NeedToKnow";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoInNeedGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const NeedToKnowGroupData = await CarNeedToKnow.find();
 

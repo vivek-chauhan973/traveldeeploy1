@@ -6,10 +6,11 @@ import PackageState from "@/models/package/PackageState";
 import CarPackageState from "@/models/car-package/package/PackageState";
 import CarPackage1 from "@/models/CarPackage";
 import BlogDetail from "@/models/blog/BlogDetail";
+import connectToDatabase from "@/utils/db";
 
-const homeFooterApi=async (req,res)=>{
+const homeFooterApi=async (req,res)=>{ 
   const {category,selectedOptions}=req.body;
- 
+ await connectToDatabase()
   if(req.method==="POST"){
     if(category==="" || selectedOptions?.length===0){
       return res.status(301).json({message:"category and selectedoptions both are required"});

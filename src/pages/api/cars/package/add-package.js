@@ -1,6 +1,8 @@
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 
  const addPackage= async (req, res) => {
+    await connectToDatabase()
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

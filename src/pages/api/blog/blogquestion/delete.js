@@ -3,8 +3,10 @@ import SubQuestions from "@/models/blog/SubQuestions";
 const uploadDirectory = "./public/uploads/images";
 import path from "path";
 import fs from "fs";
+import connectToDatabase from "@/utils/db";
 
 const blogquestionApi = async (req, res) => {
+  await connectToDatabase()
   const { quesId } = req.query;
 
   if (req.method === "DELETE") {

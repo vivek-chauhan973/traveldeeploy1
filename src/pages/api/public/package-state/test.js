@@ -1,8 +1,10 @@
 import PackageState from '@/models/package/PackageState';
 import CarPackage from "@/models/CarPackage"
 import { NextApiRequest, NextApiResponse } from "next";
+import connectToDatabase from '@/utils/db';
 
 const packagePublicPackageStateTest= async (req, res) => {
+    await connectToDatabase()
     try {
         const { locationId } = req.query;
         const packageStates = await PackageState.find({ state: locationId }).populate('state').exec();

@@ -1,8 +1,9 @@
 import CarPriceRange from '@/models/car-package/package/PriceRange';
+import connectToDatabase from '@/utils/db';
 import { eachDayOfInterval, format } from 'date-fns';
 export default async function handler(req, res) {
   const { packageId } = req.query;
-
+  await connectToDatabase()
   if (!packageId) {
     return res.status(400).json({ message: 'Package ID is required' });
   }

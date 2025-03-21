@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import dbConnect from '@/utils/db';
 import CarCrouselStatic from '@/models/car-package/CarHome/CarCrouselStatic';
+import connectToDatabase from '@/utils/db';
 const uploadDirectory = './public/uploads/CarHomeCrouselStatic';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
@@ -19,7 +20,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const apiRoute = async (req, res) => {
-  await dbConnect();
+
+  await connectToDatabase()
   if (req.method === 'POST'||req.method === 'PUT') {
     upload.single('file')(req, File, async (err) => {
       if (err instanceof multer.MulterError) {

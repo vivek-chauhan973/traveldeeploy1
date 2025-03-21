@@ -1,6 +1,8 @@
 import BlogDetail from "@/models/blog/BlogDetail";
 import BlogSeoDetail from "@/models/blog/BlogSeoDetail";
+import connectToDatabase from "@/utils/db";
 const blogdetailSeoApi=async (req,res)=>{
+    await connectToDatabase()
     const {seoData,blog}=req.body;
     const {title,canonicalUrl,description,keyword}=seoData;
    if(req.method==="POST"){ try {

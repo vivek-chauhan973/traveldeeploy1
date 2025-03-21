@@ -1,5 +1,7 @@
 import CarInclusion from "@/models/car-package/package/TourInfo/Inclusion";
+import connectToDatabase from "@/utils/db";
  const packageTourinfoInGet=async (req, res) => {
+    await connectToDatabase()
     try {
         const inclusionGroupData = await CarInclusion.find();
 

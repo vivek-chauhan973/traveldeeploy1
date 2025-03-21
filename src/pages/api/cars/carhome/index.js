@@ -1,7 +1,9 @@
 import CarHome from "@/models/car-package/CarHome";
 import CarPackageState from "@/models/car-package/package/PackageState";
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 const destinationHeader=async (req,res)=>{
+  await connectToDatabase()
   const {category,selectedOptions}=req.body;
   if(req.method==="POST"){
     if(category==="" || selectedOptions?.length===0){

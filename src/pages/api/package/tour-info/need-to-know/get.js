@@ -1,6 +1,8 @@
 import NeedToKnow from "@/models/package/TourInfo/NeedToKnow";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
  const packageTourinfoInNeedGet= async (req, res) => {
+    await connectToDatabase()
     try {
         const NeedToKnowGroupData = await NeedToKnow.find();
 

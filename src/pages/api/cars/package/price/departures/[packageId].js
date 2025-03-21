@@ -1,10 +1,12 @@
 import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 import dbConnect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 const packagePriceAddguestDepartureIds= async (req, res) => {
 const { packageId } = req?.query;
-console.log("req------------------> body==============> ",req.body)
+await connectToDatabase()
+// console.log("req------------------> body==============> ",req.body)
 // console.log("data18345634278948790353879438673489 -->",departure1)
 
 let save=0;

@@ -1,10 +1,9 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import dbConnect from '@/utils/db'; // Adjust path as per your project structure
-
 import CarPackageImage from '@/models/car-package/package/ImageUploading';
 import CarPackage1 from '@/models/CarPackage';
+import connectToDatabase from '@/utils/db';
 
 
 const uploadDirectory = './public/uploads/cars/carpackage'; // Updated upload directory
@@ -26,7 +25,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const apiRoute = async (req, res) => {
-  await dbConnect(); // Ensure database connection
+  await connectToDatabase(); // Ensure database connection
 
   const { packageId } = req.query;
   // console.log("packageId74623873256374",packageId)

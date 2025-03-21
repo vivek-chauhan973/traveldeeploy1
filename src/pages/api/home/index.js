@@ -1,8 +1,8 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import dbConnect from '@/utils/db';
 import Banner from '@/models/Home/Bannner';
+import connectToDatabase from '@/utils/db';
 const uploadDirectory = './public/uploads/banner';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const apiRoute = async (req, res) => {
-  await dbConnect();
+  await connectToDatabase()
 
   if (req.method === 'POST') {
     upload.single('file')(req, File, async (err) => {

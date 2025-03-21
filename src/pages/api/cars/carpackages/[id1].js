@@ -1,7 +1,7 @@
 import CarPackage1 from "@/models/CarPackage";
-
-
+import connectToDatabase from "@/utils/db";
 const CarPackages = async (req, res) => {
+  await connectToDatabase()
   const { id1 } = req.query;
   const {
     packageId,

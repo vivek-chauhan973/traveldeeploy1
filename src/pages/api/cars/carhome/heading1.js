@@ -1,7 +1,8 @@
 import Heading1 from "@/models/car-package/CarHome/Heading1";
+import connectToDatabase from "@/utils/db";
 
 const heading1Api=async (req,res)=>{
-
+    await connectToDatabase()
     if(req.method==="POST"){    
     try {
        

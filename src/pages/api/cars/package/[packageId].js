@@ -6,8 +6,10 @@ import CarPackageDeparture from "@/models/car-package/package/PackageDeparture";
 import Country from "@/models/Country";
 import State from "@/models/State";
 import CarPackage1 from "../../../../models/CarPackage";
+import connectToDatabase from "@/utils/db";
 // find By Id And Update
  const packageIds= async (req, res) => {
+    await connectToDatabase()
     try {
         const { packageId } = req.query;
         if (!packageId) {

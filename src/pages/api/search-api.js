@@ -1,5 +1,7 @@
 import Package from "@/models/Package";
+import connectToDatabase from "@/utils/db";
 const searchApi = async (req, res) => {
+  await connectToDatabase()
   if (req.method === "GET") {
     try {
         const data=await Package.find().populate("seo");

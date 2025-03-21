@@ -1,10 +1,8 @@
-import City from "@/models/City";
-import Package from "@/models/Package";
- // Import your Category model
-import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
-import { NextApiRequest, NextApiResponse } from "next";
 
+import Package from "@/models/Package";
+import connectToDatabase from "@/utils/db";
  const packagePublicTour= async (req, res) => {
+    await connectToDatabase()
     try {
         // Fetch packages and populate category details
         let packages = await Package.find({})

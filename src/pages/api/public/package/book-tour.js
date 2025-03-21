@@ -1,7 +1,9 @@
 import Booking from "@/models/Booking";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePublicPackageTour= async (req, res) => {
+    await connectToDatabase()
     try {
 
         const { adult, child, infant, singleRoom, twinRoom, tripleRoom, quardRoom, status, packageId } = req.body

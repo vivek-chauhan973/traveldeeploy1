@@ -1,8 +1,9 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import dbConnect from '@/utils/db'; // Adjust path as per your project structure
+// import dbConnect from '@/utils/db'; // Adjust path as per your project structure
 import File from '@/models/logo/Main'; // Adjust path as per your project structure
+import connectToDatabase from '@/utils/db';
 
 const uploadDirectory = './public/uploads/logo'; // Define your upload directory
 
@@ -23,7 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const apiRoute = async (req, res) => {
-  await dbConnect(); // Ensure database connection
+  await connectToDatabase(); // Ensure database connection
 
   if (req.method === 'POST') {
     upload.single('file')(req, File, async (err) => {

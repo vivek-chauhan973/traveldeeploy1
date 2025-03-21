@@ -7,11 +7,13 @@
 
 import CarPackageDayWise from "@/models/car-package/package/PackageDayWise";
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
 
 
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageDayWise= async (req, res) => {
+    await connectToDatabase()
     const { packageId } = req.query;
     const { days, information } = req.body;
     const day=days?.length;

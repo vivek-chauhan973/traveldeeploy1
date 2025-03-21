@@ -1,8 +1,8 @@
 import BlogDetail from '@/models/blog/BlogDetail';
-import dbConnect from '@/utils/db';
+import connectToDatabase from '@/utils/db';
 
 const apiRoute = async (req, res) => {
-  await dbConnect();
+  await connectToDatabase()
 
   if (req.method === 'GET') {
     try {

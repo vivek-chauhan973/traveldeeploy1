@@ -1,11 +1,11 @@
 import Package from "@/models/Package";
 import PackagePrice from "@/models/package/PackagePrice";
-import dbConnect from "@/utils/db";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePriceAddguestIds= async (req, res) => {
   const { packageId } = req.query;
-  await dbConnect();
+  await connectToDatabase()
 
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });

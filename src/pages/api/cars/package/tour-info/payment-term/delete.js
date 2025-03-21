@@ -1,5 +1,7 @@
 import CarPaymentTerm from "@/models/car-package/package/TourInfo/PaymentTerm";
  const packageTourinfoInPaymentDelete= async (req, res) => {
+    await connectToDatabase()
+    
     try {
         if (req.method !== 'POST') {
             return res.status(405).json({ message: 'Method Not Allowed' });

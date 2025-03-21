@@ -1,8 +1,10 @@
 import Package from "@/models/Package";
 import PackageHighlight from "@/models/package/PackageHighlight";
+import connectToDatabase from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const packageInfoIds= async (req, res) => {
+    await connectToDatabase()
     const { packageId } = req.query;
     const { highlights, about } = req.body;
 

@@ -1,8 +1,9 @@
 import Package from "@/models/Package";
 import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
+import connectToDatabase from "@/utils/db";
 
 const selectedIconApi=async (req,res)=>{
-
+    await connectToDatabase()
     const {iconId}=req.query;
     
     try {

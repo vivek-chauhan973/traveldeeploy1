@@ -1,8 +1,9 @@
 import Rating from '@/models/Rating';  // Adjust the path as needed
+import connectToDatabase from '@/utils/db';
 
 export default async function handler(req, res) {
   // Connect to the database
-
+await connectToDatabase()
   if (req.method === 'GET') {
     try {
       const data = await Rating.findOne(); // Use the Rating model

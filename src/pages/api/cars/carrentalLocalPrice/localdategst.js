@@ -1,7 +1,7 @@
 import LocalDateGST from "@/models/car-package/CarLocationPricePopup/LocalDateGST";
-import dbConnect from "@/utils/db";
+import connectToDatabase from "@/utils/db";
 const localdategst= async (req, res) => {
-  await dbConnect();
+  await connectToDatabase()
   if (req.method === "POST") {
     try {
         const data=await LocalDateGST.findOne({});

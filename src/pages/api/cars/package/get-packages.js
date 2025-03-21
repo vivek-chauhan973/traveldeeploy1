@@ -1,6 +1,7 @@
 import CarPackage1 from "@/models/CarPackage";
+import connectToDatabase from "@/utils/db";
  const packageGet= async (req, res) => {
-
+await connectToDatabase()
     try {
         const packages = await CarPackage1.find({}).populate({path:"location"}).populate({path:"country"}).populate({path:"state"}).populate('category')  // Populate the array of category references
         .exec()

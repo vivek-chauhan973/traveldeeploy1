@@ -1,6 +1,7 @@
 import SeoCarHomeData from "@/models/car-package/CarHome/SeoData";
+import connectToDatabase from "@/utils/db";
 const seoDataApi=async (req,res)=>{
-
+await connectToDatabase()
     if(req.method==="POST"){    
     try {
        
