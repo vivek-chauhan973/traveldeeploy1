@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import SearchPageTopSeoContent from '@/components/SearchPageTopSeoContent';
-import SearchHeaderWpr from '@/components/SearchHeaderWpr';
 import '../../app/globals.css';
-import SearchPageFilter from '@/components/SearchPageFilter';
-import SearchPagePackageList from '@/components/SearchPagePackageList';
-import Breadcrumbs from '@/components/Breadcrumbs';
 import { PromoBanner, PromoFilter, PromoList, PromoLink } from '@/components/Skeleton/Package/promo';
 import DesktopHeader from '@/components/Header/DesktopHeader/desktopHeader';
 import Faq1 from '@/components/Faq/Faq1';
@@ -13,6 +8,11 @@ import Footer from '@/components/Footer';
 import { useCarPopupContext } from '@/components/admin/context/CarPopupCalculation';
 import Head from 'next/head';
 import OrganizationSchema from '@/components/seo/OrganizationSchema';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import SearchHeaderWpr from '@/components/SearchHeaderWpr';
+import SearchPageFilter from '@/components/SearchPageFilter';
+import SearchPagePackageList from '@/components/SearchPagePackageList';
+import SearchPageTopSeoContent from '@/components/SearchPageTopSeoContent';
 
 const fetchPromoManagementData = async (stateId) => {
   if (!stateId) return {};

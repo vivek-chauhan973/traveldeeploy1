@@ -1,8 +1,8 @@
 import { join } from 'path';
 import { statSync, createReadStream } from 'fs';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+
+export default function handler(req, res) {
     const { path = [] } = req.query;
 
     const filePath = join(process.cwd(), 'uploads', ...(Array.isArray(path) ? path : [path]));
