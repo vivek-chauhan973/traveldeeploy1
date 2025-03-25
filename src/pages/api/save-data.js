@@ -8,7 +8,7 @@ const FixedDeparturePriceApi=async (req,res)=>{
 
     const {entries,limit}=req.body
     const limitData=limit?.split(",");
-    console.log("req body 12213282343274673203-4362789934053892 ::: :: :: :: ",limitData)
+    // console.log("req body 12213282343274673203-4362789934053892 ::: :: :: :: ",limitData)
    if(!packageId){
     return res.status(301).json({message:"packageId is required"});
    }

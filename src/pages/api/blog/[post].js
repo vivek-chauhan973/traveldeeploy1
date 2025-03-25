@@ -5,7 +5,7 @@ import BlogDetail from '@/models/blog/BlogDetail';
 import mongoose from 'mongoose';
 import connectToDatabase from '@/utils/db';
 
-const uploadDirectory = './public/uploads/blogdetail';
+const uploadDirectory = './uploads/blogdetail';
 
 // Ensure the upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -54,7 +54,7 @@ const apiRoute = async (req, res) => {
         description,
         category: categoryArray,
         filename: req.file.filename,
-        videoPath: `/uploads/blogdetail/${req.file.filename}`,
+        videoPath: `/api/uploads/blogdetail/${req.file.filename}`,
       };
 
       try {

@@ -6,7 +6,7 @@ import Package from '@/models/Package';
 import connectToDatabase from '@/utils/db';
 
 
-const uploadDirectory = './public/uploads/package/details'; // Updated upload directory
+const uploadDirectory = './uploads/package/details'; // Updated upload directory
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -51,7 +51,7 @@ const apiRoute = async (req, res) => {
           title: titles[index] || '',
           alt: alts[index] || '',
           filename: file.filename,
-          path: `/uploads/package/details/${file.filename}`,
+          path: `/api/uploads/package/details/${file.filename}`,
         }));
         // console.log("filesfhbjfsfssjfhbasjh121312y3432y4",req.files);
         // Update or insert files into database

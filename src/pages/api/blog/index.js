@@ -5,7 +5,7 @@ import BlogPromoBanner from '@/models/blog/BlogPromoBanner';
 import connectToDatabase from '@/utils/db';
 
 // Set up the upload directory
-const uploadDirectory = './public/uploads/blogpromo';
+const uploadDirectory = './uploads/blogpromo';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
@@ -48,7 +48,7 @@ const apiRoute = async (req, res) => {
         title,
         description,
         filename: req.file.filename,
-        videoPath: `/uploads/blogpromo/${req.file.filename}`,
+        videoPath: `/api/uploads/blogpromo/${req.file.filename}`,
       } : null;
 
       if (fileData) {

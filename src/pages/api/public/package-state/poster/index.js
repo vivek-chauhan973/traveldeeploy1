@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import PackageState from '@/models/package/PackageState';
 import connectToDatabase from '@/utils/db';
-const uploadDirectory = path.join(process.cwd(), 'public/uploads/packagestate/poster');
+const uploadDirectory = path.join(process.cwd(), 'uploads/packagestate/poster');
 // const packageStateUploadDir = path.join(uploadDirectory, 'poster');
 if (!fs.existsSync(uploadDirectory)) {
     fs.mkdirSync(uploadDirectory, { recursive: true });
@@ -38,7 +38,7 @@ const posterHandler = async (req, res) => {
                         posterTitle,
                         posterAlt,
                         relatedId: id,
-                        posterPath: file ? `/uploads/packagestate/poster/${file.filename}` : undefined,
+                        posterPath: file ? `/api/uploads/packagestate/poster/${file.filename}` : undefined,
                     };
                     if (!updateData.posterPath) delete updateData.posterPath;
                     if (file) {

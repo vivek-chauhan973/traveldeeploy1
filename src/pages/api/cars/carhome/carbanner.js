@@ -4,7 +4,7 @@ import fs from 'fs';
 import CarBanner from '@/models/car-package/CarHome/CarBanner';
 import connectToDatabase from '@/utils/db';
 
-const uploadDirectory = './public/uploads/carbanner';
+const uploadDirectory = './uploads/carbanner';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
@@ -37,7 +37,7 @@ const apiRoute = async (req, res) => {
       const fileData = req.file && {
         title,
         filename: req.file.filename,
-        path: `/uploads/carbanner/${req.file.filename}`,
+        path: `/api/uploads/carbanner/${req.file.filename}`,
       };
 
       try {

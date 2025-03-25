@@ -4,7 +4,7 @@ import fs from 'fs';
 import dbConnect from '@/utils/db';
 import CarCrouselStatic from '@/models/car-package/CarHome/CarCrouselStatic';
 import connectToDatabase from '@/utils/db';
-const uploadDirectory = './public/uploads/CarHomeCrouselStatic';
+const uploadDirectory = './uploads/CarHomeCrouselStatic';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
@@ -37,7 +37,7 @@ const apiRoute = async (req, res) => {
         description,
         url,
         filename:req.file.filename,
-        path: `/uploads/CarHomeCrouselStatic/${req.file.filename}`,
+        path: `/api/uploads/CarHomeCrouselStatic/${req.file.filename}`,
       }
       try {
           const file = new CarCrouselStatic(fileData);

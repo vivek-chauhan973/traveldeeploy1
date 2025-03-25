@@ -4,7 +4,7 @@ import fs from 'fs';
 import CarPackageState from '@/models/car-package/package/PackageState';
 import connectToDatabase from '@/utils/db';
 
-const uploadDirectory = path.join(process.cwd(), 'public/uploads');
+const uploadDirectory = path.join(process.cwd(), 'uploads/');
 
 // Ensure upload directory exists
 const packageStateUploadDir = path.join(uploadDirectory, 'packagestateCarPromo');
@@ -81,7 +81,7 @@ const handler = async (req, res) => {
                         relatedId: id,
                         selectType:selectType,
                         selectedItem:selectedItem,
-                        image: file ? `/uploads/packagestateCarPromo/${file.filename}` : undefined,
+                        image: file ? `/api/uploads/packagestateCarPromo/${file.filename}` : undefined,
                     };
 
                     if (!updateData.image) delete updateData.image;

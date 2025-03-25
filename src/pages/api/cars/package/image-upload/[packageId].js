@@ -6,7 +6,7 @@ import CarPackage1 from '@/models/CarPackage';
 import connectToDatabase from '@/utils/db';
 
 
-const uploadDirectory = './public/uploads/cars/carpackage'; // Updated upload directory
+const uploadDirectory = './uploads/cars/carpackage'; // Updated upload directory
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -51,7 +51,7 @@ const apiRoute = async (req, res) => {
           title: titles[index] || '',
           alt: alts[index] || '',
           filename: file.filename,
-          path: `/uploads/cars/carpackage/${file.filename}`,
+          path: `/api/uploads/cars/carpackage/${file.filename}`,
         }));
         // console.log("filesfhbjfsfssjfhbasjh121312y3432y4",req.files);
         // Update or insert files into database

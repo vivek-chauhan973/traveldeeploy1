@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 import connectToDatabase from "@/utils/db";
 
-const uploadDirectory = "./public/uploads/images";
+const uploadDirectory = "./uploads/images";
 
 const staticPageApi = async (req, res) => {
   await connectToDatabase()

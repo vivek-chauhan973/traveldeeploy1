@@ -1,10 +1,7 @@
 import { join } from 'path';
 import { statSync, createReadStream } from 'fs';
-
-
 export default function handler(req, res) {
     const { path = [] } = req.query;
-
     const filePath = join(process.cwd(), 'uploads', ...(Array.isArray(path) ? path : [path]));
 
     try {

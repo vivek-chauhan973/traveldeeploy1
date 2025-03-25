@@ -184,7 +184,7 @@ export default function IconManagement() {
                   <td className="flex justify-center items-center px-2 py-2 overflow-hidden border-gray-300">
                     <Image
                       className="shadow-md"
-                      src={`/api${item?.path}`}
+                      src={`${item?.path}`}
                       alt="Preview"
                       width={32}
                       height={32}

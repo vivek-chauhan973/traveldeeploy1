@@ -2,7 +2,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import connectToDatabase from '@/utils/db';
-const uploadDirectory = './public/uploads/images';
+const uploadDirectory = './uploads/images';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
@@ -26,7 +26,7 @@ export default function handler(req, res) {
         if (err) {
           return res.status(500).json({ error: 'Image upload failed' });
         }
-        const imageUrl = `/uploads/images/${req.file?.filename}`;
+        const imageUrl = `/api/uploads/images/${req.file?.filename}`;
         return res.status(200).json({ url: imageUrl });
       });
     } catch (error) {

@@ -5,7 +5,7 @@ import fs from 'fs';
 import File from '@/models/logo/Main'; // Adjust path as per your project structure
 import connectToDatabase from '@/utils/db';
 
-const uploadDirectory = './public/uploads/logo'; // Define your upload directory
+const uploadDirectory = './uploads/logo'; // Define your upload directory
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -41,7 +41,7 @@ const apiRoute = async (req, res) => {
         title,
         alt,
         filename: req.file.filename,
-        path: `/uploads/logo/${req.file.filename}`,
+        path: `/api/uploads/logo/${req.file.filename}`,
       } : {
         title,
         alt,

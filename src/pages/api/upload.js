@@ -12,7 +12,7 @@ const handler = nextConnect();
 
 handler.post((req, res) => {
   const form = new formidable.IncomingForm();
-  form.uploadDir = './public/uploads';
+  form.uploadDir = './uploads';
   form.keepExtensions = true;
 
   form.parse(req, async (err, fields, files) => {
@@ -27,7 +27,7 @@ handler.post((req, res) => {
       const data = fs.readFileSync(file.filepath);
       const filePath = path.join(form.uploadDir, file.originalFilename);
       await writeFileAsync(filePath, data);
-      res.status(200).json({ message: 'File uploaded successfully', path: `/uploads/${file.originalFilename}` });
+      res.status(200).json({ message: 'File uploaded successfully', path: `/api/uploads/${file.originalFilename}` });
     } catch (uploadError) {
       console.error("File upload error:", uploadError);
       res.status(500).json({ error: 'Error saving the file' });

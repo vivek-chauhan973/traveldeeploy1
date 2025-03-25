@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import Crousel from '@/models/Home/Crousel';
 import connectToDatabase from '@/utils/db';
-const uploadDirectory = './public/uploads/Crousel';
+const uploadDirectory = './uploads/Crousel';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
@@ -36,7 +36,7 @@ const apiRoute = async (req, res) => {
         description,
         url,
         filename:req.file.filename,
-        path: `/uploads/Crousel/${req.file.filename}`,
+        path: `/api/uploads/Crousel/${req.file.filename}`,
       }
       try {
           const file = new Crousel(fileData);

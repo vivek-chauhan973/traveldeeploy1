@@ -10,8 +10,8 @@ import SubQuestions from '@/models/blog/SubQuestions';
 import BlogTable from '@/models/blog/Table';
 import connectToDatabase from '@/utils/db';
 
-const uploadDirectory = './public/uploads/blogdetail';
-const uploadDirectory1 = './public/uploads/images';
+const uploadDirectory = './uploads/blogdetail';
+const uploadDirectory1 = './uploads/images';
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -58,7 +58,7 @@ const apiRoute = async (req, res) => {
         category: categoryArray,
         description,
         filename: req.file.filename,
-        videoPath: `/uploads/blogdetail/${req.file.filename}`,
+        videoPath: `/api/uploads/blogdetail/${req.file.filename}`,
       };
 
       try {

@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import PackageState from '@/models/package/PackageState';
 
-const uploadDirectory = path.join(process.cwd(), 'public/uploads/packagestate');
+const uploadDirectory = path.join(process.cwd(), 'uploads/packagestate');
 
 // Ensure upload directory exists
 // const packageStateUploadDir = path.join(uploadDirectory, '');
@@ -79,7 +79,7 @@ const handler = async (req, res) => {
                         relatedId: id,
                         selectType:selectType,
                         selectedItem:selectedItem,
-                        image: file ? `/uploads/packagestate/${file.filename}` : undefined,
+                        image: file ? `/api/uploads/packagestate/${file.filename}` : undefined,
                     };
 
                     if (!updateData.image) delete updateData.image;

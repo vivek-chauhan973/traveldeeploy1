@@ -4,7 +4,7 @@ import multer from 'multer';
 import nextConnect from 'next-connect';
 
 // Set up multer for file handling
-const upload = multer({ dest: 'public/uploads/' });
+const upload = multer({ dest: 'uploads/' });
 
 const handler = nextConnect()
   .use(upload.array('images'))
@@ -13,7 +13,7 @@ const handler = nextConnect()
     try {
       // Create a car with image URLs
       const carData = req.body;
-      const imageUrls = req.files.map(file => `/uploads/${file.filename}`);
+      const imageUrls = req.files.map(file => `/api/uploads/${file.filename}`);
 
       // Add the image URLs to the carData
       carData.imageUrls = imageUrls;
@@ -29,7 +29,7 @@ const handler = nextConnect()
     try {
       const { id } = req.query;
       const carData = req.body;
-      const imageUrls = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+      const imageUrls = req.files ? req.files.map(file => `/api/uploads/${file.filename}`) : [];
 
       // Update the car with new image URLs if provided
       if (imageUrls.length > 0) {

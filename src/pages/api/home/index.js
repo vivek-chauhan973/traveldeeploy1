@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import Banner from '@/models/Home/Bannner';
 import connectToDatabase from '@/utils/db';
-const uploadDirectory = './public/uploads/banner';
+const uploadDirectory = './uploads/banner';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
@@ -39,7 +39,7 @@ const apiRoute = async (req, res) => {
         title,
         description,
         filename: req.file.filename,
-        videoPath: `/uploads/banner/${req.file.filename}`,
+        videoPath: `/api/uploads/banner/${req.file.filename}`,
       }
       try {
         const existingFile = await Banner.findOne({});

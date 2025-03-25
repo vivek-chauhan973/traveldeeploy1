@@ -40,7 +40,7 @@ const apiRoute = async (req, res) => {
             title,
             alt,
             filename: req.file.filename,
-            path: `/uploads/icon/${req.file.filename}`,
+            path: `/api/uploads/icon/${req.file.filename}`,
           }
         : {
             title,

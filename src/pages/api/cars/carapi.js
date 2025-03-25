@@ -4,7 +4,7 @@ import fs from 'fs';
 import Car from '@/models/car-package/cars'; // Adjust the path as needed
 import connectToDatabase from '@/utils/db';
 
-const uploadDirectory = path.join(process.cwd(), 'public/uploads/cars');
+const uploadDirectory = path.join(process.cwd(), 'uploads/cars');
 
 // Ensure the upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -57,7 +57,7 @@ function handlePost(req, res) {
 
       // Process image details
       const processedImageDetails = imageDetails.map((img, index) => ({
-        url: req.files[index] ? `/uploads/cars/${req.files[index].filename}` : img.url,
+        url: req.files[index] ? `/api/uploads/cars/${req.files[index].filename}` : img.url,
         title: img.title,
         alt: img.alt
       }));
@@ -96,7 +96,7 @@ function handlePut(req, res) {
       const { name, capacity,bags, ac,locationrate, seatingCapacity, vehicleType, dailyLimit, rate, outStationBasePrice, perKmRate, markup, imageDetails } = req.body;
       // Process image details
       const processedImageDetails = imageDetails.map((img, index) => ({
-        url: req.files[index] ? `/uploads/cars/${req.files[index].filename}` : img.url,
+        url: req.files[index] ? `/api/uploads/cars/${req.files[index].filename}` : img.url,
         title: img.title,
         alt: img.alt
       }));

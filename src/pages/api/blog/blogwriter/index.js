@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import BlogWriter from '@/models/blog/BlogWriter';
 import connectToDatabase from '@/utils/db';
-const uploadDirectory = './public/uploads/blogwriter';
+const uploadDirectory = './uploads/blogwriter';
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
 }
@@ -33,7 +33,7 @@ const apiRoute = async (req, res) => {
       const fileData = req.file && {
         blogwriter,
         filename:req.file.filename,
-        path: `/uploads/blogwriter/${req.file.filename}`,
+        path: `/api/uploads/blogwriter/${req.file.filename}`,
       }
       try {
           const file = new BlogWriter(fileData);
