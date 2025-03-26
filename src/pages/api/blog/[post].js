@@ -1,11 +1,11 @@
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
-import BlogDetail from '@/models/blog/BlogDetail';
-import mongoose from 'mongoose';
-import connectToDatabase from '@/utils/db';
+import multer from "multer";
+import path from "path";
+import fs from "fs";
+import BlogDetail from "@/models/blog/BlogDetail";
+import mongoose from "mongoose";
+import connectToDatabase from "@/utils/db";
 
-const uploadDirectory = './uploads/blogdetail';
+const uploadDirectory = path.join(process.cwd(), "uploads/blogdetail");
 
 // Ensure the upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -26,22 +26,35 @@ const upload = multer({ storage });
 
 // API Route Handler
 const apiRoute = async (req, res) => {
-  await connectToDatabase()
+  await connectToDatabase();
   const { post } = req.query;
 
-  if (req.method === 'PUT') {
+  if (req.method === "PUT") {
     // Handle file upload for PUT request
-    upload.single('file')(req, res, async (err) => {
+    upload.single("file")(req, res, async (err) => {
       if (err instanceof multer.MulterError) {
-        console.error('Multer error:', err);
-        return res.status(500).json({ error: 'File upload failed' });
+        console.error("Multer error:", err);
+        return res.status(500).json({ error: "File upload failed" });
       } else if (err) {
-        console.error('Unknown error during file upload:', err);
-        return res.status(500).json({ error: 'File upload failed' });
+        console.error("Unknown error during file upload:", err);
+        return res.status(500).json({ error: "File upload failed" });
       }
 
-      const { title, description, blogType,writer, category, contentsummary, location, country, state,time } = req.body;
-      const categoryArray = category.split(',').map(id => new mongoose.Types.ObjectId(id.trim()));
+      const {
+        title,
+        description,
+        blogType,
+        writer,
+        category,
+        contentsummary,
+        location,
+        country,
+        state,
+        time,
+      } = req.body;
+      const categoryArray = category
+        .split(",")
+        .map((id) => new mongoose.Types.ObjectId(id.trim()));
       const fileData = req.file && {
         blogType,
         title,
@@ -62,7 +75,10 @@ const apiRoute = async (req, res) => {
         if (existingFile) {
           // Delete the previous image if it exists
           if (existingFile.filename) {
-            const previousFilePath = path.join(uploadDirectory, existingFile.filename);
+            const previousFilePath = path.join(
+              uploadDirectory,
+              existingFile.filename
+            );
             if (fs.existsSync(previousFilePath)) {
               fs.unlinkSync(previousFilePath);
             }
@@ -77,25 +93,29 @@ const apiRoute = async (req, res) => {
 
           return res.status(200).json({ data: updatedFile });
         } else {
-          return res.status(404).json({ error: 'Blog post not found' });
+          return res.status(404).json({ error: "Blog post not found" });
         }
       } catch (error) {
-        console.error('Error updating or saving file:', error);
-        return res.status(500).json({ message: 'Internal Server Error', error });
+        console.error("Error updating or saving file:", error);
+        return res
+          .status(500)
+          .json({ message: "Internal Server Error", error });
       }
     });
-  } else if (req.method === 'GET') {
+  } else if (req.method === "GET") {
     // Handle GET request
     try {
-      const files = await BlogDetail.findOne({ _id: post }).populate("blogSeo blogQuestions table location state country writer");
+      const files = await BlogDetail.findOne({ _id: post }).populate(
+        "blogSeo blogQuestions table location state country writer"
+      );
       return res.status(200).json({ data: files });
     } catch (error) {
-      console.error('Error fetching files:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
+      console.error("Error fetching files:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   } else {
     // Handle other methods (e.g., POST, DELETE)
-    res.setHeader('Allow', ['POST', 'GET', 'DELETE']);
+    res.setHeader("Allow", ["POST", "GET", "DELETE"]);
     return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 };

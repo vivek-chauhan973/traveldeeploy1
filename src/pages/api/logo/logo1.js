@@ -1,11 +1,11 @@
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
+import multer from "multer";
+import path from "path";
+import fs from "fs";
 // import dbConnect from '@/utils/db'; // Adjust path as per your project structure
-import File from '@/models/logo/Main'; // Adjust path as per your project structure
-import connectToDatabase from '@/utils/db';
+import File from "@/models/logo/Main"; // Adjust path as per your project structure
+import connectToDatabase from "@/utils/db";
 
-const uploadDirectory = './uploads/logo'; // Define your upload directory
+const uploadDirectory = path.join(process.cwd(), "uploads/logo"); // Define your upload directory
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -26,26 +26,28 @@ const upload = multer({ storage });
 const apiRoute = async (req, res) => {
   await connectToDatabase(); // Ensure database connection
 
-  if (req.method === 'POST') {
-    upload.single('file')(req, File, async (err) => {
+  if (req.method === "POST") {
+    upload.single("file")(req, File, async (err) => {
       if (err instanceof multer.MulterError) {
-        console.error('Multer error:', err);
-        return res.status(500).json({ error: 'File upload failed' });
+        console.error("Multer error:", err);
+        return res.status(500).json({ error: "File upload failed" });
       } else if (err) {
-        console.error('Unknown error during file upload:', err);
-        return res.status(500).json({ error: 'File upload failed' });
+        console.error("Unknown error during file upload:", err);
+        return res.status(500).json({ error: "File upload failed" });
       }
 
       const { title, alt } = req.body;
-      const fileData = req.file ? {
-        title,
-        alt,
-        filename: req.file.filename,
-        path: `/api/uploads/logo/${req.file.filename}`,
-      } : {
-        title,
-        alt,
-      };
+      const fileData = req.file
+        ? {
+            title,
+            alt,
+            filename: req.file.filename,
+            path: `/api/uploads/logo/${req.file.filename}`,
+          }
+        : {
+            title,
+            alt,
+          };
 
       try {
         const existingFile = await File.findOne({});
@@ -64,39 +66,41 @@ const apiRoute = async (req, res) => {
           return res.status(200).json({ data: file });
         }
       } catch (error) {
-        console.error('Error updating or saving file:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        console.error("Error updating or saving file:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
       }
     });
-  } else if (req.method === 'GET') {
+  } else if (req.method === "GET") {
     try {
       const files = await File.find({});
       return res.status(200).json({ data: files });
     } catch (error) {
-      console.error('Error fetching files:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
+      console.error("Error fetching files:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
     }
-  } else if (req.method === 'DELETE') {
+  } else if (req.method === "DELETE") {
     const { id } = req.query;
-    console.log("file image id by selected logo ",path.join(uploadDirectory));
+    console.log("file image id by selected logo ", path.join(uploadDirectory));
     try {
       const file = await File.findById(id);
       if (file) {
-        // Delete file from disk
-        fs.unlinkSync(path.join(uploadDirectory, file.filename));
+        if (fs.existsSync(path.join(uploadDirectory, file.filename))) {
+          // Delete file from disk
+          fs.unlinkSync(path.join(uploadDirectory, file.filename));
+        }
 
         // Delete file from database
         await File.findByIdAndDelete(id);
-        return res.status(200).json({ message: 'File removed successfully' });
+        return res.status(200).json({ message: "File removed successfully" });
       } else {
-        return res.status(404).json({ error: 'File not found' });
+        return res.status(404).json({ error: "File not found" });
       }
     } catch (error) {
-      console.error('Error deleting file:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
+      console.error("Error deleting file:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   } else {
-    res.setHeader('Allow', ['POST', 'GET', 'DELETE']);
+    res.setHeader("Allow", ["POST", "GET", "DELETE"]);
     return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 };

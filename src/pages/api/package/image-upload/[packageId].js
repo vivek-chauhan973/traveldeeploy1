@@ -1,12 +1,11 @@
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs'; // Adjust path as per your project structure
-import PackageImage from '@/models/package/ImageUploading'; // Adjust path as per your project structure
-import Package from '@/models/Package';
-import connectToDatabase from '@/utils/db';
+import multer from "multer";
+import path from "path";
+import fs from "fs"; // Adjust path as per your project structure
+import PackageImage from "@/models/package/ImageUploading"; // Adjust path as per your project structure
+import Package from "@/models/Package";
+import connectToDatabase from "@/utils/db";
 
-
-const uploadDirectory = './uploads/package/details'; // Updated upload directory
+const uploadDirectory = path.join(process.cwd(), "uploads/package/details");
 
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
@@ -25,31 +24,31 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const apiRoute = async (req, res) => {
-  await connectToDatabase()// Ensure database connection
+  await connectToDatabase(); // Ensure database connection
 
   const { packageId } = req.query;
-  console.log("packageId74623873256374",packageId)
+  console.log("packageId74623873256374", packageId);
 
   if (!packageId) {
     return res.status(400).json({ message: "Package ID is required" });
   }
 
-  if (req.method === 'POST') {
-    upload.array('files')(req, res, async (err) => {
+  if (req.method === "POST") {
+    upload.array("files")(req, res, async (err) => {
       if (err instanceof multer.MulterError) {
-        console.error('Multer error:', err);
-        return res.status(500).json({ error: 'File upload failed' });
+        console.error("Multer error:", err);
+        return res.status(500).json({ error: "File upload failed" });
       } else if (err) {
-        console.error('Unknown error during file upload:', err);
-        return res.status(500).json({ error: 'File upload failed' });
+        console.error("Unknown error during file upload:", err);
+        return res.status(500).json({ error: "File upload failed" });
       }
 
       const { titles, alts, ids } = req.body;
 
       try {
         const files = req.files.map((file, index) => ({
-          title: titles[index] || '',
-          alt: alts[index] || '',
+          title: titles[index] || "",
+          alt: alts[index] || "",
           filename: file.filename,
           path: `/api/uploads/package/details/${file.filename}`,
         }));
@@ -60,33 +59,39 @@ const apiRoute = async (req, res) => {
           { $set: { uploads: { $each: files } } },
           { upsert: true, new: true }
         );
-        const imagesArray=files?.map(item=>item.path)
+        const imagesArray = files?.map((item) => item.path);
         // console.log()
-        await Package.updateOne({_id:packageId},{
-          $set:{uploads:imagesArray}
-        },{
-          new:true,
-        })
+        await Package.updateOne(
+          { _id: packageId },
+          {
+            $set: { uploads: imagesArray },
+          },
+          {
+            new: true,
+          }
+        );
 
-        return res.status(200).json({ message: 'Files uploaded successfully' });
+        return res.status(200).json({ message: "Files uploaded successfully" });
       } catch (error) {
-        console.error('Error updating or saving files:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        console.error("Error updating or saving files:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
       }
     });
-  } else if (req.method === 'GET') {
+  } else if (req.method === "GET") {
     try {
       const packageImages = await PackageImage.find({ packageId });
       if (!packageImages || packageImages.length === 0) {
-        return res.status(404).json({ error: 'No images found for the package' });
+        return res
+          .status(404)
+          .json({ error: "No images found for the package" });
       }
       return res.status(200).json({ data: packageImages[0].uploads });
     } catch (error) {
-      console.error('Error fetching images:', error);
-      return res.status(500).json({ error: 'Internal Server Error' });
+      console.error("Error fetching images:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   } else {
-    res.setHeader('Allow', ['POST', 'GET']);
+    res.setHeader("Allow", ["POST", "GET"]);
     return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 };

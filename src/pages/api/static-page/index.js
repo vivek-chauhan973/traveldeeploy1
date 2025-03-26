@@ -3,15 +3,17 @@ import path from "path";
 import fs from "fs";
 import connectToDatabase from "@/utils/db";
 
-const uploadDirectory = "./uploads/images";
+const uploadDirectory = path.join(process.cwd(), "uploads/images");
 
 const staticPageApi = async (req, res) => {
-  await connectToDatabase()
+  await connectToDatabase();
   if (req.method === "POST") {
-    const { topics, name ,contentSummary} = req.body;
+    const { topics, name, contentSummary } = req.body;
 
     if (!name || !topics) {
-      return res.status(400).json({ message: "'name' and 'topics' are required" });
+      return res
+        .status(400)
+        .json({ message: "'name' and 'topics' are required" });
     }
 
     try {
@@ -20,7 +22,7 @@ const staticPageApi = async (req, res) => {
 
       if (!existingPage) {
         // Create new page
-        result = await StaticPage.create({ topics, name,contentSummary });
+        result = await StaticPage.create({ topics, name, contentSummary });
         return res.status(201).json({
           message: "Page created successfully",
           data: result,
@@ -28,7 +30,10 @@ const staticPageApi = async (req, res) => {
       }
 
       // Replace existing page
-      result = await StaticPage.findOneAndReplace({ name }, { name, topics ,contentSummary});
+      result = await StaticPage.findOneAndReplace(
+        { name },
+        { name, topics, contentSummary }
+      );
       if (!result) {
         return res.status(500).json({ message: "Failed to update the page" });
       }
@@ -41,8 +46,7 @@ const staticPageApi = async (req, res) => {
       console.error("Error in POST:", error);
       return res.status(500).json({ message: "Internal Server Error", error });
     }
-  } 
-  else if (req.method === "DELETE") {
+  } else if (req.method === "DELETE") {
     const { id } = req.query;
 
     if (!id) {
@@ -75,21 +79,21 @@ const staticPageApi = async (req, res) => {
       console.error("Error in DELETE:", error);
       return res.status(500).json({ message: "Internal Server Error", error });
     }
-  } 
-  else if (req.method === "GET") {
+  } else if (req.method === "GET") {
     try {
       const data = await StaticPage.find({});
       if (!data || data.length === 0) {
         return res.status(404).json({ message: "No pages found" });
       }
 
-      return res.status(200).json({ message: "Pages retrieved successfully", data });
+      return res
+        .status(200)
+        .json({ message: "Pages retrieved successfully", data });
     } catch (error) {
       console.error("Error in GET:", error);
       return res.status(500).json({ message: "Internal Server Error", error });
     }
-  } 
-  else {
+  } else {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 };

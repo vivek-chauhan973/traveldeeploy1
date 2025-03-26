@@ -4,7 +4,7 @@ import fs from "fs";
 import dbConnect from "@/utils/db"; // Adjust path as per your project structure
 import IconSchema from "@/models/Icon/Icon";
 // Adjust path as per your project structure
-const uploadDirectory = "./uploads/icon"; // Define your upload directory
+const uploadDirectory = path.join(process.cwd(), "uploads/icon"); // Define your upload directory
 // Ensure upload directory exists
 if (!fs.existsSync(uploadDirectory)) {
   fs.mkdirSync(uploadDirectory, { recursive: true });
@@ -72,7 +72,9 @@ const apiRoute = async (req, res) => {
       const file = await IconSchema.findById(id);
       if (file) {
         // Delete file from disk
-        fs.unlinkSync(path.join(uploadDirectory, file.filename));
+        if (fs.existsSync(path.join(uploadDirectory, file.filename))) {
+          fs.unlinkSync(path.join(uploadDirectory, file.filename));
+        }
 
         // Delete file from database
         await IconSchema.findByIdAndDelete(id);

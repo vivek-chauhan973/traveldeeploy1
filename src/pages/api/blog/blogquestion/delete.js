@@ -1,12 +1,12 @@
 import BlogQuestion from "@/models/blog/BlogQuestion";
 import SubQuestions from "@/models/blog/SubQuestions";
-const uploadDirectory = "./public/uploads/images";
+const uploadDirectory = path.join(process.cwd(), "uploads/images");
 import path from "path";
 import fs from "fs";
 import connectToDatabase from "@/utils/db";
 
 const blogquestionApi = async (req, res) => {
-  await connectToDatabase()
+  await connectToDatabase();
   const { quesId } = req.query;
 
   if (req.method === "DELETE") {
@@ -15,7 +15,9 @@ const blogquestionApi = async (req, res) => {
       const data = await BlogQuestion.findById({ _id: quesId });
 
       if (!data) {
-        return res.status(404).json({ message: "Question not found for the given ID!" });
+        return res
+          .status(404)
+          .json({ message: "Question not found for the given ID!" });
       }
 
       // Delete files if 'filename' property exists
@@ -43,7 +45,6 @@ const blogquestionApi = async (req, res) => {
       // Delete the BlogQuestion itself
       await BlogQuestion.findByIdAndDelete({ _id: quesId });
       return res.status(200).json({ message: "Question deleted successfully" });
-
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal Server Error", error });
