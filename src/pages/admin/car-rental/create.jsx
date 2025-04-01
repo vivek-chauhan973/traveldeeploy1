@@ -227,7 +227,7 @@ export default function AddCar() {
               </div>
               <div className="border py-6 px-3 rounded">
                 {[
-                  { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Innova", "Crysta", "Tempo 12S", "Tempo 14S"] },
+                  { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Ertiga", "Crysta", "Carens", "Bolero","Traveller 12s","Traveller 26s","Traveller Maharaja 11s","Urbania 12s","Urbania 16s","Deluxe Bus 21s"] },
                   { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
                   { label: "Large Bags", name: "bags", type: "number" },
                   { label: "Daily Limit KM's", name: "dailyLimit", type: "number" },
