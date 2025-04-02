@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 const fetchBanner=async ()=>{
   const res = await fetch("/api/home");
   return await res.json();
@@ -7,9 +7,32 @@ const HeroSection = () => {
 
   const [banner,setBanner]=useState();
   const [video,setVideo]=useState("");
+  const [currentText, setCurrentText] = useState("");
+  const [index, setIndex] = useState(0);
+  const [letterIndex, setLetterIndex] = useState(0);
   useEffect(()=>{
     fetchBanner().then(res=>{setBanner(res?.data||[]);setVideo(res?.data?.[0]?.videoPath||"")})
   },[])
+  const texts = useMemo(
+    () => ["Put The World In Your Hands", "Escape the Ordinary Embrace the Journey", "Wander Often Wonder Always", "Adventure Awaits Just One Click Away", "Travel Smart Live Fully","Wherever You Go Make It Memorable","Your Dream Destinations Start Here","Pack Your Bags Let’s Go!"],
+    []
+  );
+  useEffect(() => {
+    if (letterIndex < texts[index].length) {
+      const timeout = setTimeout(() => {
+        setCurrentText((prev) => prev + texts[index][letterIndex]);
+        setLetterIndex(letterIndex + 1);
+      }, 100);
+      return () => clearTimeout(timeout);
+    } else {
+      const delayTimeout = setTimeout(() => {
+        setCurrentText("");
+        setLetterIndex(0);
+        setIndex((prevIndex) => (prevIndex + 1) % texts.length);
+      }, 1000);
+      return () => clearTimeout(delayTimeout);
+    }
+  }, [letterIndex, index, texts]);
   // console.log("res of banner ---- >",banner?.[0]?.videoPath)
   // console.log("banner",banner);
   
@@ -24,7 +47,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 z-1 bg-black opacity-10"></div>
         <div className="z-20 text-white text-center relative  xl:w-[50vw] w-[80vw]">
           <h1 className="md:text-[32px] text-2xl leading-normal font-semibold md:font-semibold uppercase ">
-            {banner?.[0]?.title}
+          {currentText} 
           </h1>
           <p className="mt-3">{banner?.[0]?.description}
           </p>
