@@ -8,31 +8,38 @@ const HeroSection = () => {
   const [banner,setBanner]=useState();
   const [video,setVideo]=useState("");
   const [currentText, setCurrentText] = useState("");
+  const [upperText, setUpperText] = useState("");
   const [index, setIndex] = useState(0);
   const [letterIndex, setLetterIndex] = useState(0);
   useEffect(()=>{
     fetchBanner().then(res=>{setBanner(res?.data||[]);setVideo(res?.data?.[0]?.videoPath||"")})
   },[])
-  const texts = useMemo(
-    () => ["Put The World In Your Hands", "Escape the Ordinary Embrace the Journey", "Wander Often Wonder Always", "Adventure Awaits Just One Click Away", "Travel Smart Live Fully","Wherever You Go Make It Memorable","Your Dream Destinations Start Here","Pack Your Bags Let’s Go!"],
+  const textsUpper = useMemo(
+    () => ["Put The World", "Escape the Ordinary", "Wander Often ", "Adventure Awaits ", "Travel Smart ","Wherever You Go ","Your Dream Destinations ","Pack Your Bags "],
+    []
+  );
+  const textsLower = useMemo(
+    () => ["Put The World", "Embrace the Journey", " Wonder Always", " Just One Click Away", "Live Fully"," Make It Memorable","Start Here","Let’s Go!"],
     []
   );
   useEffect(() => {
-    if (letterIndex < texts[index].length) {
+    if (letterIndex < textsLower[index].length) {
+      setUpperText(textsUpper[index])
       const timeout = setTimeout(() => {
-        setCurrentText((prev) => prev + texts[index][letterIndex]);
+        setCurrentText((prev) => prev + textsLower[index][letterIndex]);
         setLetterIndex(letterIndex + 1);
       }, 100);
       return () => clearTimeout(timeout);
     } else {
       const delayTimeout = setTimeout(() => {
+        setUpperText("")
         setCurrentText("");
         setLetterIndex(0);
-        setIndex((prevIndex) => (prevIndex + 1) % texts.length);
+        setIndex((prevIndex) => (prevIndex + 1) % textsLower.length);
       }, 1000);
       return () => clearTimeout(delayTimeout);
     }
-  }, [letterIndex, index, texts]);
+  }, [letterIndex, index, textsLower]);
   // console.log("res of banner ---- >",banner?.[0]?.videoPath)
   // console.log("banner",banner);
   
@@ -46,7 +53,10 @@ const HeroSection = () => {
         </video>}
         <div className="absolute inset-0 z-1 bg-black opacity-10"></div>
         <div className="z-20 text-white text-center relative  xl:w-[50vw] w-[80vw]">
-          <h1 className="md:text-[32px] text-2xl leading-normal font-semibold md:font-semibold uppercase ">
+          <h1 className="md:text-[32px] text-2xl leading-normal font-semibold md:font-semibold uppercase">
+            {upperText}
+          </h1>
+          <h1 className="md:text-[32px] text-2xl leading-normal font-semibold md:font-semibold uppercase text-orange-600 ">
           {currentText} 
           </h1>
           <p className="mt-3">{banner?.[0]?.description}
