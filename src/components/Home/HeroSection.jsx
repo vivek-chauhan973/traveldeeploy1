@@ -19,7 +19,7 @@ const HeroSection = () => {
     []
   );
   const textsLower = useMemo(
-    () => ["Put The World", "Embrace the Journey", " Wonder Always", " Just One Click Away", "Live Fully"," Make It Memorable","Start Here","Let’s Go!"],
+    () => ["In Your Hands", "Embrace the Journey", " Wonder Always", " Just One Click Away", "Live Fully"," Make It Memorable","Start Here","Let’s Go!"],
     []
   );
   useEffect(() => {

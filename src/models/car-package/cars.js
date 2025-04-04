@@ -23,7 +23,7 @@ const CarSchema = new mongoose.Schema({
   },
   vehicleType: {
     type: String,
-    enum: ["Sedan", "Innova", "Crysta","Tempo 12S","Tempo 14S"],
+    enum: ["Sedan", "Ertiga", "Crysta", "Carens", "Bolero","Traveller 12s","Traveller 26s","Traveller Maharaja 11s","Urbania 12s","Urbania 16s","Deluxe Bus 21s"],
     required: [true, 'Vehicle type is required'],
   },
   dailyLimit: {

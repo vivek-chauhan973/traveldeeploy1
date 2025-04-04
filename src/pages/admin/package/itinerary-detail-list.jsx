@@ -6,9 +6,6 @@ import DeleteModal from "@/components/admin/itineraryCreate/DeleteModal";
 import dynamic from "next/dynamic";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCube, faArrowRightLong, faMagnifyingGlass, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-
-
-
 const YourComponent = () => {
   const [itineraries, setItineraries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,13 +30,10 @@ const YourComponent = () => {
   }, []);
 
   const handleDelete = () => {
-    // Perform delete action here
     setIsModalOpen(false);
-    // console.log("Deleting item with ID:", deletedId);
-    // Handle delete logic...
   };
 
-  console.log("current items", itineraries);
+  // console.log("current items", itineraries);
   const deleteItem = (id) => {
     const newPackages = itineraries.filter((item) => item._id !== id);
     setItineraries(newPackages);
@@ -159,8 +153,10 @@ const YourComponent = () => {
                     <td className="py-4 text-center border-x capitalize">
                       {itinerary.customId}
                     </td>
-                    <td className="py-4 text-center border-x capitalize">
+                    <td className="py-4 text-center border-x capitalize cursor-pointer">
+                      <Link href={"/package/" + itinerary?.url}>
                       {itinerary.name}
+                      </Link>
                     </td>
                     <td className="py-4 flex flex-wrap gap-2 border-x capitalize">
                       {itinerary.category?.map(item1=><p key={item1?._id} className="px-2">{item1?.category}</p>)}

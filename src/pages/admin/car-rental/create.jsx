@@ -188,6 +188,7 @@ export default function AddCar() {
             <div className='grid grid-cols-1 xl:grid-cols-2 gap-5 items-center grid-cols-reverse'>
               <div className="w-full p-5 h-full border bg-white rounded mt-1">
                 <div className="bg-slate-200 h-56 w-full rounded">
+                  <p className='bg-white pb-3'>please upload w-40px and h-28px</p>
                   {previewImage&&(
                     <img src={previewImage} alt={form.imageDetails[0]?.alt || "car image"} className="h-full w-full object-cover" />
                   )}
@@ -227,7 +228,7 @@ export default function AddCar() {
               </div>
               <div className="border py-6 px-3 rounded">
                 {[
-                  { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Ertiga", "Crysta", "Carens", "Bolero","Traveller 12s","Traveller 26s","Traveller Maharaja 11s","Urbania 12s","Urbania 16s","Deluxe Bus 21s"] },
+                  { label: "Vehicle Selection", name: "vehicleType", type: "select", options: ["Sedan", "Ertiga", "Crysta", "Carens", "Bolero","Traveller 12s","Traveller 26s","Traveller Maharaja 11s","Urbania 12s","Urbania 16s","Deluxe Bus 21s"] },
                   { label: "Seating Capacity", name: "seatingCapacity", type: "number" },
                   { label: "Large Bags", name: "bags", type: "number" },
                   { label: "Daily Limit KM's", name: "dailyLimit", type: "number" },

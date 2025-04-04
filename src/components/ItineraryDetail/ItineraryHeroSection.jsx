@@ -100,7 +100,7 @@ const ItineraryHeroSection = ({
                   <div className="box-Shadow-Style-Package flex justify-end  gap-3  absolute  right-0 z-10 w-full  py-3 uppercase text-white  pl-3 font-bold italic  bottom-0 ">
                     <h1 className="flex items-center text-2xl gap-2 mr-2">
                       {addPackage?.name}
-                      <span className=" mt-1 bg-gradient-to-r from-orange-500 to-red-500 py-[2px] px-2 text-white rounded text-para font-bold ">
+                      <span className=" mt-1 bg-gradient-to-r from-orange-500 to-red-500 py-[2px] px-2 text-white rounded text-para font-bold text-nowrap ">
                         {addPackage?.days?.length - 1}N/{" "}
                         {addPackage?.days?.length}D
                       </span>
