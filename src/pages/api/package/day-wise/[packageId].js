@@ -8,6 +8,7 @@
 import Package from "@/models/Package";
 import PackageDayWise from "@/models/package/PackageDayWise";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packageDayWise= async (req, res) => {
@@ -15,8 +16,9 @@ import { NextApiRequest, NextApiResponse } from "next";
     const { packageId } = req.query;
     const { days, information } = req.body;
     const day=days?.length;
-//     console.log("day wise ssss",days)
-//  console.log("days aaa",days);
+ if (!mongoose.Types.ObjectId.isValid(packageId)) {
+    return res.status(400).json({ message: "Package ID is required" });
+  }
     try {
         const [tourPackage, packageDays] = await Promise.all([
             Package.findByIdAndUpdate(packageId, { dayWiseInformation: information}),

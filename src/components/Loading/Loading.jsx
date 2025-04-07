@@ -3,9 +3,9 @@ import React from 'react'
 const Loading = () => {
     return (
         <div>
-            <div class="gooey">
-                <span class="dot"></span>
-                <div class="dots">
+            <div className="gooey">
+                <span className="dot"></span>
+                <div className="dots">
                     <span></span>
                     <span></span>
                     <span></span>

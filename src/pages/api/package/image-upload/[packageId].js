@@ -4,6 +4,7 @@ import fs from "fs"; // Adjust path as per your project structure
 import PackageImage from "@/models/package/ImageUploading"; // Adjust path as per your project structure
 import Package from "@/models/Package";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 
 const uploadDirectory = path.join(process.cwd(), "uploads/package/details");
 
@@ -27,11 +28,11 @@ const apiRoute = async (req, res) => {
   await connectToDatabase(); // Ensure database connection
 
   const { packageId } = req.query;
-  console.log("packageId74623873256374", packageId);
+  // console.log("packageId74623873256374", packageId);
 
-  if (!packageId) {
-    return res.status(400).json({ message: "Package ID is required" });
-  }
+   if (!mongoose.Types.ObjectId.isValid(packageId)) {
+      return res.status(400).json({ message: "Package ID is required" });
+    }
 
   if (req.method === "POST") {
     upload.array("files")(req, res, async (err) => {

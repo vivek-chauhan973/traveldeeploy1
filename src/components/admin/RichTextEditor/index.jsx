@@ -22,12 +22,12 @@
 //       }),
 //       OrderedList.configure({
 //         HTMLAttributes: {
-//           class: 'list-decimal ml-3',
+//           className: 'list-decimal ml-3',
 //         },
 //       }),
 //       BulletList.configure({
 //         HTMLAttributes: {
-//           class: 'list-disc ml-3',
+//           className: 'list-disc ml-3',
 //         },
 //       }),
 //       Link,
@@ -38,7 +38,7 @@
 //     content: content,
 //     editorProps: {
 //       attributes: {
-//         class: 'min-h-[156px] border rounded-md bg-slate-50 py-2 px-3',
+//         className: 'min-h-[156px] border rounded-md bg-slate-50 py-2 px-3',
 //       },
 //     },
 //     onUpdate: ({ editor }) => {
@@ -87,12 +87,12 @@ export default function RichTextEditor({
       }),
       OrderedList.configure({
         HTMLAttributes: {
-          class: "list-decimal ml-3",
+          className: "list-decimal ml-3",
         },
       }),
       BulletList.configure({
         HTMLAttributes: {
-          class: "list-disc ml-3",
+          className: "list-disc ml-3",
         },
       }),
       Link,
@@ -103,7 +103,7 @@ export default function RichTextEditor({
     content: content,
     editorProps: {
       attributes: {
-        class: "min-h-[156px] border rounded-md focus:border-primary outline-none py-2 px-3",
+        className: "min-h-[156px] border rounded-md focus:border-primary outline-none py-2 px-3",
       },
     },
     onUpdate: ({ editor }) => {

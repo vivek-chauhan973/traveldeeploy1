@@ -1,6 +1,7 @@
 import Package from "@/models/Package";
 import TourInformation from "@/models/package/TourInformation";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 // import dbConnect from "@/utils/db.ts";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -9,7 +10,7 @@ import { NextApiRequest, NextApiResponse } from "next";
   const { packageId } = req.query;
   // await dbConnect();
 
-  if (!packageId) {
+  if (!mongoose.Types.ObjectId.isValid(packageId)) {
     return res.status(400).json({ message: "Package ID is required" });
   }
 

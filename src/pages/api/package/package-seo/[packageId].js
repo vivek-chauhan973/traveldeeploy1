@@ -2,6 +2,7 @@
 import Package from '@/models/Package';
 import SeoData from '@/models/package/PackageSeo';
 import connectToDatabase from '@/utils/db';
+import mongoose from 'mongoose';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -16,7 +17,7 @@ export default async function handler(req, res) {
 
   const { packageId } = req.query;
 
-  if (!packageId) {
+  if (!mongoose.Types.ObjectId.isValid(packageId)) {
     return res.status(400).json({ message: 'Package ID is required' });
   }
 

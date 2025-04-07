@@ -1,6 +1,7 @@
 import Package from "@/models/Package";
 import PackageDeparture from "@/models/package/PackageDeparture";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
  const packagePriceAddguestDepartureIds= async (req, res) => {
   await connectToDatabase()
@@ -14,7 +15,7 @@ if(data1?.length!==0){
 else{
   Weight=1;
 }
-  if (!packageId) {
+  if (!mongoose.Types.ObjectId.isValid(packageId)) {
     return res.status(400).json({ message: "Package ID is required" });
   }
 

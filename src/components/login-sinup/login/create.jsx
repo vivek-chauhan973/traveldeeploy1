@@ -1300,12 +1300,12 @@ const Create = () => {
                         Continue
                       </button>
                     </div>
-                    <div class="flex items-center justify-between my-5">
-                      <span class="border-b w-1/5 lg:w-1/4 ml-2"></span>
-                      <p class="text-xxs text-center text-gray-500 uppercase">
+                    <div className="flex items-center justify-between my-5">
+                      <span className="border-b w-1/5 lg:w-1/4 ml-2"></span>
+                      <p className="text-xxs text-center text-gray-500 uppercase">
                         or continue with
                       </p>
-                      <span class="border-b w-1/5 lg:w-1/4 mr-2"></span>
+                      <span className="border-b w-1/5 lg:w-1/4 mr-2"></span>
                     </div>
                     <div className="flex justify-center gap-2 mt-5 mb-7">
                       <button

@@ -1,11 +1,12 @@
 import PackageMap from "@/models/package/PackageMap";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 
  const packageMapIds= async (req, res) => {
   const { packageId } = req.query;
   await connectToDatabase()
 
-  if (!packageId) {
+  if (!mongoose.Types.ObjectId.isValid(packageId)) {
     return res.status(400).json({ message: "Package ID is required" });
   }
 

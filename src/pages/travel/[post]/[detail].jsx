@@ -294,12 +294,12 @@ const Detail = (pageprops) => {
                     }}
                   ></p>
                 </div>
-                <div class="overflow-x-auto border rounded-t-md mt-7">
-                  <table class="min-w-full table-auto border">
+                <div className="overflow-x-auto border rounded-t-md mt-7">
+                  <table className="min-w-full table-auto border">
                     <thead>
-                      <tr class="bg-gray-100">
+                      <tr className="bg-gray-100">
                         {detailData?.table?.tableColumn?.map((item, i) => (
-                          <th key={i} class="px-4 py-2 text-left">
+                          <th key={i} className="px-4 py-2 text-left">
                             {item}
                           </th>
                         ))}
@@ -307,9 +307,9 @@ const Detail = (pageprops) => {
                     </thead>
                     <tbody>
                       {detailData?.table?.tableData?.map((item, i) => (
-                        <tr key={i} class="border-b">
+                        <tr key={i} className="border-b">
                           {detailData?.table?.tableColumn?.map((item1, k) => (
-                            <td key={k} class="px-4 py-2">
+                            <td key={k} className="px-4 py-2">
                               {item[item1]}
                             </td>
                           ))}

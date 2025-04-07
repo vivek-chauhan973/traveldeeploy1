@@ -3,12 +3,13 @@ import PriceRange from '@/models/package/PriceRange';
 import connectToDatabase from '@/utils/db';
 
 import { eachDayOfInterval, format } from 'date-fns';
+import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req, res) {
   const { packageId } = req.query;
   await connectToDatabase()
-  if (!packageId) {
+  if (!mongoose.Types.ObjectId.isValid(packageId)) {
     return res.status(400).json({ message: 'Package ID is required' });
   }
 

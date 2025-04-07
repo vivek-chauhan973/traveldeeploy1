@@ -6,6 +6,7 @@
  */
 import PackageFaqWise from "@/models/package/PackageFaq";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 // /api/package/faq/[packageId].js
 // import PackageFaqWise from "@/models/package/PackageFaqWise";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -13,7 +14,7 @@ import { NextApiRequest, NextApiResponse } from "next";
   const { packageId } = req.query;
   // await dbConnect();
   await connectToDatabase()
-  if (!packageId) {
+  if (!mongoose.Types.ObjectId.isValid(packageId)) {
     return res.status(400).json({ message: "Package ID is required" });
   }
   if (req.method === "POST") {

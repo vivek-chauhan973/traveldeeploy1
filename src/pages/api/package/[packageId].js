@@ -9,13 +9,14 @@ import PackagePrice from "@/models/package/PackagePrice";
 import Inclusion from "@/models/package/TourInfo/Inclusion";//inclusion code is here
 import SelectedIcon from "@/models/selectedIcon/SelectedIcon";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 // find By Id And Update
  const packageIds= async (req, res) => {
  await connectToDatabase()
     try {
         const { packageId } = req.query;
-        if (!packageId) {
+        if (!mongoose.Types.ObjectId.isValid(packageId)) {
             return res.status(400).json({ message: 'Package ID is required' });
         }
         let updatedPackage

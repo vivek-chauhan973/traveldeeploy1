@@ -22,7 +22,7 @@ const Transport = () => {
           <div className="flex px-4 py-2 items-center gap-2">
             <span>Non-AC</span>
             <input
-              class="switch"
+              className="switch"
               checked={isChecked}
               onChange={handleCheckboxChange}
               type="checkbox"

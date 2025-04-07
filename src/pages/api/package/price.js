@@ -1,6 +1,7 @@
 import Package from "@/models/Package";
 import PackagePrice from "@/models/package/PackagePrice";
 import connectToDatabase from "@/utils/db";
+import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 
  const packagePrice= async (req, res) => {
@@ -11,7 +12,9 @@ import { NextApiRequest, NextApiResponse } from "next";
         }
 
         const { packageId, singleRoom, twinSharingRoom, tripleSharingRoom, quadSharingRoom, infantSharingRoom, childOverFive, childUnderFive,adults,addguest } = req.body;
-
+ if (!mongoose.Types.ObjectId.isValid(packageId)) {
+    return res.status(400).json({ message: "Package ID is required" });
+  }
         let price = await PackagePrice.findOne({ package: packageId });
         
         if (!price) {
