@@ -167,7 +167,7 @@ const SearchPagePackageList = ({ locationId }) => {
               </div>
             <div className="flex flex-cols">
                 <Link
-                  href={"/package/" + packageData?.url}
+                  href={"/package/" + packageData?.url+"-tour-package"}
                   className="mt-3 block w-full select-none rounded-lg bg-gradient-to-r from-orange-500 to-red-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none"
                   type="button"
                 >

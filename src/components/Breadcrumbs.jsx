@@ -34,8 +34,8 @@ const Breadcrumbs = () => {
                 />
             </Head>
             <main>
-                <div className="container mx-auto py-2 px-4">
-                    <div className="text-sm breadcrumbs">
+                <div className="container-wrapper mx-auto py-2">
+                    <div className="text-sm breadcrumbs ">
                         <ul className="flex space-x-2 text-gray-500 breadCrumbs">
                             <li>
                                 <Link href="/" className="hover:underline">

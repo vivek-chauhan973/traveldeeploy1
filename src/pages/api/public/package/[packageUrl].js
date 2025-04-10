@@ -7,14 +7,13 @@ import PackageDeparture from "@/models/package/PackageDeparture";
 import SeoData from '@/models/package/PackageSeo';
 import PackageMap from "@/models/package/PackageMap";
 import TourInformation from "@/models/package/TourInformation";
-import FlightBookingSchema from "@/models/package/FlightBooking";
 import connectToDatabase from "@/utils/db";
 
 const packagePublicPackageUrl = async (req, res) => {
   await connectToDatabase()
   const { method, query } = req;
-  const newPackageUrl = query?.packageUrl.replace("-tour-package", " ");
-
+  const newPackageUrl = query?.packageUrl;
+console.log("package url is here ---> ",newPackageUrl)
   if (method !== 'GET') {
     res.setHeader('Allow', ['GET']);
     return res.status(405).json({ message: `Method ${method} not allowed` });
@@ -22,7 +21,7 @@ const packagePublicPackageUrl = async (req, res) => {
 
   try {
     const packageDetails = await Package.findOne({ url: newPackageUrl })
-      .populate("location country state category priceHike fixedDeparturePrices")
+      .populate("location country state category priceHike fixedDeparturePrices flight")
       .populate('tourinfo.tourInclusion')
       .populate('tourinfo.tourExclusion')
       .populate('tourinfo.tourPayment') 
@@ -37,7 +36,6 @@ const packagePublicPackageUrl = async (req, res) => {
     const dayDetails = await PackageDayWise.findOne({ package: packageDetails?._id }, 'days');
     const faqs = await PackageFaqWise.findOne({ package: packageDetails?._id }, 'days');
     const map = await PackageMap.findOne({ package: packageDetails?._id });
-    const flights = await FlightBookingSchema.findOne({ package: packageDetails?._id });
     const priceDetails = await PackagePrice.findOne({ package: packageDetails?._id });
     const seoDataDetails = await SeoData.findOne({ package: packageDetails?._id });
     const packageDepartures = await PackageDeparture.findOne({ package: packageDetails?._id });
@@ -46,7 +44,6 @@ const packagePublicPackageUrl = async (req, res) => {
     packageDetails._doc.highlights = highlightDetails ? highlightDetails?.highlights : [];
     packageDetails._doc.days = dayDetails ? dayDetails?.days : [];
     packageDetails._doc.map = map;
-    packageDetails._doc.flights = flights;
     packageDetails._doc.faqs = faqs;
     packageDetails._doc.prices = priceDetails || packageDepartures;
     packageDetails._doc.seoData = seoDataDetails;

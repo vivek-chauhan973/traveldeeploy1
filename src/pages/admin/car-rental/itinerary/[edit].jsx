@@ -4,7 +4,7 @@ import CarCalendar from "@/components/admin/itineraryCreate/CarCalender";
 import ItineraryText from "@/components/admin/itineraryCreate/CarItineraryText_Faq";
 import PackageFaq from "@/components/admin/itineraryCreate/CarPackageFaq";
 import { useSearchParams } from "next/navigation";
-import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
+// import GoogleMap from "@/components/admin/itineraryCreate/GoogleMap";
 import dynamic from 'next/dynamic';
 const LuPackagePlus = dynamic(() => import('react-icons/lu').then(mod => mod.LuPackagePlus));
 const HiOutlineArrowNarrowRight = dynamic(() => import('react-icons/hi').then(mod => mod.HiOutlineArrowNarrowRight));
@@ -16,6 +16,7 @@ import CarTourInformation from "@/components/admin/itineraryCreate/CarTourInform
 import CarSeoField from "@/components/admin/itineraryCreate/CarSeoField";
 import CarFixedDeparture from "@/components/admin/itineraryCreate/CarFixedDeparture";
 import CarIndex from "@/components/dy/CarIndex";
+import CarGoogleMap from "@/components/admin/itineraryCreate/CarGoogleMap";
 export default function CreatePackage() {
     const [pricingPopup, setPricingPopup] = useState(true);
     const router = useRouter();
@@ -118,7 +119,7 @@ export default function CreatePackage() {
             <Layout>
                 <div className="flex items-center gap-5 text-primary pb-3">
                     <LuPackagePlus size={28} className="font-semibold" />
-                    <p className="md:text-[28px] text-2xl text-black">Create Package</p>
+                    <p className="md:text-[28px] text-2xl text-black">Create Car Package</p>
                     <HiOutlineArrowNarrowRight size={28} className=" text-teal-700" />
                 </div>
                 <div className="border-b border-slate-300 mb-5">
@@ -187,7 +188,7 @@ export default function CreatePackage() {
                     </div>
                 </div>
                 <div className={` ${activeTab === 'Tab5' ? 'block' : 'hidden'}`}>
-                    <GoogleMap setActiveTab={setActiveTab} itinerary={itinerary} setMapDot={setMapDot} />
+                    <CarGoogleMap setActiveTab={setActiveTab} itinerary={itinerary} setMapDot={setMapDot} />
                 </div>
                
                 <div className={` ${activeTab === 'Tab6' ? 'block' : 'hidden'}`}>

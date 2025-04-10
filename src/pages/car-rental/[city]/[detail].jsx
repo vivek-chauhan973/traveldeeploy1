@@ -184,6 +184,8 @@ export default function CarDetail(pageprops) {
         }
     };
 
+ 
+    
     return (
         <>
             {/* Head Section with Organization Schema */}

@@ -1420,7 +1420,7 @@ const Create = () => {
                 <div className="flex justify-center items-center my-5">
                   <Image
                     className="object-cover rounded-full w-20 h-20"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjGVg145rvbEunhw4fsfcCHzJTIEQzA_bhg&s"
+                    src={ "/assets/BXPinBlack.png" || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjGVg145rvbEunhw4fsfcCHzJTIEQzA_bhg&s"}
                     alt=""
                     width={200}
                     height={200}

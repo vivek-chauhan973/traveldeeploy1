@@ -116,6 +116,7 @@ const CarArrowSection = ({ carCityPromos }) => {
           <div className=" bg-gradient-to-l from-white opacity-100 w-10 h-full right-0 absolute z-30 top-0"></div>
         </div>
         {/* end is here code */}
+        {promoCarCategory?.length > 0 && (
         <div className=" hidden md:block relative -top-96 -translate-y-[60px] justify-between w-full">
           <div className=" absolute right-2 gap-3 flex pl-2 ">
             <FontAwesomeIcon
@@ -130,6 +131,7 @@ const CarArrowSection = ({ carCityPromos }) => {
             />
           </div>
         </div>
+        ) }
       </div>
     </div>
   );

@@ -70,17 +70,19 @@ const Card4 = ({ packages }) => {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="flex flex-col gap-3 px-3 pt-3 pb-5 bg-white">
-                                        <div className="flex gap-3 w-full">
-                                            <p className="font-semibold md:text-base text-sm text-black w-[75%]">Started From {items?.startcity}</p>
-                                            <p className="font-semibold md:text-base text-sm text-black w-[25%]">{items?.days} Days</p>
+                                    <div className="flex flex-col justify-around px-3 pt-3 pb-5 bg-white">
+                                        <div className="flex justify-between w-full max-h-16 md:text-para text-sm  font-semibold mb-1">
+                                            <p className="md:line-clamp-2 overflow-hidden">Started From {items?.startcity}</p>
+                                            <p className="w-[20%] text-end text-nowrap">{items?.days} Days</p>
                                         </div>
-                                        <div className="w-full md:h-7 h-8">
-                                            <p className="md:text-lg text-base font-semibold">{items?.name}</p>
+                                        <div className="w-full max-h-16 md:text-lg text-base font-semibold md:mb-0 mb-2">
+                                            <p className="md:line-clamp-2  line-clamp-3">{items?.name}</p>
                                         </div>
-                                        <p dangerouslySetInnerHTML={{ __html: items?.about }} className="text-para line-clamp-3"></p>
                                         <div>
-                                            <div className="flex gap-5 items-center justify-between pr-4 pt-1">
+                                            <p dangerouslySetInnerHTML={{ __html: items?.about }} className="text-para line-clamp-3"></p>
+                                        </div>
+                                        <div>
+                                            <div className="flex gap-5 items-center justify-between pr-4 pt-1 mt-1.5">
                                                 <p className="text-lg font-semibold">
                                                     {items?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>

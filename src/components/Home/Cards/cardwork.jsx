@@ -48,7 +48,7 @@
 //         />
 //         <div className="relative flex justify-center items-center overflow-hidden w-full md:h-96 h-56 md:rounded-md rounded">
 //           {bannerData?.length > 0 && bannerData?.map((item, index) => (
-//             <div key={index} className={`h-full w-full absolute transition-transform transform 
+//             <div key={index} className={`h-full w-full absolute transition-transform transform
 //               ${index === startIndex ? "translate-x-0" : "translate-x-full"}`}
 //             >
 //               <div className="">
@@ -89,7 +89,6 @@
 
 // export default Cardwork;
 
-
 import "../../../app/globals.css";
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
@@ -100,18 +99,18 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 const fetchCrouselData = async () => {
   const data = await fetch("/api/home/crousel");
   return await data.json();
-}
+};
 
 const Cardwork = () => {
-  const [bannerData, setBannerData] = useState([])
+  const [bannerData, setBannerData] = useState([]);
   useEffect(() => {
-    fetchCrouselData().
-      then((res) => {
+    fetchCrouselData()
+      .then((res) => {
         // console.log("res----->13 ", res?.data);
-        setBannerData(res?.data || [])
+        setBannerData(res?.data || []);
       })
-      .catch(err => console.log("err------ > ", err))
-  }, [])
+      .catch((err) => console.log("err------ > ", err));
+  }, []);
   // console.log("bannerData", bannerData);
 
   const carouselRef = useRef(null);
@@ -169,16 +168,20 @@ const Cardwork = () => {
                             src={items?.path}
                             alt="images"
                           />
-                          <div
-                            className="absolute bg-gradient-to-r from-black to-gray pb-3 text-white md:text-xl text-lg font-semibold flex justify-start items-center w-full md:h-96 h-60 md:rounded-md rounded"
-                          >
-                            <div className="grid md:grid-cols-2 grid-cols-1 md:h-44 h-36 md:max-h-52 max-h-44">
+                          <div className="absolute bg-gradient-to-r from-black to-gray pb-3 text-white md:text-xl text-lg font-semibold flex justify-start items-center w-full md:h-96 h-60 md:rounded-md rounded">
+                            <div className="grid md:grid-cols-2 grid-cols-1 md:h-44 h-36 md:max-h-52 max-h-44 ">
                               <div className="flex flex-col justify-between items-start md:ml-16 ml-5 md:mr-0 mr-5">
-                                <h2 className="md:text-xl text-base font-bold">
+                                <h2 className="md:text-xl text-base font-bold capitalize md:w-full w-[80%]">
                                   {items.title}
                                 </h2>
-                                <p className="mb-2 md:text-sm text-xs md:line-clamp-4 line-clamp-3">
-                                  {items.description}
+                                <p className="mb-2 md:text-sm text-xs md:line-clamp-4 line-clamp-3 md:w-full w-[70%]">
+                                  {items.description
+                                    ? items.description
+                                        .charAt(0)
+                                        .toUpperCase() +
+                                      items.description.slice(1).toLowerCase()
+                                    : ""
+                                  }
                                 </p>
                                 <Link href={items.url}>
                                   <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold md:py-2 py-1.5 md:px-4 px-3 rounded md:text-sm text-xs">
@@ -218,4 +221,3 @@ const Cardwork = () => {
 };
 
 export default Cardwork;
-

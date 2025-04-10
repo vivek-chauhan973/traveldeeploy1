@@ -15,4 +15,5 @@ const PackageFaqWiseSchema = new mongoose.Schema({
     ],
 }, { timestamps: true });
 
-export default mongoose.models.PackageFaqWise || mongoose.model('PackageFaqWise', PackageFaqWiseSchema);
+const PackageDayWise= mongoose.models.PackageFaqWise || mongoose.model('PackageFaqWise', PackageFaqWiseSchema);
+export default PackageDayWise;

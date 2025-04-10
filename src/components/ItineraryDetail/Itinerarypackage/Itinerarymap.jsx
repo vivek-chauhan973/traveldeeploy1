@@ -45,15 +45,16 @@ const Itinerarymap = () => {
         </script>
       </Head>
       <main>
-        <div className="p-2 ">
+        <div className="">
           {map ? (
             <div
-              className="w-full md:h-80 h-72 rounded-xl  overflow-hidden"
+              className="w-full md:h-80 h-72 rounded-xl object-fill  overflow-hidden"
               dangerouslySetInnerHTML={{ __html: map }}
             />
           ) : (
             <Image
               src="https://uploads.exoticca.com/p/15367/45697/i/ism_horizontal_aspect_ratio_3_29.jpg"
+              className=" w-full md:h-80 h-72 object-fill rounded-xl"
               alt="map"
               width={800}
               height={800}

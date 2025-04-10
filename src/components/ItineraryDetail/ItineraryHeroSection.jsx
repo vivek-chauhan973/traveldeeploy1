@@ -129,8 +129,8 @@ const ItineraryHeroSection = ({
             <div className="box-Shadow-Style-Package hidden xl:flex justify-end gap-3 absolute right-0 z-10 w-full py-3 uppercase text-white  pl-3 font-bold italic bottom-0">
               <h1 className="flex items-center gap-2 mr-2 ">
                 {addPackage?.name}
-                <span className="bg-gradient-to-r from-orange-500 to-red-500 py-[2px] px-2 text-white rounded text-para font-bold  ">
-                  {addPackage?.days?.length - 1 > 0 ? addPackage?.days?.length - 1 : 0}N/{" "}
+                <span className="bg-gradient-to-r from-orange-500 to-red-500 py-[2px] px-2 text-white rounded text-para font-bold text-nowrap">
+                  {addPackage?.days?.length - 1 > 0 ? addPackage?.days?.length - 1 : 0}N/
                   {addPackage?.days?.length}D
                 </span>
               </h1>
@@ -211,7 +211,7 @@ const ItineraryHeroSection = ({
                         duration={500}
                       >
                         <p className="hidden md:block text-sm underline text-blue font-medium cursor-pointer">
-                          View Iternery Page
+                          View Itinerary Page
                         </p>
                       </ScrollLink>
                     </div>

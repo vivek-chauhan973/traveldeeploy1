@@ -15,6 +15,7 @@ import "@/models/package/PackageDeparture";
 import Counter from "./Counter";
 import  "./selectedIcon/SelectedIcon";
 import  "./package/PackageSeo";
+import  "./package/FlightBooking";
 async function getNextSequenceValueWithPrefix(sequenceName, prefix = 'BXP', padding = 3) {
   const sequenceDocument = await Counter.findOneAndUpdate(
     { _id: sequenceName },
@@ -126,6 +127,10 @@ const packageSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "City",
       required: true,
+    },
+    flight: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "FlightBooking",
     },
     country:{
       type: mongoose.Schema.Types.ObjectId,

@@ -66,28 +66,27 @@ const CarPackageCarousel = ({ carPackageData }) => {
                                             />}
                                         </div>
                                     </div>
-                                    <div className=" flex flex-col gap-3 px-3 pt-3 pb-5 bg-white">
-                                        <div className='flex gap-3 w-full justify-between'>
-                                            <p className="font-semibold md:text-base text-sm text-black w-[80%]">Started From {items?.startcity?.[0]}</p>
-                                            <p className="font-semibold md:text-base text-sm text-black w-[20%]">{items?.days} Days</p>
+                                    <div className="flex flex-col justify-around px-3 pt-3 pb-5 bg-white">
+                                        <div className="flex justify-between w-full max-h-16 md:text-para text-sm  font-semibold mb-1">
+                                            <p className="md:line-clamp-2 overflow-hidden">Started From {items?.startcity}</p>
+                                            <p className="w-[20%] text-end text-nowrap">{items?.days} Days</p>
                                         </div>
-                                        <div className="w-full md:h-7 h-8">
-                                            <p className="md:text-lg text-base font-semibold">{items?.name}</p>
+                                        <div className="w-full max-h-16 md:text-lg text-base font-semibold md:mb-0 mb-2">
+                                            <p className="md:line-clamp-2  line-clamp-3">{items?.name}</p>
                                         </div>
-                                        <p
-                                            dangerouslySetInnerHTML={{ __html: items?.about }}
-                                            className="text-para line-clamp-3">
-                                        </p>
                                         <div>
-                                            <div className="flex gap-5 items-center justify-between pr-4 pt-1">
+                                            <p dangerouslySetInnerHTML={{ __html: items?.about }} className="text-para line-clamp-3"></p>
+                                        </div>
+                                        <div>
+                                            <div className="flex gap-5 items-center justify-between pr-4 pt-1 mt-1.5">
                                                 <p className="text-lg font-semibold">
                                                     {items?.price?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </p>
-                                                {/* <Link href={"/package/"+items?.pageUrl}> */}
-                                                <Link href={"/car-rental/" + items.location.url + "/" + items.pageUrl} className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
-                                                    Know More
+                                                <Link href={"/car-rental/" + items.location.url + "/" + items.pageUrl}>
+                                                    <button className="badge text-sm px-3 py-1.5 rounded-full text-white bg-gradient-to-r from-orange-500 to-red-500">
+                                                        Know More
+                                                    </button>
                                                 </Link>
-                                                {/* </Link> */}
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +96,7 @@ const CarPackageCarousel = ({ carPackageData }) => {
                     })}
                     {/* end is here code */}
                 </div>
-                {carPackageData?.length > 0 &&
+                {carPackageData?.length > 0 && (
                     <div className=" hidden md:block absolute top-2/4 -translate-y-[80px] justify-between w-full">
                         <div className=' justify-between flex pl-2 '>
                             <FontAwesomeIcon
@@ -110,7 +109,7 @@ const CarPackageCarousel = ({ carPackageData }) => {
                             />
                         </div>
                     </div>
-                }
+                )}
             </div>
         </div>
     );

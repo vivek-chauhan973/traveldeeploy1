@@ -75,18 +75,18 @@ const ItineraryFaq = ({ faq }) => {
             {faq?.map((item, i) => (
               <div key={i} className="mb-4">
                 <div
-                  className="w-full h-12 flex justify-center items-center md:gap-0 gap-2 bg-gray-200 rounded-md hover:bg-gray-300 cursor-pointer"
+                  className="w-full h-12 flex justify-center items-center md:gap-0  bg-gray-200 rounded-md hover:bg-gray-300 cursor-pointer"
                   onClick={() => handleToggle(i)}
                 >
-                  <div className='flex justify-center items-center md:w-[10%] w-[15%] h-full pl-1'>
-                    <div className='w-12 h-7 rounded-2xl bg-navyblack flex justify-center items-center'>
-                      <p className="md:text-xs text-xxs font-medium text-white">Day {i + 1}</p>
+                  <div className='flex justify-center items-center md:w-[10%] w-[17%] h-full pl-1'>
+                    <div className='w-12 h-7 rounded-2xl bg-navyblack flex justify-center items-center px-1'>
+                      <p className="md:text-xs text-xxs font-medium text-white">Day {i + 1}1</p>
                     </div>
                   </div>
-                  <div className='flex justify-start items-center w-[90%] h-full'>
+                  <div className='flex justify-start items-center w-[90%] h-full md:mx-0 mx-1'>
                     <p className="md:text-para text-xs capitalize font-semibold text-graytext line-clamp-2">{item.title}</p>
                   </div>
-                  <div className='flex justify-center items-center md:w-[10%] w-[5%] h-full pr-1'>
+                  <div className='flex justify-center items-center md:w-[10%] w-[5%] h-full pr-1.5'>
                     {openIndices.includes(i) ? (
                       <FontAwesomeIcon
                         icon={faChevronUp}
