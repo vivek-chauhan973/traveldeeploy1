@@ -207,9 +207,9 @@ export default function Package1() {
     window.open(`https://wa.me/?text=${message}%20${url}`, "_blank");
   };
 
-  console.log("addPackage", addPackage);
+  // console.log("addPackage", addPackage);
   // console.log("schemaData", schemaData);
-  console.log("matchedPackages", matchedPackages);
+  // console.log("matchedPackages", matchedPackages);
 
   // Product Schema JSON-LD
   const productSchema = {
@@ -602,7 +602,7 @@ export default function Package1() {
                       />
                       <p className="text-[12px] cursor-pointer mt-0.5">Share Itinerary</p>
                       {showSharePopup && (
-                        <div className="absolute top-12 left-32 z-[9999] bg-slate-100 shadow-md p-7 rounded-md flex justify-center items-center gap-7">
+                        <div className="absolute top-12 xl:left-32 z-[9999] bg-slate-100 shadow-md p-7 rounded-md flex justify-center items-center gap-7">
                           <svg
                             onClick={handleWhatsApp}
                             xmlns="http://www.w3.org/2000/svg"

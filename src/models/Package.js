@@ -54,10 +54,6 @@ mongoose
     },
   })
 const packageSchema = new Schema({
-    priority:{
-        type: Number,
-        required: true,
-    },
     name: {
       type: String,
       required: true,

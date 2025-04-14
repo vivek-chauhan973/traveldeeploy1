@@ -21,11 +21,13 @@ const ItineraryPricingCard = () => {
     fixedDepartureButtonEnaibleAndDisable,
     setFixedDeparturePopupPrice,
     showAddguest,
-    departureSectionData
+    departureSectionData,
+    calculatedPrizeOfGst, setCalculatedPrizeOfGst,
+    gst, setGst,
   } = useAppContext();
 
-  const [gst, setGst] = useState(0);
-  const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
+  // const [gst, setGst] = useState(0);
+  // const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
@@ -113,7 +115,8 @@ const ItineraryPricingCard = () => {
                       </>
                     )
                   }
-                )}
+                )
+              }
             </div>
           </div>
           <div className="grid grid-cols-2 py-3">

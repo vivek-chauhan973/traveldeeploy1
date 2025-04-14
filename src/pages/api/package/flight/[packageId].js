@@ -3,26 +3,35 @@ import FlightBooking from "@/models/package/FlightBooking";
 import connectToDatabase from "@/utils/db";
 
 const flightBookingApi = async (req, res) => {
+  await connectToDatabase(); // Ensure DB is connected
+
   const { packageId } = req.query;
 
   if (!packageId) {
     return res.status(400).json({
       status: false,
-      message: "Package Id is required!",
+      message: "Package ID is required!",
     });
   }
 
   if (req.method === "POST") {
     try {
-       await connectToDatabase()
-      const { flights} = req.body;
+      const { flights } = req.body;
 
+      if (!flights || !Array.isArray(flights)) {
+        return res.status(400).json({
+          status: false,
+          message: "Flights data must be an array.",
+        });
+      }
+
+      // Create or update flight booking
       const updatedData = await FlightBooking.findOneAndUpdate(
-        { _id: packageId },
+        { package: packageId },
         {
           $set: {
             flights,
-            package:packageId
+            package: packageId,
           },
         },
         {
@@ -30,21 +39,15 @@ const flightBookingApi = async (req, res) => {
           new: true,
         }
       );
-if(!updatedData){
-    return res.status(300).json({
-        status: false,
-        message: "Something went wrong to create to  flight data",
+
+      // Update the Package model to reference the flight booking
+      await Package.findByIdAndUpdate(packageId, {
+        $set: { flight: updatedData._id },
       });
 
-}
-
-await Package.findOneAndUpdate({_id:packageId},{set:{flight:updatedData?._id}},{
-    upsert: true,
-    new: true,
-  })
       return res.status(200).json({
         status: true,
-        message: "Flight Data saved successfully",
+        message: "Flight data saved successfully.",
         data: updatedData,
       });
     } catch (error) {
@@ -58,12 +61,12 @@ await Package.findOneAndUpdate({_id:packageId},{set:{flight:updatedData?._id}},{
 
   if (req.method === "GET") {
     try {
-      const booking = await FlightBooking.findById(packageId);
+      const booking = await FlightBooking.findOne({ package: packageId });
 
       if (!booking) {
         return res.status(404).json({
           status: false,
-          message: "No flight data found",
+          message: "No flight data found.",
         });
       }
 

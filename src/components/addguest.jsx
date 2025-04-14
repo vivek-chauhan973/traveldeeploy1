@@ -450,8 +450,8 @@ const Addguest = ({
   const handleSelected = (item) => {
     const parsedItem = JSON.parse(item);
     // setGuestPrice(guestPrice+acpriceRef.current)
-    console.log("ref current ------> ", carpricingRef.current)
-    console.log("ref current 123456 ------> ", guestPrice)
+    // console.log("ref current ------> ", carpricingRef.current)
+    // console.log("ref current 123456 ------> ", guestPrice)
     const {
       markup,
     } = addPackage?.prices;
@@ -548,7 +548,7 @@ const Addguest = ({
                   <div>
                     <p className="text-xl font-semibold">
                       {guestPrice
-                        ? guestPrice.toLocaleString("en-IN", {
+                        ? Math.floor(guestPrice).toLocaleString("en-IN", {
                           style: "currency",
                           currency: "INR",
                           minimumFractionDigits: 0,
@@ -596,6 +596,11 @@ const Addguest = ({
                       <option value="4">4</option>
                       <option value="5">5</option>
                       <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
                     </select>
                   </div>
                 </div>
@@ -823,7 +828,7 @@ const Addguest = ({
 
                 <div>
                   <div className="flex flex-col mt-5">
-                    <div className="mb-2 flex justify-between pr-5 items-center">
+                    <div className="mb-2 flex justify-between md:pr-5 pr-2 items-center">
                       <div>
                         <p className="ml-2 text-para font-semibold cursor-pointer">
                           Single Room
@@ -864,7 +869,7 @@ const Addguest = ({
                       </div>
                     </div>
                     <hr className="my-2" />
-                    <div className="mb-2 flex justify-between pr-5 items-center">
+                    <div className="mb-2 flex justify-between md:pr-5 pr-2 items-center">
                       <div>
                         <p className="ml-2 text-para font-semibold cursor-pointer">
                           Double Room
@@ -900,7 +905,7 @@ const Addguest = ({
                       </div>
                     </div>
                     <hr className="my-2" />
-                    <div className="mb-2 flex justify-between pr-5 items-center">
+                    <div className="mb-2 flex justify-between md:pr-5 pr-2 items-center">
                       <div>
                         <p className="ml-2 text-para font-semibold cursor-pointer">
                           Double Room + 1 Extra Bed
@@ -937,7 +942,7 @@ const Addguest = ({
                       </div>
                     </div>
                     <hr className="my-2" />
-                    <div className="mb-2 flex justify-between pr-5 items-center">
+                    <div className="mb-2 flex justify-between md:pr-5 pr-2 items-center">
                       <div>
                         <p className="ml-2 text-para font-semibold cursor-pointer">
                           Double Room + 2 Extra Bed

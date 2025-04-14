@@ -66,6 +66,9 @@ const Searchable1 = () => {
     else if(selectedCategory === "category1"||selectedCategory === "category2"){
       return option?.selectedItem?.toLowerCase().includes(searchQuery.toLowerCase())
     }
+    else if(selectedCategory === "category4"){
+      return option?.vehicleType?.toLowerCase().includes(searchQuery.toLowerCase())
+    }
     return option?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   }
   );
@@ -84,6 +87,7 @@ const Searchable1 = () => {
       }));
     })
     fetchCars().then(res => {
+      console.log("category 4----->",res)
       setOptions((prevOptions) => ({
         ...prevOptions,
         category4: res?.data
@@ -161,7 +165,7 @@ const Searchable1 = () => {
 
    // Handle form submission
    const handleSubmitForm = () => {
-    if (formData.title && formData.subtitle && formData.description) {
+    if (formData?.title && formData?.subtitle && formData?.description) {
       // Hide the form after submission and enable "Send Payload" button
       setIsFormSubmitted(true);
       setIsPayloadButtonEnabled(true);
@@ -187,11 +191,11 @@ const Searchable1 = () => {
               onChange={handleCategoryChange}
               className="mb-4 p-2 w-full border rounded-md h-10 px-2 focus:border-primary outline-none"
             >
-              <option value="category1">Section 1</option>
-              <option value="category2">Section 2</option>
-              <option value="category3">Section 3</option>
-              <option value="category4">Section 4</option>
-              <option value="category5">Section 5</option>
+              <option value="category1">Section 1(Category Promo Selection)</option>
+              <option value="category2">Section 2(Category Promo Selection)</option>
+              <option value="category3">Section 3(category selection)</option>
+              <option value="category4">Section 4 (Car Selection)</option>
+              <option value="category5">Section 5 (Tour package Selcection)</option>
             </select>
           </div>
           <div>
@@ -226,13 +230,21 @@ const Searchable1 = () => {
                   }>
                     {option?.selectedItem}
                   </span>}
-                  {( selectedCategory === "category4" || selectedCategory === "category5") && <span className={
+                  {(selectedCategory === "category5") && <span className={
                     selectedOptions[selectedCategory].length >= maxSelections &&
                       !selectedOptions[selectedCategory].includes(option)
                       ? "text-gray-400 cursor-not-allowed"
                       : ""
                   }>
                     {option.name}
+                  </span>}
+                  {( selectedCategory === "category4" ) && <span className={
+                    selectedOptions[selectedCategory]?.length >= maxSelections &&
+                      !selectedOptions[selectedCategory]?.includes(option)
+                      ? "text-gray-400 cursor-not-allowed"
+                      : ""
+                  }>
+                    {option?.vehicleType}
                   </span>}
                   {selectedCategory === "category3" && <span className={
                     selectedOptions[selectedCategory].length >= maxSelections &&

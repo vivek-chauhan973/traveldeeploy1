@@ -277,6 +277,9 @@ useEffect(() => {
   const [carbookdisableandenable, setCarbookdisableandenable] = useState(false);
   const [carPrice, setCarPrice] = useState(0);
 
+  const [calculatedPrizeOfGst, setCalculatedPrizeOfGst] = useState(0);
+  const [gst, setGst] = useState(0);
+
   // packages filter data
 
   // console.log("....123....",filteredApi)
@@ -338,6 +341,8 @@ useEffect(() => {
     carPrice,
     setCarPrice,
     CarFilteredPackages,
+    calculatedPrizeOfGst, setCalculatedPrizeOfGst,
+    gst, setGst
   };
   return (
     <AppContext.Provider value={contextFun}>{children}</AppContext.Provider>

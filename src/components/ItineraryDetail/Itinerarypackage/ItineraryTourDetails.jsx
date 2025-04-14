@@ -6,7 +6,7 @@ const ItineraryTourDetails = () => {
     const { addPackage } = useAppContext();
     const [activeTab, setActiveTab] = useState("");
     useEffect(()=>{
-        if(addPackage?.flights){
+        if(addPackage?.flight){
             setActiveTab("tab1");
         }
         else{
@@ -25,7 +25,7 @@ const ItineraryTourDetails = () => {
                     <p className="md:text-md text-para italic text-slate-600">Top-notch facilities at no extra charge.</p>
                 </div>
                 <div className="flex justify-between mt-3 gap-2 border-b-2 border-navyblack">
-                    {addPackage?.flights&&<div onClick={() => handleTabClick('tab1')} 
+                    {addPackage?.flight&&<div onClick={() => handleTabClick('tab1')} 
                         className={`cursor-pointer rounded-t-lg py-2 grow text-center text-[16px] ${activeTab === 'tab1' ? 'bg-navyblack text-white' : 'text-slate-400 border-x-[1px] border-t-[1px] border-navyblacklite  bg-slate-200'}`}>
                         <p className='text-sm  '>Flight Details </p>
                     </div> }
@@ -40,35 +40,37 @@ const ItineraryTourDetails = () => {
 
                 </div>
                 <div className="border rounded-b-lg  overflow-hidden">
-                    {addPackage?.flights&&<div className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${activeTab === 'tab1' ? 'block' : 'hidden'}`}>
+                    {addPackage?.flight&&<div className={`md:p-5 xs:p-0 xs:overflow-x-auto list-disc mx-5 ${activeTab === 'tab1' ? 'block' : 'hidden'}`}>
                         <div>
                             <div className=' md:my-0 my-3'>
                                 <p className='text-sm font-semibold text-graytext'>Departure & Arrival</p>
                             </div>
 
-                            {addPackage?.flights?.flights?.map((item, i) => <div key={i} className='flex mb-3 mt-3'>
+                            {addPackage?.flight?.flights?.map((item, i) => <div key={i} className='flex mb-3 mt-3'>
                                 <div className='grow'>
                                     <p className='text-base font-semibold text-graytext'>{item?.start?.to}</p>
-                                    <p className='text-sm  '>{item?.start?.time}</p>
+                                    <p className='text-sm  '>{item?.flightNo}</p>
                                 </div>
                                 <div className='grow flex flex-col justify-center items-center' >
                                     <div >
-                                        <Image className='w-20' src="https://seeklogo.com/images/I/indigo-airlines-logo-B3BBFD5004-seeklogo.com.png" alt="" width="125"
+                                        <Image className='w-20 h-8' src={item?.selectedImg||"https://seeklogo.com/images/I/indigo-airlines-logo-B3BBFD5004-seeklogo.com.png"} alt="" width="125"
                                             height="150" />
                                     </div>
                                     <div className='flex relative items-center mt-2'>
 
                                         <hr className=' w-10' />
 
-                                        <div className='border px-7 rounded-full flex'>
-                                            <span className='md:text-[15px] text-[10px]' >-:-</span>
+                                        <div className='border px-7 rounded-full flex justify-center items-center'>
+                                            <p className='text-sm  '>{item?.start?.time}</p>
+                                            <span className='md:text-[15px] text-[10px] px-2' >-:-</span>
+                                            <p className='text-sm  '>{item?.end?.time}</p>
                                         </div>
                                         <hr className=' w-10' />
                                     </div>
                                 </div>
                                 <div className='grow text-right'>
                                     <p className='text-base font-semibold text-graytext'>{item?.end?.to}</p>
-                                    <p className='text-sm '>{item?.end?.time}</p>
+                                    {/* <p className='text-sm '>{item?.end?.time}</p> */}
                                 </div>
 
                             </div>)}

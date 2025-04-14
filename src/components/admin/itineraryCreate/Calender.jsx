@@ -11,7 +11,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
   const [endDate, setEndDate] = useState("");
   const [priceIncrease, setPriceIncrease] = useState("");
   const [isActive, setIsActive] = useState(true);
-  const [svg, setSvg] = useState("");
+  // const [svg, setSvg] = useState("");
   const [num, setNum] = useState(0);
   const [calenderArr, setCalenderArr] = useState([]);
   const [editIndex, setEditIndex] = useState(null); // To track which item is being edited
@@ -46,7 +46,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
   };
 
   const handleAddData = () => {
-    const data = { startDate, endDate, priceIncrease, isActive, svg };
+    const data = { startDate, endDate, priceIncrease, isActive};
     if ([startDate, endDate, priceIncrease].some((item) => item === "")) {
       return alert("Some fields are missing");
     }
@@ -67,7 +67,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
     setEndDate("");
     setPriceIncrease("");
     setIsActive(false);
-    setSvg("");
+    // setSvg("");
   };
 
   const handleEdit = (index) => {
@@ -76,7 +76,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
     setEndDate(item.endDate);
     setPriceIncrease(item.priceIncrease);
     setIsActive(item.isActive);
-    setSvg(item.svg);
+    // setSvg(item.svg);
     setEditIndex(index); // Set the index of the item being edited
   };
 
@@ -84,7 +84,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
     const updatedArr = calenderArr.filter((_, i) => i !== index);
     setCalenderArr(updatedArr);
   };
-  console.log("calender array --> ", calenderArr);
+  // console.log("calender array --> ", calenderArr);
 
   useEffect(() => {
     if (calenderArr.length > 0) {
@@ -150,7 +150,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
               />
             </div>
           </div>
-          <div className="sm:flex items-center">
+          {/* <div className="sm:flex items-center">
             <label htmlFor="svg" className="font-semibold w-36 text-para">
               SVG Icon :
             </label>
@@ -167,7 +167,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
               <option value="D">D</option>
               <option value="E">E</option>
             </select>
-          </div>
+          </div> */}
           <button
             onClick={handleAddData}
             className="w-1/12 rounded py-1.5 mt-8 bg-black text-white"
@@ -183,7 +183,7 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
                   <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Start Date</th>
                   <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">End Date</th>
                   <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Price Hike</th>
-                  <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">SVG</th>
+                  {/* <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">SVG</th> */}
                   <th className="border border-gray-300 font-normal px-3 py-1 text-xs uppercase tracking-wider">Action</th>
                 </tr>
               </thead>
@@ -199,9 +199,9 @@ const Calendar = ({ itinerary, setActiveTab, setCalenderDot }) => {
                     <td className="border-l border-r px-2 py-2 overflow-hidden border-gray-300">
                       <p className=" font-medium">{item?.priceIncrease}</p>
                     </td>
-                    <td className=" border-l border-r px-2 py-2 overflow-hidden border-gray-300">
+                    {/* <td className=" border-l border-r px-2 py-2 overflow-hidden border-gray-300">
                       <p className="">{item?.svg}</p>
-                    </td>
+                    </td> */}
                     <td className="flex justify-center items-center gap-4 border-l border-r px-2 py-2 overflow-hidden border-gray-300">
                       <FontAwesomeIcon
                         icon={faEdit}

@@ -13,7 +13,7 @@ const packagePublicPackageUrl = async (req, res) => {
   await connectToDatabase()
   const { method, query } = req;
   const newPackageUrl = query?.packageUrl;
-console.log("package url is here ---> ",newPackageUrl)
+// console.log("package url is here ---> ",newPackageUrl)
   if (method !== 'GET') {
     res.setHeader('Allow', ['GET']);
     return res.status(405).json({ message: `Method ${method} not allowed` });

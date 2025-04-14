@@ -32,7 +32,10 @@ const FixedDeparturePopup = () => {
     departureSectionData,
     showAddguest,
     fixedDeparturePopupPrice,
-    groupDeparturePerson
+    groupDeparturePerson,
+    calculatedPrizeOfGst,
+    gst,
+    guestPrice,
   } = useAppContext();
 
   const { loginPopup, setLoginPopup } = useCarPopupContext();
@@ -67,7 +70,12 @@ const FixedDeparturePopup = () => {
     setLoginPopup(true);
   };
   // console.log("departure section data is here ---> ", departureSectionData)
-  console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice)
+  // console.log("fixedDeparturePopupPrice----->",fixedDeparturePopupPrice)
+  console.log("addPackage----->",addPackage)
+  console.log("calculatedPrizeOfGst----->",calculatedPrizeOfGst);
+  console.log("gst----->",gst);
+  console.log("guestPrice----->",guestPrice);
+
   return (
     <>
       <div 
@@ -173,8 +181,20 @@ const FixedDeparturePopup = () => {
                       Adults : {inputData?.adult}, Child : {inputData?.child + inputData?.infant}, Infant : 0
                     </p>
                   </div>}
+                  <div className="flex mb-2 text-sm">
+                    <p className="w-20 font-medium">Total Cost:</p>
+                    <p className="font-semibold text-graytext">
+                      {Math.floor(guestPrice)?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </p>
+                  </div>
+                  <div className="flex mb-2 text-sm">
+                    <p className="w-20 font-medium">GST {gst}% :</p>
+                    <p className="font-semibold text-graytext">
+                      {calculatedPrizeOfGst?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </p>
+                  </div>
                   <div className="flex">
-                    <p className="w-28 font-semibold">Grand Total</p>
+                    <p className="w-28 font-semibold">Grand Total : </p>
                     <p className="font-semibold text-graytext">
                       {fixedDeparturePopupPrice?.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </p>

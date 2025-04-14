@@ -218,12 +218,12 @@ console.log("option",filteredOptions);
               onChange={handleCategoryChange}
               className="mb-4 p-2 w-full border rounded-md h-10 px-2 focus:border-primary outline-none"
             >
-              <option value="category1">Section 1</option>
-              <option value="category2">Section 2</option>
-              <option value="category3">Section 3</option>
-              <option value="category4">Section 4(cars)</option>
-              <option value="category5">Section 5</option>
-              <option value="category6">Section 6 (car promo)</option>
+              <option value="category1">Section 1(State Promo)</option>
+              <option value="category2">Section 2(City Promo Home page)</option>
+              <option value="category3">Section 3(Holiday Categories Slection)</option>
+              <option value="category4">Section 4(Cars packages)</option>
+              <option value="category5">Section 5(Tour packages)</option>
+              <option value="category6">Section 6 (Car promo)</option>
               <option value="category7">Popular Cities</option>
               <option value="category8">Travel Guide</option>
               <option value="category9">Blogs</option>

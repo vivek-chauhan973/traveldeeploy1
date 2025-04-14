@@ -22,8 +22,9 @@ const Speciality = ({ setOpenClose }) => {
   }, [])
   const [popularCatogories, setPopularCatagories] = useState([]);
   useEffect(() => {
-    fetchPopularCities().then(res => {setPopularCatagories(res?.data || []) });
+    fetchPopularCities().then(res => {;setPopularCatagories(res?.data || []) });
   }, [])
+  // console.log("popular cities------>",popularCatogories)
   const data = popularCatogories?.filter(item => item.category === "category6");
   return (
     <div className="flex h-[90vh] flex-col overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400">

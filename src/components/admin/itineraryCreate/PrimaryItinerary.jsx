@@ -46,7 +46,7 @@ const fetchImages = async (itinerary) => {
 export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, setItineraryInfo, setBasicDot }) {
     const router = useRouter();
     const { pricingManagement } = useAppContext();
-    const [priority, setPriority] = useState("0");
+    // const [priority, setPriority] = useState("0");
     const [countries, setCountries] = useState();
     const [states, setStates] = useState();
     const [cities, setCities] = useState();
@@ -214,7 +214,7 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
         setSelectedLocation(itinerary?.location);
         handleSelectCountry(itinerary?.associateCountry?._id);
         handleSelectState(itinerary?.associateState?._id);
-        setPriority((itinerary?.priority) || "0");
+        // setPriority((itinerary?.priority) || "0");
         handleCategory(itinerary?.category);
         setSelectedBadges(itinerary?.badges)
         setStartCities((itinerary?.startcity?.join(",")) || "");
@@ -258,7 +258,6 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        priority,
                         name: packageTitleName,
                         price: displayPrice,
                         category: selectedCategories,
@@ -297,11 +296,11 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                 <div className=" grid grid-cols-1  mb-4 gap-5">
                     <div className="border p-4 rounded">
                         <div>
-                            <div className=" sm:flex items-center mb-4">
+                            {/* <div className=" sm:flex items-center mb-4">
                                 <label htmlFor="packagetitle" className=" font-semibold w-32 text-para">Priority :</label>
                                 <input type="text" className='  border w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
                                     onChange={(e) => setPriority(e.target.value)} placeholder="Enter Priority " defaultValue={priority} />
-                            </div>
+                            </div> */}
                             {/* <div className=" sm:flex items-center mb-4">
                                 <label htmlFor="packagetitle" className=" font-semibold w-28 text-para">Pckage ID :</label>
                                 <input type="text" className='  border md:w-60 w-full  rounded-md h-8 px-2 focus:border-primary outline-none text-para'
@@ -333,9 +332,12 @@ export default function ItineraryForm({ setActiveTab, itinerary, itineraryInfo, 
                             <label htmlFor="packageRating" className=" font-semibold xl:w-32 md:w-40 text-para">Package Rating :</label>
                             <select name="packageRating" id="packageRating" className='border  rounded-md h-8 sm:w-full w-auto px-2 focus:border-primary outline-none text-para'
                                 onChange={(e) => {
-                                    setPackageRating(e.target.value);
+                                    if(e.target.value!==""){
+                                        setPackageRating(e.target.value);
+                                    }
+                                   
                                 }}>
-                                <option value="" disabled>Select Package Rating</option>
+                                <option value="">{itinerary?.packageRating || "Select Package Rating"}</option>
                                 <option value="3.5">3.5</option>
                                 <option value="3.8">3.8</option>
                                 <option value="4.0">4.0</option>

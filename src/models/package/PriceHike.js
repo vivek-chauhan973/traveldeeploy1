@@ -5,7 +5,7 @@ const hikeSchema=new mongoose.Schema({
   endDate: { type: String, required: true },
   priceIncrease: { type: Number, required: true },
   isActive: { type: Boolean, default: true } ,
-  svg:{type:String}
+  // svg:{type:String}
 })
 const priceHikeSchema = new mongoose.Schema({
   packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true },

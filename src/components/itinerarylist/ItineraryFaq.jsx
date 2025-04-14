@@ -80,7 +80,7 @@ const ItineraryFaq = ({ faq }) => {
                 >
                   <div className='flex justify-center items-center md:w-[10%] w-[17%] h-full pl-1'>
                     <div className='w-12 h-7 rounded-2xl bg-navyblack flex justify-center items-center px-1'>
-                      <p className="md:text-xs text-xxs font-medium text-white">Day {i + 1}1</p>
+                      <p className="md:text-xs text-xxs font-medium text-white">Day {i + 1}</p>
                     </div>
                   </div>
                   <div className='flex justify-start items-center w-[90%] h-full md:mx-0 mx-1'>
