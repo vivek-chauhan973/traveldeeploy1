@@ -27,7 +27,7 @@ const CarPaymentTermComponent = () => {
 
     const fetchGroups = async () => {
         try {
-            const response = await fetch('/api/package/tour-info/payment-term/get');
+            const response = await fetch('/api/cars/package/tour-info/payment-term/get');
             const result = await response.json();
             setGroupsData(result.PaymentTermGroupData.reverse());
         } catch (error) {
@@ -43,7 +43,7 @@ const CarPaymentTermComponent = () => {
     const handleDelete = async () => {
         if (deleteGroupId) {
             try {
-                const response = await fetch('/api/package/tour-info/payment-term/delete', {
+                const response = await fetch('/api/cars/package/tour-info/payment-term/delete', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ group_id: deleteGroupId })
@@ -74,8 +74,8 @@ const CarPaymentTermComponent = () => {
 
     const handleSave = async () => {
         const url = isEditing
-            ? '/api/package/tour-info/payment-term/edit'
-            : '/api/package/tour-info/payment-term/add';
+            ? '/api/cars/package/tour-info/payment-term/edit'
+            : '/api/cars/package/tour-info/payment-term/add';
         const payload = isEditing
             ? { group_id: editGroupId, ...PaymentTermGroup }
             : PaymentTermGroup;

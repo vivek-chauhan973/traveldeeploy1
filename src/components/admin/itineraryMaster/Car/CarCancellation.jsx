@@ -26,7 +26,7 @@ const CarCancellation = () => {
 
     const fetchGroups = async () => {
         try {
-            const response = await fetch('/api/package/tour-info/cancellation/get');
+            const response = await fetch('/api/cars/package/tour-info/cancellation/get');
             const result = await response.json();
             setGroupsData(result.CancellationGroupData.reverse());
         } catch (error) {
@@ -42,7 +42,7 @@ const CarCancellation = () => {
     const handleDelete = async () => {
         if (deleteGroupId) {
             try {
-                const response = await fetch('/api/package/tour-info/cancellation/delete', {
+                const response = await fetch('/api/cars/package/tour-info/cancellation/delete', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ group_id: deleteGroupId })
@@ -74,8 +74,8 @@ const CarCancellation = () => {
 
     const handleSave = async () => {
         const url = isEditing
-            ? '/api/package/tour-info/cancellation/edit'
-            : '/api/package/tour-info/cancellation/add';
+            ? '/api/cars/package/tour-info/cancellation/edit'
+            : '/api/cars/package/tour-info/cancellation/add';
         const payload = isEditing
             ? { group_id: editGroupId, ...CancellationGroup }
             : CancellationGroup;
